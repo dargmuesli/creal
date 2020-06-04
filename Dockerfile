@@ -10,9 +10,6 @@ RUN \
     apt-get update && \
     apt-get install -y git
 
-# Install the nuxt cli.
-RUN yarn global add @nuxt/cli
-
 WORKDIR /srv/app/
 
 COPY ./nuxt/ /srv/app/
