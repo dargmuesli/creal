@@ -33,6 +33,8 @@ export default {
    */
   buildModules: [
     '@nuxt/typescript-build',
+    // Doc: https://github.com/nuxt-community/moment-module
+    '@nuxtjs/moment',
     // Doc: https://github.com/nuxt-community/stylelint-module
     '@nuxtjs/stylelint-module',
     // Doc: https://github.com/nuxt-community/nuxt-tailwindcss
@@ -49,7 +51,10 @@ export default {
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
    */
-  axios: {},
+  axios: {
+    baseURL: 'http://creal_strapi:1337/',
+    browserBaseURL: 'https://strapi.creal.' + process.env.STACK_DOMAIN + '/',
+  },
   /*
    ** Build configuration
    */
@@ -58,5 +63,12 @@ export default {
      ** You can extend webpack config here
      */
     extend(_config, _ctx) {},
+  },
+  moment: {
+    locales: ['de'],
+    plugins: ['twix'],
+  },
+  env: {
+    stackDomain: process.env.STACK_DOMAIN,
   },
 }

@@ -6,7 +6,9 @@
  */
 module.exports = {
   theme: {},
-  variants: {},
+  variants: {
+    margin: ['first', 'last'],
+  },
   plugins: [
     function ({ addBase, config }) {
       addBase({
