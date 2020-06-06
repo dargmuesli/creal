@@ -35,15 +35,41 @@
 </template>
 
 <script lang="ts">
+/* eslint-disable no-console */
+import { Component, Vue } from 'nuxt-property-decorator'
+
 import Button from '~/components/Button.vue'
 import Event from '~/components/Event.vue'
 
-export default {
+interface AsyncData {
+  events: Array<object> | undefined
+  partString: string | undefined
+  queryNext: object | undefined
+  queryPrevious: object | undefined
+  allowNext: boolean | undefined
+  allowPrevious: boolean | undefined
+}
+
+@Component({
   components: {
     Button,
     Event,
   },
-  async asyncData({ $axios, query }) {
+})
+export default class extends Vue {
+  events?: Array<object>
+  queryPrevious?: Record<string, string>
+  queryNext?: Record<string, string>
+  allowNext?: boolean
+  allowPrevious?: boolean
+
+  async asyncData({
+    $axios,
+    query,
+  }: {
+    $axios: any
+    query: any
+  }): Promise<AsyncData> {
     const limit = +(query.limit ? query.limit : 100)
     const start = +(query.start ? query.start : 0)
 
@@ -56,8 +82,21 @@ export default {
     const urlEvents = `/events?${apiQuery.toString()}`
     const urlEventsCount = '/events/count'
 
-    const eventsCountTotal = await $axios.$get(urlEventsCount)
-    const events = await $axios.$get(urlEvents)
+    let eventsCountTotal, events
+
+    try {
+      eventsCountTotal = await $axios.$get(urlEventsCount)
+      events = await $axios.$get(urlEvents)
+    } catch (e) {
+      return {
+        events: undefined,
+        partString: undefined,
+        queryNext: undefined,
+        queryPrevious: undefined,
+        allowNext: undefined,
+        allowPrevious: undefined,
+      }
+    }
 
     const partString =
       (events.length > 0 ? start + 1 : 0) +
@@ -87,22 +126,26 @@ export default {
       allowNext,
       allowPrevious,
     }
-  },
-  watchQuery: ['limit', 'start'],
-  methods: {
-    goPrevious() {
-      this.$router.push({
-        path: this.$route.path,
-        query: this.queryPrevious,
-      })
-    },
-    goNext() {
-      this.$router.push({
-        path: this.$route.path,
-        query: this.queryNext,
-      })
-    },
-  },
+  }
+
+  watchQuery() {
+    return ['limit', 'start']
+  }
+
+  goPrevious() {
+    this.$router.push({
+      path: this.$route.path,
+      query: this.queryPrevious,
+    })
+  }
+
+  goNext() {
+    this.$router.push({
+      path: this.$route.path,
+      query: this.queryNext,
+    })
+  }
+
   head() {
     const queryPreviousSearchParamsString =
       '?' + new URLSearchParams(this.queryPrevious).toString()
@@ -112,7 +155,7 @@ export default {
           href: this.$route.path,
           rel: 'canonical',
         },
-        ...(this.showPrevious
+        ...(this.allowPrevious
           ? [
               {
                 href:
@@ -123,7 +166,7 @@ export default {
               },
             ]
           : []),
-        ...(this.showNext
+        ...(this.allowNext
           ? [
               {
                 href:
@@ -136,6 +179,6 @@ export default {
           : []),
       ],
     }
-  },
+  }
 }
 </script>

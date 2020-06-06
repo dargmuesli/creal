@@ -63,6 +63,14 @@ export default {
      ** You can extend webpack config here
      */
     extend(_config, _ctx) {},
+    /*
+     ** https://github.com/nuxt-community/nuxt-property-decorator
+     */
+    babel: {
+      presets({ _isServer }) {
+        return [['@nuxt/babel-preset-app', { loose: true }]]
+      },
+    },
   },
   moment: {
     locales: ['de'],

@@ -19,35 +19,39 @@
 </template>
 
 <script lang="ts">
+import { Component, Prop, Vue } from 'nuxt-property-decorator'
+
 import Button from '~/components/Button.vue'
 
-export default {
+interface Event {
+  dateEnd: any
+  dateStart: any
+}
+
+@Component({
   components: {
     Button,
   },
-  props: {
-    event: {
-      type: Object,
-      default: undefined,
-    },
-  },
-  computed: {
-    datetime() {
-      const moment = this.$moment(this.event.date_start)
+})
+export default class extends Vue {
+  @Prop({ type: Object }) readonly event!: Event
 
-      if (this.event.date_end) {
-        return moment.twix(this.event.date_end).format({
-          implicitMinutes: false,
-          implicitYear: false,
-          showDayOfWeek: true,
-        })
-      }
+  get datetime(): any {
+    const moment = this.$moment(this.event.dateStart)
 
-      return moment.format('ddd D MMM YYYY, h:mm')
-    },
-    stackDomain() {
-      return process.env.stackDomain
-    },
-  },
+    if (this.event.dateEnd) {
+      return moment.twix(this.event.dateEnd).format({
+        implicitMinutes: false,
+        implicitYear: false,
+        showDayOfWeek: true,
+      })
+    }
+
+    return moment.format('ddd D MMM YYYY, h:mm')
+  }
+
+  get stackDomain(): string | undefined {
+    return process.env.stackDomain
+  }
 }
 </script>
