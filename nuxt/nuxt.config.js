@@ -32,6 +32,7 @@ export default {
    ** Nuxt.js dev-modules
    */
   buildModules: [
+    // Doc: https://github.com/nuxt/typescript
     '@nuxt/typescript-build',
     // Doc: https://github.com/nuxt-community/moment-module
     '@nuxtjs/moment',
