@@ -10,7 +10,7 @@ module.exports = {
     margin: ['first', 'last'],
   },
   plugins: [
-    function ({ addBase, config }) {
+    function ({ addBase, addUtilities, config }) {
       addBase({
         body: {
           background: config('theme.colors.gray.800'),
@@ -29,6 +29,18 @@ module.exports = {
             cursor: config('theme.cursor.not-allowed'),
             opacity: config('theme.opacity.50'),
           },
+        },
+      })
+
+      addUtilities({
+        '.fullscreen': {
+          bottom: 0,
+          height: config('theme.height.full'),
+          left: 0,
+          position: 'absolute',
+          right: 0,
+          top: 0,
+          width: config('theme.width.full'),
         },
       })
     },
