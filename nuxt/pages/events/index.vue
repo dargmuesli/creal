@@ -35,7 +35,6 @@
 </template>
 
 <script lang="ts">
-/* eslint-disable no-console */
 import { Component, Vue } from 'nuxt-property-decorator'
 
 import Button from '~/components/Button.vue'
