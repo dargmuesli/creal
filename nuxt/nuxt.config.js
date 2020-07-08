@@ -70,7 +70,9 @@ export default {
      */
     babel: {
       presets({ _isServer }) {
-        return [['@nuxt/babel-preset-app', { loose: true }]]
+        return [
+          ['@nuxt/babel-preset-app', { loose: true, corejs: { version: 3 } }],
+        ]
       },
     },
   },
