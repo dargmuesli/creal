@@ -72,20 +72,17 @@ export default class extends Vue {
     const limit = +(query.limit ? query.limit : 100)
     const start = +(query.start ? query.start : 0)
 
-    const apiQuery = new URLSearchParams({
-      _sort: 'date_start:DESC',
-      _limit: String(limit),
-      _start: String(start),
-    })
-
-    const urlEvents = `/events?${apiQuery.toString()}`
-    const urlEventsCount = '/events/count'
-
     let eventsCountTotal, events
 
     try {
-      eventsCountTotal = await $axios.$get(urlEventsCount)
-      events = await $axios.$get(urlEvents)
+      eventsCountTotal = await $axios.$get('/strapi/events/count')
+      events = await $axios.$get('/strapi/events', {
+        params: new URLSearchParams({
+          _sort: 'date_start:DESC',
+          _limit: String(limit),
+          _start: String(start),
+        }),
+      })
     } catch (e) {
       return {
         events: undefined,

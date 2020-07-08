@@ -47,14 +47,15 @@ export default {
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
+    '@nuxtjs/proxy',
   ],
   /*
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
    */
   axios: {
-    baseURL: 'http://creal_strapi:1337/',
-    browserBaseURL: 'https://strapi.creal.' + process.env.STACK_DOMAIN + '/',
+    baseURL: 'http://creal:3000/api/',
+    browserBaseURL: 'https://creal.' + process.env.STACK_DOMAIN + '/api/',
   },
   /*
    ** Build configuration
@@ -79,5 +80,11 @@ export default {
   },
   env: {
     stackDomain: process.env.STACK_DOMAIN,
+  },
+  proxy: {
+    '/api/strapi/': {
+      target: 'http://creal_strapi:1337/',
+      pathRewrite: { '^/api/strapi': '' },
+    },
   },
 }
