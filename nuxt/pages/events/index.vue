@@ -57,8 +57,8 @@ interface AsyncData {
 })
 export default class extends Vue {
   events?: Array<object>
-  queryPrevious?: Record<string, string>
   queryNext?: Record<string, string>
+  queryPrevious?: Record<string, string>
   allowNext?: boolean
   allowPrevious?: boolean
 
