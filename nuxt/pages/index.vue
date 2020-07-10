@@ -37,26 +37,26 @@
 </template>
 
 <script lang="ts">
+import { Component, Vue } from 'nuxt-property-decorator'
+
 import Button from '~/components/Button.vue'
 
-export default {
+@Component({
   components: {
     Button,
   },
-  data() {
-    return {
-      showGreeting: true,
-    }
-  },
+})
+export default class extends Vue {
+  showGreeting = true
+
   beforeMount() {
-    const self = this
-    window.addEventListener('keypress', function (e) {
+    window.addEventListener('keypress', (e) => {
       const key = e.which || e.keyCode
 
       if (key === 13) {
-        self.showGreeting = false
+        this.showGreeting = false
       }
     })
-  },
+  }
 }
 </script>
