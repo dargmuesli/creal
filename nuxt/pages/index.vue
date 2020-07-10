@@ -48,5 +48,15 @@ export default {
       showGreeting: true,
     }
   },
+  beforeMount() {
+    const self = this
+    window.addEventListener('keypress', function (e) {
+      const key = e.which || e.keyCode
+
+      if (key === 13) {
+        self.showGreeting = false
+      }
+    })
+  },
 }
 </script>
