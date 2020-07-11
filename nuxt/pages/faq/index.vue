@@ -9,10 +9,10 @@
         <li
           v-for="item in items"
           :key="item.id"
-          class="border-b duration-300"
+          class="border duration-300"
           :class="{
             'my-4': itemFocused === item,
-            'mx-8': itemFocused !== item,
+            'mx-8 -my-px': itemFocused !== item,
           }"
         >
           <Faq :faq="item" :toggle-function="toggleItemFocused" />
