@@ -12,6 +12,7 @@
         </li>
       </ul>
       <PagingControls
+        v-if="allowPrevious || allowNext"
         :part-string="partString"
         :query-previous="queryPrevious"
         :query-next="queryNext"
