@@ -2,7 +2,10 @@
   <div class="container mx-auto mb-4">
     <section>
       <h1>FAQ</h1>
-      <ul class="list-none">
+      <Error v-if="requestError !== null" :error="requestError">
+        {{ requestError.message }}
+      </Error>
+      <ul v-if="items !== null" class="list-none">
         <li
           v-for="item in items"
           :key="item.id"
@@ -12,7 +15,13 @@
         </li>
       </ul>
       <PagingControls
-        v-if="allowPrevious || allowNext"
+        v-if="
+          (partString !== null &&
+          queryPrevious !== null &&
+          queryNext !== null &&
+          allowPrevious !== null &&
+          allowNext !== null &&
+          (allowPrevious || allowNext))"
         :part-string="partString"
         :query-previous="queryPrevious"
         :query-next="queryNext"
@@ -29,12 +38,14 @@ import { Component } from 'nuxt-property-decorator'
 import Paging from '~/classes/Paging.ts'
 
 import Button from '~/components/Button.vue'
+import Error from '~/components/Error.vue'
 import Faq from '~/components/Faq.vue'
 import PagingControls from '~/components/PagingControls.vue'
 
 @Component({
   components: {
     Button,
+    Error,
     Faq,
     PagingControls,
   },
@@ -64,7 +75,9 @@ export default class extends Paging {
         }),
       })
     } catch (e) {
-      return
+      return {
+        requestError: e,
+      }
     }
 
     return $paging(items, itemsCountTotal, query, start, limit)

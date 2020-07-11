@@ -48,6 +48,7 @@ export default {
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     '@nuxtjs/proxy',
+    'nuxt-fontawesome',
   ],
   /*
    ** Axios module configuration
@@ -88,5 +89,13 @@ export default {
       target: 'http://creal_strapi:1337/',
       pathRewrite: { '^/api/strapi': '' },
     },
+  },
+  fontawesome: {
+    imports: [
+      {
+        set: '@fortawesome/free-solid-svg-icons',
+        icons: ['faExclamationTriangle'],
+      },
+    ],
   },
 }
