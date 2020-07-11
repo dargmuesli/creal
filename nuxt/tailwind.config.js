@@ -5,8 +5,22 @@
  ** Default: https://github.com/tailwindcss/tailwindcss/blob/master/stubs/defaultConfig.stub.js
  */
 module.exports = {
-  theme: {},
+  theme: {
+    extend: {
+      transitionProperty: {
+        margin: 'margin',
+        maxHeight: 'max-height',
+      },
+      transitionTimingFunction: {
+        popout: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+      },
+    },
+    maxHeight: {
+      '0': '0',
+    },
+  },
   variants: {
+    borderWidth: ['first'],
     margin: ['first', 'last'],
   },
   plugins: [

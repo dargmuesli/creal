@@ -9,9 +9,13 @@
         <li
           v-for="item in items"
           :key="item.id"
-          class="border my-4 p-4 rounded first:mt-0 last:mb-0"
+          class="border-b duration-300"
+          :class="{
+            'my-4': itemFocused === item,
+            'mx-8': itemFocused !== item,
+          }"
         >
-          <Faq :faq="item" />
+          <Faq :faq="item" :toggle-function="toggleItemFocused" />
         </li>
       </ul>
       <PagingControls
@@ -51,6 +55,24 @@ import PagingControls from '~/components/PagingControls.vue'
   },
 })
 export default class extends Paging {
+  itemFocused: any = null
+
+  toggleItemFocused(item: any) {
+    if (this.itemFocused === null) {
+      this.itemFocused = item
+      this.$set(item, 'focused', true)
+    } else {
+      this.$set(this.itemFocused, 'focused', false)
+
+      if (this.itemFocused === item) {
+        this.itemFocused = null
+      } else {
+        this.itemFocused = item
+        this.$set(item, 'focused', true)
+      }
+    }
+  }
+
   async asyncData({
     $axios,
     $paging,
