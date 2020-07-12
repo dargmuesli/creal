@@ -10,16 +10,23 @@ import Event from '~/components/Event.vue'
   },
 })
 export default class extends Vue {
-  queryNext?: Record<string, string>
-  queryPrevious?: Record<string, string>
-  allowNext?: boolean
-  allowPrevious?: boolean
+  requestError: Error | null = null
+  items: Array<any> | null = null
+  partString: String | null = null
+  queryNext: Record<string, string> | null = null
+  queryPrevious: Record<string, string> | null = null
+  allowNext: boolean | null = null
+  allowPrevious: boolean | null = null
 
   watchQuery() {
     return ['limit', 'start']
   }
 
   head() {
+    if (this.queryPrevious === null || this.queryNext === null) {
+      return
+    }
+
     const queryPreviousSearchParamsString =
       '?' + new URLSearchParams(this.queryPrevious).toString()
     return {
