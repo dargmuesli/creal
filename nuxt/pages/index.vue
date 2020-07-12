@@ -12,13 +12,11 @@
       <div class="bg-gray-800 opacity-75 fullscreen"></div>
       <div class="fullscreen flex">
         <div class="m-auto text-center" style="margin-bottom: 20vh;">
-          <h1 class="inline-block border-b border-gray-400">
-            cReal
-          </h1>
-          <p class="font-light mt-4 mb-16">
-            Welcome to my website
-          </p>
-          <Button @click.native="showGreeting = false">start</Button>
+          <h1 class="inline-block border-b border-gray-400">cReal</h1>
+          <p class="font-light mt-4 mb-16">Welcome to my website</p>
+          <Button @click.native="setShowGreeting(true)">
+            start
+          </Button>
         </div>
       </div>
     </div>
@@ -28,7 +26,7 @@
         <EventAnnouncement :event="event" />
       </a>
       <EventAnnouncement v-else :event="event" />
-    </section> -->
+      </section>-->
       <section>
         <Button :link="'/events'">Events</Button>
         <Button :link="'/faq'">FAQ</Button>
@@ -58,6 +56,26 @@ export default class extends Vue {
         this.showGreeting = false
       }
     })
+  }
+
+  mounted() {
+    this.setShowGreeting(false)
+  }
+
+  setShowGreeting(set: boolean): void {
+    if (set) {
+      sessionStorage.setItem('cReal_showGreeting', 'shown')
+    }
+
+    if (process.client) {
+      if (sessionStorage.getItem('cReal_showGreeting') !== 'shown') {
+        this.showGreeting = true
+      } else {
+        this.showGreeting = false
+      }
+    } else {
+      this.showGreeting = true
+    }
   }
 }
 </script>
