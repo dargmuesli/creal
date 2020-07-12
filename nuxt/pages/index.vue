@@ -31,6 +31,7 @@
     </section> -->
       <section>
         <Button :link="'/events'">Events</Button>
+        <Button :link="'/faq'">FAQ</Button>
       </section>
     </div>
   </div>
