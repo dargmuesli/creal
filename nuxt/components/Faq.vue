@@ -13,7 +13,7 @@
     <div
       ref="answer"
       class="duration-300 overflow-hidden"
-      :style="`max-height: ${getMaxHeight()}px`"
+      :style="`max-height: ${answerMaxHeight}px`"
     >
       <!-- Do not insert other characters (newlines) in vue-markdown's body! -->
       <vue-markdown class="m-8">{{ faq.answer }}</vue-markdown>
@@ -22,7 +22,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'nuxt-property-decorator'
+import { Component, Prop, Vue, Watch } from 'nuxt-property-decorator'
 import VueMarkdown from 'vue-markdown-konishi'
 
 import Button from '~/components/Button.vue'
@@ -43,16 +43,27 @@ export default class extends Vue {
   @Prop({ type: Object, required: true }) readonly faq!: Faq
   @Prop({ type: Function }) readonly toggleFunction!: Function
 
-  getMaxHeight() {
-    if (
-      !this.faq.focused ||
-      this.$refs.answer === undefined ||
-      !(this.$refs.answer instanceof Element)
-    ) {
-      return '0'
-    }
+  answerMaxHeight = 0
 
-    return this.$refs.answer.scrollHeight
+  @Watch('faq')
+  onChildChanged(_newVal: any, _oldVal: any) {
+    this.setMaxHeight()
+  }
+
+  mounted() {
+    this.setMaxHeight()
+  }
+
+  setMaxHeight() {
+    if (
+      this.faq.focused &&
+      this.$refs.answer !== undefined &&
+      this.$refs.answer instanceof Element
+    ) {
+      this.answerMaxHeight = this.$refs.answer.scrollHeight
+    } else {
+      this.answerMaxHeight = 0
+    }
   }
 }
 </script>

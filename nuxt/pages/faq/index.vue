@@ -8,7 +8,7 @@
       <ul v-if="items !== null" class="list-none">
         <li
           v-for="item in items"
-          :key="item.id"
+          :key="slugify(item.title)"
           class="border duration-300"
           :class="{
             'my-4': itemFocused === item,
@@ -38,6 +38,7 @@
 
 <script lang="ts">
 import { Component } from 'nuxt-property-decorator'
+import slugify from 'slugify'
 
 import Paging from '~/classes/Paging.ts'
 
@@ -45,6 +46,10 @@ import Button from '~/components/Button.vue'
 import Error from '~/components/Error.vue'
 import Faq from '~/components/Faq.vue'
 import PagingControls from '~/components/PagingControls.vue'
+
+interface Dictionary<T> {
+  [Key: string]: T
+}
 
 @Component({
   components: {
@@ -57,29 +62,68 @@ import PagingControls from '~/components/PagingControls.vue'
 export default class extends Paging {
   itemFocused: any = null
 
+  slugify(input: string) {
+    return slugify(input)
+  }
+
   toggleItemFocused(item: any) {
     if (this.itemFocused === null) {
-      this.itemFocused = item
-      this.$set(item, 'focused', true)
+      this.focusItem(item)
     } else {
       this.$set(this.itemFocused, 'focused', false)
 
       if (this.itemFocused === item) {
         this.itemFocused = null
+
+        const newQuery = { ...this.$route.query }
+        delete newQuery.q
+
+        this.redirect(newQuery)
       } else {
-        this.itemFocused = item
+        this.focusItem(item)
+      }
+    }
+  }
+
+  focusItem(item: any) {
+    const newQuery = { ...this.$route.query }
+
+    newQuery.q = slugify(item.title)
+
+    this.redirect(newQuery)
+  }
+
+  redirect(
+    newQuery: Dictionary<string | (string | null)[] | null | undefined>
+  ) {
+    this.$router.push({
+      query: newQuery,
+    })
+  }
+
+  mounted() {
+    if (this.items === null) {
+      return
+    }
+
+    for (const item of this.items) {
+      if (slugify(item.title) === this.$route.query.q) {
         this.$set(item, 'focused', true)
+        this.itemFocused = item
+        break
       }
     }
   }
 
   async asyncData({
     $axios,
+    $focusItem,
     $paging,
     query,
   }: {
     $axios: any
-    $paging: any
+    $focusItem: Function
+    $paging: Function
     query: any
   }) {
     const limit = +(query.limit ? query.limit : 100)
@@ -102,7 +146,16 @@ export default class extends Paging {
       }
     }
 
-    return $paging(items, itemsCountTotal, query, start, limit)
+    let itemFocused = $focusItem(items, query)
+
+    if (itemFocused === undefined) {
+      itemFocused = null
+    }
+
+    return {
+      itemFocused,
+      ...$paging(items, itemsCountTotal, query, start, limit),
+    }
   }
 }
 </script>

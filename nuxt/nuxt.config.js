@@ -27,7 +27,7 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: ['~/plugins/paging.ts'],
+  plugins: ['~/plugins/paging.ts', '~/plugins/query.ts'],
   /*
    ** Nuxt.js dev-modules
    */
