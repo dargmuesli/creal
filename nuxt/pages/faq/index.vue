@@ -74,11 +74,11 @@ export default class extends Paging {
 
       if (this.itemFocused === item) {
         this.itemFocused = null
-
-        const newQuery = { ...this.$route.query }
-        delete newQuery.q
-
-        this.redirect(newQuery)
+        history.replaceState(
+          '',
+          document.title,
+          window.location.pathname + window.location.search
+        )
       } else {
         this.focusItem(item)
       }
@@ -86,19 +86,9 @@ export default class extends Paging {
   }
 
   focusItem(item: any) {
-    const newQuery = { ...this.$route.query }
-
-    newQuery.q = slugify(item.title)
-
-    this.redirect(newQuery)
-  }
-
-  redirect(
-    newQuery: Dictionary<string | (string | null)[] | null | undefined>
-  ) {
-    this.$router.push({
-      query: newQuery,
-    })
+    this.$set(item, 'focused', true)
+    this.itemFocused = item
+    history.replaceState(undefined, '', `#${slugify(item.title)}`)
   }
 
   mounted() {
@@ -107,7 +97,7 @@ export default class extends Paging {
     }
 
     for (const item of this.items) {
-      if (slugify(item.title) === this.$route.query.q) {
+      if (slugify(item.title) === window.location.hash.substring(1)) {
         this.$set(item, 'focused', true)
         this.itemFocused = item
         break
@@ -117,12 +107,10 @@ export default class extends Paging {
 
   async asyncData({
     $axios,
-    $focusItem,
     $paging,
     query,
   }: {
     $axios: any
-    $focusItem: Function
     $paging: Function
     query: any
   }) {
@@ -146,7 +134,17 @@ export default class extends Paging {
       }
     }
 
-    let itemFocused = $focusItem(items, query)
+    let itemFocused
+
+    if (process.client) {
+      for (const item of items) {
+        if (slugify(item.title) === window.location.hash.substring(1)) {
+          item.focused = true
+          itemFocused = item
+          break
+        }
+      }
+    }
 
     if (itemFocused === undefined) {
       itemFocused = null
