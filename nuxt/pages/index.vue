@@ -30,6 +30,7 @@
       <section>
         <Button :link="'/events'">Events</Button>
         <Button :link="'/faq'">FAQ</Button>
+        <Button :link="'/player'">Player</Button>
       </section>
     </div>
   </div>

@@ -23,11 +23,11 @@ export default {
   /*
    ** Global CSS
    */
-  css: [],
+  css: ['plyr/dist/plyr.css'],
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: ['~/plugins/paging.ts'],
+  plugins: ['~/plugins/paging.ts', '~/plugins/vue-plyr'],
   /*
    ** Nuxt.js dev-modules
    */
@@ -84,6 +84,7 @@ export default {
   env: {
     stackDomain: process.env.STACK_DOMAIN,
   },
+  serverMiddleware: ['~/api/player/playlists.ts', '~/api/player/signedUrl.ts'],
   proxy: {
     '/api/strapi/': {
       target: 'http://creal_strapi:1337/',
@@ -94,7 +95,7 @@ export default {
     imports: [
       {
         set: '@fortawesome/free-solid-svg-icons',
-        icons: ['faComments', 'faExclamationTriangle'],
+        icons: ['faComments', 'faDownload', 'faExclamationTriangle', 'faPlay'],
       },
     ],
   },
