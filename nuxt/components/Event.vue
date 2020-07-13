@@ -14,7 +14,7 @@
         class="mb-4"
       />
       <div v-if="event.url !== null" class="mt-4 text-center">
-        <Button :link="event.url">Details</Button>
+        <Button :icon="false" :link="event.url">Details</Button>
       </div>
     </div>
   </div>

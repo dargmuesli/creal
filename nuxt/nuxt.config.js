@@ -95,7 +95,15 @@ export default {
     imports: [
       {
         set: '@fortawesome/free-solid-svg-icons',
-        icons: ['faComments', 'faDownload', 'faExclamationTriangle', 'faPlay'],
+        icons: [
+          'faBug',
+          'faCalendarDay',
+          'faComments',
+          'faDownload',
+          'faExclamationTriangle',
+          'faMusic',
+          'faPlay',
+        ],
       },
     ],
   },

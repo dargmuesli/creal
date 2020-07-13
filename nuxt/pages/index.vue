@@ -14,7 +14,7 @@
         <div class="m-auto text-center" style="margin-bottom: 20vh;">
           <h1 class="inline-block border-b border-gray-400">cReal</h1>
           <p class="font-light mt-4 mb-16">Welcome to my website</p>
-          <Button @click.native="setShowGreeting(true)">
+          <Button :icon="false" @click.native="setShowGreeting(true)">
             start
           </Button>
         </div>
@@ -27,13 +27,13 @@
       </a>
       <EventAnnouncement v-else :event="event" />
       </section>-->
-      <ButtonBig :link="'/events'">
+      <ButtonBig :link="'/events'" :icon-id="'calendar-day'">
         Events
       </ButtonBig>
-      <ButtonBig :link="'/faq'">
+      <ButtonBig :link="'/faq'" :icon-id="'comments'">
         FAQ
       </ButtonBig>
-      <ButtonBig :link="'/player'">
+      <ButtonBig :link="'/player'" :icon-id="'music'">
         Player
       </ButtonBig>
     </div>

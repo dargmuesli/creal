@@ -3,6 +3,7 @@
     <div class="my-4">{{ partString }}</div>
     <div class="inline-grid grid-cols-2">
       <Button
+        :icon="false"
         :disabled="!allowPrevious"
         :wrapper-class="'mx-2'"
         @click.native="goPrevious"
@@ -10,6 +11,7 @@
         Previous
       </Button>
       <Button
+        :icon="false"
         :disabled="!allowNext"
         :wrapper-class="'mx-2'"
         @click.native="goNext"

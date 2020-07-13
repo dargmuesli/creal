@@ -4,21 +4,31 @@
     <app-link v-if="link !== undefined" tabIndex="-1" :to="link">
       <!-- eslint-enable vue/attribute-hyphenation -->
       <button
-        class="btn h-full w-full"
+        class="btn flex h-full items-center justify-center w-full"
         :class="buttonClass"
         :disabled="disabled"
       >
-        <!-- <font-awesome v-if="icon" class="mr-2" :icon="iconId" /> -->
+        <font-awesome-icon
+          v-if="icon"
+          :class="iconClass"
+          :icon="['fas', iconId]"
+          :size="iconSize"
+        />
         <slot />
       </button>
     </app-link>
     <button
       v-else
-      class="btn h-full w-full"
+      class="btn flex h-full items-center justify-center w-full"
       :class="buttonClass"
       :disabled="disabled"
     >
-      <!-- <font-awesome v-if="icon" class="mr-2" :icon="iconId" /> -->
+      <font-awesome-icon
+        v-if="icon"
+        :class="iconClass"
+        :icon="['fas', iconId]"
+        :size="iconSize"
+      />
       <slot />
     </button>
   </div>
@@ -38,16 +48,28 @@ export default {
       type: Boolean,
       default: false,
     },
-    // icon: {
-    //   type: Boolean,
-    //   default: true,
-    // },
-    // iconId: {
-    //   type: Array,
-    //   default() {
-    //     return ['fas', 'bug']
-    //   },
-    // },
+    icon: {
+      type: Boolean,
+      default: true,
+    },
+    iconClass: {
+      type: String,
+      default() {
+        return 'mr-2'
+      },
+    },
+    iconId: {
+      type: String,
+      default() {
+        return 'bug'
+      },
+    },
+    iconSize: {
+      type: String,
+      default() {
+        return 'lg'
+      },
+    },
     link: {
       type: String,
       default: undefined,
