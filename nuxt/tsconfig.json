@@ -25,7 +25,12 @@
     },
     "types": [
       "@types/node",
-      "@nuxt/types"
+      "@nuxt/types",
+      "@nuxtjs/moment"
+    ],
+    "typeRoots": [
+      "types",
+      "node_modules/@types"
     ]
   },
   "exclude": [

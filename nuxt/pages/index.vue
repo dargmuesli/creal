@@ -1,74 +1,88 @@
 <template>
-  <div class="container">
-    <div>
-      <logo />
-      <h1 class="title">
-        creal
-      </h1>
-      <h2 class="subtitle">
-        cReal's website.
-      </h2>
-      <div class="links">
-        <a href="https://nuxtjs.org/" target="_blank" class="button--green">
-          Documentation
-        </a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          class="button--grey"
-        >
-          GitHub
-        </a>
+  <div>
+    <div
+      :class="{ '-translate-y-full': !showGreeting }"
+      class="duration-1000 ease-in-out fullscreen transform"
+    >
+      <div class="bg-gray-800 fullscreen"></div>
+      <div
+        class="bg-center bg-cover transition-opacity bg-no-repeat fullscreen"
+        style="background-image: url('/creal.jpg');"
+      ></div>
+      <div class="bg-gray-800 opacity-75 fullscreen"></div>
+      <div class="fullscreen flex">
+        <div class="m-auto text-center" style="margin-bottom: 20vh;">
+          <h1 class="inline-block border-b border-gray-400">cReal</h1>
+          <p class="font-light mt-4 mb-16">Welcome to my website</p>
+          <Button :icon="false" @click.native="setShowGreeting(true)">
+            start
+          </Button>
+        </div>
       </div>
+    </div>
+    <div class="flex flex-col h-full">
+      <!-- <section>
+      <a v-if="event.url !== null" :href="event.url" target="_blank">
+        <EventAnnouncement :event="event" />
+      </a>
+      <EventAnnouncement v-else :event="event" />
+      </section>-->
+      <ButtonBig :link="'/events'" :icon-id="'calendar-day'">
+        Events
+      </ButtonBig>
+      <ButtonBig :link="'/faq'" :icon-id="'comments'">
+        FAQ
+      </ButtonBig>
+      <ButtonBig :link="'/player'" :icon-id="'music'">
+        Player
+      </ButtonBig>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
-import Logo from '~/components/Logo.vue'
+import { Component, Vue } from 'nuxt-property-decorator'
 
-export default Vue.extend({
+import Button from '~/components/Button.vue'
+import ButtonBig from '~/components/ButtonBig.vue'
+
+@Component({
   components: {
-    Logo
-  }
+    Button,
+    ButtonBig,
+  },
 })
+export default class extends Vue {
+  showGreeting = true
+
+  beforeMount() {
+    window.addEventListener('keypress', (e) => {
+      const key = e.which || e.keyCode
+
+      if (key === 13) {
+        this.setShowGreeting(true)
+      }
+    })
+  }
+
+  mounted() {
+    this.setShowGreeting(false)
+  }
+
+  setShowGreeting(set: boolean): void {
+    if (set) {
+      sessionStorage.setItem('cReal_showGreeting', 'shown')
+    }
+
+    if (process.client) {
+      if (sessionStorage.getItem('cReal_showGreeting') !== 'shown') {
+        this.showGreeting = true
+      } else {
+        this.showGreeting = false
+      }
+    } else {
+      this.showGreeting = true
+    }
+  }
+}
 </script>
-
-<style>
-/* Sample `apply` at-rules with Tailwind CSS
-.container {
-  @apply min-h-screen flex justify-center items-center text-center mx-auto;
-}
-*/
-.container {
-  margin: 0 auto;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-
-.title {
-  font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
-}
-
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
-}
-
-.links {
-  padding-top: 15px;
-}
-</style>

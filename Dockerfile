@@ -10,9 +10,6 @@ RUN \
     apt-get update && \
     apt-get install -y git
 
-# Install the nuxt cli.
-RUN yarn global add @nuxt/cli
-
 WORKDIR /srv/app/
 
 COPY ./nuxt/ /srv/app/
@@ -51,7 +48,7 @@ RUN yarn generate
 # Only the compiled app, ready for production with Nginx.
 
 # Should be the specific version of nginx:stable.
-FROM nginx:1.19.0@sha256:d9002da0297bcd0909b394c26bd0fc9d8c466caf2b7396f58948cac5318d0d0b AS production
+FROM nginx:1.19.1@sha256:8ff4598873f588ca9d2bf1be51bdb117ec8f56cdfd5a81b5bb0224a61565aa49 AS production
 
 # Install sqitch.
 RUN apt-get update && apt-get -y install libdbd-pg-perl postgresql-client sqitch

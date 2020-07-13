@@ -1,5 +1,4 @@
 [![build status](https://github.com/dargmuesli/creal/workflows/Docker%20CI/badge.svg)](https://github.com/dargmuesli/creal/actions?query=workflow%3A%22Docker+CI%22 "build status")
-[![renovate](https://badges.renovateapi.com/github/dargmuesli/creal)](https://renovatebot.com/ "renovate")
 [![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/dargmuesli/creal.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/dargmuesli/creal/context:javascript)
 
 # cReal
