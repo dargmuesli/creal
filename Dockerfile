@@ -32,7 +32,7 @@ CMD ["dev", "--hostname", "0.0.0.0"]
 
 FROM node:13.14.0-slim@sha256:f8fddd1391a558ecde84a6340685f29af134181e5adbaa7e4d7e8ad28c417667 AS build
 
-ARG STACK_DOMAIN=creal.jonas-thelemann.de
+ARG STACK_DOMAIN=jonas-thelemann.de
 ENV STACK_DOMAIN=${STACK_DOMAIN}
 ENV NODE_ENV=production
 
