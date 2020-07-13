@@ -88,7 +88,7 @@ export default class extends Vue {
   playlists?: Array<object>
 
   get player() {
-    return this.$refs.plyr.player
+    return (this.$refs.plyr as any).player
   }
 
   async asyncData({
