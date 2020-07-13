@@ -1,3 +1,4 @@
+import fs from 'fs'
 import { ServerResponse, IncomingMessage } from 'http'
 import { URL } from 'url'
 
@@ -38,7 +39,7 @@ export default {
       region: 'nl-ams',
     })
 
-    const bucket = 'creal-audio-dev'
+    const bucket = fs.readFileSync('/run/secrets/creal_aws-bucket', 'utf8')
     const urlSearchParams = new URL(
       req.url !== undefined ? req.url : '',
       'https://example.org/'
