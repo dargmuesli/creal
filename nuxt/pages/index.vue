@@ -60,7 +60,7 @@ export default class extends Vue {
       const key = e.which || e.keyCode
 
       if (key === 13) {
-        this.showGreeting = false
+        this.setShowGreeting(true)
       }
     })
   }
