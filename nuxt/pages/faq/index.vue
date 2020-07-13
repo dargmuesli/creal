@@ -5,33 +5,38 @@
       <Error v-if="requestError !== null" :error="requestError">
         {{ requestError.message }}
       </Error>
-      <ul v-if="items !== null" class="list-none">
-        <li
-          v-for="item in items"
-          :key="slugify(item.title)"
-          class="border duration-300"
-          :class="{
-            'my-4': itemFocused === item,
-            'mx-8 -my-px': itemFocused !== item,
-          }"
-        >
-          <Faq :faq="item" :toggle-function="toggleItemFocused" />
-        </li>
-      </ul>
-      <PagingControls
-        v-if="
-          (partString !== null &&
-          queryPrevious !== null &&
-          queryNext !== null &&
-          allowPrevious !== null &&
-          allowNext !== null &&
-          (allowPrevious || allowNext))"
-        :part-string="partString"
-        :query-previous="queryPrevious"
-        :query-next="queryNext"
-        :allow-previous="allowPrevious"
-        :allow-next="allowNext"
-      />
+      <div v-if="items !== null && items.length > 0">
+        <ul class="list-none">
+          <li
+            v-for="item in items"
+            :key="slugify(item.title)"
+            class="border duration-300"
+            :class="{
+              'my-4': itemFocused === item,
+              'mx-8 -my-px': itemFocused !== item,
+            }"
+          >
+            <Faq :faq="item" :toggle-function="toggleItemFocused" />
+          </li>
+        </ul>
+        <PagingControls
+          v-if="
+            (partString !== null &&
+            queryPrevious !== null &&
+            queryNext !== null &&
+            allowPrevious !== null &&
+            allowNext !== null &&
+            (allowPrevious || allowNext))"
+          :part-string="partString"
+          :query-previous="queryPrevious"
+          :query-next="queryNext"
+          :allow-previous="allowPrevious"
+          :allow-next="allowNext"
+        />
+      </div>
+      <div v-else class="text-center">
+        No FAQ found.
+      </div>
     </section>
   </div>
 </template>

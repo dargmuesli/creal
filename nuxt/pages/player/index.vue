@@ -18,7 +18,7 @@
               </a>
             </li>
           </ul>
-          <div v-if="playlistItems !== undefined" class="m-auto w-5/6">
+          <div v-else-if="playlistItems !== undefined" class="m-auto w-5/6">
             <h2 class="ml-2">
               {{ this.$route.query.playlist }}
             </h2>
@@ -34,6 +34,9 @@
                 />
               </li>
             </ul>
+          </div>
+          <div v-else class="text-center">
+            No items found.
           </div>
         </div>
       </div>

@@ -2,23 +2,28 @@
   <div class="container mx-auto mb-4">
     <section>
       <h1>Events</h1>
-      <ul class="list-none">
-        <li
-          v-for="item in items"
-          :key="item.id"
-          class="border my-4 p-4 rounded first:mt-0 last:mb-0"
-        >
-          <Event :event="item" />
-        </li>
-      </ul>
-      <PagingControls
-        v-if="allowPrevious || allowNext"
-        :part-string="partString"
-        :query-previous="queryPrevious"
-        :query-next="queryNext"
-        :allow-previous="allowPrevious"
-        :allow-next="allowNext"
-      />
+      <div v-if="items !== undefined && items.length > 0">
+        <ul class="list-none">
+          <li
+            v-for="item in items"
+            :key="item.id"
+            class="border my-4 p-4 rounded first:mt-0 last:mb-0"
+          >
+            <Event :event="item" />
+          </li>
+        </ul>
+        <PagingControls
+          v-if="allowPrevious || allowNext"
+          :part-string="partString"
+          :query-previous="queryPrevious"
+          :query-next="queryNext"
+          :allow-previous="allowPrevious"
+          :allow-next="allowNext"
+        />
+      </div>
+      <div v-else class="text-center">
+        No events found.
+      </div>
     </section>
   </div>
 </template>
