@@ -15,18 +15,23 @@
               </a>
             </li>
           </ul>
-          <ul class="list-none">
-            <li
-              v-for="playlistItem in playlistItems"
-              :key="playlistItem.name"
-              class="border-b border-gray-800 first:border-t hover:bg-gray-800"
-            >
-              <PlaylistItem
-                :playlist-item="playlistItem"
-                :set-source-function="setSource"
-              />
-            </li>
-          </ul>
+          <div v-if="playlistItems !== undefined">
+            <h2>
+              {{ this.$route.query.playlist }}
+            </h2>
+            <ul class="list-none">
+              <li
+                v-for="playlistItem in playlistItems"
+                :key="playlistItem.name"
+                class="border-b border-gray-800 first:border-t hover:bg-gray-800"
+              >
+                <PlaylistItem
+                  :playlist-item="playlistItem"
+                  :set-source-function="setSource"
+                />
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
       <vue-plyr ref="plyr" class="fixed bottom-0 left-0 right-0">
@@ -50,8 +55,8 @@ import PlaylistItem from '~/components/player/PlaylistItem.vue'
 import Button from '~/components/Button.vue'
 
 interface AsyncData {
-  playlists: object | undefined
-  playlistItems: object | undefined
+  playlists?: object
+  playlistItems?: object
 }
 
 interface AxiosPlaylistData {
