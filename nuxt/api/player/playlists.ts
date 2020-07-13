@@ -16,15 +16,14 @@ function getNestedObject(properties: Array<string>, size: Number) {
     } else if (properties[1].match(/^.+\.(jpg|png)$/)) {
       nestedObject[properties[0]] = { cover: true }
     }
-
-    return nestedObject
   } else {
     // properties.length is >2
     const key = properties[0]
     properties.shift()
     nestedObject[key] = { items: getNestedObject(properties, size) }
-    return nestedObject
   }
+
+  return nestedObject
 }
 
 export default {
