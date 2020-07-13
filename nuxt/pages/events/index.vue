@@ -2,7 +2,7 @@
   <div class="container mx-auto mb-4">
     <section>
       <h1>Events</h1>
-      <div v-if="items !== undefined && items.length > 0">
+      <div v-if="items !== null && items.length > 0">
         <ul class="list-none">
           <li
             v-for="item in items"
