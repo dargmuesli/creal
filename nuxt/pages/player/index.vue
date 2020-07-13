@@ -16,7 +16,7 @@
             </li>
           </ul>
           <div v-if="playlistItems !== undefined">
-            <h2>
+            <h2 class="ml-2">
               {{ this.$route.query.playlist }}
             </h2>
             <ul class="list-none">
