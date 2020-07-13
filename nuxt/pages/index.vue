@@ -20,18 +20,22 @@
         </div>
       </div>
     </div>
-    <div class="container mx-auto">
+    <div class="flex flex-col h-full">
       <!-- <section>
       <a v-if="event.url !== null" :href="event.url" target="_blank">
         <EventAnnouncement :event="event" />
       </a>
       <EventAnnouncement v-else :event="event" />
       </section>-->
-      <section>
-        <Button :link="'/events'">Events</Button>
-        <Button :link="'/faq'">FAQ</Button>
-        <Button :link="'/player'">Player</Button>
-      </section>
+      <ButtonBig :link="'/events'">
+        Events
+      </ButtonBig>
+      <ButtonBig :link="'/faq'">
+        FAQ
+      </ButtonBig>
+      <ButtonBig :link="'/player'">
+        Player
+      </ButtonBig>
     </div>
   </div>
 </template>
@@ -40,10 +44,12 @@
 import { Component, Vue } from 'nuxt-property-decorator'
 
 import Button from '~/components/Button.vue'
+import ButtonBig from '~/components/ButtonBig.vue'
 
 @Component({
   components: {
     Button,
+    ButtonBig,
   },
 })
 export default class extends Vue {
