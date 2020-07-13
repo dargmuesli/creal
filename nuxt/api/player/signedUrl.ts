@@ -24,6 +24,7 @@ export default {
 
     s3.getSignedUrlPromise('getObject', {
       Bucket: bucket,
+      Expires: 21600, // 6h
       Key: key,
     }).then(
       function (url) {
