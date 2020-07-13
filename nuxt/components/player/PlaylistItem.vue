@@ -1,12 +1,12 @@
 <template>
-  <div class="flex">
-    <button class="mr-3" title="download" @click="download()">
+  <div class="flex select-none">
+    <button class="ml-2 mr-3" title="download" @click="download()">
       <font-awesome-icon :icon="['fas', 'download']" />
     </button>
-    <div class="flex-grow">
+    <button class="cursor-default flex-grow py-2 text-left" @click="itemClick">
       {{ playlistItem.name.replace(/^cReal - /, '').replace(/\.mp3$/, '') }}
-    </div>
-    <button class="ml-3" title="play" @click="play()">
+    </button>
+    <button class="ml-3 mr-2" title="play" @click="play()">
       <font-awesome-icon :icon="['fas', 'play']" />
     </button>
   </div>
@@ -52,6 +52,13 @@ export default class extends Vue {
 
   async play() {
     this.setSourceFunction(await this.getSignedUrl())
+  }
+
+  itemClick(event: any) {
+    if (event.detail === 2) {
+      // double click
+      this.play()
+    }
   }
 }
 </script>
