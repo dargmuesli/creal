@@ -2,13 +2,13 @@
   <div class="container mx-auto mb-4">
     <section>
       <h1>Player</h1>
-      <div class="flex flex-col">
+      <div class="flex flex-col mb-2">
         <div class="bg-gray-900 flex-grow p-2">
-          <ul class="grid grid-cols-2 list-none">
+          <ul class="flex flex-wrap justify-center list-none">
             <li
               v-for="playlist in playlists"
               :key="playlist.name"
-              class="m-2 mb-4"
+              class="max-w-xs m-2 mb-4"
             >
               <a :alt="playlist.name" :href="getPlaylistLink(playlist.name)">
                 <Playlist :playlist="playlist" />
@@ -19,7 +19,7 @@
             <li
               v-for="playlistItem in playlistItems"
               :key="playlistItem.name"
-              class="border-b border-gray-800 first:border-t p-2 hover:bg-gray-700"
+              class="border-b border-gray-800 first:border-t hover:bg-gray-800"
             >
               <PlaylistItem
                 :playlist-item="playlistItem"
