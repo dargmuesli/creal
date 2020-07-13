@@ -31,13 +31,14 @@ module.exports = {
           color: config('theme.colors.white'),
           h1: {
             fontSize: config('theme.fontSize.6xl'),
-            marginBottom: config('theme.margin.4'),
             fontWeight: config('theme.fontWeight.bold'),
+            marginBottom: config('theme.margin.4'),
+            textAlign: 'center',
           },
           h2: {
             fontSize: config('theme.fontSize.4xl'),
-            marginBottom: config('theme.margin.3'),
             fontWeight: config('theme.fontWeight.bold'),
+            marginBottom: config('theme.margin.3'),
           },
           ':disabled': {
             cursor: config('theme.cursor.not-allowed'),

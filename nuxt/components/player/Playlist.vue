@@ -7,7 +7,9 @@
           : '/player/playlist-cover_default.jpg'
       "
     />
-    <h1 class="leading-tight m-0 mt-1 text-2xl">{{ playlist.name }}</h1>
+    <h1 class="leading-tight m-0 mt-1 text-2xl text-left">
+      {{ playlist.name }}
+    </h1>
   </section>
 </template>
 
