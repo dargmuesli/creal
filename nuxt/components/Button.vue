@@ -3,12 +3,21 @@
     <!-- eslint-disable vue/attribute-hyphenation -->
     <app-link v-if="link !== undefined" tabIndex="-1" :to="link">
       <!-- eslint-enable vue/attribute-hyphenation -->
-      <button class="btn" :class="buttonClass" :disabled="disabled">
+      <button
+        class="btn h-full w-full"
+        :class="buttonClass"
+        :disabled="disabled"
+      >
         <!-- <font-awesome v-if="icon" class="mr-2" :icon="iconId" /> -->
         <slot />
       </button>
     </app-link>
-    <button v-else class="btn" :class="buttonClass" :disabled="disabled">
+    <button
+      v-else
+      class="btn h-full w-full"
+      :class="buttonClass"
+      :disabled="disabled"
+    >
       <!-- <font-awesome v-if="icon" class="mr-2" :icon="iconId" /> -->
       <slot />
     </button>

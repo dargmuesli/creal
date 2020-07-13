@@ -1,3 +1,3 @@
 <template>
-  <nuxt />
+  <nuxt class="h-full" />
 </template>
