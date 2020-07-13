@@ -43,6 +43,7 @@ module.exports = {
             cursor: config('theme.cursor.not-allowed'),
             opacity: config('theme.opacity.50'),
           },
+          padding: config('theme.padding.2'),
         },
       })
 
