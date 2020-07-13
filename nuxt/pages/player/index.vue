@@ -4,7 +4,10 @@
       <h1>Player</h1>
       <div class="flex flex-col mb-2">
         <div class="bg-gray-900 flex-grow p-2">
-          <ul class="flex flex-wrap justify-center list-none">
+          <ul
+            v-if="playlists !== undefined && playlists.length > 0"
+            class="flex flex-wrap justify-center list-none"
+          >
             <li
               v-for="playlist in playlists"
               :key="playlist.name"
@@ -15,7 +18,7 @@
               </a>
             </li>
           </ul>
-          <div v-if="playlistItems !== undefined">
+          <div v-if="playlistItems !== undefined" class="m-auto w-5/6">
             <h2 class="ml-2">
               {{ this.$route.query.playlist }}
             </h2>

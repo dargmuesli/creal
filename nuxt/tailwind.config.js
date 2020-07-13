@@ -21,7 +21,7 @@ module.exports = {
   },
   variants: {
     borderWidth: ['first'],
-    margin: ['first', 'last'],
+    margin: ['responsive', 'first', 'last'],
   },
   plugins: [
     function ({ addBase, addUtilities, config }) {

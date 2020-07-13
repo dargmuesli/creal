@@ -1,12 +1,15 @@
 <template>
   <div class="flex select-none">
-    <button class="ml-2 mr-3" title="download" @click="download()">
+    <button class="ml-2 mr-3 lg:mr-10" title="download" @click="download()">
       <font-awesome-icon :icon="['fas', 'download']" />
     </button>
-    <button class="cursor-default flex-grow py-2 text-left" @click="itemClick">
+    <button
+      class="cursor-default flex-grow py-2 lg:py-3 text-left"
+      @click="itemClick"
+    >
       {{ playlistItem.name.replace(/^cReal - /, '').replace(/\.mp3$/, '') }}
     </button>
-    <button class="ml-3 mr-2" title="play" @click="play()">
+    <button class="ml-3 lg:ml-10 mr-2" title="play" @click="play()">
       <font-awesome-icon :icon="['fas', 'play']" />
     </button>
   </div>
