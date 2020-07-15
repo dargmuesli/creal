@@ -31,7 +31,7 @@ jobs:
             --load \
             .
           docker container create --name extract build
-          docker container cp extract:/srv/app/dist/ .
+          docker container cp extract:/srv/app/ .
           docker container rm -f extract
 
       - name: Build "production"
@@ -66,7 +66,7 @@ jobs:
         uses: montudor/action-zip@v0.1.0
         if: startsWith(github.ref, 'refs/tags/')
         with:
-          args: zip -qq -r ./creal.zip ./dist/
+          args: zip -qq -r ./creal.zip ./
 
       - name: Release
         uses: softprops/action-gh-release@v1
