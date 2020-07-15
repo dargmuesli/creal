@@ -43,7 +43,7 @@ RUN apt-get update && apt-get -y install libdbd-pg-perl postgresql-client sqitch
 
 WORKDIR /srv/app/
 
-COPY ./nuxt/ /srv/app/
+COPY --from=development /srv/app/ /srv/app/
 
 RUN yarn run build
 
