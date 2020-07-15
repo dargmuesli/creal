@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="h-full">
     <div
       :class="{ '-translate-y-full': !showGreeting }"
       class="duration-1000 ease-in-out fullscreen transform"
