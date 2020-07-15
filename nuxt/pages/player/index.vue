@@ -40,12 +40,16 @@
           </div>
         </div>
       </div>
-      <vue-plyr ref="plyr" class="fixed bottom-0 left-0 right-0">
+      <vue-plyr
+        v-if="playlistItems !== undefined"
+        ref="plyr"
+        class="fixed bottom-0 left-0 right-0"
+      >
         <audio />
       </vue-plyr>
     </section>
     <!-- player below is for spacing (invisible) -->
-    <vue-plyr class="invisible">
+    <vue-plyr v-if="playlistItems !== undefined" class="invisible">
       <audio />
     </vue-plyr>
   </div>
