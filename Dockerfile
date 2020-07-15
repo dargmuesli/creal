@@ -27,6 +27,21 @@ ENTRYPOINT ["docker-entrypoint.sh"]
 CMD ["dev", "--hostname", "0.0.0.0"]
 
 
+########################
+# Build Nuxt.
+
+FROM node:14.5.0-slim@sha256:cc5cfa1be89eff339b31a4b771eadcae4b8980e7625242eae90fff40dd256108 AS build
+
+ARG STACK_DOMAIN=jonas-thelemann.de
+ENV STACK_DOMAIN=${STACK_DOMAIN}
+
+WORKDIR /srv/app/
+
+COPY --from=development /srv/app/ /srv/app/
+
+RUN yarn run build
+
+
 #######################
 # Provide a web server.
 # Requires node (cannot be static) as the server acts as backend too.
@@ -35,17 +50,12 @@ CMD ["dev", "--hostname", "0.0.0.0"]
 # sqitch requires at least buster.
 FROM node:14.5.0-buster-slim@sha256:9ec68cf43cf0f3429a49356c2f690e57c8efaf04a502b86007130b5b505c2dcc AS production
 
-ARG STACK_DOMAIN=jonas-thelemann.de
-ENV STACK_DOMAIN=${STACK_DOMAIN}
-
 # Install sqitch.
 RUN apt-get update && apt-get -y install libdbd-pg-perl postgresql-client sqitch
 
 WORKDIR /srv/app/
 
-COPY --from=development /srv/app/ /srv/app/
-
-RUN yarn run build
+COPY --from=build /srv/app/ /srv/app/
 
 COPY ./sqitch/ /srv/sqitch/
 COPY ./docker-entrypoint.sh /usr/local/bin/
