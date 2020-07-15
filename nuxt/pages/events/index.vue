@@ -63,7 +63,7 @@ export default class extends Paging {
       eventsCountTotal = await $axios.$get('/strapi/events/count')
       events = await $axios.$get('/strapi/events', {
         params: new URLSearchParams({
-          _sort: 'date_start:DESC',
+          _sort: 'dateStart:DESC',
           _limit: String(limit),
           _start: String(start),
         }),
