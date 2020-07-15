@@ -10,7 +10,7 @@
     <div class="lg:pl-2 lg:w-1/2">
       <img
         v-if="event.image !== null"
-        :src="'https://strapi.creal.' + stackDomain + event.image.url"
+        :src="'https://' + strapiDomain + event.image.url"
         class="mb-4"
       />
       <div v-if="event.url !== null" class="mt-4 text-center">
@@ -52,8 +52,13 @@ export default class extends Vue {
     return moment.format('ddd D MMM YYYY, h:mm')
   }
 
-  get stackDomain(): string | undefined {
-    return process.env.stackDomain
+  // TODO: move to globals
+  // get stackDomain(): string | undefined {
+  //   return process.env.stackDomain
+  // }
+
+  get strapiDomain(): string | undefined {
+    return `strapi.${process.env.stackDomain}`
   }
 }
 </script>
