@@ -5,7 +5,7 @@
       <div class="flex flex-col mb-2">
         <div class="bg-gray-900 flex-grow p-2">
           <div class="m-auto w-5/6">
-            <h2 class="ml-2">
+            <h2 v-if="this.$route.query.playlist" class="ml-2">
               {{ this.$route.query.playlist }}
             </h2>
             <ul
