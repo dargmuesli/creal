@@ -4,38 +4,46 @@
       <h1>Player</h1>
       <div class="flex flex-col mb-2">
         <div class="bg-gray-900 flex-grow p-2">
-          <ul
-            v-if="playlists !== undefined && playlists.length > 0"
-            class="flex flex-wrap justify-center list-none"
-          >
-            <li
-              v-for="playlist in playlists"
-              :key="playlist.name"
-              class="max-w-xs m-2 mb-4"
-            >
-              <a :alt="playlist.name" :href="getPlaylistLink(playlist.name)">
-                <Playlist :playlist="playlist" />
-              </a>
-            </li>
-          </ul>
-          <div v-else-if="playlistItems !== undefined" class="m-auto w-5/6">
+          <div class="m-auto w-5/6">
             <h2 class="ml-2">
               {{ this.$route.query.playlist }}
             </h2>
-            <ul class="list-none">
+            <ul
+              v-if="playlists !== undefined && playlists.length > 0"
+              class="flex flex-wrap justify-center list-none"
+            >
               <li
-                v-for="playlistItem in playlistItems"
-                :key="playlistItem.name"
-                class="border-b border-gray-800 first:border-t hover:bg-gray-800"
+                v-for="playlist in playlists"
+                :key="playlist.name"
+                class="max-w-xs m-2 mb-4"
               >
-                <PlaylistItem
-                  :playlist-item="playlistItem"
-                  :set-source-function="setSource"
-                />
+                <a :alt="playlist.name" :href="getPlaylistLink(playlist.name)">
+                  <Playlist :playlist="playlist" />
+                </a>
               </li>
             </ul>
+            <div v-if="playlistItems !== undefined && playlistItems.length > 0">
+              <ul class="list-none">
+                <li
+                  v-for="playlistItem in playlistItems"
+                  :key="playlistItem.name"
+                  class="border-b border-gray-800 first:border-t hover:bg-gray-800"
+                >
+                  <PlaylistItem
+                    :playlist-item="playlistItem"
+                    :set-source-function="setSource"
+                  />
+                </li>
+              </ul>
+            </div>
           </div>
-          <div v-else class="text-center">
+          <div
+            v-if="
+              !(playlists !== undefined && playlists.length > 0) &&
+              !(playlistItems !== undefined && playlistItems.length > 0)
+            "
+            class="text-center"
+          >
             No items found.
           </div>
         </div>
