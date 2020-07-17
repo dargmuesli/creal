@@ -159,10 +159,10 @@ export default class extends Vue {
     }
 
     const playlists = []
-    const playlistKeyParts = query.playlist
-      .split('/')
-      .join('/collections/')
-      .split('/')
+    const playlistKeyParts =
+      query.playlist !== undefined
+        ? query.playlist.split('/').join('/collections/').split('/')
+        : undefined
     const playlistsSource =
       query.playlist !== undefined
         ? get(playlistsObject, playlistKeyParts, { collections: {} })
