@@ -151,21 +151,22 @@ export default class extends Vue {
     }
 
     const playlists = []
-    let playlistItems
-
-    const playlistsOrPlaylistItems =
+    const playlistKeyParts = query.playlist
+      .split('/')
+      .join('/collections/')
+      .split('/')
+    const playlistsSource =
       query.playlist !== undefined
-        ? get(
-            playlistsObject,
-            query.playlist.split('/').join('/items/').split('/'),
-            { items: {} }
-          ).items
+        ? get(playlistsObject, playlistKeyParts, { collections: {} })
+            .collections
+        : playlistsObject
+    const playlistItems =
+      query.playlist !== undefined
+        ? get(playlistsObject, playlistKeyParts, { items: {} }).items
         : playlistsObject
 
-    if (Array.isArray(playlistsOrPlaylistItems)) {
-      playlistItems = playlistsOrPlaylistItems
-    } else {
-      for (const [key, value] of Object.entries(playlistsOrPlaylistItems)) {
+    if (playlistsSource !== undefined) {
+      for (const [key, value] of Object.entries(playlistsSource)) {
         playlists.push({ name: key, items: value })
       }
     }
