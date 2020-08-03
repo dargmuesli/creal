@@ -21,7 +21,7 @@ function getNestedObject(properties: Array<string>, size: Number) {
     // properties.length is >2
     const key = properties[0]
     properties.shift()
-    nestedObject[key] = { items: getNestedObject(properties, size) }
+    nestedObject[key] = { collections: getNestedObject(properties, size) }
   }
 
   return nestedObject

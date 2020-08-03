@@ -13,7 +13,10 @@
         :src="'https://' + strapiDomain + event.image.url"
         class="mb-4"
       />
-      <div v-if="event.url !== null" class="mt-4 text-center">
+      <div
+        v-if="event.url !== null && event.url !== ''"
+        class="mt-4 text-center"
+      >
         <Button :icon="false" :link="event.url">Details</Button>
       </div>
     </div>
