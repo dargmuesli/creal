@@ -1,7 +1,17 @@
 export default {
+  /*
+   ** Nuxt rendering mode
+   ** See https://nuxtjs.org/api/configuration-mode
+   */
   mode: 'universal',
   /*
+   ** Nuxt target
+   ** See https://nuxtjs.org/api/configuration-target
+   */
+  target: 'server',
+  /*
    ** Headers of the page
+   ** See https://nuxtjs.org/api/configuration-head
    */
   head: {
     title: 'cReal',
@@ -26,8 +36,14 @@ export default {
   css: ['plyr/dist/plyr.css'],
   /*
    ** Plugins to load before mounting the App
+   ** https://nuxtjs.org/guide/plugins
    */
   plugins: ['~/plugins/paging.ts', '~/plugins/vue-plyr'],
+  /*
+   ** Auto import components
+   ** See https://nuxtjs.org/api/configuration-components
+   */
+  components: false,
   /*
    ** Nuxt.js dev-modules
    */
@@ -60,6 +76,7 @@ export default {
   },
   /*
    ** Build configuration
+   ** See https://nuxtjs.org/api/configuration-build/
    */
   build: {
     /*

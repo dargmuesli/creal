@@ -16,7 +16,7 @@ module.exports = {
       },
     },
     maxHeight: {
-      '0': '0',
+      0: '0',
     },
   },
   variants: {
