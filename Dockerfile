@@ -30,7 +30,7 @@ CMD ["dev", "--hostname", "0.0.0.0"]
 ########################
 # Build Nuxt.
 
-FROM node:14.10.0-slim@sha256:31d673d8e05165efce181d5d8473ac53f13b04609294c70f46d9d06e2cc3a8e6 AS build
+FROM node:14.10.0-slim@sha256:2be0b0ff8fdf14453b43f8f10234d05c718fd7b6947e080982f5e57ed4c595f0 AS build
 
 ARG STACK_DOMAIN=jonas-thelemann.de
 ENV STACK_DOMAIN=${STACK_DOMAIN}
