@@ -32,7 +32,6 @@
                   <PlaylistItem
                     :playlist-item="playlistItem"
                     :set-source-function="setSource"
-                    :set-current-pli-name="setCurrentPlayListItemName"
                   />
                 </li>
               </ul>
@@ -110,7 +109,6 @@ interface AxiosPlaylistData {
 })
 export default class extends Vue {
   playlists?: Array<object>
-  currentPlaylistItemName?: string
 
   get player() {
     return (this.$refs.plyr as any).player
@@ -204,10 +202,6 @@ export default class extends Vue {
     return `?${playlistLinkParts.join('&')}`
   }
 
-  setCurrentPlaylistItemName(name: any) {
-    this.currentPlaylistItemName = name
-  }
-
   setSource(url: URL) {
     this.player.config.controls = [
       'play-large',
@@ -232,11 +226,5 @@ export default class extends Vue {
 
     this.player.play()
   }
-
-  // head() {
-  //   return {
-  //     title: this.currentPlaylistItemName,
-  //   }
-  // }
 }
 </script>
