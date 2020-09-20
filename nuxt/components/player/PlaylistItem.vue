@@ -1,6 +1,10 @@
 <template>
   <div class="flex select-none">
-    <button class="ml-2 mr-3 lg:mr-10" title="download" @click="download()">
+    <button
+      class="ml-2 mr-3 lg:mr-10"
+      :title="playlistItem.size"
+      @click="download()"
+    >
       <font-awesome-icon :icon="['fas', 'download']" />
     </button>
     <button
@@ -29,6 +33,8 @@ export default class extends Vue {
   @Prop({ type: Function, required: true })
   readonly setSourceFunction!: Function
 
+  readonly setCurrentPliName!: Function
+
   async getSignedUrl() {
     const key = this.$route.query.playlist + '/' + this.playlistItem.name
     return await this.$axios.$get('/player/signedUrl', {
@@ -45,6 +51,9 @@ export default class extends Vue {
 
   async play() {
     this.setSourceFunction(await this.getSignedUrl())
+    this.setCurrentPliName(
+      this.playlistItem.name.replace(/^cReal - /, '').replace(/\.mp3$/, '')
+    )
   }
 
   itemClick(event: any) {
