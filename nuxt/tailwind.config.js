@@ -5,6 +5,10 @@
  ** Default: https://github.com/tailwindcss/tailwindcss/blob/master/stubs/defaultConfig.stub.js
  */
 module.exports = {
+  future: {
+    purgeLayersByDefault: true,
+    removeDeprecatedGapUtilities: true,
+  },
   theme: {
     extend: {
       transitionProperty: {
@@ -16,7 +20,7 @@ module.exports = {
       },
     },
     maxHeight: {
-      '0': '0',
+      0: '0',
     },
   },
   variants: {
