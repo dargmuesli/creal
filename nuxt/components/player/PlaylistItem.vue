@@ -16,7 +16,6 @@
 </template>
 
 <script lang="ts">
-import merge from 'lodash.mergewith'
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
 
 interface PlaylistItem {
@@ -27,22 +26,14 @@ interface PlaylistItem {
 @Component({})
 export default class extends Vue {
   @Prop({ type: Object, required: true }) readonly playlistItem!: PlaylistItem
+
   @Prop({ type: Function, required: true })
   readonly setSourceFunction!: Function
 
   async getSignedUrl() {
     const key = this.$route.query.playlist + '/' + this.playlistItem.name
     return await this.$axios.$get('/player/signedUrl', {
-      params: new URLSearchParams(
-        merge(
-          {},
-          {
-            ...(key !== undefined && {
-              key,
-            }),
-          }
-        )
-      ),
+      params: new URLSearchParams({ key }),
     })
   }
 
@@ -55,6 +46,9 @@ export default class extends Vue {
 
   async play() {
     this.setSourceFunction(await this.getSignedUrl())
+    document.title = this.playlistItem.name
+      .replace(/^cReal - /, '')
+      .replace(/\.mp3$/, '')
   }
 
   itemClick(event: any) {

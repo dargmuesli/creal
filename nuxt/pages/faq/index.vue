@@ -21,12 +21,13 @@
         </ul>
         <PagingControls
           v-if="
-            (partString !== null &&
+            partString !== null &&
             queryPrevious !== null &&
             queryNext !== null &&
             allowPrevious !== null &&
             allowNext !== null &&
-            (allowPrevious || allowNext))"
+            (allowPrevious || allowNext)
+          "
           :part-string="partString"
           :query-previous="queryPrevious"
           :query-next="queryNext"
@@ -34,9 +35,7 @@
           :allow-next="allowNext"
         />
       </div>
-      <div v-else class="text-center">
-        No FAQ found.
-      </div>
+      <div v-else class="text-center">No FAQ found.</div>
     </section>
   </div>
 </template>

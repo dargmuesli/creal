@@ -49,7 +49,7 @@
         </div>
       </div>
       <vue-plyr
-        v-if="playlistItems !== undefined"
+        v-if="playlistItems !== undefined && initialPlay"
         ref="plyr"
         class="fixed bottom-0 left-0 right-0"
       >
@@ -57,7 +57,10 @@
       </vue-plyr>
     </section>
     <!-- player below is for spacing (invisible) -->
-    <vue-plyr v-if="playlistItems !== undefined" class="invisible">
+    <vue-plyr
+      v-if="playlistItems !== undefined && initialPlay"
+      class="invisible"
+    >
       <audio />
     </vue-plyr>
   </div>
@@ -109,6 +112,7 @@ interface AxiosPlaylistData {
 })
 export default class extends Vue {
   playlists?: Array<object>
+  initialPlay = false
 
   get player() {
     return (this.$refs.plyr as any).player
@@ -203,28 +207,31 @@ export default class extends Vue {
   }
 
   setSource(url: URL) {
-    this.player.config.controls = [
-      'play-large',
-      'play',
-      'progress',
-      'current-time',
-      'mute',
-      'volume',
-      // 'pip',
-      'airplay',
-      // 'fullscreen',
-    ]
-    this.player.source = {
-      type: 'audio',
-      sources: [
-        {
-          src: url,
-          type: 'audio/mp3',
-        },
-      ],
-    }
+    this.initialPlay = true
+    this.$nextTick().then(() => {
+      this.player.config.controls = [
+        'play-large',
+        'play',
+        'progress',
+        'current-time',
+        'mute',
+        'volume',
+        // 'pip',
+        'airplay',
+        // 'fullscreen',
+      ]
+      this.player.source = {
+        type: 'audio',
+        sources: [
+          {
+            src: url,
+            type: 'audio/mp3',
+          },
+        ],
+      }
 
-    this.player.play()
+      this.player.play()
+    })
   }
 }
 </script>

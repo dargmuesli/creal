@@ -21,9 +21,7 @@
           :allow-next="allowNext"
         />
       </div>
-      <div v-else class="text-center">
-        No events found.
-      </div>
+      <div v-else class="text-center">No events found.</div>
     </section>
   </div>
 </template>
