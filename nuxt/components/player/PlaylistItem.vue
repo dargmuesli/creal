@@ -1,10 +1,6 @@
 <template>
   <div class="flex select-none">
-    <button
-      class="ml-2 mr-3 lg:mr-10"
-      :title="playlistItem.size"
-      @click="download()"
-    >
+    <button class="ml-2 mr-3 lg:mr-10" title="download" @click="download()">
       <font-awesome-icon :icon="['fas', 'download']" />
     </button>
     <button
