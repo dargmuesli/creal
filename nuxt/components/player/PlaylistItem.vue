@@ -1,6 +1,10 @@
 <template>
   <div class="flex select-none">
-    <button class="ml-2 mr-3 lg:mr-10" title="download" @click="download()">
+    <button
+      class="ml-2 mr-3 lg:mr-10"
+      :title="bytesToString(playlistItem.size)"
+      @click="download()"
+    >
       <font-awesome-icon :icon="['fas', 'download']" />
     </button>
     <button
@@ -17,6 +21,7 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
+import prettyBytes from 'pretty-bytes'
 
 interface PlaylistItem {
   name: string
@@ -56,6 +61,10 @@ export default class extends Vue {
       // double click
       this.play()
     }
+  }
+
+  bytesToString(bytes: number) {
+    return prettyBytes(bytes)
   }
 }
 </script>
