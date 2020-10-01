@@ -26,6 +26,7 @@ interface PlaylistItem {
 @Component({})
 export default class extends Vue {
   @Prop({ type: Object, required: true }) readonly playlistItem!: PlaylistItem
+
   @Prop({ type: Function, required: true })
   readonly setSourceFunction!: Function
 
@@ -45,6 +46,9 @@ export default class extends Vue {
 
   async play() {
     this.setSourceFunction(await this.getSignedUrl())
+    document.title = this.playlistItem.name
+      .replace(/^cReal - /, '')
+      .replace(/\.mp3$/, '')
   }
 
   itemClick(event: any) {
