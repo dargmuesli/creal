@@ -1,0 +1,33 @@
+# [0.2.0](https://github.com/dargmuesli/creal/compare/0.1.7...0.2.0) (2020-10-02)
+
+
+### Bug Fixes
+
+* **deps:** pin dependency pretty-bytes to 5.4.1 ([2c6cc62](https://github.com/dargmuesli/creal/commit/2c6cc622e03393dc208a81606d80a14314bf9a1f))
+* **deps:** update dependency @fortawesome/free-solid-svg-icons to v5.15.0 ([d0f9947](https://github.com/dargmuesli/creal/commit/d0f9947029aec4106720f8dd7f84aa43c3b41063))
+* **deps:** update dependency aws-sdk to v2.748.0 ([0d952a8](https://github.com/dargmuesli/creal/commit/0d952a861a186010729da12c551a983e7d29cb71))
+* **deps:** update dependency aws-sdk to v2.749.0 ([3fe9c78](https://github.com/dargmuesli/creal/commit/3fe9c788d2269bcf1b302ead5f965909b90c64c1))
+* **deps:** update dependency aws-sdk to v2.750.0 ([9ebc1e8](https://github.com/dargmuesli/creal/commit/9ebc1e87b21933cdde7ee9a799bab91b157cc89c))
+* **deps:** update dependency aws-sdk to v2.751.0 ([1fe8cc2](https://github.com/dargmuesli/creal/commit/1fe8cc29eb1388b0c50da85f92944f9284f20927))
+* **deps:** update dependency aws-sdk to v2.752.0 ([0017e65](https://github.com/dargmuesli/creal/commit/0017e650c10eabb76148a2b4a222fa34cf56c57c))
+* **deps:** update dependency aws-sdk to v2.753.0 ([fb5368a](https://github.com/dargmuesli/creal/commit/fb5368aad83c917e3ec2fcb026f4841cbd3d9c3e))
+* **deps:** update dependency aws-sdk to v2.754.0 ([5a68467](https://github.com/dargmuesli/creal/commit/5a684670711026caf994dbc1972312e47fe19e42))
+* **deps:** update dependency aws-sdk to v2.755.0 ([87e5f64](https://github.com/dargmuesli/creal/commit/87e5f647142999cb588bd640f49735b4080e0530))
+* **deps:** update dependency aws-sdk to v2.756.0 ([d83c87a](https://github.com/dargmuesli/creal/commit/d83c87a1be6be7ee0a1c6cdc555ba73c1bf5a11b))
+* **deps:** update dependency aws-sdk to v2.757.0 ([895bc2d](https://github.com/dargmuesli/creal/commit/895bc2dd5f7a311261ec1f04e66df4ae7cb7948d))
+* **deps:** update dependency aws-sdk to v2.758.0 ([b667114](https://github.com/dargmuesli/creal/commit/b66711441c449c127634692d83a8009a8433e8d4))
+* **deps:** update dependency aws-sdk to v2.759.0 ([cb87a10](https://github.com/dargmuesli/creal/commit/cb87a10e629813749de9bb67976310bf799b9a73))
+* **deps:** update dependency aws-sdk to v2.760.0 ([863d841](https://github.com/dargmuesli/creal/commit/863d84150ca7281fb25fe5c543bd1ae0d39468a8))
+* **deps:** update dependency aws-sdk to v2.761.0 ([bc25948](https://github.com/dargmuesli/creal/commit/bc259481d1e44cc62e02adb0d3c8230946e7fbb0))
+* **deps:** update dependency aws-sdk to v2.762.0 ([8ef3593](https://github.com/dargmuesli/creal/commit/8ef3593b37ff2692c7e2f8f1966197b08c8e1e99))
+* **deps:** update dependency aws-sdk to v2.763.0 ([47950e4](https://github.com/dargmuesli/creal/commit/47950e44617e8469db8d5e90b592da9a041a0f06))
+* **deps:** update dependency aws-sdk to v2.764.0 ([f61ab8f](https://github.com/dargmuesli/creal/commit/f61ab8f67add8b8ce8307820f405d421feeb5f6e))
+* **deps:** update dependency aws-sdk to v2.765.0 ([90be2eb](https://github.com/dargmuesli/creal/commit/90be2eb25d6763d3f5b243fee841741f4fd15359))
+* **deps:** update dependency aws-sdk to v2.766.0 ([86d95ec](https://github.com/dargmuesli/creal/commit/86d95ec5cf32db1f789733874b5296545f2fa530))
+* **deps:** update dependency nuxt-property-decorator to v2.8.3 ([6eb5ed1](https://github.com/dargmuesli/creal/commit/6eb5ed11002d74b2067d7d46d3577b2ce23ff028))
+* **deps:** update dependency nuxt-property-decorator to v2.8.8 ([1d25f46](https://github.com/dargmuesli/creal/commit/1d25f46feb2523890380995fa50a7dce3cacb800))
+
+
+### Features
+
+* add semantic release ([b0532ae](https://github.com/dargmuesli/creal/commit/b0532aed5c73c3da3c91365adfb2b416d859e513))
