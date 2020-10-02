@@ -1,3 +1,16 @@
+## [0.2.2](https://github.com/dargmuesli/creal/compare/0.2.1...0.2.2) (2020-10-02)
+
+
+### Bug Fixes
+
+* **docker:** install git in build step ([6e62ade](https://github.com/dargmuesli/creal/commit/6e62adea2d070292a6005869a43cfe6bdcc2379d))
+* **yarn:** correct dependency type for moment ([b38e1f7](https://github.com/dargmuesli/creal/commit/b38e1f7b127c975352adb54d1c2483bf9cd3755a))
+
+
+### Performance Improvements
+
+* **docker:** discard devDependencies ([73b8f6f](https://github.com/dargmuesli/creal/commit/73b8f6fcbfc35778e6c5fb27439b78c590febf32))
+
 ## [0.2.1](https://github.com/dargmuesli/creal/compare/0.2.0...0.2.1) (2020-10-02)
 
 
