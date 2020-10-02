@@ -36,6 +36,12 @@ ARG STACK_DOMAIN=jonas-thelemann.de
 ENV STACK_DOMAIN=${STACK_DOMAIN}
 ENV NODE_ENV=production
 
+# Update and install build dependencies
+# - `git` is required by the `yarn` command
+RUN \
+    apt-get update && \
+    apt-get install -y git
+
 WORKDIR /srv/app/
 
 COPY --from=development /srv/app/ ./
