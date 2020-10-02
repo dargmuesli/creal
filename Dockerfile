@@ -34,12 +34,16 @@ FROM node:14.11.0-slim@sha256:6da83da0c1c595cfc12ab6dacfe6abc1d0f9cd08f781ed4f38
 
 ARG STACK_DOMAIN=jonas-thelemann.de
 ENV STACK_DOMAIN=${STACK_DOMAIN}
+ENV NODE_ENV=production
 
 WORKDIR /srv/app/
 
 COPY --from=development /srv/app/ ./
 
 RUN yarn run build
+
+# Discard devDependencies.
+RUN yarn install
 
 
 #######################
