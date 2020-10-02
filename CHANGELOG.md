@@ -1,3 +1,10 @@
+## [0.2.1](https://github.com/dargmuesli/creal/compare/0.2.0...0.2.1) (2020-10-02)
+
+
+### Bug Fixes
+
+* **ci:** zip dist folder ([eb8f21b](https://github.com/dargmuesli/creal/commit/eb8f21b68d0bc19681f0800aa2325115116e1dfd))
+
 # [0.2.0](https://github.com/dargmuesli/creal/compare/0.1.7...0.2.0) (2020-10-02)
 
 
