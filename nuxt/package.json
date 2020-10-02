@@ -1,9 +1,10 @@
 {
   "name": "creal",
+  "private": true,
   "version": "0.1.7",
+  "scheduleVersion": "0.1.7",
   "description": "cReal's website.",
   "author": "Jonas Thelemann",
-  "private": true,
   "scripts": {
     "dev": "nuxt-ts",
     "build": "nuxt-ts build",
@@ -19,6 +20,7 @@
   },
   "husky": {
     "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
       "pre-commit": "lint-staged"
     }
   },
@@ -41,6 +43,8 @@
   },
   "devDependencies": {
     "@babel/runtime-corejs3": "7.11.2",
+    "@commitlint/cli": "11.0.0",
+    "@commitlint/config-conventional": "11.0.0",
     "@nuxt/types": "2.14.6",
     "@nuxt/typescript-build": "2.0.3",
     "@nuxtjs/eslint-config-typescript": "3.0.0",
