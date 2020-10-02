@@ -13,7 +13,7 @@ RUN \
 
 WORKDIR /srv/app/
 
-COPY ./nuxt/ /srv/app/
+COPY ./nuxt/ ./
 
 RUN yarn
 
@@ -30,14 +30,14 @@ CMD ["dev", "--hostname", "0.0.0.0"]
 ########################
 # Build Nuxt.
 
-FROM node:14.7.0-slim@sha256:859c51a8718b6ef7781f62e9d2ffb78b9f7445329957f737f003a35841ddbf7c AS build
+FROM node:14.11.0-slim@sha256:6da83da0c1c595cfc12ab6dacfe6abc1d0f9cd08f781ed4f3835f2f446ec8713 AS build
 
 ARG STACK_DOMAIN=jonas-thelemann.de
 ENV STACK_DOMAIN=${STACK_DOMAIN}
 
 WORKDIR /srv/app/
 
-COPY --from=development /srv/app/ /srv/app/
+COPY --from=development /srv/app/ ./
 
 RUN yarn run build
 
@@ -48,14 +48,14 @@ RUN yarn run build
 
 # Should be the specific version of node:buster-slim.
 # sqitch requires at least buster.
-FROM node:14.7.0-buster-slim@sha256:ef8951798d6a23f496e8c091491a5f93dff68e50aef4426569f595a30e141b51 AS production
+FROM node:14.11.0-buster-slim@sha256:821b940122a47acdeb229ea5820a6a810a55db350e2058c6b98ca0f2dd1c8e9f AS production
 
 # Install sqitch.
 RUN apt-get update && apt-get -y install libdbd-pg-perl postgresql-client sqitch
 
 WORKDIR /srv/app/
 
-COPY --from=build /srv/app/ /srv/app/
+COPY --from=build /srv/app/ ./
 
 COPY ./sqitch/ /srv/sqitch/
 COPY ./docker-entrypoint.sh /usr/local/bin/

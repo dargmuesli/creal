@@ -7,11 +7,11 @@
       <div class="bg-gray-800 fullscreen"></div>
       <div
         class="bg-center bg-cover transition-opacity bg-no-repeat fullscreen"
-        style="background-image: url('/creal.jpg');"
+        style="background-image: url('/creal.jpg')"
       ></div>
       <div class="bg-gray-800 opacity-75 fullscreen"></div>
       <div class="fullscreen flex">
-        <div class="m-auto text-center" style="margin-bottom: 20vh;">
+        <div class="m-auto text-center" style="margin-bottom: 20vh">
           <h1 class="inline-block border-b border-gray-400">cReal</h1>
           <p class="font-light mt-4 mb-16">Welcome to my website</p>
           <Button :icon="false" @click.native="setShowGreeting(true)">
@@ -30,12 +30,8 @@
       <ButtonBig :link="'/events'" :icon-id="'calendar-day'">
         Events
       </ButtonBig>
-      <ButtonBig :link="'/faq'" :icon-id="'comments'">
-        FAQ
-      </ButtonBig>
-      <ButtonBig :link="'/player'" :icon-id="'music'">
-        Player
-      </ButtonBig>
+      <ButtonBig :link="'/faq'" :icon-id="'comments'">FAQ</ButtonBig>
+      <ButtonBig :link="'/player'" :icon-id="'music'">Player</ButtonBig>
     </div>
   </div>
 </template>
