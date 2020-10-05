@@ -1,3 +1,10 @@
+# [0.4.0](https://github.com/dargmuesli/creal/compare/0.3.0...0.4.0) (2020-10-05)
+
+
+### Features
+
+* add page titles ([dd38876](https://github.com/dargmuesli/creal/commit/dd3887671c7c69e6ff102cc427f8a1338e0d9c47))
+
 # [0.3.0](https://github.com/dargmuesli/creal/compare/0.2.3...0.3.0) (2020-10-05)
 
 
