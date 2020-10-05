@@ -1,7 +1,7 @@
 <template>
   <div class="container mx-auto mb-4">
     <section>
-      <h1>Events</h1>
+      <h1>{{ title }}</h1>
       <div v-if="items !== null && items.length > 0">
         <ul class="list-none">
           <li
@@ -41,8 +41,15 @@ import PagingControls from '~/components/PagingControls.vue'
     Event,
     PagingControls,
   },
+  head(this: EventsPage): Object {
+    return {
+      title: this.title,
+    }
+  },
 })
-export default class extends Paging {
+export default class EventsPage extends Paging {
+  title: String = 'Events'
+
   async asyncData({
     $axios,
     $paging,

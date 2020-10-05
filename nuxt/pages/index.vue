@@ -47,6 +47,9 @@ import ButtonBig from '~/components/ButtonBig.vue'
     Button,
     ButtonBig,
   },
+  head: {
+    title: 'Welcome!',
+  },
 })
 export default class extends Vue {
   showGreeting = true

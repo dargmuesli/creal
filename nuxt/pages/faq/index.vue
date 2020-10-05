@@ -1,7 +1,7 @@
 <template>
   <div class="container mx-auto mb-4">
     <section>
-      <h1>FAQ</h1>
+      <h1>{{ title }}</h1>
       <Error v-if="requestError !== null" :error="requestError">
         {{ requestError.message }}
       </Error>
@@ -62,8 +62,15 @@ interface Dictionary<T> {
     Faq,
     PagingControls,
   },
+  head(this: FaqPage): Object {
+    return {
+      title: this.title,
+    }
+  },
 })
-export default class extends Paging {
+export default class FaqPage extends Paging {
+  title: String = 'FAQ'
+
   itemFocused: any = null
 
   slugify(input: string) {

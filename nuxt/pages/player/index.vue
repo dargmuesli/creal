@@ -1,7 +1,7 @@
 <template>
   <div class="container mx-auto mb-4">
     <section>
-      <h1>Player</h1>
+      <h1>{{ title }}</h1>
       <div class="flex flex-col mb-2">
         <div class="bg-gray-900 flex-grow p-2">
           <div class="m-auto w-5/6">
@@ -109,8 +109,15 @@ interface AxiosPlaylistData {
     Playlist,
     PlaylistItem,
   },
+  head(this: PlayerPage): Object {
+    return {
+      title: this.title,
+    }
+  },
 })
-export default class extends Vue {
+export default class PlayerPage extends Vue {
+  title: String = 'Player'
+
   playlists?: Array<object>
   initialPlay = false
 
