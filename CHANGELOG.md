@@ -1,3 +1,10 @@
+# [0.3.0](https://github.com/dargmuesli/creal/compare/0.2.3...0.3.0) (2020-10-05)
+
+
+### Features
+
+* add license ([49a3e0d](https://github.com/dargmuesli/creal/commit/49a3e0df1f185cdb62b0f6190e1a793f8975c6ee))
+
 ## [0.2.3](https://github.com/dargmuesli/creal/compare/0.2.2...0.2.3) (2020-10-05)
 
 
