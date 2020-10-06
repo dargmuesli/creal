@@ -30,7 +30,7 @@ CMD ["dev", "--hostname", "0.0.0.0"]
 ########################
 # Build Nuxt.
 
-FROM node:14.12.0-slim@sha256:20f238c9674feb6a857ed4759c213087847311235236e6b884d37d3a86c48c2d AS build
+FROM node:14.13.0-slim@sha256:8a1c2805842351c462d7482dea01600f92cae263146b2353f9e6e3f768d707a5 AS build
 
 ARG STACK_DOMAIN=jonas-thelemann.de
 ENV STACK_DOMAIN=${STACK_DOMAIN}
@@ -58,7 +58,7 @@ RUN yarn install
 
 # Should be the specific version of node:buster-slim.
 # sqitch requires at least buster.
-FROM node:14.12.0-buster-slim@sha256:8a67ada5d959f50dd7ebf460989507d1740e067023915ee3af6e60c1d3496bad AS production
+FROM node:14.13.0-buster-slim@sha256:3b6c2cd90b5b53ffd74a15c8ee199d29710a6d34d54a9b0dbadb1218517a9fd1 AS production
 
 # Install sqitch.
 RUN apt-get update && apt-get -y install libdbd-pg-perl postgresql-client sqitch
