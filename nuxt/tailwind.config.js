@@ -75,4 +75,9 @@ module.exports = {
       })
     },
   ],
+  purge: {
+    options: {
+      whitelist: ['__nuxt', '__layout'],
+    },
+  },
 }
