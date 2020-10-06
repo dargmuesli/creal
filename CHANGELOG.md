@@ -1,3 +1,10 @@
+## [0.4.1](https://github.com/dargmuesli/creal/compare/0.4.0...0.4.1) (2020-10-06)
+
+
+### Bug Fixes
+
+* **workflows/schedule:** correct path ([af413c1](https://github.com/dargmuesli/creal/commit/af413c182331e2d9a9f2be28eb7f69cd4546d079))
+
 # [0.4.0](https://github.com/dargmuesli/creal/compare/0.3.0...0.4.0) (2020-10-05)
 
 
