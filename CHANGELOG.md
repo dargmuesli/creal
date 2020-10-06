@@ -1,3 +1,11 @@
+## [0.4.2](https://github.com/dargmuesli/creal/compare/0.4.1...0.4.2) (2020-10-06)
+
+
+### Bug Fixes
+
+* **faq:** correct text alignment ([a909594](https://github.com/dargmuesli/creal/commit/a909594a07e667517813910b896f74b1b3d09554))
+* **tailwind:** whitelist nuxt globals ([955a1d0](https://github.com/dargmuesli/creal/commit/955a1d082d1cf7a9789eb6210656e3ea97943955))
+
 ## [0.4.1](https://github.com/dargmuesli/creal/compare/0.4.0...0.4.1) (2020-10-06)
 
 
