@@ -1,12 +1,12 @@
 <template>
   <section>
     <button
-      class="flex p-4 text-left w-full"
+      class="flex p-4 w-full"
       :class="{ 'border-b': faq.focused }"
       @click="toggleFunction(faq)"
     >
       <font-awesome-icon :icon="['fas', 'comments']" class="mr-4" size="lg" />
-      <h1 class="font-normal mb-0 text-base">
+      <h1 class="font-normal mb-0 text-base text-left">
         {{ faq.title }}
       </h1>
     </button>
