@@ -58,7 +58,7 @@ RUN yarn install
 
 # Should be the specific version of node:buster-slim.
 # sqitch requires at least buster.
-FROM node:14.13.1-buster-slim@sha256:fe62a3b7ef8a3047d785117327fe784776fa1386125f04d9442436568e02591f AS production
+FROM node:14.13.1-buster-slim@sha256:2565c4d4f984f9219661ccd1618d61a0614a0385e2770b71c94bfd86a2388a50 AS production
 
 # Install sqitch.
 RUN apt-get update && apt-get -y install libdbd-pg-perl postgresql-client sqitch
