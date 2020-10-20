@@ -8,8 +8,10 @@ FROM node:13.14.0-buster-slim@sha256:ffee53b7563851a457e5a6f485adbe28877cf92286c
 # Update and install build dependencies
 # - `git` is required by the `yarn` command
 RUN \
-    apt-get update && \
-    apt-get install -y git
+    apt-get update \
+    && apt-get install --no-install-recommends -y git \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /srv/app/
 
@@ -18,7 +20,10 @@ COPY ./nuxt/ ./
 RUN yarn
 
 # Install sqitch.
-RUN apt-get update && apt-get -y install libdbd-pg-perl postgresql-client sqitch
+RUN apt-get update \
+    && apt-get install --no-install-recommends -y libdbd-pg-perl postgresql-client sqitch \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
 COPY ./sqitch/ /srv/sqitch/
 COPY ./docker-entrypoint.sh /usr/local/bin/
@@ -39,8 +44,10 @@ ENV NODE_ENV=production
 # Update and install build dependencies
 # - `git` is required by the `yarn` command
 RUN \
-    apt-get update && \
-    apt-get install -y git
+    apt-get update \
+    && apt-get install --no-install-recommends -y git \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /srv/app/
 
@@ -61,7 +68,10 @@ RUN yarn install
 FROM node:14.14.0-buster-slim@sha256:8f417dc7877e271341473e9feae4696eb49219c83e5b760b5222845be0399dbf AS production
 
 # Install sqitch.
-RUN apt-get update && apt-get -y install libdbd-pg-perl postgresql-client sqitch
+RUN apt-get update \
+    && apt-get install --no-install-recommends -y libdbd-pg-perl postgresql-client sqitch \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /srv/app/
 
