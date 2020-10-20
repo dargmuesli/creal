@@ -1,3 +1,15 @@
+## [0.4.4](https://github.com/dargmuesli/creal/compare/0.4.3...0.4.4) (2020-10-20)
+
+
+### Bug Fixes
+
+* **docker:** apt install ca-certificates ([6867cea](https://github.com/dargmuesli/creal/commit/6867cea451ac7a76cff3b2af8e8d9b5f67998bcd))
+
+
+### Performance Improvements
+
+* **docker:** clean up apt lists ([4107f0f](https://github.com/dargmuesli/creal/commit/4107f0f360e0da96702c1cbede5abaccb931c631))
+
 ## [0.4.3](https://github.com/dargmuesli/creal/compare/0.4.2...0.4.3) (2020-10-19)
 
 
