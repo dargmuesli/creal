@@ -6,10 +6,10 @@
 FROM node:13.14.0-buster-slim@sha256:ffee53b7563851a457e5a6f485adbe28877cf92286cc7095806e09d721808669 AS development
 
 # Update and install build dependencies
-# - `git` is required by the `yarn` command
+# - `ca-certificates` and `git` are required by the `yarn install` command
 RUN \
     apt-get update \
-    && apt-get install --no-install-recommends -y git \
+    && apt-get install --no-install-recommends -y ca-certificates git \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
@@ -17,7 +17,7 @@ WORKDIR /srv/app/
 
 COPY ./nuxt/ ./
 
-RUN yarn
+RUN yarn install
 
 # Install sqitch.
 RUN apt-get update \
@@ -42,10 +42,10 @@ ENV STACK_DOMAIN=${STACK_DOMAIN}
 ENV NODE_ENV=production
 
 # Update and install build dependencies
-# - `git` is required by the `yarn` command
+# - `ca-certificates` and `git` are required by the `yarn install` command
 RUN \
     apt-get update \
-    && apt-get install --no-install-recommends -y git \
+    && apt-get install --no-install-recommends -y ca-certificates git \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
