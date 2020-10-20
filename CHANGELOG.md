@@ -1,3 +1,12 @@
+## [0.4.5](https://github.com/dargmuesli/creal/compare/0.4.4...0.4.5) (2020-10-20)
+
+
+### Bug Fixes
+
+* **deps:** bump crazy-max/ghaction-docker-buildx from v3.3.0 to v3.3.1 ([0285e9e](https://github.com/dargmuesli/creal/commit/0285e9e956346d937f8c6e11337b89e7793f339f))
+* **deps:** bump stefanzweifel/git-auto-commit-action ([3a094e9](https://github.com/dargmuesli/creal/commit/3a094e9b498450eaedbecd66c4bc9216131525f1))
+* **deps:** bump WyriHaximus/github-action-next-semvers from v1.0 to v1 ([772a535](https://github.com/dargmuesli/creal/commit/772a535d37dc0116800c29b94cf3a06629867c5d))
+
 ## [0.4.4](https://github.com/dargmuesli/creal/compare/0.4.3...0.4.4) (2020-10-20)
 
 
