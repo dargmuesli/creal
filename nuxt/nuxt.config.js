@@ -65,6 +65,7 @@ export default {
     '@nuxtjs/axios',
     '@nuxtjs/proxy',
     'nuxt-fontawesome',
+    '@nuxtjs/sitemap', // Should be declared at the end of the array.
   ],
   /*
    ** Axios module configuration
