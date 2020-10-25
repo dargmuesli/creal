@@ -52,6 +52,9 @@
         v-if="playlistItems !== undefined && initialPlay"
         ref="plyr"
         class="fixed bottom-0 left-0 right-0"
+        :emit="['pause', 'playing']"
+        @pause="onPlyrPause"
+        @playing="onPlyrPlaying"
       >
         <audio />
       </vue-plyr>
@@ -111,18 +114,26 @@ interface AxiosPlaylistData {
   },
   head(this: PlayerPage): Object {
     return {
-      title: this.title,
+      title: this.titleHead,
     }
   },
 })
 export default class PlayerPage extends Vue {
-  title: String = 'Player'
+  title = 'Player'
 
+  currentTrack: string = ''
   playlists?: Array<object>
+  plyrPaused: boolean = false
   initialPlay = false
 
   get player() {
     return (this.$refs.plyr as any).player
+  }
+
+  get titleHead() {
+    return this.currentTrack !== '' && !this.plyrPaused
+      ? this.currentTrack
+      : this.title
   }
 
   async asyncData({
@@ -213,8 +224,18 @@ export default class PlayerPage extends Vue {
     return `?${playlistLinkParts.join('&')}`
   }
 
-  setSource(url: URL) {
+  onPlyrPause() {
+    this.plyrPaused = true
+  }
+
+  onPlyrPlaying() {
+    this.plyrPaused = false
+  }
+
+  setSource(name: string, url: URL) {
     this.initialPlay = true
+    const nameParts = name.replace(/\.mp3$/, '').split(' - ')
+    this.currentTrack = `${nameParts[1]} · ${nameParts[0]}`
     this.$nextTick().then(() => {
       this.player.config.controls = [
         'play-large',

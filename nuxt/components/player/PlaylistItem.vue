@@ -50,10 +50,7 @@ export default class extends Vue {
   }
 
   async play() {
-    this.setSourceFunction(await this.getSignedUrl())
-    document.title = this.playlistItem.name
-      .replace(/^cReal - /, '')
-      .replace(/\.mp3$/, '')
+    this.setSourceFunction(this.playlistItem.name, await this.getSignedUrl())
   }
 
   itemClick(event: any) {
