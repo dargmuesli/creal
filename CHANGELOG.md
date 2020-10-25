@@ -1,3 +1,16 @@
+# [0.6.0](https://github.com/dargmuesli/creal/compare/0.5.0...0.6.0) (2020-10-25)
+
+
+### Features
+
+* **nuxt:** use prefixed environment variable ([d01c2ea](https://github.com/dargmuesli/creal/commit/d01c2eab9e99e9dddeb243b22db623d9702c2f7a))
+* **ops:** add healthcheck ([0814692](https://github.com/dargmuesli/creal/commit/0814692a5ccd23c89aac841d5792cf404708f246))
+
+
+### Performance Improvements
+
+* **docker:** optimize dockerfile ([f8a1831](https://github.com/dargmuesli/creal/commit/f8a18313c744c52413e9faa4cc02364066dd84dc))
+
 # [0.5.0](https://github.com/dargmuesli/creal/compare/0.4.5...0.5.0) (2020-10-25)
 
 
