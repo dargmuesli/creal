@@ -1,3 +1,10 @@
+# [0.5.0](https://github.com/dargmuesli/creal/compare/0.4.5...0.5.0) (2020-10-25)
+
+
+### Features
+
+* add sitemap ([0c64991](https://github.com/dargmuesli/creal/commit/0c64991c7111c5a4682c68b0ce3701d35b5cf487))
+
 ## [0.4.5](https://github.com/dargmuesli/creal/compare/0.4.4...0.4.5) (2020-10-20)
 
 
