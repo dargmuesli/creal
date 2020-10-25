@@ -39,8 +39,8 @@ CMD ["dev", "--hostname", "0.0.0.0"]
 # Should be the specific version of node:slim.
 FROM node:14.14.0-slim@sha256:3f0e71eee1467ac6d0a16ea66da16e1e0092c56d7e06ebaf2695b5de175cd4d9 AS build
 
-ARG STACK_DOMAIN=jonas-thelemann.de
-ENV STACK_DOMAIN=${STACK_DOMAIN}
+ARG NUXT_ENV_STACK_DOMAIN=maev.si
+ENV NUXT_ENV_STACK_DOMAIN=${NUXT_ENV_STACK_DOMAIN}
 ENV NODE_ENV=production
 
 # Update and install dependencies.

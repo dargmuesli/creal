@@ -73,7 +73,8 @@ export default {
    */
   axios: {
     baseURL: 'http://creal:3000/api/',
-    browserBaseURL: 'https://creal.' + process.env.STACK_DOMAIN + '/api/',
+    browserBaseURL:
+      'https://creal.' + process.env.NUXT_ENV_STACK_DOMAIN + '/api/',
   },
   /*
    ** Build configuration
@@ -98,9 +99,6 @@ export default {
   moment: {
     locales: ['de'],
     plugins: ['twix'],
-  },
-  env: {
-    stackDomain: process.env.STACK_DOMAIN,
   },
   serverMiddleware: ['~/api/player/playlists.ts', '~/api/player/signedUrl.ts'],
   proxy: {
