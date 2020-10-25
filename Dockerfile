@@ -15,6 +15,8 @@ RUN apt-get update \
         libdbd-pg-perl \
         postgresql-client \
         sqitch \
+    && apt-get install --no-install-recommends -y \
+        curl \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
@@ -31,6 +33,7 @@ COPY ./docker-entrypoint.sh /usr/local/bin/
 
 ENTRYPOINT ["docker-entrypoint.sh"]
 CMD ["dev", "--hostname", "0.0.0.0"]
+HEALTHCHECK --interval=10s CMD curl -f http://localhost:3000/healthcheck || exit 1
 
 
 ########################
@@ -76,6 +79,8 @@ RUN apt-get update \
         libdbd-pg-perl \
         postgresql-client \
         sqitch \
+    && apt-get install --no-install-recommends -y \
+        curl \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
@@ -88,3 +93,4 @@ COPY ./docker-entrypoint.sh /usr/local/bin/
 
 ENTRYPOINT ["docker-entrypoint.sh"]
 CMD ["nuxt-ts", "start", "--hostname", "0.0.0.0"]
+HEALTHCHECK --interval=10s CMD curl -f http://localhost:3000/healthcheck || exit 1
