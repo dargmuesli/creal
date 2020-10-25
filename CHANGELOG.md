@@ -1,3 +1,10 @@
+# [0.7.0](https://github.com/dargmuesli/creal/compare/0.6.0...0.7.0) (2020-10-25)
+
+
+### Features
+
+* **player:** make currently playing track title dynamic ([f02be0c](https://github.com/dargmuesli/creal/commit/f02be0c0ca3fb95a6a4a9395d253e1853bf293f5))
+
 # [0.6.0](https://github.com/dargmuesli/creal/compare/0.5.0...0.6.0) (2020-10-25)
 
 
