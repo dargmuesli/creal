@@ -1,3 +1,11 @@
+## [0.7.1](https://github.com/dargmuesli/creal/compare/0.7.0...0.7.1) (2020-10-26)
+
+
+### Bug Fixes
+
+* **docker:** correct stack domain ([0ea680e](https://github.com/dargmuesli/creal/commit/0ea680ee997ca7321f8df44dc7055985fba4a5b1))
+* **event:** correct environment variable ([1ef95f9](https://github.com/dargmuesli/creal/commit/1ef95f91278e706540f355b56f7ae3a1702fc071))
+
 # [0.7.0](https://github.com/dargmuesli/creal/compare/0.6.0...0.7.0) (2020-10-25)
 
 
