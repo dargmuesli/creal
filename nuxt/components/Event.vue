@@ -61,7 +61,7 @@ export default class extends Vue {
   // }
 
   get strapiDomain(): string | undefined {
-    return `strapi.${process.env.stackDomain}`
+    return `strapi.${process.env.NUXT_ENV_STACK_DOMAIN}`
   }
 }
 </script>
