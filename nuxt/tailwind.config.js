@@ -28,7 +28,7 @@ module.exports = {
     margin: ['responsive', 'first', 'last'],
   },
   plugins: [
-    function ({ addBase, addUtilities, config }) {
+    function ({ addBase, addComponents, addUtilities, config }) {
       addBase({
         '#__nuxt': {
           height: config('theme.height.full'),
@@ -62,7 +62,10 @@ module.exports = {
         },
       })
 
-      addUtilities({
+      addComponents({
+        '.bg-creal': {
+          backgroundImage: 'url("/creal.jpg")',
+        },
         '.fullscreen': {
           bottom: 0,
           height: config('theme.height.full'),
@@ -71,6 +74,12 @@ module.exports = {
           right: 0,
           top: 0,
           width: config('theme.width.full'),
+        },
+      })
+
+      addUtilities({
+        'mb-20vh': {
+          marginBottom: '20vh',
         },
       })
     },

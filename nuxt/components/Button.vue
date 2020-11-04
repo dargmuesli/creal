@@ -35,10 +35,7 @@
 </template>
 
 <script>
-import AppLink from '~/components/AppLink.vue'
-
 export default {
-  components: { AppLink },
   props: {
     buttonClass: {
       type: String,

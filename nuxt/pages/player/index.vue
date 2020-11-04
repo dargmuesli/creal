@@ -68,10 +68,6 @@ import get from 'lodash.get'
 import merge from 'lodash.mergewith'
 import { Component, Vue } from 'nuxt-property-decorator'
 
-import Playlist from '~/components/player/Playlist.vue'
-import PlaylistItem from '~/components/player/PlaylistItem.vue'
-import Button from '~/components/Button.vue'
-
 interface AsyncData {
   playlists?: object
   playlistItems?: object
@@ -101,11 +97,6 @@ interface AxiosPlaylistData {
 // }
 
 @Component({
-  components: {
-    Button,
-    Playlist,
-    PlaylistItem,
-  },
   head(this: PlayerPage): Object {
     return {
       title: this.titleHead,

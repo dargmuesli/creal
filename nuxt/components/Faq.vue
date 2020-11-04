@@ -25,8 +25,6 @@
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
 import VueMarkdown from 'vue-markdown-konishi'
 
-import Button from '~/components/Button.vue'
-
 interface Faq {
   title: any
   answer: any
@@ -35,7 +33,6 @@ interface Faq {
 
 @Component({
   components: {
-    Button,
     VueMarkdown,
   },
 })

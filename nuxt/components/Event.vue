@@ -26,18 +26,12 @@
 <script lang="ts">
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
 
-import Button from '~/components/Button.vue'
-
 interface Event {
   dateEnd: any
   dateStart: any
 }
 
-@Component({
-  components: {
-    Button,
-  },
-})
+@Component({})
 export default class extends Vue {
   @Prop({ type: Object }) readonly event!: Event
 

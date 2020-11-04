@@ -46,22 +46,7 @@ import slugify from 'slugify'
 
 import Paging from '~/classes/Paging.ts'
 
-import Button from '~/components/Button.vue'
-import Error from '~/components/Error.vue'
-import Faq from '~/components/Faq.vue'
-import PagingControls from '~/components/PagingControls.vue'
-
-interface Dictionary<T> {
-  [Key: string]: T
-}
-
 @Component({
-  components: {
-    Button,
-    Error,
-    Faq,
-    PagingControls,
-  },
   head(this: FaqPage): Object {
     return {
       title: this.title,
