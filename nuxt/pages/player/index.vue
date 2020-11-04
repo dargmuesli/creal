@@ -48,24 +48,18 @@
           </div>
         </div>
       </div>
-      <vue-plyr
-        v-if="playlistItems !== undefined && initialPlay"
-        ref="plyr"
-        class="fixed bottom-0 left-0 right-0"
-        :emit="['pause', 'playing']"
-        @pause="onPlyrPause"
-        @playing="onPlyrPlaying"
-      >
-        <audio />
-      </vue-plyr>
+      <div class="fixed bottom-0 left-0 right-0">
+        <vue-plyr v-if="playlistItems !== undefined && initialPlay" ref="plyr">
+          <audio />
+        </vue-plyr>
+      </div>
     </section>
     <!-- player below is for spacing (invisible) -->
-    <vue-plyr
-      v-if="playlistItems !== undefined && initialPlay"
-      class="invisible"
-    >
-      <audio />
-    </vue-plyr>
+    <div class="invisible">
+      <vue-plyr v-if="playlistItems !== undefined && initialPlay">
+        <audio />
+      </vue-plyr>
+    </div>
   </div>
 </template>
 
@@ -224,19 +218,14 @@ export default class PlayerPage extends Vue {
     return `?${playlistLinkParts.join('&')}`
   }
 
-  onPlyrPause() {
-    this.plyrPaused = true
-  }
-
-  onPlyrPlaying() {
-    this.plyrPaused = false
-  }
-
   setSource(name: string, url: URL) {
     this.initialPlay = true
     const nameParts = name.replace(/\.mp3$/, '').split(' - ')
     this.currentTrack = `${nameParts[1]} · ${nameParts[0]}`
     this.$nextTick().then(() => {
+      this.player.on('pause', () => (this.plyrPaused = true))
+      this.player.on('playing', () => (this.plyrPaused = false))
+
       this.player.config.controls = [
         'play-large',
         'play',
