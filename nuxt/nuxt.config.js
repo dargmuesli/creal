@@ -235,15 +235,14 @@ export default {
     compressor: shrinkRay(),
     csp: {
       policies: {
-        // 'base-uri': ["'none'"],
+        'base-uri': ["'none'"], // Mozilla Observatory.
         'connect-src': [
           "'self'", // Nuxt development.
           'https://cdn.plyr.io/', // Plyr.
-        ], // `https://*.${STACK_DOMAIN}`
+        ],
         'default-src': ["'none'"],
-        // 'font-src': ["'self'"],
-        // 'form-action': ["'none'"],
-        // 'frame-ancestors': ["'none'"],
+        'form-action': ["'none'"], // Mozilla Observatory.
+        'frame-ancestors': ["'none'"], // Mozilla Observatory.
         'img-src': [
           "'self'",
           `https://strapi.${STACK_DOMAIN}`,
@@ -255,7 +254,6 @@ export default {
         ],
         'manifest-src': ["'self'"], // Chrome
         'report-uri': 'https://dargmuesli.report-uri.com/r/d/csp/enforce',
-        // 'script-src': ["'self'"],
         'style-src': [
           "'self'", // Tailwind
           // "'sha256-45Zuu9QsRRW+hIWi5qtqijoYiDtRwjbDI0quax1AZoY='", // FAQ: dynamic height
@@ -265,5 +263,9 @@ export default {
     },
   },
 
-  serverMiddleware: ['~/api/player/playlists.ts', '~/api/player/signedUrl.ts'],
+  serverMiddleware: [
+    '~/middleware/server/headers.ts',
+    '~/api/player/playlists.ts',
+    '~/api/player/signedUrl.ts',
+  ],
 }
