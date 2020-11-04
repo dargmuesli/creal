@@ -1,3 +1,10 @@
+# [0.9.0](https://github.com/dargmuesli/creal/compare/0.8.1...0.9.0) (2020-11-04)
+
+
+### Features
+
+* **nuxt:** add more security headers ([01a853e](https://github.com/dargmuesli/creal/commit/01a853e82b4387609f2c9853e8860e79e18481bc))
+
 ## [0.8.1](https://github.com/dargmuesli/creal/compare/0.8.0...0.8.1) (2020-11-04)
 
 
