@@ -1,3 +1,10 @@
+## [0.8.1](https://github.com/dargmuesli/creal/compare/0.8.0...0.8.1) (2020-11-04)
+
+
+### Reverts
+
+* Revert "Merge pull request #51 from dargmuesli/renovate/vue-plyr-7.x" ([79f9cd8](https://github.com/dargmuesli/creal/commit/79f9cd8ba6fbaad6887bd150150f6f9fcbf6ae0a)), closes [#51](https://github.com/dargmuesli/creal/issues/51)
+
 # [0.8.0](https://github.com/dargmuesli/creal/compare/0.7.2...0.8.0) (2020-11-04)
 
 
