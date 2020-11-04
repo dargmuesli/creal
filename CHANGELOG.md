@@ -1,3 +1,10 @@
+## [0.7.2](https://github.com/dargmuesli/creal/compare/0.7.1...0.7.2) (2020-11-04)
+
+
+### Bug Fixes
+
+* **player:** migrate to plyr v7 ([2c494bb](https://github.com/dargmuesli/creal/commit/2c494bb56331d9aec57a26c5b155de43bfa0442b))
+
 ## [0.7.1](https://github.com/dargmuesli/creal/compare/0.7.0...0.7.1) (2020-10-26)
 
 
