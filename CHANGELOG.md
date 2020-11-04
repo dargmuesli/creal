@@ -1,3 +1,15 @@
+# [0.8.0](https://github.com/dargmuesli/creal/compare/0.7.2...0.8.0) (2020-11-04)
+
+
+### Bug Fixes
+
+* **plugins/base-url:** check if file exists ([14c0f9c](https://github.com/dargmuesli/creal/commit/14c0f9c3d551266d5f91999708bf24b4dea75f3a))
+
+
+### Features
+
+* adapt nuxt configuration ([7d088b2](https://github.com/dargmuesli/creal/commit/7d088b29d266ae870811918e7110286082b5449e))
+
 ## [0.7.2](https://github.com/dargmuesli/creal/compare/0.7.1...0.7.2) (2020-11-04)
 
 
