@@ -31,16 +31,7 @@ import { Component } from 'nuxt-property-decorator'
 
 import Paging from '~/classes/Paging.ts'
 
-import Button from '~/components/Button.vue'
-import Event from '~/components/Event.vue'
-import PagingControls from '~/components/PagingControls.vue'
-
 @Component({
-  components: {
-    Button,
-    Event,
-    PagingControls,
-  },
   head(this: EventsPage): Object {
     return {
       title: this.title,

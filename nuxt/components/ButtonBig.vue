@@ -16,13 +16,7 @@
 <script lang="ts">
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
 
-import Button from '~/components/Button.vue'
-
-@Component({
-  components: {
-    Button,
-  },
-})
+@Component({})
 export default class extends Vue {
   @Prop({ type: String, required: true }) readonly link!: String
   @Prop({ type: Boolean, default: true }) readonly icon!: Boolean
