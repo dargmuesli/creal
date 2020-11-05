@@ -42,6 +42,7 @@ module.exports = {
           h1: {
             fontSize: config('theme.fontSize.6xl'),
             fontWeight: config('theme.fontWeight.bold'),
+            lineHeight: 1,
             marginBottom: config('theme.margin.4'),
             textAlign: 'center',
           },
@@ -55,7 +56,8 @@ module.exports = {
             cursor: config('theme.cursor.not-allowed'),
             opacity: config('theme.opacity.50'),
           },
-          padding: config('theme.padding.2'),
+          paddingBottom: config('theme.padding.2'),
+          paddingX: config('theme.padding.2'),
         },
         html: {
           height: config('theme.height.full'),

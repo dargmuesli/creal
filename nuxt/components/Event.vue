@@ -1,5 +1,5 @@
 <template>
-  <div class="items-center flex flex-wrap">
+  <div class="items-center flex flex-wrap justify-center">
     <div class="lg:pr-2 lg:w-1/2">
       <div>{{ datetime }}</div>
       <h2 class="m-0">{{ event.title }}</h2>
