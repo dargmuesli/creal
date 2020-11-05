@@ -1,3 +1,15 @@
+# [0.10.0](https://github.com/dargmuesli/creal/compare/0.9.0...0.10.0) (2020-11-05)
+
+
+### Bug Fixes
+
+* **tailwind:** fix styling ([25eaf2c](https://github.com/dargmuesli/creal/commit/25eaf2c6ad7b8f4b4df776a5f3c0762afac44d44))
+
+
+### Features
+
+* display header logo ([8a33e3e](https://github.com/dargmuesli/creal/commit/8a33e3edeb1b851089b9d3cc97afc9c9a8133339))
+
 # [0.9.0](https://github.com/dargmuesli/creal/compare/0.8.1...0.9.0) (2020-11-04)
 
 
