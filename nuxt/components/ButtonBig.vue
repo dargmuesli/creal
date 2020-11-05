@@ -7,7 +7,9 @@
     :icon-size="iconSize"
     :link="link"
   >
-    <span class="text-4xl sm:text-5xl lg:text-6xl">
+    <span
+      class="leading-normal sm:leading-normal lg:leading-normal text-4xl sm:text-5xl lg:text-6xl"
+    >
       <slot />
     </span>
   </Button>

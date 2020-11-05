@@ -6,8 +6,10 @@
  */
 module.exports = {
   future: {
+    defaultLineHeights: true,
     purgeLayersByDefault: true,
     removeDeprecatedGapUtilities: true,
+    standardFontWeights: true,
   },
   theme: {
     extend: {
@@ -28,39 +30,44 @@ module.exports = {
     margin: ['responsive', 'first', 'last'],
   },
   plugins: [
-    function ({ addBase, addComponents, addUtilities, config }) {
+    function ({ addBase, addComponents, addUtilities, theme }) {
       addBase({
         '#__nuxt': {
-          height: config('theme.height.full'),
+          height: theme('height.full'),
         },
         '#__layout': {
-          height: config('theme.height.full'),
+          height: theme('height.full'),
         },
         body: {
-          background: config('theme.colors.gray.800'),
-          color: config('theme.colors.white'),
+          background: theme('colors.gray.800'),
+          color: theme('colors.white'),
           h1: {
-            fontSize: config('theme.fontSize.6xl'),
-            fontWeight: config('theme.fontWeight.bold'),
+            fontSize: theme('fontSize.6xl'),
+            fontWeight: theme('fontWeight.bold'),
             lineHeight: 1,
-            marginBottom: config('theme.margin.4'),
+            marginBottom: theme('margin.4'),
             textAlign: 'center',
           },
           h2: {
-            fontSize: config('theme.fontSize.4xl'),
-            fontWeight: config('theme.fontWeight.bold'),
-            marginBottom: config('theme.margin.3'),
+            fontSize: theme('fontSize.4xl'),
+            fontWeight: theme('fontWeight.bold'),
+            marginBottom: theme('margin.3'),
           },
-          height: config('theme.height.full'),
+          height: theme('height.full'),
           ':disabled': {
-            cursor: config('theme.cursor.not-allowed'),
-            opacity: config('theme.opacity.50'),
+            cursor: theme('cursor.not-allowed'),
+            opacity: theme('opacity.50'),
           },
-          paddingBottom: config('theme.padding.2'),
-          paddingX: config('theme.padding.2'),
+          padding:
+            '0px ' +
+            theme('padding.2') +
+            ' ' +
+            theme('padding.2') +
+            ' ' +
+            theme('padding.2'),
         },
         html: {
-          height: config('theme.height.full'),
+          height: theme('height.full'),
         },
       })
 
@@ -70,17 +77,20 @@ module.exports = {
         },
         '.fullscreen': {
           bottom: 0,
-          height: config('theme.height.full'),
+          height: theme('height.full'),
           left: 0,
           position: 'absolute',
           right: 0,
           top: 0,
-          width: config('theme.width.full'),
+          width: theme('width.full'),
         },
       })
 
       addUtilities({
-        'mb-20vh': {
+        '.max-w-xxs': {
+          maxWidth: '15rem',
+        },
+        '.mb-20vh': {
           marginBottom: '20vh',
         },
       })

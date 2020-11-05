@@ -15,7 +15,7 @@
               <li
                 v-for="playlist in playlists"
                 :key="playlist.name"
-                class="max-w-xs m-2 mb-4"
+                class="m-2 max-w-xxs mb-4 overflow-hidden"
               >
                 <a :alt="playlist.name" :href="getPlaylistLink(playlist.name)">
                   <Playlist :playlist="playlist" />
