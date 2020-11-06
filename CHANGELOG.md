@@ -1,3 +1,17 @@
+# [0.11.0](https://github.com/dargmuesli/creal/compare/0.10.0...0.11.0) (2020-11-06)
+
+
+### Bug Fixes
+
+* **tailwind:** remove full height properties ([801a0db](https://github.com/dargmuesli/creal/commit/801a0dbdd49a226f41abe2527ecbc31d27907cf3))
+
+
+### Features
+
+* **api/signed-urls:** check files for existence ([a2c6db8](https://github.com/dargmuesli/creal/commit/a2c6db817e92ada85e3fafdedfccf40a4f002aff))
+* **player:** allow global prefix, limit items ([33c2e86](https://github.com/dargmuesli/creal/commit/33c2e86cb713f7eb595dfb103cc7903bad00f196))
+* **player:** improve image loading ([d2ad1ce](https://github.com/dargmuesli/creal/commit/d2ad1ce2d04d3c6f089c55665839bd05c4000cb7)), closes [#23](https://github.com/dargmuesli/creal/issues/23)
+
 # [0.10.0](https://github.com/dargmuesli/creal/compare/0.9.0...0.10.0) (2020-11-05)
 
 
