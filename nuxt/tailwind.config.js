@@ -32,12 +32,6 @@ module.exports = {
   plugins: [
     function ({ addBase, addComponents, addUtilities, theme }) {
       addBase({
-        '#__nuxt': {
-          height: theme('height.full'),
-        },
-        '#__layout': {
-          height: theme('height.full'),
-        },
         body: {
           background: theme('colors.gray.800'),
           color: theme('colors.white'),
@@ -53,7 +47,6 @@ module.exports = {
             fontWeight: theme('fontWeight.bold'),
             marginBottom: theme('margin.3'),
           },
-          height: theme('height.full'),
           ':disabled': {
             cursor: theme('cursor.not-allowed'),
             opacity: theme('opacity.50'),
@@ -65,9 +58,6 @@ module.exports = {
             theme('padding.2') +
             ' ' +
             theme('padding.2'),
-        },
-        html: {
-          height: theme('height.full'),
         },
       })
 
@@ -96,9 +86,4 @@ module.exports = {
       })
     },
   ],
-  purge: {
-    options: {
-      whitelist: ['__nuxt', '__layout'],
-    },
-  },
 }

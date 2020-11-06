@@ -1,5 +1,5 @@
 <template>
-  <div class="h-full">
+  <div>
     <div
       :class="{ '-translate-y-full': !showGreeting }"
       class="duration-1000 ease-in-out fullscreen transform"
@@ -19,7 +19,7 @@
         </div>
       </div>
     </div>
-    <div class="flex flex-col h-full">
+    <div class="flex flex-col">
       <!-- <section>
       <a v-if="event.url !== null" :href="event.url" target="_blank">
         <EventAnnouncement :event="event" />
