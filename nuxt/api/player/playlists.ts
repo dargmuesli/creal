@@ -6,22 +6,27 @@ import S3 from 'aws-sdk/clients/s3'
 import AWS from 'aws-sdk'
 import merge from 'lodash.mergewith'
 
-function getNestedObject(properties: Array<string>, size: Number) {
+export const PLAYER_PREFIX = 'player/'
+
+function getNestedObject(pathParts: Array<string>, size: Number) {
   const nestedObject: any = {}
 
-  if (properties.length < 2) {
+  if (pathParts.length < 2) {
+    // A file, not a directory.
     return undefined
-  } else if (properties.length === 2) {
-    if (properties[1].match(/^.+\.mp3$/)) {
-      nestedObject[properties[0]] = { items: [{ name: properties[1], size }] }
-    } else if (properties[1].match(/^.+\.(jpg|png)$/)) {
-      nestedObject[properties[0]] = { cover: true }
+  } else if (pathParts.length === 2) {
+    // The path's last directory.
+
+    if (pathParts[1].match(/^.+\.mp3$/)) {
+      nestedObject[pathParts[0]] = { items: [{ name: pathParts[1], size }] }
+    } else if (pathParts[1].match(/^.+\.(jpg|png)$/)) {
+      nestedObject[pathParts[0]] = { cover: true }
     }
   } else {
-    // properties.length is >2
-    const key = properties[0]
-    properties.shift()
-    nestedObject[key] = { collections: getNestedObject(properties, size) }
+    // A directory with more to come (`pathParts.length` is >2).
+    const key = pathParts[0]
+    pathParts.shift()
+    nestedObject[key] = { collections: getNestedObject(pathParts, size) }
   }
 
   return nestedObject
@@ -39,6 +44,7 @@ export default {
       region: 'nl-ams',
     })
 
+    const PLAYER_PREFIX_LENGTH = PLAYER_PREFIX.split('/').length - 1
     const bucket = fs.readFileSync('/run/secrets/creal_aws-bucket', 'utf8')
     const urlSearchParams = new URL(
       req.url !== undefined ? req.url : '',
@@ -46,7 +52,10 @@ export default {
     ).searchParams
     const continuationToken = urlSearchParams.get('continuation-token')
     const prefix = urlSearchParams.get('prefix')
+    const prefixLength = prefix ? prefix.split('/').length : 0
+    const prefixLengthTotal = PLAYER_PREFIX_LENGTH + prefixLength
 
+    // https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/S3.html#listObjectsV2-property
     s3.listObjectsV2(
       {
         ...{
@@ -57,10 +66,11 @@ export default {
           ContinuationToken: continuationToken,
         }),
         ...(prefix !== null && {
-          Prefix: prefix,
+          Prefix: PLAYER_PREFIX + prefix + '/',
         }),
       },
       function (err, data) {
+        // On s3 api error.
         if (err) {
           res.writeHead(500)
           res.end(err.message)
@@ -75,7 +85,9 @@ export default {
 
         const playlists = {}
 
+        // Iterate all subdirectories and files.
         data.Contents.forEach((content) => {
+          // The content's key is the directory's/file's path.
           if (content.Key === undefined) {
             res.writeHead(500)
             res.end('Content key undefined')
@@ -85,18 +97,28 @@ export default {
           const keyParts = content.Key.split('/')
 
           if (keyParts[keyParts.length - 1] === '') {
-            // no file
+            keyParts.pop()
+          }
+
+          if (
+            ![prefixLengthTotal + 1, prefixLengthTotal + 2].includes(
+              keyParts.length
+            )
+          ) {
+            // Not an item on any requested level.
             return
           }
 
-          const nestedObject = getNestedObject(
+          keyParts.splice(0, PLAYER_PREFIX_LENGTH)
+
+          const nestedPlaylist = getNestedObject(
             keyParts,
             content.Size !== undefined ? content.Size : 0
           )
 
-          merge(playlists, nestedObject, (objValue: any, srcValue: any) => {
-            if (Array.isArray(objValue)) {
-              return objValue.concat(srcValue)
+          merge(playlists, nestedPlaylist, (value: any, srcValue: any) => {
+            if (Array.isArray(value)) {
+              return value.concat(srcValue)
             }
           })
         })

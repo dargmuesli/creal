@@ -23,6 +23,8 @@
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
 import prettyBytes from 'pretty-bytes'
 
+import { PLAYER_PREFIX } from '../../api/player/playlists'
+
 interface PlaylistItem {
   name: string
   size: number
@@ -36,7 +38,8 @@ export default class extends Vue {
   readonly setSourceFunction!: Function
 
   async getSignedUrl() {
-    const key = this.$route.query.playlist + '/' + this.playlistItem.name
+    const key =
+      PLAYER_PREFIX + this.$route.query.playlist + '/' + this.playlistItem.name
     return await this.$axios.$get('/player/signedUrl', {
       params: new URLSearchParams({ key }),
     })

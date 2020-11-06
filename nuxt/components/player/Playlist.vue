@@ -13,6 +13,8 @@
 <script lang="ts">
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
 
+import { PLAYER_PREFIX } from '../../api/player/playlists'
+
 interface Playlist {
   name: string
   items: any[]
@@ -33,9 +35,13 @@ export default class extends Vue {
   }
 
   setCoverUrl(name: string) {
-    const key = `${
-      this.$route.query.playlist !== undefined ? this.$route.query.playlist : ''
-    }${name}/playlist-cover.jpg`
+    const key =
+      PLAYER_PREFIX +
+      `${
+        this.$route.query.playlist !== undefined
+          ? this.$route.query.playlist
+          : ''
+      }${name}/playlist-cover.jpg`
     this.displayImageWhenFullyLoaded(
       this.$axios.$get('/player/signedUrl', {
         params: new URLSearchParams({ key }),
