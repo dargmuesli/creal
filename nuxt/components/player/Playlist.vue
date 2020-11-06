@@ -1,6 +1,9 @@
 <template>
-  <section>
-    <img :src="coverUrl" />
+  <section class="flex flex-col">
+    <img v-if="coverUrl !== ''" alt="Cover image." :src="coverUrl" />
+    <div v-else class="flex flex-grow justify-center items-center">
+      <div class="pulseLoader" />
+    </div>
     <h1 class="leading-tight m-0 mt-1 text-2xl text-left">
       {{ playlist.name }}
     </h1>
@@ -19,21 +22,35 @@ interface Playlist {
 export default class extends Vue {
   @Prop({ type: Object }) readonly playlist!: Playlist
 
-  coverUrl: string = '/player/playlist-cover_default.jpg'
+  coverUrl: string = ''
 
   created() {
     if ((this.playlist.items as any).cover) {
-      this.getCoverUrl(this.playlist.name)
+      this.setCoverUrl(this.playlist.name)
+    } else {
+      this.coverUrl = '/player/playlist-cover_default.jpg'
     }
   }
 
-  async getCoverUrl(name: string) {
+  setCoverUrl(name: string) {
     const key = `${
       this.$route.query.playlist !== undefined ? this.$route.query.playlist : ''
     }${name}/playlist-cover.jpg`
-    this.coverUrl = await this.$axios.$get('/player/signedUrl', {
-      params: new URLSearchParams({ key }),
-    })
+    this.displayImageWhenFullyLoaded(
+      this.$axios.$get('/player/signedUrl', {
+        params: new URLSearchParams({ key }),
+      })
+    )
+  }
+
+  async displayImageWhenFullyLoaded(promise: Promise<any>) {
+    const img = new Image()
+
+    img.onload = () => {
+      this.coverUrl = img.src
+    }
+
+    img.src = await promise
   }
 }
 </script>

@@ -15,10 +15,14 @@
               <li
                 v-for="playlist in playlists"
                 :key="playlist.name"
-                class="m-2 max-w-xxs mb-4 overflow-hidden"
+                class="m-2 max-w-xxs min-w-xxs mb-4 overflow-hidden"
               >
-                <a :alt="playlist.name" :href="getPlaylistLink(playlist.name)">
-                  <Playlist :playlist="playlist" />
+                <a
+                  class="block h-full"
+                  :title="playlist.name"
+                  :href="getPlaylistLink(playlist.name)"
+                >
+                  <Playlist class="h-full" :playlist="playlist" />
                 </a>
               </li>
             </ul>
@@ -84,24 +88,6 @@ interface AxiosPlaylistData {
   nextContinuationToken: string
 }
 
-// function flattenPlaylists(object: { [key: string]: any }) {
-//   const returnObject: any = {}
-
-//   for (const [key, value] of Object.entries(object)) {
-//     if (Array.isArray(value)) {
-//       returnObject[key] = value
-//     } else if (typeof value === 'object') {
-//       const innerObject = flattenPlaylists(value)
-
-//       for (const [iKey, iValue] of Object.entries(innerObject)) {
-//         returnObject[`${key}/${iKey}`] = iValue
-//       }
-//     }
-//   }
-
-//   return returnObject
-// }
-
 @Component({
   head(this: PlayerPage): Object {
     return {
@@ -142,26 +128,17 @@ export default class PlayerPage extends Vue {
         const playlistData: AxiosPlaylistData = await $axios.$get(
           '/player/playlists',
           {
-            params: new URLSearchParams(
-              merge(
-                {},
-                {
-                  ...(continuationToken !== undefined && {
-                    'continuation-token': continuationToken,
-                  }),
-                  ...(query.playlist !== undefined && {
-                    prefix: query.playlist,
-                  }),
-                }
-              )
-            ),
+            params: new URLSearchParams({
+              ...(continuationToken !== undefined && {
+                'continuation-token': continuationToken,
+              }),
+              ...(query.playlist !== undefined && {
+                prefix: query.playlist,
+              }),
+            }),
           }
         )
-
-        merge(
-          playlistsObject,
-          playlistData.playlists /* flattenPlaylists(playlistData.playlists) */
-        )
+        merge(playlistsObject, playlistData.playlists)
         continuationToken = playlistData.nextContinuationToken
       } while (continuationToken !== undefined)
     } catch (e) {

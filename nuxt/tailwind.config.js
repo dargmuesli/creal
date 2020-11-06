@@ -13,6 +13,12 @@ module.exports = {
   },
   theme: {
     extend: {
+      keyframes: {
+        pulse: {
+          '0%': { transform: 'scale(0)', opacity: 0.8 },
+          '100%': { transform: 'scale(1)', opacity: 0 },
+        },
+      },
       transitionProperty: {
         margin: 'margin',
         maxHeight: 'max-height',
@@ -74,11 +80,22 @@ module.exports = {
           top: 0,
           width: theme('width.full'),
         },
+        '.pulseLoader': {
+          width: '4em',
+          height: '4em',
+          borderRadius: '4em',
+          backgroundColor: 'white',
+          outline: '1px solid transparent',
+          animation: 'pulse 1.2s ease-in-out infinite',
+        },
       })
 
       addUtilities({
         '.max-w-xxs': {
           maxWidth: '15rem',
+        },
+        '.min-w-xxs': {
+          minWidth: '15rem',
         },
         '.mb-20vh': {
           marginBottom: '20vh',

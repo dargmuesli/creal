@@ -10,6 +10,7 @@
     <div class="lg:pl-2 lg:w-1/2">
       <img
         v-if="event.image !== null"
+        alt="Event image."
         :src="'https://' + strapiDomain + event.image.url"
         class="mb-4"
       />
