@@ -23,17 +23,36 @@ export default {
       'https://example.org/'
     ).searchParams.get('key')
 
-    s3.getSignedUrlPromise('getObject', {
-      Bucket: bucket,
-      Expires: 21600, // 6h
-      Key: key,
-    }).then(
-      function (url) {
-        res.end(url)
+    if (!key) {
+      res.writeHead(401)
+      res.end('Key missing!')
+      return
+    }
+
+    s3.headObject(
+      {
+        Bucket: bucket,
+        Key: key,
       },
-      function (err) {
-        res.writeHead(500)
-        res.end(err.message)
+      (err, _data) => {
+        if (err) {
+          res.writeHead(500)
+          res.end('File not found!')
+        } else {
+          s3.getSignedUrlPromise('getObject', {
+            Bucket: bucket,
+            Expires: 21600, // 6h
+            Key: key,
+          }).then(
+            function (url) {
+              res.end(url)
+            },
+            function (err) {
+              res.writeHead(500)
+              res.end(err.message)
+            }
+          )
+        }
       }
     )
   },
