@@ -1,3 +1,10 @@
+# [0.13.0](https://github.com/dargmuesli/creal/compare/0.12.0...0.13.0) (2020-11-09)
+
+
+### Features
+
+* **player:** show currently playing track items ([59d0cb9](https://github.com/dargmuesli/creal/commit/59d0cb95023fbde02898f3ef175043916d107519)), closes [#34](https://github.com/dargmuesli/creal/issues/34)
+
 # [0.12.0](https://github.com/dargmuesli/creal/compare/0.11.0...0.12.0) (2020-11-09)
 
 
