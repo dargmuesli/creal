@@ -50,16 +50,24 @@
           </div>
         </div>
       </div>
-      <vue-plyr
-        v-if="initialPlay"
-        ref="plyr"
-        class="fixed bottom-0 left-0 right-0"
-        :emit="['pause', 'playing']"
-        @pause="onPlyrPause"
-        @playing="onPlyrPlaying"
-      >
-        <audio />
-      </vue-plyr>
+      <div class="fixed bottom-0 left-0 right-0">
+        <div v-if="currentTrack" class="bg-white text-black">
+          {{
+            currentTrack +
+            (currentTrackDescription ? ': ' + currentTrackDescription : '')
+          }}
+        </div>
+        <vue-plyr
+          v-if="initialPlay"
+          ref="plyr"
+          :emit="['pause', 'playing', 'timeupdate']"
+          @pause="onPlyrPause"
+          @playing="onPlyrPlaying"
+          @timeupdate="onPlyrTimeUpdate"
+        >
+          <audio />
+        </vue-plyr>
+      </div>
     </section>
     <!-- player below is for spacing (invisible) -->
     <vue-plyr v-if="initialPlay" class="invisible">
@@ -69,14 +77,52 @@
 </template>
 
 <script lang="ts">
-// import get from 'lodash.get'
 import { Component, Vue } from 'nuxt-property-decorator'
 
 import {
+  PLAYER_PREFIX,
   AxiosPlaylistData,
   PlaylistData,
   mergeByKey,
+  PlaylistItemData,
 } from '../../api/player/playlists'
+
+interface TrackListItem {
+  startSeconds: number
+  songName: string
+  artistName: string
+}
+
+interface PlaylistItemMeta {
+  audioLength: number
+  createdTime?: string
+  description?: string
+  tracklist?: TrackListItem[]
+}
+
+function binarySearch(ar: any[], el: any, compareFn: Function) {
+  let m = 0
+  let n = ar.length - 1
+
+  while (m <= n) {
+    const k = (n + m) >> 1
+    const cmp = compareFn(el, ar[k])
+
+    if (cmp > 0) {
+      m = k + 1
+    } else if (cmp < 0) {
+      n = k - 1
+    } else {
+      return k
+    }
+  }
+
+  return m - 1
+}
+
+function trackListItemComparator(time: number, b: TrackListItem) {
+  return time - b.startSeconds
+}
 
 @Component({
   head(this: PlayerPage): Object {
@@ -89,7 +135,9 @@ export default class PlayerPage extends Vue {
   title = 'Player'
 
   currentTrack: string = ''
+  currentTrackDescription: string = ''
   playlistData?: PlaylistData
+  meta: PlaylistItemMeta | null = null
   plyrPaused: boolean = false
   initialPlay = false
 
@@ -165,10 +213,42 @@ export default class PlayerPage extends Vue {
     this.plyrPaused = false
   }
 
-  setSource(name: string, url: URL) {
+  onPlyrTimeUpdate() {
+    if (this.meta && this.meta.tracklist) {
+      const trackListItem = this.meta.tracklist[
+        binarySearch(
+          this.meta.tracklist,
+          this.player.media.currentTime,
+          trackListItemComparator
+        )
+      ]
+
+      this.currentTrackDescription = trackListItem
+        ? trackListItem.artistName + ' - ' + trackListItem.songName
+        : ''
+    }
+  }
+
+  async setSource(playlistItem: PlaylistItemData, url: URL) {
     this.initialPlay = true
-    const nameParts = name.replace(/\.mp3$/, '').split(' - ')
-    this.currentTrack = `${nameParts[1]} · ${nameParts[0]}`
+    const nameParts = playlistItem.name.split(' - ')
+    this.currentTrack = nameParts[1] // `${nameParts[1]} · ${nameParts[0]}`
+
+    const key =
+      PLAYER_PREFIX +
+      (this.$route.query.playlist ? this.$route.query.playlist + '/' : '') +
+      playlistItem.name +
+      '.json'
+
+    if (playlistItem.meta) {
+      this.meta = await this.$axios.$get('/player/getObject', {
+        params: new URLSearchParams({ key }),
+      })
+    } else {
+      this.meta = null
+      this.currentTrackDescription = ''
+    }
+
     this.$nextTick().then(() => {
       this.player.config.controls = [
         'play-large',

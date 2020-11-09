@@ -11,7 +11,7 @@
       class="cursor-default flex-grow py-2 lg:py-3 text-left"
       @click="itemClick"
     >
-      {{ playlistItem.name.replace(/^cReal - /, '').replace(/\.mp3$/, '') }}
+      {{ playlistItem.name.replace(/^cReal - /, '') }}
     </button>
     <button class="ml-3 lg:ml-10 mr-2" title="play" @click="play()">
       <font-awesome-icon :icon="['fas', 'play']" />
@@ -53,7 +53,7 @@ export default class extends Vue {
   }
 
   async play() {
-    this.setSourceFunction(this.playlistItem.name, await this.getSignedUrl())
+    this.setSourceFunction(this.playlistItem, await this.getSignedUrl())
   }
 
   itemClick(event: any) {

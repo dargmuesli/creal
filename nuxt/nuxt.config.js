@@ -265,6 +265,7 @@ export default {
 
   serverMiddleware: [
     '~/middleware/server/headers.ts',
+    '~/api/player/getObject.ts',
     '~/api/player/playlists.ts',
     '~/api/player/signedUrl.ts',
   ],

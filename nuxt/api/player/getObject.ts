@@ -6,7 +6,7 @@ import S3 from 'aws-sdk/clients/s3'
 import AWS from 'aws-sdk'
 
 export default {
-  path: '/api/player/signedUrl',
+  path: '/api/player/getObject',
   handler(req: IncomingMessage, res: ServerResponse) {
     const s3 = new S3({
       apiVersion: '2006-03-01',
@@ -29,29 +29,17 @@ export default {
       return
     }
 
-    s3.headObject(
+    s3.getObject(
       {
         Bucket: bucket,
         Key: key,
       },
-      (err, _data) => {
+      (err, data) => {
         if (err) {
           res.writeHead(500)
           res.end()
         } else {
-          s3.getSignedUrlPromise('getObject', {
-            Bucket: bucket,
-            Expires: 21600, // 6h
-            Key: key,
-          }).then(
-            function (url) {
-              res.end(url)
-            },
-            function (err) {
-              res.writeHead(500)
-              res.end(err.message)
-            }
-          )
+          res.end(data.Body)
         }
       }
     )
