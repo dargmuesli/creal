@@ -1,21 +1,19 @@
 <template>
   <div :class="wrapperClass">
-    <!-- eslint-disable vue/attribute-hyphenation -->
-    <app-link v-if="link !== undefined" tabIndex="-1" :to="link">
-      <!-- eslint-enable vue/attribute-hyphenation -->
-      <button
-        class="btn flex h-full items-center justify-center w-full"
-        :class="buttonClass"
-        :disabled="disabled"
-      >
-        <font-awesome-icon
-          v-if="icon"
-          :class="iconClass"
-          :icon="['fas', iconId]"
-          :size="iconSize"
-        />
-        <slot />
-      </button>
+    <app-link
+      v-if="link !== undefined"
+      class="btn flex h-full items-center justify-center w-full"
+      :class="buttonClass"
+      :disabled="disabled"
+      :to="link"
+    >
+      <font-awesome-icon
+        v-if="icon"
+        :class="iconClass"
+        :icon="['fas', iconId]"
+        :size="iconSize"
+      />
+      <slot />
     </app-link>
     <button
       v-else
