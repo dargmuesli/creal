@@ -12,7 +12,7 @@
     </button>
     <div
       ref="answer"
-      class="duration-300 overflow-hidden"
+      class="duration-300 overflow-hidden text-left"
       :style="`max-height: ${getMaxHeight()}px`"
     >
       <!-- Do not insert other characters (newlines) in vue-markdown's body! -->
