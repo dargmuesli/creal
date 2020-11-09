@@ -1,3 +1,10 @@
+## [0.14.1](https://github.com/dargmuesli/creal/compare/0.14.0...0.14.1) (2020-11-09)
+
+
+### Bug Fixes
+
+* **ci:** ditch deprecated buildx action ([6493003](https://github.com/dargmuesli/creal/commit/649300319a02bcbd4eee5f758e1a0e06a05672c6))
+
 # [0.14.0](https://github.com/dargmuesli/creal/compare/0.13.0...0.14.0) (2020-11-09)
 
 
