@@ -6,6 +6,8 @@ import S3 from 'aws-sdk/clients/s3'
 import AWS from 'aws-sdk'
 import mergeWith from 'lodash.mergewith'
 
+const consola = require('consola')
+
 export const PLAYER_PREFIX = 'player/'
 
 export interface NamedData {
@@ -161,7 +163,7 @@ function getPlaylistDataExtended(
           playlistDataExtended.metas.push(matchName)
           break
         default:
-          console.warn('Unexpected file type: ' + matchEnding)
+          consola.warn('Unexpected file type: ' + matchEnding)
       }
     } else {
       // A directory.
