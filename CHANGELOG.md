@@ -1,3 +1,10 @@
+## [0.14.2](https://github.com/dargmuesli/creal/compare/0.14.1...0.14.2) (2020-11-09)
+
+
+### Bug Fixes
+
+* **faq:** align text left ([2f3ddde](https://github.com/dargmuesli/creal/commit/2f3ddde70886b21558e484b56b02950365e14830))
+
 ## [0.14.1](https://github.com/dargmuesli/creal/compare/0.14.0...0.14.1) (2020-11-09)
 
 
