@@ -1,3 +1,10 @@
+# [0.14.0](https://github.com/dargmuesli/creal/compare/0.13.0...0.14.0) (2020-11-09)
+
+
+### Features
+
+* **player:** add mixcloud icon link ([0cf29ea](https://github.com/dargmuesli/creal/commit/0cf29eab49bf4fab0e9ab20cfbc19532f97acb16)), closes [#16](https://github.com/dargmuesli/creal/issues/16)
+
 # [0.13.0](https://github.com/dargmuesli/creal/compare/0.12.0...0.13.0) (2020-11-09)
 
 
