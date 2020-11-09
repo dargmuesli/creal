@@ -1,3 +1,11 @@
+# [0.12.0](https://github.com/dargmuesli/creal/compare/0.11.0...0.12.0) (2020-11-09)
+
+
+### Features
+
+* add consola ([0c56c5f](https://github.com/dargmuesli/creal/commit/0c56c5ff9ee9a66b1d225528b43411b1cff52c68))
+* **player:** order items numerically inverse ([8548d0e](https://github.com/dargmuesli/creal/commit/8548d0e15d9749ccf545a4fa169b00a819764cd1)), closes [#13](https://github.com/dargmuesli/creal/issues/13)
+
 # [0.11.0](https://github.com/dargmuesli/creal/compare/0.10.0...0.11.0) (2020-11-06)
 
 
