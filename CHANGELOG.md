@@ -1,3 +1,10 @@
+## [0.14.3](https://github.com/dargmuesli/creal/compare/0.14.2...0.14.3) (2020-11-09)
+
+
+### Bug Fixes
+
+* **favicon:** correct root favicon ([44f9a65](https://github.com/dargmuesli/creal/commit/44f9a65b35a7b23d45967710d45a4de933ee4397))
+
 ## [0.14.2](https://github.com/dargmuesli/creal/compare/0.14.1...0.14.2) (2020-11-09)
 
 
