@@ -4,56 +4,54 @@
       <h1>{{ title }}</h1>
       <div class="flex flex-col mb-2">
         <div class="bg-gray-900 flex-grow p-2">
-          <div class="m-auto w-5/6">
+          <div v-if="playlistData !== undefined" class="m-auto w-5/6">
             <h2 v-if="this.$route.query.playlist" class="ml-2">
               {{ this.$route.query.playlist }}
             </h2>
             <ul
-              v-if="playlists !== undefined && playlists.length > 0"
+              v-if="playlistData.collections.length > 0"
               class="flex flex-wrap justify-center list-none"
             >
               <li
-                v-for="playlist in playlists"
-                :key="playlist.name"
+                v-for="collection in playlistData.collections"
+                :key="collection.name"
                 class="m-2 max-w-xxs min-w-xxs mb-4 overflow-hidden"
               >
                 <a
                   class="block h-full"
-                  :title="playlist.name"
-                  :href="getPlaylistLink(playlist.name)"
+                  :title="collection.name"
+                  :href="getPlaylistLink(collection.name)"
                 >
-                  <Playlist class="h-full" :playlist="playlist" />
+                  <Playlist class="h-full" :playlist="collection" />
                 </a>
               </li>
             </ul>
-            <div v-if="playlistItems !== undefined && playlistItems.length > 0">
-              <ul class="list-none">
-                <li
-                  v-for="playlistItem in playlistItems"
-                  :key="playlistItem.name"
-                  class="border-b border-gray-800 first:border-t hover:bg-gray-800"
-                >
-                  <PlaylistItem
-                    :playlist-item="playlistItem"
-                    :set-source-function="setSource"
-                  />
-                </li>
-              </ul>
+            <ul v-if="playlistData.items.length > 0" class="list-none">
+              <li
+                v-for="item in playlistData.items"
+                :key="item.name"
+                class="border-b border-gray-800 first:border-t hover:bg-gray-800"
+              >
+                <PlaylistItem
+                  :playlist-item="item"
+                  :set-source-function="setSource"
+                />
+              </li>
+            </ul>
+            <div
+              v-if="
+                playlistData.collections.length === 0 &&
+                playlistData.items.length === 0
+              "
+              class="text-center"
+            >
+              No items found.
             </div>
-          </div>
-          <div
-            v-if="
-              !(playlists !== undefined && playlists.length > 0) &&
-              !(playlistItems !== undefined && playlistItems.length > 0)
-            "
-            class="text-center"
-          >
-            No items found.
           </div>
         </div>
       </div>
       <vue-plyr
-        v-if="playlistItems !== undefined && initialPlay"
+        v-if="initialPlay"
         ref="plyr"
         class="fixed bottom-0 left-0 right-0"
         :emit="['pause', 'playing']"
@@ -64,29 +62,21 @@
       </vue-plyr>
     </section>
     <!-- player below is for spacing (invisible) -->
-    <vue-plyr
-      v-if="playlistItems !== undefined && initialPlay"
-      class="invisible"
-    >
+    <vue-plyr v-if="initialPlay" class="invisible">
       <audio />
     </vue-plyr>
   </div>
 </template>
 
 <script lang="ts">
-import get from 'lodash.get'
-import merge from 'lodash.mergewith'
+// import get from 'lodash.get'
 import { Component, Vue } from 'nuxt-property-decorator'
 
-interface AsyncData {
-  playlists?: object
-  playlistItems?: object
-}
-
-interface AxiosPlaylistData {
-  playlists: object
-  nextContinuationToken: string
-}
+import {
+  AxiosPlaylistData,
+  PlaylistData,
+  mergeByKey,
+} from '../../api/player/playlists'
 
 @Component({
   head(this: PlayerPage): Object {
@@ -99,7 +89,7 @@ export default class PlayerPage extends Vue {
   title = 'Player'
 
   currentTrack: string = ''
-  playlists?: Array<object>
+  playlistData?: PlaylistData
   plyrPaused: boolean = false
   initialPlay = false
 
@@ -119,60 +109,35 @@ export default class PlayerPage extends Vue {
   }: {
     $axios: any
     query: any
-  }): Promise<AsyncData> {
+  }): Promise<any> {
     let continuationToken
-    const playlistsObject: object = {}
+    const playlistData: PlaylistData = {
+      name: 'root',
+      collections: [],
+      items: [],
+      cover: false,
+    }
 
-    try {
-      do {
-        const playlistData: AxiosPlaylistData = await $axios.$get(
-          '/player/playlists',
-          {
-            params: new URLSearchParams({
-              ...(continuationToken !== undefined && {
-                'continuation-token': continuationToken,
-              }),
-              ...(query.playlist !== undefined && {
-                prefix: query.playlist,
-              }),
+    do {
+      const playlistDataPart: AxiosPlaylistData = await $axios.$get(
+        '/player/playlists',
+        {
+          params: new URLSearchParams({
+            ...(continuationToken !== undefined && {
+              'continuation-token': continuationToken,
             }),
-          }
-        )
-        merge(playlistsObject, playlistData.playlists)
-        continuationToken = playlistData.nextContinuationToken
-      } while (continuationToken !== undefined)
-    } catch (e) {
-      return {
-        playlists: undefined,
-        playlistItems: undefined,
-      }
-    }
+            ...(query.playlist !== undefined && {
+              prefix: query.playlist,
+            }),
+          }),
+        }
+      )
 
-    const playlists = []
-    const playlistKeyParts =
-      query.playlist !== undefined
-        ? query.playlist.split('/').join('/collections/').split('/')
-        : undefined
-    const playlistsSource =
-      query.playlist !== undefined
-        ? get(playlistsObject, playlistKeyParts, { collections: {} })
-            .collections
-        : playlistsObject
-    const playlistItems =
-      query.playlist !== undefined
-        ? get(playlistsObject, playlistKeyParts, { items: {} }).items
-        : playlistsObject
+      mergeByKey(playlistData, playlistDataPart.playlistData, 'name')
+      continuationToken = playlistDataPart.nextContinuationToken
+    } while (continuationToken !== undefined)
 
-    if (playlistsSource !== undefined) {
-      for (const [key, value] of Object.entries(playlistsSource)) {
-        playlists.push({ name: key, items: value })
-      }
-    }
-
-    return {
-      playlists,
-      playlistItems,
-    }
+    return { playlistData }
   }
 
   getPlaylistLink(name: string) {
@@ -181,7 +146,7 @@ export default class PlayerPage extends Vue {
 
     queryObject.playlist = encodeURIComponent(
       [queryObject.playlist, name]
-        .filter(Boolean) // prevent initial join character
+        .filter(Boolean) // Prevent initial join character.
         .join('/')
     )
 

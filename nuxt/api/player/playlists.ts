@@ -4,32 +4,200 @@ import { URL } from 'url'
 
 import S3 from 'aws-sdk/clients/s3'
 import AWS from 'aws-sdk'
-import merge from 'lodash.mergewith'
+import mergeWith from 'lodash.mergewith'
 
 export const PLAYER_PREFIX = 'player/'
 
-function getNestedObject(pathParts: Array<string>, size: Number) {
-  const nestedObject: any = {}
+export interface NamedData {
+  name: string
+}
 
-  if (pathParts.length < 2) {
-    // A file, not a directory.
-    return undefined
-  } else if (pathParts.length === 2) {
-    // The path's last directory.
+export interface PlaylistItemData extends NamedData {
+  extension: string
+  size: number
+  cover: boolean
+  meta: boolean
+}
 
-    if (pathParts[1].match(/^.+\.mp3$/)) {
-      nestedObject[pathParts[0]] = { items: [{ name: pathParts[1], size }] }
-    } else if (pathParts[1].match(/^.+\.(jpg|png)$/)) {
-      nestedObject[pathParts[0]] = { cover: true }
+export interface PlaylistData extends NamedData {
+  collections: PlaylistData[]
+  items: PlaylistItemData[]
+  cover: boolean
+}
+
+interface PlaylistDataExtended extends PlaylistData {
+  collections: PlaylistDataExtended[]
+  covers: string[]
+  metas: string[]
+}
+
+export interface AxiosPlaylistData {
+  playlistData: PlaylistData
+  nextContinuationToken?: string
+}
+
+function getPlaylistData(
+  playlistDataExtended: PlaylistDataExtended
+): PlaylistData {
+  // Set cover properties.
+  for (let i = 0; i < playlistDataExtended.covers.length; i++) {
+    // For collections.
+    for (let j = 0; j < playlistDataExtended.collections.length; j++) {
+      if (
+        playlistDataExtended.covers[i] ===
+        playlistDataExtended.collections[j].name
+      ) {
+        playlistDataExtended.collections[j].cover = true
+        break
+      }
     }
-  } else {
-    // A directory with more to come (`pathParts.length` is >2).
-    const key = pathParts[0]
-    pathParts.shift()
-    nestedObject[key] = { collections: getNestedObject(pathParts, size) }
+
+    // For items.
+    for (let j = 0; j < playlistDataExtended.items.length; j++) {
+      if (
+        playlistDataExtended.covers[i] === playlistDataExtended.items[j].name
+      ) {
+        playlistDataExtended.items[j].cover = true
+        break
+      }
+    }
   }
 
-  return nestedObject
+  // Set meta properties.
+  for (let i = 0; i < playlistDataExtended.metas.length; i++) {
+    // For items.
+    for (let j = 0; j < playlistDataExtended.items.length; j++) {
+      if (
+        playlistDataExtended.metas[i] === playlistDataExtended.items[j].name
+      ) {
+        playlistDataExtended.items[j].meta = true
+        break
+      }
+    }
+  }
+
+  const subCollections: PlaylistData[] = []
+
+  for (let i = 0; i < playlistDataExtended.collections.length; i++) {
+    subCollections.push(getPlaylistData(playlistDataExtended.collections[i]))
+  }
+
+  // Leave out the helper properties `covers` and `metas`.
+  return {
+    name: playlistDataExtended.name,
+    collections: subCollections,
+    items: playlistDataExtended.items,
+    cover: playlistDataExtended.cover,
+  }
+}
+
+function getPlaylistDataExtended(
+  pathParts: Array<string>,
+  size: number,
+  root: string = 'root'
+): PlaylistDataExtended | undefined {
+  const playlistDataExtended: PlaylistDataExtended = {
+    name: root,
+    collections: [],
+    items: [],
+    cover: false,
+    covers: [],
+    metas: [],
+  }
+
+  if (pathParts.length === 1) {
+    // An item.
+    const itemName = pathParts[0]
+
+    if (size) {
+      // A file.
+
+      const match = itemName.match(/^(.+)\.(.+)$/)
+
+      if (!match) {
+        return undefined
+      }
+
+      const matchName = match[1]
+      const matchEnding = match[2]
+
+      switch (matchEnding) {
+        case 'mp3':
+          playlistDataExtended.items.push({
+            name: matchName,
+            extension: matchEnding,
+            size,
+            cover: false,
+            meta: false,
+          })
+          break
+        case 'jpg':
+        case 'png':
+          playlistDataExtended.covers.push(matchName)
+          break
+        case 'json':
+          playlistDataExtended.metas.push(matchName)
+          break
+        default:
+          console.warn('Unexpected file type: ' + matchEnding)
+      }
+    } else {
+      // A directory.
+      playlistDataExtended.collections.push({
+        name: itemName,
+        collections: [],
+        items: [],
+        cover: false,
+        covers: [],
+        metas: [],
+      })
+    }
+  } else if (pathParts.length > 1) {
+    const name = pathParts[0]
+
+    pathParts.shift()
+    const playlistDataSub = getPlaylistDataExtended(pathParts, size, name)
+
+    if (playlistDataSub) {
+      playlistDataExtended.collections.push(playlistDataSub)
+    } else {
+      return undefined
+    }
+  }
+
+  return playlistDataExtended
+}
+
+export function mergeByKey(target: any, source: any, key: string | number) {
+  if (!key) {
+    return
+  }
+
+  return mergeWith(target, source, (targetValue: any, srcValue: any) => {
+    if (Array.isArray(targetValue) && Array.isArray(srcValue)) {
+      let matchFound = false
+
+      for (let j = 0; j < srcValue.length; j++) {
+        for (let i = 0; i < targetValue.length; i++) {
+          if (targetValue[i][key] === srcValue[j][key]) {
+            targetValue[i] = mergeByKey(targetValue[i], srcValue[j], key)
+            matchFound = true
+            break
+          }
+        }
+
+        if (!matchFound) {
+          targetValue.push(srcValue[j])
+        } else {
+          matchFound = false
+        }
+      }
+
+      return targetValue
+    } else {
+      return undefined // Handle merge by lodash's merge function.
+    }
+  })
 }
 
 export default {
@@ -51,9 +219,9 @@ export default {
       'https://example.org/'
     ).searchParams
     const continuationToken = urlSearchParams.get('continuation-token')
-    const prefix = urlSearchParams.get('prefix')
-    const prefixLength = prefix ? prefix.split('/').length : 0
-    const prefixLengthTotal = PLAYER_PREFIX_LENGTH + prefixLength
+    const paramPrefix = urlSearchParams.get('prefix')
+    const paramPrefixLength = paramPrefix ? paramPrefix.split('/').length : 0
+    const paramPrefixLengthTotal = PLAYER_PREFIX_LENGTH + paramPrefixLength
 
     // https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/S3.html#listObjectsV2-property
     s3.listObjectsV2(
@@ -65,8 +233,8 @@ export default {
         ...(continuationToken !== null && {
           ContinuationToken: continuationToken,
         }),
-        ...(prefix !== null && {
-          Prefix: PLAYER_PREFIX + prefix + '/',
+        ...(paramPrefix !== null && {
+          Prefix: PLAYER_PREFIX + paramPrefix + '/',
         }),
       },
       function (err, data) {
@@ -83,7 +251,14 @@ export default {
           return
         }
 
-        const playlists = {}
+        const playlistDataExtended: PlaylistDataExtended = {
+          name: paramPrefix || 'root',
+          collections: [],
+          items: [],
+          cover: false,
+          covers: [],
+          metas: [],
+        }
 
         // Iterate all subdirectories and files.
         data.Contents.forEach((content) => {
@@ -96,12 +271,13 @@ export default {
 
           const keyParts = content.Key.split('/')
 
+          // Normalize directories.
           if (keyParts[keyParts.length - 1] === '') {
             keyParts.pop()
           }
 
           if (
-            ![prefixLengthTotal + 1, prefixLengthTotal + 2].includes(
+            ![paramPrefixLengthTotal + 1, paramPrefixLengthTotal + 2].includes(
               keyParts.length
             )
           ) {
@@ -109,29 +285,25 @@ export default {
             return
           }
 
-          keyParts.splice(0, PLAYER_PREFIX_LENGTH)
+          keyParts.splice(0, paramPrefixLengthTotal)
 
-          const nestedPlaylist = getNestedObject(
+          const nestedData = getPlaylistDataExtended(
             keyParts,
             content.Size !== undefined ? content.Size : 0
           )
 
-          merge(playlists, nestedPlaylist, (value: any, srcValue: any) => {
-            if (Array.isArray(value)) {
-              return value.concat(srcValue)
-            }
-          })
+          mergeByKey(playlistDataExtended, nestedData, 'name')
         })
 
+        const playlistData = getPlaylistData(playlistDataExtended)
+        const result: AxiosPlaylistData = {
+          playlistData,
+          ...(data.NextContinuationToken !== undefined && {
+            nextContinuationToken: data.NextContinuationToken,
+          }),
+        }
         res.setHeader('Content-Type', 'application/json')
-        res.end(
-          JSON.stringify({
-            playlists,
-            ...(data.NextContinuationToken !== undefined && {
-              nextContinuationToken: data.NextContinuationToken,
-            }),
-          })
-        )
+        res.end(JSON.stringify(result))
       }
     )
   },
