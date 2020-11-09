@@ -51,21 +51,27 @@
         </div>
       </div>
       <div class="fixed bottom-0 left-0 right-0">
-        <div v-if="currentTrack" class="bg-white text-black">
+        <div
+          v-if="currentTrack"
+          class="bg-white flex flex-col sm:flex-row font-bold justify-evenly text-black"
+        >
+          <span>
+            {{ currentTrack }}
+            <span v-if="meta && meta.createdTime" class="font-normal">
+              on {{ $moment(meta.createdTime).format('L') }}
+            </span>
+          </span>
+          <span v-if="currentTrackDescription !== ''">
+            {{ currentTrackDescription }}
+          </span>
           <a
             v-if="meta && meta.mixcloudLink"
             :href="meta.mixcloudLink"
             rel="noopener noreferrer"
             target="_blank"
           >
-            <font-awesome-icon :icon="['fab', 'mixcloud']" />
+            <font-awesome-icon :icon="['fab', 'mixcloud']" /> Mixcloud
           </a>
-          <span>
-            {{
-              currentTrack +
-              (currentTrackDescription ? ': ' + currentTrackDescription : '')
-            }}
-          </span>
         </div>
         <vue-plyr
           v-if="initialPlay"
