@@ -41,6 +41,7 @@ export default {
       '@nuxtjs/fontawesome',
       {
         icons: {
+          brands: ['faMixcloud'],
           solid: [
             'faBug',
             'faCalendarDay',

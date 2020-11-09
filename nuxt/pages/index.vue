@@ -21,11 +21,16 @@
     </div>
     <div class="flex flex-col">
       <!-- <section>
-      <a v-if="event.url !== null" :href="event.url" target="_blank">
-        <EventAnnouncement :event="event" />
-      </a>
-      <EventAnnouncement v-else :event="event" />
-      </section>-->
+        <a
+          v-if="event.url !== null"
+          :href="event.url"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <EventAnnouncement :event="event" />
+        </a>
+        <EventAnnouncement v-else :event="event" />
+      </section> -->
       <ButtonBig :link="'/events'" :icon-id="'calendar-day'">
         Events
       </ButtonBig>

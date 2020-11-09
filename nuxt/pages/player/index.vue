@@ -52,10 +52,20 @@
       </div>
       <div class="fixed bottom-0 left-0 right-0">
         <div v-if="currentTrack" class="bg-white text-black">
-          {{
-            currentTrack +
-            (currentTrackDescription ? ': ' + currentTrackDescription : '')
-          }}
+          <a
+            v-if="meta && meta.mixcloudLink"
+            :href="meta.mixcloudLink"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            <font-awesome-icon :icon="['fab', 'mixcloud']" />
+          </a>
+          <span>
+            {{
+              currentTrack +
+              (currentTrackDescription ? ': ' + currentTrackDescription : '')
+            }}
+          </span>
         </div>
         <vue-plyr
           v-if="initialPlay"
@@ -97,6 +107,7 @@ interface PlaylistItemMeta {
   audioLength: number
   createdTime?: string
   description?: string
+  mixcloudLink?: string
   tracklist?: TrackListItem[]
 }
 
