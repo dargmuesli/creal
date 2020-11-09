@@ -36,6 +36,28 @@ export interface AxiosPlaylistData {
   nextContinuationToken?: string
 }
 
+function itemSort(a: PlaylistItemData, b: PlaylistItemData) {
+  const aN = a.name
+  const bN = b.name
+
+  for (let i = 0; i < aN.length && i < bN.length; i++) {
+    const charA = aN.charAt(i)
+    const charB = bN.charAt(i)
+
+    if (
+      !isNaN(charA as any) &&
+      !isNaN(parseFloat(charA)) &&
+      !isNaN(charB as any) &&
+      !isNaN(parseFloat(charB)) &&
+      charA !== charB
+    ) {
+      return +charB - +charA
+    }
+  }
+
+  return (aN as any) - (bN as any)
+}
+
 function getPlaylistData(
   playlistDataExtended: PlaylistDataExtended
 ): PlaylistData {
@@ -86,7 +108,7 @@ function getPlaylistData(
   return {
     name: playlistDataExtended.name,
     collections: subCollections,
-    items: playlistDataExtended.items,
+    items: playlistDataExtended.items.sort(itemSort),
     cover: playlistDataExtended.cover,
   }
 }
