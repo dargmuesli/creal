@@ -34,7 +34,8 @@
               >
                 <PlaylistItem
                   :playlist-item="item"
-                  :set-source-function="setSource"
+                  @download="onPlaylistItemDownload"
+                  @play="onPlaylistItemPlay"
                 />
               </li>
             </ul>
@@ -97,25 +98,13 @@ import { Component, Vue } from 'nuxt-property-decorator'
 
 import {
   PLAYER_PREFIX,
-  AxiosPlaylistData,
-  PlaylistData,
+  AxiosPlaylist,
+  Playlist,
+  PlaylistItem,
+  PlaylistItemMeta,
+  TrackListItem,
   mergeByKey,
-  PlaylistItemData,
 } from '../../api/player/playlists'
-
-interface TrackListItem {
-  startSeconds: number
-  songName: string
-  artistName: string
-}
-
-interface PlaylistItemMeta {
-  audioLength: number
-  createdTime?: string
-  description?: string
-  mixcloudLink?: string
-  tracklist?: TrackListItem[]
-}
 
 function binarySearch(ar: any[], el: any, compareFn: Function) {
   let m = 0
@@ -153,7 +142,7 @@ export default class PlayerPage extends Vue {
 
   currentTrack: string = ''
   currentTrackDescription: string = ''
-  playlistData?: PlaylistData
+  playlistData?: Playlist
   meta: PlaylistItemMeta | null = null
   plyrPaused: boolean = false
   initialPlay = false
@@ -176,7 +165,7 @@ export default class PlayerPage extends Vue {
     query: any
   }): Promise<any> {
     let continuationToken
-    const playlistData: PlaylistData = {
+    const playlistData: Playlist = {
       name: 'root',
       collections: [],
       items: [],
@@ -184,7 +173,7 @@ export default class PlayerPage extends Vue {
     }
 
     do {
-      const playlistDataPart: AxiosPlaylistData = await $axios.$get(
+      const playlistDataPart: AxiosPlaylist = await $axios.$get(
         '/player/playlists',
         {
           params: new URLSearchParams({
@@ -205,21 +194,125 @@ export default class PlayerPage extends Vue {
     return { playlistData }
   }
 
-  getPlaylistLink(name: string) {
-    const queryObject = JSON.parse(JSON.stringify(this.$route.query))
+  // ///////////////////////////////////////////////////////////////////////////
+  // Util //////////////////////////////////////////////////////////////////////
+
+  async getSignedUrl(playlistItem: PlaylistItem) {
+    const key =
+      PLAYER_PREFIX +
+      (this.$route.query.playlist ? this.$route.query.playlist + '/' : '') +
+      playlistItem.name +
+      '.' +
+      playlistItem.extension
+    return await this.$axios.$get('/player/signedUrl', {
+      params: new URLSearchParams({ key }),
+    })
+  }
+
+  serializeQueryString(object: any) {
     const playlistLinkParts: Array<string> = []
 
+    for (const [key, value] of Object.entries(object)) {
+      playlistLinkParts.push(value === null ? key : `${key}=${value}`)
+    }
+
+    return `?${playlistLinkParts.join('&')}`
+  }
+
+  // ///////////////////////////////////////////////////////////////////////////
+  // Template //////////////////////////////////////////////////////////////////
+
+  getPlaylistLink(name: string) {
+    const queryObject = JSON.parse(JSON.stringify(this.$route.query))
+
+    // Append chosen playlist's name to current playlist path.
     queryObject.playlist = encodeURIComponent(
       [queryObject.playlist, name]
         .filter(Boolean) // Prevent initial join character.
         .join('/')
     )
+    delete queryObject.track
 
-    for (const [key, value] of Object.entries(queryObject)) {
-      playlistLinkParts.push(value === null ? key : `${key}=${value}`)
+    return this.serializeQueryString(queryObject)
+  }
+
+  // ///////////////////////////////////////////////////////////////////////////
+  // Events ////////////////////////////////////////////////////////////////////
+
+  async onPlaylistItemDownload(playlistItem: PlaylistItem) {
+    const link = document.createElement('a')
+    link.setAttribute('href', await this.getSignedUrl(playlistItem))
+    link.setAttribute('download', '123.mp3') // This value is never shown to the user in current browser implementations.
+    link.click()
+  }
+
+  async onPlaylistItemPlay(playlistItem: PlaylistItem) {
+    this.initialPlay = true
+    const nameParts = playlistItem.name.split(' - ')
+    this.currentTrack = nameParts[1] // `${nameParts[1]} · ${nameParts[0]}`
+
+    // Activate only the newly selected playlist item.
+    if (!this.playlistData) {
+      return
     }
 
-    return `?${playlistLinkParts.join('&')}`
+    for (let i = 0; i < this.playlistData.items.length; i++) {
+      this.playlistData.items[i].active = false
+    }
+
+    playlistItem.active = true
+
+    // Set query parameter.
+    const queryObject = JSON.parse(JSON.stringify(this.$route.query))
+
+    queryObject.track = encodeURIComponent(playlistItem.name)
+
+    this.$router.replace({
+      path: this.$route.path,
+      query: queryObject,
+    })
+
+    // Get meta.
+    const key =
+      PLAYER_PREFIX +
+      (this.$route.query.playlist ? this.$route.query.playlist + '/' : '') +
+      playlistItem.name +
+      '.json'
+
+    if (playlistItem.meta) {
+      this.meta = await this.$axios.$get('/player/getObject', {
+        params: new URLSearchParams({ key }),
+      })
+    } else {
+      this.meta = null
+      this.currentTrackDescription = ''
+    }
+
+    // Set plyr's source.
+    this.$nextTick().then(async () => {
+      this.player.config.controls = [
+        'play-large',
+        'play',
+        'progress',
+        'current-time',
+        'mute',
+        'volume',
+        // 'pip',
+        'airplay',
+        // 'fullscreen',
+      ]
+      this.player.source = {
+        type: 'audio',
+        sources: [
+          {
+            src: await this.getSignedUrl(playlistItem),
+            type: 'audio/mp3',
+          },
+        ],
+      }
+
+      this.player.play()
+    })
   }
 
   onPlyrPause() {
@@ -244,52 +337,6 @@ export default class PlayerPage extends Vue {
         ? trackListItem.artistName + ' - ' + trackListItem.songName
         : ''
     }
-  }
-
-  async setSource(playlistItem: PlaylistItemData, url: URL) {
-    this.initialPlay = true
-    const nameParts = playlistItem.name.split(' - ')
-    this.currentTrack = nameParts[1] // `${nameParts[1]} · ${nameParts[0]}`
-
-    const key =
-      PLAYER_PREFIX +
-      (this.$route.query.playlist ? this.$route.query.playlist + '/' : '') +
-      playlistItem.name +
-      '.json'
-
-    if (playlistItem.meta) {
-      this.meta = await this.$axios.$get('/player/getObject', {
-        params: new URLSearchParams({ key }),
-      })
-    } else {
-      this.meta = null
-      this.currentTrackDescription = ''
-    }
-
-    this.$nextTick().then(() => {
-      this.player.config.controls = [
-        'play-large',
-        'play',
-        'progress',
-        'current-time',
-        'mute',
-        'volume',
-        // 'pip',
-        'airplay',
-        // 'fullscreen',
-      ]
-      this.player.source = {
-        type: 'audio',
-        sources: [
-          {
-            src: url,
-            type: 'audio/mp3',
-          },
-        ],
-      }
-
-      this.player.play()
-    })
   }
 }
 </script>

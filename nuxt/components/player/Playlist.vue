@@ -13,11 +13,11 @@
 <script lang="ts">
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
 
-import { PLAYER_PREFIX, PlaylistData } from '../../api/player/playlists'
+import { PLAYER_PREFIX, Playlist } from '../../api/player/playlists'
 
 @Component({})
 export default class extends Vue {
-  @Prop({ type: Object }) readonly playlist!: PlaylistData
+  @Prop({ type: Object }) readonly playlist!: Playlist
 
   coverUrl: string = ''
 

@@ -10,35 +10,48 @@ const consola = require('consola')
 
 export const PLAYER_PREFIX = 'player/'
 
-export interface NamedData {
+export interface PlaylistItem {
   name: string
-}
-
-export interface PlaylistItemData extends NamedData {
   extension: string
   size: number
+  active: boolean
   cover: boolean
   meta: boolean
 }
 
-export interface PlaylistData extends NamedData {
-  collections: PlaylistData[]
-  items: PlaylistItemData[]
+export interface TrackListItem {
+  startSeconds: number
+  songName: string
+  artistName: string
+}
+
+export interface PlaylistItemMeta {
+  audioLength: number
+  createdTime?: string
+  description?: string
+  mixcloudLink?: string
+  tracklist?: TrackListItem[]
+}
+
+export interface Playlist {
+  name: string
+  collections: Playlist[]
+  items: PlaylistItem[]
   cover: boolean
 }
 
-interface PlaylistDataExtended extends PlaylistData {
-  collections: PlaylistDataExtended[]
+interface PlaylistExtended extends Playlist {
+  collections: PlaylistExtended[]
   covers: string[]
   metas: string[]
 }
 
-export interface AxiosPlaylistData {
-  playlistData: PlaylistData
+export interface AxiosPlaylist {
+  playlistData: Playlist
   nextContinuationToken?: string
 }
 
-function itemSort(a: PlaylistItemData, b: PlaylistItemData) {
+function itemSort(a: PlaylistItem, b: PlaylistItem) {
   const aN = a.name
   const bN = b.name
 
@@ -60,9 +73,7 @@ function itemSort(a: PlaylistItemData, b: PlaylistItemData) {
   return (aN as any) - (bN as any)
 }
 
-function getPlaylistData(
-  playlistDataExtended: PlaylistDataExtended
-): PlaylistData {
+function getPlaylist(playlistDataExtended: PlaylistExtended): Playlist {
   // Set cover properties.
   for (let i = 0; i < playlistDataExtended.covers.length; i++) {
     // For collections.
@@ -100,10 +111,10 @@ function getPlaylistData(
     }
   }
 
-  const subCollections: PlaylistData[] = []
+  const subCollections: Playlist[] = []
 
   for (let i = 0; i < playlistDataExtended.collections.length; i++) {
-    subCollections.push(getPlaylistData(playlistDataExtended.collections[i]))
+    subCollections.push(getPlaylist(playlistDataExtended.collections[i]))
   }
 
   // Leave out the helper properties `covers` and `metas`.
@@ -115,12 +126,12 @@ function getPlaylistData(
   }
 }
 
-function getPlaylistDataExtended(
+function getPlaylistExtended(
   pathParts: Array<string>,
   size: number,
   root: string = 'root'
-): PlaylistDataExtended | undefined {
-  const playlistDataExtended: PlaylistDataExtended = {
+): PlaylistExtended | undefined {
+  const playlistDataExtended: PlaylistExtended = {
     name: root,
     collections: [],
     items: [],
@@ -151,6 +162,7 @@ function getPlaylistDataExtended(
             name: matchName,
             extension: matchEnding,
             size,
+            active: false,
             cover: false,
             meta: false,
           })
@@ -180,7 +192,7 @@ function getPlaylistDataExtended(
     const name = pathParts[0]
 
     pathParts.shift()
-    const playlistDataSub = getPlaylistDataExtended(pathParts, size, name)
+    const playlistDataSub = getPlaylistExtended(pathParts, size, name)
 
     if (playlistDataSub) {
       playlistDataExtended.collections.push(playlistDataSub)
@@ -275,7 +287,7 @@ export default {
           return
         }
 
-        const playlistDataExtended: PlaylistDataExtended = {
+        const playlistDataExtended: PlaylistExtended = {
           name: paramPrefix || 'root',
           collections: [],
           items: [],
@@ -311,7 +323,7 @@ export default {
 
           keyParts.splice(0, paramPrefixLengthTotal)
 
-          const nestedData = getPlaylistDataExtended(
+          const nestedData = getPlaylistExtended(
             keyParts,
             content.Size !== undefined ? content.Size : 0
           )
@@ -319,8 +331,8 @@ export default {
           mergeByKey(playlistDataExtended, nestedData, 'name')
         })
 
-        const playlistData = getPlaylistData(playlistDataExtended)
-        const result: AxiosPlaylistData = {
+        const playlistData = getPlaylist(playlistDataExtended)
+        const result: AxiosPlaylist = {
           playlistData,
           ...(data.NextContinuationToken !== undefined && {
             nextContinuationToken: data.NextContinuationToken,
