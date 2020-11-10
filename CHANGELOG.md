@@ -1,3 +1,10 @@
+# [0.16.0](https://github.com/dargmuesli/creal/compare/0.15.0...0.16.0) (2020-11-10)
+
+
+### Features
+
+* improve playlist item selection ([3774fd1](https://github.com/dargmuesli/creal/commit/3774fd1a5724933e15d583d885fb4ba5e28c87d4))
+
 # [0.15.0](https://github.com/dargmuesli/creal/compare/0.14.3...0.15.0) (2020-11-09)
 
 
