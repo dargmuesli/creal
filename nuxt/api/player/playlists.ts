@@ -73,6 +73,10 @@ function itemSort(a: PlaylistItem, b: PlaylistItem) {
   return (aN as any) - (bN as any)
 }
 
+function isObject(a: any) {
+  return !!a && a.constructor === Object
+}
+
 function getPlaylist(playlistDataExtended: PlaylistExtended): Playlist {
   // Set cover properties.
   for (let i = 0; i < playlistDataExtended.covers.length; i++) {
@@ -215,7 +219,13 @@ export function mergeByKey(target: any, source: any, key: string | number) {
 
       for (let j = 0; j < srcValue.length; j++) {
         for (let i = 0; i < targetValue.length; i++) {
-          if (targetValue[i][key] === srcValue[j][key]) {
+          if (
+            isObject(srcValue[j]) &&
+            isObject(targetValue[i]) &&
+            key in srcValue[j] &&
+            key in targetValue[i] &&
+            srcValue[j][key] === targetValue[i][key]
+          ) {
             targetValue[i] = mergeByKey(targetValue[i], srcValue[j], key)
             matchFound = true
             break
