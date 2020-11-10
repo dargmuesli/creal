@@ -1,3 +1,10 @@
+## [0.16.1](https://github.com/dargmuesli/creal/compare/0.16.0...0.16.1) (2020-11-10)
+
+
+### Bug Fixes
+
+* **player:** correct key comparison ([2665113](https://github.com/dargmuesli/creal/commit/26651133fc3c69d82c016bef2b29ca4ec5c67cf2))
+
 # [0.16.0](https://github.com/dargmuesli/creal/compare/0.15.0...0.16.0) (2020-11-10)
 
 
