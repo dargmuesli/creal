@@ -77,7 +77,8 @@
         <vue-plyr
           v-if="initialPlay"
           ref="plyr"
-          :emit="['pause', 'playing', 'timeupdate']"
+          :emit="['ended', 'pause', 'playing', 'timeupdate']"
+          @ended="onPlyrEnded"
           @pause="onPlyrPause"
           @playing="onPlyrPlaying"
           @timeupdate="onPlyrTimeUpdate"
@@ -197,6 +198,16 @@ export default class PlayerPage extends Vue {
   // ///////////////////////////////////////////////////////////////////////////
   // Util //////////////////////////////////////////////////////////////////////
 
+  closeFree() {
+    window.onbeforeunload = () => {}
+  }
+
+  closeProtect() {
+    window.onbeforeunload = () => {
+      return 'The music will stop playing if you navigate away.'
+    }
+  }
+
   async getSignedUrl(playlistItem: PlaylistItem) {
     const key =
       PLAYER_PREFIX +
@@ -315,12 +326,18 @@ export default class PlayerPage extends Vue {
     })
   }
 
+  onPlyrEnded() {
+    this.closeFree()
+  }
+
   onPlyrPause() {
     this.plyrPaused = true
+    this.closeFree()
   }
 
   onPlyrPlaying() {
     this.plyrPaused = false
+    this.closeProtect()
   }
 
   onPlyrTimeUpdate() {
