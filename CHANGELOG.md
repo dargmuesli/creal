@@ -1,3 +1,10 @@
+# [0.17.0](https://github.com/dargmuesli/creal/compare/0.16.1...0.17.0) (2020-11-11)
+
+
+### Features
+
+* **player:** protect close while playing ([d667610](https://github.com/dargmuesli/creal/commit/d667610f4d585d27b3dc00a84f583f60c489339e))
+
 ## [0.16.1](https://github.com/dargmuesli/creal/compare/0.16.0...0.16.1) (2020-11-10)
 
 
