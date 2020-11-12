@@ -1,3 +1,10 @@
+## [0.18.1](https://github.com/dargmuesli/creal/compare/0.18.0...0.18.1) (2020-11-12)
+
+
+### Bug Fixes
+
+* **axios:** correct retry counting ([0b31d5e](https://github.com/dargmuesli/creal/commit/0b31d5ee9259e05d24ef90a79ffcfb671d2d272b)), closes [#55](https://github.com/dargmuesli/creal/issues/55)
+
 # [0.18.0](https://github.com/dargmuesli/creal/compare/0.17.0...0.18.0) (2020-11-12)
 
 
