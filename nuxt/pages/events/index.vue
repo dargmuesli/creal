@@ -63,8 +63,6 @@ export default class EventsPage extends Paging {
     let requestError
 
     while (tryCount <= maxTryCount && !(eventsCountTotal && events)) {
-      tryCount++
-
       try {
         eventsCountTotal = await $axios.$get('/strapi/events/count')
         events = await $axios.$get('/strapi/events', {
@@ -79,6 +77,8 @@ export default class EventsPage extends Paging {
           requestError = e
         }
       }
+
+      tryCount++
     }
 
     if (requestError) {

@@ -120,8 +120,6 @@ export default class FaqPage extends Paging {
     let requestError
 
     while (tryCount <= maxTryCount && !(itemsCountTotal && items)) {
-      tryCount++
-
       try {
         itemsCountTotal = await $axios.$get('/strapi/faqs/count')
         items = await $axios.$get('/strapi/faqs', {
@@ -136,6 +134,8 @@ export default class FaqPage extends Paging {
           requestError = e
         }
       }
+
+      tryCount++
     }
 
     if (requestError) {
