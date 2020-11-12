@@ -1,3 +1,10 @@
+# [0.18.0](https://github.com/dargmuesli/creal/compare/0.17.0...0.18.0) (2020-11-12)
+
+
+### Features
+
+* add axios retries ([354d9de](https://github.com/dargmuesli/creal/commit/354d9de25705ac7a6108af3413981f0e710aa247)), closes [#55](https://github.com/dargmuesli/creal/issues/55)
+
 # [0.17.0](https://github.com/dargmuesli/creal/compare/0.16.1...0.17.0) (2020-11-11)
 
 
