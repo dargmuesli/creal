@@ -5,7 +5,7 @@
       <Error v-if="requestError !== null" :error="requestError">
         {{ requestError.message }}
       </Error>
-      <div v-if="items !== null && items.length > 0">
+      <div v-else-if="items !== null && items.length > 0">
         <ul class="list-none">
           <li
             v-for="item in items"
@@ -115,18 +115,32 @@ export default class FaqPage extends Paging {
 
     let itemsCountTotal, items
 
-    try {
-      itemsCountTotal = await $axios.$get('/strapi/faqs/count')
-      items = await $axios.$get('/strapi/faqs', {
-        params: new URLSearchParams({
-          _sort: 'title:DESC',
-          _limit: String(limit),
-          _start: String(start),
-        }),
-      })
-    } catch (e) {
+    const maxTryCount = 3
+    let tryCount = 1
+    let requestError
+
+    while (tryCount <= maxTryCount && !(itemsCountTotal && items)) {
+      tryCount++
+
+      try {
+        itemsCountTotal = await $axios.$get('/strapi/faqs/count')
+        items = await $axios.$get('/strapi/faqs', {
+          params: new URLSearchParams({
+            _sort: 'title:DESC',
+            _limit: String(limit),
+            _start: String(start),
+          }),
+        })
+      } catch (e) {
+        if (tryCount === maxTryCount) {
+          requestError = e
+        }
+      }
+    }
+
+    if (requestError) {
       return {
-        requestError: e,
+        requestError,
       }
     }
 

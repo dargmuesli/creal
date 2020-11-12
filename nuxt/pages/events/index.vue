@@ -2,7 +2,10 @@
   <div class="container mx-auto mb-4">
     <section>
       <h1>{{ title }}</h1>
-      <div v-if="items !== null && items.length > 0">
+      <Error v-if="requestError !== null" :error="requestError">
+        {{ requestError.message }}
+      </Error>
+      <div v-else-if="items !== null && items.length > 0">
         <ul class="list-none">
           <li
             v-for="item in items"
@@ -55,17 +58,33 @@ export default class EventsPage extends Paging {
 
     let eventsCountTotal, events
 
-    try {
-      eventsCountTotal = await $axios.$get('/strapi/events/count')
-      events = await $axios.$get('/strapi/events', {
-        params: new URLSearchParams({
-          _sort: 'dateStart:DESC',
-          _limit: String(limit),
-          _start: String(start),
-        }),
-      })
-    } catch (e) {
-      return
+    const maxTryCount = 3
+    let tryCount = 1
+    let requestError
+
+    while (tryCount <= maxTryCount && !(eventsCountTotal && events)) {
+      tryCount++
+
+      try {
+        eventsCountTotal = await $axios.$get('/strapi/events/count')
+        events = await $axios.$get('/strapi/events', {
+          params: new URLSearchParams({
+            _sort: 'dateStart:DESC',
+            _limit: String(limit),
+            _start: String(start),
+          }),
+        })
+      } catch (e) {
+        if (tryCount === maxTryCount) {
+          requestError = e
+        }
+      }
+    }
+
+    if (requestError) {
+      return {
+        requestError,
+      }
     }
 
     return $paging(events, eventsCountTotal, query, start, limit)
