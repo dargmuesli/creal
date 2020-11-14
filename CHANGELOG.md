@@ -1,3 +1,10 @@
+## [0.18.2](https://github.com/dargmuesli/creal/compare/0.18.1...0.18.2) (2020-11-14)
+
+
+### Bug Fixes
+
+* **csp:** add cloudflare as script source ([1783002](https://github.com/dargmuesli/creal/commit/1783002ee36df345614700315042aaf76cc166bf)), closes [#60](https://github.com/dargmuesli/creal/issues/60)
+
 ## [0.18.1](https://github.com/dargmuesli/creal/compare/0.18.0...0.18.1) (2020-11-12)
 
 
