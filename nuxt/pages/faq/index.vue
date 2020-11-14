@@ -50,6 +50,18 @@ import Paging from '~/classes/Paging.ts'
   head(this: FaqPage): Object {
     return {
       title: this.title,
+      meta: [
+        {
+          hid: 'description',
+          property: 'description',
+          content: 'Questions DJs are asked.',
+        },
+        {
+          hid: 'og:description',
+          property: 'og:description',
+          content: 'Questions DJs are asked.',
+        },
+      ],
     }
   },
 })

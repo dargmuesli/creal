@@ -38,6 +38,18 @@ import Paging from '~/classes/Paging.ts'
   head(this: EventsPage): Object {
     return {
       title: this.title,
+      meta: [
+        {
+          hid: 'description',
+          property: 'description',
+          content: 'Events at which DJ cReal performs.',
+        },
+        {
+          hid: 'og:description',
+          property: 'og:description',
+          content: 'Events at which DJ cReal performs.',
+        },
+      ],
     }
   },
 })

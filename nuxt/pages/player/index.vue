@@ -135,6 +135,18 @@ function trackListItemComparator(time: number, b: TrackListItem) {
   head(this: PlayerPage): Object {
     return {
       title: this.titleHead,
+      meta: [
+        {
+          hid: 'description',
+          property: 'description',
+          content: 'Listen to mixes by DJ cReal.',
+        },
+        {
+          hid: 'og:description',
+          property: 'og:description',
+          content: 'Listen to mixes by DJ cReal.',
+        },
+      ],
     }
   },
 })
