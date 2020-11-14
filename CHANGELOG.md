@@ -1,3 +1,10 @@
+# [0.19.0](https://github.com/dargmuesli/creal/compare/0.18.2...0.19.0) (2020-11-14)
+
+
+### Features
+
+* add dj keyword ([644341b](https://github.com/dargmuesli/creal/commit/644341b54502cc885200bd195bb6ad5022739954)), closes [#61](https://github.com/dargmuesli/creal/issues/61)
+
 ## [0.18.2](https://github.com/dargmuesli/creal/compare/0.18.1...0.18.2) (2020-11-14)
 
 
