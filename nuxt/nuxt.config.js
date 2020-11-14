@@ -255,6 +255,7 @@ export default {
         ],
         'manifest-src': ["'self'"], // Chrome
         'report-uri': 'https://dargmuesli.report-uri.com/r/d/csp/enforce',
+        'script-src': ['https://static.cloudflareinsights.com/beacon.min.js'],
         'style-src': [
           "'self'", // Tailwind
           // "'sha256-45Zuu9QsRRW+hIWi5qtqijoYiDtRwjbDI0quax1AZoY='", // FAQ: dynamic height
