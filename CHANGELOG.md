@@ -1,3 +1,10 @@
+## [0.19.1](https://github.com/dargmuesli/creal/compare/0.19.0...0.19.1) (2020-11-23)
+
+
+### Bug Fixes
+
+* **release:** schedule release ([311f741](https://github.com/dargmuesli/creal/commit/311f741b49bd21e0fe5e6e0f7b2f1d8f26f65c6e))
+
 # [0.19.0](https://github.com/dargmuesli/creal/compare/0.18.2...0.19.0) (2020-11-14)
 
 
