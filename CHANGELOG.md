@@ -1,3 +1,10 @@
+## [0.19.2](https://github.com/dargmuesli/creal/compare/0.19.1...0.19.2) (2020-12-06)
+
+
+### Bug Fixes
+
+* **docker:** skip husky installation ([d375b80](https://github.com/dargmuesli/creal/commit/d375b80dbefe93c29806cf2ba6cf885754252427))
+
 ## [0.19.1](https://github.com/dargmuesli/creal/compare/0.19.0...0.19.1) (2020-11-23)
 
 
