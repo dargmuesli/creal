@@ -1,3 +1,10 @@
+## [0.19.3](https://github.com/dargmuesli/creal/compare/0.19.2...0.19.3) (2020-12-06)
+
+
+### Bug Fixes
+
+* **docker:** add missing production node environment variable ([223e639](https://github.com/dargmuesli/creal/commit/223e639fa58ef04c839dd578c5e92dfa57f89623))
+
 ## [0.19.2](https://github.com/dargmuesli/creal/compare/0.19.1...0.19.2) (2020-12-06)
 
 
