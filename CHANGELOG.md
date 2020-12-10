@@ -1,3 +1,10 @@
+## [0.19.4](https://github.com/dargmuesli/creal/compare/0.19.3...0.19.4) (2020-12-10)
+
+
+### Bug Fixes
+
+* **nuxt:** correct image path ([6257eb5](https://github.com/dargmuesli/creal/commit/6257eb585119765167b4e44b3f23604fc9501fc1))
+
 ## [0.19.3](https://github.com/dargmuesli/creal/compare/0.19.2...0.19.3) (2020-12-06)
 
 
