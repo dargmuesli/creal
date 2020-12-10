@@ -170,7 +170,7 @@ export default {
         {
           hid: 'og:image',
           property: 'og:image',
-          content: this.$baseUrl + '/assets/static/logos/maevsi.svg',
+          content: this.$baseUrl + '/assets/static/logos/creal.svg',
         },
         {
           hid: 'og:image:alt',
