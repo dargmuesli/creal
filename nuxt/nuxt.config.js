@@ -38,6 +38,8 @@ export default {
   // Modules for dev and build (recommended) (https://go.nuxtjs.dev/config-modules)
   buildModules: [
     [
+      // https://go.nuxtjs.dev/typescript
+      '@nuxt/typescript-build',
       '@nuxtjs/fontawesome',
       {
         icons: {
@@ -56,8 +58,7 @@ export default {
         useLayersText: false,
       },
     ],
-    // https://go.nuxtjs.dev/typescript
-    '@nuxt/typescript-build',
+    '@nuxtjs/html-validator',
     // Doc: https://github.com/nuxt-community/moment-module
     ['@nuxtjs/moment', { locales: ['de'], plugins: ['twix'] }],
     // https://go.nuxtjs.dev/stylelint
