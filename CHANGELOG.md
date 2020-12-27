@@ -1,3 +1,10 @@
+## [0.20.1](https://github.com/dargmuesli/creal/compare/0.20.0...0.20.1) (2020-12-27)
+
+
+### Bug Fixes
+
+* **nuxt:** correct build module definition ([4baff37](https://github.com/dargmuesli/creal/commit/4baff3733f7298e95fcbc5ef88e5725f9c2035d3))
+
 # [0.20.0](https://github.com/dargmuesli/creal/compare/0.19.5...0.20.0) (2020-12-27)
 
 
