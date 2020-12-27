@@ -1,3 +1,10 @@
+# [0.20.0](https://github.com/dargmuesli/creal/compare/0.19.5...0.20.0) (2020-12-27)
+
+
+### Features
+
+* add nuxt html validator ([10c3f89](https://github.com/dargmuesli/creal/commit/10c3f89e334ce049a660552ade63f533460ebb97))
+
 ## [0.19.5](https://github.com/dargmuesli/creal/compare/0.19.4...0.19.5) (2020-12-21)
 
 
