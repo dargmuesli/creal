@@ -1,3 +1,10 @@
+## [0.20.5](https://github.com/dargmuesli/creal/compare/0.20.4...0.20.5) (2021-02-12)
+
+
+### Bug Fixes
+
+* **ci:** trigger on create ([8212180](https://github.com/dargmuesli/creal/commit/8212180c0cdffaa80f68713d21b9b3d26ef7a660))
+
 ## [0.20.4](https://github.com/dargmuesli/creal/compare/0.20.3...0.20.4) (2021-02-01)
 
 
