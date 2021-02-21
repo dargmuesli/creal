@@ -1,3 +1,10 @@
+# [0.21.0](https://github.com/dargmuesli/creal/compare/0.20.5...0.21.0) (2021-02-21)
+
+
+### Features
+
+* **eslint:** remove unneeded prettier config ([37830d1](https://github.com/dargmuesli/creal/commit/37830d1e54081d7a1603ed88fcf084f5b949a3a5))
+
 ## [0.20.5](https://github.com/dargmuesli/creal/compare/0.20.4...0.20.5) (2021-02-12)
 
 
