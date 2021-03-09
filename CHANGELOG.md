@@ -1,3 +1,10 @@
+## [0.21.2](https://github.com/dargmuesli/creal/compare/0.21.1...0.21.2) (2021-03-09)
+
+
+### Bug Fixes
+
+* **ts:** remove file extension ([68bd134](https://github.com/dargmuesli/creal/commit/68bd1349990f06af78fac699e61a8f73ad3a3e63))
+
 ## [0.21.1](https://github.com/dargmuesli/creal/compare/0.21.0...0.21.1) (2021-03-01)
 
 
