@@ -44,7 +44,7 @@
 import { Component } from 'nuxt-property-decorator'
 import slugify from 'slugify'
 
-import Paging from '~/classes/Paging.ts'
+import Paging from '~/classes/Paging'
 
 @Component({
   head(this: FaqPage): Object {
