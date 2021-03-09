@@ -32,7 +32,7 @@
 <script lang="ts">
 import { Component } from 'nuxt-property-decorator'
 
-import Paging from '~/classes/Paging.ts'
+import Paging from '~/classes/Paging'
 
 @Component({
   head(this: EventsPage): Object {
