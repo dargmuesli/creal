@@ -22,7 +22,7 @@
                   :title="collection.name"
                   :href="getPlaylistLink(collection.name)"
                 >
-                  <Playlist class="h-full" :playlist="collection" />
+                  <PlayerPlaylist class="h-full" :playlist="collection" />
                 </a>
               </li>
             </ul>
@@ -32,7 +32,7 @@
                 :key="item.name"
                 class="border-b border-gray-800 first:border-t hover:bg-gray-800"
               >
-                <PlaylistItem
+                <PlayerPlaylistItem
                   :playlist-item="item"
                   @download="onPlaylistItemDownload"
                   @play="onPlaylistItemPlay"
