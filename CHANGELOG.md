@@ -1,3 +1,10 @@
+# [0.22.0](https://github.com/dargmuesli/creal/compare/0.21.5...0.22.0) (2021-04-06)
+
+
+### Features
+
+* **tailwind:** migrate to tailwindcss 4 ([c7bed2b](https://github.com/dargmuesli/creal/commit/c7bed2b720cb8ac6478e82da18a14c52a580630d))
+
 ## [0.21.5](https://github.com/dargmuesli/creal/compare/0.21.4...0.21.5) (2021-04-06)
 
 
