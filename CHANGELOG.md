@@ -1,3 +1,10 @@
+## [0.21.5](https://github.com/dargmuesli/creal/compare/0.21.4...0.21.5) (2021-04-06)
+
+
+### Bug Fixes
+
+* **nuxt:** migrate to nuxt 2.15 ([c610edb](https://github.com/dargmuesli/creal/commit/c610edb013fd8be7865b9a1b310d15a2ced2702c))
+
 ## [0.21.4](https://github.com/dargmuesli/creal/compare/0.21.3...0.21.4) (2021-04-05)
 
 
