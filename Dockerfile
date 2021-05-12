@@ -3,7 +3,7 @@
 
 # Should be the specific version of node:buster-slim.
 # `sqitch` requires at least buster.
-FROM node:16.1.0-buster-slim@sha256:0df270304cb63e22681e2e65d59ece417709cd0db4576074c8bd242041877de9 AS development
+FROM node:16.1.0-buster-slim@sha256:972548af5d81a09288fe9bb1b7291ff0c4e4e41e4b2e5f5ca80a80fc363e62f3 AS development
 
 # https://github.com/typicode/husky/issues/821
 ENV HUSKY_SKIP_INSTALL=1
@@ -73,7 +73,7 @@ RUN yarn install
 
 # Should be the specific version of node:buster-slim.
 # sqitch requires at least buster.
-FROM node:16.1.0-buster-slim@sha256:0df270304cb63e22681e2e65d59ece417709cd0db4576074c8bd242041877de9 AS production
+FROM node:16.1.0-buster-slim@sha256:972548af5d81a09288fe9bb1b7291ff0c4e4e41e4b2e5f5ca80a80fc363e62f3 AS production
 
 ENV NODE_ENV=production
 
