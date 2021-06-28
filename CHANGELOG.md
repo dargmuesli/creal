@@ -1,3 +1,10 @@
+## [0.22.6](https://github.com/dargmuesli/creal/compare/0.22.5...0.22.6) (2021-06-28)
+
+
+### Bug Fixes
+
+* **release:** schedule release ([b0b33d1](https://github.com/dargmuesli/creal/commit/b0b33d18fd6df374956d9f68b310af2a1760435b))
+
 ## [0.22.5](https://github.com/dargmuesli/creal/compare/0.22.4...0.22.5) (2021-06-14)
 
 
