@@ -78,32 +78,27 @@ export default {
     return {
       link: [
         {
-          href:
-            '/assets/static/favicon/apple-touch-icon-60x60.png?v=eEYRGn5b9R',
+          href: '/assets/static/favicon/apple-touch-icon-60x60.png?v=eEYRGn5b9R',
           rel: 'apple-touch-icon',
           sizes: '60x60',
         },
         {
-          href:
-            '/assets/static/favicon/apple-touch-icon-76x76.png?v=eEYRGn5b9R',
+          href: '/assets/static/favicon/apple-touch-icon-76x76.png?v=eEYRGn5b9R',
           rel: 'apple-touch-icon',
           sizes: '76x76',
         },
         {
-          href:
-            '/assets/static/favicon/apple-touch-icon-120x120.png?v=eEYRGn5b9R',
+          href: '/assets/static/favicon/apple-touch-icon-120x120.png?v=eEYRGn5b9R',
           rel: 'apple-touch-icon',
           sizes: '120x120',
         },
         {
-          href:
-            '/assets/static/favicon/apple-touch-icon-152x152.png?v=eEYRGn5b9R',
+          href: '/assets/static/favicon/apple-touch-icon-152x152.png?v=eEYRGn5b9R',
           rel: 'apple-touch-icon',
           sizes: '152x152',
         },
         {
-          href:
-            '/assets/static/favicon/apple-touch-icon-180x180.png?v=eEYRGn5b9R',
+          href: '/assets/static/favicon/apple-touch-icon-180x180.png?v=eEYRGn5b9R',
           rel: 'apple-touch-icon',
           sizes: '180x180',
         },

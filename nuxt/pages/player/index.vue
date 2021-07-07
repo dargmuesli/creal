@@ -5,8 +5,8 @@
       <div class="flex flex-col mb-2">
         <div class="bg-gray-900 flex-grow p-2">
           <div v-if="playlistData !== undefined" class="m-auto w-5/6">
-            <h2 v-if="this.$route.query.playlist" class="ml-2">
-              {{ this.$route.query.playlist }}
+            <h2 v-if="$route.query.playlist" class="ml-2">
+              {{ $route.query.playlist }}
             </h2>
             <ul
               v-if="playlistData.collections.length > 0"
@@ -30,7 +30,11 @@
               <li
                 v-for="item in playlistData.items"
                 :key="item.name"
-                class="border-b border-gray-800 first:border-t hover:bg-gray-800"
+                class="
+                  border-b border-gray-800
+                  first:border-t
+                  hover:bg-gray-800
+                "
               >
                 <PlayerPlaylistItem
                   :playlist-item="item"
@@ -54,7 +58,14 @@
       <div class="fixed bottom-0 left-0 right-0">
         <div
           v-if="currentTrack"
-          class="bg-white flex flex-col sm:flex-row font-bold justify-evenly text-black"
+          class="
+            bg-white
+            flex flex-col
+            sm:flex-row
+            font-bold
+            justify-evenly
+            text-black
+          "
         >
           <span>
             {{ currentTrack }}
@@ -354,13 +365,14 @@ export default class PlayerPage extends Vue {
 
   onPlyrTimeUpdate() {
     if (this.meta && this.meta.tracklist) {
-      const trackListItem = this.meta.tracklist[
-        binarySearch(
-          this.meta.tracklist,
-          this.player.media.currentTime,
-          trackListItemComparator
-        )
-      ]
+      const trackListItem =
+        this.meta.tracklist[
+          binarySearch(
+            this.meta.tracklist,
+            this.player.media.currentTime,
+            trackListItemComparator
+          )
+        ]
 
       this.currentTrackDescription = trackListItem
         ? trackListItem.artistName + ' - ' + trackListItem.songName

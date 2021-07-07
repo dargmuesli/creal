@@ -6,7 +6,12 @@
     >
       <div class="bg-gray-800 fullscreen"></div>
       <div
-        class="bg-center bg-cover bg-creal transition-opacity bg-no-repeat fullscreen"
+        class="
+          bg-center bg-cover bg-creal
+          transition-opacity
+          bg-no-repeat
+          fullscreen
+        "
       ></div>
       <div class="bg-gray-800 opacity-75 fullscreen"></div>
       <div class="fullscreen flex">
