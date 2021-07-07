@@ -8,7 +8,14 @@
     :link="link"
   >
     <span
-      class="leading-normal sm:leading-normal lg:leading-normal text-4xl sm:text-5xl lg:text-6xl"
+      class="
+        leading-normal
+        sm:leading-normal
+        lg:leading-normal
+        text-4xl
+        sm:text-5xl
+        lg:text-6xl
+      "
     >
       <slot />
     </span>

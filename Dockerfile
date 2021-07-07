@@ -5,9 +5,6 @@
 # `sqitch` requires at least buster.
 FROM node:16.4.1-buster-slim@sha256:34c21741098d529a15e164426cdf99c1ec9395394d4d4a2ad9186e30395a0540 AS development
 
-# https://github.com/typicode/husky/issues/821
-ENV HUSKY_SKIP_INSTALL=1
-
 # Update and install dependencies.
 # - `ca-certificates` and `git` are required by the `yarn install` command
 # - `sqitch` is required by the entrypoint
