@@ -2,7 +2,7 @@
   <section class="flex flex-col">
     <img v-if="coverUrl !== ''" alt="Cover image." :src="coverUrl" />
     <div v-else class="flex flex-grow justify-center items-center">
-      <div class="pulseLoader" />
+      <div class="animate-pulse pulseLoader" />
     </div>
     <h1 class="leading-tight m-0 mt-1 text-2xl text-left">
       {{ playlist.name }}

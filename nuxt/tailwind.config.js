@@ -86,7 +86,6 @@ module.exports = {
           borderRadius: '4em',
           backgroundColor: 'white',
           outline: '1px solid transparent',
-          animation: 'pulse 1.2s ease-in-out infinite',
         },
       })
 
