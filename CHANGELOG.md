@@ -1,3 +1,16 @@
+# [0.24.0](https://github.com/dargmuesli/creal/compare/0.23.0...0.24.0) (2021-07-30)
+
+
+### Bug Fixes
+
+* **player:** correct title ([41747db](https://github.com/dargmuesli/creal/commit/41747db6665f216566529a3b3a6d862c1bdf1f54))
+
+
+### Features
+
+* **design:** improve style ([daa89ef](https://github.com/dargmuesli/creal/commit/daa89ef497bbcc986988dc6de4ce7e327ccd2ec8))
+* **player:** add share button ([e036ec6](https://github.com/dargmuesli/creal/commit/e036ec645d4e41791c85f87624d783a109695008)), closes [#54](https://github.com/dargmuesli/creal/issues/54) [#22](https://github.com/dargmuesli/creal/issues/22)
+
 # [0.23.0](https://github.com/dargmuesli/creal/compare/0.22.8...0.23.0) (2021-07-30)
 
 
