@@ -1,3 +1,10 @@
+## [0.24.1](https://github.com/dargmuesli/creal/compare/0.24.0...0.24.1) (2021-07-30)
+
+
+### Bug Fixes
+
+* **player:** several bug fixes ([c32bb1e](https://github.com/dargmuesli/creal/commit/c32bb1efa1ae11e474917295d3628311ad430428))
+
 # [0.24.0](https://github.com/dargmuesli/creal/compare/0.23.0...0.24.0) (2021-07-30)
 
 
