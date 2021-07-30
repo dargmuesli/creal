@@ -4,7 +4,31 @@
       <h1>{{ title }}</h1>
       <div class="flex flex-col mb-2">
         <div class="bg-gray-900 flex-grow p-2">
-          <div v-if="playlistData !== undefined" class="m-auto w-5/6">
+          <div v-if="$fetchState.pending">
+            <svg
+              class="animate-spin h-16 m-auto text-white w-16"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              title="Loading"
+              viewBox="0 0 24 24"
+            >
+              <circle
+                class="opacity-25"
+                cx="12"
+                cy="12"
+                r="10"
+                stroke="currentColor"
+                stroke-width="4"
+              />
+              <path
+                class="opacity-75"
+                fill="currentColor"
+                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+              />
+            </svg>
+            Loading...
+          </div>
+          <div v-else-if="playlistData" class="m-auto w-5/6">
             <h2 v-if="$route.query.playlist" class="ml-2">
               {{ $route.query.playlist }}
             </h2>
@@ -17,13 +41,13 @@
                 :key="collection.name"
                 class="m-2 max-w-xxs min-w-xxs mb-4 overflow-hidden"
               >
-                <a
+                <nuxt-link
                   class="block h-full"
                   :title="collection.name"
-                  :href="getPlaylistLink(collection.name)"
+                  :to="getPlaylistLink(collection.name)"
                 >
                   <PlayerPlaylist class="h-full" :playlist="collection" />
-                </a>
+                </nuxt-link>
               </li>
             </ul>
             <ul v-if="playlistData.items.length > 0" class="list-none">
@@ -55,97 +79,63 @@
           </div>
         </div>
       </div>
-      <div class="fixed bottom-0 left-0 right-0">
-        <div
-          v-if="currentTrack"
-          class="
-            bg-white
-            flex flex-col
-            sm:flex-row
-            font-bold
-            justify-evenly
-            text-black
-          "
-        >
-          <span>
-            {{ currentTrack }}
-            <span v-if="meta && meta.createdTime" class="font-normal">
-              on {{ $moment(meta.createdTime).format('L') }}
-            </span>
-          </span>
-          <span v-if="currentTrackDescription !== ''">
-            {{ currentTrackDescription }}
-          </span>
-          <a
-            v-if="meta && meta.mixcloudLink"
-            :href="meta.mixcloudLink"
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            <font-awesome-icon :icon="['fab', 'mixcloud']" /> Mixcloud
-          </a>
-        </div>
-        <vue-plyr
-          v-if="initialPlay"
-          ref="plyr"
-          :emit="['ended', 'pause', 'playing', 'timeupdate']"
-          @ended="onPlyrEnded"
-          @pause="onPlyrPause"
-          @playing="onPlyrPlaying"
-          @timeupdate="onPlyrTimeUpdate"
-        >
-          <audio />
-        </vue-plyr>
-      </div>
     </section>
-    <!-- player below is for spacing (invisible) -->
-    <vue-plyr v-if="initialPlay" class="invisible">
-      <audio />
-    </vue-plyr>
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'nuxt-property-decorator'
+import { Component, Vue, Watch } from 'nuxt-property-decorator'
+import { getModule } from 'vuex-module-decorators'
+import { Route } from 'vue-router'
 
 import {
   PLAYER_PREFIX,
   AxiosPlaylist,
   Playlist,
   PlaylistItem,
-  PlaylistItemMeta,
-  TrackListItem,
   mergeByKey,
 } from '../../api/player/playlists'
-
-function binarySearch(ar: any[], el: any, compareFn: Function) {
-  let m = 0
-  let n = ar.length - 1
-
-  while (m <= n) {
-    const k = (n + m) >> 1
-    const cmp = compareFn(el, ar[k])
-
-    if (cmp > 0) {
-      m = k + 1
-    } else if (cmp < 0) {
-      n = k - 1
-    } else {
-      return k
-    }
-  }
-
-  return m - 1
-}
-
-function trackListItemComparator(time: number, b: TrackListItem) {
-  return time - b.startSeconds
-}
+import PlayerModule from '~/store/modules/PlayerModule'
 
 @Component({
+  async fetch(this: PlayerPage) {
+    let continuationToken
+    const playlistData: Playlist = {
+      name: 'root',
+      collections: [],
+      items: [],
+      cover: false,
+    }
+
+    do {
+      const playlistDataPart: AxiosPlaylist = await this.$axios.$get(
+        '/player/playlists',
+        {
+          params: new URLSearchParams({
+            ...(continuationToken !== undefined && {
+              'continuation-token': continuationToken,
+            }),
+            ...((this.$route.query.playlist as any) !== undefined && {
+              prefix: this.$route.query.playlist as any,
+            }),
+          }),
+        }
+      )
+
+      mergeByKey(playlistData, playlistDataPart.playlistData, 'name')
+      continuationToken = playlistDataPart.nextContinuationToken
+    } while (continuationToken !== undefined)
+
+    this.playlistData = playlistData
+  },
+  fetchOnServer: false,
   head(this: PlayerPage): Object {
     return {
-      title: this.titleHead,
+      title:
+        this.storePlayerModule.currentTrack !== '' &&
+        !this.storePlayerModule.isPlayerPaused
+          ? this.storePlayerModule.currentTrack
+          : this.title,
       meta: [
         {
           hid: 'description',
@@ -164,72 +154,26 @@ function trackListItemComparator(time: number, b: TrackListItem) {
 export default class PlayerPage extends Vue {
   title = 'Player'
 
-  currentTrack: string = ''
-  currentTrackDescription: string = ''
-  playlistData?: Playlist
-  meta: PlaylistItemMeta | null = null
-  plyrPaused: boolean = false
-  initialPlay = false
+  playlistData?: Playlist | null = null
+  storePlayerModule = getModule(PlayerModule, this.$store)
 
-  get player() {
-    return (this.$refs.plyr as any).player
-  }
-
-  get titleHead() {
-    return this.currentTrack !== '' && !this.plyrPaused
-      ? this.currentTrack
-      : this.title
-  }
-
-  async asyncData({
-    $axios,
-    query,
-  }: {
-    $axios: any
-    query: any
-  }): Promise<any> {
-    let continuationToken
-    const playlistData: Playlist = {
-      name: 'root',
-      collections: [],
-      items: [],
-      cover: false,
+  @Watch('$route')
+  onChildChanged(val: Route, valOld: Route) {
+    if (val.query.playlist !== valOld.query.playlist) {
+      this.$fetch()
     }
-
-    do {
-      const playlistDataPart: AxiosPlaylist = await $axios.$get(
-        '/player/playlists',
-        {
-          params: new URLSearchParams({
-            ...(continuationToken !== undefined && {
-              'continuation-token': continuationToken,
-            }),
-            ...(query.playlist !== undefined && {
-              prefix: query.playlist,
-            }),
-          }),
-        }
-      )
-
-      mergeByKey(playlistData, playlistDataPart.playlistData, 'name')
-      continuationToken = playlistDataPart.nextContinuationToken
-    } while (continuationToken !== undefined)
-
-    return { playlistData }
   }
+
+  // get titleHead() {
+  //   // return this.title
+  //   return this.storePlayerModule.currentTrack !== '' &&
+  //     !this.storePlayerModule.isPlayerPaused
+  //     ? this.storePlayerModule.currentTrack
+  //     : this.title
+  // }
 
   // ///////////////////////////////////////////////////////////////////////////
   // Util //////////////////////////////////////////////////////////////////////
-
-  closeFree() {
-    window.onbeforeunload = () => {}
-  }
-
-  closeProtect() {
-    window.onbeforeunload = () => {
-      return 'The music will stop playing if you navigate away.'
-    }
-  }
 
   async getSignedUrl(playlistItem: PlaylistItem) {
     const key =
@@ -281,9 +225,11 @@ export default class PlayerPage extends Vue {
   }
 
   async onPlaylistItemPlay(playlistItem: PlaylistItem) {
-    this.initialPlay = true
+    this.storePlayerModule.setIsPlayerVisible(true)
     const nameParts = playlistItem.name.split(' - ')
-    this.currentTrack = nameParts[1] // `${nameParts[1]} · ${nameParts[0]}`
+    this.storePlayerModule.setCurrentTrack(
+      nameParts.length === 1 ? nameParts[0] : nameParts[1]
+    ) // `${nameParts[1]} · ${nameParts[0]}`
 
     // Activate only the newly selected playlist item.
     if (!this.playlistData) {
@@ -298,13 +244,16 @@ export default class PlayerPage extends Vue {
 
     // Set query parameter.
     const queryObject = JSON.parse(JSON.stringify(this.$route.query))
+    const queryObjectTrack = encodeURIComponent(playlistItem.name)
 
-    queryObject.track = encodeURIComponent(playlistItem.name)
+    if (queryObject.track !== queryObjectTrack) {
+      queryObject.track = queryObjectTrack
 
-    this.$router.replace({
-      path: this.$route.path,
-      query: queryObject,
-    })
+      this.$router.replace({
+        path: this.$route.path,
+        query: queryObject,
+      })
+    }
 
     // Get meta.
     const key =
@@ -314,70 +263,24 @@ export default class PlayerPage extends Vue {
       '.json'
 
     if (playlistItem.meta) {
-      this.meta = await this.$axios.$get('/player/getObject', {
-        params: new URLSearchParams({ key }),
-      })
+      this.storePlayerModule.setMeta(
+        await this.$axios.$get('/player/getObject', {
+          params: new URLSearchParams({ key }),
+        })
+      )
     } else {
-      this.meta = null
-      this.currentTrackDescription = ''
+      this.storePlayerModule.setMeta(null)
+      this.storePlayerModule.setCurrentTrackDescription(null)
     }
-
-    // Set plyr's source.
-    this.$nextTick().then(async () => {
-      this.player.config.controls = [
-        'play-large',
-        'play',
-        'progress',
-        'current-time',
-        'mute',
-        'volume',
-        // 'pip',
-        'airplay',
-        // 'fullscreen',
-      ]
-      this.player.source = {
-        type: 'audio',
-        sources: [
-          {
-            src: await this.getSignedUrl(playlistItem),
-            type: 'audio/mp3',
-          },
-        ],
-      }
-
-      this.player.play()
+    this.$nuxt.$emit('plyr', {
+      type: 'audio',
+      sources: [
+        {
+          src: await this.getSignedUrl(playlistItem),
+          type: 'audio/mp3',
+        },
+      ],
     })
-  }
-
-  onPlyrEnded() {
-    this.closeFree()
-  }
-
-  onPlyrPause() {
-    this.plyrPaused = true
-    this.closeFree()
-  }
-
-  onPlyrPlaying() {
-    this.plyrPaused = false
-    this.closeProtect()
-  }
-
-  onPlyrTimeUpdate() {
-    if (this.meta && this.meta.tracklist) {
-      const trackListItem =
-        this.meta.tracklist[
-          binarySearch(
-            this.meta.tracklist,
-            this.player.media.currentTime,
-            trackListItemComparator
-          )
-        ]
-
-      this.currentTrackDescription = trackListItem
-        ? trackListItem.artistName + ' - ' + trackListItem.songName
-        : ''
-    }
   }
 }
 </script>
