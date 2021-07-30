@@ -1,3 +1,16 @@
+# [0.23.0](https://github.com/dargmuesli/creal/compare/0.22.8...0.23.0) (2021-07-30)
+
+
+### Bug Fixes
+
+* **player-playlist:** correct pulse animation ([2c5ead0](https://github.com/dargmuesli/creal/commit/2c5ead045b9e4d08bf0a77b85c851e3ea82de9fe)), closes [#99](https://github.com/dargmuesli/creal/issues/99)
+
+
+### Features
+
+* **design:** improve style ([1a44880](https://github.com/dargmuesli/creal/commit/1a448801ee759f7326ae98471c3627e6a9dc11d9))
+* **player:** make global ([f228d83](https://github.com/dargmuesli/creal/commit/f228d8303b1986ccf2805c5ce2e8d2af491538c7)), closes [#65](https://github.com/dargmuesli/creal/issues/65) [#66](https://github.com/dargmuesli/creal/issues/66)
+
 ## [0.22.8](https://github.com/dargmuesli/creal/compare/0.22.7...0.22.8) (2021-07-26)
 
 
