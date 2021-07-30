@@ -1,3 +1,10 @@
+## [0.24.2](https://github.com/dargmuesli/creal/compare/0.24.1...0.24.2) (2021-07-30)
+
+
+### Bug Fixes
+
+* **player:** fix manual first play ([2bd7a7c](https://github.com/dargmuesli/creal/commit/2bd7a7cbffb9044126d60239dddcf99ff0f00f65))
+
 ## [0.24.1](https://github.com/dargmuesli/creal/compare/0.24.0...0.24.1) (2021-07-30)
 
 
