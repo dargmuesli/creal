@@ -173,7 +173,7 @@ export default class PlayerPage extends Vue {
 
   get titleHead() {
     // return this.title
-    return this.storePlayerModule.currentTrack !== '' &&
+    return this.storePlayerModule.currentTrack &&
       !this.storePlayerModule.isPlayerPaused
       ? this.storePlayerModule.currentTrack
       : this.title
