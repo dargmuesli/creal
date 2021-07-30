@@ -39,6 +39,9 @@
         >
           <font-awesome-icon :icon="['fab', 'mixcloud']" /> Mixcloud
         </a>
+        <button class="font-bold" @click="share">
+          <font-awesome-icon :icon="['fas', 'share-alt']" /> Copy link
+        </button>
       </div>
       <vue-plyr
         ref="plyr"
@@ -87,34 +90,9 @@ function trackListItemComparator(time: number, b: TrackListItem) {
   return time - b.startSeconds
 }
 
-@Component({
-  head(this: Layout): Object {
-    return {
-      title: this.titleHead,
-      meta: [
-        {
-          hid: 'description',
-          property: 'description',
-          content: 'Listen to mixes by DJ cReal.',
-        },
-        {
-          hid: 'og:description',
-          property: 'og:description',
-          content: 'Listen to mixes by DJ cReal.',
-        },
-      ],
-    }
-  },
-})
+@Component({})
 export default class Layout extends Vue {
   storePlayerModule = getModule(PlayerModule, this.$store)
-
-  get titleHead() {
-    return this.storePlayerModule.currentTrack !== '' &&
-      !this.storePlayerModule.isPlayerPaused
-      ? this.storePlayerModule.currentTrack
-      : '123'
-  }
 
   get player() {
     const plyr = this.$refs.plyr as any
@@ -181,6 +159,10 @@ export default class Layout extends Vue {
         )
       }
     }
+  }
+
+  share() {
+    this.$copyText(process.browser ? window.location.href : '')
   }
 }
 </script>

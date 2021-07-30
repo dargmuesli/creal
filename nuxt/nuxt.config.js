@@ -52,6 +52,7 @@ export default {
             'faExclamationTriangle',
             'faMusic',
             'faPlay',
+            'faShareAlt',
           ],
         },
         useLayers: false,
@@ -200,6 +201,7 @@ export default {
   // Modules (https://go.nuxtjs.dev/config-modules)
   modules: [
     'nuxt-helmet', // Should be declared at the start of the array.
+    'nuxt-clipboard2',
     'nuxt-healthcheck',
     '@nuxtjs/axios', // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/proxy',

@@ -56,9 +56,13 @@
               class="border-b border-gray-800 first:border-t hover:bg-gray-800"
             >
               <PlayerPlaylistItem
+                :class="{
+                  'text-yellow-500':
+                    playlistItemSelected && item === playlistItemSelected,
+                }"
                 :playlist-item="item"
                 @download="onPlaylistItemDownload"
-                @play="onPlaylistItemPlay"
+                @play="onPlaylistItemSelect"
               />
             </li>
           </ul>
@@ -121,15 +125,23 @@ import PlayerModule from '~/store/modules/PlayerModule'
     } while (continuationToken !== undefined)
 
     this.playlistData = playlistData
+
+    // Try to select and play track as indicated by query parameter.
+    const queryTrack = this.$route.query.track
+
+    if (playlistData && typeof queryTrack === 'string') {
+      for (const playlistItem of playlistData.items) {
+        if (playlistItem.name === decodeURIComponent(queryTrack)) {
+          this.playlistItemSelected = playlistItem
+          this.onPlaylistItemSelect(playlistItem, false)
+        }
+      }
+    }
   },
   fetchOnServer: false,
   head(this: PlayerPage): Object {
     return {
-      title:
-        this.storePlayerModule.currentTrack !== '' &&
-        !this.storePlayerModule.isPlayerPaused
-          ? this.storePlayerModule.currentTrack
-          : this.title,
+      title: this.titleHead,
       meta: [
         {
           hid: 'description',
@@ -148,7 +160,8 @@ import PlayerModule from '~/store/modules/PlayerModule'
 export default class PlayerPage extends Vue {
   title = 'Player'
 
-  playlistData?: Playlist | null = null
+  playlistData?: Playlist
+  playlistItemSelected?: PlaylistItem
   storePlayerModule = getModule(PlayerModule, this.$store)
 
   @Watch('$route')
@@ -158,13 +171,13 @@ export default class PlayerPage extends Vue {
     }
   }
 
-  // get titleHead() {
-  //   // return this.title
-  //   return this.storePlayerModule.currentTrack !== '' &&
-  //     !this.storePlayerModule.isPlayerPaused
-  //     ? this.storePlayerModule.currentTrack
-  //     : this.title
-  // }
+  get titleHead() {
+    // return this.title
+    return this.storePlayerModule.currentTrack !== '' &&
+      !this.storePlayerModule.isPlayerPaused
+      ? this.storePlayerModule.currentTrack
+      : this.title
+  }
 
   // ///////////////////////////////////////////////////////////////////////////
   // Util //////////////////////////////////////////////////////////////////////
@@ -218,7 +231,7 @@ export default class PlayerPage extends Vue {
     link.click()
   }
 
-  async onPlaylistItemPlay(playlistItem: PlaylistItem) {
+  async onPlaylistItemSelect(playlistItem: PlaylistItem, isPlay = true) {
     this.storePlayerModule.setIsPlayerVisible(true)
     const nameParts = playlistItem.name.split(' - ')
     this.storePlayerModule.setCurrentTrack(
@@ -230,16 +243,13 @@ export default class PlayerPage extends Vue {
       return
     }
 
-    for (let i = 0; i < this.playlistData.items.length; i++) {
-      this.playlistData.items[i].active = false
-    }
-
-    playlistItem.active = true
+    this.playlistItemSelected = playlistItem
 
     // Set query parameter.
     const queryObject = JSON.parse(JSON.stringify(this.$route.query))
     const queryObjectTrack = encodeURIComponent(playlistItem.name)
 
+    // Conditionally update track query parameter.
     if (queryObject.track !== queryObjectTrack) {
       queryObject.track = queryObjectTrack
 
@@ -266,15 +276,18 @@ export default class PlayerPage extends Vue {
       this.storePlayerModule.setMeta(null)
       this.storePlayerModule.setCurrentTrackDescription(null)
     }
-    this.$nuxt.$emit('plyr', {
-      type: 'audio',
-      sources: [
-        {
-          src: await this.getSignedUrl(playlistItem),
-          type: 'audio/mp3',
-        },
-      ],
-    })
+
+    if (isPlay) {
+      this.$nuxt.$emit('plyr', {
+        type: 'audio',
+        sources: [
+          {
+            src: await this.getSignedUrl(playlistItem),
+            type: 'audio/mp3',
+          },
+        ],
+      })
+    }
   }
 }
 </script>

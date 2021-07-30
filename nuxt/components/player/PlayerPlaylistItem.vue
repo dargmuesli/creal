@@ -1,8 +1,5 @@
 <template>
-  <div
-    class="flex select-none"
-    :class="{ 'text-yellow-500': playlistItem.active }"
-  >
+  <div class="flex select-none">
     <button
       class="ml-2 mr-3 lg:mr-10"
       :title="bytesToString(playlistItem.size)"
