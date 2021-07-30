@@ -36,6 +36,7 @@ module.exports = {
     margin: ['responsive', 'first', 'last'],
   },
   plugins: [
+    require('@tailwindcss/line-clamp'),
     function ({ addBase, addComponents, addUtilities, theme }) {
       addBase({
         body: {

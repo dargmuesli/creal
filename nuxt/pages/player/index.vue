@@ -38,7 +38,7 @@
             <li
               v-for="collection in playlistData.collections"
               :key="collection.name"
-              class="m-2 max-w-xxs min-w-xxs overflow-hidden"
+              class="m-2 max-w-xxs min-w-xxs"
             >
               <nuxt-link
                 class="block h-full"
