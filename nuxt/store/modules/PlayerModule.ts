@@ -8,16 +8,13 @@ import { PlaylistItemMeta } from '~/api/player/playlists'
   stateFactory: true,
 })
 export default class PlayerModule extends VuexModule {
-  public currentTrack: string | null = null
   public currentTrackDescription: string | null = null
+  public currentTrackMeta: PlaylistItemMeta | null = null
+  public currentTrackName: string | null = null
+  public currentTrackNameShort: string | null = null
+  public currentTrackPlaylistName: string | null = null
+  public isPlayerPaused: boolean | null = null
   public isPlayerVisible = false
-  public isPlayerPaused = false
-  public meta: PlaylistItemMeta | null = null
-
-  @Mutation
-  public setCurrentTrack(currentTrack: string | null) {
-    this.currentTrack = currentTrack
-  }
 
   @Mutation
   public setCurrentTrackDescription(currentTrackDescription: string | null) {
@@ -25,17 +22,40 @@ export default class PlayerModule extends VuexModule {
   }
 
   @Mutation
-  public setIsPlayerVisible(isPlayerVisible: boolean) {
-    this.isPlayerVisible = isPlayerVisible
+  public setCurrentTrackMeta(currentTrackMeta: PlaylistItemMeta | null) {
+    this.currentTrackMeta = currentTrackMeta
   }
 
   @Mutation
-  public setIsPlayerPaused(isPlayerPaused: boolean) {
+  public setCurrentTrackName(currentTrackName: string | null) {
+    this.currentTrackName = currentTrackName
+
+    if (!currentTrackName) {
+      this.currentTrackNameShort = null
+      return
+    }
+
+    const currentTrackNameParts = currentTrackName.split(' - ')
+
+    if (currentTrackNameParts.length === 2) {
+      this.currentTrackNameShort = currentTrackNameParts[1]
+    } else {
+      this.currentTrackNameShort = null
+    }
+  }
+
+  @Mutation
+  public setCurrentTrackPlaylistName(currentTrackPlaylistName: string | null) {
+    this.currentTrackPlaylistName = currentTrackPlaylistName
+  }
+
+  @Mutation
+  public setIsPlayerPaused(isPlayerPaused: boolean | null) {
     this.isPlayerPaused = isPlayerPaused
   }
 
   @Mutation
-  public setMeta(meta: PlaylistItemMeta | null) {
-    this.meta = meta
+  public setIsPlayerVisible(isPlayerVisible: boolean) {
+    this.isPlayerVisible = isPlayerVisible
   }
 }

@@ -9,7 +9,7 @@
     <nuxt :class="{ 'mb-20': storePlayerModule.isPlayerVisible }" />
     <div class="fixed bottom-0 left-0 right-0">
       <div
-        v-if="storePlayerModule.currentTrack"
+        v-if="storePlayerModule.currentTrackName"
         class="
           bg-white
           flex flex-col
@@ -20,20 +20,34 @@
         "
       >
         <span>
-          {{ storePlayerModule.currentTrack }}
+          {{
+            storePlayerModule.currentTrackNameShort ||
+            storePlayerModule.currentTrackName
+          }}
           <span
-            v-if="storePlayerModule.meta && storePlayerModule.meta.createdTime"
+            v-if="
+              storePlayerModule.currentTrackMeta &&
+              storePlayerModule.currentTrackMeta.createdTime
+            "
             class="font-normal"
           >
-            on {{ $moment(storePlayerModule.meta.createdTime).format('L') }}
+            on
+            {{
+              $moment(storePlayerModule.currentTrackMeta.createdTime).format(
+                'L'
+              )
+            }}
           </span>
         </span>
         <span v-if="storePlayerModule.currentTrackDescription">
           {{ storePlayerModule.currentTrackDescription }}
         </span>
         <a
-          v-if="storePlayerModule.meta && storePlayerModule.meta.mixcloudLink"
-          :href="storePlayerModule.meta.mixcloudLink"
+          v-if="
+            storePlayerModule.currentTrackMeta &&
+            storePlayerModule.currentTrackMeta.mixcloudLink
+          "
+          :href="storePlayerModule.currentTrackMeta.mixcloudLink"
           rel="noopener noreferrer"
           target="_blank"
         >
@@ -103,12 +117,20 @@ export default class Layout extends Vue {
   }
 
   created() {
-    this.$nuxt.$on('plyr', (sourceInfo: Plyr.SourceInfo) => {
-      if (!this.player) return
+    this.$nuxt.$on(
+      'plyr',
+      (sourceInfo: Plyr.SourceInfo, isManuallySet: boolean) => {
+        if (!this.player) return
 
-      this.player.source = sourceInfo
-      this.player.play()
-    })
+        if (this.storePlayerModule.isPlayerPaused === null || isManuallySet) {
+          this.player.source = sourceInfo
+
+          if (this.storePlayerModule.isPlayerPaused !== null) {
+            this.player.play()
+          }
+        }
+      }
+    )
   }
 
   closeFree() {
@@ -136,11 +158,14 @@ export default class Layout extends Vue {
   }
 
   onPlyrTimeUpdate() {
-    if (this.storePlayerModule.meta && this.storePlayerModule.meta.tracklist) {
+    if (
+      this.storePlayerModule.currentTrackMeta &&
+      this.storePlayerModule.currentTrackMeta.tracklist
+    ) {
       const trackListItem =
-        this.storePlayerModule.meta.tracklist[
+        this.storePlayerModule.currentTrackMeta.tracklist[
           binarySearch(
-            this.storePlayerModule.meta.tracklist,
+            this.storePlayerModule.currentTrackMeta.tracklist,
             this.player.currentTime,
             trackListItemComparator
           )
@@ -162,7 +187,18 @@ export default class Layout extends Vue {
   }
 
   share() {
-    this.$copyText(process.browser ? window.location.href : '')
+    if (
+      !process.browser ||
+      !this.storePlayerModule.currentTrackPlaylistName ||
+      !this.storePlayerModule.currentTrackName
+    )
+      return
+
+    this.$copyText(
+      `${window.location.origin}/player?playlist=${encodeURIComponent(
+        this.storePlayerModule.currentTrackPlaylistName
+      )}&track=${encodeURIComponent(this.storePlayerModule.currentTrackName)}`
+    )
   }
 }
 </script>
