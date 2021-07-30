@@ -125,7 +125,7 @@ export default class Layout extends Vue {
         if (this.storePlayerModule.isPlayerPaused === null || isManuallySet) {
           this.player.source = sourceInfo
 
-          if (this.storePlayerModule.isPlayerPaused !== null) {
+          if (this.storePlayerModule.isPlayerPaused !== null || isManuallySet) {
             this.player.play()
           }
         }
