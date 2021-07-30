@@ -1,5 +1,5 @@
 <template>
-  <div class="container mx-auto mb-4">
+  <div class="container mx-auto">
     <section>
       <h1>{{ title }}</h1>
       <Error v-if="requestError !== null" :error="requestError">

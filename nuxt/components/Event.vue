@@ -1,23 +1,21 @@
 <template>
-  <div class="items-center flex flex-wrap justify-center">
-    <div class="lg:pr-2 lg:w-1/2">
+  <div
+    class="flex flex-wrap items-center justify-center space-y-4 lg:space-y-0"
+  >
+    <div class="lg:pr-2 space-y-2 lg:w-1/2">
       <div>{{ datetime }}</div>
       <h2 class="m-0">{{ event.title }}</h2>
-      <div v-if="event.description !== null" class="mb-4">
+      <div v-if="event.description !== null">
         {{ event.description }}
       </div>
     </div>
-    <div class="lg:pl-2 lg:w-1/2">
+    <div class="lg:pl-2 space-y-4 lg:w-1/2">
       <img
         v-if="event.image !== null"
         alt="Event image."
         :src="'https://' + strapiDomain + event.image.url"
-        class="mb-4"
       />
-      <div
-        v-if="event.url !== null && event.url !== ''"
-        class="mt-4 text-center"
-      >
+      <div v-if="event.url !== null && event.url !== ''" class="text-center">
         <Button :icon="false" :link="event.url">Details</Button>
       </div>
     </div>

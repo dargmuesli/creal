@@ -1,5 +1,5 @@
 <template>
-  <div class="container mx-auto mb-4">
+  <div class="container mx-auto">
     <section>
       <h1>{{ title }}</h1>
       <Error v-if="requestError !== null" :error="requestError">
@@ -10,7 +10,7 @@
           <li
             v-for="item in items"
             :key="slugify(item.title)"
-            class="border duration-300"
+            class="border duration-300 first:rounded-t last:rounded-b"
             :class="{
               'my-4': itemFocused === item,
               'mx-8 -my-px': itemFocused !== item,

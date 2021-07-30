@@ -1,6 +1,6 @@
 <template>
   <Button
-    class="flex-grow first:mt-0 mt-2"
+    class="rounded"
     :icon="icon"
     :icon-class="iconClass"
     :icon-id="iconId"

@@ -6,7 +6,7 @@
         <span class="font-bold text-lg"> cReal </span>
       </nuxt-link>
     </header>
-    <nuxt />
+    <nuxt :class="{ 'mb-20': storePlayerModule.isPlayerVisible }" />
     <div class="fixed bottom-0 left-0 right-0">
       <div
         v-if="storePlayerModule.currentTrack"
@@ -52,13 +52,6 @@
         <audio />
       </vue-plyr>
     </div>
-    <!-- player below is for spacing (invisible) -->
-    <vue-plyr
-      :class="{ hidden: !storePlayerModule.isPlayerVisible }"
-      class="invisible"
-    >
-      <audio />
-    </vue-plyr>
   </div>
 </template>
 

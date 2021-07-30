@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  a:focus {
+    @apply outline-none;
+    @apply ring;
+  }
+  button:focus {
+    @apply outline-none;
+    @apply ring;
+  }
+  .button:focus {
+    @apply outline-none;
+    @apply ring;
+  }
+}

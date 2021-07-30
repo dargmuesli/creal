@@ -1,81 +1,75 @@
 <template>
-  <div class="container mx-auto mb-4">
+  <div class="container mx-auto">
     <section>
       <h1>{{ title }}</h1>
-      <div class="flex flex-col mb-2">
-        <div class="bg-gray-900 flex-grow p-2">
-          <div v-if="$fetchState.pending">
-            <svg
-              class="animate-spin h-16 m-auto text-white w-16"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              title="Loading"
-              viewBox="0 0 24 24"
+      <div class="bg-gray-900 flex-grow p-4 rounded">
+        <div v-if="$fetchState.pending">
+          <svg
+            class="animate-spin h-16 m-auto text-white w-16"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            title="Loading"
+            viewBox="0 0 24 24"
+          >
+            <circle
+              class="opacity-25"
+              cx="12"
+              cy="12"
+              r="10"
+              stroke="currentColor"
+              stroke-width="4"
+            />
+            <path
+              class="opacity-75"
+              fill="currentColor"
+              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+            />
+          </svg>
+          Loading...
+        </div>
+        <div v-else-if="playlistData" class="m-auto w-5/6">
+          <h2 v-if="$route.query.playlist" class="ml-2">
+            {{ $route.query.playlist }}
+          </h2>
+          <ul
+            v-if="playlistData.collections.length > 0"
+            class="flex flex-wrap justify-center list-none"
+          >
+            <li
+              v-for="collection in playlistData.collections"
+              :key="collection.name"
+              class="m-2 max-w-xxs min-w-xxs overflow-hidden"
             >
-              <circle
-                class="opacity-25"
-                cx="12"
-                cy="12"
-                r="10"
-                stroke="currentColor"
-                stroke-width="4"
-              />
-              <path
-                class="opacity-75"
-                fill="currentColor"
-                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-              />
-            </svg>
-            Loading...
-          </div>
-          <div v-else-if="playlistData" class="m-auto w-5/6">
-            <h2 v-if="$route.query.playlist" class="ml-2">
-              {{ $route.query.playlist }}
-            </h2>
-            <ul
-              v-if="playlistData.collections.length > 0"
-              class="flex flex-wrap justify-center list-none"
-            >
-              <li
-                v-for="collection in playlistData.collections"
-                :key="collection.name"
-                class="m-2 max-w-xxs min-w-xxs mb-4 overflow-hidden"
+              <nuxt-link
+                class="block h-full"
+                :title="collection.name"
+                :to="getPlaylistLink(collection.name)"
               >
-                <nuxt-link
-                  class="block h-full"
-                  :title="collection.name"
-                  :to="getPlaylistLink(collection.name)"
-                >
-                  <PlayerPlaylist class="h-full" :playlist="collection" />
-                </nuxt-link>
-              </li>
-            </ul>
-            <ul v-if="playlistData.items.length > 0" class="list-none">
-              <li
-                v-for="item in playlistData.items"
-                :key="item.name"
-                class="
-                  border-b border-gray-800
-                  first:border-t
-                  hover:bg-gray-800
-                "
-              >
-                <PlayerPlaylistItem
-                  :playlist-item="item"
-                  @download="onPlaylistItemDownload"
-                  @play="onPlaylistItemPlay"
-                />
-              </li>
-            </ul>
-            <div
-              v-if="
-                playlistData.collections.length === 0 &&
-                playlistData.items.length === 0
-              "
-              class="text-center"
+                <PlayerPlaylist class="h-full" :playlist="collection" />
+              </nuxt-link>
+            </li>
+          </ul>
+          <ul v-if="playlistData.items.length > 0" class="list-none">
+            <li
+              v-for="item in playlistData.items"
+              :key="item.name"
+              class="border-b border-gray-800 first:border-t hover:bg-gray-800"
             >
-              No items found.
-            </div>
+              <PlayerPlaylistItem
+                :playlist-item="item"
+                @download="onPlaylistItemDownload"
+                @play="onPlaylistItemPlay"
+              />
+            </li>
+          </ul>
+          <div
+            v-if="
+              playlistData.collections.length === 0 &&
+              playlistData.items.length === 0
+            "
+            class="text-center"
+          >
+            No items found.
           </div>
         </div>
       </div>

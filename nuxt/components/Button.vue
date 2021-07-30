@@ -1,35 +1,33 @@
 <template>
-  <div :class="wrapperClass">
-    <app-link
-      v-if="link !== undefined"
-      class="btn flex h-full items-center justify-center w-full"
-      :class="buttonClass"
-      :disabled="disabled"
-      :to="link"
-    >
-      <font-awesome-icon
-        v-if="icon"
-        :class="iconClass"
-        :icon="['fas', iconId]"
-        :size="iconSize"
-      />
-      <slot />
-    </app-link>
-    <button
-      v-else
-      class="btn flex h-full items-center justify-center w-full"
-      :class="buttonClass"
-      :disabled="disabled"
-    >
-      <font-awesome-icon
-        v-if="icon"
-        :class="iconClass"
-        :icon="['fas', iconId]"
-        :size="iconSize"
-      />
-      <slot />
-    </button>
-  </div>
+  <app-link
+    v-if="link !== undefined"
+    class="btn flex h-full items-center justify-center"
+    :class="buttonClass"
+    :disabled="disabled"
+    :to="link"
+  >
+    <font-awesome-icon
+      v-if="icon"
+      :class="iconClass"
+      :icon="['fas', iconId]"
+      :size="iconSize"
+    />
+    <slot />
+  </app-link>
+  <button
+    v-else
+    class="btn flex h-full items-center justify-center"
+    :class="buttonClass"
+    :disabled="disabled"
+  >
+    <font-awesome-icon
+      v-if="icon"
+      :class="iconClass"
+      :icon="['fas', iconId]"
+      :size="iconSize"
+    />
+    <slot />
+  </button>
 </template>
 
 <script>

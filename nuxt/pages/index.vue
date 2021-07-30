@@ -24,7 +24,7 @@
         </div>
       </div>
     </div>
-    <div class="flex flex-col">
+    <div class="flex flex-col space-y-4">
       <!-- <section>
         <a
           v-if="event.url !== null"
