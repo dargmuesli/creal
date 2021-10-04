@@ -1,3 +1,10 @@
+## [0.24.6](https://github.com/dargmuesli/creal/compare/0.24.5...0.24.6) (2021-10-04)
+
+
+### Bug Fixes
+
+* **release:** schedule release ([12ca65b](https://github.com/dargmuesli/creal/commit/12ca65b411ebf1a49bb06e79dab902708f5ef8c3))
+
 ## [0.24.5](https://github.com/dargmuesli/creal/compare/0.24.4...0.24.5) (2021-09-20)
 
 
