@@ -1,23 +1,26 @@
-/*
- ** TailwindCSS Configuration File
- **
- ** Docs: https://tailwindcss.com/docs/configuration
- ** Default: https://github.com/tailwindcss/tailwindcss/blob/master/stubs/defaultConfig.stub.js
- */
+const defaultTheme = require('tailwindcss/defaultTheme')
+
+function heading(theme) {
+  return {
+    fontWeight: theme('fontWeight.bold'),
+    marginBottom: theme('margin.1'),
+    marginTop: theme('margin.4'),
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+  }
+}
+
 module.exports = {
-  future: {
-    defaultLineHeights: true,
-    purgeLayersByDefault: true,
-    removeDeprecatedGapUtilities: true,
-    standardFontWeights: true,
-  },
+  mode: 'jit',
   theme: {
     extend: {
-      keyframes: {
-        pulse: {
-          '0%': { transform: 'scale(0)', opacity: 0.8 },
-          '100%': { transform: 'scale(1)', opacity: 0 },
+      colors: {
+        background: {
+          body: defaultTheme.colors.gray['800'],
+          dark: defaultTheme.colors.gray['900'],
         },
+        link: defaultTheme.colors.blue['400'],
+        text: defaultTheme.colors.white,
       },
       transitionProperty: {
         margin: 'margin',
@@ -26,6 +29,60 @@ module.exports = {
       transitionTimingFunction: {
         popout: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)',
       },
+      typography: (theme) => ({
+        DEFAULT: {
+          css: {
+            color: theme('colors.text'),
+            a: {
+              color: theme('colors.link'),
+              textDecoration: 'none',
+            },
+            h1: {
+              color: theme('colors.text'),
+            },
+            h2: {
+              color: theme('colors.text'),
+            },
+            h3: {
+              color: theme('colors.text'),
+            },
+            h4: {
+              color: theme('colors.text'),
+            },
+            h5: {
+              color: theme('colors.text'),
+            },
+            h6: {
+              color: theme('colors.text'),
+            },
+            strong: {
+              color: theme('colors.text'),
+            },
+          },
+        },
+        xl: {
+          css: {
+            h1: {
+              lineHeight: theme('lineHeight.snug'),
+            },
+            h2: {
+              lineHeight: theme('lineHeight.snug'),
+            },
+            h3: {
+              lineHeight: theme('lineHeight.snug'),
+            },
+            h4: {
+              lineHeight: theme('lineHeight.snug'),
+            },
+            h5: {
+              lineHeight: theme('lineHeight.snug'),
+            },
+            h6: {
+              lineHeight: theme('lineHeight.snug'),
+            },
+          },
+        },
+      }),
     },
     maxHeight: {
       0: '0',
@@ -36,35 +93,39 @@ module.exports = {
     margin: ['responsive', 'first', 'last'],
   },
   plugins: [
+    require('@tailwindcss/forms'),
     require('@tailwindcss/line-clamp'),
+    require('@tailwindcss/typography'),
     function ({ addBase, addComponents, addUtilities, theme }) {
       addBase({
-        body: {
-          background: theme('colors.gray.800'),
-          color: theme('colors.white'),
-          h1: {
-            fontSize: theme('fontSize.6xl'),
-            fontWeight: theme('fontWeight.bold'),
-            lineHeight: 1,
-            marginBottom: theme('margin.8'),
-            textAlign: 'center',
-          },
-          h2: {
-            fontSize: theme('fontSize.4xl'),
-            fontWeight: theme('fontWeight.bold'),
-            marginBottom: theme('margin.3'),
-          },
-          ':disabled': {
-            cursor: theme('cursor.not-allowed'),
-            opacity: theme('opacity.50'),
-          },
-          padding:
-            '0px ' +
-            theme('padding.2') +
-            ' ' +
-            theme('padding.2') +
-            ' ' +
-            theme('padding.2'),
+        ':disabled': {
+          cursor: theme('cursor.not-allowed'),
+          opacity: theme('opacity.50'),
+        },
+        h1: {
+          ...heading(theme),
+          fontSize: theme('fontSize.4xl'),
+          marginBottom: theme('margin.4'),
+          textAlign: 'center',
+        },
+        h2: {
+          ...heading(theme),
+          fontSize: theme('fontSize.3xl'),
+        },
+        h3: {
+          ...heading(theme),
+          fontSize: theme('fontSize.2xl'),
+        },
+        h4: {
+          ...heading(theme),
+          fontSize: theme('fontSize.xl'),
+        },
+        h5: {
+          ...heading(theme),
+          fontSize: theme('fontSize.lg'),
+        },
+        h6: {
+          ...heading(theme),
         },
       })
 
@@ -80,13 +141,6 @@ module.exports = {
           right: 0,
           top: 0,
           width: theme('width.full'),
-        },
-        '.pulseLoader': {
-          width: '4em',
-          height: '4em',
-          borderRadius: '4em',
-          backgroundColor: 'white',
-          outline: '1px solid transparent',
         },
       })
 

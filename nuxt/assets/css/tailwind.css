@@ -19,3 +19,8 @@
     @apply rounded;
   }
 }
+@layer utilities {
+  .creal-prose {
+    @apply m-auto prose-sm sm:prose lg:prose-lg xl:prose-xl;
+  }
+}

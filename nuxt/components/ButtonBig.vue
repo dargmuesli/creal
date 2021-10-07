@@ -1,6 +1,6 @@
 <template>
   <Button
-    class="rounded"
+    class="rounded text-center"
     :icon="icon"
     :icon-class="iconClass"
     :icon-id="iconId"

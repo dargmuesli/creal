@@ -1,12 +1,57 @@
 <template>
-  <div class="container mx-auto px-4 text-center">
-    <header class="flex items-center justify-center lg:justify-start my-4">
+  <div>
+    <header
+      class="flex items-center justify-center lg:justify-start p-4 md:px-8"
+    >
       <nuxt-link :to="'/'" class="flex items-center">
         <div id="logo" class="h-10 w-10" />
         <span class="font-bold text-lg"> cReal </span>
       </nuxt-link>
     </header>
-    <nuxt :class="{ 'mb-20': storePlayerModule.isPlayerVisible }" />
+    <main class="container flex-1 min-h-screen mx-auto px-4 md:px-8 py-8">
+      <nuxt />
+    </main>
+    <footer
+      class="bg-gray-900 leading-6 text-sm"
+      :class="{ 'mb-20': storePlayerModule.isPlayerVisible }"
+    >
+      <div class="container mx-auto px-2 py-8">
+        <div class="flex flex-wrap justify-evenly mx-auto w-5/6">
+          <div
+            class="
+              flex flex-1
+              md:flex-none
+              flex-basis-50
+              md:flex-basis-auto
+              flex-col
+              items-start
+              p-4
+            "
+          >
+            <span class="font-medium leading-7 text-lg whitespace-nowrap">
+              Rechtliches
+            </span>
+            <AppLink :to="'/legal-notice'">Impressum</AppLink>
+          </div>
+        </div>
+        <div class="p-2" />
+        <div class="flex items-center mx-auto w-9/12">
+          <div class="bg-white h-px flex-1" />
+          <LoaderImage
+            alt="cReals Logo"
+            class="brightness-100 h-12 mx-12 w-12"
+            height="48"
+            src="/assets/static/logos/creal.svg"
+            width="48"
+          />
+          <div class="bg-gray-400 h-px flex-1" />
+        </div>
+        <p class="p-2 text-center">
+          © {{ new Date().getFullYear() }} Jonas Thelemann. Alle Rechte
+          vorbehalten.
+        </p>
+      </div>
+    </footer>
     <div class="fixed bottom-0 left-0 right-0">
       <div
         v-if="storePlayerModule.currentTrackName"

@@ -59,6 +59,7 @@ export default {
         useLayersText: false,
       },
     ],
+    '@nuxtjs/composition-api/module',
     '@nuxtjs/html-validator',
     // Doc: https://github.com/nuxt-community/moment-module
     ['@nuxtjs/moment', { locales: ['de'], plugins: ['twix'] }],
@@ -77,6 +78,9 @@ export default {
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head() {
     return {
+      bodyAttrs: {
+        class: 'bg-background-body text-text',
+      },
       link: [
         {
           href: '/assets/static/favicon/apple-touch-icon-60x60.png?v=eEYRGn5b9R',

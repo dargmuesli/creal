@@ -6,8 +6,8 @@
       class="rounded"
       :src="coverUrl"
     />
-    <div v-else class="flex flex-grow justify-center items-center">
-      <div class="animate-pulse pulseLoader" />
+    <div v-else class="h-16 m-auto w-16">
+      <LoaderIndicatorPing />
     </div>
     <h1 class="leading-tight line-clamp-2 m-0 mt-1 text-2xl text-left">
       {{ playlist.name }}
