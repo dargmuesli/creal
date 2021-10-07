@@ -15,26 +15,7 @@
       class="bg-gray-900 leading-6 text-sm"
       :class="{ 'mb-20': storePlayerModule.isPlayerVisible }"
     >
-      <div class="container mx-auto px-2 py-8">
-        <div class="flex flex-wrap justify-evenly mx-auto w-5/6">
-          <div
-            class="
-              flex flex-1
-              md:flex-none
-              flex-basis-50
-              md:flex-basis-auto
-              flex-col
-              items-start
-              p-4
-            "
-          >
-            <span class="font-medium leading-7 text-lg whitespace-nowrap">
-              Rechtliches
-            </span>
-            <AppLink :to="'/legal-notice'">Impressum</AppLink>
-          </div>
-        </div>
-        <div class="p-2" />
+      <div class="px-2 py-8">
         <div class="flex items-center mx-auto w-9/12">
           <div class="bg-white h-px flex-1" />
           <LoaderImage
@@ -49,6 +30,8 @@
         <p class="p-2 text-center">
           © {{ new Date().getFullYear() }} Jonas Thelemann. Alle Rechte
           vorbehalten.
+          <br />
+          <AppLink class="text-link" to="/legal-notice">Impressum</AppLink>
         </p>
       </div>
     </footer>
