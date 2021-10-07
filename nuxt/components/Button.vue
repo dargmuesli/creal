@@ -1,7 +1,7 @@
 <template>
   <app-link
     v-if="link !== undefined"
-    class="btn flex h-full items-center justify-center"
+    class="btn flex h-full items-center justify-center rounded"
     :class="buttonClass"
     :disabled="disabled"
     :to="link"
@@ -16,7 +16,7 @@
   </app-link>
   <button
     v-else
-    class="btn flex h-full items-center justify-center"
+    class="btn flex h-full items-center justify-center rounded"
     :class="buttonClass"
     :disabled="disabled"
   >
