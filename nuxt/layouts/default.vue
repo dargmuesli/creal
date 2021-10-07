@@ -44,7 +44,7 @@
             src="/assets/static/logos/creal.svg"
             width="48"
           />
-          <div class="bg-gray-400 h-px flex-1" />
+          <div class="bg-white h-px flex-1" />
         </div>
         <p class="p-2 text-center">
           © {{ new Date().getFullYear() }} Jonas Thelemann. Alle Rechte
