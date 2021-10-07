@@ -1,3 +1,11 @@
+## [0.25.1](https://github.com/dargmuesli/creal/compare/0.25.0...0.25.1) (2021-10-07)
+
+
+### Bug Fixes
+
+* **footer:** get rid off single list item ([ba6af9e](https://github.com/dargmuesli/creal/commit/ba6af9ed00de0a976f5f75bad514d4c384444ded))
+* **layout:** correct line color ([bb4f92a](https://github.com/dargmuesli/creal/commit/bb4f92ac41ffb2eec7642fc82f674c4b43b83e2c))
+
 # [0.25.0](https://github.com/dargmuesli/creal/compare/0.24.6...0.25.0) (2021-10-07)
 
 
