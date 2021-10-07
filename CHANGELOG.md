@@ -1,3 +1,12 @@
+## [0.25.2](https://github.com/dargmuesli/creal/compare/0.25.1...0.25.2) (2021-10-07)
+
+
+### Bug Fixes
+
+* **button:** use rounded ([18816e0](https://github.com/dargmuesli/creal/commit/18816e07912bdf739a255dbc1e169cefb6c5f3b7))
+* **corejs:** move to dependencies ([a1b9c64](https://github.com/dargmuesli/creal/commit/a1b9c64630b34835653f32dd0377e36f9af7f592))
+* **greeting:** use overflow ([66d9fdb](https://github.com/dargmuesli/creal/commit/66d9fdb511e2af240843ccff0a90e1239ae309a1))
+
 ## [0.25.1](https://github.com/dargmuesli/creal/compare/0.25.0...0.25.1) (2021-10-07)
 
 
