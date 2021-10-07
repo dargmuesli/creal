@@ -12,7 +12,7 @@
           bg-no-repeat
           fullscreen
         "
-      ></div>
+      />
       <div class="bg-gray-800 opacity-75 fullscreen"></div>
       <div class="fullscreen flex">
         <div class="m-auto mb-20vh text-center">
@@ -57,6 +57,7 @@ export default class extends Vue {
   showGreeting = true
 
   beforeMount() {
+    document.getElementsByTagName('body')[0].classList.add('overflow-hidden')
     window.addEventListener('keypress', (e) => {
       const key = e.which || e.keyCode
 
@@ -73,6 +74,9 @@ export default class extends Vue {
   setShowGreeting(set: boolean): void {
     if (set) {
       sessionStorage.setItem('cReal_showGreeting', 'shown')
+      document
+        .getElementsByTagName('body')[0]
+        .classList.remove('overflow-hidden')
     }
 
     if (process.client) {
