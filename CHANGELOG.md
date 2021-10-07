@@ -1,3 +1,10 @@
+# [0.25.0](https://github.com/dargmuesli/creal/compare/0.24.6...0.25.0) (2021-10-07)
+
+
+### Features
+
+* add legal notice and footer ([395bc15](https://github.com/dargmuesli/creal/commit/395bc154ad896b9f397717fb98dd78263c3c31af))
+
 ## [0.24.6](https://github.com/dargmuesli/creal/compare/0.24.5...0.24.6) (2021-10-04)
 
 
