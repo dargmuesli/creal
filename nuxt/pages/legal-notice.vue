@@ -83,9 +83,13 @@
 import { Component, Vue } from 'nuxt-property-decorator'
 
 @Component({
-  head: {
-    title: 'Impressum',
+  head(this: LegalNotice): Object {
+    return {
+      title: this.title,
+    }
   },
 })
-export default class extends Vue {}
+export default class LegalNotice extends Vue {
+  title: String = 'Impressum'
+}
 </script>

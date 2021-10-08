@@ -10,88 +10,44 @@ function heading(theme) {
   }
 }
 
+function prose(theme) {
+  return {
+    css: {
+      a: {
+        color: theme('colors.link'),
+        textDecoration: 'none',
+      },
+      color: theme('colors.text'),
+      h1: {
+        color: theme('colors.text'),
+        lineHeight: theme('lineHeight.snug'),
+      },
+      h2: {
+        color: theme('colors.text'),
+        lineHeight: theme('lineHeight.snug'),
+      },
+      h3: {
+        color: theme('colors.text'),
+        lineHeight: theme('lineHeight.snug'),
+      },
+      h4: {
+        color: theme('colors.text'),
+        lineHeight: theme('lineHeight.snug'),
+      },
+      h5: {
+        color: theme('colors.text'),
+        lineHeight: theme('lineHeight.snug'),
+      },
+      h6: {
+        color: theme('colors.text'),
+        lineHeight: theme('lineHeight.snug'),
+      },
+    },
+  }
+}
+
 module.exports = {
   mode: 'jit',
-  theme: {
-    extend: {
-      colors: {
-        background: {
-          body: defaultTheme.colors.gray['800'],
-          dark: defaultTheme.colors.gray['900'],
-        },
-        link: defaultTheme.colors.blue['400'],
-        text: defaultTheme.colors.white,
-      },
-      transitionProperty: {
-        margin: 'margin',
-        maxHeight: 'max-height',
-      },
-      transitionTimingFunction: {
-        popout: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)',
-      },
-      typography: (theme) => ({
-        DEFAULT: {
-          css: {
-            color: theme('colors.text'),
-            a: {
-              color: theme('colors.link'),
-              textDecoration: 'none',
-            },
-            h1: {
-              color: theme('colors.text'),
-            },
-            h2: {
-              color: theme('colors.text'),
-            },
-            h3: {
-              color: theme('colors.text'),
-            },
-            h4: {
-              color: theme('colors.text'),
-            },
-            h5: {
-              color: theme('colors.text'),
-            },
-            h6: {
-              color: theme('colors.text'),
-            },
-            strong: {
-              color: theme('colors.text'),
-            },
-          },
-        },
-        xl: {
-          css: {
-            h1: {
-              lineHeight: theme('lineHeight.snug'),
-            },
-            h2: {
-              lineHeight: theme('lineHeight.snug'),
-            },
-            h3: {
-              lineHeight: theme('lineHeight.snug'),
-            },
-            h4: {
-              lineHeight: theme('lineHeight.snug'),
-            },
-            h5: {
-              lineHeight: theme('lineHeight.snug'),
-            },
-            h6: {
-              lineHeight: theme('lineHeight.snug'),
-            },
-          },
-        },
-      }),
-    },
-    maxHeight: {
-      0: '0',
-    },
-  },
-  variants: {
-    borderWidth: ['first'],
-    margin: ['responsive', 'first', 'last'],
-  },
   plugins: [
     require('@tailwindcss/forms'),
     require('@tailwindcss/line-clamp'),
@@ -157,4 +113,37 @@ module.exports = {
       })
     },
   ],
+  theme: {
+    extend: {
+      colors: {
+        background: {
+          body: defaultTheme.colors.gray['800'],
+          dark: defaultTheme.colors.gray['900'],
+        },
+        link: defaultTheme.colors.blue['400'],
+        text: defaultTheme.colors.white,
+      },
+      transitionProperty: {
+        margin: 'margin',
+        maxHeight: 'max-height',
+      },
+      transitionTimingFunction: {
+        popout: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+      },
+      typography: (theme) => ({
+        sm: prose(theme),
+        DEFAULT: prose(theme),
+        lg: prose(theme),
+        xl: prose(theme),
+        '2xl': prose(theme),
+      }),
+    },
+    maxHeight: {
+      0: '0',
+    },
+  },
+  variants: {
+    borderWidth: ['first'],
+    margin: ['responsive', 'first', 'last'],
+  },
 }

@@ -17,7 +17,7 @@
     >
       <div class="px-2 py-8">
         <div class="flex items-center mx-auto w-9/12">
-          <div class="bg-white h-px flex-1" />
+          <div class="bg-gray-400 h-px flex-1" />
           <LoaderImage
             alt="cReals Logo"
             class="brightness-100 h-12 mx-12 w-12"
@@ -25,9 +25,9 @@
             src="/assets/static/logos/creal.svg"
             width="48"
           />
-          <div class="bg-white h-px flex-1" />
+          <div class="bg-gray-400 h-px flex-1" />
         </div>
-        <p class="p-2 text-center">
+        <p class="p-2 text-center text-gray-400">
           © {{ new Date().getFullYear() }} Jonas Thelemann. Alle Rechte
           vorbehalten.
           <br />
