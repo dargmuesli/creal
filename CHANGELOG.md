@@ -1,3 +1,11 @@
+## [0.25.3](https://github.com/dargmuesli/creal/compare/0.25.2...0.25.3) (2021-10-08)
+
+
+### Bug Fixes
+
+* **greeting:** correct classlist removal ([d9b527b](https://github.com/dargmuesli/creal/commit/d9b527bbe2ba73b14666a5b4726f2309de1725c2))
+* **tailwind:** improve typography ([15ef4cc](https://github.com/dargmuesli/creal/commit/15ef4ccfa31246589fd365f9fe759348eb35064c))
+
 ## [0.25.2](https://github.com/dargmuesli/creal/compare/0.25.1...0.25.2) (2021-10-07)
 
 
