@@ -74,9 +74,6 @@ export default class extends Vue {
   setShowGreeting(set: boolean): void {
     if (set) {
       sessionStorage.setItem('cReal_showGreeting', 'shown')
-      document
-        .getElementsByTagName('body')[0]
-        .classList.remove('overflow-hidden')
     }
 
     if (process.client) {
@@ -84,6 +81,9 @@ export default class extends Vue {
         this.showGreeting = true
       } else {
         this.showGreeting = false
+        document
+          .getElementsByTagName('body')[0]
+          .classList.remove('overflow-hidden')
       }
     } else {
       this.showGreeting = true
