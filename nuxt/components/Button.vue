@@ -1,76 +1,76 @@
 <template>
-  <app-link
-    v-if="link !== undefined"
-    class="btn flex h-full items-center justify-center rounded"
-    :class="buttonClass"
-    :disabled="disabled"
-    :to="link"
-  >
-    <font-awesome-icon
-      v-if="icon"
-      :class="iconClass"
-      :icon="['fas', iconId]"
-      :size="iconSize"
-    />
-    <slot />
-  </app-link>
-  <button
-    v-else
-    class="btn flex h-full items-center justify-center rounded"
-    :class="buttonClass"
-    :disabled="disabled"
-  >
-    <font-awesome-icon
-      v-if="icon"
-      :class="iconClass"
-      :icon="['fas', iconId]"
-      :size="iconSize"
-    />
-    <slot />
-  </button>
+  <div class="text-center">
+    <AppLink
+      v-if="to"
+      ref="button"
+      :append="append"
+      :aria-label="ariaLabel"
+      :class="['button', ...(buttonClass ? [buttonClass] : [])].join(' ')"
+      :disabled="disabled"
+      :icon-id="iconId"
+      :is-colored="false"
+      :to="to"
+    >
+      <slot />
+    </AppLink>
+    <button
+      v-else
+      ref="button"
+      :aria-label="ariaLabel"
+      :class="['button', ...(buttonClass ? [buttonClass] : [])].join(' ')"
+      :disabled="disabled"
+      :type="type"
+      @click="$emit('click')"
+    >
+      <FontAwesomeIcon
+        v-if="iconId"
+        :class="{ 'mr-2': $slots.default }"
+        :icon="iconId"
+      />
+      <slot />
+    </button>
+  </div>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { defineComponent, PropType } from '@nuxtjs/composition-api'
+
+export default defineComponent({
   props: {
-    buttonClass: {
+    append: {
+      default: false,
+      type: Boolean,
+    },
+    ariaLabel: {
+      required: true,
       type: String,
-      default: 'bg-yellow-500 inline-block px-6 py-2 text-gray-800',
+    },
+    buttonClass: {
+      default:
+        'bg-yellow-500 hover:bg-yellow-600 inline-block px-6 py-2 rounded text-gray-800',
+      type: String as PropType<string | undefined>,
     },
     disabled: {
-      type: Boolean,
       default: false,
-    },
-    icon: {
       type: Boolean,
-      default: true,
-    },
-    iconClass: {
-      type: String,
-      default() {
-        return 'mr-2'
-      },
     },
     iconId: {
-      type: String,
-      default() {
-        return 'bug'
-      },
-    },
-    iconSize: {
-      type: String,
-      default() {
-        return 'lg'
-      },
-    },
-    link: {
-      type: String,
       default: undefined,
+      type: Array as PropType<string[] | undefined>,
     },
-    wrapperClass: {
+    to: {
+      default: undefined,
+      type: String as PropType<string | undefined>,
+    },
+    type: {
+      default: 'button',
       type: String,
-      default: 'inline-block',
     },
   },
-}
+  methods: {
+    click() {
+      ;(this.$refs.button as HTMLButtonElement).click()
+    },
+  },
+})
 </script>

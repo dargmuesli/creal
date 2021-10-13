@@ -5,56 +5,66 @@
     <div class="lg:pr-2 space-y-2 lg:w-1/2">
       <div>{{ datetime }}</div>
       <h2 class="m-0">{{ event.title }}</h2>
-      <div v-if="event.description !== null">
-        {{ event.description }}
-      </div>
+      <!-- eslint-disable-next-line vue/no-v-html -->
+      <div v-if="event.description" v-html="$marked(event.description)" />
     </div>
     <div class="lg:pl-2 space-y-4 lg:w-1/2">
-      <img
-        v-if="event.image !== null"
-        alt="Event image."
-        :src="'https://' + strapiDomain + event.image.url"
-      />
-      <div v-if="event.url !== null && event.url !== ''" class="text-center">
-        <Button :icon="false" :link="event.url">Details</Button>
+      <img v-if="event.image" alt="Event image." :src="strapiDomain" />
+      <div v-if="event.url && event.url !== ''" class="text-center">
+        <Button :aria-label="$t('details')" :icon="false" :link="event.url">
+          {{ $t('details') }}
+        </Button>
       </div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'nuxt-property-decorator'
+import { defineComponent, PropType } from '@nuxtjs/composition-api'
+
+interface Image {
+  url: URL
+}
 
 interface Event {
-  dateEnd: any
-  dateStart: any
+  dateEnd: Date
+  dateStart: Date
+  image: Image
 }
 
-@Component({})
-export default class extends Vue {
-  @Prop({ type: Object }) readonly event!: Event
+export default defineComponent({
+  props: {
+    event: {
+      required: true,
+      type: Object as PropType<Event>,
+    },
+  },
+  computed: {
+    datetime(): any {
+      if (!this.event) return
 
-  get datetime(): any {
-    const moment = this.$moment(this.event.dateStart)
+      const moment = this.$moment(this.event.dateStart)
 
-    if (this.event.dateEnd) {
-      return moment.twix(this.event.dateEnd).format({
-        implicitMinutes: false,
-        implicitYear: false,
-        showDayOfWeek: true,
-      })
-    }
+      if (this.event.dateEnd) {
+        return moment.twix(this.event.dateEnd).format({
+          implicitMinutes: false,
+          implicitYear: false,
+          showDayOfWeek: true,
+        })
+      }
 
-    return moment.format('ddd D MMM YYYY, h:mm')
-  }
-
-  // TODO: move to globals
-  // get stackDomain(): string | undefined {
-  //   return process.env.stackDomain
-  // }
-
-  get strapiDomain(): string | undefined {
-    return `strapi.${process.env.NUXT_ENV_STACK_DOMAIN}`
-  }
-}
+      return moment.format('ddd D MMM YYYY, h:mm')
+    },
+    strapiDomain(): string {
+      return `https://strapi.${process.env.NUXT_ENV_STACK_DOMAIN}${this.event.image.url}`
+    },
+  },
+})
 </script>
+
+<i18n lang="yml">
+de:
+  details: Details
+en:
+  details: Details
+</i18n>

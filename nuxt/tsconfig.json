@@ -26,7 +26,11 @@
     "types": [
       "@types/node",
       "@nuxt/types",
-      "@nuxtjs/moment"
+      "@nuxtjs/axios",
+      "@nuxtjs/i18n",
+      "@nuxtjs/moment",
+      "vue-clipboard2",
+      "twix"
     ],
     "typeRoots": [
       "types",
@@ -38,5 +42,5 @@
     ".nuxt",
     "dist"
   ],
-  "importHelpers": true,
+  "importHelpers": true, // https://championswimmer.in/vuex-module-decorators/pages/installation.html#typescript
 }

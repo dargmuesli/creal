@@ -1,5 +1,8 @@
 import fs from 'fs'
 
+import { Inject } from '@nuxt/types/app'
+import { Context } from '@nuxt/types'
+
 const secretPathAwsBucket = '/run/secrets/creal_aws-bucket'
 
 export const STACK_DOMAIN =
@@ -13,6 +16,6 @@ export const AWS_BUCKET_NAME =
     ? fs.readFileSync(secretPathAwsBucket, 'utf8')
     : ''
 
-export default (_, inject) => {
+export default (_: Context, inject: Inject) => {
   inject('baseUrl', BASE_URL)
 }

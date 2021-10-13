@@ -2,11 +2,11 @@
   <section>
     <button
       class="flex p-4 w-full"
-      :class="{ 'border-b': faq.focused }"
-      @click="toggleFunction(faq)"
+      :class="{ 'border-b': faq.isFocused }"
+      @click="$emit('click', faq)"
     >
       <font-awesome-icon :icon="['fas', 'comments']" class="mr-4" size="lg" />
-      <h1 class="font-normal mb-0 text-base text-left">
+      <h1 class="font-normal m-0 text-base text-left">
         {{ faq.title }}
       </h1>
     </button>
@@ -15,41 +15,40 @@
       class="duration-300 overflow-hidden text-left"
       :style="`max-height: ${getMaxHeight()}px`"
     >
-      <!-- Do not insert other characters (newlines) in vue-markdown's body! -->
-      <vue-markdown class="m-8">{{ faq.answer }}</vue-markdown>
+      <!-- eslint-disable-next-line vue/no-v-html -->
+      <div class="m-8" v-html="$marked(faq.answer)" />
     </div>
   </section>
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'nuxt-property-decorator'
-import VueMarkdown from 'vue-markdown-konishi'
+import { defineComponent, PropType } from '@nuxtjs/composition-api'
 
-interface Faq {
-  title: any
+export interface Faq {
   answer: any
-  focused: boolean
+  isFocused: boolean
+  title: any
 }
 
-@Component({
-  components: {
-    VueMarkdown,
+export default defineComponent({
+  props: {
+    faq: {
+      required: true,
+      type: Object as PropType<Faq>,
+    },
+  },
+  methods: {
+    getMaxHeight() {
+      if (
+        this.faq.isFocused &&
+        this.$refs.answer &&
+        this.$refs.answer instanceof Element
+      ) {
+        return this.$refs.answer.scrollHeight
+      } else {
+        return 0
+      }
+    },
   },
 })
-export default class extends Vue {
-  @Prop({ type: Object, required: true }) readonly faq!: Faq
-  @Prop({ type: Function }) readonly toggleFunction!: Function
-
-  getMaxHeight() {
-    if (
-      this.faq.focused &&
-      this.$refs.answer !== undefined &&
-      this.$refs.answer instanceof Element
-    ) {
-      return this.$refs.answer.scrollHeight
-    } else {
-      return 0
-    }
-  }
-}
 </script>

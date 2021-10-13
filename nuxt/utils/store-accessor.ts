@@ -5,8 +5,8 @@ import PlayerModule from '~/store/modules/PlayerModule'
 // eslint-disable-next-line import/no-mutable-exports
 let playerModule: PlayerModule
 
-function initialiseStores(store: Store<any>): void {
+function initializeStores(store: Store<any>): void {
   playerModule = getModule(PlayerModule, store)
 }
 
-export { initialiseStores, playerModule }
+export { initializeStores, playerModule }

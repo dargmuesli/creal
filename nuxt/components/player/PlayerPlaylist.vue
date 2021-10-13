@@ -16,51 +16,57 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'nuxt-property-decorator'
+import { defineComponent, PropType } from '@nuxtjs/composition-api'
 
 import { PLAYER_PREFIX, Playlist } from '../../api/player/playlists'
 
-@Component({})
-export default class extends Vue {
-  @Prop({ type: Object }) readonly playlist!: Playlist
-
-  coverUrl: string = ''
-
+export default defineComponent({
+  props: {
+    playlist: {
+      required: true,
+      type: Object as PropType<Playlist>,
+    },
+  },
+  data() {
+    return {
+      coverUrl: '',
+    }
+  },
   created() {
     if (this.playlist.cover) {
       this.setCoverUrl(this.playlist.name)
     } else {
       this.coverUrl = '/player/playlist-cover_default.jpg'
     }
-  }
+  },
+  methods: {
+    setCoverUrl(name: string) {
+      const key =
+        PLAYER_PREFIX +
+        `${
+          this.$route.query.playlist !== undefined
+            ? this.$route.query.playlist
+            : ''
+        }${name}.jpg`
+      this.displayImageWhenFullyLoaded(
+        this.$axios.$get('/player/signedUrl', {
+          params: new URLSearchParams({ key }),
+        })
+      )
+    },
+    async displayImageWhenFullyLoaded(promise: Promise<any>) {
+      if (process.server) {
+        return
+      }
 
-  setCoverUrl(name: string) {
-    const key =
-      PLAYER_PREFIX +
-      `${
-        this.$route.query.playlist !== undefined
-          ? this.$route.query.playlist
-          : ''
-      }${name}.jpg`
-    this.displayImageWhenFullyLoaded(
-      this.$axios.$get('/player/signedUrl', {
-        params: new URLSearchParams({ key }),
-      })
-    )
-  }
+      const img = new Image()
 
-  async displayImageWhenFullyLoaded(promise: Promise<any>) {
-    if (process.server) {
-      return
-    }
+      img.onload = () => {
+        this.coverUrl = img.src
+      }
 
-    const img = new Image()
-
-    img.onload = () => {
-      this.coverUrl = img.src
-    }
-
-    img.src = await promise
-  }
-}
+      img.src = await promise
+    },
+  },
+})
 </script>

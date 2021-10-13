@@ -1,22 +1,25 @@
 import shrinkRay from 'shrink-ray-current'
 
+import localeDe from './locales/de.json'
+import localeEn from './locales/en.json'
 import { AWS_BUCKET_NAME, BASE_URL, STACK_DOMAIN } from './plugins/baseUrl'
 
-export default {
-  /*
-   ** Axios module configuration
-   ** See https://axios.nuxtjs.org/options
-   */
-  axios: {
-    baseURL: 'http://creal:3000/api/',
-    browserBaseURL: 'https://creal.' + STACK_DOMAIN + '/api/',
+const LOCALES = [
+  {
+    code: 'en',
+    name: 'English',
+    iso: 'en', // Will be used as catchall locale by default.
   },
+  {
+    code: 'de',
+    name: 'Deutsch',
+    iso: 'de',
+  },
+]
 
+export default {
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {
-    /*
-     ** https://github.com/nuxt-community/nuxt-property-decorator
-     */
     babel: {
       presets({ _isServer }) {
         return [
@@ -50,6 +53,7 @@ export default {
             'faComments',
             'faDownload',
             'faExclamationTriangle',
+            'faLightbulb',
             'faMusic',
             'faPlay',
             'faShareAlt',
@@ -190,13 +194,6 @@ export default {
     }
   },
 
-  helmet: {
-    hsts: {
-      maxAge: 31536000,
-      preload: true,
-    },
-  },
-
   /*
    ** Customize the progress-bar color
    */
@@ -204,10 +201,44 @@ export default {
 
   // Modules (https://go.nuxtjs.dev/config-modules)
   modules: [
-    'nuxt-helmet', // Should be declared at the start of the array.
+    [
+      'nuxt-helmet',
+      {
+        hsts: {
+          maxAge: 31536000,
+          preload: true,
+        },
+      },
+    ], // Should be declared at the start of the array.
     'nuxt-clipboard2',
     'nuxt-healthcheck',
-    '@nuxtjs/axios', // Doc: https://axios.nuxtjs.org/usage
+    [
+      '@nuxtjs/axios',
+      {
+        baseURL: 'http://creal:3000/api/',
+        browserBaseURL: 'https://creal.' + STACK_DOMAIN + '/api/',
+      },
+    ], // Doc: https://axios.nuxtjs.org/usage
+    [
+      '@nuxtjs/i18n',
+      {
+        baseUrl: BASE_URL,
+        defaultLocale: 'en', // Must be set for the default prefix_except_default prefix strategy.
+        detectBrowserLanguage: {
+          cookieSecure: true,
+          redirectOn: 'root',
+        },
+        locales: LOCALES,
+        vueI18n: {
+          messages: {
+            de: localeDe,
+            en: localeEn,
+          },
+          silentFallbackWarn: true,
+        },
+        vueI18nLoader: true,
+      },
+    ],
     '@nuxtjs/proxy',
     [
       '@nuxtjs/robots',
@@ -222,11 +253,15 @@ export default {
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
   plugins: [
-    '~/plugins/baseUrl.js',
+    '~/plugins/baseUrl.ts',
+    '~/plugins/i18n.ts',
+    '~/plugins/marked.ts',
     '~/plugins/paging.ts',
     '~/plugins/vue-plyr',
+    '~/plugins/vuelidate.ts',
   ],
 
+  // Cannot be moved to modules.
   proxy: {
     '/api/strapi/': {
       target: 'http://creal_strapi:1337/',
@@ -260,7 +295,7 @@ export default {
         'script-src': ['https://static.cloudflareinsights.com/beacon.min.js'],
         'style-src': [
           "'self'", // Tailwind
-          // "'sha256-45Zuu9QsRRW+hIWi5qtqijoYiDtRwjbDI0quax1AZoY='", // FAQ: dynamic height
+          "'sha256-WcR1Ar+4qu9KupBnfKnc/wVoMHhfObQDhd2xlj6DG4o='",
         ],
       },
       reportOnly: false,
@@ -273,4 +308,10 @@ export default {
     '~/api/player/playlists.ts',
     '~/api/player/signedUrl.ts',
   ],
+
+  vue: {
+    config: {
+      productionTip: false,
+    },
+  },
 }
