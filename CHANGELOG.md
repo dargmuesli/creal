@@ -1,3 +1,10 @@
+# [0.26.0](https://github.com/dargmuesli/creal/compare/0.25.3...0.26.0) (2021-10-13)
+
+
+### Features
+
+* rewrite ([08ec39f](https://github.com/dargmuesli/creal/commit/08ec39f4c0135ee9ee664a059d30433f6303c359))
+
 ## [0.25.3](https://github.com/dargmuesli/creal/compare/0.25.2...0.25.3) (2021-10-08)
 
 
