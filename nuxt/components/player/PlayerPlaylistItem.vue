@@ -20,33 +20,34 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'nuxt-property-decorator'
+import { defineComponent, PropType } from '@nuxtjs/composition-api'
 import prettyBytes from 'pretty-bytes'
 
 import { PlaylistItem } from '../../api/player/playlists'
 
-@Component({})
-export default class extends Vue {
-  @Prop({ type: Object, required: true })
-  readonly playlistItem!: PlaylistItem
-
-  bytesToString(bytes: number) {
-    return prettyBytes(bytes)
-  }
-
-  onDownloadClick() {
-    this.$emit('download', this.playlistItem)
-  }
-
-  onItemClick(event: any) {
-    if (event.detail === 2) {
-      // double click
-      this.onPlayClick()
-    }
-  }
-
-  onPlayClick() {
-    this.$emit('play', this.playlistItem)
-  }
-}
+export default defineComponent({
+  props: {
+    playlistItem: {
+      required: true,
+      type: Object as PropType<PlaylistItem>,
+    },
+  },
+  methods: {
+    bytesToString(bytes: number) {
+      return prettyBytes(bytes)
+    },
+    onDownloadClick() {
+      this.$emit('download', this.playlistItem)
+    },
+    onItemClick(event: any) {
+      if (event.detail === 2) {
+        // double click
+        this.onPlayClick()
+      }
+    },
+    onPlayClick() {
+      this.$emit('play', this.playlistItem)
+    },
+  },
+})
 </script>

@@ -2,10 +2,17 @@
   <div class="container mx-auto">
     <section>
       <h1>{{ title }}</h1>
-      <Error v-if="requestError !== null" :error="requestError">
+      <Error v-if="requestError" :error="requestError">
         {{ requestError.message }}
       </Error>
-      <div v-else-if="items !== null && items.length > 0">
+      <Paging
+        v-else-if="items && items.length > 0"
+        :is-previous-allowed="isPreviousAllowed"
+        :is-next-allowed="isNextAllowed"
+        :part-string="partString"
+        :query-previous="queryPrevious"
+        :query-next="queryNext"
+      >
         <ul class="list-none">
           <li
             v-for="item in items"
@@ -15,56 +22,18 @@
             <Event :event="item" />
           </li>
         </ul>
-        <PagingControls
-          v-if="allowPrevious || allowNext"
-          :part-string="partString"
-          :query-previous="queryPrevious"
-          :query-next="queryNext"
-          :allow-previous="allowPrevious"
-          :allow-next="allowNext"
-        />
-      </div>
-      <div v-else class="text-center">No events found.</div>
+      </Paging>
+      <div v-else class="text-center">{{ $t('eventsNone') }}</div>
     </section>
   </div>
 </template>
 
 <script lang="ts">
-import { Component } from 'nuxt-property-decorator'
+import { Context } from '@nuxt/types'
+import { defineComponent } from '@nuxtjs/composition-api'
 
-import Paging from '~/classes/Paging'
-
-@Component({
-  head(this: EventsPage): Object {
-    return {
-      title: this.title,
-      meta: [
-        {
-          hid: 'description',
-          property: 'description',
-          content: 'Events at which DJ cReal performs.',
-        },
-        {
-          hid: 'og:description',
-          property: 'og:description',
-          content: 'Events at which DJ cReal performs.',
-        },
-      ],
-    }
-  },
-})
-export default class EventsPage extends Paging {
-  title: String = 'Events'
-
-  async asyncData({
-    $axios,
-    $paging,
-    query,
-  }: {
-    $axios: any
-    $paging: any
-    query: any
-  }) {
+export default defineComponent({
+  async asyncData({ $axios, $paging, query }: Context) {
     const limit = +(query.limit ? query.limit : 100)
     const start = +(query.start ? query.start : 0)
 
@@ -100,6 +69,38 @@ export default class EventsPage extends Paging {
     }
 
     return $paging(events, eventsCountTotal, query, start, limit)
-  }
-}
+  },
+  data() {
+    return {
+      requestError: undefined,
+      title: 'Events',
+    }
+  },
+  head() {
+    const title = this.title as string
+    return {
+      title,
+      meta: [
+        {
+          hid: 'description',
+          property: 'description',
+          content: 'Events at which DJ cReal performs.',
+        },
+        {
+          hid: 'og:description',
+          property: 'og:description',
+          content: 'Events at which DJ cReal performs.',
+        },
+      ],
+    }
+  },
+  watchQuery: ['limit', 'start'],
+})
 </script>
+
+<i18n lang="yml">
+de:
+  eventsNone: Keine Veranstaltungen gefunden.
+en:
+  eventsNone: No events found.
+</i18n>

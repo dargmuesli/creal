@@ -2,10 +2,17 @@
   <div class="container mx-auto">
     <section>
       <h1>{{ title }}</h1>
-      <Error v-if="requestError !== null" :error="requestError">
+      <Error v-if="requestError" :error="requestError">
         {{ requestError.message }}
       </Error>
-      <div v-else-if="items !== null && items.length > 0">
+      <Paging
+        v-else-if="items && items.length > 0"
+        :is-previous-allowed="isPreviousAllowed"
+        :is-next-allowed="isNextAllowed"
+        :part-string="partString"
+        :query-previous="queryPrevious"
+        :query-next="queryNext"
+      >
         <ul class="list-none">
           <li
             v-for="item in items"
@@ -16,112 +23,24 @@
               'mx-8 -my-px': itemFocused !== item,
             }"
           >
-            <Faq :faq="item" :toggle-function="toggleItemFocused" />
+            <Faq :faq="item" @click="(e) => toggleItemFocused(e)" />
           </li>
         </ul>
-        <PagingControls
-          v-if="
-            partString !== null &&
-            queryPrevious !== null &&
-            queryNext !== null &&
-            allowPrevious !== null &&
-            allowNext !== null &&
-            (allowPrevious || allowNext)
-          "
-          :part-string="partString"
-          :query-previous="queryPrevious"
-          :query-next="queryNext"
-          :allow-previous="allowPrevious"
-          :allow-next="allowNext"
-        />
-      </div>
-      <div v-else class="text-center">No FAQ found.</div>
+      </Paging>
+      <div v-else class="text-center">{{ $t('faqNone') }}</div>
     </section>
   </div>
 </template>
 
 <script lang="ts">
-import { Component } from 'nuxt-property-decorator'
+import { Context } from '@nuxt/types'
+import { defineComponent } from '@nuxtjs/composition-api'
 import slugify from 'slugify'
 
-import Paging from '~/classes/Paging'
+import { Faq } from '~/components/Faq.vue'
 
-@Component({
-  head(this: FaqPage): Object {
-    return {
-      title: this.title,
-      meta: [
-        {
-          hid: 'description',
-          property: 'description',
-          content: 'Questions DJs are asked.',
-        },
-        {
-          hid: 'og:description',
-          property: 'og:description',
-          content: 'Questions DJs are asked.',
-        },
-      ],
-    }
-  },
-})
-export default class FaqPage extends Paging {
-  title: String = 'FAQ'
-
-  itemFocused: any = null
-
-  slugify(input: string) {
-    return slugify(input)
-  }
-
-  toggleItemFocused(item: any) {
-    if (this.itemFocused === null) {
-      this.focusItem(item)
-    } else {
-      this.$set(this.itemFocused, 'focused', false)
-
-      if (this.itemFocused === item) {
-        this.itemFocused = null
-        history.replaceState(
-          '',
-          document.title,
-          window.location.pathname + window.location.search
-        )
-      } else {
-        this.focusItem(item)
-      }
-    }
-  }
-
-  focusItem(item: any) {
-    this.$set(item, 'focused', true)
-    this.itemFocused = item
-    history.replaceState(undefined, '', `#${slugify(item.title)}`)
-  }
-
-  mounted() {
-    if (this.items === null) {
-      return
-    }
-
-    for (const item of this.items) {
-      if (slugify(item.title) === window.location.hash.substring(1)) {
-        this.$set(item, 'focused', true)
-        this.itemFocused = item
-        break
-      }
-    }
-  }
-
-  async asyncData({
-    $axios,
-    $paging,
-    query,
-  }: {
-    $axios: any
-    $paging: Function
-    query: any
-  }) {
+export default defineComponent({
+  async asyncData({ $axios, $paging, query }: Context) {
     const limit = +(query.limit ? query.limit : 100)
     const start = +(query.start ? query.start : 0)
 
@@ -176,6 +95,79 @@ export default class FaqPage extends Paging {
       itemFocused,
       ...$paging(items, itemsCountTotal, query, start, limit),
     }
-  }
-}
+  },
+  data() {
+    return {
+      items: undefined as Array<Faq> | undefined,
+      itemFocused: undefined as Faq | undefined,
+      title: 'FAQ',
+      requestError: undefined,
+    }
+  },
+  head() {
+    const title = this.title as string
+    return {
+      title,
+      meta: [
+        {
+          hid: 'description',
+          property: 'description',
+          content: 'Questions DJs are asked.',
+        },
+        {
+          hid: 'og:description',
+          property: 'og:description',
+          content: 'Questions DJs are asked.',
+        },
+      ],
+    }
+  },
+  watchQuery: ['limit', 'start'],
+  mounted() {
+    if (!this.items) return
+
+    for (const item of this.items) {
+      if (slugify(item.title) === window.location.hash.substring(1)) {
+        this.$set(item, 'isFocused', true)
+        this.itemFocused = item
+        break
+      }
+    }
+  },
+  methods: {
+    slugify(input: string) {
+      return slugify(input)
+    },
+    toggleItemFocused(item: any) {
+      if (!this.itemFocused) {
+        this.focusItem(item)
+      } else {
+        this.$set(this.itemFocused, 'isFocused', false)
+
+        if (this.itemFocused === item) {
+          this.itemFocused = undefined
+          history.replaceState(
+            '',
+            document.title,
+            window.location.pathname + window.location.search
+          )
+        } else {
+          this.focusItem(item)
+        }
+      }
+    },
+    focusItem(item: any) {
+      this.$set(item, 'isFocused', true)
+      this.itemFocused = item
+      history.replaceState(undefined, '', `#${slugify(item.title)}`)
+    },
+  },
+})
 </script>
+
+<i18n lang="yml">
+de:
+  faqNone: Keine FAQ gefunden.
+en:
+  faqNone: No FAQ found.
+</i18n>

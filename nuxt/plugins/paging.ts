@@ -1,6 +1,7 @@
+import { Inject } from '@nuxt/types/app'
 import { Context } from '@nuxt/types'
 
-export default (_context: Context, inject: any) => {
+export default (_: Context, inject: Inject) => {
   inject(
     'paging',
     (
@@ -27,17 +28,26 @@ export default (_context: Context, inject: any) => {
         start: start + limit,
       }
 
-      const allowNext = start + items.length < itemsCountTotal
-      const allowPrevious = start > 0
+      const isNextAllowed = start + items.length < itemsCountTotal
+      const isPreviousAllowed = start > 0
 
       return {
+        isNextAllowed,
+        isPreviousAllowed,
         items,
         partString,
         queryNext,
         queryPrevious,
-        allowNext,
-        allowPrevious,
       }
     }
   )
+}
+
+declare module '@nuxt/types' {
+  interface NuxtAppOptions {
+    $paging: Function
+  }
+  interface Context {
+    $paging: Function
+  }
 }

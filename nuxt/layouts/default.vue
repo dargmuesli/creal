@@ -1,16 +1,24 @@
 <template>
   <div>
-    <header
-      class="flex items-center justify-center lg:justify-start p-4 md:px-8"
-    >
-      <nuxt-link :to="'/'" class="flex items-center">
-        <div id="logo" class="h-10 w-10" />
-        <span class="font-bold text-lg"> cReal </span>
-      </nuxt-link>
-    </header>
-    <main class="container flex-1 min-h-screen mx-auto px-4 md:px-8 py-8">
-      <nuxt />
-    </main>
+    <div class="flex flex-col min-h-screen">
+      <header class="flex items-center justify-between p-4 md:px-8">
+        <AppLink :to="localePath('/')">
+          <div id="logo" class="h-10 w-10" />
+          <span class="font-bold text-lg">{{ $t('creal') }}</span>
+        </AppLink>
+        <Button
+          :aria-label="$t('bookCreal')"
+          :to="`mailto:e-mail+creal@jonas-thelemann.de?subject=${encodeURIComponent(
+            $t('bookingSubject')
+          )}`"
+        >
+          {{ $t('bookCreal') }}
+        </Button>
+      </header>
+      <main class="container flex flex-1 flex-col mx-auto px-4 md:px-8 py-8">
+        <nuxt />
+      </main>
+    </div>
     <footer
       class="bg-gray-900 leading-6 text-sm"
       :class="{ 'mb-20': storePlayerModule.isPlayerVisible }"
@@ -28,10 +36,11 @@
           <div class="bg-gray-400 h-px flex-1" />
         </div>
         <p class="p-2 text-center text-gray-400">
-          © {{ new Date().getFullYear() }} Jonas Thelemann. Alle Rechte
-          vorbehalten.
+          {{ $t('copyright', { year: new Date().getFullYear() }) }}
           <br />
-          <AppLink class="text-link" to="/legal-notice">Impressum</AppLink>
+          <AppLink class="text-link" :to="localePath('/legal-notice')">
+            {{ $t('legalNotice') }}
+          </AppLink>
         </p>
       </div>
     </footer>
@@ -59,7 +68,7 @@
             "
             class="font-normal"
           >
-            on
+            {{ $t('on') }}
             {{
               $moment(storePlayerModule.currentTrackMeta.createdTime).format(
                 'L'
@@ -79,10 +88,11 @@
           rel="noopener noreferrer"
           target="_blank"
         >
-          <font-awesome-icon :icon="['fab', 'mixcloud']" /> Mixcloud
+          <font-awesome-icon :icon="['fab', 'mixcloud']" /> {{ $t('mixcloud') }}
         </a>
         <button class="font-bold" @click="share">
-          <font-awesome-icon :icon="['fas', 'share-alt']" /> Copy link
+          <font-awesome-icon :icon="['fas', 'share-alt']" />
+          {{ $t('linkCopy') }}
         </button>
       </div>
       <vue-plyr
@@ -101,7 +111,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'nuxt-property-decorator'
+import { defineComponent } from '@nuxtjs/composition-api'
 import { getModule } from 'vuex-module-decorators'
 import Plyr from 'plyr'
 
@@ -132,103 +142,101 @@ function trackListItemComparator(time: number, b: TrackListItem) {
   return time - b.startSeconds
 }
 
-@Component({})
-export default class Layout extends Vue {
-  storePlayerModule = getModule(PlayerModule, this.$store)
+export default defineComponent({
+  data() {
+    return {
+      storePlayerModule: getModule(PlayerModule, this.$store),
+    }
+  },
+  computed: {
+    player() {
+      const plyr = this.$refs.plyr as any
 
-  get player() {
-    const plyr = this.$refs.plyr as any
+      if (!plyr) return
 
-    if (!plyr) return
-
-    return plyr.player
-  }
-
+      return plyr.player
+    },
+  },
   created() {
     this.$nuxt.$on(
       'plyr',
       (sourceInfo: Plyr.SourceInfo, isManuallySet: boolean) => {
         if (!this.player) return
 
-        if (this.storePlayerModule.isPlayerPaused === null || isManuallySet) {
+        if (!this.storePlayerModule.isPlayerPaused || isManuallySet) {
           this.player.source = sourceInfo
 
-          if (this.storePlayerModule.isPlayerPaused !== null || isManuallySet) {
+          if (this.storePlayerModule.isPlayerPaused || isManuallySet) {
             this.player.play()
           }
         }
       }
     )
-  }
-
-  closeFree() {
-    window.onbeforeunload = () => {}
-  }
-
-  closeProtect() {
-    window.onbeforeunload = () => {
-      return 'The music will stop playing if you navigate away.'
-    }
-  }
-
-  onPlyrEnded() {
-    this.closeFree()
-  }
-
-  onPlyrPause() {
-    this.storePlayerModule.setIsPlayerPaused(true)
-    this.closeFree()
-  }
-
-  onPlyrPlaying() {
-    this.storePlayerModule.setIsPlayerPaused(false)
-    this.closeProtect()
-  }
-
-  onPlyrTimeUpdate() {
-    if (
-      this.storePlayerModule.currentTrackMeta &&
-      this.storePlayerModule.currentTrackMeta.tracklist
-    ) {
-      const trackListItem =
-        this.storePlayerModule.currentTrackMeta.tracklist[
-          binarySearch(
-            this.storePlayerModule.currentTrackMeta.tracklist,
-            this.player.currentTime,
-            trackListItemComparator
-          )
-        ]
-
-      const currentTrackDescription = trackListItem
-        ? trackListItem.artistName + ' - ' + trackListItem.songName
-        : ''
-
-      if (
-        this.storePlayerModule.currentTrackDescription !==
-        currentTrackDescription
-      ) {
-        this.storePlayerModule.setCurrentTrackDescription(
-          currentTrackDescription
-        )
+  },
+  methods: {
+    closeFree() {
+      window.onbeforeunload = () => {}
+    },
+    closeProtect() {
+      window.onbeforeunload = () => {
+        return 'The music will stop playing if you navigate away.'
       }
-    }
-  }
+    },
+    onPlyrEnded() {
+      this.closeFree()
+    },
+    onPlyrPause() {
+      this.storePlayerModule.setIsPlayerPaused(true)
+      this.closeFree()
+    },
+    onPlyrPlaying() {
+      this.storePlayerModule.setIsPlayerPaused(false)
+      this.closeProtect()
+    },
+    onPlyrTimeUpdate() {
+      if (
+        this.storePlayerModule.currentTrackMeta &&
+        this.storePlayerModule.currentTrackMeta.tracklist
+      ) {
+        const trackListItem =
+          this.storePlayerModule.currentTrackMeta.tracklist[
+            binarySearch(
+              this.storePlayerModule.currentTrackMeta.tracklist,
+              this.player.currentTime,
+              trackListItemComparator
+            )
+          ]
 
-  share() {
-    if (
-      !process.browser ||
-      !this.storePlayerModule.currentTrackPlaylistName ||
-      !this.storePlayerModule.currentTrackName
-    )
-      return
+        const currentTrackDescription = trackListItem
+          ? trackListItem.artistName + ' - ' + trackListItem.songName
+          : ''
 
-    this.$copyText(
-      `${window.location.origin}/player?playlist=${encodeURIComponent(
-        this.storePlayerModule.currentTrackPlaylistName
-      )}&track=${encodeURIComponent(this.storePlayerModule.currentTrackName)}`
-    )
-  }
-}
+        if (
+          this.storePlayerModule.currentTrackDescription !==
+          currentTrackDescription
+        ) {
+          this.storePlayerModule.setCurrentTrackDescription(
+            currentTrackDescription
+          )
+        }
+      }
+    },
+    share() {
+      if (
+        !process.browser ||
+        !this.storePlayerModule.currentTrackPlaylistName ||
+        !this.storePlayerModule.currentTrackName
+      )
+        return
+
+      this.$copyText(
+        `${window.location.origin}/player?playlist=${encodeURIComponent(
+          this.storePlayerModule.currentTrackPlaylistName
+        )}&track=${encodeURIComponent(this.storePlayerModule.currentTrackName)}`
+      )
+    },
+  },
+})
 </script>
 
 <style scoped>
@@ -238,3 +246,24 @@ export default class Layout extends Vue {
   background-size: contain;
 }
 </style>
+
+<i18n lang="yml">
+en:
+  bookCreal: Book cReal
+  bookingSubject: Booking Request
+  creal: cReal
+  copyright: © {year} Jonas Thelemann. All rights reserved.
+  legalNotice: Legal notice
+  linkCopy: Copy link
+  mixcloud: Mixcloud
+  on: am
+de:
+  bookCreal: cReal buchen
+  bookingSubject: Buchungsanfrage
+  creal: cReal
+  copyright: © {year} Jonas Thelemann. Alle Rechte vorbehalten.
+  legalNotice: Impressum
+  linkCopy: Link kopieren
+  mixcloud: Mixcloud
+  on: on
+</i18n>

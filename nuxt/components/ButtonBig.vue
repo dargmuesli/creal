@@ -1,12 +1,5 @@
 <template>
-  <Button
-    class="rounded text-center"
-    :icon="icon"
-    :icon-class="iconClass"
-    :icon-id="iconId"
-    :icon-size="iconSize"
-    :link="link"
-  >
+  <Button :button-class="buttonClass" :aria-label="ariaLabel" :to="to">
     <span
       class="
         leading-normal
@@ -17,20 +10,53 @@
         lg:text-6xl
       "
     >
+      <FontAwesomeIcon
+        v-if="iconId"
+        :class="{ 'mr-2': $slots.default }"
+        :icon="iconId"
+      />
+      <br class="sm:hidden" />
       <slot />
     </span>
   </Button>
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'nuxt-property-decorator'
+import { defineComponent, PropType } from '@nuxtjs/composition-api'
 
-@Component({})
-export default class extends Vue {
-  @Prop({ type: String, required: true }) readonly link!: String
-  @Prop({ type: Boolean, default: true }) readonly icon!: Boolean
-  @Prop({ type: String, default: 'mr-6' }) readonly iconClass!: String
-  @Prop({ type: String, default: 'bug' }) readonly iconId!: String
-  @Prop({ type: String, default: '3x' }) readonly iconSize!: String
-}
+export default defineComponent({
+  props: {
+    append: {
+      default: false,
+      type: Boolean,
+    },
+    ariaLabel: {
+      required: true,
+      type: String,
+    },
+    buttonClass: {
+      default:
+        'bg-yellow-500 hover:bg-yellow-600 h-full px-6 py-2 rounded text-gray-800 w-full',
+      type: String as PropType<string | undefined>,
+    },
+    disabled: {
+      default: false,
+      type: Boolean,
+    },
+    iconId: {
+      default: undefined,
+      type: Array as PropType<string[] | undefined>,
+    },
+    to: {
+      default: undefined,
+      type: String as PropType<string | undefined>,
+    },
+    type: {
+      default: 'button',
+      type: String,
+    },
+  },
+  // @Prop({ type: String, default: 'mr-6' }) readonly iconClass!: String
+  // @Prop({ type: String, default: '3x' }) readonly iconSize!: String
+})
 </script>

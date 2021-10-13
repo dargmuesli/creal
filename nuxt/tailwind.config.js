@@ -58,6 +58,12 @@ module.exports = {
           cursor: theme('cursor.not-allowed'),
           opacity: theme('opacity.50'),
         },
+        '::placeholder': {
+          fontStyle: 'italic',
+          'input&,textarea&': {
+            opacity: 0.5,
+          },
+        },
         h1: {
           ...heading(theme),
           fontSize: theme('fontSize.4xl'),
@@ -84,10 +90,23 @@ module.exports = {
           ...heading(theme),
         },
       })
-
       addComponents({
         '.bg-creal': {
           backgroundImage: 'url("/creal.jpg")',
+        },
+        '.form-input': {
+          appearance: 'none',
+          backgroundColor: theme('colors.gray.50'),
+          borderColor: theme('colors.gray.300'),
+          borderRadius: theme('borderRadius.DEFAULT'),
+          boxShadow: theme('boxShadow.sm'),
+          color: theme('colors.text.dark'),
+          lineHeight: theme('lineHeight.tight'),
+          padding: theme('padding.2') + ' ' + theme('padding.4'),
+          width: theme('width.full'),
+          '&:focus': {
+            backgroundColor: theme('colors.white'),
+          },
         },
         '.fullscreen': {
           bottom: 0,
@@ -99,7 +118,6 @@ module.exports = {
           width: theme('width.full'),
         },
       })
-
       addUtilities({
         '.max-w-xxs': {
           maxWidth: '15rem',
@@ -122,6 +140,9 @@ module.exports = {
         },
         link: defaultTheme.colors.blue['400'],
         text: defaultTheme.colors.white,
+      },
+      minHeight: {
+        '80vh': '80vh',
       },
       transitionProperty: {
         margin: 'margin',
