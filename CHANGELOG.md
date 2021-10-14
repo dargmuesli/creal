@@ -1,3 +1,10 @@
+## [0.28.3](https://github.com/dargmuesli/creal/compare/0.28.2...0.28.3) (2021-10-14)
+
+
+### Bug Fixes
+
+* **i18n:** correct head, moment and suggestion page title ([698c164](https://github.com/dargmuesli/creal/commit/698c1649db0caf143f70f8d651089b96e56583d2))
+
 ## [0.28.2](https://github.com/dargmuesli/creal/compare/0.28.1...0.28.2) (2021-10-14)
 
 
