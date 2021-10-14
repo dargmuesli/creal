@@ -2,7 +2,7 @@
   <form
     v-if="form"
     ref="form"
-    class="card dark:card-dark"
+    class="card dark:card-dark rounded"
     :class="[
       {
         'animate-shake border border-red-500':

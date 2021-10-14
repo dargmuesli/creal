@@ -159,13 +159,23 @@ export default defineComponent({
           },
         })
         .then(() => {
-          alert('Submitted.')
+          this.$swal({
+            icon: 'success',
+            showConfirmButton: false,
+            timer: 1500,
+            title: this.$t('submitSuccess'),
+          })
           this.form.artist = undefined
           this.form.comment = undefined
           this.form.title = undefined
           this.$v.form.$reset()
         })
         .catch((reason) => {
+          this.$swal({
+            icon: 'error',
+            title: this.$t('error'),
+            text: reason,
+          })
           this.graphqlError = reason
           consola.error(reason)
         })
@@ -201,6 +211,8 @@ de:
   artistPlaceholder: Abba
   comment: Kommentar
   description: Schlage DJ cReal Lieder vor.
+  error: Fehler
+  submitSuccess: Erfolgreich eingereicht.
   title: Titel
   titlePage: Liedvorschläge
   titlePlaceholder: Dancing Queen
@@ -209,6 +221,8 @@ en:
   artistPlaceholder: Abba
   comment: Comment
   description: Suggest songs to DJ cReal.
+  error: Error
+  submitSuccess: Submitted successfully.
   title: Title
   titlePage: Song Suggestions
   titlePlaceholder: Dancing Queen

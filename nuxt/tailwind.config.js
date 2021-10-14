@@ -133,6 +133,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      animation: {
+        shake: 'shake 0.6s ease-in-out 0s 1 normal forwards running',
+      },
       colors: {
         background: {
           body: defaultTheme.colors.gray['800'],
@@ -140,6 +143,34 @@ module.exports = {
         },
         link: defaultTheme.colors.blue['400'],
         text: defaultTheme.colors.white,
+      },
+      keyframes: {
+        shake: {
+          '0%': {
+            transform: 'translateX(0)',
+          },
+          '15%': {
+            transform: 'translateX(0.375rem)',
+          },
+          '30%': {
+            transform: 'translateX(-0.375rem)',
+          },
+          '45%': {
+            transform: 'translateX(0.375rem)',
+          },
+          '60%': {
+            transform: 'translateX(-0.375rem)',
+          },
+          '75%': {
+            transform: 'translateX(0.375rem)',
+          },
+          '90%': {
+            transform: 'translateX(-0.375rem)',
+          },
+          '100%': {
+            transform: 'translateX(0)',
+          },
+        },
       },
       minHeight: {
         '80vh': '80vh',
