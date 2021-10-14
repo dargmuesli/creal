@@ -24,9 +24,9 @@
         <template slot="inputError">
           <FormInputError
             :form-input="$v.form.artist"
-            validation-property="minLength"
+            validation-property="maxLength"
           >
-            {{ $t('globalValidationShortness') }}
+            {{ $t('globalValidationLength') }}
           </FormInputError>
           <FormInputError
             :form-input="$v.form.artist"
@@ -50,6 +50,21 @@
           type="text"
           :placeholder="$t('titlePlaceholder')"
         />
+        <template slot="inputError">
+          <FormInputError
+            :form-input="$v.form.title"
+            validation-property="maxLength"
+          >
+            {{ $t('globalValidationLength') }}
+          </FormInputError>
+          <FormInputError
+            :form-input="$v.form.title"
+            validation-property="required"
+          >
+            {{ $t('globalValidationRequired') }}
+          </FormInputError>
+          <slot name="inputError" />
+        </template>
       </FormInput>
       <!-- <FormInputUrl
         :form-input="$v.form.url"
@@ -68,6 +83,15 @@
           class="form-input"
           type="text"
         />
+        <template slot="inputError">
+          <FormInputError
+            :form-input="$v.form.comment"
+            validation-property="maxLength"
+          >
+            {{ $t('globalValidationLength') }}
+          </FormInputError>
+          <slot name="inputError" />
+        </template>
       </FormInput>
     </Form>
   </section>
