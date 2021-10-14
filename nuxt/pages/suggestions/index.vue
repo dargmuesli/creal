@@ -97,17 +97,19 @@ export default defineComponent({
   },
   head() {
     const title = this.title as string
+    const description = this.$t('description') as string
+
     return {
       meta: [
         {
           hid: 'description',
           property: 'description',
-          content: 'Suggest songs to cReal.',
+          content: description,
         },
         {
           hid: 'og:description',
           property: 'og:description',
-          content: 'Suggest songs to cReal.',
+          content: description,
         },
       ],
       title,
@@ -174,6 +176,7 @@ de:
   artist: Künstler*in
   artistPlaceholder: Abba
   comment: Kommentar
+  description: Schlage cReal Lieder vor.
   title: Titel
   titlePage: Liedvorschläge
   titlePlaceholder: Dancing Queen
@@ -181,6 +184,7 @@ en:
   artist: Artist
   artistPlaceholder: Abba
   comment: Comment
+  description: Suggest songs to cReal.
   title: Title
   titlePage: Song Suggestions
   titlePlaceholder: Dancing Queen

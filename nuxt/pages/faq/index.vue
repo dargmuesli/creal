@@ -104,18 +104,20 @@ export default defineComponent({
   },
   head() {
     const title = this.title as string
+    const description = this.$t('description') as string
+
     return {
       title,
       meta: [
         {
           hid: 'description',
           property: 'description',
-          content: 'Questions DJs are asked.',
+          content: description,
         },
         {
           hid: 'og:description',
           property: 'og:description',
-          content: 'Questions DJs are asked.',
+          content: description,
         },
       ],
     }
@@ -165,7 +167,9 @@ export default defineComponent({
 
 <i18n lang="yml">
 de:
+  description: Häufig gestellte Fragen an DJ cReal.
   faqNone: Keine FAQ gefunden.
 en:
+  description: Frequently asked questions to DJ cReal.
   faqNone: No FAQ found.
 </i18n>

@@ -150,18 +150,20 @@ export default defineComponent({
   fetchOnServer: false,
   head() {
     const title = this.titleHead() as string
+    const description = this.$t('description') as string
+
     return {
       title,
       meta: [
         {
           hid: 'description',
           property: 'description',
-          content: 'Listen to mixes by DJ cReal.',
+          content: description,
         },
         {
           hid: 'og:description',
           property: 'og:description',
-          content: 'Listen to mixes by DJ cReal.',
+          content: description,
         },
       ],
     }
@@ -300,7 +302,9 @@ export default defineComponent({
 
 <i18n lang="yml">
 de:
+  description: Mixe von DJ cReal anhören.
   itemsNone: Keine Elemente gefunden.
 en:
+  description: Listen to mixes by DJ cReal.
   itemsNone: No items found.
 </i18n>

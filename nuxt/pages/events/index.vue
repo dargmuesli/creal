@@ -76,18 +76,20 @@ export default defineComponent({
   },
   head() {
     const title = this.title as string
+    const description = this.$t('description') as string
+
     return {
       title,
       meta: [
         {
           hid: 'description',
           property: 'description',
-          content: 'Events at which DJ cReal performs.',
+          content: description,
         },
         {
           hid: 'og:description',
           property: 'og:description',
-          content: 'Events at which DJ cReal performs.',
+          content: description,
         },
       ],
     }
@@ -98,7 +100,9 @@ export default defineComponent({
 
 <i18n lang="yml">
 de:
+  description: Veranstaltungen, bei denen cReal auftritt.
   eventsNone: Keine Veranstaltungen gefunden.
 en:
+  description: Events at which cReal performs.
   eventsNone: No events found.
 </i18n>

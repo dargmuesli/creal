@@ -155,12 +155,12 @@ export default {
         {
           hid: 'description',
           property: 'description',
-          content: process.env.npm_package_description,
+          content: this.$t('globalOgSeoDescription'),
         },
         {
           hid: 'og:description',
           property: 'og:description',
-          content: process.env.npm_package_description,
+          content: this.$t('globalOgSeoDescription'),
         },
         {
           content: '/assets/static/favicon/browserconfig.xml?v=eEYRGn5b9R',
@@ -182,7 +182,7 @@ export default {
         {
           hid: 'og:image:alt',
           property: 'og:image:alt',
-          content: "cReal's logo",
+          content: "DJ cReal's logo",
         },
         {
           hid: 'og:type',
