@@ -1,3 +1,10 @@
+## [0.28.2](https://github.com/dargmuesli/creal/compare/0.28.1...0.28.2) (2021-10-14)
+
+
+### Bug Fixes
+
+* **player:** add content type for signed url ([b83ef65](https://github.com/dargmuesli/creal/commit/b83ef658f0f681c7f62651e401397d76cdbc524f))
+
 ## [0.28.1](https://github.com/dargmuesli/creal/compare/0.28.0...0.28.1) (2021-10-14)
 
 
