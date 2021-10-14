@@ -1,3 +1,10 @@
+# [0.30.0](https://github.com/dargmuesli/creal/compare/0.29.0...0.30.0) (2021-10-14)
+
+
+### Features
+
+* **suggestions:** add sweet alerts ([d48b155](https://github.com/dargmuesli/creal/commit/d48b155049e98fe3a7922968fd2adaac0d8ff475))
+
 # [0.29.0](https://github.com/dargmuesli/creal/compare/0.28.3...0.29.0) (2021-10-14)
 
 
