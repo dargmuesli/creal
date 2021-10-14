@@ -4,23 +4,19 @@ BEGIN;
 
 INSERT INTO creal.suggestion (
     "title",
-    "artist",
-    "ip"
+    "artist"
     ) VALUES (
         'Song Title',
-        'Song Artist',
-        '1.2.3.4'
+        'Song Artist'
     );
 INSERT INTO creal.suggestion (
     "title",
     "artist",
-    "comment",
-    "ip"
+    "comment"
     ) VALUES (
         'Song Title',
         'Song Artist',
-        'BlaBlaBla',
-        '0.0.0.0'
+        'BlaBlaBla'
     );
 
 COMMIT;

@@ -52,6 +52,7 @@ export default {
             'faCalendarDay',
             'faComments',
             'faDownload',
+            'faExclamationCircle',
             'faExclamationTriangle',
             'faLightbulb',
             'faMusic',
@@ -213,6 +214,19 @@ export default {
     'nuxt-clipboard2',
     'nuxt-healthcheck',
     [
+      '@nuxtjs/apollo',
+      {
+        clientConfigs: {
+          default: '~/plugins/apollo-config.ts',
+        },
+        defaultOptions: {
+          $query: {
+            fetchPolicy: 'cache-and-network',
+          },
+        },
+      },
+    ],
+    [
       '@nuxtjs/axios',
       {
         baseURL: 'http://creal:3000/api/',
@@ -254,6 +268,7 @@ export default {
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
   plugins: [
     '~/plugins/baseUrl.ts',
+    '~/plugins/global.ts',
     '~/plugins/i18n.ts',
     '~/plugins/marked.ts',
     '~/plugins/paging.ts',
@@ -276,6 +291,7 @@ export default {
         'base-uri': ["'none'"], // Mozilla Observatory.
         'connect-src': [
           "'self'", // Nuxt development.
+          `https://*.${STACK_DOMAIN}`, // PostGraphile, ...
           'https://cdn.plyr.io/', // Plyr.
         ],
         'default-src': ["'none'"],
