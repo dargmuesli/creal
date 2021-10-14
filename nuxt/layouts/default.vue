@@ -29,7 +29,7 @@
         <div class="flex items-center mx-auto w-9/12">
           <div class="bg-gray-400 h-px flex-1" />
           <LoaderImage
-            alt="cReals Logo"
+            alt="DJ cReals Logo"
             class="brightness-100 h-12 mx-12 w-12"
             height="48"
             src="/assets/static/logos/creal.svg"

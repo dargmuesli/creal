@@ -176,7 +176,7 @@ de:
   artist: Künstler*in
   artistPlaceholder: Abba
   comment: Kommentar
-  description: Schlage cReal Lieder vor.
+  description: Schlage DJ cReal Lieder vor.
   title: Titel
   titlePage: Liedvorschläge
   titlePlaceholder: Dancing Queen
@@ -184,7 +184,7 @@ en:
   artist: Artist
   artistPlaceholder: Abba
   comment: Comment
-  description: Suggest songs to cReal.
+  description: Suggest songs to DJ cReal.
   title: Title
   titlePage: Song Suggestions
   titlePlaceholder: Dancing Queen

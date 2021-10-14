@@ -191,7 +191,7 @@ export default {
         },
       ],
       titleTemplate: (titleChunk) => {
-        return titleChunk ? `${titleChunk} - cReal` : 'cReal'
+        return titleChunk ? `${titleChunk} - DJ cReal` : 'DJ cReal'
       },
     }
   },
