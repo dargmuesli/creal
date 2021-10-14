@@ -1,0 +1,9 @@
+#import "../../fragments/suggestionFields.gql"
+
+mutation createSuggestion($suggestionInput: SuggestionInput!) {
+  createSuggestion(input: { suggestion: $suggestionInput }) {
+    suggestion {
+      ...suggestionFields
+    }
+  }
+}

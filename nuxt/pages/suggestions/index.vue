@@ -1,0 +1,185 @@
+<template>
+  <section>
+    <h1>{{ title }}</h1>
+    <Form
+      ref="form"
+      :form="$v.form"
+      :form-sent="form.sent"
+      :graphql-error="graphqlError"
+      @submit.prevent="submit"
+    >
+      <FormInput
+        :error="$v.form.artist.$error"
+        label-for="input-artist"
+        required
+        :title="$t('artist')"
+      >
+        <input
+          id="input-artist"
+          v-model.trim="$v.form.artist.$model"
+          class="form-input"
+          type="text"
+          :placeholder="$t('artistPlaceholder')"
+        />
+        <template slot="inputError">
+          <FormInputError
+            :form-input="$v.form.artist"
+            validation-property="minLength"
+          >
+            {{ $t('globalValidationShortness') }}
+          </FormInputError>
+          <FormInputError
+            :form-input="$v.form.artist"
+            validation-property="required"
+          >
+            {{ $t('globalValidationRequired') }}
+          </FormInputError>
+          <slot name="inputError" />
+        </template>
+      </FormInput>
+      <FormInput
+        :error="$v.form.title.$error"
+        label-for="input-title"
+        required
+        :title="$t('title')"
+      >
+        <input
+          id="input-title"
+          v-model.trim="$v.form.title.$model"
+          class="form-input"
+          type="text"
+          :placeholder="$t('titlePlaceholder')"
+        />
+      </FormInput>
+      <!-- <FormInputUrl
+        :form-input="$v.form.url"
+        is-optional
+        @input="form.url = $event"
+      /> -->
+      <FormInput
+        :error="$v.form.comment.$error"
+        is-optional
+        label-for="input-comment"
+        :title="$t('comment')"
+      >
+        <textarea
+          id="input-comment"
+          v-model.trim="$v.form.comment.$model"
+          class="form-input"
+          type="text"
+        />
+      </FormInput>
+    </Form>
+  </section>
+</template>
+
+<script lang="ts">
+import { defineComponent } from '@nuxtjs/composition-api'
+import { maxLength, required } from 'vuelidate/lib/validators'
+
+import SUGGESTION_CREATE_MUTATION from '~/gql/mutation/suggestion/suggestionCreate.gql'
+
+const consola = require('consola')
+
+export default defineComponent({
+  data() {
+    return {
+      title: 'Song Suggestions',
+      form: {
+        artist: undefined as string | undefined,
+        comment: undefined as string | undefined,
+        sent: false,
+        title: undefined as string | undefined,
+        url: undefined as string | undefined,
+      },
+      graphqlError: undefined as any,
+    }
+  },
+  head() {
+    const title = this.title as string
+    return {
+      meta: [
+        {
+          hid: 'description',
+          property: 'description',
+          content: 'Suggest songs to cReal.',
+        },
+        {
+          hid: 'og:description',
+          property: 'og:description',
+          content: 'Suggest songs to cReal.',
+        },
+      ],
+      title,
+    }
+  },
+  methods: {
+    async submit() {
+      try {
+        await this.$global.formPreSubmit(this)
+      } catch (error) {
+        return
+      }
+
+      await this.$apollo
+        .mutate({
+          mutation: SUGGESTION_CREATE_MUTATION,
+          variables: {
+            suggestionInput: {
+              artist: this.form.artist === '' ? null : this.form.artist,
+              comment: this.form.comment === '' ? null : this.form.comment,
+              title: this.form.title === '' ? null : this.form.title,
+            },
+          },
+        })
+        .then(() => {
+          alert('Submitted.')
+          this.form.artist = undefined
+          this.form.comment = undefined
+          this.form.title = undefined
+          this.$v.form.$reset()
+        })
+        .catch((reason) => {
+          this.graphqlError = reason
+          consola.error(reason)
+        })
+    },
+  },
+  validations() {
+    return {
+      form: {
+        artist: {
+          maxLength: maxLength(100),
+          required,
+        },
+        comment: {
+          maxLength: maxLength(250),
+        },
+        title: {
+          maxLength: maxLength(100),
+          required,
+        },
+        // url: {
+        //   maxLength: maxLength(200),
+        //   required,
+        // },
+      },
+    }
+  },
+})
+</script>
+
+<i18n lang="yml">
+de:
+  artist: Künstler*in
+  artistPlaceholder: Abba
+  comment: Kommentar
+  title: Titel
+  titlePlaceholder: Dancing Queen
+en:
+  artist: Artist
+  artistPlaceholder: Abba
+  comment: Comment
+  title: Title
+  titlePlaceholder: Dancing Queen
+</i18n>

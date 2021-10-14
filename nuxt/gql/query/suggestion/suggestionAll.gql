@@ -1,0 +1,16 @@
+#import "../../fragments/suggestionFields.gql"
+
+query allSuggestions($cursor: Cursor, $limit: Int!) {
+  allSuggestions(
+    after: $cursor
+    first: $limit
+  ) {
+    nodes {
+      ...suggestionFields
+    }
+    pageInfo {
+      endCursor
+      hasNextPage
+    }
+  }
+}
