@@ -1,3 +1,19 @@
+# [0.29.0](https://github.com/dargmuesli/creal/compare/0.28.3...0.29.0) (2021-10-14)
+
+
+### Bug Fixes
+
+* **event:** correct spacing ([226bd37](https://github.com/dargmuesli/creal/commit/226bd3712877332855ea7ffaed95e80a29f23744))
+* **form-input:** improve spacing ([83d1399](https://github.com/dargmuesli/creal/commit/83d13997822eb1e7d5c3d7851c2bbd4591606521))
+* **suggestion:** add missing validation errors ([d8dfc48](https://github.com/dargmuesli/creal/commit/d8dfc485e2e99ed9af46b040ba6fca22b57a4281))
+
+
+### Features
+
+* **book-me:** replace button with app link ([6010fa7](https://github.com/dargmuesli/creal/commit/6010fa792a84cf5563da4d4e906ee95f77166690))
+* **i18n:** add description translations ([50e339e](https://github.com/dargmuesli/creal/commit/50e339e46b7d33064f2c383f620045193b6b51d0))
+* **seo:** sprinkle in a few more "DJ"s ([f77c1c0](https://github.com/dargmuesli/creal/commit/f77c1c02fd0240f6244558797f266ce93ece9c92))
+
 ## [0.28.3](https://github.com/dargmuesli/creal/compare/0.28.2...0.28.3) (2021-10-14)
 
 
