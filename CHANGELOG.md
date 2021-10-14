@@ -1,3 +1,10 @@
+## [0.28.1](https://github.com/dargmuesli/creal/compare/0.28.0...0.28.1) (2021-10-14)
+
+
+### Bug Fixes
+
+* **sqitch:** revert test data commit ([12957b8](https://github.com/dargmuesli/creal/commit/12957b829eb1d95884dd425a70b349c5e76b8493))
+
 # [0.28.0](https://github.com/dargmuesli/creal/compare/0.27.0...0.28.0) (2021-10-14)
 
 
