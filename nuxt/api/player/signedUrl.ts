@@ -45,6 +45,7 @@ export default {
             Key: key,
           }).then(
             function (url) {
+              res.setHeader('Content-Type', 'text/plain')
               res.end(url)
             },
             function (err) {
