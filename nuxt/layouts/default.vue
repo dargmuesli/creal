@@ -148,6 +148,9 @@ export default defineComponent({
       storePlayerModule: getModule(PlayerModule, this.$store),
     }
   },
+  head() {
+    return this.$nuxtI18nHead({ addSeoAttributes: true })
+  },
   computed: {
     player() {
       const plyr = this.$refs.plyr as any
@@ -172,6 +175,9 @@ export default defineComponent({
         }
       }
     )
+  },
+  beforeCreate() {
+    this.$moment.locale(this.$i18n.locale)
   },
   methods: {
     closeFree() {

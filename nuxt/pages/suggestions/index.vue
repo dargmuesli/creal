@@ -84,7 +84,7 @@ const consola = require('consola')
 export default defineComponent({
   data() {
     return {
-      title: 'Song Suggestions',
+      title: this.$t('titlePage'),
       form: {
         artist: undefined as string | undefined,
         comment: undefined as string | undefined,
@@ -175,11 +175,13 @@ de:
   artistPlaceholder: Abba
   comment: Kommentar
   title: Titel
+  titlePage: Liedvorschläge
   titlePlaceholder: Dancing Queen
 en:
   artist: Artist
   artistPlaceholder: Abba
   comment: Comment
   title: Title
+  titlePage: Song Suggestions
   titlePlaceholder: Dancing Queen
 </i18n>
