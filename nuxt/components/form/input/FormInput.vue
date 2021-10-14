@@ -8,9 +8,17 @@
       }"
       class="md:flex flex-wrap md:items-center"
     >
-      <div class="leading-snug md:pr-4 md:text-right md:w-1/3">
+      <div class="leading-snug mb-1 md:mb-0 md:pr-4 md:text-right md:w-1/3">
         <label
-          class="font-semibold mb-1 md:mb-0"
+          class="
+            font-semibold
+            flex
+            md:flex-col
+            items-baseline
+            md:items-end
+            space-x-2
+            md:space-x-0
+          "
           :class="{
             'text-green-600': success,
             'text-yellow-600': warning,
@@ -18,15 +26,15 @@
           }"
           :for="labelFor"
         >
-          {{ title }}
-          <div class="font-medium md:text-right text-xs text-gray-500">
+          <span>{{ title }}</span>
+          <span class="font-medium md:text-right text-xs text-gray-500">
             <span v-if="required">
               {{ $t('required') }}
             </span>
             <span v-if="isOptional">
               {{ $t('optional') }}
             </span>
-          </div>
+          </span>
         </label>
       </div>
       <div class="md:mt-1 md:w-2/3 text-black">
