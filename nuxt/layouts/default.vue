@@ -6,14 +6,16 @@
           <div id="logo" class="h-10 w-10" />
           <span class="font-bold text-lg">{{ $t('creal') }}</span>
         </AppLink>
-        <Button
-          :aria-label="$t('bookCreal')"
+        <AppLink
+          class="font-bold text-lg"
+          :is-colored="false"
           :to="`mailto:e-mail+creal@jonas-thelemann.de?subject=${encodeURIComponent(
             $t('bookingSubject')
           )}`"
         >
           {{ $t('bookCreal') }}
-        </Button>
+          <FontAwesomeIcon class="ml-2" :icon="['fas', 'arrow-right']" />
+        </AppLink>
       </header>
       <main class="container flex flex-1 flex-col mx-auto px-4 md:px-8 py-8">
         <nuxt />

@@ -48,6 +48,7 @@ export default {
         icons: {
           brands: ['faMixcloud'],
           solid: [
+            'faArrowRight',
             'faBug',
             'faCalendarDay',
             'faComments',
