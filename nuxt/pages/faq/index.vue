@@ -2,9 +2,7 @@
   <div class="container mx-auto">
     <section>
       <h1>{{ title }}</h1>
-      <Error v-if="requestError" :error="requestError">
-        {{ requestError.message }}
-      </Error>
+      <CardAlert v-if="requestError" :error-message="requestError.message" />
       <Paging
         v-else-if="items && items.length > 0"
         :is-previous-allowed="isPreviousAllowed"
