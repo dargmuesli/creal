@@ -1,3 +1,10 @@
+# [0.28.0](https://github.com/dargmuesli/creal/compare/0.27.0...0.28.0) (2021-10-14)
+
+
+### Features
+
+* **error:** add error page ([ff8e5c6](https://github.com/dargmuesli/creal/commit/ff8e5c6d52fd2e9dd28fa3cce09f44fe3e7c2683))
+
 # [0.27.0](https://github.com/dargmuesli/creal/compare/0.26.0...0.27.0) (2021-10-14)
 
 
