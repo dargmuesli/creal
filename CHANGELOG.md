@@ -1,3 +1,10 @@
+## [0.31.1](https://github.com/dargmuesli/creal/compare/0.31.0...0.31.1) (2021-10-15)
+
+
+### Bug Fixes
+
+* **stack-domain:** correct subdomain ([e0e6e9d](https://github.com/dargmuesli/creal/commit/e0e6e9de9ce5c1c94650d7e438d70dbeb096f137))
+
 # [0.31.0](https://github.com/dargmuesli/creal/compare/0.30.0...0.31.0) (2021-10-15)
 
 
