@@ -177,17 +177,75 @@ export default {
         {
           hid: 'og:image',
           property: 'og:image',
-          content: this.$baseUrl + '/assets/static/logos/creal.svg',
+          content:
+            this.$baseUrl +
+            '/assets/static/logos/creal_with-text_open-graph.png', // Does not support .svg as of 2021-06.
         },
         {
           hid: 'og:image:alt',
           property: 'og:image:alt',
-          content: "DJ cReal's logo",
+          content: this.$t('globalOgImageAlt'),
+        },
+        {
+          hid: 'og:image:height',
+          property: 'og:image:height',
+          content: '627',
+        },
+        {
+          hid: 'og:image:width',
+          property: 'og:image:width',
+          content: '1200',
+        },
+        {
+          hid: 'og:site_name',
+          property: 'og:site_name',
+          content: 'DJ cReal',
         },
         {
           hid: 'og:type',
           property: 'og:type',
           content: 'website', // https://ogp.me/#types
+        },
+        {
+          hid: 'og:title',
+          property: 'og:title',
+          content: 'DJ cReal',
+        },
+        {
+          hid: 'og:url',
+          property: 'og:url',
+          content:
+            'https://' +
+            (process.env.NUXT_ENV_STACK_DOMAIN ||
+              'creal.jonas-thelemann.test') +
+            this.$router.currentRoute.fullPath,
+        },
+        {
+          hid: 'twitter:card',
+          property: 'twitter:card',
+          content: 'summary',
+        },
+        {
+          hid: 'twitter:description',
+          property: 'twitter:description',
+          content: this.$t('globalOgSeoDescription'),
+        },
+        {
+          hid: 'twitter:image',
+          property: 'twitter:image',
+          content:
+            this.$baseUrl +
+            '/assets/static/logos/creal_with-text_open-graph.png', // Does not support .svg as of 2021-06.
+        },
+        {
+          hid: 'twitter:image:alt',
+          property: 'twitter:image:alt',
+          content: this.$t('globalOgImageAlt'),
+        },
+        {
+          hid: 'twitter:title',
+          property: 'twitter:title',
+          content: 'DJ cReal',
         },
       ],
       titleTemplate: (titleChunk) => {

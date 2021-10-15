@@ -135,6 +135,25 @@ export default defineComponent({
           property: 'og:description',
           content: description,
         },
+        {
+          hid: 'og:title',
+          property: 'og:title',
+          content: title,
+        },
+        {
+          hid: 'og:url',
+          property: 'og:url',
+          content:
+            'https://' +
+            (process.env.NUXT_ENV_STACK_DOMAIN ||
+              'creal.jonas-thelemann.test') +
+            this.$router.currentRoute.fullPath,
+        },
+        {
+          hid: 'twitter:title',
+          property: 'twitter:title',
+          content: title,
+        },
       ],
       title,
     }

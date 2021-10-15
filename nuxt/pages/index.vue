@@ -77,6 +77,33 @@ export default defineComponent({
       title: 'Welcome!',
     }
   },
+  head() {
+    const title = this.title as string
+    return {
+      meta: [
+        {
+          hid: 'og:title',
+          property: 'og:title',
+          content: title,
+        },
+        {
+          hid: 'og:url',
+          property: 'og:url',
+          content:
+            'https://' +
+            (process.env.NUXT_ENV_STACK_DOMAIN ||
+              'creal.jonas-thelemann.test') +
+            this.$router.currentRoute.fullPath,
+        },
+        {
+          hid: 'twitter:title',
+          property: 'twitter:title',
+          content: title,
+        },
+      ],
+      title,
+    }
+  },
   beforeMount() {
     document.getElementsByTagName('body')[0].classList.add('overflow-hidden')
     window.addEventListener('keypress', (e) => {
