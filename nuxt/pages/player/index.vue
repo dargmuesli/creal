@@ -173,9 +173,8 @@ export default defineComponent({
           hid: 'og:url',
           property: 'og:url',
           content:
-            'https://' +
-            (process.env.NUXT_ENV_STACK_DOMAIN ||
-              'creal.jonas-thelemann.test') +
+            'https://creal.' +
+            (process.env.NUXT_ENV_STACK_DOMAIN || 'jonas-thelemann.test') +
             this.$router.currentRoute.fullPath,
         },
         {
