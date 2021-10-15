@@ -1,3 +1,10 @@
+## [0.31.2](https://github.com/dargmuesli/creal/compare/0.31.1...0.31.2) (2021-10-15)
+
+
+### Bug Fixes
+
+* correct base url ([cfe0cf9](https://github.com/dargmuesli/creal/commit/cfe0cf9a5cb98d70b8f2b93685f435b795b3bc90))
+
 ## [0.31.1](https://github.com/dargmuesli/creal/compare/0.31.0...0.31.1) (2021-10-15)
 
 
