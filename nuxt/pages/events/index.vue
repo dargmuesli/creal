@@ -98,10 +98,7 @@ export default defineComponent({
         {
           hid: 'og:url',
           property: 'og:url',
-          content:
-            'https://creal.' +
-            (process.env.NUXT_ENV_STACK_DOMAIN || 'jonas-thelemann.test') +
-            this.$router.currentRoute.fullPath,
+          content: this.$baseUrl + this.$router.currentRoute.fullPath,
         },
         {
           hid: 'twitter:title',

@@ -214,10 +214,7 @@ export default {
         {
           hid: 'og:url',
           property: 'og:url',
-          content:
-            'https://creal.' +
-            (process.env.NUXT_ENV_STACK_DOMAIN || 'jonas-thelemann.test') +
-            this.$router.currentRoute.fullPath,
+          content: this.$baseUrl + this.$router.currentRoute.fullPath,
         },
         {
           hid: 'twitter:card',
@@ -288,7 +285,7 @@ export default {
       '@nuxtjs/axios',
       {
         baseURL: 'http://creal:3000/api/',
-        browserBaseURL: 'https://creal.' + STACK_DOMAIN + '/api/',
+        browserBaseURL: `${BASE_URL}/api/`,
       },
     ], // Doc: https://axios.nuxtjs.org/usage
     [
