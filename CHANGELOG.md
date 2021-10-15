@@ -1,3 +1,10 @@
+# [0.31.0](https://github.com/dargmuesli/creal/compare/0.30.0...0.31.0) (2021-10-15)
+
+
+### Features
+
+* **og:** add proper open graph tags ([cb2904a](https://github.com/dargmuesli/creal/commit/cb2904a9b52bc920932df6d81c00e49e27c4d2c5))
+
 # [0.30.0](https://github.com/dargmuesli/creal/compare/0.29.0...0.30.0) (2021-10-14)
 
 
