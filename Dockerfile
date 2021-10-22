@@ -40,7 +40,7 @@ HEALTHCHECK --interval=10s CMD curl -f http://localhost:3000/healthcheck || exit
 # Build Nuxt.
 
 # Should be the specific version of node:slim.
-FROM node:16.12.0-slim@sha256:f765583af67c3938758ac0cc17b1163d2840953f93f0c425a0a81ff4d47b1673 AS build
+FROM node:16.12.0-slim@sha256:73b769068266e7a957371dccbb650b1351535902b05ed25a3d3562f0809a9cfc AS build
 
 ARG NUXT_ENV_STACK_DOMAIN=jonas-thelemann.de
 ENV NUXT_ENV_STACK_DOMAIN=${NUXT_ENV_STACK_DOMAIN}
