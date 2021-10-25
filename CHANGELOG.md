@@ -1,3 +1,10 @@
+## [0.31.4](https://github.com/dargmuesli/creal/compare/0.31.3...0.31.4) (2021-10-25)
+
+
+### Bug Fixes
+
+* **event:** correct button target ([09676ef](https://github.com/dargmuesli/creal/commit/09676ef38cd3480a233df72c49a1d2d32a9d98a2))
+
 ## [0.31.3](https://github.com/dargmuesli/creal/compare/0.31.2...0.31.3) (2021-10-25)
 
 
