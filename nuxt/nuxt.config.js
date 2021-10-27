@@ -72,14 +72,11 @@ export default {
     // https://go.nuxtjs.dev/stylelint
     '@nuxtjs/stylelint-module',
     // https://go.nuxtjs.dev/tailwindcss
-    ['@nuxtjs/tailwindcss', { jit: true }],
+    ['@nuxtjs/tailwindcss'],
   ],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)
   components: true,
-
-  // Global CSS (https://go.nuxtjs.dev/config-css)
-  css: ['plyr/dist/plyr.css'],
 
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head() {
@@ -328,7 +325,7 @@ export default {
     '~/plugins/i18n.ts',
     '~/plugins/marked.ts',
     '~/plugins/paging.ts',
-    '~/plugins/vue-plyr',
+    { src: '~/plugins/vue-plyr', mode: 'client' },
     '~/plugins/vuelidate.ts',
   ],
 

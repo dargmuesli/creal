@@ -97,17 +97,18 @@
           {{ $t('linkCopy') }}
         </button>
       </div>
-      <vue-plyr
-        ref="plyr"
-        :class="{ hidden: !storePlayerModule.isPlayerVisible }"
-        :emit="['ended', 'pause', 'playing', 'timeupdate']"
-        @ended="onPlyrEnded"
-        @pause="onPlyrPause"
-        @playing="onPlyrPlaying"
-        @timeupdate="onPlyrTimeUpdate"
-      >
-        <audio />
-      </vue-plyr>
+      <div :class="{ hidden: !storePlayerModule.isPlayerVisible }">
+        <vue-plyr
+          ref="plyr"
+          :emit="['ended', 'pause', 'playing', 'timeupdate']"
+          @ended="onPlyrEnded"
+          @pause="onPlyrPause"
+          @playing="onPlyrPlaying"
+          @timeupdate="onPlyrTimeUpdate"
+        >
+          <audio />
+        </vue-plyr>
+      </div>
     </div>
   </div>
 </template>
@@ -249,7 +250,7 @@ export default defineComponent({
 
 <style scoped>
 #logo {
-  background-image: url(/assets/static/logos/creal.svg);
+  background-image: url('/assets/static/logos/creal.svg');
   background-repeat: no-repeat;
   background-size: contain;
 }
