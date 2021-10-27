@@ -1,3 +1,10 @@
+# [0.32.0](https://github.com/dargmuesli/creal/compare/0.31.4...0.32.0) (2021-10-27)
+
+
+### Features
+
+* upgrade plyr ([1febffb](https://github.com/dargmuesli/creal/commit/1febffb91f894224f441e3cc1b98f4892777ab02))
+
 ## [0.31.4](https://github.com/dargmuesli/creal/compare/0.31.3...0.31.4) (2021-10-25)
 
 
