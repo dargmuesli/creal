@@ -1,14 +1,6 @@
 <template>
   <div
-    class="
-      flex flex-col
-      lg:flex-row
-      items-center
-      justify-center
-      lg:space-x-4
-      space-y-4
-      lg:space-y-0
-    "
+    class="flex flex-col lg:flex-row items-center justify-center lg:space-x-4 space-y-4 lg:space-y-0"
   >
     <div class="space-y-2 lg:w-1/2">
       <div>{{ datetime }}</div>
@@ -41,6 +33,7 @@ interface Event {
 }
 
 export default defineComponent({
+  name: 'CrealEvent',
   props: {
     event: {
       required: true,

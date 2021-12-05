@@ -31,6 +31,7 @@ export interface Faq {
 }
 
 export default defineComponent({
+  name: 'CrealFaq',
   props: {
     faq: {
       required: true,

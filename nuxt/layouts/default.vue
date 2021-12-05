@@ -49,14 +49,7 @@
     <div class="fixed bottom-0 left-0 right-0">
       <div
         v-if="storePlayerModule.currentTrackName"
-        class="
-          bg-white
-          flex flex-col
-          sm:flex-row
-          font-bold
-          justify-evenly
-          text-black
-        "
+        class="bg-white flex flex-col sm:flex-row font-bold justify-evenly text-black"
       >
         <span>
           {{
@@ -146,6 +139,7 @@ function trackListItemComparator(time: number, b: TrackListItem) {
 }
 
 export default defineComponent({
+  name: 'IndexPage',
   data() {
     return {
       storePlayerModule: getModule(PlayerModule, this.$store),

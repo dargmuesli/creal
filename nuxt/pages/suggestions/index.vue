@@ -106,6 +106,7 @@ import SUGGESTION_CREATE_MUTATION from '~/gql/mutation/suggestion/suggestionCrea
 const consola = require('consola')
 
 export default defineComponent({
+  name: 'IndexPage',
   data() {
     return {
       title: this.$t('titlePage'),

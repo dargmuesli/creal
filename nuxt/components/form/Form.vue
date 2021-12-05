@@ -41,10 +41,11 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from '@nuxtjs/composition-api'
+import { defineComponent, PropType, ref } from '@nuxtjs/composition-api'
 import Button from '~/components/Button.vue'
 
 const Form = defineComponent({
+  name: 'CrealForm',
   props: {
     form: {
       required: true,
@@ -73,6 +74,20 @@ const Form = defineComponent({
       type: String,
     },
   },
+  setup() {
+    const buttonSubmit = ref<InstanceType<typeof Button>>()
+
+    const submit = () => {
+      if (buttonSubmit) {
+        buttonSubmit.value?.click()
+      }
+    }
+
+    return {
+      buttonSubmit,
+      submit,
+    }
+  },
   data() {
     return {
       // TODO: remove with https://github.com/maevsi/maevsi/issues/209.
@@ -96,11 +111,6 @@ const Form = defineComponent({
   methods: {
     reset() {
       ;(this.$refs.form as HTMLFormElement).reset()
-    },
-    submit() {
-      if (this.$refs.buttonSubmit) {
-        ;(this.$refs.buttonSubmit as InstanceType<typeof Button>).click()
-      }
     },
   },
 })
