@@ -85,6 +85,7 @@ export default defineComponent({
   data() {
     return {
       items: undefined as Array<Faq> | undefined,
+      itemFocused: undefined as Faq | undefined,
       title: 'FAQ',
       requestError: undefined,
     }
@@ -126,26 +127,6 @@ export default defineComponent({
       ],
       title,
     }
-  },
-  computed: {
-    itemFocused(): Faq | undefined {
-      let itemFocused: Faq | undefined
-
-      if (process.client && this.items) {
-        for (const item of this.items) {
-          if (slugify(item.title) === window.location.hash.substring(1)) {
-            item.isFocused = true
-            itemFocused = item
-            break
-          }
-        }
-      }
-
-      // if (itemFocused === undefined) {
-      //   itemFocused = null
-      // }
-      return itemFocused
-    },
   },
   watchQuery: ['limit', 'start'],
   mounted() {

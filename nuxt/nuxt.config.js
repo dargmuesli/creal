@@ -36,6 +36,7 @@ export default {
       }
     },
     extractCSS: true,
+    transpile: ['vuex-module-decorators'],
   },
 
   // Modules for dev and build (recommended) (https://go.nuxtjs.dev/config-modules)
