@@ -1,6 +1,15 @@
 import { Inject } from '@nuxt/types/app'
 import { Context } from '@nuxt/types'
 
+export interface Paging {
+  isNextAllowed: Boolean
+  isPreviousAllowed: Boolean
+  items: Array<any>
+  partString: String
+  queryNext: Object
+  queryPrevious: Object
+}
+
 export default (_: Context, inject: Inject) => {
   inject(
     'paging',
@@ -10,7 +19,7 @@ export default (_: Context, inject: Inject) => {
       query: Record<any, any>,
       start: number,
       limit: number
-    ) => {
+    ): Paging => {
       const partString =
         (items.length > 0 ? start + 1 : 0) +
         '-' +

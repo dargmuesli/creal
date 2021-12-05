@@ -36,9 +36,16 @@ import { defineComponent } from '@nuxtjs/composition-api'
 import slugify from 'slugify'
 
 import { Faq } from '~/components/Faq.vue'
+import { Paging } from '~/plugins/paging'
 
 export default defineComponent({
-  async asyncData({ $axios, $paging, query }: Context) {
+  name: 'IndexPage',
+  async asyncData({ $axios, $paging, query }: Context): Promise<
+    | ({
+        itemFocused: Faq | undefined
+      } & Paging)
+    | { requestError: any }
+  > {
     const limit = +(query.limit ? query.limit : 100)
     const start = +(query.start ? query.start : 0)
 
@@ -58,7 +65,7 @@ export default defineComponent({
             _start: String(start),
           }),
         })
-      } catch (e) {
+      } catch (e: any) {
         if (tryCount === maxTryCount) {
           requestError = e
         }
@@ -73,31 +80,11 @@ export default defineComponent({
       }
     }
 
-    let itemFocused
-
-    if (process.client) {
-      for (const item of items) {
-        if (slugify(item.title) === window.location.hash.substring(1)) {
-          item.focused = true
-          itemFocused = item
-          break
-        }
-      }
-    }
-
-    if (itemFocused === undefined) {
-      itemFocused = null
-    }
-
-    return {
-      itemFocused,
-      ...$paging(items, itemsCountTotal, query, start, limit),
-    }
+    return $paging(items, itemsCountTotal, query, start, limit)
   },
   data() {
     return {
       items: undefined as Array<Faq> | undefined,
-      itemFocused: undefined as Faq | undefined,
       title: 'FAQ',
       requestError: undefined,
     }
@@ -139,6 +126,26 @@ export default defineComponent({
       ],
       title,
     }
+  },
+  computed: {
+    itemFocused(): Faq | undefined {
+      let itemFocused: Faq | undefined
+
+      if (process.client && this.items) {
+        for (const item of this.items) {
+          if (slugify(item.title) === window.location.hash.substring(1)) {
+            item.isFocused = true
+            itemFocused = item
+            break
+          }
+        }
+      }
+
+      // if (itemFocused === undefined) {
+      //   itemFocused = null
+      // }
+      return itemFocused
+    },
   },
   watchQuery: ['limit', 'start'],
   mounted() {

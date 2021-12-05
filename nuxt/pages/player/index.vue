@@ -99,6 +99,7 @@ import {
 import PlayerModule from '~/store/modules/PlayerModule'
 
 export default defineComponent({
+  name: 'IndexPage',
   data() {
     return {
       playlistData: null as null | Playlist,

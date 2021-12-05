@@ -2,13 +2,7 @@
   <div class="flex flex-1">
     <div
       :class="{ '-translate-y-full': !showGreeting }"
-      class="
-        duration-1000
-        ease-in-out
-        fullscreen
-        transition-transform
-        transform-gpu
-      "
+      class="duration-1000 ease-in-out fullscreen transition-transform transform-gpu"
     >
       <div class="bg-gray-800 fullscreen"></div>
       <div class="bg-center bg-cover bg-creal bg-no-repeat fullscreen" />
@@ -26,14 +20,7 @@
       </div>
     </div>
     <div
-      class="
-        flex-1
-        gap-4
-        lg:gap-8
-        grid grid-cols-1
-        lg:grid-cols-2
-        items-stretch
-      "
+      class="flex-1 gap-4 lg:gap-8 grid grid-cols-1 lg:grid-cols-2 items-stretch"
     >
       <ButtonBig
         aria-label="Events"
@@ -71,6 +58,7 @@
 import { defineComponent } from '@nuxtjs/composition-api'
 
 export default defineComponent({
+  name: 'IndexPage',
   data() {
     return {
       showGreeting: true,

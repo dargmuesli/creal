@@ -31,6 +31,7 @@ import { Context } from '@nuxt/types'
 import { defineComponent } from '@nuxtjs/composition-api'
 
 export default defineComponent({
+  name: 'IndexPage',
   async asyncData({ $axios, $paging, query }: Context) {
     const limit = +(query.limit ? query.limit : 100)
     const start = +(query.start ? query.start : 0)

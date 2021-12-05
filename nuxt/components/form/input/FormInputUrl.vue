@@ -7,16 +7,7 @@
   >
     <div class="flex">
       <span
-        class="
-          cursor-default
-          inline-flex
-          items-center
-          px-3
-          rounded-l
-          border border-r-0 border-gray-300
-          bg-gray-100
-          text-gray-500
-        "
+        class="cursor-default inline-flex items-center px-3 rounded-l border border-r-0 border-gray-300 bg-gray-100 text-gray-500"
       >
         {{ $t('https') }}
       </span>
