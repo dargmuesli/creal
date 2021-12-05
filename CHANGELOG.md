@@ -1,3 +1,11 @@
+## [0.32.5](https://github.com/dargmuesli/creal/compare/0.32.4...0.32.5) (2021-12-05)
+
+
+### Bug Fixes
+
+* **faq:** remove unnecessary computed property ([3d40a53](https://github.com/dargmuesli/creal/commit/3d40a532e03c58bc17922d04f3ea8e7cc41d6c02))
+* **layout:** render plyr on client only ([89a767d](https://github.com/dargmuesli/creal/commit/89a767d54b07c49daa31876503346f2a9c19039b))
+
 ## [0.32.4](https://github.com/dargmuesli/creal/compare/0.32.3...0.32.4) (2021-12-05)
 
 
