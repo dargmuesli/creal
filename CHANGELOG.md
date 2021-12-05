@@ -1,3 +1,10 @@
+## [0.32.4](https://github.com/dargmuesli/creal/compare/0.32.3...0.32.4) (2021-12-05)
+
+
+### Bug Fixes
+
+* **marked:** upgrade to v4 ([0be0111](https://github.com/dargmuesli/creal/commit/0be01116dbbc0ebfdc550c8cd83656886f8a4c47))
+
 ## [0.32.3](https://github.com/dargmuesli/creal/compare/0.32.2...0.32.3) (2021-12-05)
 
 
