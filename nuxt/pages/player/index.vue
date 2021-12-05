@@ -85,7 +85,6 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@nuxtjs/composition-api'
 import { getModule } from 'vuex-module-decorators'
 import { Route } from 'vue-router'
 
@@ -97,6 +96,8 @@ import {
   mergeByKey,
 } from '../../api/player/playlists'
 import PlayerModule from '~/store/modules/PlayerModule'
+
+import { defineComponent } from '#app'
 
 export default defineComponent({
   name: 'IndexPage',
@@ -209,7 +210,7 @@ export default defineComponent({
         playlistItem.name +
         '.' +
         playlistItem.extension
-      return await this.$axios.$get('/player/signedUrl', {
+      return await this.$axios.$get('/player/signed-url', {
         params: new URLSearchParams({ key }),
       })
     },
@@ -289,7 +290,7 @@ export default defineComponent({
 
       if (playlistItem.meta) {
         this.storePlayerModule.setCurrentTrackMeta(
-          await this.$axios.$get('/player/getObject', {
+          await this.$axios.$get('/player/get-object', {
             params: new URLSearchParams({ key }),
           })
         )

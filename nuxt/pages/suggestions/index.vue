@@ -98,12 +98,11 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@nuxtjs/composition-api'
 import { maxLength, required } from 'vuelidate/lib/validators'
+import consola from 'consola'
 
 import SUGGESTION_CREATE_MUTATION from '~/gql/mutation/suggestion/suggestionCreate.gql'
-
-const consola = require('consola')
+import { defineComponent } from '#app'
 
 export default defineComponent({
   name: 'IndexPage',

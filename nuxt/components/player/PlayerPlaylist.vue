@@ -16,9 +16,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from '@nuxtjs/composition-api'
-
 import { PLAYER_PREFIX, Playlist } from '../../api/player/playlists'
+import { defineComponent, PropType } from '#app'
 
 export default defineComponent({
   props: {
@@ -49,7 +48,7 @@ export default defineComponent({
             : ''
         }${name}.jpg`
       this.displayImageWhenFullyLoaded(
-        this.$axios.$get('/player/signedUrl', {
+        this.$axios.$get('/player/signed-url', {
           params: new URLSearchParams({ key }),
         })
       )

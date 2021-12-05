@@ -2,11 +2,11 @@ import fs from 'fs'
 import { ServerResponse, IncomingMessage } from 'http'
 import { URL } from 'url'
 
-import S3 from 'aws-sdk/clients/s3'
+import S3 from 'aws-sdk/clients/s3.js'
 import AWS from 'aws-sdk'
 import mergeWith from 'lodash.mergewith'
 
-const consola = require('consola')
+import consola from 'consola'
 
 export const PLAYER_PREFIX = 'player/'
 
@@ -246,111 +246,108 @@ export function mergeByKey(target: any, source: any, key: string | number) {
   })
 }
 
-export default {
-  path: '/api/player/playlists',
-  handler(req: IncomingMessage, res: ServerResponse) {
-    const s3 = new S3({
-      apiVersion: '2006-03-01',
-      credentials: new AWS.SharedIniFileCredentials({
-        filename: '/run/secrets/creal_aws-credentials',
-      }),
-      endpoint: 'https://s3.nl-ams.scw.cloud',
-      region: 'nl-ams',
-    })
+export default function (req: IncomingMessage, res: ServerResponse) {
+  const s3 = new S3({
+    apiVersion: '2006-03-01',
+    credentials: new AWS.SharedIniFileCredentials({
+      filename: '/run/secrets/creal_aws-credentials',
+    }),
+    endpoint: 'https://s3.nl-ams.scw.cloud',
+    region: 'nl-ams',
+  })
 
-    const PLAYER_PREFIX_LENGTH = PLAYER_PREFIX.split('/').length - 1
-    const bucket = fs.readFileSync('/run/secrets/creal_aws-bucket', 'utf8')
-    const urlSearchParams = new URL(
-      req.url !== undefined ? req.url : '',
-      'https://example.org/'
-    ).searchParams
-    const continuationToken = urlSearchParams.get('continuation-token')
-    const paramPrefix = urlSearchParams.get('prefix')
-    const paramPrefixLength = paramPrefix ? paramPrefix.split('/').length : 0
-    const paramPrefixLengthTotal = PLAYER_PREFIX_LENGTH + paramPrefixLength
+  const PLAYER_PREFIX_LENGTH = PLAYER_PREFIX.split('/').length - 1
+  const bucket = fs.readFileSync('/run/secrets/creal_aws-bucket', 'utf8')
+  const urlSearchParams = new URL(
+    req.url !== undefined ? req.url : '',
+    'https://example.org/'
+  ).searchParams
+  const continuationToken = urlSearchParams.get('continuation-token')
+  const paramPrefix = urlSearchParams.get('prefix')
+  const paramPrefixLength = paramPrefix ? paramPrefix.split('/').length : 0
+  const paramPrefixLengthTotal = PLAYER_PREFIX_LENGTH + paramPrefixLength
 
-    // https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/S3.html#listObjectsV2-property
-    s3.listObjectsV2(
-      {
-        ...{
-          Bucket: bucket,
-          // MaxKeys: 10,
-        },
-        ...(continuationToken !== null && {
-          ContinuationToken: continuationToken,
-        }),
-        ...(paramPrefix !== null && {
-          Prefix: PLAYER_PREFIX + paramPrefix + '/',
-        }),
+  // https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/S3.html#listObjectsV2-property
+  s3.listObjectsV2(
+    {
+      ...{
+        Bucket: bucket,
+        // MaxKeys: 10,
       },
-      function (err, data) {
-        // On s3 api error.
-        if (err) {
-          res.writeHead(500)
-          res.end(err.message)
-          return
-        }
-
-        if (data.Contents === undefined) {
-          res.writeHead(204)
-          res.end('No content')
-          return
-        }
-
-        const playlistDataExtended: PlaylistExtended = {
-          name: paramPrefix || 'root',
-          collections: [],
-          items: [],
-          cover: false,
-          covers: [],
-          metas: [],
-        }
-
-        // Iterate all subdirectories and files.
-        data.Contents.forEach((content) => {
-          // The content's key is the directory's/file's path.
-          if (content.Key === undefined) {
-            res.writeHead(500)
-            res.end('Content key undefined')
-            return
-          }
-
-          const keyParts = content.Key.split('/')
-
-          // Normalize directories.
-          if (keyParts[keyParts.length - 1] === '') {
-            keyParts.pop()
-          }
-
-          if (
-            ![paramPrefixLengthTotal + 1, paramPrefixLengthTotal + 2].includes(
-              keyParts.length
-            )
-          ) {
-            // Not an item on any requested level.
-            return
-          }
-
-          keyParts.splice(0, paramPrefixLengthTotal)
-
-          const nestedData = getPlaylistExtended(
-            keyParts,
-            content.Size !== undefined ? content.Size : 0
-          )
-
-          mergeByKey(playlistDataExtended, nestedData, 'name')
-        })
-
-        const playlistData = getPlaylist(playlistDataExtended)
-        const result: AxiosPlaylist = {
-          playlistData,
-          ...(data.NextContinuationToken !== undefined && {
-            nextContinuationToken: data.NextContinuationToken,
-          }),
-        }
-        res.setHeader('Content-Type', 'application/json')
-        res.end(JSON.stringify(result))
+      ...(continuationToken !== null && {
+        ContinuationToken: continuationToken,
+      }),
+      ...(paramPrefix !== null && {
+        Prefix: PLAYER_PREFIX + paramPrefix + '/',
+      }),
+    },
+    function (err, data) {
+      // On s3 api error.
+      if (err) {
+        res.writeHead(500)
+        res.end(err.message)
+        return
       }
-    )
-  },
+
+      if (data.Contents === undefined) {
+        res.writeHead(204)
+        res.end('No content')
+        return
+      }
+
+      const playlistDataExtended: PlaylistExtended = {
+        name: paramPrefix || 'root',
+        collections: [],
+        items: [],
+        cover: false,
+        covers: [],
+        metas: [],
+      }
+
+      // Iterate all subdirectories and files.
+      data.Contents.forEach((content) => {
+        // The content's key is the directory's/file's path.
+        if (content.Key === undefined) {
+          res.writeHead(500)
+          res.end('Content key undefined')
+          return
+        }
+
+        const keyParts = content.Key.split('/')
+
+        // Normalize directories.
+        if (keyParts[keyParts.length - 1] === '') {
+          keyParts.pop()
+        }
+
+        if (
+          ![paramPrefixLengthTotal + 1, paramPrefixLengthTotal + 2].includes(
+            keyParts.length
+          )
+        ) {
+          // Not an item on any requested level.
+          return
+        }
+
+        keyParts.splice(0, paramPrefixLengthTotal)
+
+        const nestedData = getPlaylistExtended(
+          keyParts,
+          content.Size !== undefined ? content.Size : 0
+        )
+
+        mergeByKey(playlistDataExtended, nestedData, 'name')
+      })
+
+      const playlistData = getPlaylist(playlistDataExtended)
+      const result: AxiosPlaylist = {
+        playlistData,
+        ...(data.NextContinuationToken !== undefined && {
+          nextContinuationToken: data.NextContinuationToken,
+        }),
+      }
+      res.setHeader('Content-Type', 'application/json')
+      res.end(JSON.stringify(result))
+    }
+  )
 }

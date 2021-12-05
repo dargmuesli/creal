@@ -41,7 +41,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, ref } from '@nuxtjs/composition-api'
+import { defineComponent, PropType, ref } from '#app'
+
 import Button from '~/components/Button.vue'
 
 const Form = defineComponent({

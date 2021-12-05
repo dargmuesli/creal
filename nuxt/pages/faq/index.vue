@@ -32,11 +32,12 @@
 
 <script lang="ts">
 import { Context } from '@nuxt/types'
-import { defineComponent } from '@nuxtjs/composition-api'
 import slugify from 'slugify'
 
 import { Faq } from '~/components/Faq.vue'
 import { Paging } from '~/plugins/paging'
+
+import { defineComponent } from '#app'
 
 export default defineComponent({
   name: 'IndexPage',

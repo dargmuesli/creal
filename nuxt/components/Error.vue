@@ -4,7 +4,7 @@
 
 <script lang="ts">
 import status from '@http-util/status-i18n'
-import { defineComponent, PropType } from '@nuxtjs/composition-api'
+import { defineComponent, PropType } from '#app'
 
 export default defineComponent({
   name: 'CrealError',

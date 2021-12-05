@@ -14,6 +14,7 @@
     "strict": true,
     "noEmit": true,
     "experimentalDecorators": true,
+    "resolveJsonModule": true,
     "baseUrl": ".",
     "paths": {
       "~/*": [
@@ -45,4 +46,5 @@
     "dist"
   ],
   "importHelpers": true, // https://championswimmer.in/vuex-module-decorators/pages/installation.html#typescript
+  "extends": "./.nuxt/tsconfig.json"
 }

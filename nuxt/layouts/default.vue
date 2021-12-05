@@ -109,12 +109,13 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@nuxtjs/composition-api'
 import { getModule } from 'vuex-module-decorators'
 import Plyr from 'plyr'
 
 import { TrackListItem } from '../api/player/playlists'
 import PlayerModule from '~/store/modules/PlayerModule'
+
+import { defineComponent } from '#app'
 
 function binarySearch(ar: any[], el: any, compareFn: Function) {
   let m = 0

@@ -20,10 +20,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from '@nuxtjs/composition-api'
 import prettyBytes from 'pretty-bytes'
-
 import { PlaylistItem } from '../../api/player/playlists'
+import { defineComponent, PropType } from '#app'
 
 export default defineComponent({
   props: {

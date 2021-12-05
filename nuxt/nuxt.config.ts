@@ -1,3 +1,4 @@
+import { defineNuxtConfig } from '@nuxt/bridge'
 import shrinkRay from 'shrink-ray-current'
 
 import localeDe from './locales/de.json'
@@ -17,32 +18,29 @@ const LOCALES = [
   },
 ]
 
-export default {
+export default defineNuxtConfig({
+  alias: {
+    tslib: 'tslib/tslib.es6.js',
+  },
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {
     babel: {
-      presets({ _isServer }) {
+      presets() {
         return [
           ['@nuxt/babel-preset-app', { loose: true, corejs: { version: 3 } }],
         ]
       },
     },
-    /*
-     ** You can extend webpack config here
-     */
-    extend(config, _ctx) {
+    extend(config) {
       config.node = {
         fs: 'empty',
       }
     },
     extractCSS: true,
-    transpile: ['vuex-module-decorators'],
   },
 
   // Modules for dev and build (recommended) (https://go.nuxtjs.dev/config-modules)
   buildModules: [
-    // https://go.nuxtjs.dev/typescript
-    '@nuxt/typescript-build',
     [
       '@nuxtjs/fontawesome',
       {
@@ -66,14 +64,18 @@ export default {
         useLayersText: false,
       },
     ],
-    '@nuxtjs/composition-api/module',
     '@nuxtjs/html-validator',
     // Doc: https://github.com/nuxt-community/moment-module
     ['@nuxtjs/moment', { locales: ['de'], plugins: ['twix'] }],
     // https://go.nuxtjs.dev/stylelint
     '@nuxtjs/stylelint-module',
     // https://go.nuxtjs.dev/tailwindcss
-    ['@nuxtjs/tailwindcss'],
+    [
+      '@nuxtjs/tailwindcss',
+      {
+        viewer: false,
+      },
+    ],
   ],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)
@@ -242,7 +244,7 @@ export default {
           content: 'DJ cReal',
         },
       ],
-      titleTemplate: (titleChunk) => {
+      titleTemplate: (titleChunk: string) => {
         return titleChunk ? `${titleChunk} - DJ cReal` : 'DJ cReal'
       },
     }
@@ -373,10 +375,10 @@ export default {
   },
 
   serverMiddleware: [
-    '~/middleware/server/headers.ts',
-    '~/api/player/getObject.ts',
-    '~/api/player/playlists.ts',
-    '~/api/player/signedUrl.ts',
+    { path: '*', handler: '~/middleware/server/headers.ts' },
+    { path: '/api/player/get-object', handler: '~/api/player/getObject.ts' },
+    { path: '/api/player/playlists', handler: '~/api/player/playlists.ts' },
+    { path: '/api/player/signed-url', handler: '~/api/player/signedUrl.ts' },
   ],
 
   vue: {
@@ -384,4 +386,4 @@ export default {
       productionTip: false,
     },
   },
-}
+})
