@@ -91,16 +91,18 @@
         </button>
       </div>
       <div :class="{ hidden: !storePlayerModule.isPlayerVisible }">
-        <vue-plyr
-          ref="plyr"
-          :emit="['ended', 'pause', 'playing', 'timeupdate']"
-          @ended="onPlyrEnded"
-          @pause="onPlyrPause"
-          @playing="onPlyrPlaying"
-          @timeupdate="onPlyrTimeUpdate"
-        >
-          <audio />
-        </vue-plyr>
+        <ClientOnly>
+          <vue-plyr
+            ref="plyr"
+            :emit="['ended', 'pause', 'playing', 'timeupdate']"
+            @ended="onPlyrEnded"
+            @pause="onPlyrPause"
+            @playing="onPlyrPlaying"
+            @timeupdate="onPlyrTimeUpdate"
+          >
+            <audio />
+          </vue-plyr>
+        </ClientOnly>
       </div>
     </div>
   </div>
