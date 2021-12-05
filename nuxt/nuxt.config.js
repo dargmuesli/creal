@@ -326,7 +326,7 @@ export default {
     '~/plugins/i18n.ts',
     '~/plugins/marked.ts',
     '~/plugins/paging.ts',
-    { src: '~/plugins/vue-plyr', mode: 'client' },
+    { src: '~/plugins/vue-plyr.js', mode: 'client' },
     '~/plugins/vuelidate.ts',
   ],
 
