@@ -17,6 +17,9 @@
     "resolveJsonModule": true,
     "baseUrl": ".",
     "paths": {
+      "#app": [
+        "node_modules/@nuxt/bridge/dist/runtime/index"
+      ],
       "~/*": [
         "./*"
       ],
@@ -25,19 +28,15 @@
       ]
     },
     "types": [
-      "@types/node",
       "@nuxt/types",
       "@nuxtjs/axios",
       "@nuxtjs/i18n",
       "@nuxtjs/moment",
+      "@types/node",
       "twix",
       "vue-apollo/types",
       "vue-clipboard2",
       "vue-sweetalert2",
-    ],
-    "typeRoots": [
-      "types",
-      "node_modules/@types"
     ]
   },
   "exclude": [
