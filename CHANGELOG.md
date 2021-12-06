@@ -1,3 +1,10 @@
+# [0.33.0](https://github.com/dargmuesli/creal/compare/0.32.5...0.33.0) (2021-12-06)
+
+
+### Features
+
+* **nuxt:** use bridge ([c3b5001](https://github.com/dargmuesli/creal/commit/c3b5001e16c35d4a16f57bf2e351b688ea511b46))
+
 ## [0.32.5](https://github.com/dargmuesli/creal/compare/0.32.4...0.32.5) (2021-12-05)
 
 
