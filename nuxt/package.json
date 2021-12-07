@@ -8,7 +8,7 @@
   "scripts": {
     "dev": "nuxi dev",
     "build": "nuxi build",
-    "start": "nuxi start",
+    "start": "node .output/server/index.mjs",
     "lint:js": "eslint --ext .js,.ts,.vue --ignore-path .gitignore .",
     "lint:style": "stylelint **/*.{vue,css} --ignore-path .gitignore",
     "lint": "yarn lint:js && yarn lint:style"
