@@ -21,7 +21,7 @@
 
 <script lang="ts">
 import prettyBytes from 'pretty-bytes'
-import { PlaylistItem } from '../../api/player/playlists'
+import { PlaylistItem } from '../../server/api/player/playlists'
 import { defineComponent, PropType } from '#app'
 
 export default defineComponent({

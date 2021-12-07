@@ -94,7 +94,7 @@ import {
   Playlist,
   PlaylistItem,
   mergeByKey,
-} from '../../api/player/playlists'
+} from '../../server/api/player/playlists'
 import PlayerModule from '~/store/modules/PlayerModule'
 
 import { defineComponent } from '#app'

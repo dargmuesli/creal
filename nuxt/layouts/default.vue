@@ -112,7 +112,7 @@
 import { getModule } from 'vuex-module-decorators'
 import Plyr from 'plyr'
 
-import { TrackListItem } from '../api/player/playlists'
+import { TrackListItem } from '../server/api/player/playlists'
 import PlayerModule from '~/store/modules/PlayerModule'
 
 import { defineComponent } from '#app'

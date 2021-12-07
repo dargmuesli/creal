@@ -16,7 +16,7 @@
 </template>
 
 <script lang="ts">
-import { PLAYER_PREFIX, Playlist } from '../../api/player/playlists'
+import { PLAYER_PREFIX, Playlist } from '../../server/api/player/playlists'
 import { defineComponent, PropType } from '#app'
 
 export default defineComponent({

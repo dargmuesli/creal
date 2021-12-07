@@ -37,6 +37,16 @@ export default defineNuxtConfig({
       }
     },
     extractCSS: true,
+    transpile: [
+      '@http-util/status-i18n',
+      'abort-controller',
+      'cross-fetch',
+      'graphql',
+      'moment',
+      'subscriptions-transport-ws',
+      'tslib',
+      'universal-cookie',
+    ],
   },
 
   // Modules for dev and build (recommended) (https://go.nuxtjs.dev/config-modules)
@@ -267,7 +277,6 @@ export default defineNuxtConfig({
       },
     ], // Should be declared at the start of the array.
     'nuxt-clipboard2',
-    'nuxt-healthcheck',
     [
       '@nuxtjs/apollo',
       {
@@ -373,13 +382,6 @@ export default defineNuxtConfig({
       reportOnly: false,
     },
   },
-
-  serverMiddleware: [
-    { path: '*', handler: '~/middleware/server/headers.ts' },
-    { path: '/api/player/get-object', handler: '~/api/player/getObject.ts' },
-    { path: '/api/player/playlists', handler: '~/api/player/playlists.ts' },
-    { path: '/api/player/signed-url', handler: '~/api/player/signedUrl.ts' },
-  ],
 
   vue: {
     config: {

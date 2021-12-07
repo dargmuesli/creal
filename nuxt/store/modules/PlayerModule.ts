@@ -1,6 +1,6 @@
 import { Module, VuexModule, Mutation } from 'vuex-module-decorators'
 
-import { PlaylistItemMeta } from '~/api/player/playlists'
+import { PlaylistItemMeta } from '~/server/api/player/playlists'
 
 @Module({
   name: 'modules/PlayerModule',
