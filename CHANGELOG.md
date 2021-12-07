@@ -1,3 +1,10 @@
+## [0.33.1](https://github.com/dargmuesli/creal/compare/0.33.0...0.33.1) (2021-12-07)
+
+
+### Bug Fixes
+
+* **package:** correct start command ([d810894](https://github.com/dargmuesli/creal/commit/d81089402577d0c57712bd02165460ba2a2dc474))
+
 # [0.33.0](https://github.com/dargmuesli/creal/compare/0.32.5...0.33.0) (2021-12-06)
 
 
