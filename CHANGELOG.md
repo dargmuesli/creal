@@ -1,3 +1,10 @@
+# [0.34.0](https://github.com/dargmuesli/creal/compare/0.33.4...0.34.0) (2021-12-08)
+
+
+### Features
+
+* **strapi:** migrate to v4 ([ad54065](https://github.com/dargmuesli/creal/commit/ad540655d5bc8ee70a764f4f5825a01bb6b6df9f))
+
 ## [0.33.4](https://github.com/dargmuesli/creal/compare/0.33.3...0.33.4) (2021-12-08)
 
 
