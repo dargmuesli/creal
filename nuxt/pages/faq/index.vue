@@ -63,9 +63,9 @@ export default defineComponent({
         items = (
           (await $http.$get('/faqs', {
             searchParams: new URLSearchParams({
-              sort: 'title:desc',
               'pagination[limit]': String(limit),
               'pagination[start]': String(start),
+              sort: 'title:desc',
             }),
           })) as any
         ).data

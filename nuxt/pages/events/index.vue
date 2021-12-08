@@ -51,11 +51,12 @@ export default defineComponent({
         eventsCountTotal = ((await $http.$get('/events')) as any).meta
           .pagination.total
         events = (
-          (await $http.$get('/events?populate=image', {
+          (await $http.$get('/events', {
             searchParams: new URLSearchParams({
-              sort: 'dateStart:desc',
               'pagination[limit]': String(limit),
               'pagination[start]': String(start),
+              populate: 'image',
+              sort: 'dateStart:desc',
             }),
           })) as any
         ).data
