@@ -1,3 +1,10 @@
+## [0.34.1](https://github.com/dargmuesli/creal/compare/0.34.0...0.34.1) (2021-12-08)
+
+
+### Bug Fixes
+
+* **proxy:** replace with $http ([c53afd7](https://github.com/dargmuesli/creal/commit/c53afd7287ecdc5e2fd50e4eb4f4b494b6d31a3a))
+
 # [0.34.0](https://github.com/dargmuesli/creal/compare/0.33.4...0.34.0) (2021-12-08)
 
 
