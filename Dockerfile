@@ -96,5 +96,5 @@ COPY ./sqitch/ /srv/sqitch/
 COPY ./docker-entrypoint.sh /usr/local/bin/
 
 ENTRYPOINT ["docker-entrypoint.sh"]
-CMD ["nuxt", "start"]
+CMD ["start"]
 HEALTHCHECK --interval=10s CMD curl -f http://localhost:3000/api/healthcheck || exit 1
