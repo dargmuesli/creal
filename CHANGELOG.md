@@ -1,3 +1,10 @@
+## [0.33.3](https://github.com/dargmuesli/creal/compare/0.33.2...0.33.3) (2021-12-08)
+
+
+### Bug Fixes
+
+* **plugins:** rename global to util ([fd0b962](https://github.com/dargmuesli/creal/commit/fd0b962e333cd876c74bc9b5e0ed1245f37e2e7d))
+
 ## [0.33.2](https://github.com/dargmuesli/creal/compare/0.33.1...0.33.2) (2021-12-07)
 
 
