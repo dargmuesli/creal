@@ -1,3 +1,10 @@
+## [0.34.3](https://github.com/dargmuesli/creal/compare/0.34.2...0.34.3) (2021-12-08)
+
+
+### Bug Fixes
+
+* **ci:** correct event name ([750bc87](https://github.com/dargmuesli/creal/commit/750bc879475d8a66b4faf4d79237124f798fa111))
+
 ## [0.34.2](https://github.com/dargmuesli/creal/compare/0.34.1...0.34.2) (2021-12-08)
 
 
