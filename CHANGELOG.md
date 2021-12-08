@@ -1,3 +1,10 @@
+## [0.34.4](https://github.com/dargmuesli/creal/compare/0.34.3...0.34.4) (2021-12-08)
+
+
+### Bug Fixes
+
+* **http:** correct query parameter ([785f774](https://github.com/dargmuesli/creal/commit/785f774920ddc9a52d31bce17d9002e83622a97d))
+
 ## [0.34.3](https://github.com/dargmuesli/creal/compare/0.34.2...0.34.3) (2021-12-08)
 
 
