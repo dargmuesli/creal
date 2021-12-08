@@ -1,3 +1,11 @@
+## [0.33.4](https://github.com/dargmuesli/creal/compare/0.33.3...0.33.4) (2021-12-08)
+
+
+### Bug Fixes
+
+* **csp:** remove trailing slashes ([e9d6ed8](https://github.com/dargmuesli/creal/commit/e9d6ed8172984944a7a483396958b6c9fa05edf5))
+* **docker:** correct production start command ([c361fcf](https://github.com/dargmuesli/creal/commit/c361fcfede9e0d3f72e626c25a347b585963b809))
+
 ## [0.33.3](https://github.com/dargmuesli/creal/compare/0.33.2...0.33.3) (2021-12-08)
 
 
