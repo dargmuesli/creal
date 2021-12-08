@@ -160,7 +160,7 @@ export default defineComponent({
   methods: {
     async submit() {
       try {
-        await this.$global.formPreSubmit(this)
+        await this.$util.formPreSubmit(this)
       } catch (error) {
         return
       }

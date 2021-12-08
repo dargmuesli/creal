@@ -30,26 +30,26 @@ export function formPreSubmit(that: any): Promise<void> {
   })
 }
 
-const globals = {
+const util = {
   VALIDATION_SUGGESTION_TITLE_LENGTH_MAXIMUM,
   formPreSubmit,
 }
 
 export default (_: Context, inject: Inject) => {
-  inject('global', globals)
+  inject('util', util)
 }
 
 declare module 'vue/types/vue' {
   interface Vue {
-    $global: typeof globals
+    $util: typeof util
   }
 }
 
 declare module '@nuxt/types' {
   interface NuxtAppOptions {
-    $global: typeof globals
+    $util: typeof util
   }
   interface Context {
-    $global: typeof globals
+    $util: typeof util
   }
 }

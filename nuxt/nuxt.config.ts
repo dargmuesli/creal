@@ -333,10 +333,10 @@ export default defineNuxtConfig({
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
   plugins: [
     '~/plugins/baseUrl.ts',
-    '~/plugins/global.ts',
     '~/plugins/i18n.ts',
     '~/plugins/marked.ts',
     '~/plugins/paging.ts',
+    '~/plugins/util.ts',
     { src: '~/plugins/vue-plyr.js', mode: 'client' },
     '~/plugins/vuelidate.ts',
   ],
