@@ -1,3 +1,10 @@
+## [0.34.2](https://github.com/dargmuesli/creal/compare/0.34.1...0.34.2) (2021-12-08)
+
+
+### Bug Fixes
+
+* **ci:** use GH_TOKEN ([701cbf8](https://github.com/dargmuesli/creal/commit/701cbf84f433db81bfa1cfe76fd07b4fd6658a10))
+
 ## [0.34.1](https://github.com/dargmuesli/creal/compare/0.34.0...0.34.1) (2021-12-08)
 
 
