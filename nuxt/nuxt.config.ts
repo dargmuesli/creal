@@ -357,7 +357,7 @@ export default defineNuxtConfig({
         'connect-src': [
           "'self'", // Nuxt development.
           `https://*.${STACK_DOMAIN}`, // PostGraphile, ...
-          'https://cdn.plyr.io/', // Plyr.
+          'https://cdn.plyr.io', // Plyr.
         ],
         'default-src': ["'none'"],
         'form-action': ["'none'"], // Mozilla Observatory.
@@ -365,15 +365,15 @@ export default defineNuxtConfig({
         'img-src': [
           "'self'",
           `https://strapi.${STACK_DOMAIN}`,
-          `https://${AWS_BUCKET_NAME}.s3.nl-ams.scw.cloud/`, // Playlist cover.
+          `https://${AWS_BUCKET_NAME}.s3.nl-ams.scw.cloud`, // Playlist cover.
         ],
         'media-src': [
           'https://cdn.plyr.io/static/blank.mp4', // Plyr.
-          `https://${AWS_BUCKET_NAME}.s3.nl-ams.scw.cloud/`, // Music.
+          `https://${AWS_BUCKET_NAME}.s3.nl-ams.scw.cloud`, // Music.
         ],
         'manifest-src': ["'self'"], // Chrome
         'report-uri': 'https://dargmuesli.report-uri.com/r/d/csp/enforce',
-        'script-src': ['https://static.cloudflareinsights.com/beacon.min.js'],
+        'script-src': ['https://static.cloudflareinsights.com'],
         'style-src': [
           "'self'", // Tailwind
           "'sha256-WcR1Ar+4qu9KupBnfKnc/wVoMHhfObQDhd2xlj6DG4o='",
