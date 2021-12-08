@@ -36,7 +36,7 @@ import { defineComponent } from '#app'
 
 export default defineComponent({
   name: 'IndexPage',
-  async asyncData({ $axios, $paging, query }: Context) {
+  async asyncData({ $http, $paging, query }: Context) {
     const limit = +(query.limit ? query.limit : 100)
     const start = +(query.start ? query.start : 0)
 
@@ -48,16 +48,16 @@ export default defineComponent({
 
     while (tryCount <= maxTryCount && !(eventsCountTotal && events)) {
       try {
-        eventsCountTotal = (await $axios.$get('/strapi/events')).meta.pagination
-          .total
+        eventsCountTotal = ((await $http.$get('/events')) as any).meta
+          .pagination.total
         events = (
-          await $axios.$get('/strapi/events?populate=image', {
-            params: new URLSearchParams({
+          (await $http.$get('/events?populate=image', {
+            searchParams: new URLSearchParams({
               sort: 'dateStart:desc',
               'pagination[limit]': String(limit),
               'pagination[start]': String(start),
             }),
-          })
+          })) as any
         ).data
       } catch (e) {
         if (tryCount === maxTryCount) {

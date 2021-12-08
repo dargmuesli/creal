@@ -279,6 +279,13 @@ export default defineNuxtConfig({
     ], // Should be declared at the start of the array.
     'nuxt-clipboard2',
     [
+      '@nuxt/http',
+      {
+        baseURL: 'http://creal_strapi:1337/api/',
+        browserBaseURL: `https://strapi.${STACK_DOMAIN}/api/`,
+      },
+    ],
+    [
       '@nuxtjs/apollo',
       {
         clientConfigs: {
@@ -318,7 +325,6 @@ export default defineNuxtConfig({
         vueI18nLoader: true,
       },
     ],
-    '@nuxtjs/proxy',
     [
       '@nuxtjs/robots',
       {
@@ -341,14 +347,6 @@ export default defineNuxtConfig({
     { src: '~/plugins/vue-plyr.js', mode: 'client' },
     '~/plugins/vuelidate.ts',
   ],
-
-  // Cannot be moved to modules.
-  proxy: {
-    '/api/strapi/': {
-      target: 'http://creal_strapi:1337/',
-      pathRewrite: { '^/api/strapi': '/api' },
-    },
-  },
 
   render: {
     compressor: shrinkRay(),
