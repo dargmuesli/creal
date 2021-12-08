@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section v-if="faq">
     <button
       class="flex p-4 w-full"
       :class="{ 'border-b': faq.isFocused }"

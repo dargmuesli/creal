@@ -17,7 +17,7 @@
             :key="item.id"
             class="border my-4 p-4 rounded first:mt-0 last:mb-0"
           >
-            <Event :event="item" />
+            <Event :event="item.attributes" />
           </li>
         </ul>
       </Paging>
@@ -28,6 +28,10 @@
 
 <script lang="ts">
 import { Context } from '@nuxt/types'
+
+import { Event as CrealEvent } from '~/components/Event.vue'
+import { CollectionItem } from '~/plugins/paging'
+
 import { defineComponent } from '#app'
 
 export default defineComponent({
@@ -44,14 +48,17 @@ export default defineComponent({
 
     while (tryCount <= maxTryCount && !(eventsCountTotal && events)) {
       try {
-        eventsCountTotal = await $axios.$get('/strapi/events/count')
-        events = await $axios.$get('/strapi/events', {
-          params: new URLSearchParams({
-            _sort: 'dateStart:DESC',
-            _limit: String(limit),
-            _start: String(start),
-          }),
-        })
+        eventsCountTotal = (await $axios.$get('/strapi/events')).meta.pagination
+          .total
+        events = (
+          await $axios.$get('/strapi/events?populate=image', {
+            params: new URLSearchParams({
+              sort: 'dateStart:desc',
+              'pagination[limit]': String(limit),
+              'pagination[start]': String(start),
+            }),
+          })
+        ).data
       } catch (e) {
         if (tryCount === maxTryCount) {
           requestError = e
@@ -71,6 +78,7 @@ export default defineComponent({
   },
   data() {
     return {
+      items: undefined as Array<CollectionItem<CrealEvent>> | undefined,
       requestError: undefined,
       title: 'Events',
     }

@@ -45,6 +45,7 @@ export default defineNuxtConfig({
       'moment',
       'subscriptions-transport-ws',
       'tslib',
+      'twix',
       'universal-cookie',
     ],
   },
@@ -345,7 +346,7 @@ export default defineNuxtConfig({
   proxy: {
     '/api/strapi/': {
       target: 'http://creal_strapi:1337/',
-      pathRewrite: { '^/api/strapi': '' },
+      pathRewrite: { '^/api/strapi': '/api' },
     },
   },
 

@@ -14,14 +14,14 @@
         <ul class="list-none">
           <li
             v-for="item in items"
-            :key="slugify(item.title)"
+            :key="slugify(item.attributes.title)"
             class="border duration-300 first:rounded-t last:rounded-b"
             :class="{
               'my-4': itemFocused === item,
               'mx-8 -my-px': itemFocused !== item,
             }"
           >
-            <Faq :faq="item" @click="(e) => toggleItemFocused(e)" />
+            <Faq :faq="item.attributes" @click="toggleItemFocused(item)" />
           </li>
         </ul>
       </Paging>
@@ -35,7 +35,7 @@ import { Context } from '@nuxt/types'
 import slugify from 'slugify'
 
 import { Faq } from '~/components/Faq.vue'
-import { Paging } from '~/plugins/paging'
+import { CollectionItem, Paging } from '~/plugins/paging'
 
 import { defineComponent } from '#app'
 
@@ -58,14 +58,17 @@ export default defineComponent({
 
     while (tryCount <= maxTryCount && !(itemsCountTotal && items)) {
       try {
-        itemsCountTotal = await $axios.$get('/strapi/faqs/count')
-        items = await $axios.$get('/strapi/faqs', {
-          params: new URLSearchParams({
-            _sort: 'title:DESC',
-            _limit: String(limit),
-            _start: String(start),
-          }),
-        })
+        itemsCountTotal = (await $axios.$get('/strapi/faqs')).meta.pagination
+          .total
+        items = (
+          await $axios.$get('/strapi/faqs', {
+            params: new URLSearchParams({
+              sort: 'title:desc',
+              'pagination[limit]': String(limit),
+              'pagination[start]': String(start),
+            }),
+          })
+        ).data
       } catch (e: any) {
         if (tryCount === maxTryCount) {
           requestError = e
@@ -85,8 +88,8 @@ export default defineComponent({
   },
   data() {
     return {
-      items: undefined as Array<Faq> | undefined,
-      itemFocused: undefined as Faq | undefined,
+      items: undefined as Array<CollectionItem<Faq>> | undefined,
+      itemFocused: undefined as CollectionItem<Faq> | undefined,
       title: 'FAQ',
       requestError: undefined,
     }
@@ -134,8 +137,8 @@ export default defineComponent({
     if (!this.items) return
 
     for (const item of this.items) {
-      if (slugify(item.title) === window.location.hash.substring(1)) {
-        this.$set(item, 'isFocused', true)
+      if (slugify(String(item.id)) === window.location.hash.substring(1)) {
+        this.$set(item.attributes, 'isFocused', true)
         this.itemFocused = item
         break
       }
@@ -145,11 +148,11 @@ export default defineComponent({
     slugify(input: string) {
       return slugify(input)
     },
-    toggleItemFocused(item: any) {
+    toggleItemFocused(item: CollectionItem<Faq>) {
       if (!this.itemFocused) {
         this.focusItem(item)
       } else {
-        this.$set(this.itemFocused, 'isFocused', false)
+        this.$set(this.itemFocused.attributes, 'isFocused', false)
 
         if (this.itemFocused === item) {
           this.itemFocused = undefined
@@ -163,10 +166,10 @@ export default defineComponent({
         }
       }
     },
-    focusItem(item: any) {
-      this.$set(item, 'isFocused', true)
+    focusItem(item: CollectionItem<Faq>) {
+      this.$set(item.attributes, 'isFocused', true)
       this.itemFocused = item
-      history.replaceState(undefined, '', `#${slugify(item.title)}`)
+      history.replaceState(undefined, '', `#${slugify(String(item.id))}`)
     },
   },
 })

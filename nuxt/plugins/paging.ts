@@ -10,6 +10,11 @@ export interface Paging {
   queryPrevious: Object
 }
 
+export interface CollectionItem<T> {
+  id: number
+  attributes: T
+}
+
 export default (_: Context, inject: Inject) => {
   inject(
     'paging',

@@ -20,16 +20,18 @@
 </template>
 
 <script lang="ts">
+import { CollectionItem } from '~/plugins/paging'
+
 import { defineComponent, PropType } from '#app'
 
 interface Image {
   url: URL
 }
 
-interface Event {
+export interface Event {
   dateEnd: Date
   dateStart: Date
-  image: Image
+  image: { data: CollectionItem<Image> }
 }
 
 export default defineComponent({
@@ -57,7 +59,7 @@ export default defineComponent({
       return moment.format('ddd D MMM YYYY, h:mm')
     },
     strapiDomain(): string {
-      return `https://strapi.${process.env.NUXT_ENV_STACK_DOMAIN}${this.event.image.url}`
+      return `https://strapi.${process.env.NUXT_ENV_STACK_DOMAIN}${this.event.image.data.attributes.url}`
     },
   },
 })
