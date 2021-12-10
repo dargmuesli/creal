@@ -1,4 +1,4 @@
-const defaultTheme = require('tailwindcss/defaultTheme')
+const colors = require('tailwindcss/colors')
 
 function heading(theme) {
   return {
@@ -47,7 +47,6 @@ function prose(theme) {
 }
 
 module.exports = {
-  mode: 'jit',
   plugins: [
     require('@tailwindcss/forms'),
     require('@tailwindcss/line-clamp'),
@@ -138,11 +137,11 @@ module.exports = {
       },
       colors: {
         background: {
-          body: defaultTheme.colors.gray['800'],
-          dark: defaultTheme.colors.gray['900'],
+          body: colors.gray['800'],
+          dark: colors.gray['900'],
         },
-        link: defaultTheme.colors.blue['400'],
-        text: defaultTheme.colors.white,
+        link: colors.blue['400'],
+        text: colors.white,
       },
       keyframes: {
         shake: {
@@ -193,9 +192,5 @@ module.exports = {
     maxHeight: {
       0: '0',
     },
-  },
-  variants: {
-    borderWidth: ['first'],
-    margin: ['responsive', 'first', 'last'],
   },
 }
