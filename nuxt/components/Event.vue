@@ -9,7 +9,7 @@
       <div v-if="event.description" v-html="$marked(event.description)" />
     </div>
     <div class="space-y-4 lg:w-1/2">
-      <img v-if="event.image" alt="Event image." :src="strapiDomain" />
+      <img v-if="event.image.data" alt="Event image." :src="strapiDomain" />
       <div v-if="event.url && event.url !== ''" class="text-center">
         <Button :aria-label="$t('details')" :icon="false" :to="event.url">
           {{ $t('details') }}
