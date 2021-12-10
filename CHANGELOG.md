@@ -1,3 +1,10 @@
+## [0.34.5](https://github.com/dargmuesli/creal/compare/0.34.4...0.34.5) (2021-12-10)
+
+
+### Bug Fixes
+
+* **event:** correct image null check ([5c73595](https://github.com/dargmuesli/creal/commit/5c73595274f1600858e08fba03ab50fcda886e29))
+
 ## [0.34.4](https://github.com/dargmuesli/creal/compare/0.34.3...0.34.4) (2021-12-08)
 
 
