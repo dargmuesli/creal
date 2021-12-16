@@ -26,9 +26,7 @@ export default defineNuxtConfig({
   build: {
     babel: {
       presets() {
-        return [
-          ['@nuxt/babel-preset-app', { loose: true, corejs: { version: 3 } }],
-        ]
+        return [['@nuxt/babel-preset-app', { corejs: { version: 3 } }]]
       },
     },
     extend(config) {
