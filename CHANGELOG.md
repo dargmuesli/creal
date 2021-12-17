@@ -1,3 +1,16 @@
+# [0.36.0](https://github.com/dargmuesli/creal/compare/0.35.0...0.36.0) (2021-12-17)
+
+
+### Bug Fixes
+
+* **tailwind:** split configuration content ([842b87b](https://github.com/dargmuesli/creal/commit/842b87b0fc6b09641476a5dad4365d31838bfb01))
+
+
+### Features
+
+* drop tailwindcss plugin ([924fafb](https://github.com/dargmuesli/creal/commit/924fafb483646839883ccfec3ec46c07e6328b25))
+* **tailwindcss:** migrate to v3 ([8e8d738](https://github.com/dargmuesli/creal/commit/8e8d73858208c184c8d0c73b883117691cb85c9d))
+
 # [0.35.0](https://github.com/dargmuesli/creal/compare/0.34.5...0.35.0) (2021-12-16)
 
 
