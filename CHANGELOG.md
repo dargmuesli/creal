@@ -1,3 +1,17 @@
+# [0.35.0](https://github.com/dargmuesli/creal/compare/0.34.5...0.35.0) (2021-12-16)
+
+
+### Features
+
+* **babel:** remove loose configuration ([f2c4ef1](https://github.com/dargmuesli/creal/commit/f2c4ef1b4af4a1d40d00c245d1c2970e4aaf43bb))
+
+## [0.34.5](https://github.com/dargmuesli/creal/compare/0.34.4...0.34.5) (2021-12-10)
+
+
+### Bug Fixes
+
+* **event:** correct image null check ([5c73595](https://github.com/dargmuesli/creal/commit/5c73595274f1600858e08fba03ab50fcda886e29))
+
 ## [0.34.4](https://github.com/dargmuesli/creal/compare/0.34.3...0.34.4) (2021-12-08)
 
 
