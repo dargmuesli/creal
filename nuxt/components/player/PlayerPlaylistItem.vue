@@ -8,7 +8,7 @@
       <font-awesome-icon :icon="['fas', 'download']" />
     </button>
     <button
-      class="cursor-default flex-grow py-2 lg:py-3 text-left"
+      class="cursor-default grow py-2 lg:py-3 text-left"
       @click="onItemClick"
     >
       {{ playlistItem.name.replace(/^cReal - /, '') }}

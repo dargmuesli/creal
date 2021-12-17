@@ -2,7 +2,7 @@
   <div class="container mx-auto">
     <section>
       <h1>{{ title }}</h1>
-      <div class="bg-gray-900 flex-grow p-4 rounded">
+      <div class="bg-gray-900 grow p-4 rounded">
         <div v-if="$fetchState.pending" class="text-center">
           <svg
             class="animate-spin h-16 m-auto text-white w-16"
