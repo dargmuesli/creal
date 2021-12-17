@@ -52,7 +52,8 @@ module.exports = {
     './layouts/**/*.vue',
     './pages/**/*.vue',
     './plugins/**/*.{js,ts}',
-    './nuxt.config.{js,ts}',
+    './nuxt.config.js',
+    './nuxt.config.ts',
   ],
   plugins: [
     require('@tailwindcss/forms'),
