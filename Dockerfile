@@ -3,7 +3,7 @@
 
 # Should be the specific version of node:buster-slim.
 # `sqitch` requires at least buster.
-FROM node:16.13.1-buster-slim@sha256:269885d847d382df99cc93ab5c37d3aea9f81fd8add895a9a3c639f84ae45aa4 AS development
+FROM node:16.13.1-buster-slim@sha256:41a52a395041abb700503b34b4ecf463fad4f0ef673d5343222a9591f1497047 AS development
 
 # Update and install dependencies.
 # - `ca-certificates` and `git` are required by the `yarn install` command
@@ -72,7 +72,7 @@ RUN yarn install
 
 # Should be the specific version of node:buster-slim.
 # sqitch requires at least buster.
-FROM node:16.13.1-buster-slim@sha256:269885d847d382df99cc93ab5c37d3aea9f81fd8add895a9a3c639f84ae45aa4 AS production
+FROM node:16.13.1-buster-slim@sha256:41a52a395041abb700503b34b4ecf463fad4f0ef673d5343222a9591f1497047 AS production
 
 ENV NODE_ENV=production
 
