@@ -112,10 +112,9 @@
 import { getModule } from 'vuex-module-decorators'
 import Plyr from 'plyr'
 
+import { defineComponent } from '#app'
 import { TrackListItem } from '../server/api/player/playlists'
 import PlayerModule from '~/store/modules/PlayerModule'
-
-import { defineComponent } from '#app'
 
 function binarySearch(ar: any[], el: any, compareFn: Function) {
   let m = 0

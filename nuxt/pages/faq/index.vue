@@ -34,10 +34,9 @@
 import { Context } from '@nuxt/types'
 import slugify from 'slugify'
 
+import { defineComponent } from '#app'
 import { Faq } from '~/components/Faq.vue'
 import { CollectionItem, Paging } from '~/plugins/paging'
-
-import { defineComponent } from '#app'
 
 export default defineComponent({
   name: 'IndexPage',

@@ -20,9 +20,8 @@
 </template>
 
 <script lang="ts">
-import { CollectionItem } from '~/plugins/paging'
-
 import { defineComponent, PropType } from '#app'
+import { CollectionItem } from '~/plugins/paging'
 
 interface Image {
   url: URL

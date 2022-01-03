@@ -88,6 +88,7 @@
 import { getModule } from 'vuex-module-decorators'
 import { Route } from 'vue-router'
 
+import { defineComponent } from '#app'
 import {
   PLAYER_PREFIX,
   AxiosPlaylist,
@@ -96,8 +97,6 @@ import {
   mergeByKey,
 } from '../../server/api/player/playlists'
 import PlayerModule from '~/store/modules/PlayerModule'
-
-import { defineComponent } from '#app'
 
 export default defineComponent({
   name: 'IndexPage',
