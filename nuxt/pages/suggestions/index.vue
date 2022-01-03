@@ -101,8 +101,8 @@
 import { maxLength, required } from 'vuelidate/lib/validators'
 import consola from 'consola'
 
-import SUGGESTION_CREATE_MUTATION from '~/gql/mutation/suggestion/suggestionCreate.gql'
 import { defineComponent } from '#app'
+import SUGGESTION_CREATE_MUTATION from '~/gql/mutation/suggestion/suggestionCreate.gql'
 
 export default defineComponent({
   name: 'IndexPage',

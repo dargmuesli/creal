@@ -29,10 +29,9 @@
 <script lang="ts">
 import { Context } from '@nuxt/types'
 
+import { defineComponent } from '#app'
 import { Event as CrealEvent } from '~/components/Event.vue'
 import { CollectionItem } from '~/plugins/paging'
-
-import { defineComponent } from '#app'
 
 export default defineComponent({
   name: 'IndexPage',
