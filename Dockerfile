@@ -3,7 +3,7 @@
 
 # Should be the specific version of node:buster-slim.
 # `sqitch` requires at least buster.
-FROM node:16.13.2-buster-slim@sha256:f527a6118422b888c35162e0a7e2fb2febced4c85a23d96e1342f9edc2789fec AS development
+FROM node:16.14.0-buster-slim@sha256:64dc41bcf5e9048aa1b9a6efe3af68631720e6b76e98f281a77d305e898d3610 AS development
 
 # Update and install dependencies.
 # - `ca-certificates` and `git` are required by the `yarn install` command
@@ -40,7 +40,7 @@ HEALTHCHECK --interval=10s CMD curl -f http://localhost:3000/api/healthcheck || 
 # Build Nuxt.
 
 # Should be the specific version of node:slim.
-FROM node:16.13.2-slim@sha256:f527a6118422b888c35162e0a7e2fb2febced4c85a23d96e1342f9edc2789fec AS build
+FROM node:16.14.0-slim@sha256:64dc41bcf5e9048aa1b9a6efe3af68631720e6b76e98f281a77d305e898d3610 AS build
 
 ARG NUXT_ENV_STACK_DOMAIN=jonas-thelemann.de
 ENV NUXT_ENV_STACK_DOMAIN=${NUXT_ENV_STACK_DOMAIN}
@@ -72,7 +72,7 @@ RUN yarn install
 
 # Should be the specific version of node:buster-slim.
 # sqitch requires at least buster.
-FROM node:16.13.2-buster-slim@sha256:f527a6118422b888c35162e0a7e2fb2febced4c85a23d96e1342f9edc2789fec AS production
+FROM node:16.14.0-buster-slim@sha256:64dc41bcf5e9048aa1b9a6efe3af68631720e6b76e98f281a77d305e898d3610 AS production
 
 ENV NODE_ENV=production
 
