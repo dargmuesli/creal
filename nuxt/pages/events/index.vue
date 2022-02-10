@@ -15,7 +15,7 @@
           <li
             v-for="item in items"
             :key="item.id"
-            class="border my-4 p-4 rounded first:mt-0 last:mb-0"
+            class="my-4 rounded border p-4 first:mt-0 last:mb-0"
           >
             <Event :event="item.attributes" />
           </li>

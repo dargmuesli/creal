@@ -2,10 +2,10 @@
   <div class="container mx-auto">
     <section>
       <h1>{{ title }}</h1>
-      <div class="bg-gray-900 grow p-4 rounded">
+      <div class="grow rounded bg-gray-900 p-4">
         <div v-if="$fetchState.pending" class="text-center">
           <svg
-            class="animate-spin h-16 m-auto text-white w-16"
+            class="m-auto h-16 w-16 animate-spin text-white"
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             title="Loading"
@@ -33,7 +33,7 @@
           </h2>
           <ul
             v-if="playlistData.collections.length > 0"
-            class="flex flex-wrap justify-center list-none"
+            class="flex list-none flex-wrap justify-center"
           >
             <li
               v-for="collection in playlistData.collections"

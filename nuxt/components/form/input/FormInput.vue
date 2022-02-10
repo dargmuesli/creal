@@ -6,11 +6,11 @@
         'form-input-warning': warning,
         'form-input-error': error,
       }"
-      class="md:flex flex-wrap md:items-center"
+      class="flex-wrap md:flex md:items-center"
     >
-      <div class="leading-snug mb-1 md:mb-0 md:pr-4 md:text-right md:w-1/3">
+      <div class="mb-1 leading-snug md:mb-0 md:w-1/3 md:pr-4 md:text-right">
         <label
-          class="font-semibold flex md:flex-col items-baseline md:items-end space-x-2 md:space-x-0"
+          class="flex items-baseline space-x-2 font-semibold md:flex-col md:items-end md:space-x-0"
           :class="{
             'text-green-600': success,
             'text-yellow-600': warning,
@@ -19,7 +19,7 @@
           :for="labelFor"
         >
           <span>{{ title }}</span>
-          <span class="font-medium md:text-right text-xs text-gray-500">
+          <span class="text-xs font-medium text-gray-500 md:text-right">
             <span v-if="required">
               {{ $t('required') }}
             </span>
@@ -29,7 +29,7 @@
           </span>
         </label>
       </div>
-      <div class="md:mt-1 md:w-2/3 text-black">
+      <div class="text-black md:mt-1 md:w-2/3">
         <slot />
       </div>
       <div class="md:w-1/3" />
@@ -37,7 +37,7 @@
         <slot name="inputSuccess" />
       </div>
       <div class="md:w-1/3" />
-      <div class="text-gray-500 text-left text-sm md:w-2/3">
+      <div class="text-left text-sm text-gray-500 md:w-2/3">
         <slot name="inputInfo" />
       </div>
       <div class="md:w-1/3" />

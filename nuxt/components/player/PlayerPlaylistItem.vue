@@ -8,12 +8,12 @@
       <font-awesome-icon :icon="['fas', 'download']" />
     </button>
     <button
-      class="cursor-default grow py-2 lg:py-3 text-left"
+      class="grow cursor-default py-2 text-left lg:py-3"
       @click="onItemClick"
     >
       {{ playlistItem.name.replace(/^cReal - /, '') }}
     </button>
-    <button class="ml-3 lg:ml-10 mr-2" title="play" @click="onPlayClick()">
+    <button class="ml-3 mr-2 lg:ml-10" title="play" @click="onPlayClick()">
       <font-awesome-icon :icon="['fas', 'play']" />
     </button>
   </div>

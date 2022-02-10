@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex flex-col lg:flex-row items-center justify-center lg:space-x-4 space-y-4 lg:space-y-0"
+    class="flex flex-col items-center justify-center space-y-4 lg:flex-row lg:space-x-4 lg:space-y-0"
   >
     <div class="space-y-2 lg:w-1/2">
       <div>{{ datetime }}</div>

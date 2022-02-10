@@ -1,18 +1,18 @@
 <template>
   <section v-if="faq">
     <button
-      class="flex p-4 w-full"
+      class="flex w-full p-4"
       :class="{ 'border-b': faq.isFocused }"
       @click="$emit('click', faq)"
     >
       <font-awesome-icon :icon="['fas', 'comments']" class="mr-4" size="lg" />
-      <h1 class="font-normal m-0 text-base text-left">
+      <h1 class="m-0 text-left text-base font-normal">
         {{ faq.title }}
       </h1>
     </button>
     <div
       ref="answer"
-      class="duration-300 overflow-hidden text-left"
+      class="overflow-hidden text-left duration-300"
       :style="`max-height: ${getMaxHeight()}px`"
     >
       <!-- eslint-disable-next-line vue/no-v-html -->
