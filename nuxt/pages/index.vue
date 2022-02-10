@@ -2,17 +2,17 @@
   <div class="flex flex-1">
     <div
       :class="{ '-translate-y-full': !showGreeting }"
-      class="duration-1000 ease-in-out fullscreen transition-transform transform-gpu"
+      class="fullscreen transform-gpu transition-transform duration-1000 ease-in-out"
     >
-      <div class="bg-gray-800 fullscreen"></div>
-      <div class="bg-center bg-cover bg-creal bg-no-repeat fullscreen" />
-      <div class="bg-gray-800 opacity-75 fullscreen"></div>
+      <div class="fullscreen bg-gray-800"></div>
+      <div class="bg-creal fullscreen bg-cover bg-center bg-no-repeat" />
+      <div class="fullscreen bg-gray-800 opacity-75"></div>
       <div class="fullscreen flex">
-        <div class="m-auto mb-20vh text-center">
+        <div class="m-auto text-center mb-20vh">
           <h1 class="inline-block border-b border-gray-400">
             {{ $t('creal') }}
           </h1>
-          <p class="font-light mt-4 mb-16">{{ $t('welcome') }}</p>
+          <p class="mt-4 mb-16 font-light">{{ $t('welcome') }}</p>
           <Button aria-label="start" @click.native="setShowGreeting(true)">
             {{ $t('start') }}
           </Button>
@@ -20,7 +20,7 @@
       </div>
     </div>
     <div
-      class="flex-1 gap-4 lg:gap-8 grid grid-cols-1 lg:grid-cols-2 items-stretch"
+      class="grid flex-1 grid-cols-1 items-stretch gap-4 lg:grid-cols-2 lg:gap-8"
     >
       <ButtonBig
         aria-label="Events"

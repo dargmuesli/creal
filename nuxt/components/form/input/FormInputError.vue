@@ -6,7 +6,7 @@
         validationProperty in formInput &&
         !formInput[validationProperty])
     "
-    class="text-red-600 text-left"
+    class="text-left text-red-600"
   >
     <FontAwesomeIcon
       v-if="formInput && validationProperty"

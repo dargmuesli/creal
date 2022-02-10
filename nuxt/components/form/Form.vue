@@ -14,7 +14,7 @@
     @submit="(e) => $emit('submit', e)"
   >
     <slot />
-    <div class="flex flex-col items-center justify-between mb-4 mt-6">
+    <div class="mb-4 mt-6 flex flex-col items-center justify-between">
       <Button
         ref="buttonSubmit"
         :aria-label="submitName"

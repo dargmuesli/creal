@@ -1,7 +1,7 @@
 <template>
   <a
     v-if="to.match(/^((ftp|http(s)?):\/\/|(mailto):)/)"
-    class="items-center justify-center inline-flex rounded"
+    class="inline-flex items-center justify-center rounded"
     :class="{ 'text-link-dark dark:text-link-bright': isColored }"
     :href="to"
     :rel="
@@ -20,7 +20,7 @@
   <nuxt-link
     v-else
     :append="append"
-    class="items-center justify-center inline-flex rounded"
+    class="inline-flex items-center justify-center rounded"
     :class="{ 'text-link-dark dark:text-link-bright': isColored }"
     :to="to"
     @click.native="$emit('click')"

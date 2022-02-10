@@ -1,7 +1,7 @@
 <template>
   <Button :button-class="buttonClass" :aria-label="ariaLabel" :to="to">
     <span
-      class="leading-normal sm:leading-normal lg:leading-normal text-4xl sm:text-5xl lg:text-6xl"
+      class="text-4xl leading-normal sm:text-5xl sm:leading-normal lg:text-6xl lg:leading-normal"
     >
       <FontAwesomeIcon
         v-if="iconId"

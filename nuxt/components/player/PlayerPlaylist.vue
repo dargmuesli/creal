@@ -6,10 +6,10 @@
       class="rounded"
       :src="coverUrl"
     />
-    <div v-else class="h-16 m-auto w-16">
+    <div v-else class="m-auto h-16 w-16">
       <LoaderIndicatorPing />
     </div>
-    <h1 class="leading-tight line-clamp-2 m-0 mt-1 text-2xl text-left">
+    <h1 class="m-0 mt-1 text-left text-2xl leading-tight line-clamp-2">
       {{ playlist.name }}
     </h1>
   </section>

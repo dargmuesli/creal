@@ -1,7 +1,7 @@
 <template>
   <div
     v-if="$slots.default || errorMessage"
-    class="bg-red-600 border-0 card dark:card-dark font-medium overflow-hidden text-center text-white"
+    class="card dark:card-dark overflow-hidden border-0 bg-red-600 text-center font-medium text-white"
     :class="{ 'rounded-none': isEdgy }"
     role="alert"
   >

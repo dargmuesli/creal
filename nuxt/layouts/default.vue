@@ -1,13 +1,13 @@
 <template>
   <div>
-    <div class="flex flex-col min-h-screen">
+    <div class="flex min-h-screen flex-col">
       <header class="flex items-center justify-between p-4 md:px-8">
         <AppLink :to="localePath('/')">
           <div id="logo" class="h-10 w-10" />
-          <span class="font-bold text-lg">{{ $t('creal') }}</span>
+          <span class="text-lg font-bold">{{ $t('creal') }}</span>
         </AppLink>
         <AppLink
-          class="font-bold text-lg"
+          class="text-lg font-bold"
           :is-colored="false"
           :to="`mailto:e-mail+creal@jonas-thelemann.de?subject=${encodeURIComponent(
             $t('bookingSubject')
@@ -17,25 +17,25 @@
           <FontAwesomeIcon class="ml-2" :icon="['fas', 'arrow-right']" />
         </AppLink>
       </header>
-      <main class="container flex flex-1 flex-col mx-auto px-4 md:px-8 py-8">
+      <main class="container mx-auto flex flex-1 flex-col px-4 py-8 md:px-8">
         <nuxt />
       </main>
     </div>
     <footer
-      class="bg-gray-900 leading-6 text-sm"
+      class="bg-gray-900 text-sm leading-6"
       :class="{ 'mb-20': storePlayerModule.isPlayerVisible }"
     >
       <div class="px-2 py-8">
-        <div class="flex items-center mx-auto w-9/12">
-          <div class="bg-gray-400 h-px flex-1" />
+        <div class="mx-auto flex w-9/12 items-center">
+          <div class="h-px flex-1 bg-gray-400" />
           <LoaderImage
             alt="DJ cReals Logo"
-            class="brightness-100 h-12 mx-12 w-12"
+            class="mx-12 h-12 w-12 brightness-100"
             height="48"
             src="/assets/static/logos/creal.svg"
             width="48"
           />
-          <div class="bg-gray-400 h-px flex-1" />
+          <div class="h-px flex-1 bg-gray-400" />
         </div>
         <p class="p-2 text-center text-gray-400">
           {{ $t('copyright', { year: new Date().getFullYear() }) }}
@@ -49,7 +49,7 @@
     <div class="fixed bottom-0 left-0 right-0">
       <div
         v-if="storePlayerModule.currentTrackName"
-        class="bg-white flex flex-col sm:flex-row font-bold justify-evenly text-black"
+        class="flex flex-col justify-evenly bg-white font-bold text-black sm:flex-row"
       >
         <span>
           {{
