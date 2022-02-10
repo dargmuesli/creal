@@ -1,3 +1,10 @@
+## [0.36.5](https://github.com/dargmuesli/creal/compare/0.36.4...0.36.5) (2022-02-10)
+
+
+### Bug Fixes
+
+* **tailwind:** reorder classes ([10a13b0](https://github.com/dargmuesli/creal/commit/10a13b0b41617764dbc126061adaa8a06d552722))
+
 ## [0.36.4](https://github.com/dargmuesli/creal/compare/0.36.3...0.36.4) (2022-02-07)
 
 
