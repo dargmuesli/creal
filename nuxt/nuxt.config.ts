@@ -43,6 +43,7 @@ export default defineNuxtConfig({
       'event-target-shim',
       'graphql',
       'moment',
+      'pretty-bytes',
       'subscriptions-transport-ws',
       'tslib',
       'twix',
