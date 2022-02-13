@@ -1,3 +1,10 @@
+## [0.36.7](https://github.com/dargmuesli/creal/compare/0.36.6...0.36.7) (2022-02-13)
+
+
+### Bug Fixes
+
+* **greeting:** correct body class list ([4a0aed0](https://github.com/dargmuesli/creal/commit/4a0aed0e0f30d3350cee5816ad826bb34af16c08))
+
 ## [0.36.6](https://github.com/dargmuesli/creal/compare/0.36.5...0.36.6) (2022-02-13)
 
 
