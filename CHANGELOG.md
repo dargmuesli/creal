@@ -1,3 +1,10 @@
+## [0.36.6](https://github.com/dargmuesli/creal/compare/0.36.5...0.36.6) (2022-02-13)
+
+
+### Bug Fixes
+
+* **nuxt:** transpile pretty-bytes ([0b26aed](https://github.com/dargmuesli/creal/commit/0b26aed6cdf84fbf279a0d868cc7a18b8a7d07fd))
+
 ## [0.36.5](https://github.com/dargmuesli/creal/compare/0.36.4...0.36.5) (2022-02-10)
 
 
