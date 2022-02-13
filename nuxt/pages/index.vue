@@ -68,6 +68,9 @@ export default defineComponent({
   head() {
     const title = this.title as string
     return {
+      bodyAttrs: {
+        class: this.showGreeting ? ['overflow-hidden'] : [],
+      },
       meta: [
         {
           hid: 'og:title',
@@ -89,7 +92,6 @@ export default defineComponent({
     }
   },
   beforeMount() {
-    document.getElementsByTagName('body')[0].classList.add('overflow-hidden')
     window.addEventListener('keypress', (e) => {
       const key = e.which || e.keyCode
 
@@ -112,9 +114,6 @@ export default defineComponent({
           this.showGreeting = true
         } else {
           this.showGreeting = false
-          document
-            .getElementsByTagName('body')[0]
-            .classList.remove('overflow-hidden')
         }
       } else {
         this.showGreeting = true

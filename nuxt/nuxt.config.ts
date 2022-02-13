@@ -93,7 +93,7 @@ export default defineNuxtConfig({
   head() {
     return {
       bodyAttrs: {
-        class: 'bg-background-body text-text',
+        class: ['bg-background-body', 'text-text'],
       },
       link: [
         {
