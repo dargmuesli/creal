@@ -1,3 +1,10 @@
+# [0.37.0](https://github.com/dargmuesli/creal/compare/0.36.12...0.37.0) (2022-03-22)
+
+
+### Features
+
+* **docker:** use node:slim ([8be599d](https://github.com/dargmuesli/creal/commit/8be599dc88c5ee4c022257960a3b6b6fcde5d50a))
+
 ## [0.36.12](https://github.com/dargmuesli/creal/compare/0.36.11...0.36.12) (2022-03-22)
 
 
