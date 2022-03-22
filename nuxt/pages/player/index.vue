@@ -88,6 +88,7 @@
 import { getModule } from 'vuex-module-decorators'
 import { Route } from 'vue-router'
 
+import { defineComponent } from '#app'
 import {
   PLAYER_PREFIX,
   AxiosPlaylist,
@@ -95,7 +96,6 @@ import {
   PlaylistItem,
   mergeByKey,
 } from '../../server/api/player/playlists'
-import { defineComponent } from '#app'
 import PlayerModule from '~/store/modules/PlayerModule'
 
 export default defineComponent({
