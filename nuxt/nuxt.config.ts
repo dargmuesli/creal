@@ -37,6 +37,9 @@ export default defineNuxtConfig({
     extractCSS: true,
     postcss: { plugins: { tailwindcss: {}, autoprefixer: {} } },
     transpile: [
+      '@fortawesome/fontawesome-svg-core',
+      '@fortawesome/free-solid-svg-icons',
+      '@fortawesome/free-brands-svg-icons',
       '@http-util/status-i18n',
       'abort-controller',
       'cross-fetch',
