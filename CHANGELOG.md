@@ -1,3 +1,10 @@
+## [0.37.1](https://github.com/dargmuesli/creal/compare/0.37.0...0.37.1) (2022-03-23)
+
+
+### Bug Fixes
+
+* **nuxt:** transpile [@fontawesome](https://github.com/fontawesome) ([8cc6dd0](https://github.com/dargmuesli/creal/commit/8cc6dd09ab3f8925f8721a5940a4aff02d883c7d))
+
 # [0.37.0](https://github.com/dargmuesli/creal/compare/0.36.12...0.37.0) (2022-03-22)
 
 
