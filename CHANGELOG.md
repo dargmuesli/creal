@@ -1,3 +1,10 @@
+## [0.37.3](https://github.com/dargmuesli/creal/compare/0.37.2...0.37.3) (2022-04-12)
+
+
+### Bug Fixes
+
+* **event:** align image horizontally ([9b22b37](https://github.com/dargmuesli/creal/commit/9b22b374377b5c22dced82b0c3187bc98c55a0c8))
+
 ## [0.37.2](https://github.com/dargmuesli/creal/compare/0.37.1...0.37.2) (2022-04-04)
 
 
