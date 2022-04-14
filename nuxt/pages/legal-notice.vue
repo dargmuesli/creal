@@ -1,5 +1,5 @@
 <template>
-  <div class="creal-prose">
+  <div class="creal-prose-scheme m-auto">
     <h1>{{ title }}</h1>
     <h2>{{ $t('tmg') }}</h2>
     <p>

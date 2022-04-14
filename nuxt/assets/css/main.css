@@ -24,6 +24,10 @@
 
 @layer utilities {
   .creal-prose {
-    @apply m-auto prose-sm sm:prose lg:prose-lg xl:prose-xl;
+    @apply prose sm:prose-sm lg:prose-lg xl:prose-xl;
+  }
+
+  .creal-prose-scheme {
+    @apply creal-prose dark:prose-invert;
   }
 }
