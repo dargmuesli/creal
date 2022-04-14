@@ -2,14 +2,14 @@ import fs from 'fs'
 import { ServerResponse, IncomingMessage } from 'http'
 import { URL } from 'url'
 
-import S3 from 'aws-sdk/clients/s3.js'
-import AWS from 'aws-sdk'
+import { S3Client, GetObjectCommand } from '@aws-sdk/client-s3'
+import { fromIni } from '@aws-sdk/credential-providers'
 
 export default function (req: IncomingMessage, res: ServerResponse) {
-  const s3 = new S3({
+  const s3 = new S3Client({
     apiVersion: '2006-03-01',
-    credentials: new AWS.SharedIniFileCredentials({
-      filename: '/run/secrets/creal_aws-credentials',
+    credentials: fromIni({
+      filepath: '/run/secrets/creal_aws-credentials',
     }),
     endpoint: 'https://s3.nl-ams.scw.cloud',
     region: 'nl-ams',
@@ -27,18 +27,18 @@ export default function (req: IncomingMessage, res: ServerResponse) {
     return
   }
 
-  s3.getObject(
-    {
+  s3.send(
+    new GetObjectCommand({
       Bucket: bucket,
       Key: key,
-    },
-    (err, data) => {
-      if (err) {
-        res.writeHead(500)
-        res.end()
-      } else {
-        res.end(data.Body)
-      }
-    }
+    })
   )
+    .then((data) => {
+      if (!data) return
+      res.end(data.Body)
+    })
+    .catch(() => {
+      res.writeHead(500)
+      res.end()
+    })
 }

@@ -2,14 +2,19 @@ import fs from 'fs'
 import { ServerResponse, IncomingMessage } from 'http'
 import { URL } from 'url'
 
-import S3 from 'aws-sdk/clients/s3.js'
-import AWS from 'aws-sdk'
+import {
+  S3Client,
+  GetObjectCommand,
+  HeadObjectCommand,
+} from '@aws-sdk/client-s3'
+import { fromIni } from '@aws-sdk/credential-providers'
+import { getSignedUrl } from '@aws-sdk/s3-request-presigner'
 
 export default function (req: IncomingMessage, res: ServerResponse) {
-  const s3 = new S3({
+  const s3 = new S3Client({
     apiVersion: '2006-03-01',
-    credentials: new AWS.SharedIniFileCredentials({
-      filename: '/run/secrets/creal_aws-credentials',
+    credentials: fromIni({
+      filepath: '/run/secrets/creal_aws-credentials',
     }),
     endpoint: 'https://s3.nl-ams.scw.cloud',
     region: 'nl-ams',
@@ -27,31 +32,35 @@ export default function (req: IncomingMessage, res: ServerResponse) {
     return
   }
 
-  s3.headObject(
-    {
+  s3.send(
+    new HeadObjectCommand({
       Bucket: bucket,
       Key: key,
-    },
-    (err, _data) => {
-      if (err) {
-        res.writeHead(500)
-        res.end()
-      } else {
-        s3.getSignedUrlPromise('getObject', {
-          Bucket: bucket,
-          Expires: 21600, // 6h
-          Key: key,
-        }).then(
-          function (url) {
-            res.setHeader('Content-Type', 'text/plain')
-            res.end(url)
-          },
-          function (err) {
-            res.writeHead(500)
-            res.end(err.message)
-          }
-        )
-      }
-    }
+    })
   )
+    .then(() => {
+      getSignedUrl(
+        s3,
+        new GetObjectCommand({
+          Bucket: bucket,
+          Key: key,
+        }),
+        {
+          expiresIn: 21600, // 6h
+        }
+      ).then(
+        function (url) {
+          res.setHeader('Content-Type', 'text/plain')
+          res.end(url)
+        },
+        function (err) {
+          res.writeHead(500)
+          res.end(err.message)
+        }
+      )
+    })
+    .catch(() => {
+      res.writeHead(500)
+      res.end()
+    })
 }

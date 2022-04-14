@@ -18,6 +18,9 @@
     "*.{css,vue}": "stylelint"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "3.67.0",
+    "@aws-sdk/credential-providers": "3.67.0",
+    "@aws-sdk/s3-request-presigner": "3.67.0",
     "@http-util/status-i18n": "0.3.0",
     "@nuxt/http": "0.6.4",
     "@nuxt/types": "2.15.8",
@@ -30,7 +33,6 @@
     "@tailwindcss/forms": "0.5.0",
     "@tailwindcss/line-clamp": "0.3.1",
     "@tailwindcss/typography": "0.5.2",
-    "aws-sdk": "2.1114.0",
     "compression-with-brotli": "1.7.5",
     "consola": "2.15.3",
     "core-js": "3.21.1",

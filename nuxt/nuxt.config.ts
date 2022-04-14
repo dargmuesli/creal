@@ -31,6 +31,7 @@ export default defineNuxtConfig({
     },
     extend(config) {
       config.node = {
+        child_process: 'empty',
         fs: 'empty',
       }
     },
