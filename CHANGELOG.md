@@ -1,3 +1,10 @@
+# [0.38.0](https://github.com/dargmuesli/creal/compare/0.37.3...0.38.0) (2022-04-14)
+
+
+### Features
+
+* **faq:** use prose ([75a10d8](https://github.com/dargmuesli/creal/commit/75a10d80cde702ce94422e100760ccfbc69a5741))
+
 ## [0.37.3](https://github.com/dargmuesli/creal/compare/0.37.2...0.37.3) (2022-04-12)
 
 
