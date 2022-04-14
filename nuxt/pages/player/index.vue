@@ -41,7 +41,7 @@
               class="m-2 max-w-xxs min-w-xxs"
             >
               <AppLink
-                class="block h-full"
+                class="block h-full w-full"
                 :title="collection.name"
                 :to="getPlaylistLink(collection.name)"
               >

@@ -1,5 +1,5 @@
 <template>
-  <section class="flex flex-col">
+  <section class="flex w-full flex-col">
     <img
       v-if="coverUrl !== ''"
       alt="Cover image."
