@@ -11,7 +11,7 @@
         :query-previous="queryPrevious"
         :query-next="queryNext"
       >
-        <ul class="list-none">
+        <ul>
           <li
             v-for="item in items"
             :key="slugify(item.attributes.title)"

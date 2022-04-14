@@ -33,7 +33,7 @@
           </h2>
           <ul
             v-if="playlistData.collections.length > 0"
-            class="flex list-none flex-wrap justify-center"
+            class="flex flex-wrap justify-center"
           >
             <li
               v-for="collection in playlistData.collections"
@@ -49,7 +49,7 @@
               </AppLink>
             </li>
           </ul>
-          <ul v-if="playlistData.items.length > 0" class="list-none">
+          <ul v-if="playlistData.items.length > 0">
             <li
               v-for="playlistItem of playlistData.items"
               :key="playlistItem.name"
