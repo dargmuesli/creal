@@ -1,3 +1,10 @@
+# [0.41.0](https://github.com/dargmuesli/creal/compare/0.40.0...0.41.0) (2022-04-14)
+
+
+### Features
+
+* **event:** use prose for description ([ac56dde](https://github.com/dargmuesli/creal/commit/ac56dde7c2a2232456cbc83c6a99855b05c19379))
+
 # [0.40.0](https://github.com/dargmuesli/creal/compare/0.39.0...0.40.0) (2022-04-14)
 
 
