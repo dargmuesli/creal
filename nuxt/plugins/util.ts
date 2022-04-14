@@ -1,6 +1,8 @@
 import { Context } from '@nuxt/types'
 import { Inject } from '@nuxt/types/app'
 
+type Dictionary<T> = { [key: string]: T } // import { Dictionary } from 'vue-router/types/router'
+
 export const VALIDATION_SUGGESTION_TITLE_LENGTH_MAXIMUM = 300
 
 export function formPreSubmit(that: any): Promise<void> {
@@ -30,9 +32,29 @@ export function formPreSubmit(that: any): Promise<void> {
   })
 }
 
+export function getQueryString(
+  queryParametersObject: Dictionary<
+    string | ((string | null)[] & { pw: 'lost' | 'found' })
+  >
+): string {
+  return (
+    '?' +
+    Object.keys(queryParametersObject)
+      .map((key) => {
+        return (
+          encodeURIComponent(key) +
+          '=' +
+          encodeURIComponent(queryParametersObject[key] as string)
+        )
+      })
+      .join('&')
+  )
+}
+
 const util = {
   VALIDATION_SUGGESTION_TITLE_LENGTH_MAXIMUM,
   formPreSubmit,
+  getQueryString,
 }
 
 export default (_: Context, inject: Inject) => {

@@ -1,7 +1,12 @@
 <template>
   <div class="container mx-auto">
     <section>
-      <h1>{{ title }}</h1>
+      <Breadcrumbs
+        :suffixes="$route.query.playlist && $route.query.playlist.split('/')"
+        suffixes-key="playlist"
+      >
+        {{ title }}
+      </Breadcrumbs>
       <div class="grow rounded bg-gray-900 p-4">
         <div v-if="$fetchState.pending" class="text-center">
           <svg
@@ -28,9 +33,6 @@
           {{ $t('globalLoading') }}
         </div>
         <div v-else-if="playlistData" class="m-auto w-5/6">
-          <h2 v-if="$route.query.playlist" class="ml-2">
-            {{ $route.query.playlist }}
-          </h2>
           <ul
             v-if="playlistData.collections.length > 0"
             class="flex flex-wrap justify-center"

@@ -1,6 +1,8 @@
 <template>
   <section>
-    <h1>{{ title }}</h1>
+    <Breadcrumbs>
+      {{ title }}
+    </Breadcrumbs>
     <Form
       ref="form"
       :form="$v.form"

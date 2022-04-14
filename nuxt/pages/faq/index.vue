@@ -1,7 +1,9 @@
 <template>
   <div class="container mx-auto">
     <section>
-      <h1>{{ title }}</h1>
+      <Breadcrumbs>
+        {{ title }}
+      </Breadcrumbs>
       <CardAlert v-if="requestError" :error-message="requestError.message" />
       <Paging
         v-else-if="items && items.length > 0"
