@@ -3,7 +3,13 @@
     class="flex flex-col items-center justify-center space-y-4 lg:flex-row lg:space-x-4 lg:space-y-0"
   >
     <div class="space-y-2 lg:w-1/2">
-      <div>{{ datetime }}</div>
+      <div class="flex gap-2">
+        <div>{{ datetime }}</div>
+        <div v-if="event.location" class="flex gap-2">
+          <div>{{ $t('separator') }}</div>
+          <div>{{ event.location }}</div>
+        </div>
+      </div>
       <h2 class="m-0">{{ event.title }}</h2>
       <!-- eslint-disable-next-line vue/no-v-html -->
       <div v-if="event.description" v-html="$marked(event.description)" />
@@ -72,6 +78,8 @@ export default defineComponent({
 <i18n lang="yml">
 de:
   details: Details
+  separator: ⋅
 en:
   details: Details
+  separator: ⋅
 </i18n>
