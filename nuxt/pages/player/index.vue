@@ -191,6 +191,21 @@ export default defineComponent({
       }
     },
   },
+  mounted() {
+    this.$nuxt.$on('plyrEnd', () => {
+      if (!this.playlistData) return
+
+      for (let i = 0; i < this.playlistData.items.length - 1; i++) {
+        if (
+          this.playlistData.items[i].name ===
+          this.storePlayerModule.currentTrackName
+        ) {
+          this.onPlaylistItemSelect(this.playlistData.items[i + 1])
+          break
+        }
+      }
+    })
+  },
   methods: {
     titleHead() {
       return this.storePlayerModule.currentTrackName &&

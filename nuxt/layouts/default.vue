@@ -81,10 +81,6 @@
           <vue-plyr
             ref="plyr"
             :emit="['ended', 'pause', 'playing', 'timeupdate']"
-            @ended="onPlyrEnded"
-            @pause="onPlyrPause"
-            @playing="onPlyrPlaying"
-            @timeupdate="onPlyrTimeUpdate"
           >
             <audio />
           </vue-plyr>
@@ -130,6 +126,7 @@ export default defineComponent({
   name: 'IndexPage',
   data() {
     return {
+      isInitialized: false,
       storePlayerModule: getModule(PlayerModule, this.$store),
     }
   },
@@ -141,6 +138,10 @@ export default defineComponent({
       const plyr = this.$refs.plyr as any
 
       if (!plyr) return
+
+      if (!this.isInitialized) {
+        this.initPlyr(plyr)
+      }
 
       return plyr.player
     },
@@ -165,7 +166,7 @@ export default defineComponent({
     this.$moment.locale(this.$i18n.locale)
   },
   methods: {
-    closeFree() {
+    closeAllow() {
       window.onbeforeunload = () => {}
     },
     closeProtect() {
@@ -173,44 +174,49 @@ export default defineComponent({
         return 'The music will stop playing if you navigate away.'
       }
     },
-    onPlyrEnded() {
-      this.closeFree()
-    },
-    onPlyrPause() {
-      this.storePlayerModule.setIsPlayerPaused(true)
-      this.closeFree()
-    },
-    onPlyrPlaying() {
-      this.storePlayerModule.setIsPlayerPaused(false)
-      this.closeProtect()
-    },
-    onPlyrTimeUpdate() {
-      if (
-        this.storePlayerModule.currentTrackMeta &&
-        this.storePlayerModule.currentTrackMeta.tracklist
-      ) {
-        const trackListItem =
-          this.storePlayerModule.currentTrackMeta.tracklist[
-            binarySearch(
-              this.storePlayerModule.currentTrackMeta.tracklist,
-              this.player.currentTime,
-              trackListItemComparator
-            )
-          ]
-
-        const currentTrackDescription = trackListItem
-          ? trackListItem.artistName + ' - ' + trackListItem.songName
-          : ''
-
+    initPlyr(plyr: any) {
+      plyr.player.on('ended', () => {
+        this.closeAllow()
+        this.$nuxt.$emit('plyrEnd')
+      })
+      plyr.player.on('pause', () => {
+        this.storePlayerModule.setIsPlayerPaused(true)
+        this.closeAllow()
+      })
+      plyr.player.on('playing', () => {
+        this.storePlayerModule.setIsPlayerPaused(false)
+        this.closeProtect()
+      })
+      plyr.player.on('timeupdate', () => {
         if (
-          this.storePlayerModule.currentTrackDescription !==
-          currentTrackDescription
+          this.storePlayerModule.currentTrackMeta &&
+          this.storePlayerModule.currentTrackMeta.tracklist
         ) {
-          this.storePlayerModule.setCurrentTrackDescription(
+          const trackListItem =
+            this.storePlayerModule.currentTrackMeta.tracklist[
+              binarySearch(
+                this.storePlayerModule.currentTrackMeta.tracklist,
+                this.player.currentTime,
+                trackListItemComparator
+              )
+            ]
+
+          const currentTrackDescription = trackListItem
+            ? trackListItem.artistName + ' - ' + trackListItem.songName
+            : ''
+
+          if (
+            this.storePlayerModule.currentTrackDescription !==
             currentTrackDescription
-          )
+          ) {
+            this.storePlayerModule.setCurrentTrackDescription(
+              currentTrackDescription
+            )
+          }
         }
-      }
+      })
+
+      this.isInitialized = true
     },
     share() {
       if (
