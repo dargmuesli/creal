@@ -1,3 +1,10 @@
+# [0.39.0](https://github.com/dargmuesli/creal/compare/0.38.0...0.39.0) (2022-04-14)
+
+
+### Features
+
+* **event:** add location ([8788d6a](https://github.com/dargmuesli/creal/commit/8788d6a006c800d6ddd83310e3657535b1314054))
+
 # [0.38.0](https://github.com/dargmuesli/creal/compare/0.37.3...0.38.0) (2022-04-14)
 
 
