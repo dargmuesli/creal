@@ -2,8 +2,8 @@ import fs from 'fs'
 import { ServerResponse, IncomingMessage } from 'http'
 import { URL } from 'url'
 
-import S3 from 'aws-sdk/clients/s3.js'
-import AWS from 'aws-sdk'
+import { S3Client, ListObjectsV2Command } from '@aws-sdk/client-s3'
+import { fromIni } from '@aws-sdk/credential-providers'
 import mergeWith from 'lodash.mergewith'
 
 import consola from 'consola'
@@ -247,10 +247,10 @@ export function mergeByKey(target: any, source: any, key: string | number) {
 }
 
 export default function (req: IncomingMessage, res: ServerResponse) {
-  const s3 = new S3({
+  const s3 = new S3Client({
     apiVersion: '2006-03-01',
-    credentials: new AWS.SharedIniFileCredentials({
-      filename: '/run/secrets/creal_aws-credentials',
+    credentials: fromIni({
+      filepath: '/run/secrets/creal_aws-credentials',
     }),
     endpoint: 'https://s3.nl-ams.scw.cloud',
     region: 'nl-ams',
@@ -267,9 +267,8 @@ export default function (req: IncomingMessage, res: ServerResponse) {
   const paramPrefixLength = paramPrefix ? paramPrefix.split('/').length : 0
   const paramPrefixLengthTotal = PLAYER_PREFIX_LENGTH + paramPrefixLength
 
-  // https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/S3.html#listObjectsV2-property
-  s3.listObjectsV2(
-    {
+  s3.send(
+    new ListObjectsV2Command({
       ...{
         Bucket: bucket,
         // MaxKeys: 10,
@@ -280,14 +279,10 @@ export default function (req: IncomingMessage, res: ServerResponse) {
       ...(paramPrefix !== null && {
         Prefix: PLAYER_PREFIX + paramPrefix + '/',
       }),
-    },
-    function (err, data) {
-      // On s3 api error.
-      if (err) {
-        res.writeHead(500)
-        res.end(err.message)
-        return
-      }
+    })
+  )
+    .then((data) => {
+      if (!data) return
 
       if (data.Contents === undefined) {
         res.writeHead(204)
@@ -348,6 +343,9 @@ export default function (req: IncomingMessage, res: ServerResponse) {
       }
       res.setHeader('Content-Type', 'application/json')
       res.end(JSON.stringify(result))
-    }
-  )
+    })
+    .catch((err) => {
+      res.writeHead(500)
+      res.end(err.message)
+    })
 }
