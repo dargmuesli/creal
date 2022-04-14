@@ -1,3 +1,16 @@
+# [0.40.0](https://github.com/dargmuesli/creal/compare/0.39.0...0.40.0) (2022-04-14)
+
+
+### Bug Fixes
+
+* **player:** correct playlist width ([18fc100](https://github.com/dargmuesli/creal/commit/18fc100f9d2e3213922a6c3b5cccf907d5b4449e))
+
+
+### Features
+
+* **components:** remove integrated icons ([c15abf5](https://github.com/dargmuesli/creal/commit/c15abf502c7778edf08564deae68c0c4f3552ca0))
+* **event:** highlight events ([18fe55f](https://github.com/dargmuesli/creal/commit/18fe55fe1944b8910ccd59a2fcdfd288c3bc4353)), closes [#17](https://github.com/dargmuesli/creal/issues/17)
+
 # [0.39.0](https://github.com/dargmuesli/creal/compare/0.38.0...0.39.0) (2022-04-14)
 
 
