@@ -2,7 +2,7 @@
   <div
     class="flex flex-col items-center justify-center space-y-4 lg:flex-row lg:space-x-4 lg:space-y-0"
   >
-    <div class="space-y-2 lg:w-1/2">
+    <div class="creal-prose-scheme space-y-2 lg:w-1/2">
       <div class="flex gap-2">
         <div>{{ datetime }}</div>
         <div v-if="event.location" class="flex gap-2">
@@ -22,7 +22,12 @@
         :src="strapiDomain"
       />
       <div v-if="event.url && event.url !== ''" class="text-center">
-        <Button :aria-label="$t('details')" :icon="false" :to="event.url">
+        <Button
+          :aria-label="$t('details')"
+          class="text-xl"
+          :icon="false"
+          :to="event.url"
+        >
           {{ $t('details') }}
         </Button>
       </div>
