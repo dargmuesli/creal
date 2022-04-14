@@ -1,3 +1,10 @@
+## [0.42.1](https://github.com/dargmuesli/creal/compare/0.42.0...0.42.1) (2022-04-14)
+
+
+### Bug Fixes
+
+* **revert): chore(deps:** upgrade ([7b238df](https://github.com/dargmuesli/creal/commit/7b238df69619df33f3af65abb57ca001ddb27b7b))
+
 # [0.42.0](https://github.com/dargmuesli/creal/compare/0.41.0...0.42.0) (2022-04-14)
 
 
