@@ -10,11 +10,6 @@
     target="_blank"
     @click="$emit('click')"
   >
-    <FontAwesomeIcon
-      v-if="iconId"
-      :class="{ 'mr-2': $slots.default }"
-      :icon="iconId"
-    />
     <slot />
   </a>
   <nuxt-link
@@ -25,27 +20,18 @@
     :to="to"
     @click.native="$emit('click')"
   >
-    <FontAwesomeIcon
-      v-if="iconId"
-      :class="{ 'mr-2': $slots.default }"
-      :icon="iconId"
-    />
     <slot />
   </nuxt-link>
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from '#app'
+import { defineComponent } from '#app'
 
 export default defineComponent({
   props: {
     append: {
       default: false,
       type: Boolean,
-    },
-    iconId: {
-      default: undefined,
-      type: Array as PropType<string[] | undefined>,
     },
     isColored: {
       default: true,

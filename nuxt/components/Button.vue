@@ -7,7 +7,6 @@
       :aria-label="ariaLabel"
       :class="['button', ...(buttonClass ? [buttonClass] : [])].join(' ')"
       :disabled="disabled"
-      :icon-id="iconId"
       :is-colored="false"
       :to="to"
     >
@@ -22,11 +21,6 @@
       :type="type"
       @click="$emit('click')"
     >
-      <FontAwesomeIcon
-        v-if="iconId"
-        :class="{ 'mr-2': $slots.default }"
-        :icon="iconId"
-      />
       <slot />
     </button>
   </div>
@@ -54,10 +48,6 @@ export default defineComponent({
     disabled: {
       default: false,
       type: Boolean,
-    },
-    iconId: {
-      default: undefined,
-      type: Array as PropType<string[] | undefined>,
     },
     to: {
       default: undefined,
