@@ -11,15 +11,21 @@
         :query-previous="queryPrevious"
         :query-next="queryNext"
       >
-        <ul class="list-none">
-          <li
-            v-for="item in items"
-            :key="item.id"
-            class="my-4 rounded border p-4 first:mt-0 last:mb-0"
-          >
-            <Event :event="item.attributes" />
-          </li>
-        </ul>
+        <EventList :events="itemsCurrent">
+          <div class="flex items-center gap-2">
+            {{ $t('eventsCurrent') }}
+            <LivePulse />
+          </div>
+        </EventList>
+        <EventList :events="itemsFuture">
+          <div class="flex items-center gap-2">
+            {{ $t('eventsFuture') }}
+            <LivePulse v-if="!itemsCurrent || itemsCurrent.length === 0" />
+          </div>
+        </EventList>
+        <EventList :events="itemsPast">
+          {{ $t('eventsPast') }}
+        </EventList>
       </Paging>
       <div v-else class="text-center">{{ $t('eventsNone') }}</div>
     </section>
@@ -30,7 +36,7 @@
 import { Context } from '@nuxt/types'
 
 import { defineComponent } from '#app'
-import { Event as CrealEvent } from '~/components/Event.vue'
+import { Event as CrealEvent } from '~/components/event/Event.vue'
 import { CollectionItem } from '~/plugins/paging'
 
 export default defineComponent({
@@ -118,6 +124,58 @@ export default defineComponent({
       title,
     }
   },
+  computed: {
+    itemsCurrent() {
+      const events = this.items as Array<CollectionItem<CrealEvent>> | undefined
+
+      if (!events) return
+
+      const current = this.$moment()
+
+      return events.filter((event) => {
+        if (event.attributes.dateEnd) {
+          return (
+            this.$moment(event.attributes.dateStart).isSameOrBefore(current) &&
+            this.$moment(event.attributes.dateEnd).isAfter(current)
+          )
+        } else {
+          return (
+            this.$moment(event.attributes.dateStart).isSameOrBefore(current) &&
+            this.$moment(event.attributes.dateStart).isSame(current, 'day')
+          )
+        }
+      })
+    },
+    itemsFuture() {
+      const events = this.items as Array<CollectionItem<CrealEvent>> | undefined
+
+      if (!events) return
+
+      const current = this.$moment()
+
+      return events.filter((event) =>
+        this.$moment(event.attributes.dateStart).isAfter(current)
+      )
+    },
+    itemsPast() {
+      const events = this.items as Array<CollectionItem<CrealEvent>> | undefined
+
+      if (!events) return
+
+      const current = this.$moment()
+
+      return events.filter((event) => {
+        if (event.attributes.dateEnd) {
+          return this.$moment(event.attributes.dateEnd).isBefore(current)
+        } else {
+          return (
+            this.$moment(event.attributes.dateStart).isBefore(current) &&
+            !this.$moment(event.attributes.dateStart).isSame(current, 'day')
+          )
+        }
+      })
+    },
+  },
   watchQuery: ['limit', 'start'],
 })
 </script>
@@ -125,8 +183,14 @@ export default defineComponent({
 <i18n lang="yml">
 de:
   description: Veranstaltungen, bei denen cReal auftritt.
+  eventsCurrent: Laufende Veranstaltungen
+  eventsFuture: Zukünftige Veranstaltungen
   eventsNone: Keine Veranstaltungen gefunden.
+  eventsPast: Vergangene Veranstaltungen
 en:
   description: Events at which cReal performs.
+  eventsCurrent: Current events
+  eventsFuture: Upcoming events
   eventsNone: No events found.
+  eventsPast: Past events
 </i18n>

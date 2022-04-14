@@ -1,5 +1,5 @@
 import { defineNuxtConfig } from '@nuxt/bridge'
-import shrinkRay from 'shrink-ray-current'
+import compressionWithBrotli from 'compression-with-brotli'
 
 import localeDe from './locales/de.json'
 import localeEn from './locales/en.json'
@@ -37,9 +37,6 @@ export default defineNuxtConfig({
     extractCSS: true,
     postcss: { plugins: { tailwindcss: {}, autoprefixer: {} } },
     transpile: [
-      '@fortawesome/fontawesome-svg-core',
-      '@fortawesome/free-solid-svg-icons',
-      '@fortawesome/free-brands-svg-icons',
       '@http-util/status-i18n',
       'abort-controller',
       'cross-fetch',
@@ -57,29 +54,6 @@ export default defineNuxtConfig({
 
   // Modules for dev and build (recommended) (https://go.nuxtjs.dev/config-modules)
   buildModules: [
-    [
-      '@nuxtjs/fontawesome',
-      {
-        icons: {
-          brands: ['faMixcloud'],
-          solid: [
-            'faArrowRight',
-            'faBug',
-            'faCalendarDay',
-            'faComments',
-            'faDownload',
-            'faExclamationCircle',
-            'faExclamationTriangle',
-            'faLightbulb',
-            'faMusic',
-            'faPlay',
-            'faShareAlt',
-          ],
-        },
-        useLayers: false,
-        useLayersText: false,
-      },
-    ],
     '@nuxtjs/html-validator',
     // Doc: https://github.com/nuxt-community/moment-module
     ['@nuxtjs/moment', { locales: ['de'], plugins: ['twix'] }],
@@ -349,7 +323,7 @@ export default defineNuxtConfig({
   ],
 
   render: {
-    compressor: shrinkRay(),
+    compressor: compressionWithBrotli(),
     csp: {
       policies: {
         'base-uri': ["'none'"], // Mozilla Observatory.

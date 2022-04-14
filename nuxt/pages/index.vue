@@ -20,34 +20,22 @@
       </div>
     </div>
     <div
-      class="grid flex-1 grid-cols-1 items-stretch gap-4 lg:grid-cols-2 lg:gap-8"
+      class="grid flex-1 grid-cols-1 items-stretch gap-4 xl:grid-cols-2 xl:gap-8"
     >
-      <ButtonBig
-        aria-label="Events"
-        :to="localePath('/events')"
-        :icon-id="['fas', 'calendar-day']"
-      >
+      <ButtonBig aria-label="Events" :to="localePath('/events')">
+        <IconCalendar classes="h-16 w-16" />
         {{ $t('events') }}
       </ButtonBig>
-      <ButtonBig
-        aria-label="FAQ"
-        :to="localePath('/faq')"
-        :icon-id="['fas', 'comments']"
-      >
+      <ButtonBig aria-label="FAQ" :to="localePath('/faq')">
+        <IconChatOutline classes="h-16 w-16" />
         {{ $t('faq') }}
       </ButtonBig>
-      <ButtonBig
-        aria-label="Player"
-        :to="localePath('/player')"
-        :icon-id="['fas', 'music']"
-      >
+      <ButtonBig aria-label="Player" :to="localePath('/player')">
+        <IconMusic classes="h-16 w-16" />
         {{ $t('player') }}
       </ButtonBig>
-      <ButtonBig
-        aria-label="Suggestions"
-        :to="localePath('/suggestions')"
-        :icon-id="['fas', 'lightbulb']"
-      >
+      <ButtonBig aria-label="Suggestions" :to="localePath('/suggestions')">
+        <IconLightbulb classes="h-16 w-16" />
         {{ $t('suggestions') }}
       </ButtonBig>
     </div>

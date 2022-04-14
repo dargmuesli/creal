@@ -21,7 +21,6 @@
         :class="{
           'animate-shake': form.$anyError,
         }"
-        :icon-id="iconId"
         type="submit"
         @click="$emit('click')"
       >
@@ -63,10 +62,6 @@ const Form = defineComponent({
     graphqlError: {
       default: undefined,
       type: Error as PropType<any>,
-    },
-    iconId: {
-      default: undefined,
-      type: Array as PropType<string[] | undefined>,
     },
     submitName: {
       default() {

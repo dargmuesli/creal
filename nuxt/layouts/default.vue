@@ -1,22 +1,7 @@
 <template>
   <div>
     <div class="flex min-h-screen flex-col">
-      <header class="flex items-center justify-between p-4 md:px-8">
-        <AppLink :to="localePath('/')">
-          <div id="logo" class="h-10 w-10" />
-          <span class="text-lg font-bold">{{ $t('creal') }}</span>
-        </AppLink>
-        <AppLink
-          class="text-lg font-bold"
-          :is-colored="false"
-          :to="`mailto:e-mail+creal@jonas-thelemann.de?subject=${encodeURIComponent(
-            $t('bookingSubject')
-          )}`"
-        >
-          {{ $t('bookCreal') }}
-          <FontAwesomeIcon class="ml-2" :icon="['fas', 'arrow-right']" />
-        </AppLink>
-      </header>
+      <Header />
       <main class="container mx-auto flex flex-1 flex-col px-4 py-8 md:px-8">
         <nuxt />
       </main>
@@ -79,14 +64,15 @@
             storePlayerModule.currentTrackMeta &&
             storePlayerModule.currentTrackMeta.mixcloudLink
           "
+          class="flex items-center gap-1"
           :href="storePlayerModule.currentTrackMeta.mixcloudLink"
           rel="noopener noreferrer"
           target="_blank"
         >
-          <font-awesome-icon :icon="['fab', 'mixcloud']" /> {{ $t('mixcloud') }}
+          <IconMixcloud classes="h-5 w-5" /> {{ $t('mixcloud') }}
         </a>
-        <button class="font-bold" @click="share">
-          <font-awesome-icon :icon="['fas', 'share-alt']" />
+        <button class="flex items-center gap-1 font-bold" @click="share">
+          <IconShare classes="h-4 w-4" />
           {{ $t('linkCopy') }}
         </button>
       </div>
@@ -244,31 +230,17 @@ export default defineComponent({
 })
 </script>
 
-<style scoped>
-#logo {
-  background-image: url('/assets/static/logos/creal.svg');
-  background-repeat: no-repeat;
-  background-size: contain;
-}
-</style>
-
 <i18n lang="yml">
 en:
-  bookCreal: Book cReal
-  bookingSubject: Booking Request
-  creal: cReal
   copyright: © {year} Jonas Thelemann. All rights reserved.
   legalNotice: Legal notice
   linkCopy: Copy link
   mixcloud: Mixcloud
-  on: am
+  on: on
 de:
-  bookCreal: cReal buchen
-  bookingSubject: Buchungsanfrage
-  creal: cReal
   copyright: © {year} Jonas Thelemann. Alle Rechte vorbehalten.
   legalNotice: Impressum
   linkCopy: Link kopieren
   mixcloud: Mixcloud
-  on: on
+  on: am
 </i18n>

@@ -1,11 +1,11 @@
 <template>
   <section v-if="faq">
     <button
-      class="flex w-full items-center p-4"
+      class="flex w-full items-center gap-4 p-4"
       :class="{ 'border-b': faq.isFocused }"
       @click="$emit('click', faq)"
     >
-      <font-awesome-icon :icon="['fas', 'comments']" class="mr-4" size="lg" />
+      <IconChatSolid />
       <h1 class="creal-prose-scheme m-0">
         {{ faq.title }}
       </h1>

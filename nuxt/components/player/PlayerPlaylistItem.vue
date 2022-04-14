@@ -5,7 +5,7 @@
       :title="bytesToString(playlistItem.size)"
       @click="onDownloadClick()"
     >
-      <font-awesome-icon :icon="['fas', 'download']" />
+      <IconDownload />
     </button>
     <button
       class="grow cursor-default py-2 text-left lg:py-3"
@@ -14,7 +14,7 @@
       {{ playlistItem.name.replace(/^cReal - /, '') }}
     </button>
     <button class="ml-3 mr-2 lg:ml-10" title="play" @click="onPlayClick()">
-      <font-awesome-icon :icon="['fas', 'play']" />
+      <IconPlay />
     </button>
   </div>
 </template>
