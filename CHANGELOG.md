@@ -1,3 +1,11 @@
+# [0.42.0](https://github.com/dargmuesli/creal/compare/0.41.0...0.42.0) (2022-04-14)
+
+
+### Features
+
+* add breadcrumb navigation ([7427e20](https://github.com/dargmuesli/creal/commit/7427e20716159178827d5a26d9a8d4deb3cd2533)), closes [#59](https://github.com/dargmuesli/creal/issues/59)
+* **player:** play next track automatically ([7eb0e47](https://github.com/dargmuesli/creal/commit/7eb0e47de39030cc7d5cc93bb6f29d0267426c7b)), closes [#33](https://github.com/dargmuesli/creal/issues/33)
+
 # [0.41.0](https://github.com/dargmuesli/creal/compare/0.40.0...0.41.0) (2022-04-14)
 
 
