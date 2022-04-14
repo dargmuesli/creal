@@ -1,3 +1,10 @@
+## [0.42.2](https://github.com/dargmuesli/creal/compare/0.42.1...0.42.2) (2022-04-14)
+
+
+### Bug Fixes
+
+* **playlist:** separate client and server side code ([9defb00](https://github.com/dargmuesli/creal/commit/9defb00a060806475fbd5293bf1f2594421c17fe))
+
 ## [0.42.1](https://github.com/dargmuesli/creal/compare/0.42.0...0.42.1) (2022-04-14)
 
 
