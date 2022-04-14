@@ -1,55 +1,19 @@
 import fs from 'fs'
 import { ServerResponse, IncomingMessage } from 'http'
 import { URL } from 'url'
+import consola from 'consola'
 
 import { S3Client, ListObjectsV2Command } from '@aws-sdk/client-s3'
 import { fromIni } from '@aws-sdk/credential-providers'
-import mergeWith from 'lodash.mergewith'
 
-import consola from 'consola'
-
-export const PLAYER_PREFIX = 'player/'
-
-export interface PlaylistItem {
-  name: string
-  extension: string
-  size: number
-  active: boolean
-  cover: boolean
-  meta: boolean
-}
-
-export interface TrackListItem {
-  startSeconds: number
-  songName: string
-  artistName: string
-}
-
-export interface PlaylistItemMeta {
-  audioLength: number
-  createdTime?: string
-  description?: string
-  mixcloudLink?: string
-  tracklist?: TrackListItem[]
-}
-
-export interface Playlist {
-  name: string
-  collections: Playlist[]
-  items: PlaylistItem[]
-  cover: boolean
-}
-
-interface PlaylistExtended extends Playlist {
-  collections: PlaylistExtended[]
-  covers: string[]
-  metas: string[]
-}
-
-export interface AxiosPlaylist {
-  playlistData: Playlist
-  nextContinuationToken?: string
-}
+import {
+  AxiosPlaylist,
+  PLAYER_PREFIX,
+  Playlist,
+  PlaylistItem,
+  PlaylistExtended,
+  mergeByKey,
+} from '~/types/playlist'
 
 function itemSort(a: PlaylistItem, b: PlaylistItem) {
   const aN = a.name
@@ -71,10 +35,6 @@ function itemSort(a: PlaylistItem, b: PlaylistItem) {
   }
 
   return (aN as any) - (bN as any)
-}
-
-function isObject(a: any) {
-  return !!a && a.constructor === Object
 }
 
 function getPlaylist(playlistDataExtended: PlaylistExtended): Playlist {
@@ -206,44 +166,6 @@ function getPlaylistExtended(
   }
 
   return playlistDataExtended
-}
-
-export function mergeByKey(target: any, source: any, key: string | number) {
-  if (!key) {
-    return
-  }
-
-  return mergeWith(target, source, (targetValue: any, srcValue: any) => {
-    if (Array.isArray(targetValue) && Array.isArray(srcValue)) {
-      let matchFound = false
-
-      for (let j = 0; j < srcValue.length; j++) {
-        for (let i = 0; i < targetValue.length; i++) {
-          if (
-            isObject(srcValue[j]) &&
-            isObject(targetValue[i]) &&
-            key in srcValue[j] &&
-            key in targetValue[i] &&
-            srcValue[j][key] === targetValue[i][key]
-          ) {
-            targetValue[i] = mergeByKey(targetValue[i], srcValue[j], key)
-            matchFound = true
-            break
-          }
-        }
-
-        if (!matchFound) {
-          targetValue.push(srcValue[j])
-        } else {
-          matchFound = false
-        }
-      }
-
-      return targetValue
-    } else {
-      return undefined // Handle merge by lodash's merge function.
-    }
-  })
 }
 
 export default function (req: IncomingMessage, res: ServerResponse) {
