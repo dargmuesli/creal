@@ -1,3 +1,10 @@
+## [0.42.4](https://github.com/dargmuesli/creal/compare/0.42.3...0.42.4) (2022-04-15)
+
+
+### Bug Fixes
+
+* **style:** pin cssnano version ([c06756b](https://github.com/dargmuesli/creal/commit/c06756bc9d4ef7ca483ba51cb3680c3ebad305e1))
+
 ## [0.42.3](https://github.com/dargmuesli/creal/compare/0.42.2...0.42.3) (2022-04-15)
 
 
