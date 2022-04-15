@@ -1,6 +1,7 @@
-import fs from 'fs'
-import { ServerResponse, IncomingMessage } from 'http'
-import { URL } from 'url'
+import fs from 'node:fs'
+import { ServerResponse, IncomingMessage } from 'node:http'
+import { URL } from 'node:url'
+import { Readable } from 'node:stream'
 
 import { S3Client, GetObjectCommand } from '@aws-sdk/client-s3'
 import { fromIni } from '@aws-sdk/credential-providers'
@@ -33,12 +34,21 @@ export default function (req: IncomingMessage, res: ServerResponse) {
       Key: key,
     })
   )
-    .then((data) => {
+    .then(async (data) => {
       if (!data) return
-      res.end(data.Body)
+      res.end(await streamToString(data.Body as Readable))
     })
     .catch(() => {
       res.writeHead(500)
       res.end()
     })
+}
+
+async function streamToString(stream: Readable): Promise<string> {
+  return await new Promise((resolve, reject) => {
+    const chunks: Uint8Array[] = []
+    stream.on('data', (chunk) => chunks.push(chunk))
+    stream.on('error', reject)
+    stream.on('end', () => resolve(Buffer.concat(chunks).toString('utf-8')))
+  })
 }
