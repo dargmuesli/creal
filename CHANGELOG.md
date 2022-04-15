@@ -1,3 +1,10 @@
+## [0.42.3](https://github.com/dargmuesli/creal/compare/0.42.2...0.42.3) (2022-04-15)
+
+
+### Bug Fixes
+
+* **api:** correct return type ([12a5bce](https://github.com/dargmuesli/creal/commit/12a5bce557a9da6418059a118847cbc77c485f9d))
+
 ## [0.42.2](https://github.com/dargmuesli/creal/compare/0.42.1...0.42.2) (2022-04-14)
 
 
