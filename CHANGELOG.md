@@ -1,3 +1,10 @@
+## [0.43.1](https://github.com/dargmuesli/creal/compare/0.43.0...0.43.1) (2022-04-16)
+
+
+### Bug Fixes
+
+* **style:** correct faq display ([a025457](https://github.com/dargmuesli/creal/commit/a02545769ec58aee5492ce37bd025b6d64c099ab))
+
 # [0.43.0](https://github.com/dargmuesli/creal/compare/0.42.5...0.43.0) (2022-04-16)
 
 
