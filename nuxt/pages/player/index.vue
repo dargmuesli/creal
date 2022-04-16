@@ -106,7 +106,7 @@ export default defineComponent({
     return {
       playlistData: null as null | Playlist,
       storePlayerModule: getModule(PlayerModule, this.$store),
-      title: 'Player',
+      title: this.$t('titlePage'),
     }
   },
   async fetch() {
@@ -337,7 +337,9 @@ export default defineComponent({
 de:
   description: Mixe von DJ cReal anhören.
   itemsNone: Keine Elemente gefunden.
+  titlePage: Player
 en:
   description: Listen to mixes by DJ cReal.
   itemsNone: No items found.
+  titlePage: Player
 </i18n>

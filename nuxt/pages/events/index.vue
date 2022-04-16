@@ -89,7 +89,7 @@ export default defineComponent({
     return {
       items: undefined as Array<CollectionItem<CrealEvent>> | undefined,
       requestError: undefined,
-      title: 'Events',
+      title: this.$t('titlePage'),
     }
   },
   head() {
@@ -190,10 +190,12 @@ de:
   eventsFuture: Zukünftige Veranstaltungen
   eventsNone: Keine Veranstaltungen gefunden.
   eventsPast: Vergangene Veranstaltungen
+  titlePage: Veranstaltungen
 en:
   description: Events at which cReal performs.
   eventsCurrent: Current events
   eventsFuture: Upcoming events
   eventsNone: No events found.
   eventsPast: Past events
+  titlePage: Events
 </i18n>

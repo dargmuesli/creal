@@ -91,7 +91,7 @@ export default defineComponent({
     return {
       items: undefined as Array<CollectionItem<Faq>> | undefined,
       itemFocused: undefined as CollectionItem<Faq> | undefined,
-      title: 'FAQ',
+      title: this.$t('titlePage'),
       requestError: undefined,
     }
   },
@@ -180,7 +180,9 @@ export default defineComponent({
 de:
   description: Häufig gestellte Fragen an DJ cReal.
   faqNone: Keine FAQ gefunden.
+  titlePage: FAQ
 en:
   description: Frequently asked questions to DJ cReal.
   faqNone: No FAQ found.
+  titlePage: FAQ
 </i18n>
