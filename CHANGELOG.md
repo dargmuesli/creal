@@ -1,3 +1,17 @@
+# [0.43.0](https://github.com/dargmuesli/creal/compare/0.42.5...0.43.0) (2022-04-16)
+
+
+### Bug Fixes
+
+* **api:** use async await ([a07d398](https://github.com/dargmuesli/creal/commit/a07d398bd5bff5978921391a6a824d373d361b5a))
+* **static:** work around nitro issue ([aa63168](https://github.com/dargmuesli/creal/commit/aa63168fd35283ab5f64c113f2cdf1b45779c06f))
+
+
+### Features
+
+* **error:** upgrade status-i18n ([ed4604e](https://github.com/dargmuesli/creal/commit/ed4604e15e10639604bcc28ba28d302b31b1d4f2))
+* **style:** mobile improvements ([ca88813](https://github.com/dargmuesli/creal/commit/ca88813a368f790752af1ba98a4d80aac2b38bae))
+
 ## [0.42.5](https://github.com/dargmuesli/creal/compare/0.42.4...0.42.5) (2022-04-15)
 
 
