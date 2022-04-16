@@ -6,7 +6,7 @@ import { Readable } from 'node:stream'
 import { S3Client, GetObjectCommand } from '@aws-sdk/client-s3'
 import { fromIni } from '@aws-sdk/credential-providers'
 
-export default function (req: IncomingMessage, res: ServerResponse) {
+export default async function (req: IncomingMessage, res: ServerResponse) {
   const s3 = new S3Client({
     apiVersion: '2006-03-01',
     credentials: fromIni({
@@ -28,20 +28,23 @@ export default function (req: IncomingMessage, res: ServerResponse) {
     return
   }
 
-  s3.send(
-    new GetObjectCommand({
-      Bucket: bucket,
-      Key: key,
-    })
-  )
-    .then(async (data) => {
-      if (!data) return
-      res.end(await streamToString(data.Body as Readable))
-    })
-    .catch(() => {
-      res.writeHead(500)
-      res.end()
-    })
+  let data
+
+  try {
+    data = await s3.send(
+      new GetObjectCommand({
+        Bucket: bucket,
+        Key: key,
+      })
+    )
+  } catch (err) {
+    res.writeHead(500)
+    res.end()
+  }
+
+  if (!data) return
+
+  res.end(await streamToString(data.Body as Readable))
 }
 
 async function streamToString(stream: Readable): Promise<string> {

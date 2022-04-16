@@ -10,7 +10,7 @@ import {
 import { fromIni } from '@aws-sdk/credential-providers'
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner'
 
-export default function (req: IncomingMessage, res: ServerResponse) {
+export default async function (req: IncomingMessage, res: ServerResponse) {
   const s3 = new S3Client({
     apiVersion: '2006-03-01',
     credentials: fromIni({
@@ -32,35 +32,36 @@ export default function (req: IncomingMessage, res: ServerResponse) {
     return
   }
 
-  s3.send(
-    new HeadObjectCommand({
-      Bucket: bucket,
-      Key: key,
-    })
-  )
-    .then(() => {
-      getSignedUrl(
-        s3,
-        new GetObjectCommand({
-          Bucket: bucket,
-          Key: key,
-        }),
-        {
-          expiresIn: 21600, // 6h
-        }
-      ).then(
-        function (url) {
-          res.setHeader('Content-Type', 'text/plain')
-          res.end(url)
-        },
-        function (err) {
-          res.writeHead(500)
-          res.end(err.message)
-        }
-      )
-    })
-    .catch(() => {
-      res.writeHead(500)
-      res.end()
-    })
+  try {
+    await s3.send(
+      new HeadObjectCommand({
+        Bucket: bucket,
+        Key: key,
+      })
+    )
+  } catch (err) {
+    res.writeHead(500)
+    res.end()
+  }
+
+  let url
+
+  try {
+    url = await getSignedUrl(
+      s3,
+      new GetObjectCommand({
+        Bucket: bucket,
+        Key: key,
+      }),
+      {
+        expiresIn: 21600, // 6h
+      }
+    )
+  } catch (err: any) {
+    res.writeHead(500)
+    res.end(err.message)
+  }
+
+  res.setHeader('Content-Type', 'text/plain')
+  res.end(url)
 }
