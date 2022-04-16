@@ -67,6 +67,10 @@ export default defineNuxtConfig({
 
   css: ['@/assets/css/main.css'],
 
+  dir: {
+    static: 'public',
+  },
+
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head() {
     return {
