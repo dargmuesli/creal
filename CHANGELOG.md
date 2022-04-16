@@ -1,3 +1,11 @@
+## [0.43.2](https://github.com/dargmuesli/creal/compare/0.43.1...0.43.2) (2022-04-16)
+
+
+### Bug Fixes
+
+* **pages:** translate title ([833c35b](https://github.com/dargmuesli/creal/commit/833c35bcf6cdc1cce345007257939ff7fcceb396))
+* **style:** correct default dark mode ([afd7e81](https://github.com/dargmuesli/creal/commit/afd7e813b5a97cbd6da7912ddead1ff51e0d2fea))
+
 ## [0.43.1](https://github.com/dargmuesli/creal/compare/0.43.0...0.43.1) (2022-04-16)
 
 
