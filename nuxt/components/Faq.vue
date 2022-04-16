@@ -5,8 +5,8 @@
       :class="{ 'border-b': faq.isFocused }"
       @click="$emit('click', faq)"
     >
-      <IconChatSolid />
-      <h1 class="creal-prose-fullwidth m-0">
+      <IconChatSolid class="shrink-0" />
+      <h1 class="creal-prose-fullwidth m-0 text-left">
         {{ faq.title }}
       </h1>
     </button>
