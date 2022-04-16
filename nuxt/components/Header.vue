@@ -6,28 +6,32 @@
     </AppLink>
     <AppLink
       v-if="eventsCurrentCount"
-      class="flex items-center gap-2 rounded-full border px-4 py-2 font-bold focus:rounded-full"
+      class="gap-2 rounded-full border px-4 py-2 font-bold focus:rounded-full sm:px-4"
       :to="localePath('/events')"
     >
-      {{ $t('live') }}
+      <span class="hidden whitespace-nowrap sm:inline">
+        {{ $t('live') }}
+      </span>
       <LivePulse />
     </AppLink>
     <AppLink
       v-else-if="eventsFutureCount"
-      class="flex items-center gap-2 rounded-full border px-4 py-2 font-bold focus:rounded-full"
+      class="gap-2 rounded-full border px-2 py-2 font-bold focus:rounded-full sm:px-4"
       :to="localePath('/events')"
     >
-      {{ $t('eventsFuture') }}
+      <span class="hidden whitespace-nowrap sm:inline">
+        {{ $t('eventsFuture') }}
+      </span>
       <LivePulse />
     </AppLink>
     <AppLink
-      class="flex gap-2 text-lg font-bold"
+      class="basis-0 gap-2 text-lg font-bold"
       :is-colored="false"
       :to="`mailto:e-mail+creal@jonas-thelemann.de?subject=${encodeURIComponent(
         $t('bookingSubject')
       )}`"
     >
-      {{ $t('bookCreal') }}
+      <span class="basis-0 whitespace-nowrap">{{ $t('bookCreal') }}</span>
       <IconArrowRight />
     </AppLink>
   </header>

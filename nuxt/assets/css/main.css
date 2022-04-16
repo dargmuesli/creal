@@ -24,10 +24,10 @@
 
 @layer utilities {
   .creal-prose {
-    @apply prose sm:prose-sm lg:prose-lg xl:prose-xl;
+    @apply prose prose-base lg:prose-lg xl:prose-xl dark:prose-invert; /* prose-sm sm: 2xl:prose-2xl */
   }
 
-  .creal-prose-scheme {
-    @apply creal-prose dark:prose-invert;
+  .creal-prose-fullwidth {
+    @apply creal-prose max-w-full sm:max-w-full md:max-w-full xl:max-w-full 2xl:max-w-full;
   }
 }

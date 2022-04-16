@@ -1,9 +1,9 @@
 <template>
-  <div class="mb-4 flex items-center gap-2">
+  <div class="mb-4 flex items-center gap-2 overflow-auto">
     <AppLink :to="localePath('/')"><IconHome classes="h-8 w-8" /></AppLink>
     <span>{{ $t('separator') }}</span>
     <AppLink :to="$util.getQueryString({})">
-      <h1 class="m-0"><slot /></h1>
+      <h1 class="m-0 whitespace-nowrap"><slot /></h1>
     </AppLink>
     <ul v-if="suffixes" class="flex items-center gap-2">
       <li
@@ -19,7 +19,7 @@
             })
           "
         >
-          <span class="text-4xl">{{ suffix }}</span>
+          <span class="whitespace-nowrap text-4xl">{{ suffix }}</span>
         </AppLink>
       </li>
     </ul>

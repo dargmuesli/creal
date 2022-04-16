@@ -34,7 +34,7 @@
     <div class="fixed bottom-0 left-0 right-0">
       <div
         v-if="storePlayerModule.currentTrackName"
-        class="flex flex-col justify-evenly bg-white font-bold text-black sm:flex-row"
+        class="flex flex-col justify-evenly bg-white px-2 font-bold text-black sm:flex-row"
       >
         <span>
           {{

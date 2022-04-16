@@ -1,6 +1,8 @@
 <template>
-  <div v-if="events && events.length > 0">
-    <h2><slot /></h2>
+  <div v-if="events && events.length > 0" class="flex flex-col gap-2 lg:gap-4">
+    <div class="creal-prose-fullwidth">
+      <h2><slot /></h2>
+    </div>
     <ul>
       <li
         v-for="event in events"

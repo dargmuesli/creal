@@ -6,7 +6,7 @@
       @click="$emit('click', faq)"
     >
       <IconChatSolid />
-      <h1 class="creal-prose-scheme m-0">
+      <h1 class="creal-prose-fullwidth m-0">
         {{ faq.title }}
       </h1>
     </button>
@@ -16,7 +16,7 @@
       :style="`max-height: ${getMaxHeight()}px`"
     >
       <!-- eslint-disable-next-line vue/no-v-html -->
-      <div class="creal-prose-scheme p-8" v-html="$marked(faq.answer)" />
+      <div class="creal-prose-fullwidth p-8" v-html="$marked(faq.answer)" />
     </div>
   </section>
 </template>

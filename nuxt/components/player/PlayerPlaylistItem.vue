@@ -8,7 +8,7 @@
       <IconDownload />
     </button>
     <button
-      class="grow cursor-default py-2 text-left lg:py-3"
+      class="creal-prose-fullwidth max-w-full grow cursor-default py-2 text-left lg:py-3"
       @click="onItemClick"
     >
       {{ playlistItem.name.replace(/^cReal - /, '') }}

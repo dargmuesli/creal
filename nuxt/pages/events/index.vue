@@ -7,6 +7,7 @@
       <CardAlert v-if="requestError" :error-message="requestError.message" />
       <Paging
         v-else-if="items && items.length > 0"
+        class="flex flex-col gap-4 lg:gap-8"
         :is-previous-allowed="isPreviousAllowed"
         :is-next-allowed="isNextAllowed"
         :part-string="partString"

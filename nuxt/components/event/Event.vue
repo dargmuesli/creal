@@ -1,8 +1,8 @@
 <template>
   <div
-    class="flex flex-col items-center justify-center space-y-4 lg:flex-row lg:space-x-4 lg:space-y-0"
+    class="flex flex-col justify-center space-y-4 lg:flex-row lg:items-center lg:space-x-4 lg:space-y-0"
   >
-    <div class="creal-prose-scheme space-y-2 lg:w-1/2">
+    <div class="creal-prose-fullwidth space-y-2 lg:w-1/2">
       <div class="flex gap-2">
         <div>{{ datetime }}</div>
         <div v-if="event.location" class="flex gap-2">
@@ -24,7 +24,7 @@
       <div v-if="event.url && event.url !== ''" class="text-center">
         <Button
           :aria-label="$t('details')"
-          class="text-xl"
+          class="creal-prose-fullwidth prose-a:text-gray-800"
           :icon="false"
           :to="event.url"
         >
