@@ -16,20 +16,8 @@ export default defineComponent({
   },
   computed: {
     statusReason(): string {
-      // TODO: https://github.com/http-util/status-i18n/issues/27
-      let statusCodeLanguageCode
-
-      switch (this.$i18n.locale) {
-        case 'de': // Prepared for https://github.com/http-util/status-i18n/pull/26
-          statusCodeLanguageCode = 'de-de'
-          break
-        // en captured by `default`
-        default:
-          statusCodeLanguageCode = 'en-us'
-          break
-      }
       return (
-        status(this.statusCode, statusCodeLanguageCode) ||
+        status(this.statusCode, this.$i18n.locale) ||
         (this.$t('error') as string)
       )
     },

@@ -8,7 +8,7 @@ import { defineComponent, PropType } from '#app'
 type Error = { statusCode: number }
 
 export default defineComponent({
-  name: 'IndexPage',
+  name: 'CrealError',
   props: {
     error: {
       type: Object as PropType<Error | undefined>,
