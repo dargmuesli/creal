@@ -1,3 +1,10 @@
+## [0.43.4](https://github.com/dargmuesli/creal/compare/0.43.3...0.43.4) (2022-04-19)
+
+
+### Bug Fixes
+
+* **docker:** switch to wget for healthcheck ([fec9104](https://github.com/dargmuesli/creal/commit/fec91047105181a88ca302b38fa5c1757d6405b7))
+
 ## [0.43.3](https://github.com/dargmuesli/creal/compare/0.43.2...0.43.3) (2022-04-18)
 
 
