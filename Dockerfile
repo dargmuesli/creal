@@ -7,6 +7,7 @@ FROM node:16.14.2-slim@sha256:9b43cdacd070d1b38976a804aec78f03139c600865a3c72501
 # Update and install dependencies.
 # - `ca-certificates` and `git` are required by the `yarn install` command
 # - `sqitch` is required by the entrypoint
+# - `wget` is required by the healthcheck
 RUN apt-get update \
     && apt-get install --no-install-recommends -y \
         ca-certificates git \
@@ -15,7 +16,7 @@ RUN apt-get update \
         postgresql-client \
         sqitch \
     && apt-get install --no-install-recommends -y \
-        curl \
+        wget \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
@@ -32,7 +33,7 @@ COPY ./docker-entrypoint.sh /usr/local/bin/
 
 ENTRYPOINT ["docker-entrypoint.sh"]
 CMD ["dev", "--hostname", "0.0.0.0"]
-HEALTHCHECK --interval=10s CMD curl -f http://localhost:3000/api/healthcheck || exit 1
+HEALTHCHECK --interval=10s CMD wget -O /dev/null http://localhost:3000/api/healthcheck || exit 1
 
 
 ########################
@@ -76,13 +77,14 @@ ENV NODE_ENV=production
 
 # Update and install dependencies.
 # - `sqitch` is required by the entrypoint
+# - `wget` is required by the healthcheck
 RUN apt-get update \
     && apt-get install --no-install-recommends -y \
         libdbd-pg-perl \
         postgresql-client \
         sqitch \
     && apt-get install --no-install-recommends -y \
-        curl \
+        wget \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
@@ -95,4 +97,4 @@ COPY ./docker-entrypoint.sh /usr/local/bin/
 
 ENTRYPOINT ["docker-entrypoint.sh"]
 CMD ["start"]
-HEALTHCHECK --interval=10s CMD curl -f http://localhost:3000/api/healthcheck || exit 1
+HEALTHCHECK --interval=10s CMD wget -O /dev/null http://localhost:3000/api/healthcheck || exit 1
