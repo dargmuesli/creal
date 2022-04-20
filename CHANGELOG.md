@@ -1,3 +1,10 @@
+# [0.44.0](https://github.com/dargmuesli/creal/compare/0.43.5...0.44.0) (2022-04-20)
+
+
+### Features
+
+* **index:** add small page description ([c12060d](https://github.com/dargmuesli/creal/commit/c12060dbf87eb6069d2efddb1031efbb505b675f)), closes [#170](https://github.com/dargmuesli/creal/issues/170)
+
 ## [0.43.5](https://github.com/dargmuesli/creal/compare/0.43.4...0.43.5) (2022-04-20)
 
 
