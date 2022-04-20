@@ -12,7 +12,13 @@
           <h1 class="inline-block border-b border-gray-400">
             {{ $t('creal') }}
           </h1>
-          <p class="mt-4 mb-16 font-light">{{ $t('welcome') }}</p>
+          <i18n
+            class="mt-4 mb-16 whitespace-pre-line font-light"
+            path="welcome"
+            tag="p"
+          >
+            <br />
+          </i18n>
           <Button aria-label="start" @click.native="setShowGreeting(true)">
             {{ $t('start') }}
           </Button>
@@ -119,7 +125,7 @@ de:
   player: Player
   start: Start
   suggestions: Vorschläge
-  welcome: Willkommen auf meiner Website
+  welcome: DJ und Event-Organisator,{0}manchmal am Doubletime rappen.
 en:
   creal: cReal
   events: Events
@@ -127,5 +133,5 @@ en:
   player: Player
   start: Start
   suggestions: Suggestions
-  welcome: Welcome to my website
+  welcome: DJ and event organizer,{0}occasionally rapping double times.
 </i18n>
