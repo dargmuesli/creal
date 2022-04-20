@@ -1,3 +1,10 @@
+## [0.43.5](https://github.com/dargmuesli/creal/compare/0.43.4...0.43.5) (2022-04-20)
+
+
+### Bug Fixes
+
+* **package:** update status-i18n to v0.6.2 ([a57529c](https://github.com/dargmuesli/creal/commit/a57529c7fe6287353209f5bec10059d69b1159b9))
+
 ## [0.43.4](https://github.com/dargmuesli/creal/compare/0.43.3...0.43.4) (2022-04-19)
 
 
