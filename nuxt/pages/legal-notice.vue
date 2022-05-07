@@ -42,7 +42,7 @@ import { defineComponent } from '#app'
 export default defineComponent({
   data() {
     return {
-      title: 'Impressum',
+      title: this.$t('title'),
     }
   },
   head() {
