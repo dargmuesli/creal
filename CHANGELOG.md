@@ -1,3 +1,11 @@
+## [0.44.3](https://github.com/dargmuesli/creal/compare/0.44.2...0.44.3) (2022-05-07)
+
+
+### Bug Fixes
+
+* **legal-notice:** correct title translation ([faf1551](https://github.com/dargmuesli/creal/commit/faf15515683ee6086a233b58e9af480c0021b1e2))
+* **typography:** correct sizes ([75a3411](https://github.com/dargmuesli/creal/commit/75a34117b0259b969e1ca9d725744c9a03dc13ff))
+
 ## [0.44.2](https://github.com/dargmuesli/creal/compare/0.44.1...0.44.2) (2022-05-02)
 
 
