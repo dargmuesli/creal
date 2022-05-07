@@ -1,7 +1,7 @@
 import fs from 'fs'
 
-import { Inject } from '@nuxt/types/app'
-import { Context } from '@nuxt/types'
+import { Inject } from '@nuxt/types-edge/app'
+import { Context } from '@nuxt/types-edge'
 
 const secretPathAwsBucket = '/run/secrets/creal_aws-bucket'
 
@@ -26,7 +26,7 @@ declare module 'vue/types/vue' {
   }
 }
 
-declare module '@nuxt/types' {
+declare module '@nuxt/types-edge' {
   interface NuxtAppOptions {
     $baseUrl: typeof BASE_URL
   }

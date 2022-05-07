@@ -1,5 +1,5 @@
-import { Inject } from '@nuxt/types/app'
-import { Context } from '@nuxt/types'
+import { Inject } from '@nuxt/types-edge/app'
+import { Context } from '@nuxt/types-edge'
 
 export interface Paging {
   isNextAllowed: Boolean
@@ -57,7 +57,7 @@ export default (_: Context, inject: Inject) => {
   )
 }
 
-declare module '@nuxt/types' {
+declare module '@nuxt/types-edge' {
   interface NuxtAppOptions {
     $paging: Function
   }

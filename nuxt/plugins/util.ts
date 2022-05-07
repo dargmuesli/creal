@@ -1,5 +1,5 @@
-import { Context } from '@nuxt/types'
-import { Inject } from '@nuxt/types/app'
+import { Context } from '@nuxt/types-edge'
+import { Inject } from '@nuxt/types-edge/app'
 
 type Dictionary<T> = { [key: string]: T } // import { Dictionary } from 'vue-router/types/router'
 
@@ -67,7 +67,7 @@ declare module 'vue/types/vue' {
   }
 }
 
-declare module '@nuxt/types' {
+declare module '@nuxt/types-edge' {
   interface NuxtAppOptions {
     $util: typeof util
   }

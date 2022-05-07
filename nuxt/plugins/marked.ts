@@ -1,5 +1,5 @@
-import { Inject } from '@nuxt/types/app'
-import { Context } from '@nuxt/types'
+import { Inject } from '@nuxt/types-edge/app'
+import { Context } from '@nuxt/types-edge'
 
 import { marked } from 'marked'
 
