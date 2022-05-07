@@ -190,8 +190,9 @@ module.exports = {
         popout: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)',
       },
       typography: (theme) => ({
-        sm: prose(theme),
         DEFAULT: prose(theme),
+        sm: prose(theme),
+        base: prose(theme),
         lg: prose(theme),
         xl: prose(theme),
         '2xl': prose(theme),

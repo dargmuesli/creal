@@ -24,7 +24,7 @@
 
 @layer utilities {
   .creal-prose {
-    @apply prose prose-base lg:prose-lg xl:prose-xl prose-invert; /* prose-sm sm:... 2xl:prose-2xl */ /* dark mode is default */
+    @apply prose prose-sm sm:prose-base lg:prose-lg xl:prose-xl prose-invert; /* 2xl:prose-2xl */ /* dark mode is default */
   }
 
   .creal-prose-fullwidth {
