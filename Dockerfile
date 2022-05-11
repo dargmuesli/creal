@@ -2,7 +2,7 @@
 # Serve Nuxt in development mode.
 
 # Should be the specific version of node:slim.
-FROM node:16.15.0-slim@sha256:9ad2f889d4a15ef94e40ac75e95c28daa34073dbc25d7b1e619caacc6b83623c AS development
+FROM node:16.15.0-slim@sha256:f8cb96358ff1d2264e0e70f1dc35537735876c02fd6d8f568eec681a9b991bde AS development
 
 # Update and install dependencies.
 # - `ca-certificates` and `git` are required by the `yarn install` command
@@ -40,7 +40,7 @@ HEALTHCHECK --interval=10s CMD wget -O /dev/null http://localhost:3000/api/healt
 # Build Nuxt.
 
 # Should be the specific version of node:slim.
-FROM node:16.15.0-slim@sha256:9ad2f889d4a15ef94e40ac75e95c28daa34073dbc25d7b1e619caacc6b83623c AS build
+FROM node:16.15.0-slim@sha256:f8cb96358ff1d2264e0e70f1dc35537735876c02fd6d8f568eec681a9b991bde AS build
 
 ARG NUXT_ENV_STACK_DOMAIN=jonas-thelemann.de
 ENV NUXT_ENV_STACK_DOMAIN=${NUXT_ENV_STACK_DOMAIN}
@@ -71,7 +71,7 @@ RUN yarn install
 # Requires node (cannot be static) as the server acts as backend too.
 
 # Should be the specific version of node:slim.
-FROM node:16.15.0-slim@sha256:9ad2f889d4a15ef94e40ac75e95c28daa34073dbc25d7b1e619caacc6b83623c AS production
+FROM node:16.15.0-slim@sha256:f8cb96358ff1d2264e0e70f1dc35537735876c02fd6d8f568eec681a9b991bde AS production
 
 ENV NODE_ENV=production
 
