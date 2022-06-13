@@ -1,3 +1,10 @@
+## [0.44.8](https://github.com/dargmuesli/creal/compare/0.44.7...0.44.8) (2022-06-13)
+
+
+### Bug Fixes
+
+* **release:** schedule release ([1a53862](https://github.com/dargmuesli/creal/commit/1a53862390a40893cacb4532570bc57d91597ed5))
+
 ## [0.44.7](https://github.com/dargmuesli/creal/compare/0.44.6...0.44.7) (2022-05-30)
 
 
