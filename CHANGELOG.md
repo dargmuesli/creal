@@ -1,3 +1,10 @@
+## [0.44.9](https://github.com/dargmuesli/creal/compare/0.44.8...0.44.9) (2022-06-14)
+
+
+### Bug Fixes
+
+* **deps:** pin ufo ([a0590af](https://github.com/dargmuesli/creal/commit/a0590afcd6592a48535b3032c1c67309bb2c1e4f))
+
 ## [0.44.8](https://github.com/dargmuesli/creal/compare/0.44.7...0.44.8) (2022-06-13)
 
 
