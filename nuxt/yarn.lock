@@ -259,10 +259,10 @@
   dependencies:
     tslib "^2.3.1"
 
-"@aws-sdk/client-cognito-identity@3.154.0":
-  version "3.154.0"
-  resolved "https://registry.yarnpkg.com/@aws-sdk/client-cognito-identity/-/client-cognito-identity-3.154.0.tgz#c4fab02bf05e1fb5fdfbd31e5017990eab106ee9"
-  integrity sha512-anMfJ4o/q3bOZ1M5+1DN2wvcgdQVr0wy7yJoh+PpxfPzLDhlgmlFjvpI9Dv4LYVB4DNobyGKTKA1Q7Mppwb8dw==
+"@aws-sdk/client-cognito-identity@3.157.0":
+  version "3.157.0"
+  resolved "https://registry.yarnpkg.com/@aws-sdk/client-cognito-identity/-/client-cognito-identity-3.157.0.tgz#3a993e0621125ddd90c6e4dc4ab593fb761659f4"
+  integrity sha512-AlRONV96+ovlzgstZ4sq/LATYwTl5gjTRGUNAeWt1brKipSedJCi7TPJpEViv7Pt0+d713odvTtdZzyGRfhOqg==
   dependencies:
     "@aws-crypto/sha256-browser" "2.0.0"
     "@aws-crypto/sha256-js" "2.0.0"
@@ -299,10 +299,10 @@
     "@aws-sdk/util-utf8-node" "3.109.0"
     tslib "^2.3.1"
 
-"@aws-sdk/client-s3@3.154.0":
-  version "3.154.0"
-  resolved "https://registry.yarnpkg.com/@aws-sdk/client-s3/-/client-s3-3.154.0.tgz#f11b8eb514efeaefa57b76261e73a0512b59c887"
-  integrity sha512-TUkUZUmDuQlh7N6455LNqjuky/iIhjvnISJzl+wMKyQUMX61FPDZMYDG7HXDEQGV7uaAvjaabKfyHVNdoi/SmA==
+"@aws-sdk/client-s3@3.157.0":
+  version "3.157.0"
+  resolved "https://registry.yarnpkg.com/@aws-sdk/client-s3/-/client-s3-3.157.0.tgz#88500fed3a08634b99e23eab2c817010522fb0b9"
+  integrity sha512-xWlNzuEbWkgGwTFWPRfiYHfFE2W+Y8wakoiFBNvvh16nzPqjw6RGZYbydR2vvl69VMp1uQ9C2ZeD9Nagh8wtrw==
   dependencies:
     "@aws-crypto/sha1-browser" "2.0.0"
     "@aws-crypto/sha256-browser" "2.0.0"
@@ -449,12 +449,12 @@
     "@aws-sdk/util-middleware" "3.127.0"
     tslib "^2.3.1"
 
-"@aws-sdk/credential-provider-cognito-identity@3.154.0":
-  version "3.154.0"
-  resolved "https://registry.yarnpkg.com/@aws-sdk/credential-provider-cognito-identity/-/credential-provider-cognito-identity-3.154.0.tgz#2acb894b398766eef90798c2d237b97963140eac"
-  integrity sha512-19kmtBcoM/vUHMoBv+YiNkvWTVeJc7ZFISjQSEFbWn7ZcUEPTejXa+iy5UmEP1Xe8aEjOWSxx4D+dFBFgF/1kw==
+"@aws-sdk/credential-provider-cognito-identity@3.157.0":
+  version "3.157.0"
+  resolved "https://registry.yarnpkg.com/@aws-sdk/credential-provider-cognito-identity/-/credential-provider-cognito-identity-3.157.0.tgz#45b42f4d0dce6ee64b242247a8a6030f0d4f3287"
+  integrity sha512-7C1plOm6evYOdlfI03d7XTKuZLCoQHD10+SES1Wyx3oeo1ogaktACY9MnTm8sLNBlOPcTUVr21Oz6UoO3vBivQ==
   dependencies:
-    "@aws-sdk/client-cognito-identity" "3.154.0"
+    "@aws-sdk/client-cognito-identity" "3.157.0"
     "@aws-sdk/property-provider" "3.127.0"
     "@aws-sdk/types" "3.127.0"
     tslib "^2.3.1"
@@ -539,15 +539,15 @@
     "@aws-sdk/types" "3.127.0"
     tslib "^2.3.1"
 
-"@aws-sdk/credential-providers@3.154.0":
-  version "3.154.0"
-  resolved "https://registry.yarnpkg.com/@aws-sdk/credential-providers/-/credential-providers-3.154.0.tgz#a0d14fe3877980ccdbd2b68643ad3ebb62d6ae39"
-  integrity sha512-aSyEMwUu6HzM7K9x9zlLHHzsyt4KTfkn1obblN7DdOmUipM+dR6upNkAiilpYa/F7jAIkU+cXe3btvRo5SAoAw==
+"@aws-sdk/credential-providers@3.157.0":
+  version "3.157.0"
+  resolved "https://registry.yarnpkg.com/@aws-sdk/credential-providers/-/credential-providers-3.157.0.tgz#232940608e7e61ac512c0ac10af443db2285f6b9"
+  integrity sha512-ys3p/XcSjgnKjUIsQL211zaqyzP4VxrbSQKq/iG6oSKmYxbNDkstbzaou/GSvdTm7XcAGJF/7hAuGFXnc8Udzw==
   dependencies:
-    "@aws-sdk/client-cognito-identity" "3.154.0"
+    "@aws-sdk/client-cognito-identity" "3.157.0"
     "@aws-sdk/client-sso" "3.154.0"
     "@aws-sdk/client-sts" "3.154.0"
-    "@aws-sdk/credential-provider-cognito-identity" "3.154.0"
+    "@aws-sdk/credential-provider-cognito-identity" "3.157.0"
     "@aws-sdk/credential-provider-env" "3.127.0"
     "@aws-sdk/credential-provider-imds" "3.127.0"
     "@aws-sdk/credential-provider-ini" "3.154.0"
@@ -875,10 +875,10 @@
     "@aws-sdk/types" "3.127.0"
     tslib "^2.3.1"
 
-"@aws-sdk/s3-request-presigner@3.154.0":
-  version "3.154.0"
-  resolved "https://registry.yarnpkg.com/@aws-sdk/s3-request-presigner/-/s3-request-presigner-3.154.0.tgz#1dc2dd534c4a8d2e7ed1314ba4c1e942241d23dc"
-  integrity sha512-a8eKo81Ch7TuEcNMIe3T7LhpqDrmXg1oQzGoHeHEE/YYZVXLZimoqLeRZne3wPVWz8sb9wDqIIn+iP/ek6XfZg==
+"@aws-sdk/s3-request-presigner@3.157.0":
+  version "3.157.0"
+  resolved "https://registry.yarnpkg.com/@aws-sdk/s3-request-presigner/-/s3-request-presigner-3.157.0.tgz#1b621dad2589af807702005fcafa4b83bd8434b8"
+  integrity sha512-WEfAILMML5lfWtZe8cUL46tTU6uCgOHRDyDRenswIPiS8EiyxyjACwwRq29xYd6T61Xy5q8hJd+9voeQDo+qZQ==
   dependencies:
     "@aws-sdk/middleware-sdk-s3" "3.127.0"
     "@aws-sdk/protocol-http" "3.127.0"
