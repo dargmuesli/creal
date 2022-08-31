@@ -1,3 +1,10 @@
+## [0.44.16](https://github.com/dargmuesli/creal/compare/0.44.15...0.44.16) (2022-08-31)
+
+
+### Bug Fixes
+
+* **player:** correct type import ([56f8eec](https://github.com/dargmuesli/creal/commit/56f8eec1b342531a00bb0b221752c9caae302a9c))
+
 ## [0.44.15](https://github.com/dargmuesli/creal/compare/0.44.14...0.44.15) (2022-08-29)
 
 
