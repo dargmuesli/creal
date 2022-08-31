@@ -58,7 +58,8 @@ WORKDIR /srv/app/
 
 COPY --from=development /srv/app/ ./
 
-RUN yarn run lint \
+RUN yarn run nuxi prepare \
+    && yarn run lint \
     && yarn run build
     # && yarn run test
 

@@ -88,7 +88,7 @@
 
 <script lang="ts">
 import { getModule } from 'vuex-module-decorators'
-import { Route } from 'vue-router'
+import { Route } from 'vue-router/types'
 
 import { defineComponent } from '#app'
 import {
