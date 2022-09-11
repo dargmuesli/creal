@@ -2797,13 +2797,12 @@
   resolved "https://registry.yarnpkg.com/@graphql-typed-document-node/core/-/core-3.1.1.tgz#076d78ce99822258cf813ecc1e7fa460fa74d052"
   integrity sha512-NQ17ii0rK1b34VZonlmT2QMJFI70m0TRwbknO/ihlbatXyaktDhN/98vBiUU6kNBPljqGqyIrl2T4nY2RpFANg==
 
-"@html-validate/stylish@^2.0.0":
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/@html-validate/stylish/-/stylish-2.0.1.tgz#a21dac99e7bbf7d25a564b8560d9d2a17aa84dd4"
-  integrity sha512-iRLjgQnNq66rcsTukun6KwMhPEoUV2R3atPbTSapnEvD1aETjD+pfS+1yYrmaPeJFgXHzfsSYjAuyUVq7EID/Q==
+"@html-validate/stylish@^3.0.0":
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/@html-validate/stylish/-/stylish-3.0.1.tgz#9d0304c6fd91e4b19467b8b7d6f3f112fc7831ff"
+  integrity sha512-jQNDrSnWvJEPSlqC1tFqcbmVuJy2x61UwqFsXHxYT2sgCXFW4AVhsoIcHkECCmUHtQ8hpHU6yOBGA+rMLZhS7A==
   dependencies:
     kleur "^4.0.0"
-    text-table "^0.2.0"
 
 "@http-util/status-i18n@0.6.2":
   version "0.6.2"
@@ -3572,13 +3571,13 @@
     defu "^6.0.0"
     eslint-webpack-plugin "^2.6.0"
 
-"@nuxtjs/html-validator@0.7.0":
-  version "0.7.0"
-  resolved "https://registry.yarnpkg.com/@nuxtjs/html-validator/-/html-validator-0.7.0.tgz#d48dd85688634cc87f153937ed5aa009abc1538b"
-  integrity sha512-UP0fVbVevB/RtftzulZNcXdmzBjm0mJgOHBNroY1Snef8ZNaIVs9bt7wbCqEhv8flaVwfUD1THFr75+SyYc4yg==
+"@nuxtjs/html-validator@0.7.1":
+  version "0.7.1"
+  resolved "https://registry.yarnpkg.com/@nuxtjs/html-validator/-/html-validator-0.7.1.tgz#d12942ec6d322ca78830cd094a1be2d8f0ae28f0"
+  integrity sha512-oH3yZsBzggrn5cwQWxXeLj6KWOxQuFNnTV6OBaak1ZUePK2VbA3AmywIxHnv0ZHVNhk5I1X6nlxbize4mZDTcg==
   dependencies:
-    defu "5.0.0"
-    html-validate "7.1.0"
+    defu "^5.0.1"
+    html-validate "~7.4.1"
 
 "@nuxtjs/i18n@7.3.0":
   version "7.3.0"
@@ -7867,17 +7866,12 @@ defined@^1.0.0:
   resolved "https://registry.yarnpkg.com/defined/-/defined-1.0.0.tgz#c98d9bcef75674188e110969151199e39b1fa693"
   integrity sha512-Y2caI5+ZwS5c3RiNDJ6u53VhQHv+hHKwhkI1iHvceKUHw9Df6EK2zRLfjejRgMuCuxK7PfSWIMwWecceVvThjQ==
 
-defu@5.0.0:
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/defu/-/defu-5.0.0.tgz#5768f0d402a555bfc4c267246b20f82ce8b5a10b"
-  integrity sha512-VHg73EDeRXlu7oYWRmmrNp/nl7QkdXUxkQQKig0Zk8daNmm84AbGoC8Be6/VVLJEKxn12hR0UBmz8O+xQiAPKQ==
-
 defu@^3.2.2:
   version "3.2.2"
   resolved "https://registry.yarnpkg.com/defu/-/defu-3.2.2.tgz#be20f4cc49b9805d54ee6b610658d53894942e97"
   integrity sha512-8UWj5lNv7HD+kB0e9w77Z7TdQlbUYDVWqITLHNqFIn6khrNHv5WQo38Dcm1f6HeNyZf0U7UbPf6WeZDSdCzGDQ==
 
-defu@^5.0.0:
+defu@^5.0.0, defu@^5.0.1:
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/defu/-/defu-5.0.1.tgz#a034278f9b032bf0845d261aa75e9ad98da878ac"
   integrity sha512-EPS1carKg+dkEVy3qNTqIdp2qV7mUP08nIsupfwQpz++slCVRw7qbQyWvSTig+kFPwz2XXp5/kIIkH+CwrJKkQ==
@@ -10366,13 +10360,13 @@ html-tags@^3.2.0:
   resolved "https://registry.yarnpkg.com/html-tags/-/html-tags-3.2.0.tgz#dbb3518d20b726524e4dd43de397eb0a95726961"
   integrity sha512-vy7ClnArOZwCnqZgvv+ddgHgJiAFXe3Ge9ML5/mBctVJoUoYPCdxVucOywjDARn6CVoh3dRSFdPHy2sX80L0Wg==
 
-html-validate@7.1.0:
-  version "7.1.0"
-  resolved "https://registry.yarnpkg.com/html-validate/-/html-validate-7.1.0.tgz#668936381af11e7ccee9082dd3cfe667b69a8ce5"
-  integrity sha512-sp/dyAk57tXfqpMP87jbnrX8UiyXvclVyQE7GK0RJBX5caPI5rJ4RaE3L9R4isT0rdeORXXLVdyxkH4KnKLprQ==
+html-validate@~7.4.1:
+  version "7.4.1"
+  resolved "https://registry.yarnpkg.com/html-validate/-/html-validate-7.4.1.tgz#7f5171906f2840e191ab2f427b3a867dd0bb9f22"
+  integrity sha512-HJQQVmD2TWkwniaKonQo2BWQ7gWICSjumDFLG+DAY0TJM2oqqPMX9KJFXCpTsNorTuJAOR5kQss4HNjDZCvz6w==
   dependencies:
     "@babel/code-frame" "^7.10.0"
-    "@html-validate/stylish" "^2.0.0"
+    "@html-validate/stylish" "^3.0.0"
     "@sidvind/better-ajv-errors" "^2.0.0"
     acorn-walk "^8.0.0"
     ajv "^8.0.0"
