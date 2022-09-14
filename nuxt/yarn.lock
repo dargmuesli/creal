@@ -14345,7 +14345,7 @@ postcss@7.x.x, postcss@^7.0.0, postcss@^7.0.1, postcss@^7.0.14, postcss@^7.0.17,
     picocolors "^0.2.1"
     source-map "^0.6.1"
 
-postcss@8.4.16, postcss@^8, postcss@^8.1.10, postcss@^8.2.15, postcss@^8.2.4, postcss@^8.3.6, postcss@^8.4.0, postcss@^8.4.13, postcss@^8.4.14, postcss@^8.4.16:
+postcss@8.4.16, postcss@^8, postcss@^8.1.10, postcss@^8.2.15, postcss@^8.2.4, postcss@^8.4.0, postcss@^8.4.13, postcss@^8.4.14, postcss@^8.4.16:
   version "8.4.16"
   resolved "https://registry.yarnpkg.com/postcss/-/postcss-8.4.16.tgz#33a1d675fac39941f5f445db0de4db2b6e01d43c"
   integrity sha512-ipHE1XBvKzm5xI7hiHCZJCSugxvsdq2mPnsq5+UF+VHCjiBvtDrlxJfMBToWaP9D5XlgNmcFGqoHmUn0EYEaRQ==
@@ -15967,14 +15967,14 @@ stylelint-config-standard@28.0.0:
   dependencies:
     stylelint-config-recommended "^9.0.0"
 
-stylelint-no-unsupported-browser-features@5.0.3:
-  version "5.0.3"
-  resolved "https://registry.yarnpkg.com/stylelint-no-unsupported-browser-features/-/stylelint-no-unsupported-browser-features-5.0.3.tgz#a65e80eff16e3a356ef64e1776e34f8a20b6959f"
-  integrity sha512-FqfbOTk5UEkHsAKOkPH6SvajsfO9YuoWvKxd34tCRBZug9ZNeaPn141nyWkd+ncc8S1gVmO2+O6qVAMj9bvWww==
+stylelint-no-unsupported-browser-features@5.0.4:
+  version "5.0.4"
+  resolved "https://registry.yarnpkg.com/stylelint-no-unsupported-browser-features/-/stylelint-no-unsupported-browser-features-5.0.4.tgz#49006462965b62d6384c40eab9403e292c6f3375"
+  integrity sha512-05DeIsWv262DXTSWhbQURDOxno9Tsu81sNnOpG1gD39WT+NNsEjhR2BQvwvNpZ/J/lS8vHxjhHULU2OGKSswvA==
   dependencies:
     doiuse "^4.4.1"
     lodash "^4.17.15"
-    postcss "^8.3.6"
+    postcss "^8.4.16"
 
 stylelint-webpack-plugin@^2.3.1:
   version "2.4.0"
