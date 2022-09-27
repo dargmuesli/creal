@@ -1,5 +1,15 @@
 {
   "extends": [
     "github>dargmuesli/renovate-config"
+  ],
+  "packageRules": [
+    {
+      "matchPackageNames": ["vue"],
+      "allowedVersions": "<3"
+    },
+    {
+      "matchPackageNames": ["webpack"],
+      "allowedVersions": "<5"
+    }
   ]
 }
