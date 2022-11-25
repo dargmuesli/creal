@@ -5,13 +5,15 @@
   "scheduleVersion": "0.44.22",
   "description": "DJ cReal's website.",
   "author": "Jonas Thelemann",
+  "packageManager": "pnpm@7.17.0",
   "scripts": {
     "dev": "nuxi dev",
     "build": "nuxi build",
     "start": "node .output/server/index.mjs",
+    "lint": "pnpm lint:js && pnpm lint:style",
     "lint:js": "eslint --ext .js,.ts,.vue --ignore-path .gitignore .",
     "lint:style": "stylelint **/*.{vue,css} --ignore-path .gitignore",
-    "lint": "yarn lint:js && yarn lint:style"
+    "lint:staged": "pnpm lint-staged"
   },
   "lint-staged": {
     "*.{js,ts,vue}": "eslint",

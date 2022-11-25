@@ -5,7 +5,7 @@
 FROM node:16.18.1-slim@sha256:197c40ee61039103188b3a96046fb8c90fdf09b60f44c22a080bbe70b87c8a6f AS development
 
 # Update and install dependencies.
-# - `ca-certificates` and `git` are required by the `yarn install` command
+# - `ca-certificates` and `git` are required by the `pnpm install` command
 # - `sqitch` is required by the entrypoint
 # - `wget` is required by the healthcheck
 RUN apt-get update \
@@ -22,9 +22,9 @@ RUN apt-get update \
 
 WORKDIR /srv/app/
 
-COPY ./nuxt/package.json ./nuxt/yarn.lock ./
+COPY ./nuxt/package.json ./nuxt/pnpm-lock.yaml ./
 
-RUN yarn install
+RUN pnpm install
 
 COPY ./nuxt/ ./
 
@@ -47,7 +47,7 @@ ENV NUXT_ENV_STACK_DOMAIN=${NUXT_ENV_STACK_DOMAIN}
 ENV NODE_ENV=production
 
 # Update and install dependencies.
-# - `ca-certificates` and `git` are required by the `yarn install` command
+# - `ca-certificates` and `git` are required by the `pnpm install` command
 RUN apt-get update \
     && apt-get install --no-install-recommends -y \
         ca-certificates git \
@@ -58,13 +58,13 @@ WORKDIR /srv/app/
 
 COPY --from=development /srv/app/ ./
 
-RUN yarn run nuxi prepare \
-    && yarn run lint \
-    && yarn run build
-    # && yarn run test
+RUN pnpm run nuxi prepare \
+    && pnpm run lint \
+    && pnpm run build
+    # && pnpm run test
 
 # Discard devDependencies.
-RUN yarn install
+RUN pnpm install
 
 
 #######################
