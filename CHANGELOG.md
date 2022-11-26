@@ -1,3 +1,12 @@
+# [0.45.0](https://github.com/dargmuesli/creal/compare/0.44.22...0.45.0) (2022-11-26)
+
+
+### Features
+
+* **cypress:** add e2e test ([3e5090d](https://github.com/dargmuesli/creal/commit/3e5090df3cf9bd474d105e65c17db34db07ac612))
+* **docker:** update dockerfile ([134c704](https://github.com/dargmuesli/creal/commit/134c704a7c5413b8696e6e05376f33e43772ab13))
+* **package:** migrate to pnpm ([c6bad9b](https://github.com/dargmuesli/creal/commit/c6bad9bb560556a18f09853aa00373af2f6ab59e))
+
 ## [0.44.22](https://github.com/dargmuesli/creal/compare/0.44.21...0.44.22) (2022-11-14)
 
 
