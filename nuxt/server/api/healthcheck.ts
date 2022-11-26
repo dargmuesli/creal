@@ -1,6 +1,7 @@
-import { IncomingMessage, ServerResponse } from 'http'
+import { defineEventHandler } from 'h3'
 
-export default function (_req: IncomingMessage, res: ServerResponse) {
+export default defineEventHandler((event) => {
+  const { res } = event
   res.setHeader('Content-Type', 'text/plain')
   res.end('OK')
-}
+})

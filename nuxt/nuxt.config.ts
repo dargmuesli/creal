@@ -36,6 +36,20 @@ export default defineNuxtConfig({
       }
     },
     extractCSS: true,
+    optimization: {
+      runtimeChunk: true,
+      splitChunks: {
+        name: true,
+        cacheGroups: {
+          styles: {
+            name: 'styles',
+            test: /.(css|vue)$/,
+            chunks: 'all',
+            enforce: true,
+          },
+        },
+      },
+    },
     postcss: { plugins: { tailwindcss: {}, autoprefixer: {} } },
     transpile: [
       '@http-util/status-i18n',
@@ -313,7 +327,7 @@ export default defineNuxtConfig({
       },
     ],
     'vue-sweetalert2/nuxt',
-    '@nuxtjs/sitemap', // Should be declared at the end of the array.
+    '@funken-studio/sitemap-nuxt-3', // Should be declared at the end of the array.
   ],
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)

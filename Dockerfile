@@ -1,101 +1,179 @@
 #############
 # Serve Nuxt in development mode.
 
-# Should be the specific version of node:slim.
-FROM node:16.18.1-slim@sha256:197c40ee61039103188b3a96046fb8c90fdf09b60f44c22a080bbe70b87c8a6f AS development
+# Should be the specific version of `node:slim`.
+# `sqitch` requires at least `buster`.
+FROM node:18.12.1-slim@sha256:3139aa3e8915e7c135623498d29f20a75ee3bfc41cf321ceaa59470b2fffc1a5 AS development
 
 # Update and install dependencies.
-# - `ca-certificates` and `git` are required by the `yarn install` command
-# - `sqitch` is required by the entrypoint
-# - `wget` is required by the healthcheck
+# - `libdbd-pg-perl postgresql-client sqitch` is required by the entrypoint
 RUN apt-get update \
     && apt-get install --no-install-recommends -y \
-        ca-certificates git \
-    && apt-get install --no-install-recommends -y \
-        libdbd-pg-perl \
-        postgresql-client \
-        sqitch \
-    && apt-get install --no-install-recommends -y \
-        wget \
+        libdbd-pg-perl postgresql-client sqitch \
     && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/* \
+    && npm install -g pnpm
+
+COPY ./docker/entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 
 WORKDIR /srv/app/
 
-COPY ./nuxt/package.json ./nuxt/yarn.lock ./
+VOLUME /srv/.pnpm-store
+VOLUME /srv/app
+VOLUME /srv/sqitch
 
-RUN yarn install
+ENTRYPOINT ["docker-entrypoint.sh"]
+CMD ["pnpm", "run", "dev"]
+
+# Waiting for https://github.com/nuxt/framework/issues/6915
+# HEALTHCHECK --interval=10s CMD wget -O /dev/null http://localhost:3000/api/healthcheck || exit 1
+
+
+########################
+# Prepare Nuxt.
+
+# Should be the specific version of `node:slim`.
+FROM node:18.12.1-slim@sha256:3139aa3e8915e7c135623498d29f20a75ee3bfc41cf321ceaa59470b2fffc1a5 AS prepare
+
+WORKDIR /srv/app/
+
+COPY ./nuxt/pnpm-lock.yaml ./
+
+RUN npm install -g pnpm && \
+    pnpm fetch
 
 COPY ./nuxt/ ./
 
-COPY ./sqitch/ /srv/sqitch/
-COPY ./docker-entrypoint.sh /usr/local/bin/
-
-ENTRYPOINT ["docker-entrypoint.sh"]
-CMD ["dev", "--hostname", "0.0.0.0"]
-HEALTHCHECK --interval=10s CMD wget -O /dev/null http://localhost:3000/api/healthcheck || exit 1
+RUN pnpm install --offline \
+  && pnpm nuxi prepare
+# TODO: replace nuxi with nuxt
 
 
 ########################
 # Build Nuxt.
 
-# Should be the specific version of node:slim.
-FROM node:16.18.1-slim@sha256:197c40ee61039103188b3a96046fb8c90fdf09b60f44c22a080bbe70b87c8a6f AS build
+# Should be the specific version of `node:slim`.
+# Could be the specific version of `node:alpine`, but the `prepare` stage uses slim too.
+FROM node:18.12.1-slim@sha256:3139aa3e8915e7c135623498d29f20a75ee3bfc41cf321ceaa59470b2fffc1a5 AS build
 
+ARG CI=false
+ENV CI ${CI}
 ARG NUXT_ENV_STACK_DOMAIN=jonas-thelemann.de
 ENV NUXT_ENV_STACK_DOMAIN=${NUXT_ENV_STACK_DOMAIN}
-ENV NODE_ENV=production
-
-# Update and install dependencies.
-# - `ca-certificates` and `git` are required by the `yarn install` command
-RUN apt-get update \
-    && apt-get install --no-install-recommends -y \
-        ca-certificates git \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /srv/app/
 
-COPY --from=development /srv/app/ ./
+COPY --from=prepare /srv/app/ ./
 
-RUN yarn run nuxi prepare \
-    && yarn run lint \
-    && yarn run build
-    # && yarn run test
+ENV NODE_ENV=production
+RUN npm install -g pnpm && \
+    pnpm run build
 
-# Discard devDependencies.
-RUN yarn install
+
+########################
+# Nuxt: lint
+
+# Should be the specific version of `node:slim`.
+# Could be the specific version of `node:alpine`, but the `prepare` stage uses slim too.
+FROM node:18.12.1-slim@sha256:3139aa3e8915e7c135623498d29f20a75ee3bfc41cf321ceaa59470b2fffc1a5 AS lint
+
+WORKDIR /srv/app/
+
+COPY --from=prepare /srv/app/ ./
+
+RUN npm install -g pnpm && \
+    pnpm run lint
+
+
+########################
+# Nuxt: test (integration)
+
+# Should be the specific version of `cypress/included`.
+FROM cypress/included:11.2.0@sha256:97068f93a4f41f7ecc8e30dc323cb3dbb52471801f244c7b48e87643a5a4551e AS test-integration_base
+
+ARG UNAME=cypress
+ARG UID=1000
+ARG GID=1000
+
+ENV DOCKER=true
+
+WORKDIR /srv/app/
+
+# Update and install dependencies.
+RUN apt-get update \
+    # pnpm
+    && npm install -g pnpm \
+    # user
+    && groupadd -g $GID -o $UNAME \
+    && useradd -m -u $UID -g $GID -o -s /bin/bash $UNAME \
+    # clean
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+USER $UNAME
+
+VOLUME /srv/app
+
+
+########################
+# Nuxt: test (integration)
+
+# Should be the specific version of `cypress/included`.
+FROM cypress/included:11.2.0@sha256:97068f93a4f41f7ecc8e30dc323cb3dbb52471801f244c7b48e87643a5a4551e AS test-integration
+
+# Update and install dependencies.
+RUN npm install -g pnpm
+
+WORKDIR /srv/app/
+
+COPY --from=prepare /root/.cache/Cypress /root/.cache/Cypress
+COPY --from=build /srv/app/ ./
+
+RUN pnpm test:integration:prod \
+    && pnpm test:integration:dev
+
+
+#######################
+# Collect build, lint and test results.
+
+# Should be the specific version of `node:slim`.
+FROM node:18.12.1-slim@sha256:3139aa3e8915e7c135623498d29f20a75ee3bfc41cf321ceaa59470b2fffc1a5 AS collect
+
+WORKDIR /srv/app/
+
+COPY --from=build /srv/app/.output ./.output
+COPY --from=lint /srv/app/package.json /tmp/lint/package.json
+# COPY --from=test-unit /srv/app/package.json /tmp/test/package.json
+COPY --from=test-integration /srv/app/package.json /tmp/test/package.json
 
 
 #######################
 # Provide a web server.
 # Requires node (cannot be static) as the server acts as backend too.
 
-# Should be the specific version of node:slim.
-FROM node:16.18.1-slim@sha256:197c40ee61039103188b3a96046fb8c90fdf09b60f44c22a080bbe70b87c8a6f AS production
+# Should be the specific version of `node:slim`.
+# `sqitch` requires at least `buster`.
+FROM node:18.12.1-slim@sha256:3139aa3e8915e7c135623498d29f20a75ee3bfc41cf321ceaa59470b2fffc1a5 AS production
 
 ENV NODE_ENV=production
 
 # Update and install dependencies.
-# - `sqitch` is required by the entrypoint
+# - `libdbd-pg-perl postgresql-client sqitch` is required by the entrypoint
 # - `wget` is required by the healthcheck
 RUN apt-get update \
     && apt-get install --no-install-recommends -y \
-        libdbd-pg-perl \
-        postgresql-client \
-        sqitch \
-    && apt-get install --no-install-recommends -y \
+        libdbd-pg-perl postgresql-client sqitch \
         wget \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /srv/app/
 
-COPY --from=build /srv/app/ ./
-
 COPY ./sqitch/ /srv/sqitch/
-COPY ./docker-entrypoint.sh /usr/local/bin/
+COPY ./docker/entrypoint.sh /usr/local/bin/docker-entrypoint.sh
+
+COPY --from=collect /srv/app/ ./
 
 ENTRYPOINT ["docker-entrypoint.sh"]
-CMD ["start"]
+CMD ["node", ".output/server/index.mjs"]
 HEALTHCHECK --interval=10s CMD wget -O /dev/null http://localhost:3000/api/healthcheck || exit 1
