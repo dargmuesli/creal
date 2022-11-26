@@ -1,7 +1,8 @@
 import fs from 'fs'
-import { ServerResponse, IncomingMessage } from 'http'
 import { URL } from 'url'
+
 import consola from 'consola'
+import { defineEventHandler } from 'h3'
 
 import { S3Client, ListObjectsV2Command } from '@aws-sdk/client-s3'
 import { fromIni } from '@aws-sdk/credential-providers'
@@ -168,7 +169,8 @@ function getPlaylistExtended(
   return playlistDataExtended
 }
 
-export default async function (req: IncomingMessage, res: ServerResponse) {
+export default defineEventHandler(async (event) => {
+  const { req, res } = event
   const s3 = new S3Client({
     apiVersion: '2006-03-01',
     credentials: fromIni({
@@ -272,4 +274,4 @@ export default async function (req: IncomingMessage, res: ServerResponse) {
   }
   res.setHeader('Content-Type', 'application/json')
   res.end(JSON.stringify(result))
-}
+})

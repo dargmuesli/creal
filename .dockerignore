@@ -1,6 +1,24 @@
 # Dependency directories
-nuxt/node_modules/
+**/node_modules/
 
 # Nuxt.js build / generate output
-nuxt/.nuxt/
-nuxt/dist/
+nuxt/.nuxt
+nuxt/.output
+
+# Git
+**/!.gitkeep
+
+# Environment variables
+**/.env
+
+# ESLint
+**/.eslintcache
+
+# Cypress
+**/cypress/results
+**/cypress/reports
+**/cypress/screenshots
+**/cypress/snapshots/actual
+**/cypress/snapshots/diff
+**/cypress/snapshots/result
+**/cypress/videos

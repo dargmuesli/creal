@@ -5,8 +5,6 @@
 # `sqitch` requires at least `buster`.
 FROM node:18.12.1-slim@sha256:3139aa3e8915e7c135623498d29f20a75ee3bfc41cf321ceaa59470b2fffc1a5 AS development
 
-COPY ./docker/entrypoint.sh /usr/local/bin/docker-entrypoint.sh
-
 # Update and install dependencies.
 # - `libdbd-pg-perl postgresql-client sqitch` is required by the entrypoint
 RUN apt-get update \
@@ -15,6 +13,8 @@ RUN apt-get update \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* \
     && npm install -g pnpm
+
+COPY ./docker/entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 
 WORKDIR /srv/app/
 
@@ -65,12 +65,9 @@ WORKDIR /srv/app/
 
 COPY --from=prepare /srv/app/ ./
 
+ENV NODE_ENV=production
 RUN npm install -g pnpm && \
     pnpm run build
-
-ENV NODE_ENV=production
-# Discard devDependencies.
-RUN pnpm install
 
 
 ########################
@@ -88,6 +85,54 @@ RUN npm install -g pnpm && \
     pnpm run lint
 
 
+########################
+# Nuxt: test (integration)
+
+# Should be the specific version of `cypress/included`.
+FROM cypress/included:11.2.0@sha256:97068f93a4f41f7ecc8e30dc323cb3dbb52471801f244c7b48e87643a5a4551e AS test-integration_base
+
+ARG UNAME=cypress
+ARG UID=1000
+ARG GID=1000
+
+ENV DOCKER=true
+
+WORKDIR /srv/app/
+
+# Update and install dependencies.
+RUN apt-get update \
+    # pnpm
+    && npm install -g pnpm \
+    # user
+    && groupadd -g $GID -o $UNAME \
+    && useradd -m -u $UID -g $GID -o -s /bin/bash $UNAME \
+    # clean
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+USER $UNAME
+
+VOLUME /srv/app
+
+
+########################
+# Nuxt: test (integration)
+
+# Should be the specific version of `cypress/included`.
+FROM cypress/included:11.2.0@sha256:97068f93a4f41f7ecc8e30dc323cb3dbb52471801f244c7b48e87643a5a4551e AS test-integration
+
+# Update and install dependencies.
+RUN npm install -g pnpm
+
+WORKDIR /srv/app/
+
+COPY --from=prepare /root/.cache/Cypress /root/.cache/Cypress
+COPY --from=build /srv/app/ ./
+
+RUN pnpm test:integration:prod \
+    && pnpm test:integration:dev
+
+
 #######################
 # Collect build, lint and test results.
 
@@ -99,7 +144,7 @@ WORKDIR /srv/app/
 COPY --from=build /srv/app/.output ./.output
 COPY --from=lint /srv/app/package.json /tmp/lint/package.json
 # COPY --from=test-unit /srv/app/package.json /tmp/test/package.json
-# COPY --from=test-integration /srv/app/package.json /tmp/test/package.json
+COPY --from=test-integration /srv/app/package.json /tmp/test/package.json
 
 
 #######################
@@ -124,10 +169,10 @@ RUN apt-get update \
 
 WORKDIR /srv/app/
 
-COPY --from=collect /srv/app/ ./
-
 COPY ./sqitch/ /srv/sqitch/
 COPY ./docker/entrypoint.sh /usr/local/bin/docker-entrypoint.sh
+
+COPY --from=collect /srv/app/ ./
 
 ENTRYPOINT ["docker-entrypoint.sh"]
 CMD ["node", ".output/server/index.mjs"]

@@ -1,6 +1,7 @@
 import fs from 'fs'
-import { ServerResponse, IncomingMessage } from 'http'
 import { URL } from 'url'
+
+import { defineEventHandler } from 'h3'
 
 import {
   S3Client,
@@ -10,7 +11,8 @@ import {
 import { fromIni } from '@aws-sdk/credential-providers'
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner'
 
-export default async function (req: IncomingMessage, res: ServerResponse) {
+export default defineEventHandler(async (event) => {
+  const { req, res } = event
   const s3 = new S3Client({
     apiVersion: '2006-03-01',
     credentials: fromIni({
@@ -64,4 +66,4 @@ export default async function (req: IncomingMessage, res: ServerResponse) {
 
   res.setHeader('Content-Type', 'text/plain')
   res.end(url)
-}
+})
