@@ -1,6 +1,6 @@
 {
   "private": true,
-  "packageManager": "pnpm@7.17.0",
+  "packageManager": "pnpm@7.17.1",
   "scripts": {
     "postinstall": "if [ -d '.git' ] && [ -d '.husky' ]; then husky install && shx rm -rf .git/hooks && shx ln -s ../.husky .git/hooks; fi"
   },
