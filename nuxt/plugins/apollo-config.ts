@@ -1,8 +1,8 @@
 export default () => {
   return {
     httpEndpoint: process.server
-      ? 'http://creal-postgraphile:5000/graphql'
-      : 'https://creal-postgraphile.' +
+      ? 'http://creal_postgraphile:5000/graphql'
+      : 'https://creal_postgraphile.' +
         (process.env.NUXT_ENV_STACK_DOMAIN || 'jonas-thelemann.test') +
         '/graphql',
   }
