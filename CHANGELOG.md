@@ -1,3 +1,11 @@
+## [0.45.1](https://github.com/dargmuesli/creal/compare/0.45.0...0.45.1) (2022-11-28)
+
+
+### Bug Fixes
+
+* **docker:** correct entrypoint ([d628444](https://github.com/dargmuesli/creal/commit/d628444a6dd17d778b22e4042f5fe5dbec3f20b0))
+* **stack:** rename service ([a7f82e6](https://github.com/dargmuesli/creal/commit/a7f82e685a024af3c0fb471ceba6eb62e6cc705f))
+
 # [0.45.0](https://github.com/dargmuesli/creal/compare/0.44.22...0.45.0) (2022-11-26)
 
 
