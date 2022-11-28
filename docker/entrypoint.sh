@@ -3,4 +3,9 @@ set -e
 
 sqitch -C /srv/sqitch/ deploy "$(cat /run/secrets/creal_sqitch-target)"
 
-exec pnpm run "$@"
+if [ "$NODE_ENV" != "production" ]; then
+    pnpm config set store-dir "/srv/.pnpm-store"
+    pnpm install
+fi
+
+exec "$@"

@@ -74,7 +74,7 @@ export default defineComponent({
       return moment.format('ddd D MMM YYYY, h:mm')
     },
     strapiDomain(): string {
-      return `https://strapi.${process.env.NUXT_ENV_STACK_DOMAIN}${this.event.image.data.attributes.url}`
+      return `https://creal_strapi.${process.env.NUXT_ENV_STACK_DOMAIN}${this.event.image.data.attributes.url}`
     },
   },
 })

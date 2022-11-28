@@ -64,6 +64,6 @@ passopt+=(-e "HOME=${homedst}")
 docker run -it --rm --network host \
     --mount "type=bind,src=$(pwd),dst=/repo" \
     --mount "type=bind,src=$HOME,dst=$homedst" \
-    --mount "type=bind,src=$PWD/../../jonas-thelemann_stack/src/development/secrets/postgres/role_creal-postgraphile_password.secret,dst=/run/secrets/postgres_role_creal-postgraphile_password" \
+    --mount "type=bind,src=$PWD/../../jonas-thelemann_stack/src/development/secrets/postgres/role_creal_postgraphile_password.secret,dst=/run/secrets/postgres_role_creal_postgraphile_password" \
     --mount "type=bind,src=/mnt/dev/postgresql/,dst=/var/run/postgresql/" \
     "${passopt[@]}" "$SQITCH_IMAGE" "$@"
