@@ -1,3 +1,10 @@
+## [0.45.4](https://github.com/dargmuesli/creal/compare/0.45.3...0.45.4) (2022-12-04)
+
+
+### Bug Fixes
+
+* **strapi:** correct subdomain ([1a4fcdd](https://github.com/dargmuesli/creal/commit/1a4fcdd161367140c98d483858ef11c28b5c8ce3))
+
 ## [0.45.3](https://github.com/dargmuesli/creal/compare/0.45.2...0.45.3) (2022-12-04)
 
 
