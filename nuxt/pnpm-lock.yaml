@@ -20,7 +20,7 @@ specifiers:
   '@nuxtjs/axios': 5.13.6
   '@nuxtjs/eslint-config-typescript': 11.0.0
   '@nuxtjs/eslint-module': 3.1.0
-  '@nuxtjs/html-validator': 1.2.1
+  '@nuxtjs/html-validator': 1.2.2
   '@nuxtjs/i18n': 7.3.0
   '@nuxtjs/moment': 1.6.1
   '@nuxtjs/robots': 3.0.0
@@ -129,7 +129,7 @@ devDependencies:
   '@nuxt/bridge': /@nuxt/bridge-edge/3.0.0-27833237.ddd8ecc_p7gxyih4a7vnvjdqq7ztdqhmom
   '@nuxtjs/eslint-config-typescript': 11.0.0_s5ps7njkmjlaqajutnox5ntcla
   '@nuxtjs/eslint-module': 3.1.0_6jsmz2zc5xaew2sfvnugwmshty
-  '@nuxtjs/html-validator': 1.2.1
+  '@nuxtjs/html-validator': 1.2.2
   '@nuxtjs/stylelint-module': 4.1.0_sygruky7nqwwton67tsf5kyopm
   '@types/jsonwebtoken': 8.5.9
   '@types/lodash.get': 4.4.7
@@ -4377,12 +4377,12 @@ packages:
       - webpack
     dev: true
 
-  /@nuxtjs/html-validator/1.2.1:
-    resolution: {integrity: sha512-DuzD4cEJYwmBYvDgcPGgO90dAPiyk9Zyk8G44wdjNvzXHzxa5n1HfDPZ63O/+U3VSgxgUBeeYRPjSZhI//FjhA==}
+  /@nuxtjs/html-validator/1.2.2:
+    resolution: {integrity: sha512-kaZm4Ks6snS3fRi9yihkVFbpffdaZHiFcOxfTOuRRjDy2vnUKkdBzz6+JsGqliNhunSrCT/mziEeq1icjCle8Q==}
     dependencies:
       '@nuxt/kit': 3.0.0
       chalk: 5.1.2
-      html-validate: 7.8.0
+      html-validate: 7.10.1
       pathe: 1.0.0
       prettier: 2.8.0
     transitivePeerDependencies:
@@ -11768,8 +11768,8 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
-  /html-validate/7.8.0:
-    resolution: {integrity: sha512-r9KxbC6ztQ5F266KEykWj2DtjlAEOYhCcZCwIP6Zme3odLJxeGAzoOQfrSW4x/RGJruzfbYzNUw+XH7+pPRBeQ==}
+  /html-validate/7.10.1:
+    resolution: {integrity: sha512-2MjthTcMfqAZ8V1YyXshINGsdmPKc3RW9IKJ3kgfjXq59BuvSVM+vBhfOu0dJvlpRVH117vZ5JImYNsMfca3nA==}
     engines: {node: '>= 14.0'}
     hasBin: true
     peerDependencies:
@@ -11792,7 +11792,7 @@ packages:
       deepmerge: 4.2.2
       espree: 9.4.1
       glob: 8.0.3
-      ignore: 5.2.0
+      ignore: 5.2.1
       kleur: 4.1.5
       minimist: 1.2.7
       prompts: 2.4.2
