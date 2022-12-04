@@ -275,7 +275,7 @@ export default defineNuxtConfig({
       '@nuxt/http',
       {
         baseURL: 'http://creal_strapi:1337/api/',
-        browserBaseURL: `https://creal_strapi.${STACK_DOMAIN}/api/`,
+        browserBaseURL: `https://creal-strapi.${STACK_DOMAIN}/api/`,
       },
     ],
     [
@@ -356,7 +356,7 @@ export default defineNuxtConfig({
         'frame-ancestors': ["'none'"], // Mozilla Observatory.
         'img-src': [
           "'self'",
-          `https://creal_strapi.${STACK_DOMAIN}`,
+          `https://creal-strapi.${STACK_DOMAIN}`,
           `https://${AWS_BUCKET_NAME}.s3.nl-ams.scw.cloud`, // Playlist cover.
         ],
         'media-src': [
