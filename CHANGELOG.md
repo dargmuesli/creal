@@ -1,3 +1,10 @@
+## [0.45.3](https://github.com/dargmuesli/creal/compare/0.45.2...0.45.3) (2022-12-04)
+
+
+### Bug Fixes
+
+* **postgraphile:** correct internal subdomain ([7b0d9ed](https://github.com/dargmuesli/creal/commit/7b0d9eda76ba2c4817681c17d333c11374c6783a))
+
 ## [0.45.2](https://github.com/dargmuesli/creal/compare/0.45.1...0.45.2) (2022-12-04)
 
 
