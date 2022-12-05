@@ -27,16 +27,14 @@
           </li>
         </ul>
       </Paging>
-      <div v-else class="text-center">{{ $t('faqNone') }}</div>
+      <div v-else class="text-center">{{ t('faqNone') }}</div>
     </section>
   </div>
 </template>
 
 <script lang="ts">
-import { Context } from '@nuxt/types-edge'
 import slugify from 'slugify'
 
-import { defineComponent } from '#app'
 import { Faq } from '~/components/Faq.vue'
 import { CollectionItem, Paging } from '~/plugins/paging'
 
@@ -63,11 +61,11 @@ export default defineComponent({
           .total
         items = (
           (await $http.$get('/faqs', {
-            searchParams: new URLSearchParams({
+            searchParams: {
               'pagination[limit]': String(limit),
               'pagination[start]': String(start),
               sort: 'title:desc',
-            }),
+            },
           })) as any
         ).data
       } catch (e: any) {
@@ -91,13 +89,13 @@ export default defineComponent({
     return {
       items: undefined as Array<CollectionItem<Faq>> | undefined,
       itemFocused: undefined as CollectionItem<Faq> | undefined,
-      title: this.$t('titlePage'),
+      title: this.t('titlePage'),
       requestError: undefined,
     }
   },
   head() {
     const title = this.title as string
-    const description = this.$t('description') as string
+    const description = this.t('description') as string
 
     return {
       meta: [
@@ -176,7 +174,7 @@ export default defineComponent({
 })
 </script>
 
-<i18n lang="yml">
+<i18n lang="yaml">
 de:
   description: Häufig gestellte Fragen an DJ cReal.
   faqNone: Keine FAQ gefunden.

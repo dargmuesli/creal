@@ -4,30 +4,40 @@
 
 @layer components {
   a:focus {
-    @apply outline-none;
-    @apply ring;
-    @apply rounded;
+    @apply outline-none ring rounded;
   }
 
   button:focus {
-    @apply outline-none;
-    @apply ring;
-    @apply rounded;
+    @apply outline-none ring rounded;
   }
 
-  .button:focus {
-    @apply outline-none;
-    @apply ring;
-    @apply rounded;
+  thead {
+    @apply sticky top-0 z-10 custom-bg-darken;
+  }
+
+  tbody {
+    @apply divide-y custom-divide-darken;
   }
 }
 
 @layer utilities {
-  .creal-prose {
+  .custom-prose {
     @apply prose prose-sm sm:prose-base lg:prose-lg xl:prose-xl prose-invert; /* 2xl:prose-2xl */ /* dark mode is default */
   }
 
-  .creal-prose-fullwidth {
-    @apply creal-prose max-w-full sm:max-w-full md:max-w-full xl:max-w-full 2xl:max-w-full;
+  .custom-prose-fullwidth {
+    @apply custom-prose max-w-full sm:max-w-full md:max-w-full xl:max-w-full 2xl:max-w-full;
+  }
+
+  .custom-divide-darken {
+    @apply divide-background-brighten dark:divide-background-darken;
+  }
+
+  .custom-bg-darken {
+    @apply bg-background-brighten dark:bg-background-darken;
+  }
+
+  .custom-border-darken {
+    @apply border-background-brighten dark:border-background-darken;
   }
 }

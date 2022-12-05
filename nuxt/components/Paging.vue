@@ -13,8 +13,6 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from '#app'
-
 export default defineComponent({
   name: 'CrealPaging',
   props: {
@@ -45,10 +43,7 @@ export default defineComponent({
     }
 
     const queryPreviousSearchParamsString =
-      '?' +
-      new URLSearchParams(
-        this.queryPrevious as Record<string, string>
-      ).toString()
+      '?' + (this.queryPrevious as Record<string, string>).toString()
     return {
       link: [
         {
@@ -72,9 +67,7 @@ export default defineComponent({
                 href:
                   this.$route.path +
                   '?' +
-                  new URLSearchParams(
-                    this.queryNext as Record<string, string>
-                  ).toString(),
+                  (this.queryNext as Record<string, string>).toString(),
                 rel: 'next',
               },
             ]

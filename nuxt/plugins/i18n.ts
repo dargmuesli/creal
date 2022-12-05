@@ -1,7 +1,10 @@
-import { Context } from '@nuxt/types-edge'
+export default defineNuxtPlugin((nuxtApp) => {
+  nuxtApp.$i18n.onLanguageSwitched = (
+    _oldLocale: string,
+    newLocale: string
+  ) => {
+    const { $moment } = nuxtApp
 
-export default function ({ app, $moment }: Context) {
-  app.i18n.onLanguageSwitched = (_oldLocale, newLocale) => {
     $moment.locale(newLocale)
   }
-}
+})

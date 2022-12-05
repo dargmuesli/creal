@@ -4,8 +4,6 @@
 
 <script lang="ts">
 import { status } from '@http-util/status-i18n'
-import { defineComponent, PropType } from '#app'
-
 export default defineComponent({
   name: 'CrealError',
   props: {
@@ -18,14 +16,14 @@ export default defineComponent({
     statusReason(): string {
       return (
         status(this.statusCode, this.$i18n.locale) ||
-        (this.$t('error') as string)
+        (this.t('error') as string)
       )
     },
   },
 })
 </script>
 
-<i18n lang="yml">
+<i18n lang="yaml">
 de:
   error: Fehler
 en:

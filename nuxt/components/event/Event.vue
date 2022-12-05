@@ -2,11 +2,11 @@
   <div
     class="flex flex-col justify-center space-y-4 lg:flex-row lg:items-center lg:space-x-4 lg:space-y-0"
   >
-    <div class="creal-prose-fullwidth space-y-2 lg:w-1/2">
+    <div class="custom-prose-fullwidth space-y-2 lg:w-1/2">
       <div class="flex gap-2">
         <div>{{ datetime }}</div>
         <div v-if="event.location" class="flex gap-2">
-          <div>{{ $t('separator') }}</div>
+          <div>{{ t('separator') }}</div>
           <div>{{ event.location }}</div>
         </div>
       </div>
@@ -23,12 +23,12 @@
       />
       <div v-if="event.url && event.url !== ''" class="text-center">
         <Button
-          :aria-label="$t('details')"
-          class="creal-prose-fullwidth prose-a:text-gray-800"
+          :aria-label="t('details')"
+          class="custom-prose-fullwidth prose-a:text-gray-800"
           :icon="false"
           :to="event.url"
         >
-          {{ $t('details') }}
+          {{ t('details') }}
         </Button>
       </div>
     </div>
@@ -36,7 +36,6 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from '#app'
 import { CollectionItem } from '~/plugins/paging'
 
 interface Image {
@@ -80,7 +79,7 @@ export default defineComponent({
 })
 </script>
 
-<i18n lang="yml">
+<i18n lang="yaml">
 de:
   details: Details
   separator: ⋅

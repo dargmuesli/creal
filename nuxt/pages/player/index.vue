@@ -30,7 +30,7 @@
               d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
             />
           </svg>
-          {{ $t('globalLoading') }}
+          {{ t('globalLoading') }}
         </div>
         <div v-else-if="playlistData" class="m-auto w-5/6">
           <ul
@@ -61,9 +61,8 @@
                 :class="{
                   'text-yellow-500':
                     $route.query.playlist &&
-                    $route.query.playlist ===
-                      storePlayerModule.currentTrackPlaylistName &&
-                    playlistItem.name === storePlayerModule.currentTrackName,
+                    $route.query.playlist === store.currentTrackPlaylistName &&
+                    playlistItem.name === store.currentTrackName,
                 }"
                 :playlist-item="playlistItem"
                 @download="onPlaylistItemDownload"
@@ -78,7 +77,7 @@
             "
             class="text-center"
           >
-            {{ $t('itemsNone') }}
+            {{ t('itemsNone') }}
           </div>
         </div>
       </div>
@@ -87,26 +86,20 @@
 </template>
 
 <script lang="ts">
-import { getModule } from 'vuex-module-decorators'
-import { Route } from 'vue-router/types'
-
-import { defineComponent } from '#app'
 import {
   PLAYER_PREFIX,
   AxiosPlaylist,
   Playlist,
   PlaylistItem,
-  mergeByKey,
 } from '~/types/playlist'
-import PlayerModule from '~/store/modules/PlayerModule'
 
 export default defineComponent({
   name: 'IndexPage',
   data() {
     return {
       playlistData: null as null | Playlist,
-      storePlayerModule: getModule(PlayerModule, this.$store),
-      title: this.$t('titlePage'),
+      store: getModule(PlayerModule, this.$store),
+      title: this.t('titlePage'),
     }
   },
   async fetch() {
@@ -122,14 +115,14 @@ export default defineComponent({
       const playlistDataPart: AxiosPlaylist = await this.$axios.$get(
         '/player/playlists',
         {
-          params: new URLSearchParams({
+          params: {
             ...(continuationToken !== undefined && {
               'continuation-token': continuationToken,
             }),
             ...((this.$route.query.playlist as any) !== undefined && {
               prefix: this.$route.query.playlist as any,
             }),
-          }),
+          },
         }
       )
 
@@ -153,7 +146,7 @@ export default defineComponent({
   fetchOnServer: false,
   head() {
     const title = this.titleHead() as string
-    const description = this.$t('description') as string
+    const description = this.t('description') as string
 
     return {
       meta: [
@@ -198,10 +191,7 @@ export default defineComponent({
       if (!this.playlistData) return
 
       for (let i = 0; i < this.playlistData.items.length - 1; i++) {
-        if (
-          this.playlistData.items[i].name ===
-          this.storePlayerModule.currentTrackName
-        ) {
+        if (this.playlistData.items[i].name === this.store.currentTrackName) {
           this.onPlaylistItemSelect(this.playlistData.items[i + 1])
           break
         }
@@ -210,9 +200,8 @@ export default defineComponent({
   },
   methods: {
     titleHead() {
-      return this.storePlayerModule.currentTrackName &&
-        !this.storePlayerModule.isPlayerPaused
-        ? this.storePlayerModule.currentTrackName
+      return this.store.currentTrackName && !this.store.isPlayerPaused
+        ? this.store.currentTrackName
         : this.title
     },
 
@@ -227,7 +216,7 @@ export default defineComponent({
         '.' +
         playlistItem.extension
       return await this.$axios.$get('/player/signed-url', {
-        params: new URLSearchParams({ key }),
+        params: { key },
       })
     },
     serializeQueryString(object: any) {
@@ -270,9 +259,9 @@ export default defineComponent({
       playlistItem: PlaylistItem,
       isManuallySet = true
     ) {
-      this.storePlayerModule.setIsPlayerVisible(true)
-      this.storePlayerModule.setCurrentTrackName(playlistItem.name)
-      this.storePlayerModule.setCurrentTrackPlaylistName(
+      this.store.setIsPlayerVisible(true)
+      this.store.setCurrentTrackName(playlistItem.name)
+      this.store.setCurrentTrackPlaylistName(
         typeof this.$route.query.playlist === 'string'
           ? decodeURIComponent(this.$route.query.playlist)
           : null
@@ -305,14 +294,14 @@ export default defineComponent({
         '.json'
 
       if (playlistItem.meta) {
-        this.storePlayerModule.setCurrentTrackMeta(
+        this.store.setCurrentTrackMeta(
           await this.$axios.$get('/player/get-object', {
-            params: new URLSearchParams({ key }),
+            params: { key },
           })
         )
       } else {
-        this.storePlayerModule.setCurrentTrackMeta(null)
-        this.storePlayerModule.setCurrentTrackDescription(null)
+        this.store.setCurrentTrackMeta(null)
+        this.store.setCurrentTrackDescription(null)
       }
 
       this.$nuxt.$emit(
@@ -333,7 +322,7 @@ export default defineComponent({
 })
 </script>
 
-<i18n lang="yml">
+<i18n lang="yaml">
 de:
   description: Mixe von DJ cReal anhören.
   itemsNone: Keine Elemente gefunden.

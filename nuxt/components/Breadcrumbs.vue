@@ -1,7 +1,7 @@
 <template>
   <div class="mb-4 flex items-center gap-2 overflow-auto">
     <AppLink :to="localePath('/')"><IconHome classes="h-8 w-8" /></AppLink>
-    <span>{{ $t('separator') }}</span>
+    <span>{{ t('separator') }}</span>
     <AppLink :to="$util.getQueryString({})">
       <h1 class="m-0 whitespace-nowrap"><slot /></h1>
     </AppLink>
@@ -11,7 +11,7 @@
         :key="suffix"
         class="flex items-center gap-2"
       >
-        <span>{{ $t('separator') }}</span>
+        <span>{{ t('separator') }}</span>
         <AppLink
           :to="
             $util.getQueryString({
@@ -27,8 +27,6 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from '#app'
-
 export default defineComponent({
   name: 'CrealBreadcrumbs',
   props: {
@@ -59,7 +57,7 @@ export default defineComponent({
 })
 </script>
 
-<i18n lang="yml">
+<i18n lang="yaml">
 de:
   separator: /
 en:

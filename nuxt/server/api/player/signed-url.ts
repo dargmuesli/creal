@@ -12,7 +12,7 @@ import { fromIni } from '@aws-sdk/credential-providers'
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner'
 
 export default defineEventHandler(async (event) => {
-  const { req, res } = event
+  const { req, res } = event.node
   const s3 = new S3Client({
     apiVersion: '2006-03-01',
     credentials: fromIni({

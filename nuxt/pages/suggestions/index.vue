@@ -5,92 +5,92 @@
     </Breadcrumbs>
     <Form
       ref="form"
-      :form="$v.form"
+      :form="v$.form"
       :form-sent="form.sent"
       :graphql-error="graphqlError"
       @submit.prevent="submit"
     >
       <FormInput
-        :error="$v.form.artist.$error"
+        :error="v$.form.artist.$error"
         label-for="input-artist"
         required
-        :title="$t('artist')"
+        :title="t('artist')"
       >
         <input
           id="input-artist"
-          v-model.trim="$v.form.artist.$model"
+          v-model.trim="v$.form.artist.$model"
           class="form-input"
           type="text"
-          :placeholder="$t('artistPlaceholder')"
+          :placeholder="t('artistPlaceholder')"
         />
-        <template slot="inputError">
+        <template #inputError>
           <FormInputError
-            :form-input="$v.form.artist"
+            :form-input="v$.form.artist"
             validation-property="maxLength"
           >
-            {{ $t('globalValidationLength') }}
+            {{ t('globalValidationLength') }}
           </FormInputError>
           <FormInputError
-            :form-input="$v.form.artist"
+            :form-input="v$.form.artist"
             validation-property="required"
           >
-            {{ $t('globalValidationRequired') }}
+            {{ t('globalValidationRequired') }}
           </FormInputError>
           <slot name="inputError" />
         </template>
       </FormInput>
       <FormInput
-        :error="$v.form.title.$error"
+        :error="v$.form.title.$error"
         label-for="input-title"
         required
-        :title="$t('title')"
+        :title="t('title')"
       >
         <input
           id="input-title"
-          v-model.trim="$v.form.title.$model"
+          v-model.trim="v$.form.title.$model"
           class="form-input"
           type="text"
-          :placeholder="$t('titlePlaceholder')"
+          :placeholder="t('titlePlaceholder')"
         />
-        <template slot="inputError">
+        <template #inputError>
           <FormInputError
-            :form-input="$v.form.title"
+            :form-input="v$.form.title"
             validation-property="maxLength"
           >
-            {{ $t('globalValidationLength') }}
+            {{ t('globalValidationLength') }}
           </FormInputError>
           <FormInputError
-            :form-input="$v.form.title"
+            :form-input="v$.form.title"
             validation-property="required"
           >
-            {{ $t('globalValidationRequired') }}
+            {{ t('globalValidationRequired') }}
           </FormInputError>
           <slot name="inputError" />
         </template>
       </FormInput>
       <!-- <FormInputUrl
-        :form-input="$v.form.url"
+        :form-input="v$.form.url"
         is-optional
         @input="form.url = $event"
       /> -->
       <FormInput
-        :error="$v.form.comment.$error"
+        :error="v$.form.comment.$error"
         is-optional
         label-for="input-comment"
-        :title="$t('comment')"
+        :title="t('comment')"
       >
         <textarea
           id="input-comment"
-          v-model.trim="$v.form.comment.$model"
+          v-model.trim="v$.form.comment.$model"
           class="form-input"
           type="text"
         />
-        <template slot="inputError">
+        <template #inputError>
           <FormInputError
-            :form-input="$v.form.comment"
+            :form-input="v$.form.comment"
             validation-property="maxLength"
           >
-            {{ $t('globalValidationLength') }}
+            {{ t('globalValidationLength') }}
           </FormInputError>
           <slot name="inputError" />
         </template>
@@ -103,14 +103,13 @@
 import { maxLength, required } from 'vuelidate/lib/validators'
 import consola from 'consola'
 
-import { defineComponent } from '#app'
 import SUGGESTION_CREATE_MUTATION from '~/gql/mutation/suggestion/suggestionCreate.gql'
 
 export default defineComponent({
   name: 'IndexPage',
   data() {
     return {
-      title: this.$t('titlePage'),
+      title: this.t('titlePage'),
       form: {
         artist: undefined as string | undefined,
         comment: undefined as string | undefined,
@@ -123,7 +122,7 @@ export default defineComponent({
   },
   head() {
     const title = this.title as string
-    const description = this.$t('description') as string
+    const description = this.t('description') as string
 
     return {
       meta: [
@@ -183,17 +182,17 @@ export default defineComponent({
             icon: 'success',
             showConfirmButton: false,
             timer: 1500,
-            title: this.$t('submitSuccess'),
+            title: this.t('submitSuccess'),
           })
           this.form.artist = undefined
           this.form.comment = undefined
           this.form.title = undefined
-          this.$v.form.$reset()
+          this.v$.form.$reset()
         })
         .catch((reason) => {
           this.$swal({
             icon: 'error',
-            title: this.$t('error'),
+            title: this.t('error'),
             text: reason,
           })
           this.graphqlError = reason
@@ -225,7 +224,7 @@ export default defineComponent({
 })
 </script>
 
-<i18n lang="yml">
+<i18n lang="yaml">
 de:
   artist: Künstler*in
   artistPlaceholder: Abba

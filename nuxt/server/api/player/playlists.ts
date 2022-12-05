@@ -13,7 +13,6 @@ import {
   Playlist,
   PlaylistItem,
   PlaylistExtended,
-  mergeByKey,
 } from '~/types/playlist'
 
 function itemSort(a: PlaylistItem, b: PlaylistItem) {
@@ -94,7 +93,7 @@ function getPlaylist(playlistDataExtended: PlaylistExtended): Playlist {
 function getPlaylistExtended(
   pathParts: Array<string>,
   size: number,
-  root: string = 'root'
+  root = 'root'
 ): PlaylistExtended | undefined {
   const playlistDataExtended: PlaylistExtended = {
     name: root,
@@ -170,7 +169,7 @@ function getPlaylistExtended(
 }
 
 export default defineEventHandler(async (event) => {
-  const { req, res } = event
+  const { req, res } = event.node
   const s3 = new S3Client({
     apiVersion: '2006-03-01',
     credentials: fromIni({

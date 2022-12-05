@@ -10,17 +10,17 @@
       <div class="fullscreen flex">
         <div class="m-auto text-center mb-20vh">
           <h1 class="inline-block border-b border-gray-400">
-            {{ $t('creal') }}
+            {{ t('creal') }}
           </h1>
-          <i18n
+          <i18n-t
             class="mt-4 mb-16 whitespace-pre-line font-light"
-            path="welcome"
+            keypath="welcome"
             tag="p"
           >
             <br />
-          </i18n>
-          <Button aria-label="start" @click.native="setShowGreeting(true)">
-            {{ $t('start') }}
+          </i18n-t>
+          <Button aria-label="start" @click="setShowGreeting(true)">
+            {{ t('start') }}
           </Button>
         </div>
       </div>
@@ -30,27 +30,25 @@
     >
       <ButtonBig aria-label="Events" :to="localePath('/events')">
         <IconCalendar classes="h-16 w-16" />
-        {{ $t('events') }}
+        {{ t('events') }}
       </ButtonBig>
       <ButtonBig aria-label="FAQ" :to="localePath('/faq')">
         <IconChatOutline classes="h-16 w-16" />
-        {{ $t('faq') }}
+        {{ t('faq') }}
       </ButtonBig>
       <ButtonBig aria-label="Player" :to="localePath('/player')">
         <IconMusic classes="h-16 w-16" />
-        {{ $t('player') }}
+        {{ t('player') }}
       </ButtonBig>
       <ButtonBig aria-label="Suggestions" :to="localePath('/suggestions')">
         <IconLightbulb classes="h-16 w-16" />
-        {{ $t('suggestions') }}
+        {{ t('suggestions') }}
       </ButtonBig>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from '#app'
-
 export default defineComponent({
   name: 'IndexPage',
   data() {
@@ -117,7 +115,7 @@ export default defineComponent({
 })
 </script>
 
-<i18n lang="yml">
+<i18n lang="yaml">
 de:
   creal: cReal
   events: Veranstaltungen

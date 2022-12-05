@@ -16,7 +16,6 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from '#app'
 import { PLAYER_PREFIX, Playlist } from '~/types/playlist'
 
 export default defineComponent({
@@ -49,7 +48,7 @@ export default defineComponent({
         }${name}.jpg`
       this.displayImageWhenFullyLoaded(
         this.$axios.$get('/player/signed-url', {
-          params: new URLSearchParams({ key }),
+          params: { key },
         })
       )
     },

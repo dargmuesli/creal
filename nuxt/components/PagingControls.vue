@@ -3,30 +3,28 @@
     <div class="my-4">{{ partString }}</div>
     <div class="inline-grid grid-cols-2">
       <Button
-        :aria-label="$t('previous')"
+        :aria-label="t('previous')"
         :icon="false"
         :disabled="!isPreviousAllowed"
         :wrapper-class="'mx-2'"
-        @click.native="goPrevious"
+        @click="goPrevious"
       >
-        {{ $t('previous') }}
+        {{ t('previous') }}
       </Button>
       <Button
-        :aria-label="$t('next')"
+        :aria-label="t('next')"
         :icon="false"
         :disabled="!isNextAllowed"
         :wrapper-class="'mx-2'"
-        @click.native="goNext"
+        @click="goNext"
       >
-        {{ $t('next') }}
+        {{ t('next') }}
       </Button>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from '#app'
-
 export default defineComponent({
   props: {
     isPreviousAllowed: {
@@ -67,7 +65,7 @@ export default defineComponent({
 })
 </script>
 
-<i18n lang="yml">
+<i18n lang="yaml">
 de:
   next: Weiter
   previous: Zurück

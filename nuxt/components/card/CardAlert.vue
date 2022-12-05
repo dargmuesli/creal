@@ -6,15 +6,13 @@
     role="alert"
   >
     <span v-if="errorMessage">
-      {{ $t('error', { errorMessage }) }}
+      {{ t('error', { errorMessage }) }}
     </span>
     <slot />
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from '#app'
-
 export default defineComponent({
   props: {
     errorMessage: {
@@ -29,7 +27,7 @@ export default defineComponent({
 })
 </script>
 
-<i18n lang="yml">
+<i18n lang="yaml">
 de:
   error: 'Fehler: {errorMessage}'
 en:

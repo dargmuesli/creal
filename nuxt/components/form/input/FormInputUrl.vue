@@ -3,34 +3,32 @@
     :error="formInput.$error"
     :is-optional="isOptional"
     :label-for="`input-${id}`"
-    :title="$t('url')"
+    :title="t('url')"
   >
     <div class="flex">
       <span
         class="inline-flex cursor-default items-center rounded-l border border-r-0 border-gray-300 bg-gray-100 px-3 text-gray-500"
       >
-        {{ $t('https') }}
+        {{ t('https') }}
       </span>
       <input
         :id="`input-${id}`"
         class="form-input rounded-l-none"
-        :placeholder="$t('placeholderUrl')"
+        :placeholder="t('placeholderUrl')"
         type="url"
         :value="formInput.$model"
         @input="$emit('input', $event.target.value)"
       />
     </div>
-    <template slot="inputError">
+    <template #inputError>
       <FormInputError :form-input="formInput" validation-property="maxLength">
-        {{ $t('validationLength') }}
+        {{ t('validationLength') }}
       </FormInputError>
     </template>
   </FormInput>
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from '#app'
-
 import { FormInputType } from '~/components/form/input/FormInput.vue'
 
 export default defineComponent({
@@ -51,7 +49,7 @@ export default defineComponent({
 })
 </script>
 
-<i18n lang="yml">
+<i18n lang="yaml">
 de:
   https: https://
   placeholderUrl: websei.te

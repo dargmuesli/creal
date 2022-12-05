@@ -27,7 +27,7 @@
         {{ submitName }}
       </Button>
       <FormInputError v-if="form.$anyError" class="mt-2">
-        {{ $t('validationFailed') }}
+        {{ t('validationFailed') }}
       </FormInputError>
     </div>
     <CardAlert
@@ -40,8 +40,6 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, ref } from '#app'
-
 import Button from '~/components/Button.vue'
 
 const Form = defineComponent({
@@ -65,7 +63,7 @@ const Form = defineComponent({
     },
     submitName: {
       default() {
-        return this.$t('submit') as string
+        return t('submit')
       },
       type: String,
     },
@@ -116,7 +114,7 @@ export default Form
 export type FormType = InstanceType<typeof Form>
 </script>
 
-<i18n lang="yml">
+<i18n lang="yaml">
 de:
   submit: Absenden
   validationFailed: Bitte überprüfe deine Eingaben 🙈

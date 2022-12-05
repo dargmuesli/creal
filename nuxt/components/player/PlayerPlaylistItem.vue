@@ -8,7 +8,7 @@
       <IconDownload />
     </button>
     <button
-      class="creal-prose-fullwidth max-w-full grow cursor-default py-2 text-left lg:py-3"
+      class="custom-prose-fullwidth max-w-full grow cursor-default py-2 text-left lg:py-3"
       @click="onItemClick"
     >
       {{ playlistItem.name.replace(/^cReal - /, '') }}
@@ -21,7 +21,6 @@
 
 <script lang="ts">
 import prettyBytes from 'pretty-bytes'
-import { defineComponent, PropType } from '#app'
 import { PlaylistItem } from '~/types/playlist'
 
 export default defineComponent({

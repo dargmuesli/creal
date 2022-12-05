@@ -18,15 +18,13 @@
     class="inline-flex items-center justify-center rounded"
     :class="{ 'text-link-dark dark:text-link-bright': isColored }"
     :to="to"
-    @click.native="$emit('click')"
+    @click="$emit('click')"
   >
     <slot />
   </nuxt-link>
 </template>
 
 <script lang="ts">
-import { defineComponent } from '#app'
-
 export default defineComponent({
   props: {
     append: {

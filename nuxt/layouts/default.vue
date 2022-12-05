@@ -3,12 +3,12 @@
     <div class="flex min-h-screen flex-col">
       <Header />
       <main class="container mx-auto flex flex-1 flex-col px-4 py-8 md:px-8">
-        <nuxt />
+        <slot />
       </main>
     </div>
     <footer
       class="bg-gray-900 text-sm leading-6"
-      :class="{ 'mb-20': storePlayerModule.isPlayerVisible }"
+      :class="{ 'mb-20': store.isPlayerVisible }"
     >
       <div class="px-2 py-8">
         <div class="mx-auto flex w-9/12 items-center">
@@ -23,60 +23,47 @@
           <div class="h-px flex-1 bg-gray-400" />
         </div>
         <p class="p-2 text-center text-gray-400">
-          {{ $t('copyright', { year: new Date().getFullYear() }) }}
+          {{ t('copyright', { year: new Date().getFullYear() }) }}
           <br />
           <AppLink class="text-link" :to="localePath('/legal-notice')">
-            {{ $t('legalNotice') }}
+            {{ t('legalNotice') }}
           </AppLink>
         </p>
       </div>
     </footer>
     <div class="fixed bottom-0 left-0 right-0">
       <div
-        v-if="storePlayerModule.currentTrackName"
+        v-if="store.currentTrackName"
         class="flex flex-col justify-evenly bg-white px-2 font-bold text-black sm:flex-row"
       >
         <span>
-          {{
-            storePlayerModule.currentTrackNameShort ||
-            storePlayerModule.currentTrackName
-          }}
+          {{ store.currentTrackNameShort || store.currentTrackName }}
           <span
-            v-if="
-              storePlayerModule.currentTrackMeta &&
-              storePlayerModule.currentTrackMeta.createdTime
-            "
+            v-if="store.currentTrackMeta && store.currentTrackMeta.createdTime"
             class="font-normal"
           >
-            {{ $t('on') }}
-            {{
-              $moment(storePlayerModule.currentTrackMeta.createdTime).format(
-                'L'
-              )
-            }}
+            {{ t('on') }}
+            {{ $moment(store.currentTrackMeta.createdTime).format('L') }}
           </span>
         </span>
-        <span v-if="storePlayerModule.currentTrackDescription">
-          {{ storePlayerModule.currentTrackDescription }}
+        <span v-if="store.currentTrackDescription">
+          {{ store.currentTrackDescription }}
         </span>
         <a
-          v-if="
-            storePlayerModule.currentTrackMeta &&
-            storePlayerModule.currentTrackMeta.mixcloudLink
-          "
+          v-if="store.currentTrackMeta && store.currentTrackMeta.mixcloudLink"
           class="flex items-center gap-1"
-          :href="storePlayerModule.currentTrackMeta.mixcloudLink"
+          :href="store.currentTrackMeta.mixcloudLink"
           rel="noopener noreferrer"
           target="_blank"
         >
-          <IconMixcloud classes="h-5 w-5" /> {{ $t('mixcloud') }}
+          <IconMixcloud classes="h-5 w-5" /> {{ t('mixcloud') }}
         </a>
         <button class="flex items-center gap-1 font-bold" @click="share">
           <IconShare classes="h-4 w-4" />
-          {{ $t('linkCopy') }}
+          {{ t('linkCopy') }}
         </button>
       </div>
-      <div :class="{ hidden: !storePlayerModule.isPlayerVisible }">
+      <div :class="{ hidden: !store.isPlayerVisible }">
         <ClientOnly>
           <vue-plyr
             ref="plyr"
@@ -90,14 +77,18 @@
   </div>
 </template>
 
-<script lang="ts">
-import { getModule } from 'vuex-module-decorators'
+<script setup lang="ts">
 import Plyr from 'plyr'
 
-import { defineComponent } from '#app'
 import { TrackListItem } from '~/types/playlist'
-import PlayerModule from '~/store/modules/PlayerModule'
+import { useStore } from '~/store'
 
+const store = useStore()
+
+// data
+const isInitialized = ref(false)
+
+// methods
 function binarySearch(ar: any[], el: any, compareFn: Function) {
   let m = 0
   let n = ar.length - 1
@@ -117,126 +108,107 @@ function binarySearch(ar: any[], el: any, compareFn: Function) {
 
   return m - 1
 }
-
 function trackListItemComparator(time: number, b: TrackListItem) {
   return time - b.startSeconds
 }
+function closeAllow() {
+  window.onbeforeunload = () => {}
+}
+function closeProtect() {
+  window.onbeforeunload = () => {
+    return 'The music will stop playing if you navigate away.'
+  }
+}
+function init() {
+  $nuxt.$on('plyr', (sourceInfo: Plyr.SourceInfo, isManuallySet: boolean) => {
+    if (!player) return
 
-export default defineComponent({
-  name: 'IndexPage',
-  data() {
-    return {
-      isInitialized: false,
-      storePlayerModule: getModule(PlayerModule, this.$store),
+    if (!store.isPlayerPaused || isManuallySet) {
+      player.source = sourceInfo
+
+      if (store.isPlayerPaused || isManuallySet) {
+        player.play()
+      }
     }
-  },
-  head() {
-    return this.$nuxtI18nHead({ addSeoAttributes: true })
-  },
-  computed: {
-    player() {
-      const plyr = this.$refs.plyr as any
+  })
+}
+function initPlyr(plyr: any) {
+  plyr.player.on('ended', () => {
+    closeAllow()
+    $nuxt.$emit('plyrEnd')
+  })
+  plyr.player.on('pause', () => {
+    store.setIsPlayerPaused(true)
+    closeAllow()
+  })
+  plyr.player.on('playing', () => {
+    store.setIsPlayerPaused(false)
+    closeProtect()
+  })
+  plyr.player.on('timeupdate', () => {
+    if (store.currentTrackMeta && store.currentTrackMeta.tracklist) {
+      const trackListItem =
+        store.currentTrackMeta.tracklist[
+          binarySearch(
+            store.currentTrackMeta.tracklist,
+            player.currentTime,
+            trackListItemComparator
+          )
+        ]
 
-      if (!plyr) return
+      const currentTrackDescription = trackListItem
+        ? trackListItem.artistName + ' - ' + trackListItem.songName
+        : ''
 
-      if (!this.isInitialized) {
-        this.initPlyr(plyr)
+      if (store.currentTrackDescription !== currentTrackDescription) {
+        store.setCurrentTrackDescription(currentTrackDescription)
       }
+    }
+  })
 
-      return plyr.player
-    },
-  },
-  created() {
-    this.$nuxt.$on(
-      'plyr',
-      (sourceInfo: Plyr.SourceInfo, isManuallySet: boolean) => {
-        if (!this.player) return
+  isInitialized.value = true
+}
+function share() {
+  if (
+    !process.browser ||
+    !store.currentTrackPlaylistName ||
+    !store.currentTrackName
+  )
+    return
 
-        if (!this.storePlayerModule.isPlayerPaused || isManuallySet) {
-          this.player.source = sourceInfo
+  $copyText(
+    `${window.location.origin}/player?playlist=${encodeURIComponent(
+      store.currentTrackPlaylistName
+    )}&track=${encodeURIComponent(store.currentTrackName)}`
+  )
+}
 
-          if (this.storePlayerModule.isPlayerPaused || isManuallySet) {
-            this.player.play()
-          }
-        }
-      }
-    )
-  },
-  beforeCreate() {
-    this.$moment.locale(this.$i18n.locale)
-  },
-  methods: {
-    closeAllow() {
-      window.onbeforeunload = () => {}
-    },
-    closeProtect() {
-      window.onbeforeunload = () => {
-        return 'The music will stop playing if you navigate away.'
-      }
-    },
-    initPlyr(plyr: any) {
-      plyr.player.on('ended', () => {
-        this.closeAllow()
-        this.$nuxt.$emit('plyrEnd')
-      })
-      plyr.player.on('pause', () => {
-        this.storePlayerModule.setIsPlayerPaused(true)
-        this.closeAllow()
-      })
-      plyr.player.on('playing', () => {
-        this.storePlayerModule.setIsPlayerPaused(false)
-        this.closeProtect()
-      })
-      plyr.player.on('timeupdate', () => {
-        if (
-          this.storePlayerModule.currentTrackMeta &&
-          this.storePlayerModule.currentTrackMeta.tracklist
-        ) {
-          const trackListItem =
-            this.storePlayerModule.currentTrackMeta.tracklist[
-              binarySearch(
-                this.storePlayerModule.currentTrackMeta.tracklist,
-                this.player.currentTime,
-                trackListItemComparator
-              )
-            ]
+// computations
+const player = computed(() => {
+  const plyr = $refs.plyr as any
 
-          const currentTrackDescription = trackListItem
-            ? trackListItem.artistName + ' - ' + trackListItem.songName
-            : ''
+  if (!plyr) return
 
-          if (
-            this.storePlayerModule.currentTrackDescription !==
-            currentTrackDescription
-          ) {
-            this.storePlayerModule.setCurrentTrackDescription(
-              currentTrackDescription
-            )
-          }
-        }
-      })
+  if (!isInitialized.value) {
+    initPlyr(plyr)
+  }
 
-      this.isInitialized = true
-    },
-    share() {
-      if (
-        !process.browser ||
-        !this.storePlayerModule.currentTrackPlaylistName ||
-        !this.storePlayerModule.currentTrackName
-      )
-        return
-
-      this.$copyText(
-        `${window.location.origin}/player?playlist=${encodeURIComponent(
-          this.storePlayerModule.currentTrackPlaylistName
-        )}&track=${encodeURIComponent(this.storePlayerModule.currentTrackName)}`
-      )
-    },
-  },
+  return plyr.player
 })
+
+// initialization
+init()
+useHeadLayout()
+$moment.locale(locale.value)
 </script>
 
-<i18n lang="yml">
+<script lang="ts">
+export default {
+  name: 'IndexPage',
+}
+</script>
+
+<i18n lang="yaml">
 en:
   copyright: © {year} Jonas Thelemann. All rights reserved.
   legalNotice: Legal notice

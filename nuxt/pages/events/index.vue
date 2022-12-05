@@ -16,29 +16,26 @@
       >
         <EventList :events="itemsCurrent">
           <div class="flex items-center gap-2">
-            {{ $t('eventsCurrent') }}
+            {{ t('eventsCurrent') }}
             <LivePulse />
           </div>
         </EventList>
         <EventList :events="itemsFuture">
           <div class="flex items-center gap-2">
-            {{ $t('eventsFuture') }}
+            {{ t('eventsFuture') }}
             <LivePulse v-if="!itemsCurrent || itemsCurrent.length === 0" />
           </div>
         </EventList>
         <EventList :events="itemsPast">
-          {{ $t('eventsPast') }}
+          {{ t('eventsPast') }}
         </EventList>
       </Paging>
-      <div v-else class="text-center">{{ $t('eventsNone') }}</div>
+      <div v-else class="text-center">{{ t('eventsNone') }}</div>
     </section>
   </div>
 </template>
 
 <script lang="ts">
-import { Context } from '@nuxt/types-edge'
-
-import { defineComponent } from '#app'
 import { Event as CrealEvent } from '~/components/event/Event.vue'
 import { CollectionItem } from '~/plugins/paging'
 
@@ -60,12 +57,12 @@ export default defineComponent({
           .pagination.total
         events = (
           (await $http.$get('/events', {
-            searchParams: new URLSearchParams({
+            searchParams: {
               'pagination[limit]': String(limit),
               'pagination[start]': String(start),
               populate: 'image',
               sort: 'dateStart:desc',
-            }),
+            },
           })) as any
         ).data
       } catch (e) {
@@ -89,12 +86,12 @@ export default defineComponent({
     return {
       items: undefined as Array<CollectionItem<CrealEvent>> | undefined,
       requestError: undefined,
-      title: this.$t('titlePage'),
+      title: this.t('titlePage'),
     }
   },
   head() {
     const title = this.title as string
-    const description = this.$t('description') as string
+    const description = this.t('description') as string
 
     return {
       meta: [
@@ -183,7 +180,7 @@ export default defineComponent({
 })
 </script>
 
-<i18n lang="yml">
+<i18n lang="yaml">
 de:
   description: Veranstaltungen, bei denen cReal auftritt.
   eventsCurrent: Laufende Veranstaltungen

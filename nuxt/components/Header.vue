@@ -2,7 +2,7 @@
   <header class="flex items-center justify-between gap-4 p-4 md:px-8">
     <AppLink :to="localePath('/')">
       <div id="logo" class="h-10 w-10" />
-      <span class="text-lg font-bold">{{ $t('creal') }}</span>
+      <span class="text-lg font-bold">{{ t('creal') }}</span>
     </AppLink>
     <AppLink
       v-if="eventsCurrentCount"
@@ -10,7 +10,7 @@
       :to="localePath('/events')"
     >
       <span class="hidden whitespace-nowrap sm:inline">
-        {{ $t('live') }}
+        {{ t('live') }}
       </span>
       <LivePulse />
     </AppLink>
@@ -20,7 +20,7 @@
       :to="localePath('/events')"
     >
       <span class="hidden whitespace-nowrap sm:inline">
-        {{ $t('eventsFuture') }}
+        {{ t('eventsFuture') }}
       </span>
       <LivePulse />
     </AppLink>
@@ -28,18 +28,16 @@
       class="basis-0 gap-2 text-lg font-bold"
       :is-colored="false"
       :to="`mailto:e-mail+creal@jonas-thelemann.de?subject=${encodeURIComponent(
-        $t('bookingSubject')
+        t('bookingSubject')
       )}`"
     >
-      <span class="basis-0 whitespace-nowrap">{{ $t('bookCreal') }}</span>
+      <span class="basis-0 whitespace-nowrap">{{ t('bookCreal') }}</span>
       <IconArrowRight />
     </AppLink>
   </header>
 </template>
 
 <script lang="ts">
-import { defineComponent } from '#app'
-
 export default defineComponent({
   name: 'CrealHeader',
   data() {
@@ -51,21 +49,21 @@ export default defineComponent({
   async fetch() {
     this.eventsCurrentCount = (
       (await this.$http.$get('/events', {
-        searchParams: new URLSearchParams({
+        searchParams: {
           'filters[$and][0][dateStart][$lte]': this.$moment().toISOString(),
           'filters[$and][1][$or][0][dateEnd][$gt]':
             this.$moment().toISOString(),
           'filters[$and][1][$or][1][dateStart][$gte]': this.$moment()
             .startOf('day')
             .toISOString(),
-        }),
+        },
       })) as any
     ).meta.pagination.total
     this.eventsFutureCount = (
       (await this.$http.$get('/events', {
-        searchParams: new URLSearchParams({
+        searchParams: {
           'filters[dateStart][$gt]': this.$moment().toISOString(),
-        }),
+        },
       })) as any
     ).meta.pagination.total
   },
@@ -84,7 +82,7 @@ export default defineComponent({
 }
 </style>
 
-<i18n lang="yml">
+<i18n lang="yaml">
 en:
   bookCreal: Book cReal
   bookingSubject: Booking Request

@@ -6,7 +6,7 @@
       @click="$emit('click', faq)"
     >
       <IconChatSolid class="shrink-0" />
-      <h1 class="creal-prose-fullwidth m-0 text-left">
+      <h1 class="custom-prose-fullwidth m-0 text-left">
         {{ faq.title }}
       </h1>
     </button>
@@ -16,14 +16,12 @@
       :style="`max-height: ${getMaxHeight()}px`"
     >
       <!-- eslint-disable-next-line vue/no-v-html -->
-      <div class="creal-prose-fullwidth p-8" v-html="$marked(faq.answer)" />
+      <div class="custom-prose-fullwidth p-8" v-html="$marked(faq.answer)" />
     </div>
   </section>
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from '#app'
-
 export interface Faq {
   answer: any
   isFocused: boolean

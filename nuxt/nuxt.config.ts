@@ -1,303 +1,97 @@
-import { defineNuxtConfig } from '@nuxt/bridge'
-import compressionWithBrotli from 'compression-with-brotli'
+import { dirname, resolve } from 'node:path'
+import { fileURLToPath } from 'node:url'
+
+import VueI18nPlugin from '@intlify/unplugin-vue-i18n/vite'
+import graphqlPlugin from '@rollup/plugin-graphql'
 
 import localeDe from './locales/de.json'
 import localeEn from './locales/en.json'
-import { AWS_BUCKET_NAME, BASE_URL, STACK_DOMAIN } from './plugins/baseUrl'
+import { LOCALES } from './utils/constants'
 
-const LOCALES = [
-  {
-    code: 'en',
-    name: 'English',
-    iso: 'en', // Will be used as catchall locale by default.
-  },
-  {
-    code: 'de',
-    name: 'Deutsch',
-    iso: 'de',
-  },
-]
+const BASE_URL =
+  'https://' +
+  (process.env.NUXT_PUBLIC_STACK_DOMAIN ||
+    `${process.env.HOST || 'localhost'}:3000`)
 
 export default defineNuxtConfig({
-  alias: {
-    tslib: 'tslib/tslib.es6.js',
+  app: {
+    pageTransition: {
+      name: 'layout',
+    },
   },
-  // Build Configuration (https://go.nuxtjs.dev/config-build)
-  build: {
-    babel: {
-      presets() {
-        return [['@nuxt/babel-preset-app', { corejs: { version: 3 } }]]
-      },
-    },
-    extend(config) {
-      config.node = {
-        child_process: 'empty',
-        fs: 'empty',
-      }
-    },
-    extractCSS: true,
-    optimization: {
-      runtimeChunk: true,
-      splitChunks: {
-        name: true,
-        cacheGroups: {
-          styles: {
-            name: 'styles',
-            test: /.(css|vue)$/,
-            chunks: 'all',
-            enforce: true,
-          },
-        },
-      },
-    },
-    postcss: { plugins: { tailwindcss: {}, autoprefixer: {} } },
-    transpile: [
-      '@http-util/status-i18n',
-      'abort-controller',
-      'cross-fetch',
-      'event-target-shim',
-      'graphql',
-      'moment',
-      'pretty-bytes',
-      'subscriptions-transport-ws',
-      'tslib',
-      'twix',
-      'universal-cookie',
-      'web-streams-polyfill',
-    ],
-  },
-
-  // Modules for dev and build (recommended) (https://go.nuxtjs.dev/config-modules)
-  buildModules: [
-    '@nuxtjs/html-validator',
-    // Doc: https://github.com/nuxt-community/moment-module
-    ['@nuxtjs/moment', { locales: ['de'], plugins: ['twix'] }],
-    // https://go.nuxtjs.dev/stylelint
-    '@nuxtjs/stylelint-module',
-  ],
-
-  // Auto import components (https://go.nuxtjs.dev/config-components)
-  components: true,
-
   css: ['@/assets/css/main.css'],
-
-  dir: {
-    static: 'public',
-  },
-
-  // Global page headers (https://go.nuxtjs.dev/config-head)
-  head() {
-    return {
-      bodyAttrs: {
-        class: ['bg-background-body', 'text-text'],
-      },
-      link: [
-        {
-          href: '/assets/static/favicon/apple-touch-icon-60x60.png?v=eEYRGn5b9R',
-          rel: 'apple-touch-icon',
-          sizes: '60x60',
-        },
-        {
-          href: '/assets/static/favicon/apple-touch-icon-76x76.png?v=eEYRGn5b9R',
-          rel: 'apple-touch-icon',
-          sizes: '76x76',
-        },
-        {
-          href: '/assets/static/favicon/apple-touch-icon-120x120.png?v=eEYRGn5b9R',
-          rel: 'apple-touch-icon',
-          sizes: '120x120',
-        },
-        {
-          href: '/assets/static/favicon/apple-touch-icon-152x152.png?v=eEYRGn5b9R',
-          rel: 'apple-touch-icon',
-          sizes: '152x152',
-        },
-        {
-          href: '/assets/static/favicon/apple-touch-icon-180x180.png?v=eEYRGn5b9R',
-          rel: 'apple-touch-icon',
-          sizes: '180x180',
-        },
-        {
-          href: '/assets/static/favicon/apple-touch-icon.png?v=eEYRGn5b9R',
-          rel: 'apple-touch-icon',
-          sizes: '180x180',
-        },
-        {
-          href: '/assets/static/favicon/favicon-16x16.png?v=eEYRGn5b9R',
-          rel: 'icon',
-          sizes: '16x16',
-          type: 'image/png',
-        },
-        {
-          href: '/assets/static/favicon/favicon-32x32.png?v=eEYRGn5b9R',
-          rel: 'icon',
-          sizes: '32x32',
-          type: 'image/png',
-        },
-        {
-          href: '/assets/static/favicon/favicon.ico',
-          rel: 'icon',
-          type: 'image/x-icon',
-        },
-        {
-          href: '/assets/static/favicon/site.webmanifest?v=eEYRGn5b9R',
-          rel: 'manifest',
-        },
-        {
-          color: '#2d3748',
-          href: '/assets/static/favicon/safari-pinned-tab.svg?v=eEYRGn5b9R',
-          rel: 'mask-icon',
-        },
-        {
-          href: '/assets/static/favicon/favicon.ico?v=eEYRGn5b9R',
-          rel: 'shortcut icon',
-        },
-      ],
-      meta: [
-        { charset: 'utf-8' },
-        { content: 'width=device-width, initial-scale=1', name: 'viewport' },
-        {
-          hid: 'description',
-          property: 'description',
-          content: this.$t('globalOgSeoDescription'),
-        },
-        {
-          hid: 'og:description',
-          property: 'og:description',
-          content: this.$t('globalOgSeoDescription'),
-        },
-        {
-          content: '/assets/static/favicon/browserconfig.xml?v=eEYRGn5b9R',
-          name: 'msapplication-config',
-        },
-        {
-          content: '#2d3748',
-          name: 'msapplication-TileColor',
-        },
-        {
-          content: '#2d3748',
-          name: 'theme-color',
-        },
-        {
-          hid: 'og:image',
-          property: 'og:image',
-          content:
-            this.$baseUrl +
-            '/assets/static/logos/creal_with-text_open-graph.png', // Does not support .svg as of 2021-06.
-        },
-        {
-          hid: 'og:image:alt',
-          property: 'og:image:alt',
-          content: this.$t('globalOgImageAlt'),
-        },
-        {
-          hid: 'og:image:height',
-          property: 'og:image:height',
-          content: '627',
-        },
-        {
-          hid: 'og:image:width',
-          property: 'og:image:width',
-          content: '1200',
-        },
-        {
-          hid: 'og:site_name',
-          property: 'og:site_name',
-          content: 'DJ cReal',
-        },
-        {
-          hid: 'og:type',
-          property: 'og:type',
-          content: 'website', // https://ogp.me/#types
-        },
-        {
-          hid: 'og:title',
-          property: 'og:title',
-          content: 'DJ cReal',
-        },
-        {
-          hid: 'og:url',
-          property: 'og:url',
-          content: this.$baseUrl + this.$router.currentRoute.fullPath,
-        },
-        {
-          hid: 'twitter:card',
-          property: 'twitter:card',
-          content: 'summary',
-        },
-        {
-          hid: 'twitter:description',
-          property: 'twitter:description',
-          content: this.$t('globalOgSeoDescription'),
-        },
-        {
-          hid: 'twitter:image',
-          property: 'twitter:image',
-          content:
-            this.$baseUrl +
-            '/assets/static/logos/creal_with-text_open-graph.png', // Does not support .svg as of 2021-06.
-        },
-        {
-          hid: 'twitter:image:alt',
-          property: 'twitter:image:alt',
-          content: this.$t('globalOgImageAlt'),
-        },
-        {
-          hid: 'twitter:title',
-          property: 'twitter:title',
-          content: 'DJ cReal',
-        },
-      ],
-      titleTemplate: (titleChunk: string) => {
-        return titleChunk ? `${titleChunk} - DJ cReal` : 'DJ cReal'
-      },
-    }
-  },
-
-  /*
-   ** Customize the progress-bar color
-   */
-  loading: { color: '#fff' },
-
-  // Modules (https://go.nuxtjs.dev/config-modules)
   modules: [
+    // [
+    //   '@dargmuesli/nuxt-cookie-control',
+    //   {
+    //     locales: ['en', 'de'],
+    //     necessary: [
+    //       {
+    //         name: {
+    //           de: 'Authentifizierungsdaten',
+    //           en: 'Authentication Data',
+    //         },
+    //         // cookies: ['JWT_NAME'],
+    //       },
+    //       {
+    //         name: {
+    //           de: 'Cookie-Präferenzen',
+    //           en: 'Cookie Preferences',
+    //         },
+    //         // cookies: ['cookie_control_consent', 'cookie_control_enabled_cookies'],
+    //       },
+    //       {
+    //         name: {
+    //           de: 'Spracheinstellungen',
+    //           en: 'Language Settings',
+    //         },
+    //         // cookies: ['i18n_redirected'],
+    //       },
+    //     ],
+    //     optional: [
+    //       {
+    //         name: 'Google Analytics',
+    //         identifier: 'ga',
+    //         // cookies: ['_ga', '_gat', '_gid'],
+    //         accepted: () => {
+    //           const { $ga } = useNuxtApp()
+    //           $ga.enable()
+    //         },
+    //         declined: () => {
+    //           const { $ga } = useNuxtApp()
+    //           $ga.disable()
+    //         },
+    //       },
+    //     ],
+    //   },
+    // ],
     [
-      'nuxt-helmet',
+      '@nuxtjs/color-mode',
       {
-        hsts: {
-          maxAge: 31536000,
-          preload: true,
-        },
-      },
-    ], // Should be declared at the start of the array.
-    'nuxt-clipboard2',
-    [
-      '@nuxt/http',
-      {
-        baseURL: 'http://creal_strapi:1337/api/',
-        browserBaseURL: `https://creal-strapi.${STACK_DOMAIN}/api/`,
+        classSuffix: '',
       },
     ],
     [
-      '@nuxtjs/apollo',
+      '@nuxtjs/html-validator',
       {
-        clientConfigs: {
-          default: '~/plugins/apollo-config.ts',
-        },
-        defaultOptions: {
-          $query: {
-            fetchPolicy: 'cache-and-network',
-          },
-        },
+        failOnError: true,
+        logLevel: 'warning',
       },
     ],
-    [
-      '@nuxtjs/axios',
-      {
-        baseURL: 'http://creal:3000/api/',
-        browserBaseURL: `${BASE_URL}/api/`,
-      },
-    ], // Doc: https://axios.nuxtjs.org/usage
+    // [
+    //   '@nuxt/http',
+    //   {
+    //     baseURL: 'http://creal_strapi:1337/api/',
+    //     browserBaseURL: `https://creal-strapi.${STACK_DOMAIN}/api/`,
+    //   },
+    // ],
+    // [
+    //   '@nuxtjs/axios',
+    //   {
+    //     baseURL: 'http://creal:3000/api/',
+    //     browserBaseURL: `${BASE_URL}/api/`,
+    //   },
+    // ],
     [
       '@nuxtjs/i18n',
       {
@@ -313,71 +107,53 @@ export default defineNuxtConfig({
             de: localeDe,
             en: localeEn,
           },
-          silentFallbackWarn: true,
+          fallbackWarn: false, // TODO: don't show incorrect warnings (https://github.com/intlify/vue-i18n-next/issues/776)
         },
-        vueI18nLoader: true,
+        // vueI18nLoader: true,
       },
     ],
-    [
-      '@nuxtjs/robots',
-      {
-        Allow: ['/'],
-        Disallow: ['/robots.txt'], // https://webmasters.stackexchange.com/a/117537/70856
-        Sitemap: BASE_URL + '/sitemap.xml',
-      },
-    ],
-    'vue-sweetalert2/nuxt',
-    '@funken-studio/sitemap-nuxt-3', // Should be declared at the end of the array.
+    '@nuxtjs/robots',
+    '@pinia/nuxt',
+    // 'nuxt-clipboard2',
+    ['@funken-studio/sitemap-nuxt-3', { i18n: true }], // Should be declared at the end of the array.
   ],
-
-  // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
-  plugins: [
-    '~/plugins/baseUrl.ts',
-    '~/plugins/i18n.ts',
-    '~/plugins/marked.ts',
-    '~/plugins/paging.ts',
-    '~/plugins/util.ts',
-    { src: '~/plugins/vue-plyr.js', mode: 'client' },
-    '~/plugins/vuelidate.ts',
-  ],
-
-  render: {
-    compressor: compressionWithBrotli(),
-    csp: {
-      policies: {
-        'base-uri': ["'none'"], // Mozilla Observatory.
-        'connect-src': [
-          "'self'", // Nuxt development.
-          `https://*.${STACK_DOMAIN}`, // PostGraphile, ...
-          'https://cdn.plyr.io', // Plyr.
-        ],
-        'default-src': ["'none'"],
-        'form-action': ["'none'"], // Mozilla Observatory.
-        'frame-ancestors': ["'none'"], // Mozilla Observatory.
-        'img-src': [
-          "'self'",
-          `https://creal-strapi.${STACK_DOMAIN}`,
-          `https://${AWS_BUCKET_NAME}.s3.nl-ams.scw.cloud`, // Playlist cover.
-        ],
-        'media-src': [
-          'https://cdn.plyr.io/static/blank.mp4', // Plyr.
-          `https://${AWS_BUCKET_NAME}.s3.nl-ams.scw.cloud`, // Music.
-        ],
-        'manifest-src': ["'self'"], // Chrome
-        'report-uri': 'https://dargmuesli.report-uri.com/r/d/csp/enforce',
-        'script-src': ['https://static.cloudflareinsights.com'],
-        'style-src': [
-          "'self'", // Tailwind
-          "'sha256-WcR1Ar+4qu9KupBnfKnc/wVoMHhfObQDhd2xlj6DG4o='",
-        ],
-      },
-      reportOnly: false,
+  nitro: {
+    compressPublicAssets: true,
+  },
+  postcss: {
+    plugins: { tailwindcss: {}, autoprefixer: {} },
+  },
+  runtimeConfig: {
+    public: {
+      stagingHost:
+        process.env.NODE_ENV !== 'production' &&
+        !process.env.NUXT_PUBLIC_STACK_DOMAIN
+          ? 'jonas-thelemann.de'
+          : undefined,
     },
   },
-
-  vue: {
-    config: {
-      productionTip: false,
+  typescript: {
+    shim: false,
+    strict: true,
+    tsConfig: {
+      compilerOptions: {
+        esModuleInterop: true,
+        // types: ['jest'],
+      },
+      vueCompilerOptions: {
+        htmlAttributes: [], // https://github.com/johnsoncodehk/volar/issues/1970#issuecomment-1276994634
+      },
     },
+  },
+  vite: {
+    plugins: [
+      VueI18nPlugin({
+        include:
+          '!' +
+          resolve(dirname(fileURLToPath(import.meta.url)), './node_modules/**'), // https://github.com/intlify/bundle-tools/issues/168
+      }),
+      // @ts-ignore https://github.com/rollup/plugins/issues/1243
+      graphqlPlugin(),
+    ],
   },
 })

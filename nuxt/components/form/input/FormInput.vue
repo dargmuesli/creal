@@ -21,10 +21,10 @@
           <span>{{ title }}</span>
           <span class="text-xs font-medium text-gray-500 md:text-right">
             <span v-if="required">
-              {{ $t('required') }}
+              {{ t('required') }}
             </span>
             <span v-if="isOptional">
-              {{ $t('optional') }}
+              {{ t('optional') }}
             </span>
           </span>
         </label>
@@ -53,8 +53,6 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from '#app'
-
 const FormInput = defineComponent({
   props: {
     error: {
@@ -93,7 +91,7 @@ export default FormInput
 export type FormInputType = InstanceType<typeof FormInput>
 </script>
 
-<i18n lang="yml">
+<i18n lang="yaml">
 de:
   optional: optional
   required: Pflichtfeld

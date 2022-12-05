@@ -1,6 +1,6 @@
 <template>
   <div v-if="events && events.length > 0" class="flex flex-col gap-2 lg:gap-4">
-    <div class="creal-prose-fullwidth">
+    <div class="custom-prose-fullwidth">
       <h2><slot /></h2>
     </div>
     <ul>
@@ -16,7 +16,6 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from '#app'
 import { Event as CrealEvent } from '~/components/event/Event.vue'
 import { CollectionItem } from '~/plugins/paging'
 

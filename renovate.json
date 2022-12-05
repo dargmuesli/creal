@@ -4,12 +4,12 @@
   ],
   "packageRules": [
     {
-      "matchPackageNames": ["vue"],
-      "allowedVersions": "<3"
+      "matchPackageNames": ["@rollup/plugin-graphql"],
+      "allowedVersions": "<2"
     },
     {
-      "matchPackageNames": ["webpack"],
-      "allowedVersions": "<5"
+      "matchPackageNames": ["rollup"],
+      "allowedVersions": "<3"
     }
   ]
 }

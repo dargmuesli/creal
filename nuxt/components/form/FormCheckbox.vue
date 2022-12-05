@@ -13,8 +13,6 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from '#app'
-
 export default defineComponent({
   props: {
     formKey: {
