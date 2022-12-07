@@ -69,7 +69,7 @@ specifiers:
   prettier-plugin-tailwindcss: 0.2.0
   pretty-bytes: 6.0.0
   slugify: 1.6.5
-  start-server-and-test: 1.15.0
+  start-server-and-test: 1.15.1
   stylelint: 14.16.0
   stylelint-config-prettier: 9.0.4
   stylelint-config-recommended-vue: 1.4.0
@@ -159,7 +159,7 @@ devDependencies:
   postcss-html: 1.5.0
   prettier: 2.8.0
   prettier-plugin-tailwindcss: 0.2.0_prettier@2.8.0
-  start-server-and-test: 1.15.0
+  start-server-and-test: 1.15.1
   stylelint: 14.16.0
   stylelint-config-prettier: 9.0.4_stylelint@14.16.0
   stylelint-config-recommended-vue: 1.4.0_bto6pmslw3cibsiuq6smxboytq
@@ -7186,10 +7186,10 @@ packages:
       - debug
     dev: false
 
-  /axios/0.21.4_debug@4.3.2:
+  /axios/0.21.4_debug@4.3.4:
     resolution: {integrity: sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg==}
     dependencies:
-      follow-redirects: 1.15.2_debug@4.3.2
+      follow-redirects: 1.15.2_debug@4.3.4
     transitivePeerDependencies:
       - debug
     dev: true
@@ -9089,18 +9089,6 @@ packages:
       supports-color: 8.1.1
     dev: true
 
-  /debug/4.3.2:
-    resolution: {integrity: sha512-mOp8wKcvj7XxC78zLgw/ZA+6TSgkoE2C/ienthhRD298T7UNwAg9diBpLRxC0mOezLl4B0xV7M0cCO6P/O0Xhw==}
-    engines: {node: '>=6.0'}
-    peerDependencies:
-      supports-color: '*'
-    peerDependenciesMeta:
-      supports-color:
-        optional: true
-    dependencies:
-      ms: 2.1.2
-    dev: true
-
   /debug/4.3.4:
     resolution: {integrity: sha512-PRWFHuSU3eDtQJPvnNY7Jcket1j0t5OuOsFzPPzsekD52Zl8qUfFIPEiswXqIvHWGVHOgX+7G/vCNNhehwxfkQ==}
     engines: {node: '>=6.0'}
@@ -10834,7 +10822,7 @@ packages:
       debug:
         optional: true
 
-  /follow-redirects/1.15.2_debug@4.3.2:
+  /follow-redirects/1.15.2_debug@4.3.4:
     resolution: {integrity: sha512-VQLG33o04KaQ8uYi2tVNbdrWp1QWxNNea+nmIB4EVM28v0hmP17z7aG1+wAkNzVq4KeXTq3221ye5qTJP91JwA==}
     engines: {node: '>=4.0'}
     peerDependencies:
@@ -10843,7 +10831,7 @@ packages:
       debug:
         optional: true
     dependencies:
-      debug: 4.3.2
+      debug: 4.3.4
     dev: true
 
   /for-each/0.3.3:
@@ -17136,19 +17124,19 @@ packages:
     resolution: {integrity: sha512-qoRRSyROncaz1z0mvYqIE4lCd9p2R90i6GxW3uZv5ucSu8tU7B5HXUP1gG8pVZsYNVaXjk8ClXHPttLyxAL48A==}
     dev: true
 
-  /start-server-and-test/1.15.0:
-    resolution: {integrity: sha512-T4Chk9ulFuT5LcKUrtAPjOzMQHCYonvQ8kJTZlXc9gEWLmJk9lhNarkIbR9vpbGZZp6nxTDV7jdL5mpvqP1xMw==}
+  /start-server-and-test/1.15.1:
+    resolution: {integrity: sha512-ixhMbUAmym+7k3kqhjhTt6/0eUwE3dbNZPWgcfEUJ5uStaHbT0m8VB+049V5V9X0ueEyxAkwnkkR2SEhCKst5g==}
     engines: {node: '>=6'}
     hasBin: true
     dependencies:
       arg: 5.0.2
       bluebird: 3.7.2
       check-more-types: 2.24.0
-      debug: 4.3.2
+      debug: 4.3.4
       execa: 5.1.1
       lazy-ass: 1.6.0
       ps-tree: 1.2.0
-      wait-on: 6.0.0_debug@4.3.2
+      wait-on: 6.0.0_debug@4.3.4
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -18965,12 +18953,12 @@ packages:
     dependencies:
       vue: 2.7.14
 
-  /wait-on/6.0.0_debug@4.3.2:
+  /wait-on/6.0.0_debug@4.3.4:
     resolution: {integrity: sha512-tnUJr9p5r+bEYXPUdRseolmz5XqJTTj98JgOsfBn7Oz2dxfE2g3zw1jE+Mo8lopM3j3et/Mq1yW7kKX6qw7RVw==}
     engines: {node: '>=10.0.0'}
     hasBin: true
     dependencies:
-      axios: 0.21.4_debug@4.3.2
+      axios: 0.21.4_debug@4.3.4
       joi: 17.7.0
       lodash: 4.17.21
       minimist: 1.2.7
