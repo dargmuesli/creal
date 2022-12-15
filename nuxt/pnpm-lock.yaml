@@ -82,7 +82,7 @@ specifiers:
   vue-plyr: 7.0.0
   vue-sweetalert2: 5.0.5
   vuelidate: 0.7.7
-  vuex: 3.6.2
+  vuex: 4.1.0
   vuex-module-decorators: 1.2.0
   webpack: 4.46.0
 
@@ -119,7 +119,7 @@ dependencies:
   vue-plyr: 7.0.0
   vue-sweetalert2: 5.0.5_vue@2.7.14
   vuelidate: 0.7.7
-  vuex-module-decorators: 1.2.0_vue@2.7.14+vuex@3.6.2
+  vuex-module-decorators: 1.2.0_vue@2.7.14+vuex@4.1.0
 
 devDependencies:
   '@babel/core': 7.20.5
@@ -168,7 +168,7 @@ devDependencies:
   tailwindcss: 3.2.4_postcss@8.4.20
   typescript: 4.9.4
   vue: 2.7.14
-  vuex: 3.6.2_vue@2.7.14
+  vuex: 4.1.0_vue@2.7.14
   webpack: 4.46.0
 
 packages:
@@ -5846,6 +5846,9 @@ packages:
       - walrus
       - whiskers
     dev: false
+
+  /@vue/devtools-api/6.4.5:
+    resolution: {integrity: sha512-JD5fcdIuFxU4fQyXUu3w2KpAJHzTVdN+p4iOX2lMWSHMOoQdMAcpFLZzm9Z/2nmsoZ1a96QEhZ26e50xLBsgOQ==}
 
   /@webassemblyjs/ast/1.11.1:
     resolution: {integrity: sha512-ukBh14qFLjxTQNTXocdyksN5QdM28S1CxHt2rdskFyL+xFV7VremuBLVbmCePj+URalXBENx/9Lm7lnhihtCSw==}
@@ -18869,7 +18872,7 @@ packages:
     engines: {node: '>= 4.0.0', npm: '>= 3.0.0'}
     dev: false
 
-  /vuex-module-decorators/1.2.0_vue@2.7.14+vuex@3.6.2:
+  /vuex-module-decorators/1.2.0_vue@2.7.14+vuex@4.1.0:
     resolution: {integrity: sha512-3lHp75qVgrNXUpFKs4J4eRnrxjY3BYUkHwR+ZKvvIycw/7tDwlL0RPuiYLwrHEUBTvJePSZaehZJ0BMTw1/ugQ==}
     engines: {node: '>= 8', npm: '>= 5', yarn: '>= 1'}
     requiresBuild: true
@@ -18878,7 +18881,7 @@ packages:
       vuex: '>=3'
     dependencies:
       vue: 2.7.14
-      vuex: 3.6.2_vue@2.7.14
+      vuex: 4.1.0_vue@2.7.14
     dev: false
 
   /vuex/3.6.2_vue@2.7.14:
@@ -18886,6 +18889,15 @@ packages:
     peerDependencies:
       vue: ^2.0.0
     dependencies:
+      vue: 2.7.14
+    dev: false
+
+  /vuex/4.1.0_vue@2.7.14:
+    resolution: {integrity: sha512-hmV6UerDrPcgbSy9ORAtNXDr9M4wlNP4pEFKye4ujJF8oqgFFuxDCdOLS3eNoRTtq5O3hoBDh9Doj1bQMYHRbQ==}
+    peerDependencies:
+      vue: ^3.2.0
+    dependencies:
+      '@vue/devtools-api': 6.4.5
       vue: 2.7.14
 
   /wait-on/6.0.1_debug@4.3.4:
