@@ -1,177 +1,120 @@
 <template>
-  <div class="container mx-auto">
-    <section>
-      <Breadcrumbs>
-        {{ title }}
-      </Breadcrumbs>
-      <CardAlert v-if="requestError" :error-message="requestError.message" />
-      <Paging
-        v-else-if="items && items.length > 0"
-        :is-previous-allowed="isPreviousAllowed"
-        :is-next-allowed="isNextAllowed"
-        :part-string="partString"
-        :query-previous="queryPrevious"
-        :query-next="queryNext"
-      >
-        <ul>
-          <li
-            v-for="item in items"
-            :key="slugify(item.attributes.title)"
-            class="border duration-300 first:rounded-t last:rounded-b"
-            :class="{
-              'my-4': itemFocused === item,
-              'mx-8 -my-px': itemFocused !== item,
-            }"
-          >
-            <Faq :faq="item.attributes" @click="toggleItemFocused(item)" />
-          </li>
-        </ul>
-      </Paging>
-      <div v-else class="text-center">{{ t('faqNone') }}</div>
-    </section>
+  <div class="flex-1">
+    <LayoutBreadcrumbs>
+      {{ title }}
+    </LayoutBreadcrumbs>
+    <CardStateAlert v-if="requestError">
+      {{ requestError }}
+    </CardStateAlert>
+    <Paging
+      v-if="faqItems?.length"
+      :is-previous-allowed="paging.isPreviousAllowed"
+      :is-next-allowed="paging.isNextAllowed"
+      :part-string="paging.partString"
+      :query-previous="paging.queryPrevious"
+      :query-next="paging.queryNext"
+    >
+      <ul>
+        <li
+          v-for="faqItem in faqItems"
+          :key="faqItem.id"
+          class="border duration-300 first:rounded-t last:rounded-b"
+          :class="
+            itemFocusedId === faqItem.id ? 'my-4' : 'mx-8 -my-px last:my-0'
+          "
+        >
+          <FaqItem
+            :faq-item="faqItem"
+            :is-focused="itemFocusedId === faqItem.id"
+            @click="focusItem(faqItem.id)"
+          />
+        </li>
+      </ul>
+    </Paging>
+    <div v-else class="text-center">{{ t('faqNone') }}</div>
   </div>
 </template>
 
-<script lang="ts">
-import slugify from 'slugify'
+<script setup lang="ts">
+import consola from 'consola'
 
-import { Faq } from '~/components/Faq.vue'
-import { CollectionItem, Paging } from '~/plugins/paging'
+import type { StrapiResult } from '~/types/fetch'
+import type { CrealFaq } from '~/types/creal'
 
-export default defineComponent({
-  name: 'IndexPage',
-  async asyncData({ $http, $paging, query }: Context): Promise<
-    | ({
-        itemFocused: Faq | undefined
-      } & Paging)
-    | { requestError: any }
-  > {
-    const limit = +(query.limit ? query.limit : 100)
-    const start = +(query.start ? query.start : 0)
+definePageMeta({ colorMode: 'dark' })
 
-    let itemsCountTotal, items
+const { t } = useI18n()
+const route = useRoute()
+const strapiFetch = useStrapiFetch()
 
-    const maxTryCount = 3
-    let tryCount = 1
-    let requestError
+// data
+const itemFocusedId = ref<number>()
+const title = t('titlePage')
+const requestError = ref()
+const querylimit = +(route.query.limit ? route.query.limit : 100)
+const queryStart = +(route.query.start ? route.query.start : 0)
 
-    while (tryCount <= maxTryCount && !(itemsCountTotal && items)) {
-      try {
-        itemsCountTotal = ((await $http.$get('/faqs')) as any).meta.pagination
-          .total
-        items = (
-          (await $http.$get('/faqs', {
-            searchParams: {
-              'pagination[limit]': String(limit),
-              'pagination[start]': String(start),
-              sort: 'title:desc',
-            },
-          })) as any
-        ).data
-      } catch (e: any) {
-        if (tryCount === maxTryCount) {
-          requestError = e
-        }
-      }
-
-      tryCount++
-    }
-
-    if (requestError) {
-      return {
-        requestError,
-      }
-    }
-
-    return $paging(items, itemsCountTotal, query, start, limit)
-  },
-  data() {
-    return {
-      items: undefined as Array<CollectionItem<Faq>> | undefined,
-      itemFocused: undefined as CollectionItem<Faq> | undefined,
-      title: this.t('titlePage'),
-      requestError: undefined,
-    }
-  },
-  head() {
-    const title = this.title as string
-    const description = this.t('description') as string
-
-    return {
-      meta: [
-        {
-          hid: 'description',
-          property: 'description',
-          content: description,
-        },
-        {
-          hid: 'og:description',
-          property: 'og:description',
-          content: description,
-        },
-        {
-          hid: 'og:title',
-          property: 'og:title',
-          content: title,
-        },
-        {
-          hid: 'og:url',
-          property: 'og:url',
-          content:
-            'https://creal.' +
-            (process.env.NUXT_ENV_STACK_DOMAIN || 'jonas-thelemann.test') +
-            this.$router.currentRoute.fullPath,
-        },
-        {
-          hid: 'twitter:title',
-          property: 'twitter:title',
-          content: title,
-        },
-      ],
-      title,
-    }
-  },
-  watchQuery: ['limit', 'start'],
-  mounted() {
-    if (!this.items) return
-
-    for (const item of this.items) {
-      if (slugify(String(item.id)) === window.location.hash.substring(1)) {
-        this.$set(item.attributes, 'isFocused', true)
-        this.itemFocused = item
-        break
-      }
-    }
-  },
-  methods: {
-    slugify(input: string) {
-      return slugify(input)
+// async data
+let asyncData: StrapiResult<CrealFaq> | undefined
+try {
+  asyncData = await strapiFetch('/faqs', {
+    query: {
+      'pagination[limit]': querylimit,
+      'pagination[start]': queryStart,
+      sort: 'title:desc',
     },
-    toggleItemFocused(item: CollectionItem<Faq>) {
-      if (!this.itemFocused) {
-        this.focusItem(item)
-      } else {
-        this.$set(this.itemFocused.attributes, 'isFocused', false)
-
-        if (this.itemFocused === item) {
-          this.itemFocused = undefined
-          history.replaceState(
-            '',
-            document.title,
-            window.location.pathname + window.location.search
-          )
-        } else {
-          this.focusItem(item)
-        }
-      }
-    },
-    focusItem(item: CollectionItem<Faq>) {
-      this.$set(item.attributes, 'isFocused', true)
-      this.itemFocused = item
-      history.replaceState(undefined, '', `#${slugify(String(item.id))}`)
-    },
-  },
+    retry: FETCH_RETRY,
+  })
+} catch (error: any) {
+  requestError.value = error
+  consola.error(error)
+}
+const faqItems = asyncData?.data
+const paging = getPaging({
+  items: faqItems,
+  itemsCountTotal: asyncData?.meta.pagination.total,
+  query: route.query,
+  start: queryStart,
+  limit: querylimit,
 })
+
+// methods
+function focusItem(id: number) {
+  itemFocusedId.value = id
+  history.replaceState(undefined, '', `#${id}`)
+}
+
+// lifecycle
+onMounted(() => {
+  itemFocusedId.value = parseInt(route.hash.substring(1))
+})
+// watchQuery: ['limit', 'start'],
+
+// initialization
+useHeadDefault(title, {
+  meta: [
+    {
+      hid: 'description',
+      property: 'description',
+      content: t('description'),
+    },
+    {
+      hid: 'og:description',
+      property: 'og:description',
+      content: t('description'),
+    },
+  ],
+})
+// TODO: remove markdown formatting
+useSchemaOrg([
+  defineWebPage({ '@type': 'FAQPage' }),
+  (faqItems || []).map((faqItem) =>
+    defineQuestion({
+      name: faqItem.attributes.title,
+      acceptedAnswer: faqItem.attributes.answer,
+    })
+  ),
+])
 </script>
 
 <i18n lang="yaml">

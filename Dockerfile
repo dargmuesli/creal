@@ -45,7 +45,7 @@ RUN npm install -g pnpm && \
 COPY ./nuxt/ ./
 
 RUN pnpm install --offline \
-  && pnpm nuxt prepare
+    && rm -rf ./node-jiti
 
 
 ########################

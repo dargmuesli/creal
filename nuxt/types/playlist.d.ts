@@ -1,5 +1,3 @@
-export const PLAYER_PREFIX = 'player/'
-
 export interface PlaylistItem {
   name: string
   extension: string
@@ -36,7 +34,7 @@ export interface PlaylistExtended extends Playlist {
   metas: string[]
 }
 
-export interface AxiosPlaylist {
+export interface FetchPlaylist {
   playlistData: Playlist
   nextContinuationToken?: string
 }

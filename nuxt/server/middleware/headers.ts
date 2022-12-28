@@ -1,6 +1,7 @@
 import defu from 'defu'
 import { appendHeader, defineEventHandler } from 'h3'
 
+import { AWS_BUCKET_NAME } from '~/utils/constants'
 import { getDomainTldPort, getHost } from '~/utils/util'
 
 function getCsp(host: string): Record<string, Array<string>> {
@@ -23,7 +24,8 @@ function getCsp(host: string): Record<string, Array<string>> {
     'frame-ancestors': ["'none'"], // Mozilla Observatory.
     'img-src': [
       "'self'",
-      `https://creal-strapi.${STACK_DOMAIN}`,
+      'data:',
+      `https://creal-strapi.${getDomainTldPort(stagingHostOrHost)}`,
       `https://${AWS_BUCKET_NAME}.s3.nl-ams.scw.cloud`, // Playlist cover.
     ],
     'manifest-src': ["'self'"],

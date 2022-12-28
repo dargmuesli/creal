@@ -19,9 +19,9 @@
           >
             <br />
           </i18n-t>
-          <Button aria-label="start" @click="setShowGreeting(true)">
+          <ButtonColored aria-label="start" @click="setShowGreeting(true)">
             {{ t('start') }}
-          </Button>
+          </ButtonColored>
         </div>
       </div>
     </div>
@@ -48,71 +48,58 @@
   </div>
 </template>
 
-<script lang="ts">
-export default defineComponent({
-  name: 'IndexPage',
-  data() {
-    return {
-      showGreeting: true,
-      title: 'Welcome!',
-    }
-  },
-  head() {
-    const title = this.title as string
-    return {
-      bodyAttrs: {
-        class: this.showGreeting ? ['overflow-hidden'] : [],
-      },
-      meta: [
-        {
-          hid: 'og:title',
-          property: 'og:title',
-          content: title,
-        },
-        {
-          hid: 'og:url',
-          property: 'og:url',
-          content: this.$baseUrl + this.$router.currentRoute.fullPath,
-        },
-        {
-          hid: 'twitter:title',
-          property: 'twitter:title',
-          content: title,
-        },
-      ],
-      title,
-    }
-  },
-  beforeMount() {
-    window.addEventListener('keypress', (e) => {
-      const key = e.which || e.keyCode
+<script setup lang="ts">
+definePageMeta({ colorMode: 'dark' })
 
-      if (key === 13) {
-        this.setShowGreeting(true)
-      }
-    })
-  },
-  mounted() {
-    this.setShowGreeting(false)
-  },
-  methods: {
-    setShowGreeting(set: boolean): void {
-      if (set) {
-        sessionStorage.setItem('cReal_showGreeting', 'shown')
-      }
+const localePath = useLocalePath()
+const { t } = useI18n()
 
-      if (process.client) {
-        if (sessionStorage.getItem('cReal_showGreeting') !== 'shown') {
-          this.showGreeting = true
-        } else {
-          this.showGreeting = false
-        }
-      } else {
-        this.showGreeting = true
-      }
-    },
-  },
+// data
+const showGreeting = ref(true)
+const title = t('title')
+
+// methods
+function setShowGreeting(set: boolean): void {
+  if (set) {
+    sessionStorage.setItem('cReal_showGreeting', 'shown')
+  }
+
+  // if (process.server) {
+  //   showGreeting.value = true
+  //   return
+  // }
+
+  if (sessionStorage.getItem('cReal_showGreeting') !== 'shown') {
+    showGreeting.value = true
+    document.body.classList.add('overflow-hidden')
+  } else {
+    showGreeting.value = false
+    document.body.classList.remove('overflow-hidden')
+  }
+}
+
+// lifecycle
+onBeforeMount(() => {
+  window.addEventListener('keypress', (e) => {
+    const key = e.which || e.keyCode
+
+    if (key === 13) {
+      setShowGreeting(true)
+    }
+  })
 })
+onMounted(() => {
+  setShowGreeting(false)
+})
+
+// initialization
+useHeadDefault(title)
+</script>
+
+<script lang="ts">
+export default {
+  name: 'IndexPage',
+}
 </script>
 
 <i18n lang="yaml">
@@ -123,6 +110,7 @@ de:
   player: Player
   start: Start
   suggestions: Vorschläge
+  title: Willkommen!
   welcome: DJ und Event-Organisator,{0}manchmal am Doubletime rappen.
 en:
   creal: cReal
@@ -131,5 +119,6 @@ en:
   player: Player
   start: Start
   suggestions: Suggestions
+  title: Welcome!
   welcome: DJ and event organizer,{0}occasionally rapping double times.
 </i18n>

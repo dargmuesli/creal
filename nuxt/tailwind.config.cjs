@@ -5,56 +5,23 @@ function heading(theme) {
     fontWeight: theme('fontWeight.bold'),
     marginBottom: theme('margin.1'),
     marginTop: theme('margin.4'),
-    overflow: 'hidden',
-    textOverflow: 'ellipsis',
+    // set overflow truncate/ellipsis in the surrounding container, or larger fonts will be cut off due to their line-heights
   }
 }
 
-function prose(theme) {
-  return {
-    css: {
-      a: {
-        color: theme('colors.link'),
-        textDecoration: 'none',
-      },
-      color: theme('colors.text'),
-      h1: {
-        color: theme('colors.text'),
-        lineHeight: theme('lineHeight.snug'),
-      },
-      h2: {
-        color: theme('colors.text'),
-        lineHeight: theme('lineHeight.snug'),
-      },
-      h3: {
-        color: theme('colors.text'),
-        lineHeight: theme('lineHeight.snug'),
-      },
-      h4: {
-        color: theme('colors.text'),
-        lineHeight: theme('lineHeight.snug'),
-      },
-      h5: {
-        color: theme('colors.text'),
-        lineHeight: theme('lineHeight.snug'),
-      },
-      h6: {
-        color: theme('colors.text'),
-        lineHeight: theme('lineHeight.snug'),
-      },
-    },
-  }
-}
+const gray = colors.gray // or slate, zinc, neutral, stone
 
 module.exports = {
   content: [
     './components/**/*.{js,vue,ts}',
+    './composables/**/*.{js,vue,ts}',
     './layouts/**/*.vue',
     './pages/**/*.vue',
     './plugins/**/*.{js,ts}',
-    './nuxt.config.js',
-    './nuxt.config.ts',
+    // './nuxt.config.{js,ts}', // Does not work with i18n as of 2022-12-01
+    './app.vue',
   ],
+  darkMode: 'class',
   plugins: [
     require('@tailwindcss/forms'),
     require('@tailwindcss/line-clamp'),
@@ -65,11 +32,18 @@ module.exports = {
           cursor: theme('cursor.not-allowed'),
           opacity: theme('opacity.50'),
         },
-        '::placeholder': {
-          fontStyle: 'italic',
-          'input&,textarea&': {
-            opacity: 0.5,
-          },
+        'a[target="_blank"]:after': {
+          backgroundColor: 'currentColor',
+          content: '""',
+          display: 'inline-table', // inline-table centers the element vertically in the tiptap text area, instead of inline-block
+          mask: 'url(data:image/svg+xml;base64,PHN2ZyBhcmlhLWhpZGRlbj0idHJ1ZSIgZm9jdXNhYmxlPSJmYWxzZSIgZGF0YS1wcmVmaXg9ImZhcyIgZGF0YS1pY29uPSJhcnJvdy11cC1yaWdodC1mcm9tLXNxdWFyZSIgY2xhc3M9InN2Zy1pbmxpbmUtLWZhIGZhLWFycm93LXVwLXJpZ2h0LWZyb20tc3F1YXJlIiByb2xlPSJpbWciIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmlld0JveD0iMCAwIDUxMiA1MTIiPjxwYXRoIGZpbGw9ImN1cnJlbnRDb2xvciIgZD0iTTM4NCAzMjBjLTE3LjY3IDAtMzIgMTQuMzMtMzIgMzJ2OTZINjRWMTYwaDk2YzE3LjY3IDAgMzItMTQuMzIgMzItMzJzLTE0LjMzLTMyLTMyLTMyTDY0IDk2Yy0zNS4zNSAwLTY0IDI4LjY1LTY0IDY0VjQ0OGMwIDM1LjM0IDI4LjY1IDY0IDY0IDY0aDI4OGMzNS4zNSAwIDY0LTI4LjY2IDY0LTY0di05NkM0MTYgMzM0LjMgNDAxLjcgMzIwIDM4NCAzMjB6TTUwMi42IDkuMzY3QzQ5Ni44IDMuNTc4IDQ4OC44IDAgNDgwIDBoLTE2MGMtMTcuNjcgMC0zMS4xIDE0LjMyLTMxLjEgMzEuMWMwIDE3LjY3IDE0LjMyIDMxLjEgMzEuOTkgMzEuMWg4Mi43NUwxNzguNyAyOTAuN2MtMTIuNSAxMi41LTEyLjUgMzIuNzYgMCA0NS4yNkMxOTEuMiAzNDguNSAyMTEuNSAzNDguNSAyMjQgMzM2bDIyNC0yMjYuOFYxOTJjMCAxNy42NyAxNC4zMyAzMS4xIDMxLjEgMzEuMVM1MTIgMjA5LjcgNTEyIDE5MlYzMS4xQzUxMiAyMy4xNiA1MDguNCAxNS4xNiA1MDIuNiA5LjM2N3oiPjwvcGF0aD48L3N2Zz4K) no-repeat 50% 50%',
+          maskSize: 'cover',
+          height: theme('fontSize.xs'),
+          marginLeft: '5px',
+          width: theme('fontSize.xs'),
+        },
+        address: {
+          margin: theme('margin.4'),
         },
         h1: {
           ...heading(theme),
@@ -89,15 +63,14 @@ module.exports = {
           ...heading(theme),
           fontSize: theme('fontSize.xl'),
         },
-        h5: {
-          ...heading(theme),
-          fontSize: theme('fontSize.lg'),
-        },
-        h6: {
-          ...heading(theme),
-        },
       })
       addComponents({
+        '::placeholder': {
+          fontStyle: 'italic',
+          '.form-input&,.form-textarea&': {
+            opacity: 0.5,
+          },
+        },
         '.bg-creal': {
           backgroundImage: 'url("/creal.jpg")',
         },
@@ -106,6 +79,7 @@ module.exports = {
           backgroundColor: theme('colors.gray.50'),
           borderColor: theme('colors.gray.300'),
           borderRadius: theme('borderRadius.DEFAULT'),
+          borderWidth: theme('borderWidth.DEFAULT'),
           boxShadow: theme('boxShadow.sm'),
           color: theme('colors.text.dark'),
           lineHeight: theme('lineHeight.tight'),
@@ -113,6 +87,21 @@ module.exports = {
           width: theme('width.full'),
           '&:focus': {
             backgroundColor: theme('colors.white'),
+          },
+        },
+        '.form-input-error': {
+          input: {
+            borderColor: theme('colors.red.500'),
+          },
+        },
+        '.form-input-success': {
+          input: {
+            borderColor: theme('colors.green.600'),
+          },
+        },
+        '.form-input-warning': {
+          input: {
+            borderColor: theme('colors.yellow.600'),
           },
         },
         '.fullscreen': {
@@ -126,6 +115,10 @@ module.exports = {
         },
       })
       addUtilities({
+        '.disabled': {
+          cursor: theme('cursor.not-allowed'),
+          opacity: theme('opacity.50'),
+        },
         '.max-w-xxs': {
           maxWidth: '15rem',
         },
@@ -145,11 +138,19 @@ module.exports = {
       },
       colors: {
         background: {
-          body: colors.gray['800'],
-          dark: colors.gray['900'],
+          bright: colors.white,
+          brighten: gray['200'],
+          dark: gray['800'],
+          darken: gray['700'],
         },
-        link: colors.blue['400'],
-        text: colors.white,
+        link: {
+          bright: colors.blue['400'],
+          dark: colors.blue['600'],
+        },
+        text: {
+          bright: gray['50'],
+          dark: gray['900'],
+        },
       },
       keyframes: {
         shake: {
@@ -179,27 +180,6 @@ module.exports = {
           },
         },
       },
-      minHeight: {
-        '80vh': '80vh',
-      },
-      transitionProperty: {
-        margin: 'margin',
-        maxHeight: 'max-height',
-      },
-      transitionTimingFunction: {
-        popout: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)',
-      },
-      typography: (theme) => ({
-        DEFAULT: prose(theme),
-        sm: prose(theme),
-        base: prose(theme),
-        lg: prose(theme),
-        xl: prose(theme),
-        '2xl': prose(theme),
-      }),
-    },
-    maxHeight: {
-      0: '0',
     },
   },
 }

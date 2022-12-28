@@ -5,10 +5,11 @@ import { LocaleObject } from '@nuxtjs/i18n/dist/runtime/composables'
 const secretPathAwsBucket = '/run/secrets/creal_aws-bucket'
 
 export const AWS_BUCKET_NAME =
-  typeof window === 'undefined' && fs.existsSync(secretPathAwsBucket)
+  process.server && fs.existsSync(secretPathAwsBucket)
     ? fs.readFileSync(secretPathAwsBucket, 'utf8')
-    : ''
+    : 'creal-audio-dev'
 export const CYPRESS_BASE_URL = 'http://localhost:3000'
+export const FETCH_RETRY = 3
 export const LOCALES: LocaleObject[] = [
   {
     code: 'en',
@@ -21,3 +22,4 @@ export const LOCALES: LocaleObject[] = [
     iso: 'de',
   },
 ]
+export const PLAYER_PREFIX = 'player/'

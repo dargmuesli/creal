@@ -1,15 +1,16 @@
 import fs from 'fs'
 import { URL } from 'url'
 
+import { S3Client, ListObjectsV2Command } from '@aws-sdk/client-s3'
+import { fromIni } from '@aws-sdk/credential-providers'
 import consola from 'consola'
 import { defineEventHandler } from 'h3'
 
-import { S3Client, ListObjectsV2Command } from '@aws-sdk/client-s3'
-import { fromIni } from '@aws-sdk/credential-providers'
+import { mergeByKey } from '~/utils/util'
+import { PLAYER_PREFIX } from '~/utils/constants'
 
-import {
-  AxiosPlaylist,
-  PLAYER_PREFIX,
+import type {
+  FetchPlaylist,
   Playlist,
   PlaylistItem,
   PlaylistExtended,
@@ -169,7 +170,7 @@ function getPlaylistExtended(
 }
 
 export default defineEventHandler(async (event) => {
-  const { req, res } = event.node
+  const { req } = event.node
   const s3 = new S3Client({
     apiVersion: '2006-03-01',
     credentials: fromIni({
@@ -190,33 +191,25 @@ export default defineEventHandler(async (event) => {
   const paramPrefixLength = paramPrefix ? paramPrefix.split('/').length : 0
   const paramPrefixLengthTotal = PLAYER_PREFIX_LENGTH + paramPrefixLength
 
-  let data
-
-  try {
-    data = await s3.send(
-      new ListObjectsV2Command({
-        ...{
-          Bucket: bucket,
-          // MaxKeys: 10,
-        },
-        ...(continuationToken !== null && {
-          ContinuationToken: continuationToken,
-        }),
-        ...(paramPrefix !== null && {
-          Prefix: PLAYER_PREFIX + paramPrefix + '/',
-        }),
-      })
-    )
-  } catch (err: any) {
-    res.writeHead(500)
-    res.end(err.message)
-  }
+  const data = await s3.send(
+    new ListObjectsV2Command({
+      ...{
+        Bucket: bucket,
+        // MaxKeys: 10,
+      },
+      ...(continuationToken !== null && {
+        ContinuationToken: continuationToken,
+      }),
+      ...(paramPrefix !== null && {
+        Prefix: PLAYER_PREFIX + paramPrefix + '/',
+      }),
+    })
+  )
 
   if (!data) return
 
   if (data.Contents === undefined) {
-    res.writeHead(204)
-    res.end('No content')
+    setResponseStatus(204, 'No content')
     return
   }
 
@@ -233,9 +226,7 @@ export default defineEventHandler(async (event) => {
   data.Contents.forEach((content) => {
     // The content's key is the directory's/file's path.
     if (content.Key === undefined) {
-      res.writeHead(500)
-      res.end('Content key undefined')
-      return
+      throw createError({ statusCode: 500, message: 'Content key undefined' })
     }
 
     const keyParts = content.Key.split('/')
@@ -265,12 +256,11 @@ export default defineEventHandler(async (event) => {
   })
 
   const playlistData = getPlaylist(playlistDataExtended)
-  const result: AxiosPlaylist = {
+  const result: FetchPlaylist = {
     playlistData,
     ...(data.NextContinuationToken !== undefined && {
       nextContinuationToken: data.NextContinuationToken,
     }),
   }
-  res.setHeader('Content-Type', 'application/json')
-  res.end(JSON.stringify(result))
+  return result
 })

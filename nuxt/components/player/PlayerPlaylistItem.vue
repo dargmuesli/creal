@@ -8,7 +8,7 @@
       <IconDownload />
     </button>
     <button
-      class="custom-prose-fullwidth max-w-full grow cursor-default py-2 text-left lg:py-3"
+      class="vio-prose-fullwidth max-w-full grow cursor-default py-2 text-left lg:py-3"
       @click="onItemClick"
     >
       {{ playlistItem.name.replace(/^cReal - /, '') }}
@@ -19,33 +19,34 @@
   </div>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 import prettyBytes from 'pretty-bytes'
-import { PlaylistItem } from '~/types/playlist'
+import type { PlaylistItem } from '~/types/playlist'
 
-export default defineComponent({
-  props: {
-    playlistItem: {
-      required: true,
-      type: Object as PropType<PlaylistItem>,
-    },
-  },
-  methods: {
-    bytesToString(bytes: number) {
-      return prettyBytes(bytes)
-    },
-    onDownloadClick() {
-      this.$emit('download', this.playlistItem)
-    },
-    onItemClick(event: any) {
-      if (event.detail === 2) {
-        // double click
-        this.onPlayClick()
-      }
-    },
-    onPlayClick() {
-      this.$emit('play', this.playlistItem)
-    },
-  },
-})
+export interface Props {
+  playlistItem: PlaylistItem
+}
+const props = withDefaults(defineProps<Props>(), {})
+
+const emit = defineEmits<{
+  (e: 'download', playlistItem: PlaylistItem): void
+  (e: 'play', playlistItem: PlaylistItem): void
+}>()
+
+// methods
+function bytesToString(bytes: number) {
+  return prettyBytes(bytes)
+}
+function onDownloadClick() {
+  emit('download', props.playlistItem)
+}
+function onItemClick(event: any) {
+  if (event.detail === 2) {
+    // double click
+    onPlayClick()
+  }
+}
+function onPlayClick() {
+  emit('play', props.playlistItem)
+}
 </script>

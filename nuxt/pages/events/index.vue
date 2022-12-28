@@ -1,183 +1,153 @@
 <template>
-  <div class="container mx-auto">
-    <section>
-      <Breadcrumbs>
-        {{ title }}
-      </Breadcrumbs>
-      <CardAlert v-if="requestError" :error-message="requestError.message" />
-      <Paging
-        v-else-if="items && items.length > 0"
-        class="flex flex-col gap-4 lg:gap-8"
-        :is-previous-allowed="isPreviousAllowed"
-        :is-next-allowed="isNextAllowed"
-        :part-string="partString"
-        :query-previous="queryPrevious"
-        :query-next="queryNext"
-      >
-        <EventList :events="itemsCurrent">
-          <div class="flex items-center gap-2">
-            {{ t('eventsCurrent') }}
-            <LivePulse />
-          </div>
-        </EventList>
-        <EventList :events="itemsFuture">
-          <div class="flex items-center gap-2">
-            {{ t('eventsFuture') }}
-            <LivePulse v-if="!itemsCurrent || itemsCurrent.length === 0" />
-          </div>
-        </EventList>
-        <EventList :events="itemsPast">
-          {{ t('eventsPast') }}
-        </EventList>
-      </Paging>
-      <div v-else class="text-center">{{ t('eventsNone') }}</div>
-    </section>
+  <div class="flex-1">
+    <LayoutBreadcrumbs>
+      {{ title }}
+    </LayoutBreadcrumbs>
+    <CardStateAlert v-if="requestError">
+      {{ requestError }}
+    </CardStateAlert>
+    <Paging
+      v-else-if="events?.length"
+      class="flex flex-col gap-4 lg:gap-8"
+      :is-previous-allowed="paging.isPreviousAllowed"
+      :is-next-allowed="paging.isNextAllowed"
+      :part-string="paging.partString"
+      :query-previous="paging.queryPrevious"
+      :query-next="paging.queryNext"
+    >
+      <EventList v-if="itemsCurrent" :events="itemsCurrent">
+        <div class="flex items-center gap-2">
+          {{ t('eventsCurrent') }}
+          <LivePulse />
+        </div>
+      </EventList>
+      <EventList v-if="itemsFuture" :events="itemsFuture">
+        <div class="flex items-center gap-2">
+          {{ t('eventsFuture') }}
+          <LivePulse v-if="!itemsCurrent || itemsCurrent.length === 0" />
+        </div>
+      </EventList>
+      <EventList v-if="itemsPast" :events="itemsPast">
+        {{ t('eventsPast') }}
+      </EventList>
+    </Paging>
+    <div v-else class="text-center">{{ t('eventsNone') }}</div>
   </div>
 </template>
 
-<script lang="ts">
-import { Event as CrealEvent } from '~/components/event/Event.vue'
-import { CollectionItem } from '~/plugins/paging'
+<script setup lang="ts">
+import consola from 'consola'
 
-export default defineComponent({
-  name: 'IndexPage',
-  async asyncData({ $http, $paging, query }: Context) {
-    const limit = +(query.limit ? query.limit : 100)
-    const start = +(query.start ? query.start : 0)
+import type { CrealEvent } from '~/types/creal'
+import type { StrapiResult } from '~/types/fetch'
 
-    let eventsCountTotal, events
+definePageMeta({ colorMode: 'dark' })
 
-    const maxTryCount = 3
-    let tryCount = 1
-    let requestError
+const { $moment } = useNuxtApp()
+const { t } = useI18n()
+const route = useRoute()
+const strapiFetch = useStrapiFetch()
 
-    while (tryCount <= maxTryCount && !(eventsCountTotal && events)) {
-      try {
-        eventsCountTotal = ((await $http.$get('/events')) as any).meta
-          .pagination.total
-        events = (
-          (await $http.$get('/events', {
-            searchParams: {
-              'pagination[limit]': String(limit),
-              'pagination[start]': String(start),
-              populate: 'image',
-              sort: 'dateStart:desc',
-            },
-          })) as any
-        ).data
-      } catch (e) {
-        if (tryCount === maxTryCount) {
-          requestError = e
-        }
-      }
+// data
+const requestError = ref()
+const title = t('titlePage')
+const queryLimit = +(route.query.limit ? route.query.limit : 100)
+const queryStart = +(route.query.start ? route.query.start : 0)
 
-      tryCount++
-    }
+// async data
+let asyncData
 
-    if (requestError) {
-      return {
-        requestError,
-      }
-    }
-
-    return $paging(events, eventsCountTotal, query, start, limit)
-  },
-  data() {
-    return {
-      items: undefined as Array<CollectionItem<CrealEvent>> | undefined,
-      requestError: undefined,
-      title: this.t('titlePage'),
-    }
-  },
-  head() {
-    const title = this.title as string
-    const description = this.t('description') as string
-
-    return {
-      meta: [
-        {
-          hid: 'description',
-          property: 'description',
-          content: description,
-        },
-        {
-          hid: 'og:description',
-          property: 'og:description',
-          content: description,
-        },
-        {
-          hid: 'og:title',
-          property: 'og:title',
-          content: title,
-        },
-        {
-          hid: 'og:url',
-          property: 'og:url',
-          content: this.$baseUrl + this.$router.currentRoute.fullPath,
-        },
-        {
-          hid: 'twitter:title',
-          property: 'twitter:title',
-          content: title,
-        },
-      ],
-      title,
-    }
-  },
-  computed: {
-    itemsCurrent() {
-      const events = this.items as Array<CollectionItem<CrealEvent>> | undefined
-
-      if (!events) return
-
-      const current = this.$moment()
-
-      return events.filter((event) => {
-        if (event.attributes.dateEnd) {
-          return (
-            this.$moment(event.attributes.dateStart).isSameOrBefore(current) &&
-            this.$moment(event.attributes.dateEnd).isAfter(current)
-          )
-        } else {
-          return (
-            this.$moment(event.attributes.dateStart).isSameOrBefore(current) &&
-            this.$moment(event.attributes.dateStart).isSame(current, 'day')
-          )
-        }
-      })
+try {
+  asyncData = await strapiFetch<StrapiResult<CrealEvent>>('/events', {
+    query: {
+      'pagination[limit]': String(queryLimit),
+      'pagination[start]': String(queryStart),
+      populate: 'image',
+      sort: 'dateStart:desc',
     },
-    itemsFuture() {
-      const events = this.items as Array<CollectionItem<CrealEvent>> | undefined
-
-      if (!events) return
-
-      const current = this.$moment()
-
-      return events.filter((event) =>
-        this.$moment(event.attributes.dateStart).isAfter(current)
-      )
-    },
-    itemsPast() {
-      const events = this.items as Array<CollectionItem<CrealEvent>> | undefined
-
-      if (!events) return
-
-      const current = this.$moment()
-
-      return events.filter((event) => {
-        if (event.attributes.dateEnd) {
-          return this.$moment(event.attributes.dateEnd).isBefore(current)
-        } else {
-          return (
-            this.$moment(event.attributes.dateStart).isBefore(current) &&
-            !this.$moment(event.attributes.dateStart).isSame(current, 'day')
-          )
-        }
-      })
-    },
-  },
-  watchQuery: ['limit', 'start'],
+    retry: FETCH_RETRY,
+  })
+} catch (error: any) {
+  requestError.value = error
+  consola.error(error)
+}
+const events = asyncData?.data
+const paging = getPaging({
+  items: events,
+  itemsCountTotal: asyncData?.meta.pagination.total,
+  query: route.query,
+  start: queryStart,
+  limit: queryLimit,
 })
+
+// computations
+const itemsCurrent = computed(() => {
+  if (!events) return
+
+  const current = $moment()
+
+  return events.filter((event) => {
+    if (event.attributes.dateEnd) {
+      return (
+        $moment(event.attributes.dateStart).isSameOrBefore(current) &&
+        $moment(event.attributes.dateEnd).isAfter(current)
+      )
+    } else {
+      return (
+        $moment(event.attributes.dateStart).isSameOrBefore(current) &&
+        $moment(event.attributes.dateStart).isSame(current, 'day')
+      )
+    }
+  })
+})
+const itemsFuture = computed(() => {
+  if (!events) return
+
+  const current = $moment()
+
+  return events.filter((event) =>
+    $moment(event.attributes.dateStart).isAfter(current)
+  )
+})
+const itemsPast = computed(() => {
+  if (!events) return
+
+  const current = $moment()
+
+  return events.filter((event) => {
+    if (event.attributes.dateEnd) {
+      return $moment(event.attributes.dateEnd).isBefore(current)
+    } else {
+      return (
+        $moment(event.attributes.dateStart).isBefore(current) &&
+        !$moment(event.attributes.dateStart).isSame(current, 'day')
+      )
+    }
+  })
+})
+// watchQuery: ['limit', 'start'],
+
+// initialization
+useHeadDefault(title, {
+  meta: [
+    {
+      hid: 'description',
+      property: 'description',
+      content: t('description'),
+    },
+    {
+      hid: 'og:description',
+      property: 'og:description',
+      content: t('description'),
+    },
+  ],
+})
+</script>
+
+<script lang="ts">
+export default {
+  name: 'IndexPage',
+}
 </script>
 
 <i18n lang="yaml">

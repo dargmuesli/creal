@@ -1,5 +1,5 @@
 <template>
-  <div class="custom-prose m-auto">
+  <div class="vio-prose m-auto">
     <h1>{{ title }}</h1>
     <h2>{{ t('tmg') }}</h2>
     <p>
@@ -36,40 +36,22 @@
   </div>
 </template>
 
+<script setup lang="ts">
+definePageMeta({ colorMode: 'dark' })
+
+const { t } = useI18n()
+
+// data
+const title = t('title')
+
+// initialization
+useHeadDefault(title)
+</script>
+
 <script lang="ts">
-export default defineComponent({
-  data() {
-    return {
-      title: this.t('title'),
-    }
-  },
-  head() {
-    const title = this.title as string
-    return {
-      meta: [
-        {
-          hid: 'og:title',
-          property: 'og:title',
-          content: title,
-        },
-        {
-          hid: 'og:url',
-          property: 'og:url',
-          content:
-            'https://creal.' +
-            (process.env.NUXT_ENV_STACK_DOMAIN || 'jonas-thelemann.test') +
-            this.$router.currentRoute.fullPath,
-        },
-        {
-          hid: 'twitter:title',
-          property: 'twitter:title',
-          content: title,
-        },
-      ],
-      title,
-    }
-  },
-})
+export default {
+  name: 'IndexPage',
+}
 </script>
 
 <i18n lang="yaml">

@@ -7,7 +7,7 @@ import { fromIni } from '@aws-sdk/credential-providers'
 import { defineEventHandler } from 'h3'
 
 export default defineEventHandler(async (event) => {
-  const { req, res } = event.node
+  const { req } = event.node
   const s3 = new S3Client({
     apiVersion: '2006-03-01',
     credentials: fromIni({
@@ -24,28 +24,19 @@ export default defineEventHandler(async (event) => {
   ).searchParams.get('key')
 
   if (!key) {
-    res.writeHead(401)
-    res.end('Key missing!')
-    return
+    throw createError({ statusCode: 401, message: 'Key missing!' })
   }
 
-  let data
-
-  try {
-    data = await s3.send(
-      new GetObjectCommand({
-        Bucket: bucket,
-        Key: key,
-      })
-    )
-  } catch (err) {
-    res.writeHead(500)
-    res.end()
-  }
+  const data = await s3.send(
+    new GetObjectCommand({
+      Bucket: bucket,
+      Key: key,
+    })
+  )
 
   if (!data) return
 
-  res.end(await streamToString(data.Body as Readable))
+  return await streamToString(data.Body as Readable)
 })
 
 async function streamToString(stream: Readable): Promise<string> {

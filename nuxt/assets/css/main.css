@@ -12,32 +12,32 @@
   }
 
   thead {
-    @apply sticky top-0 z-10 custom-bg-darken;
+    @apply sticky top-0 z-10 vio-bg-darken;
   }
 
   tbody {
-    @apply divide-y custom-divide-darken;
+    @apply divide-y vio-divide-darken;
   }
 }
 
 @layer utilities {
-  .custom-prose {
+  .vio-prose {
     @apply prose prose-sm sm:prose-base lg:prose-lg xl:prose-xl prose-invert; /* 2xl:prose-2xl */ /* dark mode is default */
   }
 
-  .custom-prose-fullwidth {
-    @apply custom-prose max-w-full sm:max-w-full md:max-w-full xl:max-w-full 2xl:max-w-full;
+  .vio-prose-fullwidth {
+    @apply vio-prose max-w-full sm:max-w-full md:max-w-full xl:max-w-full 2xl:max-w-full;
   }
 
-  .custom-divide-darken {
+  .vio-divide-darken {
     @apply divide-background-brighten dark:divide-background-darken;
   }
 
-  .custom-bg-darken {
+  .vio-bg-darken {
     @apply bg-background-brighten dark:bg-background-darken;
   }
 
-  .custom-border-darken {
+  .vio-border-darken {
     @apply border-background-brighten dark:border-background-darken;
   }
 }

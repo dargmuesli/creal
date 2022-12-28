@@ -1,40 +1,23 @@
 <template>
   <div class="container mx-auto">
     <section>
-      <Breadcrumbs
-        :suffixes="$route.query.playlist && $route.query.playlist.split('/')"
+      <LayoutBreadcrumbs
+        :suffixes="
+          !Array.isArray(route.query.playlist) &&
+          route.query.playlist?.split('/')
+        "
         suffixes-key="playlist"
       >
         {{ title }}
-      </Breadcrumbs>
+      </LayoutBreadcrumbs>
       <div class="grow rounded bg-gray-900 p-4">
-        <div v-if="$fetchState.pending" class="text-center">
-          <svg
-            class="m-auto h-16 w-16 animate-spin text-white"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            title="Loading"
-            viewBox="0 0 24 24"
-          >
-            <circle
-              class="opacity-25"
-              cx="12"
-              cy="12"
-              r="10"
-              stroke="currentColor"
-              stroke-width="4"
-            />
-            <path
-              class="opacity-75"
-              fill="currentColor"
-              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-            />
-          </svg>
+        <div v-if="isLoading" class="text-center">
+          <LoaderIndicatorSpinner class="m-auto h-32 w-32" />
           {{ t('globalLoading') }}
         </div>
         <div v-else-if="playlistData" class="m-auto w-5/6">
           <ul
-            v-if="playlistData.collections.length > 0"
+            v-if="playlistData.collections.length"
             class="flex flex-wrap justify-center"
           >
             <li
@@ -51,7 +34,7 @@
               </AppLink>
             </li>
           </ul>
-          <ul v-if="playlistData.items.length > 0">
+          <ul v-if="playlistData.items.length">
             <li
               v-for="playlistItem of playlistData.items"
               :key="playlistItem.name"
@@ -60,8 +43,8 @@
               <PlayerPlaylistItem
                 :class="{
                   'text-yellow-500':
-                    $route.query.playlist &&
-                    $route.query.playlist === store.currentTrackPlaylistName &&
+                    route.query.playlist &&
+                    route.query.playlist === store.currentTrackPlaylistName &&
                     playlistItem.name === store.currentTrackName,
                 }"
                 :playlist-item="playlistItem"
@@ -72,8 +55,7 @@
           </ul>
           <div
             v-if="
-              playlistData.collections.length === 0 &&
-              playlistData.items.length === 0
+              !playlistData.collections.length && !playlistData.items.length
             "
             class="text-center"
           >
@@ -85,241 +67,234 @@
   </div>
 </template>
 
-<script lang="ts">
-import {
-  PLAYER_PREFIX,
-  AxiosPlaylist,
-  Playlist,
-  PlaylistItem,
-} from '~/types/playlist'
+<script setup lang="ts">
+import type { Playlist, PlaylistItem } from '~/types/playlist'
+import { useStore } from '~/store'
+import { PLAYER_PREFIX } from '~/utils/constants'
 
-export default defineComponent({
-  name: 'IndexPage',
-  data() {
-    return {
-      playlistData: null as null | Playlist,
-      store: getModule(PlayerModule, this.$store),
-      title: this.t('titlePage'),
-    }
-  },
-  async fetch() {
-    let continuationToken
-    const playlistData: Playlist = {
-      name: 'root',
-      collections: [],
-      items: [],
-      cover: false,
-    }
+definePageMeta({ colorMode: 'dark' })
 
-    do {
-      const playlistDataPart: AxiosPlaylist = await this.$axios.$get(
-        '/player/playlists',
-        {
-          params: {
-            ...(continuationToken !== undefined && {
-              'continuation-token': continuationToken,
-            }),
-            ...((this.$route.query.playlist as any) !== undefined && {
-              prefix: this.$route.query.playlist as any,
-            }),
-          },
-        }
-      )
+// const emit = defineEmits<{
+//   (e: 'plyr', sourceInfo: Plyr.SourceInfo, isManuallySet: boolean): void
+// }>()
 
-      mergeByKey(playlistData, playlistDataPart.playlistData, 'name')
-      continuationToken = playlistDataPart.nextContinuationToken
-    } while (continuationToken !== undefined)
+const store = useStore()
+const { t } = useI18n()
+const router = useRouter()
+const route = useRoute()
+const fireError = useFireError()
 
-    this.playlistData = playlistData
+// data
+const isLoading = ref(false)
+const playlistData = ref<Playlist>()
+const title = t('titlePage')
 
-    // Try to select and play track as indicated by query parameter.
-    const queryTrack = this.$route.query.track
+// methods
+// async fetch() {
+async function init() {
+  isLoading.value = true
 
-    if (playlistData && typeof queryTrack === 'string') {
-      for (const playlistItem of playlistData.items) {
-        if (playlistItem.name === queryTrack) {
-          this.onPlaylistItemSelect(playlistItem, false)
-        }
+  let continuationToken: string | undefined
+  const playlistDataFetch = {
+    name: 'root',
+    collections: [],
+    items: [],
+    cover: false,
+  } as Playlist
+
+  do {
+    const { data } = await useFetch('/api/player/playlists', {
+      params: {
+        ...(continuationToken && {
+          'continuation-token': continuationToken,
+        }),
+        ...((route.query.playlist as any) !== undefined && {
+          prefix: route.query.playlist as any,
+        }),
+      },
+    })
+
+    mergeByKey(playlistDataFetch, data.value?.playlistData, 'name')
+    continuationToken = data.value?.nextContinuationToken
+  } while (continuationToken)
+
+  playlistData.value = playlistDataFetch
+
+  // Try to select and play track as indicated by query parameter.
+  const queryTrack = route.query.track
+
+  if (playlistData.value && typeof queryTrack === 'string') {
+    for (const playlistItem of playlistData.value.items) {
+      if (playlistItem.name === queryTrack) {
+        onPlaylistItemSelect(playlistItem, false)
+        break
       }
     }
-  },
-  fetchOnServer: false,
-  head() {
-    const title = this.titleHead() as string
-    const description = this.t('description') as string
+  }
 
-    return {
-      meta: [
+  isLoading.value = false
+}
+function titleHead() {
+  return store.currentTrackName && !store.isPlayerPaused
+    ? store.currentTrackName
+    : title
+}
+
+// ///////////////////////////////////////////////////////////////////////////
+// Util //////////////////////////////////////////////////////////////////////
+
+async function getSignedUrl(playlistItem: PlaylistItem) {
+  const key =
+    PLAYER_PREFIX +
+    (route.query.playlist ? route.query.playlist + '/' : '') +
+    playlistItem.name +
+    '.' +
+    playlistItem.extension
+  const {
+    data: { value },
+  } = await useFetch('/api/player/signed-url', {
+    params: { key },
+  })
+  return value
+}
+function serializeQueryString(object: any) {
+  const playlistLinkParts: Array<string> = []
+
+  for (const [key, value] of Object.entries(object)) {
+    playlistLinkParts.push(!value ? key : `${key}=${value}`)
+  }
+
+  return `?${playlistLinkParts.join('&')}`
+}
+
+// ///////////////////////////////////////////////////////////////////////////
+// Template //////////////////////////////////////////////////////////////////
+
+function getPlaylistLink(name: string) {
+  const queryObject = JSON.parse(JSON.stringify(route.query))
+
+  // Append chosen playlist's name to current playlist path.
+  queryObject.playlist = encodeURIComponent(
+    [queryObject.playlist, name]
+      .filter(Boolean) // Prevent initial join character.
+      .join('/')
+  )
+  delete queryObject.track
+
+  return serializeQueryString(queryObject)
+}
+
+// ///////////////////////////////////////////////////////////////////////////
+// Events ////////////////////////////////////////////////////////////////////
+
+async function onPlaylistItemDownload(playlistItem: PlaylistItem) {
+  const link = document.createElement('a')
+  const signedUrl = await getSignedUrl(playlistItem)
+
+  if (!signedUrl)
+    return fireError({ error: new Error('Could not get signed url!') })
+
+  link.setAttribute('href', signedUrl)
+  link.setAttribute('download', '123.mp3') // This value is never shown to the user in current browser implementations.
+  link.click()
+}
+async function onPlaylistItemSelect(
+  playlistItem: PlaylistItem,
+  isManuallySet = true
+) {
+  store.isPlayerVisible = true
+  store.currentTrackName = playlistItem.name
+  store.currentTrackPlaylistName =
+    typeof route.query.playlist === 'string'
+      ? decodeURIComponent(route.query.playlist)
+      : undefined
+
+  // Activate only the newly selected playlist item.
+  if (!playlistData) {
+    return
+  }
+
+  // Set query parameter.
+  const queryObject = JSON.parse(JSON.stringify(route.query))
+  const queryObjectTrack = playlistItem.name
+
+  // Conditionally update track query parameter.
+  if (queryObject.track !== queryObjectTrack) {
+    queryObject.track = queryObjectTrack
+
+    router.replace({
+      path: route.path,
+      query: queryObject,
+    })
+  }
+
+  // Get meta.
+  const key =
+    PLAYER_PREFIX +
+    (route.query.playlist ? route.query.playlist + '/' : '') +
+    playlistItem.name +
+    '.json'
+
+  if (playlistItem.meta) {
+    store.currentTrackMeta = await $fetch('/api/player/get-object', {
+      params: { key },
+    })
+  } else {
+    store.currentTrackMeta = undefined
+    store.currentTrackDescription = undefined
+  }
+
+  const signedUrl = await getSignedUrl(playlistItem)
+
+  if (!signedUrl)
+    return fireError({ error: new Error('Could not get signed url!') })
+
+  store.setPlayerSourceInfo(
+    {
+      type: 'audio',
+      sources: [
         {
-          hid: 'description',
-          property: 'description',
-          content: description,
-        },
-        {
-          hid: 'og:description',
-          property: 'og:description',
-          content: description,
-        },
-        {
-          hid: 'og:title',
-          property: 'og:title',
-          content: title,
-        },
-        {
-          hid: 'og:url',
-          property: 'og:url',
-          content: this.$baseUrl + this.$router.currentRoute.fullPath,
-        },
-        {
-          hid: 'twitter:title',
-          property: 'twitter:title',
-          content: title,
+          src: signedUrl,
+          type: 'audio/mp3',
         },
       ],
-      title,
-    }
-  },
-  watch: {
-    $route(val: Route, valOld: Route) {
-      if (val.query.playlist !== valOld.query.playlist) {
-        this.$fetch()
-      }
     },
-  },
-  mounted() {
-    this.$nuxt.$on('plyrEnd', () => {
-      if (!this.playlistData) return
+    isManuallySet
+  )
+}
 
-      for (let i = 0; i < this.playlistData.items.length - 1; i++) {
-        if (this.playlistData.items[i].name === this.store.currentTrackName) {
-          this.onPlaylistItemSelect(this.playlistData.items[i + 1])
-          break
-        }
-      }
-    })
-  },
-  methods: {
-    titleHead() {
-      return this.store.currentTrackName && !this.store.isPlayerPaused
-        ? this.store.currentTrackName
-        : this.title
+// lifecycle
+watch(
+  () => route.query,
+  async (current, old) => {
+    if (current.playlist === old.playlist) return
+
+    await init()
+  }
+)
+
+// initialization
+await init()
+useHeadDefault(titleHead(), {
+  meta: [
+    {
+      hid: 'description',
+      property: 'description',
+      content: t('description'),
     },
-
-    // ///////////////////////////////////////////////////////////////////////////
-    // Util //////////////////////////////////////////////////////////////////////
-
-    async getSignedUrl(playlistItem: PlaylistItem) {
-      const key =
-        PLAYER_PREFIX +
-        (this.$route.query.playlist ? this.$route.query.playlist + '/' : '') +
-        playlistItem.name +
-        '.' +
-        playlistItem.extension
-      return await this.$axios.$get('/player/signed-url', {
-        params: { key },
-      })
+    {
+      hid: 'og:description',
+      property: 'og:description',
+      content: t('description'),
     },
-    serializeQueryString(object: any) {
-      const playlistLinkParts: Array<string> = []
-
-      for (const [key, value] of Object.entries(object)) {
-        playlistLinkParts.push(value === null ? key : `${key}=${value}`)
-      }
-
-      return `?${playlistLinkParts.join('&')}`
-    },
-
-    // ///////////////////////////////////////////////////////////////////////////
-    // Template //////////////////////////////////////////////////////////////////
-
-    getPlaylistLink(name: string) {
-      const queryObject = JSON.parse(JSON.stringify(this.$route.query))
-
-      // Append chosen playlist's name to current playlist path.
-      queryObject.playlist = encodeURIComponent(
-        [queryObject.playlist, name]
-          .filter(Boolean) // Prevent initial join character.
-          .join('/')
-      )
-      delete queryObject.track
-
-      return this.serializeQueryString(queryObject)
-    },
-
-    // ///////////////////////////////////////////////////////////////////////////
-    // Events ////////////////////////////////////////////////////////////////////
-
-    async onPlaylistItemDownload(playlistItem: PlaylistItem) {
-      const link = document.createElement('a')
-      link.setAttribute('href', await this.getSignedUrl(playlistItem))
-      link.setAttribute('download', '123.mp3') // This value is never shown to the user in current browser implementations.
-      link.click()
-    },
-    async onPlaylistItemSelect(
-      playlistItem: PlaylistItem,
-      isManuallySet = true
-    ) {
-      this.store.setIsPlayerVisible(true)
-      this.store.setCurrentTrackName(playlistItem.name)
-      this.store.setCurrentTrackPlaylistName(
-        typeof this.$route.query.playlist === 'string'
-          ? decodeURIComponent(this.$route.query.playlist)
-          : null
-      )
-
-      // Activate only the newly selected playlist item.
-      if (!this.playlistData) {
-        return
-      }
-
-      // Set query parameter.
-      const queryObject = JSON.parse(JSON.stringify(this.$route.query))
-      const queryObjectTrack = playlistItem.name
-
-      // Conditionally update track query parameter.
-      if (queryObject.track !== queryObjectTrack) {
-        queryObject.track = queryObjectTrack
-
-        this.$router.replace({
-          path: this.$route.path,
-          query: queryObject,
-        })
-      }
-
-      // Get meta.
-      const key =
-        PLAYER_PREFIX +
-        (this.$route.query.playlist ? this.$route.query.playlist + '/' : '') +
-        playlistItem.name +
-        '.json'
-
-      if (playlistItem.meta) {
-        this.store.setCurrentTrackMeta(
-          await this.$axios.$get('/player/get-object', {
-            params: { key },
-          })
-        )
-      } else {
-        this.store.setCurrentTrackMeta(null)
-        this.store.setCurrentTrackDescription(null)
-      }
-
-      this.$nuxt.$emit(
-        'plyr',
-        {
-          type: 'audio',
-          sources: [
-            {
-              src: await this.getSignedUrl(playlistItem),
-              type: 'audio/mp3',
-            },
-          ],
-        },
-        isManuallySet
-      )
-    },
-  },
+  ],
 })
+</script>
+
+<script lang="ts">
+export default {
+  name: 'IndexPage',
+}
 </script>
 
 <i18n lang="yaml">
