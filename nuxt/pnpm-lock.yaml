@@ -42,7 +42,7 @@ specifiers:
   buffer: 6.0.3
   compression-with-brotli: 1.7.5
   consola: 2.15.3
-  core-js: 3.27.0
+  core-js: 3.27.1
   cross-env: 7.0.3
   cypress: 12.2.0
   cypress-visual-regression: 2.1.0
@@ -104,7 +104,7 @@ dependencies:
   '@tailwindcss/typography': 0.5.8_tailwindcss@3.2.4
   compression-with-brotli: 1.7.5
   consola: 2.15.3
-  core-js: 3.27.0
+  core-js: 3.27.1
   jsonwebtoken: 8.5.1
   lodash.get: 4.4.2
   lodash.mergewith: 4.6.2
@@ -3676,7 +3676,7 @@ packages:
       '@babel/preset-env': 7.20.2_@babel+core@7.20.7
       '@babel/runtime': 7.20.6
       '@vue/babel-preset-jsx': 1.4.0_qmjjnmkndvfo77554ya2p26uuu
-      core-js: 3.27.0
+      core-js: 3.27.1
       core-js-compat: 3.26.1
       regenerator-runtime: 0.13.11
     transitivePeerDependencies:
@@ -5709,7 +5709,7 @@ packages:
       vite: ^3.0.0
     dependencies:
       '@babel/standalone': 7.20.6
-      core-js: 3.27.0
+      core-js: 3.27.1
       magic-string: 0.26.7
       regenerator-runtime: 0.13.11
       systemjs: 6.13.0
@@ -6575,7 +6575,7 @@ packages:
     engines: {node: '>=8'}
     dependencies:
       '@types/node-fetch': 2.6.2
-      core-js: 3.27.0
+      core-js: 3.27.1
       node-fetch: 2.6.7
       sha.js: 2.4.11
     transitivePeerDependencies:
@@ -6611,7 +6611,7 @@ packages:
       apollo-link-http: 1.5.17_graphql@15.8.0
       apollo-server-errors: 2.5.0_graphql@15.8.0
       await-to-js: 3.0.0
-      core-js: 3.27.0
+      core-js: 3.27.1
       cosmiconfig: 7.1.0
       dotenv: 16.0.3
       glob: 8.0.3
@@ -8587,8 +8587,8 @@ packages:
     requiresBuild: true
     dev: true
 
-  /core-js/3.27.0:
-    resolution: {integrity: sha512-wY6cKosevs430KRkHUIsvepDXHGjlXOZO3hYXNyqpD6JvB0X28aXyv0t1Y1vZMwE7SoKmtfa6IASHCPN52FwBQ==}
+  /core-js/3.27.1:
+    resolution: {integrity: sha512-GutwJLBChfGCpwwhbYoqfv03LAfmiz7e7D/BNxzeMxwQf10GRSzqiOjx7AmtEk+heiD/JWmBuyBPgFtx0Sg1ww==}
     requiresBuild: true
 
   /core-util-is/1.0.2:
@@ -19515,7 +19515,7 @@ packages:
     name: plyr
     version: 3.7.0
     dependencies:
-      core-js: 3.27.0
+      core-js: 3.27.1
       custom-event-polyfill: 1.0.7
       loadjs: 4.2.0
       rangetouch: 2.0.1
