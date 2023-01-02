@@ -1,65 +1,54 @@
 <template>
   <FormInput
-    :error="formInput.$error"
+    v-if="formInput"
     :is-optional="isOptional"
-    :label-for="`input-${id}`"
-    :title="$t('url')"
+    :id-label="`input-${id}`"
+    :placeholder="t('globalPlaceholderUrl')"
+    :title="t('url')"
+    type="url"
+    :value="formInput"
+    @input="emit('input', $event)"
   >
-    <div class="flex">
-      <span
-        class="inline-flex cursor-default items-center rounded-l border border-r-0 border-gray-300 bg-gray-100 px-3 text-gray-500"
+    <template #stateError>
+      <FormInputStateError
+        :form-input="formInput"
+        validation-property="maxLength"
       >
-        {{ $t('https') }}
-      </span>
-      <input
-        :id="`input-${id}`"
-        class="form-input rounded-l-none"
-        :placeholder="$t('placeholderUrl')"
-        type="url"
-        :value="formInput.$model"
-        @input="$emit('input', $event.target.value)"
-      />
-    </div>
-    <template slot="inputError">
-      <FormInputError :form-input="formInput" validation-property="maxLength">
-        {{ $t('validationLength') }}
-      </FormInputError>
+        {{ t('globalValidationLength') }}
+      </FormInputStateError>
+      <FormInputStateError
+        :form-input="formInput"
+        validation-property="formatUrlHttps"
+      >
+        {{ t('globalValidationFormatUrlHttps') }}
+      </FormInputStateError>
     </template>
   </FormInput>
 </template>
 
-<script lang="ts">
-import { defineComponent, PropType } from '#app'
+<script setup lang="ts">
+import type { BaseValidation } from '@vuelidate/core'
 
-import { FormInputType } from '~/components/form/input/FormInput.vue'
-
-export default defineComponent({
-  props: {
-    id: {
-      default: 'url',
-      type: String,
-    },
-    formInput: {
-      required: true,
-      type: Object as PropType<FormInputType>,
-    },
-    isOptional: {
-      default: false,
-      type: Boolean,
-    },
-  },
+export interface Props {
+  formInput: BaseValidation
+  id?: string
+  isOptional?: boolean
+}
+withDefaults(defineProps<Props>(), {
+  id: 'phone-number',
+  isOptional: false,
 })
+
+const emit = defineEmits<{
+  (e: 'input', event: string): void
+}>()
+
+const { t } = useI18n()
 </script>
 
-<i18n lang="yml">
+<i18n lang="yaml">
 de:
-  https: https://
-  placeholderUrl: websei.te
-  url: Link
-  validationLength: Zu lang
+  url: Weblink
 en:
-  https: https://
-  placeholderUrl: websi.te
-  url: Link
-  validationLength: Too long
+  url: Weblink
 </i18n>

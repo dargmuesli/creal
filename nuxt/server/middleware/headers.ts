@@ -1,11 +1,108 @@
-import { defineEventHandler } from 'h3'
+import defu from 'defu'
+import { appendHeader, defineEventHandler } from 'h3'
+
+import { AWS_BUCKET_NAME } from '~/utils/constants'
+import { getDomainTldPort, getHost } from '~/utils/util'
+
+function getCsp(host: string): Record<string, Array<string>> {
+  const hostName = host.replace(/:[0-9]+$/, '')
+  const config = useRuntimeConfig()
+
+  const stagingHostOrHost = config.public.stagingHost || host
+
+  const base = {
+    'base-uri': ["'none'"], // Mozilla Observatory.
+    'connect-src': [
+      "'self'", // Nuxt development.
+      `https://creal-postgraphile.${getDomainTldPort(stagingHostOrHost)}`,
+      `https://creal-strapi.${getDomainTldPort(stagingHostOrHost)}`,
+      'https://cdn.plyr.io', // Plyr.
+    ],
+    'default-src': ["'none'"],
+    'font-src': ["'self'"],
+    'form-action': ["'self'"], // Mozilla Observatory: "none".
+    'frame-ancestors': ["'none'"], // Mozilla Observatory.
+    'img-src': [
+      "'self'",
+      'data:',
+      `https://creal-strapi.${getDomainTldPort(stagingHostOrHost)}`,
+      `https://${AWS_BUCKET_NAME}.s3.nl-ams.scw.cloud`, // Playlist cover.
+    ],
+    'manifest-src': ["'self'"],
+    'media-src': [
+      'https://cdn.plyr.io/static/blank.mp4', // Plyr.
+      `https://${AWS_BUCKET_NAME}.s3.nl-ams.scw.cloud`, // Music.
+    ],
+    'prefetch-src': ["'self'"],
+    'report-uri': ['https://dargmuesli.report-uri.com/r/d/csp/enforce'],
+    // TODO: evaluate header (https://github.com/maevsi/maevsi/issues/830) // https://stackoverflow.com/questions/62081028/this-document-requires-trustedscripturl-assignment
+    // 'require-trusted-types-for': ["'script'"], // csp-evaluator
+    'script-src': [
+      "'self'",
+      'https://static.cloudflareinsights.com',
+      "'unsafe-inline'", // https://github.com/unjs/nitro/issues/81
+      "'unsafe-eval'", // https://github.com/unjs/nitro/issues/81
+    ],
+    'style-src': ["'self'", "'unsafe-inline'"], // Tailwind
+  }
+
+  const development = {
+    'connect-src': [
+      `http://${hostName}:24678/_nuxt/`,
+      `https://${hostName}:24678/_nuxt/`,
+      `ws://${hostName}:24678/_nuxt/`,
+      `wss://${hostName}:24678/_nuxt/`,
+    ],
+  }
+
+  const production = {
+    'connect-src': [`https://${stagingHostOrHost}/cdn-cgi/rum`],
+  }
+
+  return defu(base, config.public.isInProduction ? production : development)
+}
+
+function getCspAsString(host: string): string {
+  const csp = getCsp(host)
+  let result = ''
+
+  Object.keys(csp).forEach((key) => {
+    result += `${key} ${csp[key].join(' ')};`
+  })
+
+  return result
+}
 
 export default defineEventHandler((event) => {
-  const { res } = event
-  res.setHeader('Permissions-Policy', '')
-  // // Disabled until there is better browser support (https://caniuse.com/?search=report-to)
-  // res.setHeader(
-  //   'Report-To',
-  //   '{"group":"default","max_age":31536000,"endpoints":[{"url":"https://dargmuesli.report-uri.com/a/d/g"}],"include_subdomains":true}'
-  // )
+  const host = getHost(event.node.req)
+
+  appendHeader(event, 'Content-Security-Policy', getCspAsString(host))
+  // appendHeader(event, 'Cross-Origin-Embedder-Policy', 'require-corp') // https://stackoverflow.com/questions/71904052/getting-notsameoriginafterdefaultedtosameoriginbycoep-error-with-helmet
+  appendHeader(event, 'Cross-Origin-Opener-Policy', 'same-origin')
+  appendHeader(event, 'Cross-Origin-Resource-Policy', 'same-origin')
+  // appendHeader(event, 'Expect-CT', 'max-age=0') // deprecated (https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Expect-CT)
+  appendHeader(
+    event,
+    'NEL',
+    '\'{"report_to":"default","max_age":31536000,"include_subdomains":true}\''
+  )
+  appendHeader(event, 'Origin-Agent-Cluster', '?1')
+  appendHeader(event, 'Permissions-Policy', '')
+  appendHeader(event, 'Referrer-Policy', 'no-referrer')
+  appendHeader(
+    event,
+    'Report-To',
+    '\'{"group":"default","max_age":31536000,"endpoints":[{"url":"https://dargmuesli.report-uri.com/a/d/g"}],"include_subdomains":true}\''
+  )
+  appendHeader(
+    event,
+    'Strict-Transport-Security',
+    'max-age=31536000; includeSubDomains; preload'
+  )
+  appendHeader(event, 'X-Content-Type-Options', 'nosniff')
+  appendHeader(event, 'X-DNS-Prefetch-Control', 'off')
+  appendHeader(event, 'X-Download-Options', 'noopen')
+  appendHeader(event, 'X-Frame-Options', 'SAMEORIGIN')
+  appendHeader(event, 'X-Permitted-Cross-Domain-Policies', 'none')
+  appendHeader(event, 'X-XSS-Protection', '0')
 })

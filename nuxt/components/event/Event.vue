@@ -2,89 +2,98 @@
   <div
     class="flex flex-col justify-center space-y-4 lg:flex-row lg:items-center lg:space-x-4 lg:space-y-0"
   >
-    <div class="creal-prose-fullwidth space-y-2 lg:w-1/2">
+    <div class="vio-prose-fullwidth space-y-2 lg:w-1/2">
       <div class="flex gap-2">
-        <div>{{ datetime }}</div>
-        <div v-if="event.location" class="flex gap-2">
-          <div>{{ $t('separator') }}</div>
-          <div>{{ event.location }}</div>
-        </div>
+        <i18n-t keypath="header" class="flex gap-4" tag="label">
+          <template #datetime>
+            <span>{{
+              t('datetime', {
+                start: dateFormat(new Date(crealEvent.dateStart)),
+                end: t('datetimeEnd', {
+                  end: dateFormat(new Date(crealEvent.dateEnd)),
+                }),
+              })
+            }}</span>
+          </template>
+          <template #separator>
+            <span>{{ t('separator') }}</span>
+          </template>
+          <template #location>
+            <span>{{ crealEvent.location }}</span>
+          </template>
+        </i18n-t>
       </div>
-      <h2 class="m-0">{{ event.title }}</h2>
-      <!-- eslint-disable-next-line vue/no-v-html -->
-      <div v-if="event.description" v-html="$marked(event.description)" />
+      <h2 class="m-0">{{ crealEvent.title }}</h2>
+      <!-- eslint-disable vue/no-v-html -->
+      <div
+        v-if="crealEvent.description"
+        v-html="$marked(crealEvent.description)"
+      />
+      <!-- eslint-enable vue/no-v-html -->
     </div>
     <div class="space-y-4 lg:w-1/2">
       <img
-        v-if="event.image.data"
+        v-if="crealEvent.image.data"
         class="m-auto"
         alt="Event image."
-        :src="strapiDomain"
+        :src="imageSrc"
       />
-      <div v-if="event.url && event.url !== ''" class="text-center">
-        <Button
-          :aria-label="$t('details')"
-          class="creal-prose-fullwidth prose-a:text-gray-800"
+      <div v-if="crealEvent.url && crealEvent.url !== ''" class="text-center">
+        <ButtonColored
+          :aria-label="t('details')"
+          class="vio-prose-fullwidth prose-a:text-gray-800"
           :icon="false"
-          :to="event.url"
+          :to="crealEvent.url"
         >
-          {{ $t('details') }}
-        </Button>
+          {{ t('details') }}
+        </ButtonColored>
       </div>
     </div>
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, PropType } from '#app'
-import { CollectionItem } from '~/plugins/paging'
+<script setup lang="ts">
+import type { CrealEvent } from '~/types/creal'
 
-interface Image {
+export interface Image {
   url: URL
 }
 
-export interface Event {
-  dateEnd: Date
-  dateStart: Date
-  image: { data: CollectionItem<Image> }
+export interface Props {
+  crealEvent: CrealEvent
 }
+const props = withDefaults(defineProps<Props>(), {})
 
-export default defineComponent({
-  name: 'CrealEvent',
-  props: {
-    event: {
-      required: true,
-      type: Object as PropType<Event>,
-    },
-  },
-  computed: {
-    datetime(): any {
-      if (!this.event) return
+const { $moment } = useNuxtApp()
+const { t } = useI18n()
+const getServiceHref = useGetServiceHref()
 
-      const moment = this.$moment(this.event.dateStart)
-
-      if (this.event.dateEnd) {
-        return moment.twix(this.event.dateEnd).format({
-          implicitMinutes: false,
-          implicitYear: false,
-          showDayOfWeek: true,
-        })
-      }
-
-      return moment.format('ddd D MMM YYYY, h:mm')
-    },
-    strapiDomain(): string {
-      return `https://creal-strapi.${process.env.NUXT_ENV_STACK_DOMAIN}${this.event.image.data.attributes.url}`
-    },
-  },
-})
+// computations
+const dateFormat = (date: Date) => $moment(date).format('ddd D MMM YYYY, h:mm')
+const imageSrc = computed(
+  () =>
+    getServiceHref('creal-strapi', 1337) +
+    props.crealEvent.image.data.attributes.url
+)
 </script>
 
-<i18n lang="yml">
+<script lang="ts">
+export default {
+  name: 'CrealEvent',
+}
+</script>
+
+<i18n lang="yaml">
 de:
+  datetime: '{start}{end}'
+  datetimeEnd: ' - {end}'
   details: Details
+  header: '{datetime}{separator}{location}'
   separator: ⋅
 en:
+  datetime: '{start}{end}'
+  datetimeEnd: ' - {end}'
   details: Details
+  header: '{datetime}{separator}{location}'
   separator: ⋅
 </i18n>

@@ -3,7 +3,9 @@
 
 # Should be the specific version of `node:slim`.
 # `sqitch` requires at least `buster`.
-FROM node:18.12.1-slim@sha256:0c3ea57b6c560f83120801e222691d9bd187c605605185810752a19225b5e4d9 AS development
+FROM node:19.2.0-slim@sha256:26c00e8ca7cbe467e35d4efdbe3aded834b0b7bf7512d62db4c51f6b86466e1c AS development
+
+COPY ./docker/entrypoint.sh /usr/local/bin/
 
 # Update and install dependencies.
 # - `libdbd-pg-perl postgresql-client sqitch` is required by the entrypoint
@@ -14,15 +16,13 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/* \
     && npm install -g pnpm
 
-COPY ./docker/entrypoint.sh /usr/local/bin/docker-entrypoint.sh
-
 WORKDIR /srv/app/
 
 VOLUME /srv/.pnpm-store
 VOLUME /srv/app
 VOLUME /srv/sqitch
 
-ENTRYPOINT ["docker-entrypoint.sh"]
+ENTRYPOINT ["entrypoint.sh"]
 CMD ["pnpm", "run", "dev"]
 
 # Waiting for https://github.com/nuxt/framework/issues/6915
@@ -33,7 +33,7 @@ CMD ["pnpm", "run", "dev"]
 # Prepare Nuxt.
 
 # Should be the specific version of `node:slim`.
-FROM node:18.12.1-slim@sha256:0c3ea57b6c560f83120801e222691d9bd187c605605185810752a19225b5e4d9 AS prepare
+FROM node:19.2.0-slim@sha256:0777883c3f8d9b62a4774fb6ff0b33f2771ea63d96a5dff8c3340a44f9019198 AS prepare
 
 WORKDIR /srv/app/
 
@@ -45,8 +45,7 @@ RUN npm install -g pnpm && \
 COPY ./nuxt/ ./
 
 RUN pnpm install --offline \
-  && pnpm nuxi prepare
-# TODO: replace nuxi with nuxt
+    && rm -rf ./node-jiti
 
 
 ########################
@@ -54,12 +53,12 @@ RUN pnpm install --offline \
 
 # Should be the specific version of `node:slim`.
 # Could be the specific version of `node:alpine`, but the `prepare` stage uses slim too.
-FROM node:18.12.1-slim@sha256:0c3ea57b6c560f83120801e222691d9bd187c605605185810752a19225b5e4d9 AS build
+FROM node:19.2.0-slim@sha256:0777883c3f8d9b62a4774fb6ff0b33f2771ea63d96a5dff8c3340a44f9019198 AS build
 
 ARG CI=false
 ENV CI ${CI}
-ARG NUXT_ENV_STACK_DOMAIN=jonas-thelemann.de
-ENV NUXT_ENV_STACK_DOMAIN=${NUXT_ENV_STACK_DOMAIN}
+ARG NUXT_PUBLIC_STACK_DOMAIN=jonas-thelemann.de
+ENV NUXT_PUBLIC_STACK_DOMAIN=${NUXT_PUBLIC_STACK_DOMAIN}
 
 WORKDIR /srv/app/
 
@@ -75,7 +74,7 @@ RUN npm install -g pnpm && \
 
 # Should be the specific version of `node:slim`.
 # Could be the specific version of `node:alpine`, but the `prepare` stage uses slim too.
-FROM node:18.12.1-slim@sha256:0c3ea57b6c560f83120801e222691d9bd187c605605185810752a19225b5e4d9 AS lint
+FROM node:19.2.0-slim@sha256:0777883c3f8d9b62a4774fb6ff0b33f2771ea63d96a5dff8c3340a44f9019198 AS lint
 
 WORKDIR /srv/app/
 
@@ -95,6 +94,7 @@ ARG UNAME=cypress
 ARG UID=1000
 ARG GID=1000
 
+ENV CYPRESS_RUN_BINARY=/home/cypress/Cypress/Cypress
 ENV DOCKER=true
 
 WORKDIR /srv/app/
@@ -108,9 +108,14 @@ RUN apt-get update \
     && useradd -m -u $UID -g $GID -o -s /bin/bash $UNAME \
     # clean
     && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/* \
+    && export CYPRESS_VERSION=$(ls /root/.cache/Cypress/) \
+    && mkdir /home/cypress/.cache \
+    && mv /root/.cache/Cypress/$CYPRESS_VERSION/Cypress /home/cypress/Cypress
 
-USER $UNAME
+RUN chown $UID:$GID /home/cypress/Cypress -R
+
+USER $UID:$GID
 
 VOLUME /srv/app
 
@@ -137,7 +142,7 @@ RUN pnpm test:integration:prod \
 # Collect build, lint and test results.
 
 # Should be the specific version of `node:slim`.
-FROM node:18.12.1-slim@sha256:0c3ea57b6c560f83120801e222691d9bd187c605605185810752a19225b5e4d9 AS collect
+FROM node:19.2.0-slim@sha256:0777883c3f8d9b62a4774fb6ff0b33f2771ea63d96a5dff8c3340a44f9019198 AS collect
 
 WORKDIR /srv/app/
 
@@ -153,7 +158,7 @@ COPY --from=test-integration /srv/app/package.json /tmp/test/package.json
 
 # Should be the specific version of `node:slim`.
 # `sqitch` requires at least `buster`.
-FROM node:18.12.1-slim@sha256:0c3ea57b6c560f83120801e222691d9bd187c605605185810752a19225b5e4d9 AS production
+FROM node:19.2.0-slim@sha256:0777883c3f8d9b62a4774fb6ff0b33f2771ea63d96a5dff8c3340a44f9019198 AS production
 
 ENV NODE_ENV=production
 
@@ -169,11 +174,11 @@ RUN apt-get update \
 
 WORKDIR /srv/app/
 
-COPY ./sqitch/ /srv/sqitch/
-COPY ./docker/entrypoint.sh /usr/local/bin/docker-entrypoint.sh
-
 COPY --from=collect /srv/app/ ./
 
-ENTRYPOINT ["docker-entrypoint.sh"]
+COPY ./sqitch/ /srv/sqitch/
+COPY ./docker/entrypoint.sh /usr/local/bin/
+
+ENTRYPOINT ["entrypoint.sh"]
 CMD ["node", ".output/server/index.mjs"]
 HEALTHCHECK --interval=10s CMD wget -O /dev/null http://localhost:3000/api/healthcheck || exit 1

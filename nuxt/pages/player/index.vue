@@ -1,49 +1,27 @@
 <template>
   <div class="container mx-auto">
     <section>
-      <Breadcrumbs
-        :suffixes="$route.query.playlist && $route.query.playlist.split('/')"
-        suffixes-key="playlist"
-      >
+      <LayoutBreadcrumbs :suffixes="breadcrumbSuffixes">
         {{ title }}
-      </Breadcrumbs>
+      </LayoutBreadcrumbs>
       <div class="grow rounded bg-gray-900 p-4">
-        <div v-if="$fetchState.pending" class="text-center">
-          <svg
-            class="m-auto h-16 w-16 animate-spin text-white"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            title="Loading"
-            viewBox="0 0 24 24"
-          >
-            <circle
-              class="opacity-25"
-              cx="12"
-              cy="12"
-              r="10"
-              stroke="currentColor"
-              stroke-width="4"
-            />
-            <path
-              class="opacity-75"
-              fill="currentColor"
-              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-            />
-          </svg>
-          {{ $t('globalLoading') }}
+        <div v-if="isLoading" class="text-center">
+          <LoaderIndicatorSpinner class="m-auto h-32 w-32" />
+          {{ t('globalLoading') }}
         </div>
-        <div v-else-if="playlistData" class="m-auto w-5/6">
+        <div v-else-if="store.playerData.currentPlaylist" class="m-auto w-5/6">
           <ul
-            v-if="playlistData.collections.length > 0"
+            v-if="store.playerData.currentPlaylist.collections.length"
             class="flex flex-wrap justify-center"
           >
             <li
-              v-for="collection in playlistData.collections"
+              v-for="collection in store.playerData.currentPlaylist.collections"
               :key="collection.name"
               class="m-2 max-w-xxs min-w-xxs"
             >
               <AppLink
                 class="block h-full w-full"
+                :is-colored="false"
                 :title="collection.name"
                 :to="getPlaylistLink(collection.name)"
               >
@@ -51,34 +29,41 @@
               </AppLink>
             </li>
           </ul>
-          <ul v-if="playlistData.items.length > 0">
+          <ul v-if="store.playerData.currentPlaylist.items.length">
             <li
-              v-for="playlistItem of playlistData.items"
-              :key="playlistItem.name"
+              v-for="playlistItem of store.playerData.currentPlaylist.items"
+              :key="playlistItem.fileName"
               class="border-b border-gray-800 first:border-t hover:bg-gray-800"
             >
               <PlayerPlaylistItem
                 :class="{
                   'text-yellow-500':
-                    $route.query.playlist &&
-                    $route.query.playlist ===
-                      storePlayerModule.currentTrackPlaylistName &&
-                    playlistItem.name === storePlayerModule.currentTrackName,
+                    routeQueryPlaylist &&
+                    store.playerData.currentPlaylist &&
+                    store.playerData.currentTrack &&
+                    routeQueryPlaylist ===
+                      store.playerData.currentPlaylist.name &&
+                    playlistItem.fileName ===
+                      store.playerData.currentTrack.fileName,
                 }"
                 :playlist-item="playlistItem"
-                @download="onPlaylistItemDownload"
-                @play="onPlaylistItemSelect"
+                @download="download(playlistItem)"
+                @play="
+                  routeQueryPlaylist
+                    ? play(routeQueryPlaylist, playlistItem)
+                    : undefined
+                "
               />
             </li>
           </ul>
           <div
             v-if="
-              playlistData.collections.length === 0 &&
-              playlistData.items.length === 0
+              !store.playerData.currentPlaylist.collections.length &&
+              !store.playerData.currentPlaylist.items.length
             "
             class="text-center"
           >
-            {{ $t('itemsNone') }}
+            {{ t('itemsNone') }}
           </div>
         </div>
       </div>
@@ -86,254 +71,192 @@
   </div>
 </template>
 
-<script lang="ts">
-import { getModule } from 'vuex-module-decorators'
-import { Route } from 'vue-router/types'
+<script setup lang="ts">
+import type { Playlist, PlaylistItem } from '~/types/player'
+import { useStore } from '~/store'
 
-import { defineComponent } from '#app'
-import {
-  PLAYER_PREFIX,
-  AxiosPlaylist,
-  Playlist,
-  PlaylistItem,
-  mergeByKey,
-} from '~/types/playlist'
-import PlayerModule from '~/store/modules/PlayerModule'
+definePageMeta({ colorMode: 'dark' })
 
-export default defineComponent({
-  name: 'IndexPage',
-  data() {
-    return {
-      playlistData: null as null | Playlist,
-      storePlayerModule: getModule(PlayerModule, this.$store),
-      title: this.$t('titlePage'),
-    }
-  },
-  async fetch() {
-    let continuationToken
-    const playlistData: Playlist = {
-      name: 'root',
-      collections: [],
-      items: [],
-      cover: false,
-    }
+const store = useStore()
+const { t } = useI18n()
+const localePath = useLocalePath()
+const route = useRoute()
+const fireError = useFireError()
+const { play } = usePlyr()
 
-    do {
-      const playlistDataPart: AxiosPlaylist = await this.$axios.$get(
-        '/player/playlists',
-        {
-          params: new URLSearchParams({
-            ...(continuationToken !== undefined && {
-              'continuation-token': continuationToken,
-            }),
-            ...((this.$route.query.playlist as any) !== undefined && {
-              prefix: this.$route.query.playlist as any,
-            }),
-          }),
-        }
-      )
+// data
+const isLoading = ref(false)
+const title = t('titlePage')
 
-      mergeByKey(playlistData, playlistDataPart.playlistData, 'name')
-      continuationToken = playlistDataPart.nextContinuationToken
-    } while (continuationToken !== undefined)
+// methods
+async function init() {
+  isLoading.value = true
 
-    this.playlistData = playlistData
+  let continuationToken: string | undefined
+  const playlistDataFetch = {
+    name: 'root',
+    collections: [],
+    items: [],
+    isCoverAvailable: false,
+  } as Playlist
 
-    // Try to select and play track as indicated by query parameter.
-    const queryTrack = this.$route.query.track
-
-    if (playlistData && typeof queryTrack === 'string') {
-      for (const playlistItem of playlistData.items) {
-        if (playlistItem.name === queryTrack) {
-          this.onPlaylistItemSelect(playlistItem, false)
-        }
-      }
-    }
-  },
-  fetchOnServer: false,
-  head() {
-    const title = this.titleHead() as string
-    const description = this.$t('description') as string
-
-    return {
-      meta: [
-        {
-          hid: 'description',
-          property: 'description',
-          content: description,
-        },
-        {
-          hid: 'og:description',
-          property: 'og:description',
-          content: description,
-        },
-        {
-          hid: 'og:title',
-          property: 'og:title',
-          content: title,
-        },
-        {
-          hid: 'og:url',
-          property: 'og:url',
-          content: this.$baseUrl + this.$router.currentRoute.fullPath,
-        },
-        {
-          hid: 'twitter:title',
-          property: 'twitter:title',
-          content: title,
-        },
-      ],
-      title,
-    }
-  },
-  watch: {
-    $route(val: Route, valOld: Route) {
-      if (val.query.playlist !== valOld.query.playlist) {
-        this.$fetch()
-      }
-    },
-  },
-  mounted() {
-    this.$nuxt.$on('plyrEnd', () => {
-      if (!this.playlistData) return
-
-      for (let i = 0; i < this.playlistData.items.length - 1; i++) {
-        if (
-          this.playlistData.items[i].name ===
-          this.storePlayerModule.currentTrackName
-        ) {
-          this.onPlaylistItemSelect(this.playlistData.items[i + 1])
-          break
-        }
-      }
+  do {
+    const { data } = await useFetch('/api/player/playlists', {
+      params: {
+        ...(continuationToken && {
+          'continuation-token': continuationToken,
+        }),
+        ...(routeQueryPlaylist.value && {
+          prefix: routeQueryPlaylist.value,
+        }),
+      },
     })
-  },
-  methods: {
-    titleHead() {
-      return this.storePlayerModule.currentTrackName &&
-        !this.storePlayerModule.isPlayerPaused
-        ? this.storePlayerModule.currentTrackName
-        : this.title
-    },
 
-    // ///////////////////////////////////////////////////////////////////////////
-    // Util //////////////////////////////////////////////////////////////////////
+    mergeByKey(playlistDataFetch, data.value?.playlistData, 'name')
+    continuationToken = data.value?.nextContinuationToken
+  } while (continuationToken)
 
-    async getSignedUrl(playlistItem: PlaylistItem) {
-      const key =
-        PLAYER_PREFIX +
-        (this.$route.query.playlist ? this.$route.query.playlist + '/' : '') +
-        playlistItem.name +
-        '.' +
-        playlistItem.extension
-      return await this.$axios.$get('/player/signed-url', {
-        params: new URLSearchParams({ key }),
-      })
-    },
-    serializeQueryString(object: any) {
-      const playlistLinkParts: Array<string> = []
+  store.playerData.currentPlaylist = playlistDataFetch
+  store.playerData.currentPlaylist.name = routeQueryPlaylist.value
+    ? decodeURIComponent(routeQueryPlaylist.value)
+    : store.playerData.currentPlaylist.name
 
-      for (const [key, value] of Object.entries(object)) {
-        playlistLinkParts.push(value === null ? key : `${key}=${value}`)
+  // Try to select and play track as indicated by query parameter.
+  if (
+    store.playerData.isPaused &&
+    store.playerData.currentPlaylist &&
+    routeQueryPlaylist.value &&
+    routeQueryTrack.value
+  ) {
+    for (const playlistItem of store.playerData.currentPlaylist.items) {
+      if (playlistItem.fileName === routeQueryTrack.value) {
+        play(routeQueryPlaylist.value, playlistItem)
+        break
+      }
+    }
+  }
+
+  isLoading.value = false
+}
+function titleHead() {
+  return store.playerData.currentTrack?.fileName && !store.playerData.isPaused
+    ? store.playerData.currentTrack.fileName
+    : title
+}
+function getPlaylistLink(name: string) {
+  const queryObject = JSON.parse(JSON.stringify(route.query))
+
+  // Append chosen playlist's name to current playlist path.
+  queryObject.playlist = encodeURIComponent(
+    [queryObject.playlist, name]
+      .filter(Boolean) // Prevent initial join character.
+      .join('/')
+  )
+  delete queryObject.track
+
+  return serializeQueryString(queryObject)
+}
+async function download(playlistItem: PlaylistItem) {
+  const link = document.createElement('a')
+  const signedUrl = await getSignedUrl({
+    playlistItem,
+    playlistPath: routeQueryPlaylist.value,
+  })
+
+  if (!signedUrl)
+    return fireError({ error: new Error('Could not get signed url!') })
+
+  link.setAttribute('href', signedUrl)
+  link.setAttribute('download', '123.mp3') // This value is never shown to the user in current browser implementations.
+  link.click()
+}
+
+// computations
+const breadcrumbSuffixes = computed(() => {
+  if (!routeQueryPlaylist.value) return
+
+  const queryObject = JSON.parse(JSON.stringify(route.query))
+  const breadcrumbSuffixes = []
+  const routeQueryPlaylistParts = routeQueryPlaylist.value.split('/')
+
+  for (const [
+    index,
+    routeQueryPlaylistPart,
+  ] of routeQueryPlaylistParts.entries()) {
+    let playlistPath = ''
+
+    for (let i = 0; i <= index; i++) {
+      if (i !== 0) {
+        playlistPath += '/'
       }
 
-      return `?${playlistLinkParts.join('&')}`
-    },
+      playlistPath += routeQueryPlaylistParts[i]
+    }
 
-    // ///////////////////////////////////////////////////////////////////////////
-    // Template //////////////////////////////////////////////////////////////////
-
-    getPlaylistLink(name: string) {
-      const queryObject = JSON.parse(JSON.stringify(this.$route.query))
-
-      // Append chosen playlist's name to current playlist path.
-      queryObject.playlist = encodeURIComponent(
-        [queryObject.playlist, name]
-          .filter(Boolean) // Prevent initial join character.
-          .join('/')
-      )
-      delete queryObject.track
-
-      return this.serializeQueryString(queryObject)
-    },
-
-    // ///////////////////////////////////////////////////////////////////////////
-    // Events ////////////////////////////////////////////////////////////////////
-
-    async onPlaylistItemDownload(playlistItem: PlaylistItem) {
-      const link = document.createElement('a')
-      link.setAttribute('href', await this.getSignedUrl(playlistItem))
-      link.setAttribute('download', '123.mp3') // This value is never shown to the user in current browser implementations.
-      link.click()
-    },
-    async onPlaylistItemSelect(
-      playlistItem: PlaylistItem,
-      isManuallySet = true
-    ) {
-      this.storePlayerModule.setIsPlayerVisible(true)
-      this.storePlayerModule.setCurrentTrackName(playlistItem.name)
-      this.storePlayerModule.setCurrentTrackPlaylistName(
-        typeof this.$route.query.playlist === 'string'
-          ? decodeURIComponent(this.$route.query.playlist)
-          : null
-      )
-
-      // Activate only the newly selected playlist item.
-      if (!this.playlistData) {
-        return
-      }
-
-      // Set query parameter.
-      const queryObject = JSON.parse(JSON.stringify(this.$route.query))
-      const queryObjectTrack = playlistItem.name
-
-      // Conditionally update track query parameter.
-      if (queryObject.track !== queryObjectTrack) {
-        queryObject.track = queryObjectTrack
-
-        this.$router.replace({
-          path: this.$route.path,
-          query: queryObject,
-        })
-      }
-
-      // Get meta.
-      const key =
-        PLAYER_PREFIX +
-        (this.$route.query.playlist ? this.$route.query.playlist + '/' : '') +
-        playlistItem.name +
-        '.json'
-
-      if (playlistItem.meta) {
-        this.storePlayerModule.setCurrentTrackMeta(
-          await this.$axios.$get('/player/get-object', {
-            params: new URLSearchParams({ key }),
-          })
-        )
-      } else {
-        this.storePlayerModule.setCurrentTrackMeta(null)
-        this.storePlayerModule.setCurrentTrackDescription(null)
-      }
-
-      this.$nuxt.$emit(
-        'plyr',
-        {
-          type: 'audio',
-          sources: [
-            {
-              src: await this.getSignedUrl(playlistItem),
-              type: 'audio/mp3',
-            },
-          ],
+    breadcrumbSuffixes.push({
+      name: routeQueryPlaylistPart,
+      to: localePath({
+        path: '/player',
+        query: {
+          ...queryObject,
+          playlist: playlistPath,
+          track:
+            index === routeQueryPlaylistParts.length - 1
+              ? queryObject.track
+              : undefined,
         },
-        isManuallySet
-      )
+      }),
+    })
+  }
+
+  return breadcrumbSuffixes
+})
+const routeQueryPlaylist = computed(() => {
+  if (typeof route.query.playlist === 'string') {
+    return route.query.playlist
+  }
+})
+const routeQueryTrack = computed(() => {
+  if (typeof route.query.track === 'string') {
+    return route.query.track
+  }
+})
+
+// lifecycle
+watch(
+  () => route.query,
+  async (current, old) => {
+    if (current.playlist === old.playlist) return
+
+    await init()
+  }
+)
+
+// initialization
+await init()
+useHeadDefault(titleHead(), {
+  meta: [
+    {
+      hid: 'description',
+      property: 'description',
+      content: t('description'),
     },
-  },
+    {
+      hid: 'og:description',
+      property: 'og:description',
+      content: t('description'),
+    },
+  ],
 })
 </script>
 
-<i18n lang="yml">
+<script lang="ts">
+export default {
+  name: 'IndexPage',
+}
+</script>
+
+<i18n lang="yaml">
 de:
   description: Mixe von DJ cReal anhören.
   itemsNone: Keine Elemente gefunden.

@@ -1,237 +1,206 @@
 <template>
-  <section>
-    <Breadcrumbs>
+  <div class="flex-1">
+    <LayoutBreadcrumbs>
       {{ title }}
-    </Breadcrumbs>
+    </LayoutBreadcrumbs>
     <Form
-      ref="form"
-      :form="$v.form"
-      :form-sent="form.sent"
-      :graphql-error="graphqlError"
+      :errors="api.errors"
+      :form="v$"
+      :is-form-sent="isFormSent"
       @submit.prevent="submit"
     >
       <FormInput
-        :error="$v.form.artist.$error"
-        label-for="input-artist"
-        required
-        :title="$t('artist')"
+        :error="v$.artist.$error"
+        id-label="input-artist"
+        is-required
+        :placeholder="t('artistPlaceholder')"
+        :title="t('artist')"
+        type="text"
+        :value="v$.artist"
+        @input="form.artist = $event"
       >
-        <input
-          id="input-artist"
-          v-model.trim="$v.form.artist.$model"
-          class="form-input"
-          type="text"
-          :placeholder="$t('artistPlaceholder')"
-        />
-        <template slot="inputError">
-          <FormInputError
-            :form-input="$v.form.artist"
+        <template #inputError>
+          <FormInputStateError
+            :form-input="v$.artist"
             validation-property="maxLength"
           >
-            {{ $t('globalValidationLength') }}
-          </FormInputError>
-          <FormInputError
-            :form-input="$v.form.artist"
+            {{ t('globalValidationLength') }}
+          </FormInputStateError>
+          <FormInputStateError
+            :form-input="v$.artist"
             validation-property="required"
           >
-            {{ $t('globalValidationRequired') }}
-          </FormInputError>
+            {{ t('globalValidationRequired') }}
+          </FormInputStateError>
           <slot name="inputError" />
         </template>
       </FormInput>
       <FormInput
-        :error="$v.form.title.$error"
-        label-for="input-title"
-        required
-        :title="$t('title')"
+        id-label="input-title"
+        is-required
+        :placeholder="t('titlePlaceholder')"
+        :title="t('title')"
+        type="text"
+        :value="v$.title"
+        @input="form.title = $event"
       >
-        <input
-          id="input-title"
-          v-model.trim="$v.form.title.$model"
-          class="form-input"
-          type="text"
-          :placeholder="$t('titlePlaceholder')"
-        />
-        <template slot="inputError">
-          <FormInputError
-            :form-input="$v.form.title"
+        <template #inputError>
+          <FormInputStateError
+            :form-input="v$.title"
             validation-property="maxLength"
           >
-            {{ $t('globalValidationLength') }}
-          </FormInputError>
-          <FormInputError
-            :form-input="$v.form.title"
+            {{ t('globalValidationLength') }}
+          </FormInputStateError>
+          <FormInputStateError
+            :form-input="v$.title"
             validation-property="required"
           >
-            {{ $t('globalValidationRequired') }}
-          </FormInputError>
+            {{ t('globalValidationRequired') }}
+          </FormInputStateError>
           <slot name="inputError" />
         </template>
       </FormInput>
       <!-- <FormInputUrl
-        :form-input="$v.form.url"
+        :form-input="v$.url"
         is-optional
         @input="form.url = $event"
       /> -->
       <FormInput
-        :error="$v.form.comment.$error"
         is-optional
-        label-for="input-comment"
-        :title="$t('comment')"
+        id-label="input-comment"
+        :title="t('comment')"
+        type="textarea"
       >
         <textarea
           id="input-comment"
-          v-model.trim="$v.form.comment.$model"
+          v-model.trim="v$.comment.$model"
           class="form-input"
-          type="text"
         />
-        <template slot="inputError">
-          <FormInputError
-            :form-input="$v.form.comment"
+        <template #inputError>
+          <FormInputStateError
+            :form-input="v$.comment"
             validation-property="maxLength"
           >
-            {{ $t('globalValidationLength') }}
-          </FormInputError>
+            {{ t('globalValidationLength') }}
+          </FormInputStateError>
           <slot name="inputError" />
         </template>
       </FormInput>
     </Form>
-  </section>
+  </div>
 </template>
 
-<script lang="ts">
-import { maxLength, required } from 'vuelidate/lib/validators'
+<script setup lang="ts">
+import { useVuelidate } from '@vuelidate/core'
+import { maxLength, required } from '@vuelidate/validators'
 import consola from 'consola'
 
-import { defineComponent } from '#app'
-import SUGGESTION_CREATE_MUTATION from '~/gql/mutation/suggestion/suggestionCreate.gql'
+import { useCreateSuggestionMutation } from '~/gql/generated'
 
-export default defineComponent({
-  name: 'IndexPage',
-  data() {
-    return {
-      title: this.$t('titlePage'),
-      form: {
-        artist: undefined as string | undefined,
-        comment: undefined as string | undefined,
-        sent: false,
-        title: undefined as string | undefined,
-        url: undefined as string | undefined,
-      },
-      graphqlError: undefined as any,
-    }
-  },
-  head() {
-    const title = this.title as string
-    const description = this.$t('description') as string
+definePageMeta({ colorMode: 'dark' })
 
-    return {
-      meta: [
-        {
-          hid: 'description',
-          property: 'description',
-          content: description,
-        },
-        {
-          hid: 'og:description',
-          property: 'og:description',
-          content: description,
-        },
-        {
-          hid: 'og:title',
-          property: 'og:title',
-          content: title,
-        },
-        {
-          hid: 'og:url',
-          property: 'og:url',
-          content:
-            'https://creal.' +
-            (process.env.NUXT_ENV_STACK_DOMAIN || 'jonas-thelemann.test') +
-            this.$router.currentRoute.fullPath,
-        },
-        {
-          hid: 'twitter:title',
-          property: 'twitter:title',
-          content: title,
-        },
-      ],
-      title,
-    }
-  },
-  methods: {
-    async submit() {
-      try {
-        await this.$util.formPreSubmit(this)
-      } catch (error) {
-        return
-      }
+const { t } = useI18n()
+const fireError = useFireError()
+const createSuggestionMutation = useCreateSuggestionMutation()
 
-      await this.$apollo
-        .mutate({
-          mutation: SUGGESTION_CREATE_MUTATION,
-          variables: {
-            suggestionInput: {
-              artist: this.form.artist === '' ? null : this.form.artist,
-              comment: this.form.comment === '' ? null : this.form.comment,
-              title: this.form.title === '' ? null : this.form.title,
-            },
-          },
-        })
-        .then(() => {
-          this.$swal({
-            icon: 'success',
-            showConfirmButton: false,
-            timer: 1500,
-            title: this.$t('submitSuccess'),
-          })
-          this.form.artist = undefined
-          this.form.comment = undefined
-          this.form.title = undefined
-          this.$v.form.$reset()
-        })
-        .catch((reason) => {
-          this.$swal({
-            icon: 'error',
-            title: this.$t('error'),
-            text: reason,
-          })
-          this.graphqlError = reason
-          consola.error(reason)
-        })
+// api data
+const api = computed(() =>
+  reactive({
+    data: {},
+    ...getApiMeta([createSuggestionMutation]),
+  })
+)
+
+// data
+const title = t('titlePage')
+const form = reactive({
+  artist: ref<string>(),
+  comment: ref<string>(),
+  title: ref<string>(),
+  url: ref<string>(),
+})
+const isFormSent = ref(false)
+
+// methods
+async function submit() {
+  try {
+    await formPreSubmit(api, v$, isFormSent)
+  } catch (error) {
+    consola.error(error)
+    return
+  }
+
+  const result = await createSuggestionMutation.executeMutation({
+    suggestionInput: {
+      artist: form.artist || '',
+      comment: form.comment,
+      title: form.title || '',
     },
+  })
+
+  if (result.error) {
+    fireError({ error: result.error }, api)
+  }
+
+  if (!result.data) return
+
+  showToast({ title: t('submitSuccess') })
+
+  form.artist = undefined
+  form.comment = undefined
+  form.title = undefined
+  v$.value.$reset()
+}
+
+// vuelidate
+const rules = {
+  artist: {
+    maxLength: maxLength(100),
+    required,
   },
-  validations() {
-    return {
-      form: {
-        artist: {
-          maxLength: maxLength(100),
-          required,
-        },
-        comment: {
-          maxLength: maxLength(250),
-        },
-        title: {
-          maxLength: maxLength(100),
-          required,
-        },
-        // url: {
-        //   maxLength: maxLength(200),
-        //   required,
-        // },
-      },
-    }
+  comment: {
+    maxLength: maxLength(250),
   },
+  title: {
+    maxLength: maxLength(100),
+    required,
+  },
+  // url: {
+  //   maxLength: maxLength(200),
+  //   required,
+  // },
+}
+const v$ = useVuelidate(rules, form)
+
+// initialization
+useHeadDefault(title, {
+  meta: [
+    {
+      hid: 'description',
+      property: 'description',
+      content: t('description'),
+    },
+    {
+      hid: 'og:description',
+      property: 'og:description',
+      content: t('description'),
+    },
+  ],
 })
 </script>
 
-<i18n lang="yml">
+<script lang="ts">
+export default {
+  name: 'IndexPage',
+}
+</script>
+
+<i18n lang="yaml">
 de:
   artist: Künstler*in
   artistPlaceholder: Abba
   comment: Kommentar
   description: Schlage DJ cReal Lieder vor.
-  error: Fehler
   submitSuccess: Erfolgreich eingereicht.
   title: Titel
   titlePage: Liedvorschläge
@@ -241,7 +210,6 @@ en:
   artistPlaceholder: Abba
   comment: Comment
   description: Suggest songs to DJ cReal.
-  error: Error
   submitSuccess: Submitted successfully.
   title: Title
   titlePage: Song Suggestions

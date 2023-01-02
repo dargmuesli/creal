@@ -1,15 +1,12 @@
 {
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "github>dargmuesli/renovate-config"
   ],
   "packageRules": [
     {
-      "matchPackageNames": ["vue"],
+      "matchPackageNames": ["rollup"],
       "allowedVersions": "<3"
-    },
-    {
-      "matchPackageNames": ["webpack"],
-      "allowedVersions": "<5"
     }
   ]
 }

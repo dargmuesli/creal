@@ -1,85 +1,76 @@
 <template>
-  <div>
-    <div class="flex min-h-screen flex-col">
-      <Header />
-      <main class="container mx-auto flex flex-1 flex-col px-4 py-8 md:px-8">
-        <nuxt />
+  <div class="container mx-auto p-4 md:px-8">
+    <div class="flex flex-col min-h-screen pb-32">
+      <LayoutHeader />
+      <main class="flex flex-1 overflow-hidden">
+        <slot />
       </main>
     </div>
-    <footer
-      class="bg-gray-900 text-sm leading-6"
-      :class="{ 'mb-20': storePlayerModule.isPlayerVisible }"
-    >
-      <div class="px-2 py-8">
-        <div class="mx-auto flex w-9/12 items-center">
-          <div class="h-px flex-1 bg-gray-400" />
-          <LoaderImage
-            alt="DJ cReals Logo"
-            class="mx-12 h-12 w-12 brightness-100"
-            height="48"
-            src="/assets/static/logos/creal.svg"
-            width="48"
-          />
-          <div class="h-px flex-1 bg-gray-400" />
-        </div>
-        <p class="p-2 text-center text-gray-400">
-          {{ $t('copyright', { year: new Date().getFullYear() }) }}
-          <br />
-          <AppLink class="text-link" :to="localePath('/legal-notice')">
-            {{ $t('legalNotice') }}
-          </AppLink>
-        </p>
-      </div>
-    </footer>
+    <LayoutFooter :class="{ 'mb-20': store.playerData.isVisible }">
+      <LayoutFooterCategory :heading="t('legal')">
+        <AppLink :to="localePath('/legal-notice')">
+          {{ t('legalNotice') }}
+        </AppLink>
+      </LayoutFooterCategory>
+      <LayoutFooterCategory :heading="t('languages')">
+        <AppLink
+          v-for="availableLocale in availableLocales"
+          :key="availableLocale"
+          :data-testid="`i18n-${availableLocale}`"
+          :to="switchLocalePath(availableLocale)"
+        >
+          <div class="flex gap-2 items-center">
+            <!-- <component
+              :is="getLocaleFlag(availableLocale)"
+              :class="{ disabled: availableLocale === locale }"
+            /> -->
+            <span :class="{ disabled: availableLocale === locale }">
+              {{ getLocaleName(availableLocale) }}
+            </span>
+          </div>
+        </AppLink>
+      </LayoutFooterCategory>
+    </LayoutFooter>
     <div class="fixed bottom-0 left-0 right-0">
       <div
-        v-if="storePlayerModule.currentTrackName"
+        v-if="store.playerData.currentTrack?.fileName"
         class="flex flex-col justify-evenly bg-white px-2 font-bold text-black sm:flex-row"
       >
         <span>
-          {{
-            storePlayerModule.currentTrackNameShort ||
-            storePlayerModule.currentTrackName
-          }}
+          {{ store.playerData.currentTrack.fileName }}
           <span
-            v-if="
-              storePlayerModule.currentTrackMeta &&
-              storePlayerModule.currentTrackMeta.createdTime
-            "
+            v-if="store.playerData.currentTrack.meta?.createdTime"
             class="font-normal"
           >
-            {{ $t('on') }}
+            {{ t('on') }}
             {{
-              $moment(storePlayerModule.currentTrackMeta.createdTime).format(
+              $moment(store.playerData.currentTrack.meta.createdTime).format(
                 'L'
               )
             }}
           </span>
         </span>
-        <span v-if="storePlayerModule.currentTrackDescription">
-          {{ storePlayerModule.currentTrackDescription }}
+        <span v-if="store.playerData.currentTrack.meta?.description">
+          {{ store.playerData.currentTrack.meta.description }}
         </span>
         <a
-          v-if="
-            storePlayerModule.currentTrackMeta &&
-            storePlayerModule.currentTrackMeta.mixcloudLink
-          "
+          v-if="store.playerData.currentTrack.meta?.mixcloudLink"
           class="flex items-center gap-1"
-          :href="storePlayerModule.currentTrackMeta.mixcloudLink"
+          :href="store.playerData.currentTrack.meta.mixcloudLink"
           rel="noopener noreferrer"
           target="_blank"
         >
-          <IconMixcloud classes="h-5 w-5" /> {{ $t('mixcloud') }}
+          <IconMixcloud classes="h-5 w-5" /> {{ t('mixcloud') }}
         </a>
         <button class="flex items-center gap-1 font-bold" @click="share">
           <IconShare classes="h-4 w-4" />
-          {{ $t('linkCopy') }}
+          {{ t('linkCopy') }}
         </button>
       </div>
-      <div :class="{ hidden: !storePlayerModule.isPlayerVisible }">
+      <div :class="{ hidden: !store.playerData.isVisible }">
         <ClientOnly>
           <vue-plyr
-            ref="plyr"
+            ref="plyrRef"
             :emit="['ended', 'pause', 'playing', 'timeupdate']"
           >
             <audio />
@@ -87,17 +78,31 @@
         </ClientOnly>
       </div>
     </div>
+    <CookieControl :locale="(locale as Locale)" />
   </div>
 </template>
 
-<script lang="ts">
-import { getModule } from 'vuex-module-decorators'
+<script setup lang="ts">
+import { Locale } from '@dargmuesli/nuxt-cookie-control/dist/runtime/types'
+import { LocaleObject } from '@nuxtjs/i18n/dist/runtime/composables'
 import Plyr from 'plyr'
 
-import { defineComponent } from '#app'
-import { TrackListItem } from '~/types/playlist'
-import PlayerModule from '~/store/modules/PlayerModule'
+import type { TrackListItem } from '~/types/player'
+import { useStore } from '~/store'
 
+const { $moment } = useNuxtApp()
+const store = useStore()
+const localePath = useLocalePath()
+const switchLocalePath = useSwitchLocalePath()
+const { availableLocales, t, locale } = useI18n()
+const { play } = usePlyr()
+const fireError = useFireError()
+
+// data
+const isInitialized = ref(false)
+const plyrRef = ref<{ player: Plyr }>()
+
+// methods
 function binarySearch(ar: any[], el: any, compareFn: Function) {
   let m = 0
   let n = ar.length - 1
@@ -117,134 +122,152 @@ function binarySearch(ar: any[], el: any, compareFn: Function) {
 
   return m - 1
 }
+function getLocaleName(locale: string) {
+  const locales: LocaleObject[] = LOCALES.filter(
+    (localeObject) => localeObject.code === locale
+  )
 
+  if (locales.length) {
+    return locales[0].name
+  } else {
+    return undefined
+  }
+}
 function trackListItemComparator(time: number, b: TrackListItem) {
   return time - b.startSeconds
 }
+function closeAllow() {
+  window.onbeforeunload = () => {}
+}
+function closeProtect() {
+  window.onbeforeunload = () => {
+    return 'The music will stop playing if you navigate away.'
+  }
+}
+function initPlyr(plyr: { player: Plyr }) {
+  plyr.player.on('ended', () => {
+    closeAllow()
 
-export default defineComponent({
-  name: 'IndexPage',
-  data() {
-    return {
-      isInitialized: false,
-      storePlayerModule: getModule(PlayerModule, this.$store),
-    }
-  },
-  head() {
-    return this.$nuxtI18nHead({ addSeoAttributes: true })
-  },
-  computed: {
-    player() {
-      const plyr = this.$refs.plyr as any
+    if (!store.playerData.currentPlaylist || !store.playerData.currentTrack)
+      return
 
-      if (!plyr) return
-
-      if (!this.isInitialized) {
-        this.initPlyr(plyr)
-      }
-
-      return plyr.player
-    },
-  },
-  created() {
-    this.$nuxt.$on(
-      'plyr',
-      (sourceInfo: Plyr.SourceInfo, isManuallySet: boolean) => {
-        if (!this.player) return
-
-        if (!this.storePlayerModule.isPlayerPaused || isManuallySet) {
-          this.player.source = sourceInfo
-
-          if (this.storePlayerModule.isPlayerPaused || isManuallySet) {
-            this.player.play()
-          }
-        }
-      }
-    )
-  },
-  beforeCreate() {
-    this.$moment.locale(this.$i18n.locale)
-  },
-  methods: {
-    closeAllow() {
-      window.onbeforeunload = () => {}
-    },
-    closeProtect() {
-      window.onbeforeunload = () => {
-        return 'The music will stop playing if you navigate away.'
-      }
-    },
-    initPlyr(plyr: any) {
-      plyr.player.on('ended', () => {
-        this.closeAllow()
-        this.$nuxt.$emit('plyrEnd')
-      })
-      plyr.player.on('pause', () => {
-        this.storePlayerModule.setIsPlayerPaused(true)
-        this.closeAllow()
-      })
-      plyr.player.on('playing', () => {
-        this.storePlayerModule.setIsPlayerPaused(false)
-        this.closeProtect()
-      })
-      plyr.player.on('timeupdate', () => {
-        if (
-          this.storePlayerModule.currentTrackMeta &&
-          this.storePlayerModule.currentTrackMeta.tracklist
-        ) {
-          const trackListItem =
-            this.storePlayerModule.currentTrackMeta.tracklist[
-              binarySearch(
-                this.storePlayerModule.currentTrackMeta.tracklist,
-                this.player.currentTime,
-                trackListItemComparator
-              )
-            ]
-
-          const currentTrackDescription = trackListItem
-            ? trackListItem.artistName + ' - ' + trackListItem.songName
-            : ''
-
-          if (
-            this.storePlayerModule.currentTrackDescription !==
-            currentTrackDescription
-          ) {
-            this.storePlayerModule.setCurrentTrackDescription(
-              currentTrackDescription
-            )
-          }
-        }
-      })
-
-      this.isInitialized = true
-    },
-    share() {
+    for (
+      let i = 0;
+      i < store.playerData.currentPlaylist.items.length - 1;
+      i++
+    ) {
       if (
-        !process.browser ||
-        !this.storePlayerModule.currentTrackPlaylistName ||
-        !this.storePlayerModule.currentTrackName
-      )
-        return
+        store.playerData.currentPlaylist.items[i].fileName ===
+        store.playerData.currentTrack.fileName
+      ) {
+        play(
+          store.playerData.currentPlaylist.name,
+          store.playerData.currentPlaylist.items[i + 1]
+        )
+        break
+      }
+    }
+  })
+  plyr.player.on('pause', () => {
+    store.playerData.isPaused = true
+    closeAllow()
+  })
+  // plyr.player.on('playing', () => {
+  //   store.playerData.isPaused = false
+  //   closeProtect()
+  // })
+  plyr.player.on('timeupdate', () => {
+    if (!store.playerData.currentTrack?.meta?.tracklist || !player.value) return
 
-      this.$copyText(
-        `${window.location.origin}/player?playlist=${encodeURIComponent(
-          this.storePlayerModule.currentTrackPlaylistName
-        )}&track=${encodeURIComponent(this.storePlayerModule.currentTrackName)}`
-      )
-    },
-  },
+    const trackListItem =
+      store.playerData.currentTrack.meta.tracklist[
+        binarySearch(
+          store.playerData.currentTrack.meta.tracklist,
+          player.value.currentTime,
+          trackListItemComparator
+        )
+      ]
+
+    const currentTrackDescription = trackListItem
+      ? trackListItem.artistName + ' - ' + trackListItem.songName
+      : ''
+
+    if (
+      store.playerData.currentTrack.meta.description !== currentTrackDescription
+    ) {
+      store.playerData.currentTrack.meta.description = currentTrackDescription
+    }
+  })
+
+  isInitialized.value = true
+}
+function share() {
+  if (
+    !window ||
+    !store.playerData.currentPlaylist?.name ||
+    !store.playerData.currentTrack?.fileName
+  )
+    return fireError({ error: new Error(t('copyError')) })
+
+  copyText(
+    `${window.location.origin}/player?playlist=${encodeURIComponent(
+      store.playerData.currentPlaylist.name
+    )}&track=${encodeURIComponent(store.playerData.currentTrack.fileName)}`
+  )
+}
+
+// computations
+const player = computed(() => {
+  if (!plyrRef.value) return
+
+  if (!isInitialized.value) {
+    initPlyr(plyrRef.value)
+  }
+
+  return plyrRef.value.player
 })
+
+// lifecycle
+watch(
+  () => store.playerData.sourceInfo,
+  (current, _old) => {
+    if (
+      current &&
+      player.value
+      // !store.playerData.isPaused
+    ) {
+      player.value.source = current
+      player.value.play()
+      store.playerData.isPaused = false
+      closeProtect()
+    }
+  }
+)
+
+// initialization
+useHeadLayout()
+$moment.locale(locale.value)
 </script>
 
-<i18n lang="yml">
-en:
-  copyright: © {year} Jonas Thelemann. All rights reserved.
+<script lang="ts">
+export default {
+  name: 'IndexPage',
+}
+</script>
+
+<i18n lang="yaml">
+de:
+  copyError: Das Kopieren war nicht erfolgreich.
+  languages: Sprachen
+  legal: Rechtliches
   legalNotice: Legal notice
   linkCopy: Copy link
   mixcloud: Mixcloud
   on: on
-de:
-  copyright: © {year} Jonas Thelemann. Alle Rechte vorbehalten.
+en:
+  copyError: Copying failed.
+  languages: Languages
+  legal: Legal
   legalNotice: Impressum
   linkCopy: Link kopieren
   mixcloud: Mixcloud

@@ -10,18 +10,18 @@
       <div class="fullscreen flex">
         <div class="m-auto text-center mb-20vh">
           <h1 class="inline-block border-b border-gray-400">
-            {{ $t('creal') }}
+            {{ t('creal') }}
           </h1>
-          <i18n
+          <i18n-t
             class="mt-4 mb-16 whitespace-pre-line font-light"
-            path="welcome"
+            keypath="welcome"
             tag="p"
           >
             <br />
-          </i18n>
-          <Button aria-label="start" @click.native="setShowGreeting(true)">
-            {{ $t('start') }}
-          </Button>
+          </i18n-t>
+          <ButtonColored aria-label="start" @click="setShowGreeting(true)">
+            {{ t('start') }}
+          </ButtonColored>
         </div>
       </div>
     </div>
@@ -30,94 +30,79 @@
     >
       <ButtonBig aria-label="Events" :to="localePath('/events')">
         <IconCalendar classes="h-16 w-16" />
-        {{ $t('events') }}
+        {{ t('events') }}
       </ButtonBig>
       <ButtonBig aria-label="FAQ" :to="localePath('/faq')">
         <IconChatOutline classes="h-16 w-16" />
-        {{ $t('faq') }}
+        {{ t('faq') }}
       </ButtonBig>
       <ButtonBig aria-label="Player" :to="localePath('/player')">
         <IconMusic classes="h-16 w-16" />
-        {{ $t('player') }}
+        {{ t('player') }}
       </ButtonBig>
       <ButtonBig aria-label="Suggestions" :to="localePath('/suggestions')">
         <IconLightbulb classes="h-16 w-16" />
-        {{ $t('suggestions') }}
+        {{ t('suggestions') }}
       </ButtonBig>
     </div>
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from '#app'
+<script setup lang="ts">
+definePageMeta({ colorMode: 'dark' })
 
-export default defineComponent({
-  name: 'IndexPage',
-  data() {
-    return {
-      showGreeting: true,
-      title: 'Welcome!',
+const localePath = useLocalePath()
+const { t } = useI18n()
+
+// data
+const showGreeting = ref(true)
+const title = t('title')
+
+// methods
+function setShowGreeting(set: boolean): void {
+  if (set) {
+    sessionStorage.setItem('cReal_showGreeting', 'shown')
+  }
+
+  // if (process.server) {
+  //   showGreeting.value = true
+  //   return
+  // }
+
+  if (sessionStorage.getItem('cReal_showGreeting') !== 'shown') {
+    showGreeting.value = true
+    document.body.classList.add('overflow-hidden')
+  } else {
+    showGreeting.value = false
+    document.body.classList.remove('overflow-hidden')
+  }
+}
+
+// lifecycle
+onBeforeMount(() => {
+  window.addEventListener('keypress', (e) => {
+    const key = e.which || e.keyCode
+
+    if (key === 13) {
+      setShowGreeting(true)
     }
-  },
-  head() {
-    const title = this.title as string
-    return {
-      bodyAttrs: {
-        class: this.showGreeting ? ['overflow-hidden'] : [],
-      },
-      meta: [
-        {
-          hid: 'og:title',
-          property: 'og:title',
-          content: title,
-        },
-        {
-          hid: 'og:url',
-          property: 'og:url',
-          content: this.$baseUrl + this.$router.currentRoute.fullPath,
-        },
-        {
-          hid: 'twitter:title',
-          property: 'twitter:title',
-          content: title,
-        },
-      ],
-      title,
-    }
-  },
-  beforeMount() {
-    window.addEventListener('keypress', (e) => {
-      const key = e.which || e.keyCode
-
-      if (key === 13) {
-        this.setShowGreeting(true)
-      }
-    })
-  },
-  mounted() {
-    this.setShowGreeting(false)
-  },
-  methods: {
-    setShowGreeting(set: boolean): void {
-      if (set) {
-        sessionStorage.setItem('cReal_showGreeting', 'shown')
-      }
-
-      if (process.client) {
-        if (sessionStorage.getItem('cReal_showGreeting') !== 'shown') {
-          this.showGreeting = true
-        } else {
-          this.showGreeting = false
-        }
-      } else {
-        this.showGreeting = true
-      }
-    },
-  },
+  })
 })
+onMounted(() => {
+  setShowGreeting(false)
+})
+
+// initialization
+useHeadDefault(title)
 </script>
 
-<i18n lang="yml">
+<script lang="ts">
+export default {
+  name: 'IndexPage',
+}
+</script>
+
+<i18n lang="yaml">
 de:
   creal: cReal
   events: Veranstaltungen
@@ -125,6 +110,7 @@ de:
   player: Player
   start: Start
   suggestions: Vorschläge
+  title: Willkommen!
   welcome: DJ und Event-Organisator,{0}manchmal am Doubletime rappen.
 en:
   creal: cReal
@@ -133,5 +119,6 @@ en:
   player: Player
   start: Start
   suggestions: Suggestions
+  title: Welcome!
   welcome: DJ and event organizer,{0}occasionally rapping double times.
 </i18n>

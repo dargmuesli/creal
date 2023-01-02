@@ -1,0 +1,102 @@
+<template>
+  <header class="flex items-center justify-between gap-4 mb-8">
+    <Button :aria-label="t('creal')" :to="localePath('/')">
+      <span class="text-lg font-bold">{{ t('creal') }}</span>
+      <template #prefix>
+        <IconLogo class="h-10 w-10" />
+      </template>
+    </Button>
+    <AppLink
+      v-if="eventsCurrentCount"
+      class="gap-2 rounded-full border px-4 py-2 font-bold focus:rounded-full sm:px-4"
+      :to="localePath('/events')"
+    >
+      <span class="hidden whitespace-nowrap sm:inline">
+        {{ t('live') }}
+      </span>
+      <LivePulse />
+    </AppLink>
+    <AppLink
+      v-else-if="eventsFutureCount"
+      class="gap-2 rounded-full border px-2 py-2 font-bold focus:rounded-full sm:px-4"
+      :to="localePath('/events')"
+    >
+      <span class="hidden whitespace-nowrap sm:inline">
+        {{ t('eventsFuture') }}
+      </span>
+      <LivePulse />
+    </AppLink>
+    <Button
+      :aria-label="t('bookCreal')"
+      class="basis-0 text-lg font-bold"
+      :is-colored="false"
+      :to="`mailto:e-mail+creal@jonas-thelemann.de?subject=${encodeURIComponent(
+        t('bookingSubject')
+      )}`"
+    >
+      <span class="basis-0 whitespace-nowrap">{{ t('bookCreal') }}</span>
+      <template #suffix>
+        <IconArrowRight />
+      </template>
+    </Button>
+  </header>
+</template>
+
+<script setup lang="ts">
+const { $moment } = useNuxtApp()
+const { t } = useI18n()
+const localePath = useLocalePath()
+const strapiFetch = useStrapiFetch()
+
+// async data
+let eventsCurrentCount = 0
+let eventsFutureCount = 0
+
+// methods
+const init = async () => {
+  eventsCurrentCount = (
+    (await strapiFetch('/events', {
+      query: {
+        'filters[$and][0][dateStart][$lte]': $moment().toISOString(),
+        'filters[$and][1][$or][0][dateEnd][$gt]': $moment().toISOString(),
+        'filters[$and][1][$or][1][dateStart][$gte]': $moment()
+          .startOf('day')
+          .toISOString(),
+      },
+    })) as any
+  ).meta.pagination.total
+  eventsFutureCount = (
+    (await strapiFetch('/events', {
+      query: {
+        'filters[dateStart][$gt]': $moment().toISOString(),
+      },
+    })) as any
+  ).meta.pagination.total
+}
+
+// initialization
+try {
+  await init()
+} catch (error: any) {}
+</script>
+
+<script lang="ts">
+export default {
+  name: 'VioHeader',
+}
+</script>
+
+<i18n lang="yaml">
+en:
+  bookCreal: Book cReal
+  bookingSubject: Booking Request
+  creal: cReal
+  eventsFuture: Upcoming events
+  live: Live
+de:
+  bookCreal: cReal buchen
+  bookingSubject: Buchungsanfrage
+  creal: cReal
+  eventsFuture: Kommende Veranstaltungen
+  live: Live
+</i18n>

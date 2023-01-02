@@ -15,57 +15,55 @@
   </section>
 </template>
 
-<script lang="ts">
-import { defineComponent, PropType } from '#app'
-import { PLAYER_PREFIX, Playlist } from '~/types/playlist'
+<script setup lang="ts">
+import type { Playlist } from '~/types/player'
 
-export default defineComponent({
-  props: {
-    playlist: {
-      required: true,
-      type: Object as PropType<Playlist>,
-    },
-  },
-  data() {
-    return {
-      coverUrl: '',
-    }
-  },
-  created() {
-    if (this.playlist.cover) {
-      this.setCoverUrl(this.playlist.name)
-    } else {
-      this.coverUrl = '/player/playlist-cover_default.jpg'
-    }
-  },
-  methods: {
-    setCoverUrl(name: string) {
-      const key =
-        PLAYER_PREFIX +
-        `${
-          this.$route.query.playlist !== undefined
-            ? this.$route.query.playlist
-            : ''
-        }${name}.jpg`
-      this.displayImageWhenFullyLoaded(
-        this.$axios.$get('/player/signed-url', {
-          params: new URLSearchParams({ key }),
-        })
-      )
-    },
-    async displayImageWhenFullyLoaded(promise: Promise<any>) {
-      if (process.server) {
-        return
-      }
+export interface Props {
+  playlist: Playlist
+}
+const props = withDefaults(defineProps<Props>(), {})
 
-      const img = new Image()
+const route = useRoute()
+const fireError = useFireError()
 
-      img.onload = () => {
-        this.coverUrl = img.src
-      }
+// data
+const coverUrl = ref('')
 
-      img.src = await promise
-    },
-  },
-})
+// methods
+function init() {
+  if (props.playlist.isCoverAvailable) {
+    setCoverUrl(props.playlist.name)
+  } else {
+    coverUrl.value = '/player/playlist-cover_default.jpg'
+  }
+}
+async function setCoverUrl(name: string) {
+  const key = PLAYER_PREFIX + `${route.query.playlist || ''}${name}.jpg`
+  const {
+    data: { value: signedUrl },
+  } = await useFetch('/api/player/signed-url', {
+    params: { key },
+  })
+
+  if (!signedUrl)
+    return fireError({ error: new Error('Could not get signed url!') })
+
+  displayImageWhenFullyLoaded(signedUrl)
+}
+function displayImageWhenFullyLoaded(src: string) {
+  if (process.server) {
+    return
+  }
+
+  const img = new Image()
+
+  img.onload = () => {
+    coverUrl.value = img.src
+  }
+
+  img.src = src
+}
+
+// initialization
+init()
 </script>
