@@ -1,16 +1,18 @@
+import Plyr from 'plyr'
+import { Ref } from 'vue'
+
 export interface PlaylistItem {
-  name: string
-  extension: string
-  size: number
-  active: boolean
-  cover: boolean
-  meta: boolean
+  fileExtension: string
+  fileName: string
+  fileSize: number
+  isCoverAvailable: boolean
+  isMetaAvailable: boolean
 }
 
 export interface TrackListItem {
-  startSeconds: number
-  songName: string
   artistName: string
+  songName: string
+  startSeconds: number
 }
 
 export interface PlaylistItemMeta {
@@ -22,10 +24,10 @@ export interface PlaylistItemMeta {
 }
 
 export interface Playlist {
-  name: string
   collections: Playlist[]
+  isCoverAvailable: boolean
   items: PlaylistItem[]
-  cover: boolean
+  name: string
 }
 
 export interface PlaylistExtended extends Playlist {
@@ -37,4 +39,12 @@ export interface PlaylistExtended extends Playlist {
 export interface FetchPlaylist {
   playlistData: Playlist
   nextContinuationToken?: string
+}
+
+export interface PlayerData {
+  currentPlaylist: Ref<Playlist | undefined>
+  currentTrack: Ref<PlaylistItem & { meta?: PlaylistItemMeta } | undefined>,
+  isPaused: Ref<boolean>
+  isVisible: Ref<boolean>
+  sourceInfo: Ref<Plyr.SourceInfo | undefined>
 }

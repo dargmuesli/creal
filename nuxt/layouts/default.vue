@@ -6,7 +6,7 @@
         <slot />
       </main>
     </div>
-    <LayoutFooter :class="{ 'mb-20': store.isPlayerVisible }">
+    <LayoutFooter :class="{ 'mb-20': store.playerData.isVisible }">
       <LayoutFooterCategory :heading="t('legal')">
         <AppLink :to="localePath('/legal-notice')">
           {{ t('legalNotice') }}
@@ -33,26 +33,30 @@
     </LayoutFooter>
     <div class="fixed bottom-0 left-0 right-0">
       <div
-        v-if="store.currentTrackName"
+        v-if="store.playerData.currentTrack?.fileName"
         class="flex flex-col justify-evenly bg-white px-2 font-bold text-black sm:flex-row"
       >
         <span>
-          {{ store.currentTrackNameShort || store.currentTrackName }}
+          {{ store.playerData.currentTrack.fileName }}
           <span
-            v-if="store.currentTrackMeta && store.currentTrackMeta.createdTime"
+            v-if="store.playerData.currentTrack.meta?.createdTime"
             class="font-normal"
           >
             {{ t('on') }}
-            {{ $moment(store.currentTrackMeta.createdTime).format('L') }}
+            {{
+              $moment(store.playerData.currentTrack.meta.createdTime).format(
+                'L'
+              )
+            }}
           </span>
         </span>
-        <span v-if="store.currentTrackDescription">
-          {{ store.currentTrackDescription }}
+        <span v-if="store.playerData.currentTrack.meta?.description">
+          {{ store.playerData.currentTrack.meta.description }}
         </span>
         <a
-          v-if="store.currentTrackMeta && store.currentTrackMeta.mixcloudLink"
+          v-if="store.playerData.currentTrack.meta?.mixcloudLink"
           class="flex items-center gap-1"
-          :href="store.currentTrackMeta.mixcloudLink"
+          :href="store.playerData.currentTrack.meta.mixcloudLink"
           rel="noopener noreferrer"
           target="_blank"
         >
@@ -63,7 +67,7 @@
           {{ t('linkCopy') }}
         </button>
       </div>
-      <div :class="{ hidden: !store.isPlayerVisible }">
+      <div :class="{ hidden: !store.playerData.isVisible }">
         <ClientOnly>
           <vue-plyr
             ref="plyrRef"
@@ -83,7 +87,7 @@ import { Locale } from '@dargmuesli/nuxt-cookie-control/dist/runtime/types'
 import { LocaleObject } from '@nuxtjs/i18n/dist/runtime/composables'
 import Plyr from 'plyr'
 
-import type { TrackListItem } from '~/types/playlist'
+import type { TrackListItem } from '~/types/player'
 import { useStore } from '~/store'
 
 const { $moment } = useNuxtApp()
@@ -91,6 +95,8 @@ const store = useStore()
 const localePath = useLocalePath()
 const switchLocalePath = useSwitchLocalePath()
 const { availableLocales, t, locale } = useI18n()
+const { play } = usePlyr()
+const fireError = useFireError()
 
 // data
 const isInitialized = ref(false)
@@ -138,60 +144,58 @@ function closeProtect() {
     return 'The music will stop playing if you navigate away.'
   }
 }
-// function init() {
-//   $nuxt.$on('plyr', (sourceInfo: Plyr.SourceInfo, isManuallySet: boolean) => {
-//     if (!player.value) return
-
-//     if (!store.isPlayerPaused || isManuallySet) {
-//       player.value.source = sourceInfo
-
-//       if (store.isPlayerPaused || isManuallySet) {
-//         player.value.play()
-//       }
-//     }
-//   })
-// }
 function initPlyr(plyr: { player: Plyr }) {
   plyr.player.on('ended', () => {
     closeAllow()
 
-    if (!store.currentTrackPlaylistData) return
+    if (!store.playerData.currentPlaylist || !store.playerData.currentTrack)
+      return
 
-    for (let i = 0; i < store.currentTrackPlaylistData.items.length - 1; i++) {
+    for (
+      let i = 0;
+      i < store.playerData.currentPlaylist.items.length - 1;
+      i++
+    ) {
       if (
-        store.currentTrackPlaylistData.items[i].name === store.currentTrackName
+        store.playerData.currentPlaylist.items[i].fileName ===
+        store.playerData.currentTrack.fileName
       ) {
-        onPlaylistItemSelect(store.currentTrackPlaylistData.items[i + 1])
+        play(
+          store.playerData.currentPlaylist.name,
+          store.playerData.currentPlaylist.items[i + 1]
+        )
         break
       }
     }
   })
   plyr.player.on('pause', () => {
-    store.isPlayerPaused = true
+    store.playerData.isPaused = true
     closeAllow()
   })
-  plyr.player.on('playing', () => {
-    store.isPlayerPaused = false
-    closeProtect()
-  })
+  // plyr.player.on('playing', () => {
+  //   store.playerData.isPaused = false
+  //   closeProtect()
+  // })
   plyr.player.on('timeupdate', () => {
-    if (store.currentTrackMeta?.tracklist && player.value) {
-      const trackListItem =
-        store.currentTrackMeta.tracklist[
-          binarySearch(
-            store.currentTrackMeta.tracklist,
-            player.value.currentTime,
-            trackListItemComparator
-          )
-        ]
+    if (!store.playerData.currentTrack?.meta?.tracklist || !player.value) return
 
-      const currentTrackDescription = trackListItem
-        ? trackListItem.artistName + ' - ' + trackListItem.songName
-        : ''
+    const trackListItem =
+      store.playerData.currentTrack.meta.tracklist[
+        binarySearch(
+          store.playerData.currentTrack.meta.tracklist,
+          player.value.currentTime,
+          trackListItemComparator
+        )
+      ]
 
-      if (store.currentTrackDescription !== currentTrackDescription) {
-        store.currentTrackDescription = currentTrackDescription
-      }
+    const currentTrackDescription = trackListItem
+      ? trackListItem.artistName + ' - ' + trackListItem.songName
+      : ''
+
+    if (
+      store.playerData.currentTrack.meta.description !== currentTrackDescription
+    ) {
+      store.playerData.currentTrack.meta.description = currentTrackDescription
     }
   })
 
@@ -199,16 +203,16 @@ function initPlyr(plyr: { player: Plyr }) {
 }
 function share() {
   if (
-    !process.browser ||
-    !store.currentTrackPlaylistName ||
-    !store.currentTrackName
+    !window ||
+    !store.playerData.currentPlaylist?.name ||
+    !store.playerData.currentTrack?.fileName
   )
-    return
+    return fireError({ error: new Error(t('copyError')) })
 
   copyText(
     `${window.location.origin}/player?playlist=${encodeURIComponent(
-      store.currentTrackPlaylistName
-    )}&track=${encodeURIComponent(store.currentTrackName)}`
+      store.playerData.currentPlaylist.name
+    )}&track=${encodeURIComponent(store.playerData.currentTrack.fileName)}`
   )
 }
 
@@ -223,6 +227,23 @@ const player = computed(() => {
   return plyrRef.value.player
 })
 
+// lifecycle
+watch(
+  () => store.playerData.sourceInfo,
+  (current, _old) => {
+    if (
+      current &&
+      player.value
+      // !store.playerData.isPaused
+    ) {
+      player.value.source = current
+      player.value.play()
+      store.playerData.isPaused = false
+      closeProtect()
+    }
+  }
+)
+
 // initialization
 useHeadLayout()
 $moment.locale(locale.value)
@@ -235,14 +256,16 @@ export default {
 </script>
 
 <i18n lang="yaml">
-en:
+de:
+  copyError: Das Kopieren war nicht erfolgreich.
   languages: Sprachen
   legal: Rechtliches
   legalNotice: Legal notice
   linkCopy: Copy link
   mixcloud: Mixcloud
   on: on
-de:
+en:
+  copyError: Copying failed.
   languages: Languages
   legal: Legal
   legalNotice: Impressum

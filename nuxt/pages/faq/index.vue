@@ -17,6 +17,7 @@
       <ul>
         <li
           v-for="faqItem in faqItems"
+          :id="faqItem.id"
           :key="faqItem.id"
           class="border duration-300 first:rounded-t last:rounded-b"
           :class="
@@ -26,7 +27,7 @@
           <FaqItem
             :faq-item="faqItem"
             :is-focused="itemFocusedId === faqItem.id"
-            @click="focusItem(faqItem.id)"
+            @click="toggleItemFocus(faqItem.id)"
           />
         </li>
       </ul>
@@ -79,9 +80,14 @@ const paging = getPaging({
 })
 
 // methods
-function focusItem(id: number) {
-  itemFocusedId.value = id
-  history.replaceState(undefined, '', `#${id}`)
+function toggleItemFocus(id: number) {
+  if (itemFocusedId.value === id) {
+    itemFocusedId.value = undefined
+    history.replaceState(undefined, '', '')
+  } else {
+    itemFocusedId.value = id
+    history.replaceState(undefined, '', `#${id}`)
+  }
 }
 
 // lifecycle

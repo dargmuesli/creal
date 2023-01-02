@@ -185,6 +185,16 @@ export function mergeByKey(target: any, source: any, key: string | number) {
   })
 }
 
+export function serializeQueryString(object: any) {
+  const playlistLinkParts: Array<string> = []
+
+  for (const [key, value] of Object.entries(object)) {
+    playlistLinkParts.push(!value ? key : `${key}=${value}`)
+  }
+
+  return `?${playlistLinkParts.join('&')}`
+}
+
 export function showToast({ title }: { title: string }) {
   Swal.fire({
     didOpen: (toast) => {

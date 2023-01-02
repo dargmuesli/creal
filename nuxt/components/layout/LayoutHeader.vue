@@ -1,5 +1,5 @@
 <template>
-  <header class="flex items-center justify-between gap-4 p-4 md:px-8">
+  <header class="flex items-center justify-between gap-4 mb-8">
     <Button :aria-label="t('creal')" :to="localePath('/')">
       <span class="text-lg font-bold">{{ t('creal') }}</span>
       <template #prefix>

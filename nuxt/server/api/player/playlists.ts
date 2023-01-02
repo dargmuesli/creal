@@ -14,11 +14,11 @@ import type {
   Playlist,
   PlaylistItem,
   PlaylistExtended,
-} from '~/types/playlist'
+} from '~/types/player'
 
 function itemSort(a: PlaylistItem, b: PlaylistItem) {
-  const aN = a.name
-  const bN = b.name
+  const aN = a.fileName
+  const bN = b.fileName
 
   for (let i = 0; i < aN.length && i < bN.length; i++) {
     const charA = aN.charAt(i)
@@ -47,7 +47,7 @@ function getPlaylist(playlistDataExtended: PlaylistExtended): Playlist {
         playlistDataExtended.covers[i] ===
         playlistDataExtended.collections[j].name
       ) {
-        playlistDataExtended.collections[j].cover = true
+        playlistDataExtended.collections[j].isCoverAvailable = true
         break
       }
     }
@@ -55,9 +55,10 @@ function getPlaylist(playlistDataExtended: PlaylistExtended): Playlist {
     // For items.
     for (let j = 0; j < playlistDataExtended.items.length; j++) {
       if (
-        playlistDataExtended.covers[i] === playlistDataExtended.items[j].name
+        playlistDataExtended.covers[i] ===
+        playlistDataExtended.items[j].fileName
       ) {
-        playlistDataExtended.items[j].cover = true
+        playlistDataExtended.items[j].isCoverAvailable = true
         break
       }
     }
@@ -68,9 +69,9 @@ function getPlaylist(playlistDataExtended: PlaylistExtended): Playlist {
     // For items.
     for (let j = 0; j < playlistDataExtended.items.length; j++) {
       if (
-        playlistDataExtended.metas[i] === playlistDataExtended.items[j].name
+        playlistDataExtended.metas[i] === playlistDataExtended.items[j].fileName
       ) {
-        playlistDataExtended.items[j].meta = true
+        playlistDataExtended.items[j].isMetaAvailable = true
         break
       }
     }
@@ -87,7 +88,7 @@ function getPlaylist(playlistDataExtended: PlaylistExtended): Playlist {
     name: playlistDataExtended.name,
     collections: subCollections,
     items: playlistDataExtended.items.sort(itemSort),
-    cover: playlistDataExtended.cover,
+    isCoverAvailable: playlistDataExtended.isCoverAvailable,
   }
 }
 
@@ -100,7 +101,7 @@ function getPlaylistExtended(
     name: root,
     collections: [],
     items: [],
-    cover: false,
+    isCoverAvailable: false,
     covers: [],
     metas: [],
   }
@@ -124,12 +125,11 @@ function getPlaylistExtended(
       switch (matchEnding) {
         case 'mp3':
           playlistDataExtended.items.push({
-            name: matchName,
-            extension: matchEnding,
-            size,
-            active: false,
-            cover: false,
-            meta: false,
+            fileName: matchName,
+            fileExtension: matchEnding,
+            fileSize: size,
+            isCoverAvailable: false,
+            isMetaAvailable: false,
           })
           break
         case 'jpg':
@@ -148,7 +148,7 @@ function getPlaylistExtended(
         name: itemName,
         collections: [],
         items: [],
-        cover: false,
+        isCoverAvailable: false,
         covers: [],
         metas: [],
       })
@@ -217,7 +217,7 @@ export default defineEventHandler(async (event) => {
     name: paramPrefix || 'root',
     collections: [],
     items: [],
-    cover: false,
+    isCoverAvailable: false,
     covers: [],
     metas: [],
   }

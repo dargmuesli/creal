@@ -16,8 +16,7 @@
 </template>
 
 <script setup lang="ts">
-import type { Playlist } from '~/types/playlist'
-import { PLAYER_PREFIX } from '~/utils/constants'
+import type { Playlist } from '~/types/player'
 
 export interface Props {
   playlist: Playlist
@@ -32,18 +31,14 @@ const coverUrl = ref('')
 
 // methods
 function init() {
-  if (props.playlist.cover) {
+  if (props.playlist.isCoverAvailable) {
     setCoverUrl(props.playlist.name)
   } else {
     coverUrl.value = '/player/playlist-cover_default.jpg'
   }
 }
 async function setCoverUrl(name: string) {
-  const key =
-    PLAYER_PREFIX +
-    `${
-      route.query.playlist !== undefined ? route.query.playlist : ''
-    }${name}.jpg`
+  const key = PLAYER_PREFIX + `${route.query.playlist || ''}${name}.jpg`
   const {
     data: { value: signedUrl },
   } = await useFetch('/api/player/signed-url', {

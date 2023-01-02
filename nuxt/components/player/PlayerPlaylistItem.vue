@@ -2,7 +2,7 @@
   <div class="flex select-none">
     <button
       class="ml-2 mr-3 lg:mr-10"
-      :title="bytesToString(playlistItem.size)"
+      :title="bytesToString(playlistItem.fileSize)"
       @click="onDownloadClick()"
     >
       <IconDownload />
@@ -11,7 +11,7 @@
       class="vio-prose-fullwidth max-w-full grow cursor-default py-2 text-left lg:py-3"
       @click="onItemClick"
     >
-      {{ playlistItem.name.replace(/^cReal - /, '') }}
+      {{ playlistItem.fileName.replace(/^cReal - /, '') }}
     </button>
     <button class="ml-3 mr-2 lg:ml-10" title="play" @click="onPlayClick()">
       <IconPlay />
@@ -21,16 +21,16 @@
 
 <script setup lang="ts">
 import prettyBytes from 'pretty-bytes'
-import type { PlaylistItem } from '~/types/playlist'
+import type { PlaylistItem } from '~/types/player'
 
 export interface Props {
   playlistItem: PlaylistItem
 }
-const props = withDefaults(defineProps<Props>(), {})
+withDefaults(defineProps<Props>(), {})
 
 const emit = defineEmits<{
-  (e: 'download', playlistItem: PlaylistItem): void
-  (e: 'play', playlistItem: PlaylistItem): void
+  (e: 'download'): void
+  (e: 'play'): void
 }>()
 
 // methods
@@ -38,7 +38,7 @@ function bytesToString(bytes: number) {
   return prettyBytes(bytes)
 }
 function onDownloadClick() {
-  emit('download', props.playlistItem)
+  emit('download')
 }
 function onItemClick(event: any) {
   if (event.detail === 2) {
@@ -47,6 +47,6 @@ function onItemClick(event: any) {
   }
 }
 function onPlayClick() {
-  emit('play', props.playlistItem)
+  emit('play')
 }
 </script>

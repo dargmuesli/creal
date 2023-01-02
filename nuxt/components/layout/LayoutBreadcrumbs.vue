@@ -34,7 +34,6 @@
         <slot />
       </span>
     </AppLink>
-    <!-- Suffixes are currently unused.
     <ul v-if="suffixes" class="flex items-center gap-2">
       <li
         v-for="suffix in suffixes"
@@ -44,13 +43,14 @@
         <span>{{ t('separator') }}</span>
         <AppLink
           class="whitespace-nowrap text-2xl"
+          :data-testid="`breadcrumb-suffix-${suffix.to}`"
           :is-colored="false"
           :to="suffix.to"
         >
           {{ suffix.name }}
         </AppLink>
       </li>
-    </ul> -->
+    </ul>
   </div>
 </template>
 
@@ -62,11 +62,11 @@ export interface Breadcrumb {
 
 export interface Props {
   prefixes?: Array<Breadcrumb>
-  // suffixes?: Array<Breadcrumb> // Suffixes are currently unused.
+  suffixes?: Array<Breadcrumb>
 }
 withDefaults(defineProps<Props>(), {
   prefixes: undefined,
-  // suffixes: undefined, // Suffixes are currently unused.
+  suffixes: undefined,
 })
 
 const route = useRoute()

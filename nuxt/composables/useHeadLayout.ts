@@ -4,6 +4,8 @@ export const useHeadLayout = () => {
   const { t } = useI18n()
   const head = useLocaleHead({ addSeoAttributes: true })
 
+  const title = 'cReal'
+
   useHead(head.value)
   useHead({
     bodyAttrs: {
@@ -94,7 +96,7 @@ export const useHeadLayout = () => {
       {
         key: 'og:site_name',
         property: 'og:site_name',
-        content: 'maevsi',
+        content: title,
       },
       {
         key: 'og:type',
@@ -104,7 +106,7 @@ export const useHeadLayout = () => {
       {
         key: 'og:title',
         property: 'og:title',
-        content: 'maevsi',
+        content: title,
       },
       {
         key: 'og:url',
@@ -140,13 +142,13 @@ export const useHeadLayout = () => {
       {
         key: 'twitter:title',
         property: 'twitter:title',
-        content: 'maevsi',
+        content: title,
       },
     ],
     titleTemplate: (titleChunk?: string) => {
-      return titleChunk && titleChunk !== 'maevsi'
-        ? `${titleChunk} · maevsi`
-        : 'maevsi'
+      return titleChunk && titleChunk !== title
+        ? `${titleChunk} · ${title}`
+        : title
     },
   })
 }
