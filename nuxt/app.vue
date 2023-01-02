@@ -20,6 +20,9 @@ const name = 'cReal'
 // computations
 const isLoading = computed(() => !!loadingIds.value.length)
 
+// lifecycle
+onMounted(() => loadingIds.value.splice(loadingIds.value.indexOf(loadingId), 1))
+
 // initialization
 useSchemaOrg([
   definePerson({
