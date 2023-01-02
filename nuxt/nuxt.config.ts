@@ -112,6 +112,7 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     public: {
+      isTesting: false, // set via environment variables only
       stagingHost:
         process.env.NODE_ENV !== 'production' &&
         !process.env.NUXT_PUBLIC_STACK_DOMAIN

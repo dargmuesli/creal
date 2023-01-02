@@ -15,7 +15,7 @@
         {{
           t('copyright', {
             name: 'Jonas Thelemann',
-            year: new Date().getFullYear(),
+            year,
           })
         }}
       </p>
@@ -25,6 +25,12 @@
 
 <script setup lang="ts">
 const { t } = useI18n()
+const config = useRuntimeConfig()
+
+// computations
+const year = computed(() =>
+  config.public.isTesting ? 1337 : new Date().getFullYear()
+)
 </script>
 
 <i18n lang="yaml">
