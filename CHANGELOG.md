@@ -1,3 +1,25 @@
+# [1.0.0](https://github.com/dargmuesli/creal/compare/0.45.4...1.0.0) (2023-01-02)
+
+
+### Bug Fixes
+
+* **app:** correct loading state ([611d229](https://github.com/dargmuesli/creal/commit/611d229d2adf9345195d26b08409a3a90a495b42))
+* **release:** schedule release ([09c8d68](https://github.com/dargmuesli/creal/commit/09c8d6809842c0a2197610f2355d2d4bed8b52c8))
+* **release:** schedule release ([d9b5a2c](https://github.com/dargmuesli/creal/commit/d9b5a2c79da1c8a6bc23dd7136b6820b9275ccf2))
+* **release:** schedule release ([6382ea4](https://github.com/dargmuesli/creal/commit/6382ea4a14f2316d5c061d787f8fab6e1ccee18a))
+
+
+### Features
+
+* continue nuxt 3 migration ([f804551](https://github.com/dargmuesli/creal/commit/f8045511df4dec52c59e396e4c262e328e1413f2))
+* migrate to nuxt 3 ([86b9213](https://github.com/dargmuesli/creal/commit/86b9213a1653968d9cc9eae64ecc4a90afb0ddb2))
+* rework player ([4044f87](https://github.com/dargmuesli/creal/commit/4044f8780956f49482f563bf1d1f4e0af9008ae0))
+
+
+### BREAKING CHANGES
+
+* migration to Nuxt 3.
+
 ## [0.45.4](https://github.com/dargmuesli/creal/compare/0.45.3...0.45.4) (2022-12-04)
 
 
