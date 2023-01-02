@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/dargmuesli/creal/compare/1.0.0...1.0.1) (2023-01-02)
+
+
+### Bug Fixes
+
+* **cypress:** use testing timestamp ([e773079](https://github.com/dargmuesli/creal/commit/e773079e6860741dab7a925c6cfad6443905685e))
+
 # [1.0.0](https://github.com/dargmuesli/creal/compare/0.45.4...1.0.0) (2023-01-02)
 
 
