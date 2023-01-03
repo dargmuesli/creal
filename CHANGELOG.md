@@ -1,3 +1,14 @@
+## [1.0.2](https://github.com/dargmuesli/creal/compare/1.0.1...1.0.2) (2023-01-03)
+
+
+### Bug Fixes
+
+* **event:** correct metadata display ([461c4d4](https://github.com/dargmuesli/creal/commit/461c4d4d2c2f68fca0f983e9b0966c52c72095fa)), closes [#242](https://github.com/dargmuesli/creal/issues/242)
+* **head:** correct title ([656104b](https://github.com/dargmuesli/creal/commit/656104bb3217610b4c533a4d0f07d79a3c5c378f))
+* **header:** correct pulse layout ([ce9f39c](https://github.com/dargmuesli/creal/commit/ce9f39c00db9f5ec4917e51bfce4231ac8c4bf89))
+* **moment:** workaround language bug ([d56667b](https://github.com/dargmuesli/creal/commit/d56667b2c0e98284d52b1127c9f0fb921ba5474d))
+* **ssr:** correct service name ([0bd7965](https://github.com/dargmuesli/creal/commit/0bd7965a9fe5e694492a34f7a8d61b699cba1c13))
+
 ## [1.0.1](https://github.com/dargmuesli/creal/compare/1.0.0...1.0.1) (2023-01-02)
 
 
