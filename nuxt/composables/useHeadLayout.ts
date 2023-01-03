@@ -4,7 +4,7 @@ export const useHeadLayout = () => {
   const { t } = useI18n()
   const head = useLocaleHead({ addSeoAttributes: true })
 
-  const title = 'cReal'
+  const title = 'DJ cReal'
 
   useHead(head.value)
   useHead({
