@@ -1,3 +1,10 @@
+## [1.0.3](https://github.com/dargmuesli/creal/compare/1.0.2...1.0.3) (2023-01-03)
+
+
+### Bug Fixes
+
+* **csp:** correct method usage ([f5ac37d](https://github.com/dargmuesli/creal/commit/f5ac37d5519eeab1ffdddc010194466440a5b4d9))
+
 ## [1.0.2](https://github.com/dargmuesli/creal/compare/1.0.1...1.0.2) (2023-01-03)
 
 
