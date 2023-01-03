@@ -8,23 +8,25 @@
     </Button>
     <AppLink
       v-if="eventsCurrentCount"
-      class="gap-2 rounded-full border px-4 py-2 font-bold focus:rounded-full sm:px-4"
+      class="flex items-center gap-2 rounded-full border px-4 py-2 font-bold focus:rounded-full sm:px-4"
+      :is-colored="false"
       :to="localePath('/events')"
     >
+      <LivePulse />
       <span class="hidden whitespace-nowrap sm:inline">
         {{ t('live') }}
       </span>
-      <LivePulse />
     </AppLink>
     <AppLink
       v-else-if="eventsFutureCount"
-      class="gap-2 rounded-full border px-2 py-2 font-bold focus:rounded-full sm:px-4"
+      class="flex items-center gap-2 rounded-full border px-2 py-2 font-bold focus:rounded-full sm:px-4"
+      :is-colored="false"
       :to="localePath('/events')"
     >
+      <LivePulse />
       <span class="hidden whitespace-nowrap sm:inline">
         {{ t('eventsFuture') }}
       </span>
-      <LivePulse />
     </AppLink>
     <Button
       :aria-label="t('bookCreal')"
