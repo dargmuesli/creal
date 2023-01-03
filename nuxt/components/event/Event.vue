@@ -4,22 +4,19 @@
   >
     <div class="vio-prose-fullwidth space-y-2 lg:w-1/2">
       <div class="flex gap-2">
-        <i18n-t keypath="header" class="flex gap-4" tag="label">
-          <template #datetime>
-            <span>{{
-              t('datetime', {
-                start: dateFormat(new Date(crealEvent.dateStart)),
-                end: t('datetimeEnd', {
-                  end: dateFormat(new Date(crealEvent.dateEnd)),
-                }),
+        <i18n-t keypath="datetime">
+          <template #start>
+            {{ dateFormat(new Date(crealEvent.dateStart)) }}
+          </template>
+          <template v-if="crealEvent.dateEnd" #end>
+            {{
+              t('datetimeEnd', {
+                end: dateFormat(new Date(crealEvent.dateEnd)),
               })
-            }}</span>
+            }}
           </template>
-          <template #separator>
-            <span>{{ t('separator') }}</span>
-          </template>
-          <template #location>
-            <span>{{ crealEvent.location }}</span>
+          <template v-if="crealEvent.location" #location>
+            {{ t('datetimeLocation', { location: crealEvent.location }) }}
           </template>
         </i18n-t>
       </div>
@@ -85,15 +82,13 @@ export default {
 
 <i18n lang="yaml">
 de:
-  datetime: '{start}{end}'
+  datetime: '{start}{end}{location}'
   datetimeEnd: ' - {end}'
+  datetimeLocation: ' ⋅ {location}'
   details: Details
-  header: '{datetime}{separator}{location}'
-  separator: ⋅
 en:
   datetime: '{start}{end}'
   datetimeEnd: ' - {end}'
+  datetimeLocation: ' ⋅ {location}'
   details: Details
-  header: '{datetime}{separator}{location}'
-  separator: ⋅
 </i18n>
