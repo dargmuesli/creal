@@ -4,7 +4,7 @@ import { LocaleObject } from '@nuxtjs/i18n/dist/runtime/composables'
 
 const secretPathAwsBucket = '/run/secrets/creal_aws-bucket'
 
-export const AWS_BUCKET_NAME =
+export const AWS_BUCKET_NAME = () =>
   process.server && fs.existsSync(secretPathAwsBucket)
     ? fs.readFileSync(secretPathAwsBucket, 'utf8')
     : 'creal-audio-dev'

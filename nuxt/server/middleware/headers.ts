@@ -26,12 +26,12 @@ function getCsp(host: string): Record<string, Array<string>> {
       "'self'",
       'data:',
       `https://creal-strapi.${getDomainTldPort(stagingHostOrHost)}`,
-      `https://${AWS_BUCKET_NAME}.s3.nl-ams.scw.cloud`, // Playlist cover.
+      `https://${AWS_BUCKET_NAME()}.s3.nl-ams.scw.cloud`, // Playlist cover.
     ],
     'manifest-src': ["'self'"],
     'media-src': [
       'https://cdn.plyr.io/static/blank.mp4', // Plyr.
-      `https://${AWS_BUCKET_NAME}.s3.nl-ams.scw.cloud`, // Music.
+      `https://${AWS_BUCKET_NAME()}.s3.nl-ams.scw.cloud`, // Music.
     ],
     'prefetch-src': ["'self'"],
     'report-uri': ['https://dargmuesli.report-uri.com/r/d/csp/enforce'],
