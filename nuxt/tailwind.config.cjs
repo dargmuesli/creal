@@ -11,6 +11,7 @@ function heading(theme) {
 
 const gray = colors.gray // or slate, zinc, neutral, stone
 
+/** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
     './components/**/*.{js,vue,ts}',
