@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/dargmuesli/creal/compare/1.0.3...1.1.0) (2023-01-06)
+
+
+### Features
+
+* add gtag ([2d844a6](https://github.com/dargmuesli/creal/commit/2d844a61443decac66046d7621bb6d237b6e41ab))
+
 ## [1.0.3](https://github.com/dargmuesli/creal/compare/1.0.2...1.0.3) (2023-01-03)
 
 
