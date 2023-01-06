@@ -48,21 +48,16 @@ export default defineNuxtConfig({
               targetCookieIds: ['i18n_redirected'],
             },
           ],
-          // optional: [
-          //   {
-          //     name: 'Google Analytics',
-          //     id: 'ga',
-          //     // targetCookieIds: ['_ga', '_gat', '_gid'],
-          //     accepted: () => {
-          //       const { $ga } = useNuxtApp()
-          //       $ga.enable()
-          //     },
-          //     declined: () => {
-          //       const { $ga } = useNuxtApp()
-          //       $ga.disable()
-          //     },
-          //   },
-          // ],
+          optional: [
+            {
+              description: {
+                de: 'Hilft uns dabei Nutzerverhalten zu verstehen und unsere Dienste zu verbessern.',
+                en: 'Helps us understand user behavior and optimize our services.',
+              },
+              name: 'Google Analytics',
+              targetCookieIds: ['_ga', '_ga_K4R41W62BR'],
+            },
+          ],
           locales: ['en', 'de'],
         },
       },
@@ -112,7 +107,8 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     public: {
-      isTesting: false, // set via environment variables only
+      googleAnalyticsId: '', // set via environment variable `NUXT_PUBLIC_GOOGLE_ANALYTICS_ID` only
+      isTesting: false, // set via environment variable `NUXT_PUBLIC_IS_TESTING` only
       stagingHost:
         process.env.NODE_ENV !== 'production' &&
         !process.env.NUXT_PUBLIC_STACK_DOMAIN

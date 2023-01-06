@@ -17,6 +17,8 @@ function getCsp(host: string): Record<string, Array<string>> {
       `https://creal-postgraphile.${getDomainTldPort(stagingHostOrHost)}`,
       `https://creal-strapi.${getDomainTldPort(stagingHostOrHost)}`,
       'https://cdn.plyr.io', // Plyr.
+      'https://*.google-analytics.com',
+      'https://*.analytics.google.com',
     ],
     'default-src': ["'none'"],
     'font-src': ["'self'"],
@@ -26,6 +28,7 @@ function getCsp(host: string): Record<string, Array<string>> {
       "'self'",
       'data:',
       `https://creal-strapi.${getDomainTldPort(stagingHostOrHost)}`,
+      'https://*.google-analytics.com',
       `https://${AWS_BUCKET_NAME()}.s3.nl-ams.scw.cloud`, // Playlist cover.
     ],
     'manifest-src': ["'self'"],
@@ -40,6 +43,8 @@ function getCsp(host: string): Record<string, Array<string>> {
     'script-src': [
       "'self'",
       'https://static.cloudflareinsights.com',
+      'https://*.google-analytics.com',
+      'https://www.googletagmanager.com/gtag/js',
       "'unsafe-inline'", // https://github.com/unjs/nitro/issues/81
       "'unsafe-eval'", // https://github.com/unjs/nitro/issues/81
     ],
