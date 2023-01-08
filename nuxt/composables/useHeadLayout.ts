@@ -31,7 +31,7 @@ export const useHeadLayout = () => {
         type: 'image/png',
       },
       {
-        href: '/assets/static/favicon/favicon.ico',
+        href: '/favicon.ico?v=eEYRGn5b9R',
         rel: 'icon',
         type: 'image/x-icon',
       },
@@ -45,7 +45,7 @@ export const useHeadLayout = () => {
         rel: 'mask-icon',
       },
       {
-        href: '/assets/static/favicon/favicon.ico?v=eEYRGn5b9R',
+        href: '/favicon.ico?v=eEYRGn5b9R',
         rel: 'shortcut icon',
       },
     ],
