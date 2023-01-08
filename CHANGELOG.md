@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/dargmuesli/creal/compare/1.1.0...1.1.1) (2023-01-08)
+
+
+### Bug Fixes
+
+* **favicon:** move to root ([f03ccd9](https://github.com/dargmuesli/creal/commit/f03ccd9a1331bbd6c10b4f251219b7ad4f5a52c5))
+
 # [1.1.0](https://github.com/dargmuesli/creal/compare/1.0.3...1.1.0) (2023-01-06)
 
 
