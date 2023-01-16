@@ -10,6 +10,7 @@
 
 <script setup lang="ts">
 const { t, locale } = useI18n()
+const cookieControl = useCookieControl()
 
 const loadingId = Math.random()
 const loadingIds = useState('loadingIds', () => [loadingId])
@@ -22,6 +23,20 @@ const isLoading = computed(() => !!loadingIds.value.length)
 
 // lifecycle
 onMounted(() => loadingIds.value.splice(loadingIds.value.indexOf(loadingId), 1))
+watch(
+  () => cookieControl.cookiesEnabledIds.value,
+  (current, previous) => {
+    if (
+      (!previous?.includes('google-analytics') &&
+        current?.includes('google-analytics')) ||
+      (previous?.includes('google-analytics') &&
+        !current?.includes('google-analytics'))
+    ) {
+      window.location.reload()
+    }
+  },
+  { deep: true }
+)
 
 // initialization
 useSchemaOrg([
