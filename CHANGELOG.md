@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/dargmuesli/creal/compare/1.1.2...1.2.0) (2023-01-16)
+
+
+### Features
+
+* **cookie-control:** migrate to v3 ([682e79b](https://github.com/dargmuesli/creal/commit/682e79bb12c3e661d24994a66c60f96c185f6353))
+
 ## [1.1.2](https://github.com/dargmuesli/creal/compare/1.1.1...1.1.2) (2023-01-16)
 
 
