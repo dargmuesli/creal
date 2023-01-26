@@ -1,4 +1,4 @@
-import defu from 'defu'
+import { defu } from 'defu'
 import { appendHeader, defineEventHandler } from 'h3'
 
 import { AWS_BUCKET_NAME } from '~/utils/constants'
