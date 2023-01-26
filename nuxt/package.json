@@ -97,7 +97,7 @@
     "marked": "4.2.12",
     "moment": "2.29.4",
     "node-fetch": "3.3.0",
-    "nuxt": "3.0.0",
+    "nuxt": "3.1.1",
     "nuxt-schema-org": "2.1.0",
     "pinia": "2.0.29",
     "postcss": "8.4.21",
@@ -105,7 +105,7 @@
     "prettier": "2.8.3",
     "prettier-plugin-tailwindcss": "0.2.2",
     "pretty-bytes": "6.0.0",
-    "rollup": "2.79.1",
+    "rollup": "3.11.0",
     "slugify": "1.6.5",
     "start-server-and-test": "1.15.3",
     "stylelint": "14.16.1",
@@ -125,6 +125,7 @@
   "pnpm": {
     "peerDependencyRules": {
       "ignoreMissing": [
+        "cosmiconfig-toml-loader",
         "webpack"
       ]
     }
