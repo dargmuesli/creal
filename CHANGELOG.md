@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/dargmuesli/creal/compare/1.2.0...1.3.0) (2023-01-30)
+
+
+### Features
+
+* **deps:** update dependency @dargmuesli/nuxt-cookie-control to v5-beta ([ce634a7](https://github.com/dargmuesli/creal/commit/ce634a7b0457679e8241d4ff43b8dcaaa0b5b429))
+
 # [1.2.0](https://github.com/dargmuesli/creal/compare/1.1.2...1.2.0) (2023-01-16)
 
 
