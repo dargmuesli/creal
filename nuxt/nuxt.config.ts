@@ -17,83 +17,10 @@ export default defineNuxtConfig({
   },
   css: ['@/assets/css/main.css'],
   modules: [
-    [
-      '@dargmuesli/nuxt-cookie-control',
-      {
-        cookies: {
-          necessary: [
-            {
-              description: {
-                de: 'Speichert die Einstellungen, die in diesem Dialog getroffen werden.',
-                en: 'Saves the settings made in this dialog.',
-              },
-              name: {
-                de: 'Cookie-Präferenzen',
-                en: 'Cookie Preferences',
-              },
-              targetCookieIds: [
-                'cookie_control_is_consent_given',
-                'cookie_control_cookies_enabled_ids',
-              ],
-            },
-            {
-              description: {
-                de: 'Speichert in welcher Sprache die Webseite angezeigt wird.',
-                en: 'Saves in which language the web page is displayed.',
-              },
-              name: {
-                de: 'Spracheinstellungen',
-                en: 'Language Settings',
-              },
-              targetCookieIds: ['i18n_redirected'],
-            },
-          ],
-          optional: [
-            {
-              description: {
-                de: 'Hilft uns dabei Nutzerverhalten zu verstehen und unsere Dienste zu verbessern.',
-                en: 'Helps us understand user behavior and optimize our services.',
-              },
-              name: 'Google Analytics',
-              targetCookieIds: ['_ga', '_ga_K4R41W62BR'],
-            },
-          ],
-          locales: ['en', 'de'],
-        },
-      },
-    ],
-    [
-      '@nuxtjs/color-mode',
-      {
-        classSuffix: '',
-      },
-    ],
-    [
-      '@nuxtjs/html-validator',
-      {
-        failOnError: true,
-        logLevel: 'warning',
-      },
-    ],
-    [
-      '@nuxtjs/i18n',
-      {
-        baseUrl: BASE_URL,
-        defaultLocale: 'en', // Must be set for the default prefix_except_default prefix strategy.
-        detectBrowserLanguage: {
-          cookieSecure: true,
-          redirectOn: 'root',
-        },
-        locales: LOCALES,
-        vueI18n: {
-          messages: {
-            de: localeDe,
-            en: localeEn,
-          },
-          fallbackWarn: false, // TODO: don't show incorrect warnings (https://github.com/intlify/vue-i18n-next/issues/776)
-        },
-      },
-    ],
+    '@dargmuesli/nuxt-cookie-control',
+    '@nuxtjs/color-mode',
+    '@nuxtjs/html-validator',
+    '@nuxtjs/i18n',
     '@nuxtjs/robots',
     '@pinia/nuxt',
     ['nuxt-schema-org', { host: BASE_URL }],
@@ -131,5 +58,72 @@ export default defineNuxtConfig({
   },
   vite: {
     plugins: [graphqlPlugin()],
+  },
+
+  // modules
+  cookieControl: {
+    cookies: {
+      necessary: [
+        {
+          description: {
+            de: 'Dieser Cookie von uns speichert die Einstellungen, die in diesem Dialog getroffen werden.',
+            en: 'This cookie of ours stores the settings made in this dialog.',
+          },
+          name: {
+            de: 'Cookie-Präferenzen',
+            en: 'Cookie Preferences',
+          },
+          targetCookieIds: [
+            'cookie_control_is_consent_given',
+            'cookie_control_cookies_enabled_ids',
+          ],
+        },
+        {
+          description: {
+            de: 'Dieser Cookie von uns speichert die Sprache, in der diese Webseite angezeigt wird.',
+            en: "This cookie of ours stores the language that's used to display this website.",
+          },
+          name: {
+            de: 'Sprache',
+            en: 'Language',
+          },
+          targetCookieIds: ['i18n_redirected'],
+        },
+      ],
+      optional: [
+        {
+          description: {
+            de: 'Hilft uns dabei Nutzerverhalten zu verstehen und unsere Dienste zu verbessern.',
+            en: 'Helps us understand user behavior and optimize our services.',
+          },
+          name: 'Google Analytics',
+          targetCookieIds: ['_ga', '_ga_K4R41W62BR'],
+        },
+      ],
+    },
+    locales: ['en', 'de'],
+  },
+  colorMode: {
+    classSuffix: '',
+  },
+  htmlValidator: {
+    failOnError: true,
+    logLevel: 'warning',
+  },
+  i18n: {
+    baseUrl: BASE_URL,
+    defaultLocale: 'en', // Must be set for the default prefix_except_default prefix strategy.
+    detectBrowserLanguage: {
+      cookieSecure: true,
+      redirectOn: 'root',
+    },
+    locales: LOCALES,
+    vueI18n: {
+      messages: {
+        de: localeDe,
+        en: localeEn,
+      },
+      fallbackWarn: false, // TODO: don't show incorrect warnings (https://github.com/intlify/vue-i18n-next/issues/776)
+    },
   },
 })
