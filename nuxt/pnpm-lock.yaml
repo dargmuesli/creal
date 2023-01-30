@@ -5,7 +5,7 @@ specifiers:
   '@aws-sdk/credential-providers': 3.259.0
   '@aws-sdk/s3-request-presigner': 3.259.0
   '@babel/core': 7.20.12
-  '@dargmuesli/nuxt-cookie-control': 3.0.0
+  '@dargmuesli/nuxt-cookie-control': 5.0.0-beta.2
   '@funken-studio/sitemap-nuxt-3': 4.0.4
   '@graphql-codegen/cli': 2.16.4
   '@graphql-codegen/typescript': 2.8.7
@@ -92,7 +92,7 @@ devDependencies:
   '@aws-sdk/credential-providers': 3.259.0
   '@aws-sdk/s3-request-presigner': 3.259.0
   '@babel/core': 7.20.12
-  '@dargmuesli/nuxt-cookie-control': 3.0.0_rollup@3.11.0
+  '@dargmuesli/nuxt-cookie-control': 5.0.0-beta.2_rollup@3.11.0
   '@funken-studio/sitemap-nuxt-3': 4.0.4_rollup@3.11.0
   '@graphql-codegen/cli': 2.16.4_wl4vyuczoxcwwozwumwpxheb2e
   '@graphql-codegen/typescript': 2.8.7_graphql@16.6.0
@@ -1961,10 +1961,10 @@ packages:
       - supports-color
     dev: true
 
-  /@dargmuesli/nuxt-cookie-control/3.0.0_rollup@3.11.0:
-    resolution: {integrity: sha512-ewlYK2SXhzbtZmMFQktWCBsYj17ql5zfFHHA7AfTPsQLJx8gf3GbUL5bKe1uoDWwj2E9cuzMmVSVCvuMoZfg/A==}
+  /@dargmuesli/nuxt-cookie-control/5.0.0-beta.2_rollup@3.11.0:
+    resolution: {integrity: sha512-9GLiyetW2R2gdSEGYTpfel5Zq6QQeRaiNpQ5VLlOD1Zb6gm72f05Gy2KTNcJHL8j9xofnWIw3+zGkvIQD3hLpQ==}
     dependencies:
-      '@nuxt/kit': 3.0.0_rollup@3.11.0
+      '@nuxt/kit': 3.1.1_rollup@3.11.0
       '@sindresorhus/slugify': 2.1.1
       css-vars-ponyfill: 2.4.8
       js-cookie: 3.0.1
