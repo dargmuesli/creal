@@ -48,7 +48,7 @@ specifiers:
   defu: 6.1.2
   eslint: 8.33.0
   eslint-config-prettier: 8.6.0
-  eslint-plugin-compat: 4.0.2
+  eslint-plugin-compat: 4.1.1
   eslint-plugin-nuxt: 4.0.0
   eslint-plugin-prettier: 4.2.1
   eslint-plugin-yml: 1.4.0
@@ -135,7 +135,7 @@ devDependencies:
   defu: 6.1.2
   eslint: 8.33.0
   eslint-config-prettier: 8.6.0_eslint@8.33.0
-  eslint-plugin-compat: 4.0.2_eslint@8.33.0
+  eslint-plugin-compat: 4.1.1_eslint@8.33.0
   eslint-plugin-nuxt: 4.0.0_eslint@8.33.0
   eslint-plugin-prettier: 4.2.1_qa2thblfovmfepmgrc7z2owbo4
   eslint-plugin-yml: 1.4.0_eslint@8.33.0
@@ -1360,7 +1360,7 @@ packages:
       '@babel/compat-data': 7.20.14
       '@babel/core': 7.20.12
       '@babel/helper-validator-option': 7.18.6
-      browserslist: 4.21.4
+      browserslist: 4.21.5
       lru-cache: 5.1.1
       semver: 6.3.0
     dev: true
@@ -3374,8 +3374,8 @@ packages:
     resolution: {integrity: sha512-n2RC9d6XatVbWFdHLimzzUJxJ1KY8LdjqrW6YvGPiRmsHkhOUx74/Ct10x5Yo7bC/Jvqx7cDEW8IMPv/+vwEzA==}
     dev: true
 
-  /@mdn/browser-compat-data/4.2.1:
-    resolution: {integrity: sha512-EWUguj2kd7ldmrF9F+vI5hUOralPd+sdsUnYbRy33vZTuZkduC1shE9TtEMEjAQwyfyMb4ole5KtjF8MsnQOlA==}
+  /@mdn/browser-compat-data/5.2.34:
+    resolution: {integrity: sha512-Z2YDZ+wTOo9q7ztKndznivTbPk+DOVDUcc8Gdq3nE00AErSZlt/aWNlE33lVfR/7FcP9Zz3uaSA2nBzOGGrh8A==}
     dev: true
 
   /@netlify/functions/1.4.0:
@@ -5195,10 +5195,21 @@ packages:
     engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
     hasBin: true
     dependencies:
-      caniuse-lite: 1.0.30001449
+      caniuse-lite: 1.0.30001451
       electron-to-chromium: 1.4.284
       node-releases: 2.0.8
       update-browserslist-db: 1.0.10_browserslist@4.21.4
+    dev: true
+
+  /browserslist/4.21.5:
+    resolution: {integrity: sha512-tUkiguQGW7S3IhB7N+c2MV/HZPSCPAAiYBZXLsBhFB/PCy6ZKKsZrmBayHV9fdGV/ARIfJ14NkxKzRDjvp7L6w==}
+    engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
+    hasBin: true
+    dependencies:
+      caniuse-lite: 1.0.30001451
+      electron-to-chromium: 1.4.284
+      node-releases: 2.0.8
+      update-browserslist-db: 1.0.10_browserslist@4.21.5
     dev: true
 
   /bser/2.1.1:
@@ -5322,14 +5333,18 @@ packages:
   /caniuse-api/3.0.0:
     resolution: {integrity: sha512-bsTwuIg/BZZK/vreVTYYbSWoe2F+71P7K5QGEX+pT250DZbfU1MQ5prOKpPR+LL6uWKK3KMwMCAS74QB3Um1uw==}
     dependencies:
-      browserslist: 4.21.4
-      caniuse-lite: 1.0.30001449
+      browserslist: 4.21.5
+      caniuse-lite: 1.0.30001451
       lodash.memoize: 4.1.2
       lodash.uniq: 4.5.0
     dev: true
 
   /caniuse-lite/1.0.30001449:
     resolution: {integrity: sha512-CPB+UL9XMT/Av+pJxCKGhdx+yg1hzplvFJQlJ2n68PyQGMz9L/E2zCyLdOL8uasbouTUgnPl+y0tccI/se+BEw==}
+    dev: true
+
+  /caniuse-lite/1.0.30001451:
+    resolution: {integrity: sha512-XY7UbUpGRatZzoRft//5xOa69/1iGJRBlrieH6QYrkKLIFn3m7OVEJ81dSrKoy2BnKsdbX5cLrOispZNYo9v2w==}
     dev: true
 
   /capital-case/1.0.4:
@@ -6641,21 +6656,21 @@ packages:
       - supports-color
     dev: true
 
-  /eslint-plugin-compat/4.0.2_eslint@8.33.0:
-    resolution: {integrity: sha512-xqvoO54CLTVaEYGMzhu35Wzwk/As7rCvz/2dqwnFiWi0OJccEtGIn+5qq3zqIu9nboXlpdBN579fZcItC73Ycg==}
+  /eslint-plugin-compat/4.1.1_eslint@8.33.0:
+    resolution: {integrity: sha512-vUAaqKcDwXpVASyCAfKzkfaw3NxZ6FqeCNSGp7yqHpUMzkAiWRO0B6pR5zqh8RUhvybwXhPXvwVKDLr9GqGFUQ==}
     engines: {node: '>=9.x'}
     peerDependencies:
       eslint: ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0
     dependencies:
-      '@mdn/browser-compat-data': 4.2.1
+      '@mdn/browser-compat-data': 5.2.34
       ast-metadata-inferer: 0.7.0
-      browserslist: 4.21.4
-      caniuse-lite: 1.0.30001449
+      browserslist: 4.21.5
+      caniuse-lite: 1.0.30001451
       core-js: 3.27.2
       eslint: 8.33.0
       find-up: 5.0.0
       lodash.memoize: 4.1.2
-      semver: 7.3.5
+      semver: 7.3.8
     dev: true
 
   /eslint-plugin-es/3.0.1_eslint@8.33.0:
@@ -9987,7 +10002,7 @@ packages:
     peerDependencies:
       postcss: ^8.2.15
     dependencies:
-      browserslist: 4.21.4
+      browserslist: 4.21.5
       caniuse-api: 3.0.0
       colord: 2.9.3
       postcss: 8.4.21
@@ -10000,7 +10015,7 @@ packages:
     peerDependencies:
       postcss: ^8.2.15
     dependencies:
-      browserslist: 4.21.4
+      browserslist: 4.21.5
       postcss: 8.4.21
       postcss-value-parser: 4.2.0
     dev: true
@@ -10130,7 +10145,7 @@ packages:
     peerDependencies:
       postcss: ^8.2.15
     dependencies:
-      browserslist: 4.21.4
+      browserslist: 4.21.5
       caniuse-api: 3.0.0
       cssnano-utils: 3.1.0_postcss@8.4.21
       postcss: 8.4.21
@@ -10165,7 +10180,7 @@ packages:
     peerDependencies:
       postcss: ^8.2.15
     dependencies:
-      browserslist: 4.21.4
+      browserslist: 4.21.5
       cssnano-utils: 3.1.0_postcss@8.4.21
       postcss: 8.4.21
       postcss-value-parser: 4.2.0
@@ -10256,7 +10271,7 @@ packages:
     peerDependencies:
       postcss: ^8.2.15
     dependencies:
-      browserslist: 4.21.4
+      browserslist: 4.21.5
       postcss: 8.4.21
       postcss-value-parser: 4.2.0
     dev: true
@@ -10299,7 +10314,7 @@ packages:
     peerDependencies:
       postcss: ^8.2.15
     dependencies:
-      browserslist: 4.21.4
+      browserslist: 4.21.5
       caniuse-api: 3.0.0
       postcss: 8.4.21
     dev: true
@@ -10921,14 +10936,6 @@ packages:
     hasBin: true
     dev: true
 
-  /semver/7.3.5:
-    resolution: {integrity: sha512-PoeGJYh8HK4BTO/a9Tf6ZG3veo/A7ZVsYrSA6J8ny9nb3B1VrpkuN+z9OE5wfE5p6H4LchYZsegiQgbJD94ZFQ==}
-    engines: {node: '>=10'}
-    hasBin: true
-    dependencies:
-      lru-cache: 6.0.0
-    dev: true
-
   /semver/7.3.8:
     resolution: {integrity: sha512-NB1ctGL5rlHrPJtFDVIVzTyQylMLu9N9VICA6HSFJo8MCGVTMW6gfpicwKmmK/dAjTOrqu5l63JJOpDSrAis3A==}
     engines: {node: '>=10'}
@@ -11367,7 +11374,7 @@ packages:
     peerDependencies:
       postcss: ^8.2.15
     dependencies:
-      browserslist: 4.21.4
+      browserslist: 4.21.5
       postcss: 8.4.21
       postcss-selector-parser: 6.0.11
     dev: true
@@ -12042,6 +12049,17 @@ packages:
       browserslist: '>= 4.21.0'
     dependencies:
       browserslist: 4.21.4
+      escalade: 3.1.1
+      picocolors: 1.0.0
+    dev: true
+
+  /update-browserslist-db/1.0.10_browserslist@4.21.5:
+    resolution: {integrity: sha512-OztqDenkfFkbSG+tRxBeAnCVPckDBcvibKd35yDONx6OU8N7sqgwc7rCbkJ/WcYtVRZ4ba68d6byhC21GFh7sQ==}
+    hasBin: true
+    peerDependencies:
+      browserslist: '>= 4.21.0'
+    dependencies:
+      browserslist: 4.21.5
       escalade: 3.1.1
       picocolors: 1.0.0
     dev: true
