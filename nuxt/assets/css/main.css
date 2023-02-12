@@ -29,6 +29,10 @@
     @apply vio-prose max-w-full sm:max-w-full md:max-w-full xl:max-w-full 2xl:max-w-full;
   }
 
+  .vio-prose-scheme {
+    @apply vio-prose dark:prose-invert;
+  }
+
   .vio-divide-darken {
     @apply divide-background-brighten dark:divide-background-darken;
   }

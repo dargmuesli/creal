@@ -1,5 +1,5 @@
 <template>
-  <div class="vio-prose m-auto">
+  <div class="vio-prose-scheme m-auto">
     <h1>{{ title }}</h1>
     <h2>{{ t('tmg') }}</h2>
     <p>
