@@ -11,6 +11,9 @@
         <AppLink :to="localePath('/legal-notice')">
           {{ t('legalNotice') }}
         </AppLink>
+        <AppLink :to="localePath('/privacy-policy')">
+          {{ t('privacyPolicy') }}
+        </AppLink>
       </LayoutFooterCategory>
       <LayoutFooterCategory :heading="t('languages')">
         <AppLink
@@ -260,16 +263,18 @@ de:
   copyError: Das Kopieren war nicht erfolgreich.
   languages: Sprachen
   legal: Rechtliches
-  legalNotice: Legal notice
+  legalNotice: Impressum
   linkCopy: Copy link
   mixcloud: Mixcloud
   on: on
+  privacyPolicy: Datenschutz
 en:
   copyError: Copying failed.
   languages: Languages
   legal: Legal
-  legalNotice: Impressum
+  legalNotice: Legal notice
   linkCopy: Link kopieren
   mixcloud: Mixcloud
   on: am
+  privacyPolicy: Privacy policy
 </i18n>
