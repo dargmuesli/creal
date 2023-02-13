@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/dargmuesli/creal/compare/1.3.1...1.4.0) (2023-02-13)
+
+
+### Features
+
+* **legal:** add privacy policy ([8548f7f](https://github.com/dargmuesli/creal/commit/8548f7f2e8ed3275ad24a81316929f19ce2eff01))
+
 ## [1.3.1](https://github.com/dargmuesli/creal/compare/1.3.0...1.3.1) (2023-02-09)
 
 
