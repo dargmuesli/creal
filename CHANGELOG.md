@@ -1,3 +1,10 @@
+## [1.4.1](https://github.com/dargmuesli/creal/compare/1.4.0...1.4.1) (2023-02-15)
+
+
+### Performance Improvements
+
+* **docker:** run cypress in parallel ([6a6039a](https://github.com/dargmuesli/creal/commit/6a6039a0927e0316fca4b64b4461cecca13f0e6b))
+
 # [1.4.0](https://github.com/dargmuesli/creal/compare/1.3.1...1.4.0) (2023-02-13)
 
 
