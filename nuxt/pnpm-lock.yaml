@@ -78,7 +78,7 @@ specifiers:
   stylelint-config-recommended-vue: 1.4.0
   stylelint-config-standard: 30.0.1
   stylelint-no-unsupported-browser-features: 6.1.0
-  sweetalert2: 11.7.1
+  sweetalert2: 11.7.2
   tailwindcss: 3.2.7
   ts-node: 10.9.1
   typescript: 4.9.5
@@ -165,7 +165,7 @@ devDependencies:
   stylelint-config-recommended-vue: 1.4.0_qaaem4ytw5dycdgwcgrc5pmjki
   stylelint-config-standard: 30.0.1_stylelint@15.1.0
   stylelint-no-unsupported-browser-features: 6.1.0_stylelint@15.1.0
-  sweetalert2: 11.7.1
+  sweetalert2: 11.7.2
   tailwindcss: 3.2.7_aesdjsunmf4wiehhujt67my7tu
   ts-node: 10.9.1_4bewfcp2iebiwuold25d6rgcsy
   typescript: 4.9.5
@@ -3411,7 +3411,7 @@ packages:
     engines: {node: ^14.16.0 || ^16.10.0 || ^17.0.0 || ^18.0.0 || ^19.0.0}
     dependencies:
       '@nuxt/schema': 3.2.0_rollup@3.11.0
-      c12: 1.1.0
+      c12: 1.1.2
       consola: 2.15.3
       defu: 6.1.2
       globby: 13.1.3
@@ -3422,7 +3422,7 @@ packages:
       lodash.template: 4.5.0
       mlly: 1.1.1
       pathe: 1.1.0
-      pkg-types: 1.0.1
+      pkg-types: 1.0.2
       scule: 1.0.0
       semver: 7.3.8
       unctx: 2.1.2
@@ -3741,7 +3741,7 @@ packages:
       '@intlify/bundle-utils': 4.0.0_vue-i18n@9.3.0-beta.16
       '@intlify/shared': 9.3.0-beta.16
       '@intlify/unplugin-vue-i18n': 0.8.2_vue-i18n@9.3.0-beta.16
-      '@nuxt/kit': 3.2.0_rollup@3.11.0
+      '@nuxt/kit': 3.2.2_rollup@3.11.0
       '@vue/compiler-sfc': 3.2.47
       cookie-es: 0.5.0
       debug: 4.3.4
@@ -3750,11 +3750,11 @@ packages:
       js-cookie: 3.0.1
       knitwork: 1.0.0
       magic-string: 0.27.0
-      mlly: 1.1.0
+      mlly: 1.1.1
       pathe: 1.1.0
-      pkg-types: 1.0.1
-      ufo: 1.0.1
-      unplugin: 1.0.1
+      pkg-types: 1.0.2
+      ufo: 1.1.0
+      unplugin: 1.1.0
       vue-i18n: 9.3.0-beta.16_vue@3.2.47
       vue-i18n-routing: 0.11.0_nojl5tq4gemnzytwc7cf7ndqfm
     transitivePeerDependencies:
@@ -9329,7 +9329,7 @@ packages:
     dependencies:
       acorn: 8.8.2
       pathe: 1.1.0
-      pkg-types: 1.0.1
+      pkg-types: 1.0.2
       ufo: 1.1.0
     dev: true
 
@@ -11672,8 +11672,8 @@ packages:
       tslib: 2.5.0
     dev: true
 
-  /sweetalert2/11.7.1:
-    resolution: {integrity: sha512-+1bnkbqBl64FnZmi3g4SzAi4F3pL3S2jF1YQvrysv4GbgizfeFqGkJopxR3FnV/eJm6w2SQ2oAmCxSIBjgP/ag==}
+  /sweetalert2/11.7.2:
+    resolution: {integrity: sha512-atPjDa3fv/4xwZpiAt7FZUgAhR5VAASiLP2hu7HUeVDXx+v4/9nD1W0u8xal1e9f2/qGh0DwTxPXPV9XoZIBvg==}
     dev: true
 
   /synckit/0.8.5:
@@ -12113,15 +12113,6 @@ packages:
     engines: {node: '>=0.10.0'}
     dependencies:
       normalize-path: 2.1.1
-    dev: true
-
-  /unplugin/1.0.1:
-    resolution: {integrity: sha512-aqrHaVBWW1JVKBHmGo33T5TxeL0qWzfvjWokObHA9bYmN7eNDkwOxmLjhioHl9878qDFMAaT51XNroRyuz7WxA==}
-    dependencies:
-      acorn: 8.8.2
-      chokidar: 3.5.3
-      webpack-sources: 3.2.3
-      webpack-virtual-modules: 0.5.0
     dev: true
 
   /unplugin/1.1.0:
