@@ -54,7 +54,7 @@ specifiers:
   eslint-plugin-yml: 1.5.0
   graphql: 16.6.0
   graphql-tag: 2.12.6
-  h3: 1.4.0
+  h3: 1.5.0
   is-https: 4.0.0
   jose: 4.12.0
   lint-staged: 13.1.2
@@ -141,7 +141,7 @@ devDependencies:
   eslint-plugin-yml: 1.5.0_eslint@8.34.0
   graphql: 16.6.0
   graphql-tag: 2.12.6_graphql@16.6.0
-  h3: 1.4.0
+  h3: 1.5.0
   is-https: 4.0.0
   jose: 4.12.0
   lint-staged: 13.1.2
@@ -3771,7 +3771,7 @@ packages:
     resolution: {integrity: sha512-qsHGW1KXBvV5Kq7u3huPnFCUTbHS4Fk8Za2mNPgmUXcwLgp3exvhPtdZfIdjrCF/aZk3A8OZONNmGghs6CecBA==}
     dependencies:
       '@nuxt/kit': 3.2.0_rollup@3.11.0
-      h3: 1.4.0
+      h3: 1.5.0
     transitivePeerDependencies:
       - rollup
       - supports-color
@@ -7818,17 +7818,6 @@ packages:
       duplexer: 0.1.2
     dev: true
 
-  /h3/1.4.0:
-    resolution: {integrity: sha512-FWG+FUdW6XQnf/54L4AXzZs1KUYwSJk5cbdFvTM4EG96bEQiWDJ5003xW4S3UGgXI0VJJgyY6KCaDmAL75kjbA==}
-    dependencies:
-      cookie-es: 0.5.0
-      destr: 1.2.2
-      iron-webcrypto: 0.4.0
-      radix3: 1.0.0
-      ufo: 1.0.1
-      uncrypto: 0.1.2
-    dev: true
-
   /h3/1.5.0:
     resolution: {integrity: sha512-M+T6P4iOB0ipkC/ZCdw2w8iTF7yY6phmkILOwlrtcPuVv+KW9BilOspYlvnblpKx1nnNl+3iBsZIvZ8pvKM8Nw==}
     dependencies:
@@ -8188,10 +8177,6 @@ packages:
   /ip-regex/5.0.0:
     resolution: {integrity: sha512-fOCG6lhoKKakwv+C6KdsOnGvgXnmgfmp0myi3bcNwj3qfwPAxRKWEuFhvEFF7ceYIz6+1jRZ+yguLFAmUNPEfw==}
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
-    dev: true
-
-  /iron-webcrypto/0.4.0:
-    resolution: {integrity: sha512-5OG53gJ4dBTq4y3IJqK7MEG9CPZRsYn9EP9J4jjgH4TcP/ywdsSMAmqj9VTSzdXu0/xfUrqjGHU7WLUme2+k5Q==}
     dev: true
 
   /iron-webcrypto/0.5.0:
@@ -12007,10 +11992,6 @@ packages:
 
   /ua-parser-js/0.7.33:
     resolution: {integrity: sha512-s8ax/CeZdK9R/56Sui0WM6y9OFREJarMRHqLB2EwkovemBxNQ+Bqu8GAsUnVcXKgphb++ghr/B2BZx4mahujPw==}
-    dev: true
-
-  /ufo/1.0.1:
-    resolution: {integrity: sha512-boAm74ubXHY7KJQZLlXrtMz52qFvpsbOxDcZOnw/Wf+LS4Mmyu7JxmzD4tDLtUQtmZECypJ0FrCz4QIe6dvKRA==}
     dev: true
 
   /ufo/1.1.0:
