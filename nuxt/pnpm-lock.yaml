@@ -64,7 +64,7 @@ specifiers:
   node-fetch: 3.3.0
   nuxt: 3.2.2
   nuxt-schema-org: 2.1.1
-  pinia: 2.0.30
+  pinia: 2.0.31
   postcss: 8.4.21
   postcss-html: 1.5.0
   prettier: 2.8.4
@@ -151,7 +151,7 @@ devDependencies:
   node-fetch: 3.3.0
   nuxt: 3.2.2_s5dirx6i2l4hvxla466ldaf35y
   nuxt-schema-org: 2.1.1_yq4347qleoaqnciamuhxa5dppe
-  pinia: 2.0.30_hmuptsblhheur2tugfgucj7gc4
+  pinia: 2.0.31_hmuptsblhheur2tugfgucj7gc4
   postcss: 8.4.21
   postcss-html: 1.5.0
   prettier: 2.8.4
@@ -10035,24 +10035,6 @@ packages:
   /pify/2.3.0:
     resolution: {integrity: sha512-udgsAY+fTnvv7kI7aaxbqwWNb0AHiB0qBO89PZKPkoTmGOgdbrHDKD+0B2X4uTfJ/FT1R09r9gTsjUjNJotuog==}
     engines: {node: '>=0.10.0'}
-    dev: true
-
-  /pinia/2.0.30_hmuptsblhheur2tugfgucj7gc4:
-    resolution: {integrity: sha512-q6DUmxWwe/mQgg+55QQjykpKC+aGeGdaJV3niminl19V08dE+LRTvSEuqi6/NLSGCKHI49KGL6tMNEOssFiMyA==}
-    peerDependencies:
-      '@vue/composition-api': ^1.4.0
-      typescript: '>=4.4.4'
-      vue: ^2.6.14 || ^3.2.0
-    peerDependenciesMeta:
-      '@vue/composition-api':
-        optional: true
-      typescript:
-        optional: true
-    dependencies:
-      '@vue/devtools-api': 6.5.0
-      typescript: 4.9.5
-      vue: 3.2.47
-      vue-demi: 0.13.11_vue@3.2.47
     dev: true
 
   /pinia/2.0.31_hmuptsblhheur2tugfgucj7gc4:
