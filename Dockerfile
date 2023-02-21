@@ -14,7 +14,7 @@ RUN apt-get update \
         libdbd-pg-perl postgresql-client sqitch \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* \
-    && npm install -g pnpm
+    && corepack enable
 
 WORKDIR /srv/app/
 
@@ -39,11 +39,12 @@ WORKDIR /srv/app/
 
 COPY ./nuxt/pnpm-lock.yaml ./
 
-RUN npm install -g pnpm && \
+RUN corepack enable && \
     pnpm fetch
 
 COPY ./nuxt/ ./
 
+# TODO: create ticket about node-jiti folder (https://github.com/dargmuesli/jonas-thelemann/issues/178)
 RUN pnpm install --offline \
     && rm -rf ./node-jiti
 
@@ -55,8 +56,6 @@ RUN pnpm install --offline \
 # Could be the specific version of `node:alpine`, but the `prepare` stage uses slim too.
 FROM node:19.6.1-slim@sha256:e684615bdfb71cb676b3d0dfcc538c416f7254697d8f9639bd87255062fd1681 AS build
 
-ARG CI=false
-ENV CI ${CI}
 ARG NUXT_PUBLIC_STACK_DOMAIN=jonas-thelemann.de
 ENV NUXT_PUBLIC_STACK_DOMAIN=${NUXT_PUBLIC_STACK_DOMAIN}
 
@@ -65,7 +64,7 @@ WORKDIR /srv/app/
 COPY --from=prepare /srv/app/ ./
 
 ENV NODE_ENV=production
-RUN npm install -g pnpm && \
+RUN corepack enable && \
     pnpm run build
 
 
@@ -80,7 +79,7 @@ WORKDIR /srv/app/
 
 COPY --from=prepare /srv/app/ ./
 
-RUN npm install -g pnpm && \
+RUN corepack enable && \
     pnpm run lint
 
 
@@ -88,7 +87,7 @@ RUN npm install -g pnpm && \
 # Nuxt: test (integration)
 
 # Should be the specific version of `cypress/included`.
-FROM cypress/included:12.5.1@sha256:5cd0a6192ccf93739ce8c1f080ead0d6058eab991bc093a15adcf1c34e443972 AS test-integration_base
+FROM cypress/included:12.6.0@sha256:48e0fcdde8ef5350d7638b939f6f9fe3c3321044a02416e72f0f32fc6f8d93b5 AS test-integration_base
 
 ARG UNAME=cypress
 ARG UID=1000
@@ -96,16 +95,13 @@ ARG GID=1000
 
 WORKDIR /srv/app/
 
-RUN cp /usr/local/bin/cypress /root/.cache/Cypress \
-    # pnpm
-    && npm install -g pnpm \
+RUN corepack enable \
     # user
     && groupadd -g $GID -o $UNAME \
-    && useradd -m -u $UID -g $GID -o -s /bin/bash $UNAME \
-    # clean
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/* \
-    && cypress verify
+    && useradd -m -u $UID -g $GID -o -s /bin/bash $UNAME
+
+# Use the Cypress version installed by pnpm, not as provided by the Docker image.
+COPY --from=prepare --chown=$UNAME /root/.cache/Cypress /root/.cache/Cypress
 
 USER $UNAME
 
@@ -116,14 +112,14 @@ VOLUME /srv/app
 # Nuxt: test (integration, development)
 
 # Should be the specific version of `cypress/included`.
-FROM cypress/included:12.5.1@sha256:5cd0a6192ccf93739ce8c1f080ead0d6058eab991bc093a15adcf1c34e443972 AS test-integration-dev
+FROM cypress/included:12.6.0@sha256:c94488e51545b6604c5a511d1dc99e225914c45b16a2778b2fabcb29fb5563a4 AS test-integration-dev
 
-RUN cp /usr/local/bin/cypress /root/.cache/Cypress \
-    # pnpm
-    && npm install -g pnpm
+RUN corepack enable
 
 WORKDIR /srv/app/
 
+# Use the Cypress version installed by pnpm, not as provided by the Docker image.
+COPY --from=prepare /root/.cache/Cypress /root/.cache/Cypress
 COPY --from=prepare /srv/app/ ./
 
 RUN pnpm test:integration:dev
@@ -133,14 +129,14 @@ RUN pnpm test:integration:dev
 # Nuxt: test (integration, production)
 
 # Should be the specific version of `cypress/included`.
-FROM cypress/included:12.5.1@sha256:5cd0a6192ccf93739ce8c1f080ead0d6058eab991bc093a15adcf1c34e443972 AS test-integration-prod
+FROM cypress/included:12.6.0@sha256:c94488e51545b6604c5a511d1dc99e225914c45b16a2778b2fabcb29fb5563a4 AS test-integration-prod
 
-RUN cp /usr/local/bin/cypress /root/.cache/Cypress \
-    # pnpm
-    && npm install -g pnpm
+RUN corepack enable
 
 WORKDIR /srv/app/
 
+# Use the Cypress version installed by pnpm, not as provided by the Docker image.
+COPY --from=prepare /root/.cache/Cypress /root/.cache/Cypress
 COPY --from=build /srv/app/ /srv/app/
 COPY --from=test-integration-dev /srv/app/package.json /tmp/test/package.json
 
@@ -150,8 +146,9 @@ RUN pnpm test:integration:prod
 #######################
 # Collect build, lint and test results.
 
-# Should be the specific version of `node:alpine`.
-FROM node:19.6.1-alpine@sha256:64b0af3059f2471184168d366aa5a9fbad9c29e104e87e35336d03e409a27623 AS collect
+# Should be the specific version of `node:slim`.
+# Could be the specific version of `node:alpine`, but the `prepare` stage uses slim too.
+FROM node:19.6.1-slim@sha256:e684615bdfb71cb676b3d0dfcc538c416f7254697d8f9639bd87255062fd1681 AS collect
 
 WORKDIR /srv/app/
 
