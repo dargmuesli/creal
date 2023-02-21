@@ -1,3 +1,10 @@
+## [1.4.2](https://github.com/dargmuesli/creal/compare/1.4.1...1.4.2) (2023-02-21)
+
+
+### Bug Fixes
+
+* **docker:** do not ignore dockerfile ([64a22ee](https://github.com/dargmuesli/creal/commit/64a22ee3376b2982d31bf94cc13c1877c571bd38))
+
 ## [1.4.1](https://github.com/dargmuesli/creal/compare/1.4.0...1.4.1) (2023-02-15)
 
 
