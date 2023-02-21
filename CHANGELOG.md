@@ -1,3 +1,10 @@
+## [1.4.3](https://github.com/dargmuesli/creal/compare/1.4.2...1.4.3) (2023-02-21)
+
+
+### Performance Improvements
+
+* **docker:** align to jonas-thelemann ([fe9aafb](https://github.com/dargmuesli/creal/commit/fe9aafbe2f0e288f3b6f5c38edcf0b6406ab26a9))
+
 ## [1.4.2](https://github.com/dargmuesli/creal/compare/1.4.1...1.4.2) (2023-02-21)
 
 
