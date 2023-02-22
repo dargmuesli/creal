@@ -7,7 +7,7 @@ specifiers:
   '@babel/core': 7.21.0
   '@dargmuesli/nuxt-cookie-control': 5.0.0-beta.2
   '@funken-studio/sitemap-nuxt-3': 4.0.4
-  '@graphql-codegen/cli': 3.1.0
+  '@graphql-codegen/cli': 3.2.0
   '@graphql-codegen/typescript': 3.0.1
   '@graphql-codegen/typescript-operations': 3.0.1
   '@graphql-codegen/typescript-urql-graphcache': 2.4.3
@@ -94,7 +94,7 @@ devDependencies:
   '@babel/core': 7.21.0
   '@dargmuesli/nuxt-cookie-control': 5.0.0-beta.2_rollup@3.11.0
   '@funken-studio/sitemap-nuxt-3': 4.0.4_rollup@3.11.0
-  '@graphql-codegen/cli': 3.1.0_savsl3g3pdaq3utprfj3oshmgm
+  '@graphql-codegen/cli': 3.2.0_savsl3g3pdaq3utprfj3oshmgm
   '@graphql-codegen/typescript': 3.0.1_graphql@16.6.0
   '@graphql-codegen/typescript-operations': 3.0.1_graphql@16.6.0
   '@graphql-codegen/typescript-urql-graphcache': 2.4.3_augkor4gfvt5io7wvlisjx2v4u
@@ -2434,8 +2434,8 @@ packages:
       - supports-color
     dev: true
 
-  /@graphql-codegen/cli/3.1.0_savsl3g3pdaq3utprfj3oshmgm:
-    resolution: {integrity: sha512-MUYyHkh/n8XVuONk7AYvJV/ObZDlPGwyevl8ch21jNFNj2M5PM39WViHKmIYwVw2n4fDmoh3BNdaeHQs1wb4HA==}
+  /@graphql-codegen/cli/3.2.0_savsl3g3pdaq3utprfj3oshmgm:
+    resolution: {integrity: sha512-o+oTOIMlBF4PE+JDo3m37W/xQNYUIASFOc5K9DHkWh4zW/qVHVkGyyu2fEgI8PbscODALyNYWG/ArGXoIAy2/A==}
     hasBin: true
     peerDependencies:
       graphql: ^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
@@ -2455,9 +2455,9 @@ packages:
       '@graphql-tools/prisma-loader': 7.2.63_dsrot7vgr22owbcoisakchg2na
       '@graphql-tools/url-loader': 7.17.12_dsrot7vgr22owbcoisakchg2na
       '@graphql-tools/utils': 9.2.1_graphql@16.6.0
+      '@parcel/watcher': 2.1.0
       '@whatwg-node/fetch': 0.8.1_@types+node@18.14.0
       chalk: 4.1.2
-      chokidar: 3.5.3
       cosmiconfig: 7.1.0
       cosmiconfig-typescript-loader: 4.3.0_6og66usasbupn3od2rlr5mhede
       debounce: 1.2.1
@@ -3791,6 +3791,17 @@ packages:
       lodash.unionby: 4.8.0
       minimatch: 3.1.2
       sitemap: 4.1.1
+    dev: true
+
+  /@parcel/watcher/2.1.0:
+    resolution: {integrity: sha512-8s8yYjd19pDSsBpbkOHnT6Z2+UJSuLQx61pCFM0s5wSRvKCEMDjd/cHY3/GI1szHIWbpXpsJdg3V6ISGGx9xDw==}
+    engines: {node: '>= 10.0.0'}
+    requiresBuild: true
+    dependencies:
+      is-glob: 4.0.3
+      micromatch: 4.0.5
+      node-addon-api: 3.2.1
+      node-gyp-build: 4.6.0
     dev: true
 
   /@peculiar/asn1-schema/2.3.3:
@@ -9441,6 +9452,10 @@ packages:
     dependencies:
       lower-case: 2.0.2
       tslib: 2.5.0
+    dev: true
+
+  /node-addon-api/3.2.1:
+    resolution: {integrity: sha512-mmcei9JghVNDYydghQmeDX8KoAm0FAiYyIcUt/N4nhyAipB17pllZQDOJD2fotxABnt4Mdz+dKTO7eftLg4d0A==}
     dev: true
 
   /node-domexception/1.0.0:
