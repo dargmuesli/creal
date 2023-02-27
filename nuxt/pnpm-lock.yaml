@@ -30,7 +30,7 @@ specifiers:
   '@types/lodash-es': 4.17.6
   '@types/marked': 4.0.8
   '@types/node': 18.14.2
-  '@unhead/vue': 1.1.9
+  '@unhead/vue': 1.1.11
   '@urql/core': 3.1.1
   '@urql/devtools': 2.0.3
   '@urql/exchange-graphcache': 5.0.9
@@ -117,7 +117,7 @@ devDependencies:
   '@types/lodash-es': 4.17.6
   '@types/marked': 4.0.8
   '@types/node': 18.14.2
-  '@unhead/vue': 1.1.9_vue@3.2.47
+  '@unhead/vue': 1.1.11_vue@3.2.47
   '@urql/core': 3.1.1_graphql@16.6.0
   '@urql/devtools': 2.0.3_ioimjbecbkqzfeizgamzrgwc3y
   '@urql/exchange-graphcache': 5.0.9_graphql@16.6.0
@@ -150,7 +150,7 @@ devDependencies:
   moment: 2.29.4
   node-fetch: 3.3.0
   nuxt: 3.2.2_fmclrb2zyqd7734u4vsj5pdtdy
-  nuxt-schema-org: 2.1.2_zd6pl523sqbne4ng3v2q3yltqe
+  nuxt-schema-org: 2.1.2_6t4wcmfdnrhdr2kti5bh3jg7mq
   pinia: 2.0.32_hmuptsblhheur2tugfgucj7gc4
   postcss: 8.4.21
   postcss-html: 1.5.0
@@ -3403,33 +3403,6 @@ packages:
     resolution: {integrity: sha512-YBI/6o2EBz02tdEJRBK8xkt3zvOFOWlLBf7WKYGBsSYSRtjjgrqPe2skp6VLLmKx5WbHHDNcW+6oACaurxGzeA==}
     dev: true
 
-  /@nuxt/kit/3.1.1_rollup@3.11.0:
-    resolution: {integrity: sha512-wmqVCIuD/te6BKf3YiqWyMumKI5JIpkiv0li/1Y3QHnTkoxyIhLkbFgNcQHuBxJ3eMlk2UjAjAqWiqBHTX54vQ==}
-    engines: {node: ^14.16.0 || ^16.10.0 || ^17.0.0 || ^18.0.0 || ^19.0.0}
-    dependencies:
-      '@nuxt/schema': 3.1.1_rollup@3.11.0
-      c12: 1.1.2
-      consola: 2.15.3
-      defu: 6.1.2
-      globby: 13.1.3
-      hash-sum: 2.0.0
-      ignore: 5.2.4
-      jiti: 1.17.1
-      knitwork: 1.0.0
-      lodash.template: 4.5.0
-      mlly: 1.1.1
-      pathe: 1.1.0
-      pkg-types: 1.0.2
-      scule: 1.0.0
-      semver: 7.3.8
-      unctx: 2.1.2
-      unimport: 2.2.4_rollup@3.11.0
-      untyped: 1.2.2
-    transitivePeerDependencies:
-      - rollup
-      - supports-color
-    dev: true
-
   /@nuxt/kit/3.2.2_rollup@3.11.0:
     resolution: {integrity: sha512-T3UeLxGSNl7dQgKzmtBbPEkUiiBYgXI+KkemmpkYbQK/l+bWy2f9VQw/Rl0HkQLfRTE2fS8q8jhsOedFiEnHQQ==}
     engines: {node: ^14.18.0 || ^16.10.0 || ^17.0.0 || ^18.0.0 || ^19.0.0}
@@ -3478,28 +3451,6 @@ packages:
       semver: 7.3.8
       unctx: 2.1.2
       unimport: 2.2.4_rollup@3.17.3
-      untyped: 1.2.2
-    transitivePeerDependencies:
-      - rollup
-      - supports-color
-    dev: true
-
-  /@nuxt/schema/3.1.1_rollup@3.11.0:
-    resolution: {integrity: sha512-/KuoCDVGrLD9W7vwuYhu4HbdT/BpbrhA4Pm9dGn7Jah40kHDGqUnJxugvMjt+4suq53rLQyTA0LRDWfFxfxAOQ==}
-    engines: {node: ^14.16.0 || ^16.10.0 || ^17.0.0 || ^18.0.0 || ^19.0.0}
-    dependencies:
-      c12: 1.1.2
-      create-require: 1.1.1
-      defu: 6.1.2
-      hookable: 5.4.2
-      jiti: 1.17.1
-      pathe: 1.1.0
-      pkg-types: 1.0.2
-      postcss-import-resolver: 2.0.0
-      scule: 1.0.0
-      std-env: 3.3.2
-      ufo: 1.1.0
-      unimport: 2.2.4_rollup@3.11.0
       untyped: 1.2.2
     transitivePeerDependencies:
       - rollup
@@ -4345,6 +4296,13 @@ packages:
       eslint-visitor-keys: 3.3.0
     dev: true
 
+  /@unhead/dom/1.1.11:
+    resolution: {integrity: sha512-rCRLCCZOml5UHgL381XTKefpVuGV3XP4RBeLPbDxwH/yM9Sa4sjNdgSV76r9VKy3S93ns+hGr6kE+zow1St1nQ==}
+    dependencies:
+      '@unhead/schema': 1.1.11
+      '@unhead/shared': 1.1.11
+    dev: true
+
   /@unhead/dom/1.1.9:
     resolution: {integrity: sha512-VwI/rnY4mwEiv3V0mef++2agvHaP4qf+pqM3jbaCXiSQmsGIGIbd5LmStg1yOWvc0XMDVAr+B2MkbmB+rnn+3w==}
     dependencies:
@@ -4352,13 +4310,20 @@ packages:
       '@unhead/shared': 1.1.9
     dev: true
 
-  /@unhead/schema-org-vue/0.5.0_@unhead+vue@1.1.9:
+  /@unhead/schema-org-vue/0.5.0_@unhead+vue@1.1.11:
     resolution: {integrity: sha512-UEB54jF2+HBoHKqyqdw7oNLqdhDfEX/FSImtPT3oTDTfGBWpc7RGUPe2RG/j4N78Kk3SsfnHxxJO0GKIGPJRwQ==}
     engines: {node: '>=14.0.0'}
     peerDependencies:
       '@unhead/vue': '>=1.1.9'
     dependencies:
-      '@unhead/vue': 1.1.9_vue@3.2.47
+      '@unhead/vue': 1.1.11_vue@3.2.47
+    dev: true
+
+  /@unhead/schema/1.1.11:
+    resolution: {integrity: sha512-BL1jERCX/ny5SoZKnqWHRTkTZRNZhVu4PJaJjFr1Be1auxAjgXnN3TecBepb/A+fNCOvPbeIaO4ItsLRIb4XQQ==}
+    dependencies:
+      hookable: 5.4.2
+      zhead: 2.0.4
     dev: true
 
   /@unhead/schema/1.1.9:
@@ -4366,6 +4331,12 @@ packages:
     dependencies:
       hookable: 5.4.2
       zhead: 2.0.4
+    dev: true
+
+  /@unhead/shared/1.1.11:
+    resolution: {integrity: sha512-x2FzJUHmN3rau5VLbz62rGrIi0eis+tDjyxucMF/jRiMfBiYzSFbco6qpKqpPK0O1+zXoaw7u1Mko1bQ3hL6CQ==}
+    dependencies:
+      '@unhead/schema': 1.1.11
     dev: true
 
   /@unhead/shared/1.1.9:
@@ -4381,15 +4352,15 @@ packages:
       '@unhead/shared': 1.1.9
     dev: true
 
-  /@unhead/vue/1.1.9_vue@3.2.47:
-    resolution: {integrity: sha512-Q0f1z5YIYJrwogIpSNNd78qP1I6k9MXhGaDumCFRbau8vUtm0iXJVq4auWeulMsf6er+LR8jV3NgazPMwwps5w==}
+  /@unhead/vue/1.1.11_vue@3.2.47:
+    resolution: {integrity: sha512-VBDQH2GUrmWbgERbXKeS3y53uYr09yKKo2MCEDcEs4xMuBrx0Zh3Jtj8Bzu1p1l3EGHg23MgbAzNu6WnmbxXOg==}
     peerDependencies:
       vue: '>=2.7 || >=3'
     dependencies:
-      '@unhead/schema': 1.1.9
-      '@unhead/shared': 1.1.9
+      '@unhead/schema': 1.1.11
+      '@unhead/shared': 1.1.11
       hookable: 5.4.2
-      unhead: 1.1.9
+      unhead: 1.1.11
       vue: 3.2.47
     dev: true
 
@@ -4677,10 +4648,10 @@ packages:
     peerDependencies:
       vue: '>=2.7 || >=3'
     dependencies:
-      '@unhead/dom': 1.1.9
-      '@unhead/schema': 1.1.9
+      '@unhead/dom': 1.1.11
+      '@unhead/schema': 1.1.11
       '@unhead/ssr': 1.1.9
-      '@unhead/vue': 1.1.9_vue@3.2.47
+      '@unhead/vue': 1.1.11_vue@3.2.47
       vue: 3.2.47
     dev: true
 
@@ -9566,11 +9537,11 @@ packages:
       fsevents: 2.3.2
     dev: true
 
-  /nuxt-schema-org/2.1.2_zd6pl523sqbne4ng3v2q3yltqe:
+  /nuxt-schema-org/2.1.2_6t4wcmfdnrhdr2kti5bh3jg7mq:
     resolution: {integrity: sha512-2mao0slpJgR4vOaDjhVKHn1apQ4ZH6T9FmmOmFus9YI9wAD6X6Q4USKWWoYRqNIyMEF2WX26sGr4uSPrhp1U9A==}
     dependencies:
       '@nuxt/kit': 3.2.2_rollup@3.11.0
-      '@unhead/schema-org-vue': 0.5.0_@unhead+vue@1.1.9
+      '@unhead/schema-org-vue': 0.5.0_@unhead+vue@1.1.11
       pathe: 1.1.0
     transitivePeerDependencies:
       - '@unhead/vue'
@@ -11979,6 +11950,15 @@ packages:
       mime: 3.0.0
       node-fetch-native: 1.0.2
       pathe: 1.1.0
+    dev: true
+
+  /unhead/1.1.11:
+    resolution: {integrity: sha512-R7hObRUhNNIWxiZSNiIPXEzA0QJT+hTvvud+FVhqdQzUhkFXhzE1fYuGYI8Ktsr+f8YgefuuDA9f0Mo4q+CRmA==}
+    dependencies:
+      '@unhead/dom': 1.1.11
+      '@unhead/schema': 1.1.11
+      '@unhead/shared': 1.1.11
+      hookable: 5.4.2
     dev: true
 
   /unhead/1.1.9:
