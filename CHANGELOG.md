@@ -1,3 +1,10 @@
+# [1.5.0](https://github.com/dargmuesli/creal/compare/1.4.3...1.5.0) (2023-02-27)
+
+
+### Features
+
+* **nuxt-cookie-control:** migrate to v5 ([0565139](https://github.com/dargmuesli/creal/commit/056513904bcb835de3f384772525d9d7a747ba86))
+
 ## [1.4.3](https://github.com/dargmuesli/creal/compare/1.4.2...1.4.3) (2023-02-21)
 
 
