@@ -1,4 +1,4 @@
-[![build status](https://github.com/dargmuesli/creal/workflows/CI/badge.svg)](https://github.com/dargmuesli/creal/actions?query=workflow%3A%22CI%22 "build status")
+[![CI](https://github.com/dargmuesli/creal/actions/workflows/ci.yml/badge.svg)](https://github.com/dargmuesli/creal/actions/workflows/ci.yml)
 
 # cReal
 
