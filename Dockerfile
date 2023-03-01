@@ -33,7 +33,7 @@ CMD ["pnpm", "run", "dev"]
 # Prepare Nuxt.
 
 # Should be the specific version of `node:slim`.
-FROM node:19.7.0-slim@sha256:9e79f15dcf6544b7503ba032cffba65b5a1467a5ceca60fab258f518c5aa3828 AS prepare
+FROM node:19.7.0-slim@sha256:3d41bbdc64267e7d4eefcbbfa8a0d038da6fe84c55377b65955d8e77fff32a4b AS prepare
 
 WORKDIR /srv/app/
 
@@ -54,7 +54,7 @@ RUN pnpm install --offline \
 
 # Should be the specific version of `node:slim`.
 # Could be the specific version of `node:alpine`, but the `prepare` stage uses slim too.
-FROM node:19.7.0-slim@sha256:9e79f15dcf6544b7503ba032cffba65b5a1467a5ceca60fab258f518c5aa3828 AS build
+FROM node:19.7.0-slim@sha256:3d41bbdc64267e7d4eefcbbfa8a0d038da6fe84c55377b65955d8e77fff32a4b AS build
 
 ARG NUXT_PUBLIC_STACK_DOMAIN=jonas-thelemann.de
 ENV NUXT_PUBLIC_STACK_DOMAIN=${NUXT_PUBLIC_STACK_DOMAIN}
@@ -73,7 +73,7 @@ RUN corepack enable && \
 
 # Should be the specific version of `node:slim`.
 # Could be the specific version of `node:alpine`, but the `prepare` stage uses slim too.
-FROM node:19.7.0-slim@sha256:9e79f15dcf6544b7503ba032cffba65b5a1467a5ceca60fab258f518c5aa3828 AS lint
+FROM node:19.7.0-slim@sha256:3d41bbdc64267e7d4eefcbbfa8a0d038da6fe84c55377b65955d8e77fff32a4b AS lint
 
 WORKDIR /srv/app/
 
@@ -148,7 +148,7 @@ RUN pnpm test:integration:prod
 
 # Should be the specific version of `node:slim`.
 # Could be the specific version of `node:alpine`, but the `prepare` stage uses slim too.
-FROM node:19.7.0-slim@sha256:9e79f15dcf6544b7503ba032cffba65b5a1467a5ceca60fab258f518c5aa3828 AS collect
+FROM node:19.7.0-slim@sha256:3d41bbdc64267e7d4eefcbbfa8a0d038da6fe84c55377b65955d8e77fff32a4b AS collect
 
 WORKDIR /srv/app/
 
@@ -164,7 +164,7 @@ COPY --from=test-integration-prod /srv/app/package.json /tmp/test/package.json
 
 # Should be the specific version of `node:slim`.
 # `sqitch` requires at least `buster`.
-FROM node:19.7.0-slim@sha256:9e79f15dcf6544b7503ba032cffba65b5a1467a5ceca60fab258f518c5aa3828 AS production
+FROM node:19.7.0-slim@sha256:3d41bbdc64267e7d4eefcbbfa8a0d038da6fe84c55377b65955d8e77fff32a4b AS production
 
 ENV NODE_ENV=production
 
