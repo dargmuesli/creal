@@ -1,8 +1,8 @@
 import { defu } from 'defu'
 import { appendHeader, defineEventHandler } from 'h3'
 
-import { AWS_BUCKET_NAME } from '~/utils/constants'
-import { getDomainTldPort, getHost } from '~/utils/util'
+import { AWS_BUCKET_NAME, TIMEZONE_HEADER_KEY } from '~/utils/constants'
+import { getDomainTldPort, getHost, getTimezone } from '~/utils/util'
 
 function getCsp(host: string): Record<string, Array<string>> {
   const hostName = host.replace(/:[0-9]+$/, '')
@@ -78,7 +78,9 @@ function getCspAsString(host: string): string {
   return result
 }
 
-export default defineEventHandler((event) => {
+export default defineEventHandler(async (event) => {
+  event.node.req.headers[TIMEZONE_HEADER_KEY] = await getTimezone(event)
+
   const host = getHost(event.node.req)
 
   appendHeader(event, 'Content-Security-Policy', getCspAsString(host))

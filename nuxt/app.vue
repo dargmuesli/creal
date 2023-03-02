@@ -9,6 +9,7 @@
 </template>
 
 <script setup lang="ts">
+const { $moment } = useNuxtApp()
 const { t, locale } = useI18n()
 const cookieControl = useCookieControl()
 
@@ -17,6 +18,20 @@ const loadingIds = useState('loadingIds', () => [loadingId])
 
 // data
 const name = 'cReal'
+
+// methods
+const init = () => {
+  if (process.client) {
+    const cookieTimezone = useCookie(TIMEZONE_COOKIE_NAME, {
+      // default: () => undefined, // setting `default` on the client side only does not write the cookie
+      httpOnly: false,
+      sameSite: 'strict',
+      secure: true,
+    })
+    // @ts-ignore `tz` should be part of `$moment` (https://github.com/iamkun/dayjs/issues/2106)
+    cookieTimezone.value = $moment.tz.guess()
+  }
+}
 
 // computations
 const isLoading = computed(() => !!loadingIds.value.length)
@@ -37,6 +52,7 @@ watch(
 )
 
 // initialization
+init()
 useSchemaOrg([
   definePerson({
     name,
