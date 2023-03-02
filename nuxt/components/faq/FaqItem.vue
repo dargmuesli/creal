@@ -39,7 +39,7 @@ const props = withDefaults(defineProps<Props>(), {})
 const answerRef = ref()
 
 // methods
-function getMaxHeight() {
+const getMaxHeight = () => {
   if (props.isFocused && answerRef.value instanceof Element) {
     return answerRef.value.scrollHeight
   } else {

@@ -34,19 +34,11 @@ const emit = defineEmits<{
 }>()
 
 // methods
-function bytesToString(bytes: number) {
-  return prettyBytes(bytes)
+const bytesToString = (bytes: number) => prettyBytes(bytes)
+const onDownloadClick = () => emit('download')
+const onItemClick = (event: any) => {
+  // double click
+  if (event.detail === 2) onPlayClick()
 }
-function onDownloadClick() {
-  emit('download')
-}
-function onItemClick(event: any) {
-  if (event.detail === 2) {
-    // double click
-    onPlayClick()
-  }
-}
-function onPlayClick() {
-  emit('play')
-}
+const onPlayClick = () => emit('play')
 </script>

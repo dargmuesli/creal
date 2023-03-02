@@ -19,7 +19,10 @@
           >
             <br />
           </i18n-t>
-          <ButtonColored aria-label="start" @click="setShowGreeting(true)">
+          <ButtonColored
+            aria-label="start"
+            @click="setShowGreeting({ save: true })"
+          >
             {{ t('start') }}
           </ButtonColored>
         </div>
@@ -59,19 +62,13 @@ const showGreeting = ref(true)
 const title = t('title')
 
 // methods
-function setShowGreeting(set: boolean): void {
-  if (set) {
+const setShowGreeting = ({ save }: { save: boolean }) => {
+  if (save) {
     sessionStorage.setItem('cReal_showGreeting', 'shown')
   }
 
-  // if (process.server) {
-  //   showGreeting.value = true
-  //   return
-  // }
-
   if (sessionStorage.getItem('cReal_showGreeting') !== 'shown') {
     showGreeting.value = true
-    document.body.classList.add('overflow-hidden')
   } else {
     showGreeting.value = false
     document.body.classList.remove('overflow-hidden')
@@ -80,19 +77,23 @@ function setShowGreeting(set: boolean): void {
 
 // lifecycle
 onBeforeMount(() => {
-  window.addEventListener('keypress', (e) => {
-    const key = e.which || e.keyCode
-
-    if (key === 13) {
-      setShowGreeting(true)
+  window.addEventListener('keypress', (event) => {
+    if (event.key === 'Enter') {
+      setShowGreeting({ save: true })
     }
   })
 })
+
 onMounted(() => {
-  setShowGreeting(false)
+  setShowGreeting({ save: false })
 })
 
 // initialization
+useHead({
+  bodyAttrs: {
+    class: ['overflow-hidden'],
+  },
+})
 useHeadDefault(title)
 </script>
 

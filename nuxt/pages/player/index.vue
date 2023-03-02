@@ -89,7 +89,7 @@ const isLoading = ref(false)
 const title = t('titlePage')
 
 // methods
-async function init() {
+const init = async () => {
   isLoading.value = true
 
   let continuationToken: string | undefined
@@ -138,12 +138,11 @@ async function init() {
 
   isLoading.value = false
 }
-function titleHead() {
-  return store.playerData.currentTrack?.fileName && !store.playerData.isPaused
+const titleHead = () =>
+  store.playerData.currentTrack?.fileName && !store.playerData.isPaused
     ? store.playerData.currentTrack.fileName
     : title
-}
-function getPlaylistLink(name: string) {
+const getPlaylistLink = (name: string) => {
   const queryObject = JSON.parse(JSON.stringify(route.query))
 
   // Append chosen playlist's name to current playlist path.
@@ -156,7 +155,7 @@ function getPlaylistLink(name: string) {
 
   return serializeQueryString(queryObject)
 }
-async function download(playlistItem: PlaylistItem) {
+const download = async (playlistItem: PlaylistItem) => {
   const link = document.createElement('a')
   const signedUrl = await getSignedUrl({
     playlistItem,

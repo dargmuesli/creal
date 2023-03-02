@@ -1,6 +1,6 @@
 import type { Paging } from '~/types/paging'
 
-export function getPaging({
+export const getPaging = ({
   items,
   itemsCountTotal,
   query,
@@ -12,7 +12,7 @@ export function getPaging({
   query: Record<any, any>
   start: number
   limit: number
-}) {
+}) => {
   const partString =
     (items?.length && items?.length > 0 ? start + 1 : 0) +
     '-' +

@@ -28,13 +28,12 @@ const props = withDefaults(defineProps<Props>(), {
 const route = useRoute()
 
 // methods
-function init() {
-  if (props.queryPrevious === undefined || props.queryNext === undefined) {
+const init = () => {
+  if (props.queryPrevious === undefined || props.queryNext === undefined)
     return {}
-  }
 
-  const queryPreviousSearchParamsString =
-    '?' + (props.queryPrevious as Record<string, string>).toString()
+  const queryPreviousSearchParamsString = '?' + props.queryPrevious.toString()
+
   useHead({
     link: [
       {

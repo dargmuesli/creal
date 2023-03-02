@@ -15,39 +15,33 @@ export type BackendError = CombinedError | { errcode: string; message: string }
 
 export const VALIDATION_SUGGESTION_TITLE_LENGTH_MAXIMUM = 300
 
-export function append(path: string, pathToAppend: string): string {
-  return path + (path.endsWith('/') ? '' : '/') + pathToAppend
-}
+export const append = (path: string, pathToAppend: string) =>
+  path + (path.endsWith('/') ? '' : '/') + pathToAppend
 
-export function copyText(text: string) {
-  return new Promise(function (resolve, reject) {
+export const copyText = (text: string) =>
+  new Promise((resolve, reject) => {
     const fakeElement = document.createElement('button')
     const clipboard = new Clipboard(fakeElement, {
-      text: function () {
-        return text
-      },
-      action: function () {
-        return 'copy'
-      },
+      text: () => text,
+      action: () => 'copy',
       container: document.body,
     })
-    clipboard.on('success', function (e) {
+    clipboard.on('success', (e) => {
       clipboard.destroy()
       resolve(e)
     })
-    clipboard.on('error', function (e) {
+    clipboard.on('error', (e) => {
       clipboard.destroy()
       reject(e)
     })
     fakeElement.click()
   })
-}
 
-export async function formPreSubmit(
+export const formPreSubmit = async (
   api: ApiData,
   v$: any,
   isFormSent: Ref<boolean>
-): Promise<boolean> {
+): Promise<boolean> => {
   api.value.errors = []
   v$.value.$touch()
 
@@ -81,10 +75,10 @@ export const getApiMeta = (
     : false,
 })
 
-export function getCombinedErrorMessages(
+export const getCombinedErrorMessages = (
   errors: BackendError[],
   pgIds?: Record<string, string>
-) {
+) => {
   const errorMessages: string[] = []
 
   for (const error of errors) {
@@ -112,7 +106,7 @@ export function getCombinedErrorMessages(
   return errorMessages
 }
 
-export function getDomainTldPort(host: string) {
+export const getDomainTldPort = (host: string) => {
   const hostParts = host.split('.')
 
   if (/^localhost(:[0-9]+)?$/.test(hostParts[hostParts.length - 1]))
@@ -123,15 +117,13 @@ export function getDomainTldPort(host: string) {
   return `${hostParts[hostParts.length - 2]}.${hostParts[hostParts.length - 1]}`
 }
 
-export function getHost(req: IncomingMessage) {
+export const getHost = (req: IncomingMessage) => {
   if (!req.headers.host) throw new Error('Host header is not given!')
 
   return req.headers.host
 }
 
-export function getQueryString(
-  queryParametersObject: Record<string, any>
-): string {
+export const getQueryString = (queryParametersObject: Record<string, any>) => {
   return (
     '?' +
     Object.keys(queryParametersObject)
@@ -154,49 +146,44 @@ export const getTimezone = async (event: H3Event) =>
     )
   ).timezone
 
-function isObject(a: any) {
-  return !!a && a.constructor === Object
-}
+const isObject = (a: any) => !!a && a.constructor === Object
 
-export function mergeByKey(target: any, source: any, key: string | number) {
-  if (!key) {
-    return
-  }
+export const mergeByKey = (target: any, source: any, key: string | number) =>
+  key
+    ? mergeWith(target, source, (targetValue: any, srcValue: any) => {
+        if (Array.isArray(targetValue) && Array.isArray(srcValue)) {
+          let matchFound = false
 
-  return mergeWith(target, source, (targetValue: any, srcValue: any) => {
-    if (Array.isArray(targetValue) && Array.isArray(srcValue)) {
-      let matchFound = false
+          for (let j = 0; j < srcValue.length; j++) {
+            for (let i = 0; i < targetValue.length; i++) {
+              if (
+                isObject(srcValue[j]) &&
+                isObject(targetValue[i]) &&
+                key in srcValue[j] &&
+                key in targetValue[i] &&
+                srcValue[j][key] === targetValue[i][key]
+              ) {
+                targetValue[i] = mergeByKey(targetValue[i], srcValue[j], key)
+                matchFound = true
+                break
+              }
+            }
 
-      for (let j = 0; j < srcValue.length; j++) {
-        for (let i = 0; i < targetValue.length; i++) {
-          if (
-            isObject(srcValue[j]) &&
-            isObject(targetValue[i]) &&
-            key in srcValue[j] &&
-            key in targetValue[i] &&
-            srcValue[j][key] === targetValue[i][key]
-          ) {
-            targetValue[i] = mergeByKey(targetValue[i], srcValue[j], key)
-            matchFound = true
-            break
+            if (!matchFound) {
+              targetValue.push(srcValue[j])
+            } else {
+              matchFound = false
+            }
           }
-        }
 
-        if (!matchFound) {
-          targetValue.push(srcValue[j])
+          return targetValue
         } else {
-          matchFound = false
+          return undefined // Handle merge by lodash's merge function.
         }
-      }
+      })
+    : undefined
 
-      return targetValue
-    } else {
-      return undefined // Handle merge by lodash's merge function.
-    }
-  })
-}
-
-export function serializeQueryString(object: any) {
+export const serializeQueryString = (object: any) => {
   const playlistLinkParts: Array<string> = []
 
   for (const [key, value] of Object.entries(object)) {
@@ -206,7 +193,7 @@ export function serializeQueryString(object: any) {
   return `?${playlistLinkParts.join('&')}`
 }
 
-export function showToast({ title }: { title: string }) {
+export const showToast = ({ title }: { title: string }) =>
   Swal.fire({
     didOpen: (toast) => {
       toast.addEventListener('mouseenter', Swal.stopTimer)
@@ -220,4 +207,3 @@ export function showToast({ title }: { title: string }) {
     title,
     toast: true,
   })
-}

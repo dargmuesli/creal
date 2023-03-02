@@ -1,13 +1,11 @@
 const colors = require('tailwindcss/colors')
 
-function heading(theme) {
-  return {
-    fontWeight: theme('fontWeight.bold'),
-    marginBottom: theme('margin.1'),
-    marginTop: theme('margin.4'),
-    // set overflow truncate/ellipsis in the surrounding container, or larger fonts will be cut off due to their line-heights
-  }
-}
+const heading = (theme) => ({
+  fontWeight: theme('fontWeight.bold'),
+  marginBottom: theme('margin.1'),
+  marginTop: theme('margin.4'),
+  // set overflow truncate/ellipsis in the surrounding container, or larger fonts will be cut off due to their line-heights
+})
 
 const gray = colors.gray // or slate, zinc, neutral, stone
 
@@ -27,7 +25,7 @@ module.exports = {
     require('@tailwindcss/forms'),
     require('@tailwindcss/line-clamp'),
     require('@tailwindcss/typography'),
-    function ({ addBase, addComponents, addUtilities, theme }) {
+    ({ addBase, addComponents, addUtilities, theme }) => {
       addBase({
         ':disabled': {
           cursor: theme('cursor.not-allowed'),

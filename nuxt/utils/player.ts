@@ -1,12 +1,12 @@
 import { PlaylistItem } from '~/types/player'
 
-export async function getSignedUrl({
+export const getSignedUrl = async ({
   playlistItem,
   playlistPath,
 }: {
   playlistItem: PlaylistItem
   playlistPath?: string
-}) {
+}) => {
   const key =
     PLAYER_PREFIX +
     (playlistPath ? playlistPath + '/' : '') +

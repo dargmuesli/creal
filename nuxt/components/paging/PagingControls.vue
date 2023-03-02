@@ -42,18 +42,17 @@ const route = useRoute()
 const router = useRouter()
 
 // methods
-function goPrevious() {
+const goPrevious = () =>
   router.push({
     path: route.path,
     query: props.queryPrevious,
   })
-}
-function goNext() {
+
+const goNext = () =>
   router.push({
     path: route.path,
     query: props.queryNext,
   })
-}
 </script>
 
 <i18n lang="yaml">
