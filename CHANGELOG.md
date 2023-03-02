@@ -1,3 +1,10 @@
+## [1.5.1](https://github.com/dargmuesli/creal/compare/1.5.0...1.5.1) (2023-03-02)
+
+
+### Bug Fixes
+
+* **ssr:** account for timezone ([de43e99](https://github.com/dargmuesli/creal/commit/de43e9981e2bdc70e16240ff3881ed1055a59a79)), closes [#244](https://github.com/dargmuesli/creal/issues/244)
+
 # [1.5.0](https://github.com/dargmuesli/creal/compare/1.4.3...1.5.0) (2023-02-27)
 
 
