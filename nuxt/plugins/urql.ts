@@ -63,7 +63,7 @@ const ssrKey = '__URQL_DATA__'
 //       cache.link('Query', field.fieldKey, allInvitations)
 //     })
 
-// function isNonEmptyArrayOfStrings(value: unknown): value is (string | Data)[] {
+// const isNonEmptyArrayOfStrings = (value: unknown): value is (string | Data)[] => {
 //   return Array.isArray(value) && value.every((item) => typeof item === 'string')
 // }
 
@@ -149,9 +149,7 @@ export default defineNuxtPlugin((nuxtApp) => {
   }
   const client = ref(createClient(options))
 
-  function urqlReset() {
-    client.value = createClient(options)
-  }
+  const urqlReset = () => (client.value = createClient(options))
 
   nuxtApp.hook('vue:setup', () => {
     const { $urql } = useNuxtApp()

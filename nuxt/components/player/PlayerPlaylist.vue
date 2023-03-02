@@ -30,14 +30,14 @@ const fireError = useFireError()
 const coverUrl = ref('')
 
 // methods
-function init() {
+const init = () => {
   if (props.playlist.isCoverAvailable) {
     setCoverUrl(props.playlist.name)
   } else {
     coverUrl.value = '/player/playlist-cover_default.jpg'
   }
 }
-async function setCoverUrl(name: string) {
+const setCoverUrl = async (name: string) => {
   const key = PLAYER_PREFIX + `${route.query.playlist || ''}${name}.jpg`
   const {
     data: { value: signedUrl },
@@ -50,10 +50,8 @@ async function setCoverUrl(name: string) {
 
   displayImageWhenFullyLoaded(signedUrl)
 }
-function displayImageWhenFullyLoaded(src: string) {
-  if (process.server) {
-    return
-  }
+const displayImageWhenFullyLoaded = (src: string) => {
+  if (process.server) return
 
   const img = new Image()
 

@@ -16,11 +16,9 @@ export const useStore = defineStore('creal', () => {
   const jwtDecoded = ref<JWTPayload>()
   const signedInUsername = ref<string>()
 
-  function jwtRemove() {
-    jwtSet(undefined)
-  }
+  const jwtRemove = () => jwtSet(undefined)
 
-  function jwtSet(jwtNew?: string) {
+  const jwtSet = (jwtNew?: string) => {
     const jwtDecodedNew = jwtNew !== undefined ? decodeJwt(jwtNew) : undefined
 
     jwt.value = jwtNew

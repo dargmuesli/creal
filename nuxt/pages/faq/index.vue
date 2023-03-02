@@ -80,7 +80,7 @@ const paging = getPaging({
 })
 
 // methods
-function toggleItemFocus(id: number) {
+const toggleItemFocus = (id: number) => {
   if (itemFocusedId.value === id) {
     itemFocusedId.value = undefined
     history.replaceState(undefined, '', '')

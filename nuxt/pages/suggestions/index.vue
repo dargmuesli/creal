@@ -122,7 +122,7 @@ const form = reactive({
 const isFormSent = ref(false)
 
 // methods
-async function submit() {
+const submit = async () => {
   try {
     await formPreSubmit(api, v$, isFormSent)
   } catch (error) {

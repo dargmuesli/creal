@@ -4,7 +4,7 @@ import { appendHeader, defineEventHandler } from 'h3'
 import { AWS_BUCKET_NAME, TIMEZONE_HEADER_KEY } from '~/utils/constants'
 import { getDomainTldPort, getHost, getTimezone } from '~/utils/util'
 
-function getCsp(host: string): Record<string, Array<string>> {
+const getCsp = (host: string): Record<string, Array<string>> => {
   const hostName = host.replace(/:[0-9]+$/, '')
   const config = useRuntimeConfig()
 
@@ -67,7 +67,7 @@ function getCsp(host: string): Record<string, Array<string>> {
   return defu(base, config.public.isInProduction ? production : development)
 }
 
-function getCspAsString(host: string): string {
+const getCspAsString = (host: string) => {
   const csp = getCsp(host)
   let result = ''
 

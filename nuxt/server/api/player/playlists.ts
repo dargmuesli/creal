@@ -16,7 +16,7 @@ import type {
   PlaylistExtended,
 } from '~/types/player'
 
-function itemSort(a: PlaylistItem, b: PlaylistItem) {
+const itemSort = (a: PlaylistItem, b: PlaylistItem) => {
   const aN = a.fileName
   const bN = b.fileName
 
@@ -38,7 +38,7 @@ function itemSort(a: PlaylistItem, b: PlaylistItem) {
   return (aN as any) - (bN as any)
 }
 
-function getPlaylist(playlistDataExtended: PlaylistExtended): Playlist {
+const getPlaylist = (playlistDataExtended: PlaylistExtended): Playlist => {
   // Set cover properties.
   for (let i = 0; i < playlistDataExtended.covers.length; i++) {
     // For collections.
@@ -92,11 +92,11 @@ function getPlaylist(playlistDataExtended: PlaylistExtended): Playlist {
   }
 }
 
-function getPlaylistExtended(
+const getPlaylistExtended = (
   pathParts: Array<string>,
   size: number,
   root = 'root'
-): PlaylistExtended | undefined {
+) => {
   const playlistDataExtended: PlaylistExtended = {
     name: root,
     collections: [],

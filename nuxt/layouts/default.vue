@@ -106,7 +106,7 @@ const isInitialized = ref(false)
 const plyrRef = ref<{ player: Plyr }>()
 
 // methods
-function binarySearch(ar: any[], el: any, compareFn: Function) {
+const binarySearch = (ar: any[], el: any, compareFn: Function) => {
   let m = 0
   let n = ar.length - 1
 
@@ -125,7 +125,7 @@ function binarySearch(ar: any[], el: any, compareFn: Function) {
 
   return m - 1
 }
-function getLocaleName(locale: string) {
+const getLocaleName = (locale: string) => {
   const locales: LocaleObject[] = LOCALES.filter(
     (localeObject) => localeObject.code === locale
   )
@@ -136,18 +136,16 @@ function getLocaleName(locale: string) {
     return undefined
   }
 }
-function trackListItemComparator(time: number, b: TrackListItem) {
-  return time - b.startSeconds
-}
-function closeAllow() {
-  window.onbeforeunload = () => {}
-}
-function closeProtect() {
-  window.onbeforeunload = () => {
-    return 'The music will stop playing if you navigate away.'
-  }
-}
-function initPlyr(plyr: { player: Plyr }) {
+const trackListItemComparator = (time: number, b: TrackListItem) =>
+  time - b.startSeconds
+
+const closeAllow = () => (window.onbeforeunload = () => {})
+
+const closeProtect = () =>
+  (window.onbeforeunload = () =>
+    'The music will stop playing if you navigate away.')
+
+const initPlyr = (plyr: { player: Plyr }) => {
   plyr.player.on('ended', () => {
     closeAllow()
 
@@ -204,7 +202,7 @@ function initPlyr(plyr: { player: Plyr }) {
 
   isInitialized.value = true
 }
-function share() {
+const share = () => {
   if (
     !window ||
     !store.playerData.currentPlaylist?.name ||
