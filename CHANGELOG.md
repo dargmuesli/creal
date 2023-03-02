@@ -1,3 +1,10 @@
+## [1.5.2](https://github.com/dargmuesli/creal/compare/1.5.1...1.5.2) (2023-03-02)
+
+
+### Bug Fixes
+
+* **index:** do not allow scroll on page load ([5215bf6](https://github.com/dargmuesli/creal/commit/5215bf619054e52ce1e8190e567f9017a735ca80)), closes [#240](https://github.com/dargmuesli/creal/issues/240)
+
 ## [1.5.1](https://github.com/dargmuesli/creal/compare/1.5.0...1.5.1) (2023-03-02)
 
 
