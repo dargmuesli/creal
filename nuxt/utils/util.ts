@@ -2,10 +2,13 @@ import { IncomingMessage } from 'node:http'
 
 import { CombinedError } from '@urql/core'
 import Clipboard from 'clipboard'
+import { H3Event, getCookie } from 'h3'
 import { mergeWith } from 'lodash-es'
+import { ofetch } from 'ofetch'
 import Swal from 'sweetalert2'
 import { Ref } from 'vue'
 
+import { TIMEZONE_COOKIE_NAME } from './constants'
 import type { ApiData } from '~/types/api'
 
 export type BackendError = CombinedError | { errcode: string; message: string }
@@ -142,6 +145,14 @@ export function getQueryString(
       .join('&')
   )
 }
+
+export const getTimezone = async (event: H3Event) =>
+  getCookie(event, TIMEZONE_COOKIE_NAME) ||
+  (
+    await ofetch(
+      `http://ip-api.com/json/${event.node.req.headers['x-real-ip']}`
+    )
+  ).timezone
 
 function isObject(a: any) {
   return !!a && a.constructor === Object

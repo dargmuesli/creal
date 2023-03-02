@@ -2,7 +2,7 @@ import graphqlPlugin from '@rollup/plugin-graphql'
 
 import localeDe from './locales/de.json'
 import localeEn from './locales/en.json'
-import { LOCALES } from './utils/constants'
+import { LOCALES, TIMEZONE_COOKIE_NAME } from './utils/constants'
 
 const BASE_URL =
   'https://' +
@@ -87,6 +87,18 @@ export default defineNuxtConfig({
             en: 'Language',
           },
           targetCookieIds: ['i18n_redirected'],
+        },
+        {
+          description: {
+            de: 'Dieser Cookie von uns speichert die Zeitzone, in der sich das Gerät zu befinden scheint.',
+            en: 'This cookie of ours saves the timezone in which the device appears to be located.',
+          },
+          id: 't',
+          name: {
+            de: 'Zeitzone',
+            en: 'Timezone',
+          },
+          targetCookieIds: [TIMEZONE_COOKIE_NAME],
         },
       ],
       optional: [

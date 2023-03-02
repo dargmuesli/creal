@@ -1,13 +1,17 @@
-import moment from 'dayjs'
+import moment, { DayjsFn } from 'dayjs'
 
 // workaround for [1]
 import de from 'dayjs/locale/de'
 // import 'dayjs/locale/de' does not make locale available
 
 import isSameOrBefore from 'dayjs/plugin/isSameOrBefore'
+import timezone from 'dayjs/plugin/timezone'
+import utc from 'dayjs/plugin/utc'
 
 export default defineNuxtPlugin((_nuxtApp) => {
   moment.extend(isSameOrBefore)
+  moment.extend(timezone)
+  moment.extend(utc)
 
   // workaround for [1]
   moment.locale(de)
@@ -19,6 +23,18 @@ export default defineNuxtPlugin((_nuxtApp) => {
     },
   }
 })
+
+declare module '#app' {
+  interface NuxtApp {
+    $dayjs: DayjsFn
+  }
+}
+
+declare module 'nuxt/dist/app/nuxt' {
+  interface NuxtApp {
+    $dayjs: DayjsFn
+  }
+}
 
 /*
   [1]
