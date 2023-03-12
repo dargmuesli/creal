@@ -1,4 +1,5 @@
 import fs from 'node:fs'
+import { IncomingMessage } from 'node:http'
 import { URL } from 'node:url'
 import { Readable } from 'node:stream'
 
@@ -6,8 +7,13 @@ import { S3Client, GetObjectCommand } from '@aws-sdk/client-s3'
 import { fromIni } from '@aws-sdk/credential-providers'
 import { defineEventHandler } from 'h3'
 
+import { proxy } from '~/server/utils/util'
+
 export default defineEventHandler(async (event) => {
-  const { req } = event.node
+  return await proxy(event, getObject)
+})
+
+const getObject = async (req: IncomingMessage) => {
   const s3 = new S3Client({
     apiVersion: '2006-03-01',
     credentials: fromIni({
@@ -37,7 +43,7 @@ export default defineEventHandler(async (event) => {
   if (!data) return
 
   return await streamToString(data.Body as Readable)
-})
+}
 
 const streamToString = async (stream: Readable): Promise<string> =>
   await new Promise((resolve, reject) => {

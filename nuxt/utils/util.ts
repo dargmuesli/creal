@@ -137,6 +137,30 @@ export const getQueryString = (queryParametersObject: Record<string, any>) => {
   )
 }
 
+export const getServiceHref = ({
+  host,
+  name,
+  port,
+  stagingHost,
+}: {
+  host: string
+  name?: string
+  port?: number
+  stagingHost?: string
+}) => {
+  const nameSubdomain = name?.replaceAll('_', '-')
+  const nameSubdomainString = nameSubdomain ? `${nameSubdomain}.` : ''
+  const portString = port ? `:${port}` : ''
+
+  if (stagingHost) {
+    return `https://${nameSubdomainString}${stagingHost}`
+  } else if (process.server) {
+    return `http://${name}${portString}`
+  } else {
+    return `https://${nameSubdomainString}${getDomainTldPort(host)}`
+  }
+}
+
 export const getTimezone = async (event: H3Event) =>
   getCookie(event, TIMEZONE_COOKIE_NAME) ||
   (

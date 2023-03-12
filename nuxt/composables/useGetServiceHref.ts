@@ -1,14 +1,7 @@
-export const useGetServiceHref = () => (name: string, port: number) => {
+export const useGetServiceHref = () => {
   const host = useHost()
   const config = useRuntimeConfig()
 
-  if (config.public.stagingHost) {
-    return `https://${name.replaceAll('_', '-')}.${config.public.stagingHost}`
-  }
-
-  if (process.server) {
-    return `http://${name}:${port}`
-  }
-
-  return `https://${name.replaceAll('_', '-')}.${getDomainTldPort(host)}`
+  return (name?: string, port?: number) =>
+    getServiceHref({ host, name, port, stagingHost: config.public.stagingHost })
 }

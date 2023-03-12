@@ -1,5 +1,6 @@
-import fs from 'fs'
-import { URL } from 'url'
+import { IncomingMessage } from 'node:http'
+import fs from 'node:fs'
+import { URL } from 'node:url'
 
 import { S3Client, ListObjectsV2Command } from '@aws-sdk/client-s3'
 import { fromIni } from '@aws-sdk/credential-providers'
@@ -15,6 +16,11 @@ import type {
   PlaylistItem,
   PlaylistExtended,
 } from '~/types/player'
+import { proxy } from '~/server/utils/util'
+
+export default defineEventHandler(async (event) => {
+  return await proxy(event, fetchPlaylist)
+})
 
 const itemSort = (a: PlaylistItem, b: PlaylistItem) => {
   const aN = a.fileName
@@ -169,8 +175,7 @@ const getPlaylistExtended = (
   return playlistDataExtended
 }
 
-export default defineEventHandler(async (event) => {
-  const { req } = event.node
+const fetchPlaylist = async (req: IncomingMessage) => {
   const s3 = new S3Client({
     apiVersion: '2006-03-01',
     credentials: fromIni({
@@ -262,5 +267,6 @@ export default defineEventHandler(async (event) => {
       nextContinuationToken: data.NextContinuationToken,
     }),
   }
+
   return result
-})
+}
