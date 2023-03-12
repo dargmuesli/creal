@@ -122,21 +122,6 @@ export const getHost = (req: IncomingMessage) => {
   return req.headers.host
 }
 
-export const getQueryString = (queryParametersObject: Record<string, any>) => {
-  return (
-    '?' +
-    Object.keys(queryParametersObject)
-      .map((key) => {
-        return (
-          encodeURIComponent(key) +
-          '=' +
-          encodeURIComponent(queryParametersObject[key] as string)
-        )
-      })
-      .join('&')
-  )
-}
-
 export const getServiceHref = ({
   host,
   name,
