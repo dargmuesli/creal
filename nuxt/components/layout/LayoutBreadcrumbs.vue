@@ -26,10 +26,10 @@
       </li>
     </ul>
     <span>{{ t('separator') }}</span>
-    <AppLink :is-colored="false" :to="queryString">
+    <AppLink :is-colored="false" to="?">
       <span
         class="whitespace-nowrap text-2xl font-bold"
-        :data-testid="`breadcrumb-${queryString}`"
+        data-testid="breadcrumb"
       >
         <slot />
       </span>
@@ -69,12 +69,8 @@ withDefaults(defineProps<Props>(), {
   suffixes: undefined,
 })
 
-const route = useRoute()
 const localePath = useLocalePath()
 const { t } = useI18n()
-
-// computations
-const queryString = computed(() => getQueryString(route.query))
 </script>
 
 <i18n lang="yaml">
