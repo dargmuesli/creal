@@ -1,11 +1,8 @@
-import { IncomingMessage } from 'node:http'
-import fs from 'node:fs'
 import { URL } from 'node:url'
 
-import { S3Client, ListObjectsV2Command } from '@aws-sdk/client-s3'
-import { fromIni } from '@aws-sdk/credential-providers'
+import { ListObjectsV2Command } from '@aws-sdk/client-s3'
 import consola from 'consola'
-import { defineEventHandler } from 'h3'
+import { defineEventHandler, H3Event, sendNoContent } from 'h3'
 
 import { mergeByKey } from '~/utils/util'
 import { PLAYER_PREFIX } from '~/utils/constants'
@@ -16,7 +13,7 @@ import type {
   PlaylistItem,
   PlaylistExtended,
 } from '~/types/player'
-import { proxy } from '~/server/utils/util'
+import { getS3Client, proxy } from '~/server/utils/util'
 
 export default defineEventHandler(async (event) => {
   return await proxy(event, fetchPlaylist)
@@ -175,18 +172,12 @@ const getPlaylistExtended = (
   return playlistDataExtended
 }
 
-const fetchPlaylist = async (req: IncomingMessage) => {
-  const s3 = new S3Client({
-    apiVersion: '2006-03-01',
-    credentials: fromIni({
-      filepath: '/run/secrets/creal_aws-credentials',
-    }),
-    endpoint: 'https://s3.nl-ams.scw.cloud',
-    region: 'nl-ams',
-  })
+const fetchPlaylist = async (event: H3Event) => {
+  const { req } = event.node
+  const config = useRuntimeConfig()
 
+  const s3 = getS3Client()
   const PLAYER_PREFIX_LENGTH = PLAYER_PREFIX.split('/').length - 1
-  const bucket = fs.readFileSync('/run/secrets/creal_aws-bucket', 'utf8')
   const urlSearchParams = new URL(
     req.url !== undefined ? req.url : '',
     'https://example.org/'
@@ -199,7 +190,7 @@ const fetchPlaylist = async (req: IncomingMessage) => {
   const data = await s3.send(
     new ListObjectsV2Command({
       ...{
-        Bucket: bucket,
+        Bucket: config.public.s3Bucket,
         // MaxKeys: 10,
       },
       ...(continuationToken !== null && {
@@ -214,8 +205,7 @@ const fetchPlaylist = async (req: IncomingMessage) => {
   if (!data) return
 
   if (data.Contents === undefined) {
-    setResponseStatus(204, 'No content')
-    return
+    return sendNoContent(event)
   }
 
   const playlistDataExtended: PlaylistExtended = {

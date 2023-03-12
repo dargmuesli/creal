@@ -1,34 +1,21 @@
-import fs from 'node:fs'
-import { IncomingMessage } from 'node:http'
 import { URL } from 'node:url'
 
-import { defineEventHandler } from 'h3'
+import { defineEventHandler, H3Event } from 'h3'
 
-import {
-  S3Client,
-  GetObjectCommand,
-  HeadObjectCommand,
-} from '@aws-sdk/client-s3'
-import { fromIni } from '@aws-sdk/credential-providers'
+import { GetObjectCommand } from '@aws-sdk/client-s3'
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner'
 
-import { proxy } from '~/server/utils/util'
+import { getS3Client, proxy } from '~/server/utils/util'
 
 export default defineEventHandler(async (event) => {
   return await proxy(event, signedUrl)
 })
 
-const signedUrl = async (req: IncomingMessage) => {
-  const s3 = new S3Client({
-    apiVersion: '2006-03-01',
-    credentials: fromIni({
-      filepath: '/run/secrets/creal_aws-credentials',
-    }),
-    endpoint: 'https://s3.nl-ams.scw.cloud',
-    region: 'nl-ams',
-  })
+const signedUrl = async (event: H3Event) => {
+  const { req } = event.node
+  const config = useRuntimeConfig()
 
-  const bucket = fs.readFileSync('/run/secrets/creal_aws-bucket', 'utf8')
+  const s3 = getS3Client(true)
   const key = new URL(
     req.url !== undefined ? req.url : '',
     'https://example.org/'
@@ -38,23 +25,14 @@ const signedUrl = async (req: IncomingMessage) => {
     throw createError({ statusCode: 401, message: 'Key missing!' })
   }
 
-  await s3.send(
-    new HeadObjectCommand({
-      Bucket: bucket,
-      Key: key,
-    })
-  )
-
-  const url = await getSignedUrl(
+  return await getSignedUrl(
     s3,
     new GetObjectCommand({
-      Bucket: bucket,
+      Bucket: config.public.s3Bucket,
       Key: key,
     }),
     {
       expiresIn: 21600, // 6h
     }
   )
-
-  return url
 }

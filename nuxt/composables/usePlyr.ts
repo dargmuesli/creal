@@ -8,7 +8,7 @@ export const usePlyr = () => {
   const fireError = useFireError()
 
   return {
-    play: async (playlistPath: string, playlistItem: PlaylistItem) => {
+    play: async (playlistItem: PlaylistItem, playlistPath?: string) => {
       store.playerData.isVisible = true
 
       // Set query parameter.

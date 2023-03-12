@@ -36,6 +36,9 @@ export default defineNuxtConfig({
     public: {
       googleAnalyticsId: '', // set via environment variable `NUXT_PUBLIC_GOOGLE_ANALYTICS_ID` only
       isInProduction: process.env.NODE_ENV === 'production',
+      s3Bucket: 'creal-audio',
+      s3Endpoint: 'https://s3.nl-ams.scw.cloud',
+      s3Region: 'nl-ams',
       stagingHost:
         process.env.NODE_ENV !== 'production' &&
         !process.env.NUXT_PUBLIC_STACK_DOMAIN
