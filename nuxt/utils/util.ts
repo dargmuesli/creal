@@ -4,7 +4,6 @@ import { CombinedError } from '@urql/core'
 import Clipboard from 'clipboard'
 import { H3Event, getCookie } from 'h3'
 import { mergeWith } from 'lodash-es'
-import { ofetch } from 'ofetch'
 import Swal from 'sweetalert2'
 import { Ref } from 'vue'
 
@@ -141,7 +140,7 @@ export const getQueryString = (queryParametersObject: Record<string, any>) => {
 export const getTimezone = async (event: H3Event) =>
   getCookie(event, TIMEZONE_COOKIE_NAME) ||
   (
-    await ofetch(
+    await $fetch<{ timezone: string }>(
       `http://ip-api.com/json/${event.node.req.headers['x-real-ip']}`
     )
   ).timezone
