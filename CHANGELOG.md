@@ -1,3 +1,11 @@
+## [1.6.1](https://github.com/dargmuesli/creal/compare/1.6.0...1.6.1) (2023-03-12)
+
+
+### Bug Fixes
+
+* **headers:** set hsts only in production ([c393ace](https://github.com/dargmuesli/creal/commit/c393ace40f0fe4e671cc46b32114968948702e68))
+* **server:** correct s3 endpoint ([9184856](https://github.com/dargmuesli/creal/commit/9184856f7494bdf0d82fdfbfe3ee11d2aad4f419))
+
 # [1.6.0](https://github.com/dargmuesli/creal/compare/1.5.2...1.6.0) (2023-03-12)
 
 
