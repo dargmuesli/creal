@@ -105,15 +105,18 @@ export default defineEventHandler(async (event) => {
     'Report-To',
     '\'{"group":"default","max_age":31536000,"endpoints":[{"url":"https://dargmuesli.report-uri.com/a/d/g"}],"include_subdomains":true}\''
   )
-  appendHeader(
-    event,
-    'Strict-Transport-Security',
-    'max-age=31536000; includeSubDomains; preload'
-  )
   appendHeader(event, 'X-Content-Type-Options', 'nosniff')
   appendHeader(event, 'X-DNS-Prefetch-Control', 'off')
   appendHeader(event, 'X-Download-Options', 'noopen')
   appendHeader(event, 'X-Frame-Options', 'SAMEORIGIN')
   appendHeader(event, 'X-Permitted-Cross-Domain-Policies', 'none')
   appendHeader(event, 'X-XSS-Protection', '0')
+
+  if (process.env.NODE_ENV === 'production') {
+    appendHeader(
+      event,
+      'Strict-Transport-Security',
+      'max-age=31536000; includeSubDomains; preload'
+    )
+  }
 })
