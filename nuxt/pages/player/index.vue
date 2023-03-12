@@ -48,11 +48,7 @@
                 }"
                 :playlist-item="playlistItem"
                 @download="download(playlistItem)"
-                @play="
-                  routeQueryPlaylist
-                    ? play(routeQueryPlaylist, playlistItem)
-                    : undefined
-                "
+                @play="play(playlistItem, routeQueryPlaylist)"
               />
             </li>
           </ul>
@@ -130,7 +126,7 @@ const init = async () => {
   ) {
     for (const playlistItem of store.playerData.currentPlaylist.items) {
       if (playlistItem.fileName === routeQueryTrack.value) {
-        play(routeQueryPlaylist.value, playlistItem)
+        play(playlistItem, routeQueryPlaylist.value)
         break
       }
     }

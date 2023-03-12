@@ -1,23 +1,20 @@
-import fs from 'node:fs'
 import { URL } from 'node:url'
 import { Readable } from 'node:stream'
 
-import { S3Client, GetObjectCommand } from '@aws-sdk/client-s3'
-import { fromIni } from '@aws-sdk/credential-providers'
-import { defineEventHandler } from 'h3'
+import { GetObjectCommand } from '@aws-sdk/client-s3'
+import { defineEventHandler, H3Event } from 'h3'
+
+import { getS3Client, proxy } from '~/server/utils/util'
 
 export default defineEventHandler(async (event) => {
-  const { req } = event.node
-  const s3 = new S3Client({
-    apiVersion: '2006-03-01',
-    credentials: fromIni({
-      filepath: '/run/secrets/creal_aws-credentials',
-    }),
-    endpoint: 'https://s3.nl-ams.scw.cloud',
-    region: 'nl-ams',
-  })
+  return await proxy(event, getObject)
+})
 
-  const bucket = fs.readFileSync('/run/secrets/creal_aws-bucket', 'utf8')
+const getObject = async (event: H3Event) => {
+  const { req } = event.node
+  const config = useRuntimeConfig()
+
+  const s3 = getS3Client()
   const key = new URL(
     req.url !== undefined ? req.url : '',
     'https://example.org/'
@@ -29,7 +26,7 @@ export default defineEventHandler(async (event) => {
 
   const data = await s3.send(
     new GetObjectCommand({
-      Bucket: bucket,
+      Bucket: config.public.s3Bucket,
       Key: key,
     })
   )
@@ -37,7 +34,7 @@ export default defineEventHandler(async (event) => {
   if (!data) return
 
   return await streamToString(data.Body as Readable)
-})
+}
 
 const streamToString = async (stream: Readable): Promise<string> =>
   await new Promise((resolve, reject) => {

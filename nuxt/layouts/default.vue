@@ -162,8 +162,8 @@ const initPlyr = (plyr: { player: Plyr }) => {
         store.playerData.currentTrack.fileName
       ) {
         play(
-          store.playerData.currentPlaylist.name,
-          store.playerData.currentPlaylist.items[i + 1]
+          store.playerData.currentPlaylist.items[i + 1],
+          store.playerData.currentPlaylist.name
         )
         break
       }
