@@ -1,3 +1,18 @@
+# [1.6.0](https://github.com/dargmuesli/creal/compare/1.5.2...1.6.0) (2023-03-12)
+
+
+### Bug Fixes
+
+* **headers:** correct bucket name ([e729ce9](https://github.com/dargmuesli/creal/commit/e729ce931c7dcbc2a7d9a008b772682d55828443))
+* **nuxt:** add missing public runtime configuration ([9580665](https://github.com/dargmuesli/creal/commit/9580665bb2e802bc683e22c4d03f7ef1cb6a5203))
+* **player:** correct s3 configuration ([b3ecde3](https://github.com/dargmuesli/creal/commit/b3ecde331ece72165f4b82cc9888d9856d81ba41))
+* **util:** use $fetch instead of ofetch ([b894958](https://github.com/dargmuesli/creal/commit/b89495861bcea9d5f1e8b372d6673abc0b22e315))
+
+
+### Features
+
+* **server:** proxy staging requests ([b54a455](https://github.com/dargmuesli/creal/commit/b54a455915116e38dbfd3107e7d13424a0756cf7))
+
 ## [1.5.2](https://github.com/dargmuesli/creal/compare/1.5.1...1.5.2) (2023-03-02)
 
 
