@@ -1,13 +1,7 @@
-import fs from 'fs'
-
 import { LocaleObject } from '@nuxtjs/i18n/dist/runtime/composables'
 
-const secretPathAwsBucket = '/run/secrets/creal_aws-bucket'
-
-export const AWS_BUCKET_NAME = () =>
-  process.server && fs.existsSync(secretPathAwsBucket)
-    ? fs.readFileSync(secretPathAwsBucket, 'utf8')
-    : 'creal-audio-dev'
+export const AWS_BUCKET_NAME_DEVELOPMENT = 'creal-audio-dev'
+export const AWS_BUCKET_NAME_PRODUCTION = 'creal-audio'
 export const CYPRESS_BASE_URL = 'http://localhost:3000'
 export const FETCH_RETRY = 3
 export const LOCALES: LocaleObject[] = [

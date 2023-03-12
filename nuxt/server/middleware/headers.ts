@@ -1,7 +1,11 @@
 import { defu } from 'defu'
 import { appendHeader, defineEventHandler } from 'h3'
 
-import { AWS_BUCKET_NAME, TIMEZONE_HEADER_KEY } from '~/utils/constants'
+import {
+  AWS_BUCKET_NAME_DEVELOPMENT,
+  AWS_BUCKET_NAME_PRODUCTION,
+  TIMEZONE_HEADER_KEY,
+} from '~/utils/constants'
 import { getDomainTldPort, getHost, getTimezone } from '~/utils/util'
 
 const getCsp = (host: string): Record<string, Array<string>> => {
@@ -9,6 +13,10 @@ const getCsp = (host: string): Record<string, Array<string>> => {
   const config = useRuntimeConfig()
 
   const stagingHostOrHost = config.public.stagingHost || host
+  const awsBucketName =
+    config.public.stagingHost || config.public.isInProduction
+      ? AWS_BUCKET_NAME_PRODUCTION
+      : AWS_BUCKET_NAME_DEVELOPMENT
 
   const base = {
     'base-uri': ["'none'"], // Mozilla Observatory.
@@ -29,12 +37,12 @@ const getCsp = (host: string): Record<string, Array<string>> => {
       'data:',
       `https://creal-strapi.${getDomainTldPort(stagingHostOrHost)}`,
       'https://*.google-analytics.com',
-      `https://${AWS_BUCKET_NAME()}.s3.nl-ams.scw.cloud`, // Playlist cover.
+      `https://${awsBucketName}.s3.nl-ams.scw.cloud`, // Playlist cover.
     ],
     'manifest-src': ["'self'"],
     'media-src': [
       'https://cdn.plyr.io/static/blank.mp4', // Plyr.
-      `https://${AWS_BUCKET_NAME()}.s3.nl-ams.scw.cloud`, // Music.
+      `https://${awsBucketName}.s3.nl-ams.scw.cloud`, // Music.
     ],
     'prefetch-src': ["'self'"],
     'report-uri': ['https://dargmuesli.report-uri.com/r/d/csp/enforce'],
