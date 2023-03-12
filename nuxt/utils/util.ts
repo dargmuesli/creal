@@ -171,6 +171,14 @@ export const getTimezone = async (event: H3Event) =>
 
 const isObject = (a: any) => !!a && a.constructor === Object
 
+export const isTesting = () => process.client && window.Cypress
+
+declare global {
+  interface Window {
+    Cypress: any
+  }
+}
+
 export const mergeByKey = (target: any, source: any, key: string | number) =>
   key
     ? mergeWith(target, source, (targetValue: any, srcValue: any) => {
