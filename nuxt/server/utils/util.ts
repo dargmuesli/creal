@@ -11,7 +11,10 @@ export const getS3Client = (isExternal = false) => {
     credentials: fromIni({
       filepath: '/run/secrets/creal_aws-credentials',
     }),
-    endpoint: isExternal ? config.public.s3Endpoint : 'http://minio:9000',
+    endpoint:
+      config.public.stagingHost || config.public.isInProduction || isExternal
+        ? config.public.s3Endpoint
+        : 'http://minio:9000',
     forcePathStyle: !config.public.stagingHost && !config.public.isInProduction,
     region: config.public.s3Region,
   })
