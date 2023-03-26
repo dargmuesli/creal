@@ -1,3 +1,4 @@
+import { Pinia } from '@pinia/nuxt/dist/runtime/composables'
 import {
   createClient,
   ssrExchange,
@@ -125,7 +126,7 @@ export default defineNuxtPlugin((nuxtApp) => {
     requestPolicy: 'cache-and-network',
     fetchOptions: () => {
       const { $pinia } = useNuxtApp()
-      const store = useStore($pinia)
+      const store = useStore($pinia as Pinia) // TODO: remove `as` (https://github.com/vuejs/pinia/issues/2071)
       const jwt = store.jwt
 
       if (jwt) {
