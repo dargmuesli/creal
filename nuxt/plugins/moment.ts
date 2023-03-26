@@ -1,4 +1,4 @@
-import moment, { DayjsFn } from 'dayjs'
+import moment from 'dayjs'
 
 // workaround for [1]
 import de from 'dayjs/locale/de'
@@ -23,18 +23,6 @@ export default defineNuxtPlugin((_nuxtApp) => {
     },
   }
 })
-
-declare module '#app' {
-  interface NuxtApp {
-    $dayjs: DayjsFn
-  }
-}
-
-declare module 'nuxt/dist/app/nuxt' {
-  interface NuxtApp {
-    $dayjs: DayjsFn
-  }
-}
 
 /*
   [1]
