@@ -1,10 +1,10 @@
+import { Pinia } from '@pinia/nuxt/dist/runtime/composables'
 import {
   createClient,
   ssrExchange,
   dedupExchange,
   fetchExchange,
   ClientOptions,
-  Client,
 } from '@urql/core'
 // import type { Data } from '@urql/exchange-graphcache'
 import { /* Cache, */ cacheExchange } from '@urql/exchange-graphcache'
@@ -12,7 +12,7 @@ import { /* Cache, */ cacheExchange } from '@urql/exchange-graphcache'
 import { devtoolsExchange } from '@urql/devtools'
 import { provideClient } from '@urql/vue'
 import consola from 'consola'
-import { Ref, ref } from 'vue'
+import { ref } from 'vue'
 
 import schema from '~/gql/introspection'
 import { GraphCacheConfig } from '~/gql/schema'
@@ -125,7 +125,8 @@ export default defineNuxtPlugin((nuxtApp) => {
   const options: ClientOptions = {
     requestPolicy: 'cache-and-network',
     fetchOptions: () => {
-      const store = useStore(nuxtApp.$pinia)
+      const { $pinia } = useNuxtApp()
+      const store = useStore($pinia as Pinia) // TODO: remove `as` (https://github.com/vuejs/pinia/issues/2071)
       const jwt = store.jwt
 
       if (jwt) {
@@ -188,17 +189,3 @@ export default defineNuxtPlugin((nuxtApp) => {
     },
   }
 })
-
-declare module '#app' {
-  interface NuxtApp {
-    $urql: Ref<Client>
-    urqlReset: () => undefined
-  }
-}
-
-declare module 'nuxt/dist/app/nuxt' {
-  interface NuxtApp {
-    $urql: Ref<Client>
-    urqlReset: () => undefined
-  }
-}

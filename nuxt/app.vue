@@ -9,7 +9,7 @@
 </template>
 
 <script setup lang="ts">
-const { $moment } = useNuxtApp()
+const { $i18n, $moment } = useNuxtApp()
 const { t, locale } = useI18n()
 const cookieControl = useCookieControl()
 
@@ -21,6 +21,9 @@ const name = 'cReal'
 
 // methods
 const init = () => {
+  $i18n.onLanguageSwitched = (_oldLocale: string, newLocale: string) =>
+    $moment.locale(newLocale)
+
   if (process.client) {
     const cookieTimezone = useCookie(TIMEZONE_COOKIE_NAME, {
       // default: () => undefined, // setting `default` on the client side only does not write the cookie
