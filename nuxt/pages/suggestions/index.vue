@@ -95,7 +95,7 @@ import { useVuelidate } from '@vuelidate/core'
 import { maxLength, required } from '@vuelidate/validators'
 import consola from 'consola'
 
-import { useCreateSuggestionMutation } from '~/gql/generated'
+import { useCreateSuggestionMutation } from '~/gql/documents/mutations/suggestion/suggestionCreate'
 
 definePageMeta({ colorMode: 'dark' })
 

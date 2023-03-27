@@ -14,8 +14,8 @@ import { provideClient } from '@urql/vue'
 import consola from 'consola'
 import { ref } from 'vue'
 
-import schema from '~/gql/introspection'
-import { GraphCacheConfig } from '~/gql/schema'
+import schema from '~/gql/generated/introspection'
+import { GraphCacheConfig } from '~/gql/generated/graphcache'
 
 // import {
 //   authenticationAnonymous,
