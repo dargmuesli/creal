@@ -1,6 +1,5 @@
-/* eslint-disable no-use-before-define */
-import { gql } from 'graphql-tag'
-import * as Urql from '@urql/vue'
+/* eslint-disable */
+import type { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core'
 export type Maybe<T> = T | null
 export type InputMaybe<T> = Maybe<T>
 export type Exact<T extends { [key: string]: unknown }> = {
@@ -12,7 +11,6 @@ export type MakeOptional<T, K extends keyof T> = Omit<T, K> & {
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & {
   [SubKey in K]: Maybe<T[SubKey]>
 }
-export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string
@@ -20,7 +18,12 @@ export type Scalars = {
   Boolean: boolean
   Int: number
   Float: number
+  /** A location in a connection that can be used for resuming pagination. */
   Cursor: any
+  /**
+   * A point in time as described by the [ISO
+   * 8601](https://en.wikipedia.org/wiki/ISO_8601) standard. May or may not include a timezone.
+   */
   Datetime: any
 }
 
@@ -358,14 +361,14 @@ export type UpdateSuggestionPayloadSuggestionEdgeArgs = {
   orderBy?: InputMaybe<Array<SuggestionsOrderBy>>
 }
 
-export type SuggestionFieldsFragment = {
+export type SuggestionItemFragment = {
   __typename?: 'Suggestion'
   id: number
   nodeId: string
   artist: string
   comment?: string | null
   title: string
-}
+} & { ' $fragmentName'?: 'SuggestionItemFragment' }
 
 export type CreateSuggestionMutationVariables = Exact<{
   suggestionInput: SuggestionInput
@@ -375,91 +378,127 @@ export type CreateSuggestionMutation = {
   __typename?: 'Mutation'
   createSuggestion?: {
     __typename?: 'CreateSuggestionPayload'
-    suggestion?: {
-      __typename?: 'Suggestion'
-      id: number
-      nodeId: string
-      artist: string
-      comment?: string | null
-      title: string
-    } | null
+    suggestion?:
+      | ({ __typename?: 'Suggestion' } & {
+          ' $fragmentRefs'?: { SuggestionItemFragment: SuggestionItemFragment }
+        })
+      | null
   } | null
 }
 
-export type AllSuggestionsQueryVariables = Exact<{
-  cursor?: InputMaybe<Scalars['Cursor']>
-  limit: Scalars['Int']
-}>
-
-export type AllSuggestionsQuery = {
-  __typename?: 'Query'
-  allSuggestions?: {
-    __typename?: 'SuggestionsConnection'
-    nodes: Array<{
-      __typename?: 'Suggestion'
-      id: number
-      nodeId: string
-      artist: string
-      comment?: string | null
-      title: string
-    } | null>
-    pageInfo: {
-      __typename?: 'PageInfo'
-      endCursor?: any | null
-      hasNextPage: boolean
-    }
-  } | null
-}
-
-export const SuggestionFieldsFragmentDoc = gql`
-  fragment suggestionFields on Suggestion {
-    id
-    nodeId
-    artist
-    comment
-    title
-  }
-`
-export const CreateSuggestionDocument = gql`
-  mutation createSuggestion($suggestionInput: SuggestionInput!) {
-    createSuggestion(input: { suggestion: $suggestionInput }) {
-      suggestion {
-        ...suggestionFields
-      }
-    }
-  }
-  ${SuggestionFieldsFragmentDoc}
-`
-
-export function useCreateSuggestionMutation() {
-  return Urql.useMutation<
-    CreateSuggestionMutation,
-    CreateSuggestionMutationVariables
-  >(CreateSuggestionDocument)
-}
-export const AllSuggestionsDocument = gql`
-  query allSuggestions($cursor: Cursor, $limit: Int!) {
-    allSuggestions(after: $cursor, first: $limit) {
-      nodes {
-        ...suggestionFields
-      }
-      pageInfo {
-        endCursor
-        hasNextPage
-      }
-    }
-  }
-  ${SuggestionFieldsFragmentDoc}
-`
-
-export function useAllSuggestionsQuery(
-  options: Omit<
-    Urql.UseQueryArgs<never, AllSuggestionsQueryVariables>,
-    'query'
-  > = {}
-) {
-  return Urql.useQuery<AllSuggestionsQuery>({
-    query: AllSuggestionsDocument,
-    ...options,
-  })
-}
+export const SuggestionItemFragmentDoc = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'FragmentDefinition',
+      name: { kind: 'Name', value: 'SuggestionItem' },
+      typeCondition: {
+        kind: 'NamedType',
+        name: { kind: 'Name', value: 'Suggestion' },
+      },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'nodeId' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'artist' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'comment' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'title' } },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<SuggestionItemFragment, unknown>
+export const CreateSuggestionDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'mutation',
+      name: { kind: 'Name', value: 'createSuggestion' },
+      variableDefinitions: [
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'suggestionInput' },
+          },
+          type: {
+            kind: 'NonNullType',
+            type: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'SuggestionInput' },
+            },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'createSuggestion' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'input' },
+                value: {
+                  kind: 'ObjectValue',
+                  fields: [
+                    {
+                      kind: 'ObjectField',
+                      name: { kind: 'Name', value: 'suggestion' },
+                      value: {
+                        kind: 'Variable',
+                        name: { kind: 'Name', value: 'suggestionInput' },
+                      },
+                    },
+                  ],
+                },
+              },
+            ],
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'suggestion' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'FragmentSpread',
+                        name: { kind: 'Name', value: 'SuggestionItem' },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+    {
+      kind: 'FragmentDefinition',
+      name: { kind: 'Name', value: 'SuggestionItem' },
+      typeCondition: {
+        kind: 'NamedType',
+        name: { kind: 'Name', value: 'Suggestion' },
+      },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'nodeId' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'artist' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'comment' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'title' } },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<
+  CreateSuggestionMutation,
+  CreateSuggestionMutationVariables
+>

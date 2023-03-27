@@ -4,8 +4,9 @@ import {
   UpdateResolver as GraphCacheUpdateResolver,
   OptimisticMutationResolver as GraphCacheOptimisticMutationResolver,
   StorageAdapter as GraphCacheStorageAdapter,
+  CacheExchangeOpts,
 } from '@urql/exchange-graphcache'
-import { IntrospectionData } from '@urql/exchange-graphcache/dist/types/ast'
+
 export type Maybe<T> = T | null
 export type InputMaybe<T> = Maybe<T>
 export type Exact<T extends { [key: string]: unknown }> = {
@@ -633,7 +634,7 @@ export type GraphCacheUpdaters = {
 }
 
 export type GraphCacheConfig = {
-  schema?: IntrospectionData
+  schema?: CacheExchangeOpts['schema']
   updates?: GraphCacheUpdaters
   keys?: GraphCacheKeysConfig
   optimistic?: GraphCacheOptimisticUpdaters
