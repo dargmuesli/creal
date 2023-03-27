@@ -1,3 +1,10 @@
+# [1.7.0](https://github.com/dargmuesli/creal/compare/1.6.3...1.7.0) (2023-03-27)
+
+
+### Features
+
+* **gql:** migrate to document node ([526bc54](https://github.com/dargmuesli/creal/commit/526bc54ccbf6866b4d21de3286a08c52810bbfbf))
+
 ## [1.6.3](https://github.com/dargmuesli/creal/compare/1.6.2...1.6.3) (2023-03-23)
 
 
