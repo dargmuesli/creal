@@ -1,3 +1,10 @@
+## [1.7.1](https://github.com/dargmuesli/creal/compare/1.7.0...1.7.1) (2023-04-06)
+
+
+### Bug Fixes
+
+* schedule release ([8eb7794](https://github.com/dargmuesli/creal/commit/8eb77944ee0f6cbf58b1a0cec22e9f19c627e9a2))
+
 # [1.7.0](https://github.com/dargmuesli/creal/compare/1.6.3...1.7.0) (2023-03-27)
 
 
