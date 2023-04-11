@@ -1,7 +1,7 @@
 import { URL } from 'node:url'
 
 import { ListObjectsV2Command } from '@aws-sdk/client-s3'
-import consola from 'consola'
+import { consola } from 'consola'
 import { defineEventHandler, H3Event, sendNoContent } from 'h3'
 
 import { mergeByKey } from '~/utils/util'
