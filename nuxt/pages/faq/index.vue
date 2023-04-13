@@ -37,7 +37,7 @@
 </template>
 
 <script setup lang="ts">
-import consola from 'consola'
+import { consola } from 'consola'
 
 import type { StrapiResult } from '~/types/fetch'
 import type { CrealFaq } from '~/types/creal'

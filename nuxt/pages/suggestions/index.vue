@@ -93,7 +93,7 @@
 <script setup lang="ts">
 import { useVuelidate } from '@vuelidate/core'
 import { maxLength, required } from '@vuelidate/validators'
-import consola from 'consola'
+import { consola } from 'consola'
 
 import { useCreateSuggestionMutation } from '~/gql/documents/mutations/suggestion/suggestionCreate'
 
