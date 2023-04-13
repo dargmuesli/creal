@@ -14,8 +14,8 @@ devDependencies:
     specifier: 7.21.4
     version: 7.21.4
   '@dargmuesli/nuxt-cookie-control':
-    specifier: 5.5.0
-    version: 5.5.0(rollup@3.20.2)
+    specifier: 5.6.0
+    version: 5.6.0(rollup@3.20.2)
   '@funken-studio/sitemap-nuxt-3':
     specifier: 4.0.4
     version: 4.0.4(rollup@3.20.2)
@@ -2034,8 +2034,8 @@ packages:
       - supports-color
     dev: true
 
-  /@dargmuesli/nuxt-cookie-control@5.5.0(rollup@3.20.2):
-    resolution: {integrity: sha512-GWgCp7FANJTEYOdIgUO4wezfqFFYCMn9WiMZthO3kWUCtV9zvZLos/ajG2KQ5nrE2u//27YbcxDML7oIOYFg8A==}
+  /@dargmuesli/nuxt-cookie-control@5.6.0(rollup@3.20.2):
+    resolution: {integrity: sha512-4N5PyMPpWdDakCDP6GxiHHwRh2bCPPoAYGwOaP4W1W67MzXfQFgUVBrTnbtAsOFOEfjcBDtwbcPNJ/Kek/83xw==}
     dependencies:
       '@nuxt/kit': 3.4.0(rollup@3.20.2)
       '@sindresorhus/slugify': 2.2.0
@@ -3404,7 +3404,7 @@ packages:
       c12: 1.2.0
       consola: 2.15.3
       defu: 6.1.2
-      globby: 13.1.3
+      globby: 13.1.4
       hash-sum: 2.0.0
       ignore: 5.2.4
       jiti: 1.18.2
@@ -3414,9 +3414,9 @@ packages:
       pathe: 1.1.0
       pkg-types: 1.0.2
       scule: 1.0.0
-      semver: 7.3.8
-      unctx: 2.1.2
-      unimport: 3.0.4(rollup@3.20.2)
+      semver: 7.4.0
+      unctx: 2.2.0
+      unimport: 3.0.6(rollup@3.20.2)
       untyped: 1.3.2
     transitivePeerDependencies:
       - rollup
@@ -3541,7 +3541,7 @@ packages:
       scule: 1.0.0
       std-env: 3.3.2
       ufo: 1.1.1
-      unimport: 3.0.4(rollup@3.20.2)
+      unimport: 3.0.6(rollup@3.20.2)
       untyped: 1.3.2
     transitivePeerDependencies:
       - rollup
@@ -7841,7 +7841,7 @@ packages:
       kleur: 4.1.5
       minimist: 1.2.8
       prompts: 2.4.2
-      semver: 7.3.8
+      semver: 7.4.0
     dev: true
 
   /htmlparser2@8.0.2:
@@ -11986,24 +11986,6 @@ packages:
       fast-glob: 3.2.12
       local-pkg: 0.4.3
       magic-string: 0.27.0
-      mlly: 1.2.0
-      pathe: 1.1.0
-      pkg-types: 1.0.2
-      scule: 1.0.0
-      strip-literal: 1.0.1
-      unplugin: 1.3.1
-    transitivePeerDependencies:
-      - rollup
-    dev: true
-
-  /unimport@3.0.4(rollup@3.20.2):
-    resolution: {integrity: sha512-eoof/HLiNJcIkVpnqc7sJbzKSLx39J6xTaP7E4ElgVQKeq2t9fPTkvJKcA55IJTaRPkEkDq8kcc/IZPmrypnFg==}
-    dependencies:
-      '@rollup/pluginutils': 5.0.2(rollup@3.20.2)
-      escape-string-regexp: 5.0.0
-      fast-glob: 3.2.12
-      local-pkg: 0.4.3
-      magic-string: 0.30.0
       mlly: 1.2.0
       pathe: 1.1.0
       pkg-types: 1.0.2
