@@ -3,7 +3,7 @@
 
 # Should be the specific version of `node:slim`.
 # `sqitch` requires at least `buster`.
-FROM node:18.15.0-slim@sha256:e9ea1b9c6ed95b612a2766b7d9399ba35a8cf8068558ca631e08e19c6d6db92d AS development
+FROM node:18.15.0-slim@sha256:095c1ce1491a2109e1c41b6ec3ba3726564f7ba93bcae64187fcc92a614d86f6 AS development
 
 COPY ./docker/entrypoint.sh /usr/local/bin/
 
@@ -33,7 +33,7 @@ CMD ["pnpm", "run", "dev"]
 # Prepare Nuxt.
 
 # Should be the specific version of `node:slim`.
-FROM node:18.15.0-slim@sha256:e9ea1b9c6ed95b612a2766b7d9399ba35a8cf8068558ca631e08e19c6d6db92d AS prepare
+FROM node:18.15.0-slim@sha256:095c1ce1491a2109e1c41b6ec3ba3726564f7ba93bcae64187fcc92a614d86f6 AS prepare
 
 WORKDIR /srv/app/
 
@@ -52,7 +52,7 @@ RUN pnpm install --offline
 
 # Should be the specific version of `node:slim`.
 # Could be the specific version of `node:alpine`, but the `prepare` stage uses slim too.
-FROM node:18.15.0-slim@sha256:e9ea1b9c6ed95b612a2766b7d9399ba35a8cf8068558ca631e08e19c6d6db92d AS build
+FROM node:18.15.0-slim@sha256:095c1ce1491a2109e1c41b6ec3ba3726564f7ba93bcae64187fcc92a614d86f6 AS build
 
 ARG NUXT_PUBLIC_STACK_DOMAIN=jonas-thelemann.de
 ENV NUXT_PUBLIC_STACK_DOMAIN=${NUXT_PUBLIC_STACK_DOMAIN}
@@ -71,7 +71,7 @@ RUN corepack enable && \
 
 # Should be the specific version of `node:slim`.
 # Could be the specific version of `node:alpine`, but the `prepare` stage uses slim too.
-FROM node:18.15.0-slim@sha256:e9ea1b9c6ed95b612a2766b7d9399ba35a8cf8068558ca631e08e19c6d6db92d AS lint
+FROM node:18.15.0-slim@sha256:095c1ce1491a2109e1c41b6ec3ba3726564f7ba93bcae64187fcc92a614d86f6 AS lint
 
 WORKDIR /srv/app/
 
@@ -146,7 +146,7 @@ RUN pnpm test:integration:prod
 
 # Should be the specific version of `node:slim`.
 # Could be the specific version of `node:alpine`, but the `prepare` stage uses slim too.
-FROM node:18.15.0-slim@sha256:e9ea1b9c6ed95b612a2766b7d9399ba35a8cf8068558ca631e08e19c6d6db92d AS collect
+FROM node:18.15.0-slim@sha256:095c1ce1491a2109e1c41b6ec3ba3726564f7ba93bcae64187fcc92a614d86f6 AS collect
 
 WORKDIR /srv/app/
 
@@ -162,7 +162,7 @@ COPY --from=test-integration-prod /srv/app/package.json /tmp/test/package.json
 
 # Should be the specific version of `node:slim`.
 # `sqitch` requires at least `buster`.
-FROM node:18.15.0-slim@sha256:e9ea1b9c6ed95b612a2766b7d9399ba35a8cf8068558ca631e08e19c6d6db92d AS production
+FROM node:18.15.0-slim@sha256:095c1ce1491a2109e1c41b6ec3ba3726564f7ba93bcae64187fcc92a614d86f6 AS production
 
 ENV NODE_ENV=production
 
