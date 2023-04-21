@@ -1,3 +1,10 @@
+## [1.7.3](https://github.com/dargmuesli/creal/compare/1.7.2...1.7.3) (2023-04-21)
+
+
+### Bug Fixes
+
+* **event:** add missing location ([281c46a](https://github.com/dargmuesli/creal/commit/281c46a659634937c14234f18a0474fa41c7c11a))
+
 ## [1.7.2](https://github.com/dargmuesli/creal/compare/1.7.1...1.7.2) (2023-04-20)
 
 
