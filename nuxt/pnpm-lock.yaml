@@ -176,8 +176,8 @@ devDependencies:
     specifier: 2.1.2
     version: 2.1.2(@unhead/vue@1.1.26)(rollup@3.20.6)
   pinia:
-    specifier: 2.0.34
-    version: 2.0.34(typescript@5.0.4)(vue@3.2.47)
+    specifier: 2.0.35
+    version: 2.0.35(typescript@5.0.4)(vue@3.2.47)
   postcss:
     specifier: 8.4.22
     version: 8.4.22
@@ -3975,7 +3975,7 @@ packages:
       '@intlify/bundle-utils': 4.0.0(vue-i18n@9.3.0-beta.16)
       '@intlify/shared': 9.3.0-beta.16
       '@intlify/unplugin-vue-i18n': 0.8.2(vue-i18n@9.3.0-beta.16)
-      '@nuxt/kit': 3.4.1(rollup@3.20.6)
+      '@nuxt/kit': 3.4.2(rollup@3.20.6)
       '@vue/compiler-sfc': 3.2.47
       cookie-es: 0.5.0
       debug: 4.3.4(supports-color@8.1.1)
@@ -9531,7 +9531,7 @@ packages:
       '@rollup/pluginutils': 5.0.2(rollup@3.20.6)
       '@vercel/nft': 0.22.6
       archiver: 5.3.1
-      c12: 1.2.0
+      c12: 1.4.1
       chalk: 5.2.0
       chokidar: 3.5.3
       consola: 3.1.0
@@ -9567,7 +9567,7 @@ packages:
       rollup: 3.20.6
       rollup-plugin-visualizer: 5.9.0(rollup@3.20.6)
       scule: 1.0.0
-      semver: 7.4.0
+      semver: 7.5.0
       serve-placeholder: 2.0.1
       serve-static: 1.15.0
       source-map-support: 0.5.21
@@ -10193,24 +10193,6 @@ packages:
   /pify@2.3.0:
     resolution: {integrity: sha512-udgsAY+fTnvv7kI7aaxbqwWNb0AHiB0qBO89PZKPkoTmGOgdbrHDKD+0B2X4uTfJ/FT1R09r9gTsjUjNJotuog==}
     engines: {node: '>=0.10.0'}
-    dev: true
-
-  /pinia@2.0.34(typescript@5.0.4)(vue@3.2.47):
-    resolution: {integrity: sha512-cgOoGUiyqX0SSgX8XelK9+Ri4XA2/YyNtgjogwfzIx1g7iZTaZPxm7/bZYMCLU2qHRiHhxG7SuQO0eBacFNc2Q==}
-    peerDependencies:
-      '@vue/composition-api': ^1.4.0
-      typescript: '>=4.4.4'
-      vue: ^2.6.14 || ^3.2.0
-    peerDependenciesMeta:
-      '@vue/composition-api':
-        optional: true
-      typescript:
-        optional: true
-    dependencies:
-      '@vue/devtools-api': 6.5.0
-      typescript: 5.0.4
-      vue: 3.2.47
-      vue-demi: 0.13.11(vue@3.2.47)
     dev: true
 
   /pinia@2.0.35(typescript@5.0.4)(vue@3.2.47):
