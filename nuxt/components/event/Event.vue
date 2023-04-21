@@ -87,7 +87,7 @@ de:
   datetimeLocation: ' ⋅ {location}'
   details: Details
 en:
-  datetime: '{start}{end}'
+  datetime: '{start}{end}{location}'
   datetimeEnd: ' - {end}'
   datetimeLocation: ' ⋅ {location}'
   details: Details
