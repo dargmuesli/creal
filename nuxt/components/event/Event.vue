@@ -69,7 +69,7 @@ const getServiceHref = useGetServiceHref()
 const dateFormat = (date: Date) => $moment(date).format('ddd D MMM YYYY, h:mm')
 const imageSrc = computed(
   () =>
-    getServiceHref('creal-strapi', 1337) +
+    getServiceHref({ isSsr: false, name: 'creal-strapi', port: 1337 }) +
     props.crealEvent.image.data.attributes.url
 )
 </script>

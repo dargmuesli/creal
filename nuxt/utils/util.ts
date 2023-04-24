@@ -124,11 +124,13 @@ export const getHost = (req: IncomingMessage) => {
 
 export const getServiceHref = ({
   host,
+  isSsr = true,
   name,
   port,
   stagingHost,
 }: {
   host: string
+  isSsr?: boolean
   name?: string
   port?: number
   stagingHost?: string
@@ -139,7 +141,7 @@ export const getServiceHref = ({
 
   if (stagingHost) {
     return `https://${nameSubdomainString}${stagingHost}`
-  } else if (process.server) {
+  } else if (isSsr && process.server) {
     return `http://${name}${portString}`
   } else {
     return `https://${nameSubdomainString}${getDomainTldPort(host)}`
