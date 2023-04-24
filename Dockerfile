@@ -5,7 +5,7 @@
 # `sqitch` requires at least `buster`.
 FROM node:20.0.0-slim@sha256:c32b648533614f3328f5123f29480058fc857606b81fe2796844af1c424adb75 AS development
 
-COPY ./docker/entrypoint.sh /usr/local/bin/
+COPY ./docker/entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 
 # Update and install dependencies.
 # - `libdbd-pg-perl postgresql-client sqitch` is required by the entrypoint
@@ -22,7 +22,7 @@ VOLUME /srv/.pnpm-store
 VOLUME /srv/app
 VOLUME /srv/sqitch
 
-ENTRYPOINT ["entrypoint.sh"]
+ENTRYPOINT ["docker-entrypoint.sh"]
 CMD ["pnpm", "run", "dev"]
 
 # Waiting for https://github.com/nuxt/framework/issues/6915
@@ -37,12 +37,12 @@ FROM node:20.0.0-slim@sha256:c32b648533614f3328f5123f29480058fc857606b81fe279684
 
 WORKDIR /srv/app/
 
-COPY ./nuxt/pnpm-lock.yaml ./
+COPY ./pnpm-lock.yaml ./
 
 RUN corepack enable && \
     pnpm fetch
 
-COPY ./nuxt/ ./
+COPY ./ ./
 
 RUN pnpm install --offline
 
@@ -63,7 +63,7 @@ COPY --from=prepare /srv/app/ ./
 
 ENV NODE_ENV=production
 RUN corepack enable && \
-    pnpm run build
+    pnpm --dir nuxt run build
 
 
 ########################
@@ -78,7 +78,7 @@ WORKDIR /srv/app/
 COPY --from=prepare /srv/app/ ./
 
 RUN corepack enable && \
-    pnpm run lint
+    pnpm --dir nuxt run lint
 
 
 ########################
@@ -120,7 +120,7 @@ WORKDIR /srv/app/
 COPY --from=prepare /root/.cache/Cypress /root/.cache/Cypress
 COPY --from=prepare /srv/app/ ./
 
-RUN pnpm test:integration:dev
+RUN pnpm --dir nuxt run test:integration:dev
 
 
 ########################
@@ -138,7 +138,7 @@ COPY --from=prepare /root/.cache/Cypress /root/.cache/Cypress
 COPY --from=build /srv/app/ /srv/app/
 COPY --from=test-integration-dev /srv/app/package.json /tmp/test/package.json
 
-RUN pnpm test:integration:prod
+RUN pnpm --dir nuxt run test:integration:prod
 
 
 #######################
@@ -150,7 +150,7 @@ FROM node:20.0.0-slim@sha256:c32b648533614f3328f5123f29480058fc857606b81fe279684
 
 WORKDIR /srv/app/
 
-COPY --from=build /srv/app/.output ./.output
+COPY --from=build /srv/app/nuxt/.output ./.output
 COPY --from=lint /srv/app/package.json /tmp/lint/package.json
 COPY --from=test-integration-dev /srv/app/package.json /tmp/test/package.json
 COPY --from=test-integration-prod /srv/app/package.json /tmp/test/package.json
