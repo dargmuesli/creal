@@ -23,7 +23,6 @@ module.exports = {
   darkMode: 'class',
   plugins: [
     require('@tailwindcss/forms'),
-    require('@tailwindcss/line-clamp'),
     require('@tailwindcss/typography'),
     ({ addBase, addComponents, addUtilities, theme }) => {
       addBase({

@@ -138,7 +138,8 @@ export default defineNuxtPlugin((nuxtApp) => {
         return {}
       }
     },
-    url: getServiceHref('creal-postgraphile', 5000) + '/graphql',
+    url:
+      getServiceHref({ name: 'creal-postgraphile', port: 5000 }) + '/graphql',
     exchanges: [
       ...(config.public.isInProduction ? [] : [devtoolsExchange]),
       cache,
