@@ -1,3 +1,11 @@
+## [1.7.4](https://github.com/dargmuesli/creal/compare/1.7.3...1.7.4) (2023-04-24)
+
+
+### Bug Fixes
+
+* **docker:** account for pnpm workspace ([8970238](https://github.com/dargmuesli/creal/commit/8970238c57e1c51d79e04a9372833dd028814883))
+* **event:** correct server side image source ([6a1f97f](https://github.com/dargmuesli/creal/commit/6a1f97f46aa98e3325eab371fadf3800ef1c9390)), closes [#297](https://github.com/dargmuesli/creal/issues/297)
+
 ## [1.7.3](https://github.com/dargmuesli/creal/compare/1.7.2...1.7.3) (2023-04-21)
 
 
