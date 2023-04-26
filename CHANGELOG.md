@@ -1,3 +1,10 @@
+## [1.8.1](https://github.com/dargmuesli/creal/compare/1.8.0...1.8.1) (2023-04-26)
+
+
+### Bug Fixes
+
+* **faq:** order ascending ([c644a97](https://github.com/dargmuesli/creal/commit/c644a97701f255cadc8bffa03f0e09bfbda7fc5e))
+
 # [1.8.0](https://github.com/dargmuesli/creal/compare/1.7.6...1.8.0) (2023-04-26)
 
 
