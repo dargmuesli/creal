@@ -1,3 +1,10 @@
+# [1.8.0](https://github.com/dargmuesli/creal/compare/1.7.6...1.8.0) (2023-04-26)
+
+
+### Features
+
+* **i18n:** internationalize the strapi api client ([7981455](https://github.com/dargmuesli/creal/commit/7981455bc0ae107ffb0d76e085b8224bc0f9874a))
+
 ## [1.7.6](https://github.com/dargmuesli/creal/compare/1.7.5...1.7.6) (2023-04-26)
 
 
