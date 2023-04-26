@@ -9,13 +9,13 @@ on:
 jobs:
   build:
     name: Build
-    uses: dargmuesli/github-actions/.github/workflows/docker-ghcr.yml@0.36.0
+    uses: dargmuesli/github-actions/.github/workflows/docker-ghcr.yml@0.37.3
     permissions:
       packages: write
   release-semantic:
     needs: build
     name: Release (semantic)
-    uses: dargmuesli/github-actions/.github/workflows/release-semantic.yml@0.36.0
+    uses: dargmuesli/github-actions/.github/workflows/release-semantic.yml@0.37.3
     secrets:
       GH_TOKEN: ${{ secrets.GH_TOKEN }}
     with:
