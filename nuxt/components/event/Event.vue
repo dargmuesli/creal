@@ -66,7 +66,7 @@ const dateTime = useDateTime()
 const getServiceHref = useGetServiceHref()
 
 // computations
-const dateFormat = (date: Date) => dateTime(date).format('ddd D MMM YYYY, h:mm')
+const dateFormat = (date: Date) => dateTime(date).format('lll')
 const imageSrc = computed(
   () =>
     getServiceHref({ isSsr: false, name: 'creal-strapi', port: 1337 }) +

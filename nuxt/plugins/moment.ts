@@ -1,25 +1,27 @@
-import moment from 'dayjs'
+import dayjs from 'dayjs'
 
 // workaround for [1]
 import de from 'dayjs/locale/de'
 // import 'dayjs/locale/de' does not make locale available
 
 import isSameOrBefore from 'dayjs/plugin/isSameOrBefore'
+import localizedFormat from 'dayjs/plugin/localizedFormat'
 import timezone from 'dayjs/plugin/timezone'
 import utc from 'dayjs/plugin/utc'
 
 export default defineNuxtPlugin((_nuxtApp) => {
-  moment.extend(isSameOrBefore)
-  moment.extend(timezone)
-  moment.extend(utc)
+  dayjs.extend(isSameOrBefore)
+  dayjs.extend(localizedFormat)
+  dayjs.extend(timezone)
+  dayjs.extend(utc)
 
   // workaround for [1]
-  moment.locale(de)
-  // moment.locale(en) makes `format` error
+  dayjs.locale(de)
+  // dayjs.locale(en) makes `format` error
 
   return {
     provide: {
-      moment,
+      dayjs,
     },
   }
 })

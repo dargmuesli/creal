@@ -93,7 +93,7 @@ import Plyr from 'plyr'
 import type { TrackListItem } from '~/types/player'
 import { useStore } from '~/store'
 
-const { $moment } = useNuxtApp()
+const { $dayjs } = useNuxtApp()
 const store = useStore()
 const localePath = useLocalePath()
 const switchLocalePath = useSwitchLocalePath()
@@ -248,7 +248,7 @@ watch(
 
 // initialization
 useHeadLayout()
-$moment.locale(locale.value)
+$dayjs.locale(locale.value)
 </script>
 
 <script lang="ts">
