@@ -47,7 +47,7 @@
           >
             {{ t('on') }}
             {{
-              $moment(store.playerData.currentTrack.meta.createdTime).format(
+              dateTime(store.playerData.currentTrack.meta.createdTime).format(
                 'L'
               )
             }}
@@ -100,6 +100,7 @@ const switchLocalePath = useSwitchLocalePath()
 const { availableLocales, t, locale } = useI18n()
 const { play } = usePlyr()
 const fireError = useFireError()
+const dateTime = useDateTime()
 
 // data
 const isInitialized = ref(false)

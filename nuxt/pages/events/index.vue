@@ -43,10 +43,10 @@ import type { StrapiResult } from '~/types/fetch'
 
 definePageMeta({ colorMode: 'dark' })
 
-const { $moment } = useNuxtApp()
 const { t } = useI18n()
 const route = useRoute()
 const strapiFetch = useStrapiFetch()
+const dateTime = useDateTime()
 
 // data
 const requestError = ref()
@@ -84,18 +84,18 @@ const paging = getPaging({
 const itemsCurrent = computed(() => {
   if (!events) return
 
-  const current = $moment()
+  const current = dateTime()
 
   return events.filter((event) => {
     if (event.attributes.dateEnd) {
       return (
-        $moment(event.attributes.dateStart).isSameOrBefore(current) &&
-        $moment(event.attributes.dateEnd).isAfter(current)
+        dateTime(event.attributes.dateStart).isSameOrBefore(current) &&
+        dateTime(event.attributes.dateEnd).isAfter(current)
       )
     } else {
       return (
-        $moment(event.attributes.dateStart).isSameOrBefore(current) &&
-        $moment(event.attributes.dateStart).isSame(current, 'day')
+        dateTime(event.attributes.dateStart).isSameOrBefore(current) &&
+        dateTime(event.attributes.dateStart).isSame(current, 'day')
       )
     }
   })
@@ -103,24 +103,24 @@ const itemsCurrent = computed(() => {
 const itemsFuture = computed(() => {
   if (!events) return
 
-  const current = $moment()
+  const current = dateTime()
 
   return events.filter((event) =>
-    $moment(event.attributes.dateStart).isAfter(current)
+    dateTime(event.attributes.dateStart).isAfter(current)
   )
 })
 const itemsPast = computed(() => {
   if (!events) return
 
-  const current = $moment()
+  const current = dateTime()
 
   return events.filter((event) => {
     if (event.attributes.dateEnd) {
-      return $moment(event.attributes.dateEnd).isBefore(current)
+      return dateTime(event.attributes.dateEnd).isBefore(current)
     } else {
       return (
-        $moment(event.attributes.dateStart).isBefore(current) &&
-        !$moment(event.attributes.dateStart).isSame(current, 'day')
+        dateTime(event.attributes.dateStart).isBefore(current) &&
+        !dateTime(event.attributes.dateStart).isSame(current, 'day')
       )
     }
   })

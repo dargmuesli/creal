@@ -45,23 +45,26 @@
 </template>
 
 <script setup lang="ts">
-const { $moment } = useNuxtApp()
 const { t } = useI18n()
 const localePath = useLocalePath()
 const strapiFetch = useStrapiFetch()
+const dateTime = useDateTime()
 
 // async data
 let eventsCurrentCount = 0
 let eventsFutureCount = 0
+
+// data
+const now = dateTime()
 
 // methods
 const init = async () => {
   eventsCurrentCount = (
     (await strapiFetch('/events', {
       query: {
-        'filters[$and][0][dateStart][$lte]': $moment().toISOString(),
-        'filters[$and][1][$or][0][dateEnd][$gt]': $moment().toISOString(),
-        'filters[$and][1][$or][1][dateStart][$gte]': $moment()
+        'filters[$and][0][dateStart][$lte]': now.toISOString(),
+        'filters[$and][1][$or][0][dateEnd][$gt]': now.toISOString(),
+        'filters[$and][1][$or][1][dateStart][$gte]': now
           .startOf('day')
           .toISOString(),
       },
@@ -70,7 +73,7 @@ const init = async () => {
   eventsFutureCount = (
     (await strapiFetch('/events', {
       query: {
-        'filters[dateStart][$gt]': $moment().toISOString(),
+        'filters[dateStart][$gt]': now.toISOString(),
       },
     })) as any
   ).meta.pagination.total
