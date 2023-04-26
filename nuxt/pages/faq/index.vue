@@ -63,7 +63,7 @@ try {
       locale: locale.value,
       'pagination[limit]': querylimit,
       'pagination[start]': queryStart,
-      sort: 'title:desc',
+      sort: 'title:asc',
     },
     retry: FETCH_RETRY,
   })
