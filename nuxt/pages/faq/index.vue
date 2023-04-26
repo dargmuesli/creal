@@ -44,7 +44,7 @@ import type { CrealFaq } from '~/types/creal'
 
 definePageMeta({ colorMode: 'dark' })
 
-const { t } = useI18n()
+const { t, locale } = useI18n()
 const route = useRoute()
 const strapiFetch = useStrapiFetch()
 
@@ -60,6 +60,7 @@ let asyncData: StrapiResult<CrealFaq> | undefined
 try {
   asyncData = await strapiFetch('/faqs', {
     query: {
+      locale: locale.value,
       'pagination[limit]': querylimit,
       'pagination[start]': queryStart,
       sort: 'title:desc',

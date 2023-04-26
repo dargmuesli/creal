@@ -43,7 +43,7 @@ import type { StrapiResult } from '~/types/fetch'
 
 definePageMeta({ colorMode: 'dark' })
 
-const { t } = useI18n()
+const { t, locale } = useI18n()
 const route = useRoute()
 const strapiFetch = useStrapiFetch()
 const dateTime = useDateTime()
@@ -60,6 +60,7 @@ let asyncData
 try {
   asyncData = await strapiFetch<StrapiResult<CrealEvent>>('/events', {
     query: {
+      locale: locale.value,
       'pagination[limit]': String(queryLimit),
       'pagination[start]': String(queryStart),
       populate: 'image',
