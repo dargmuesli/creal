@@ -1,3 +1,10 @@
+## [1.7.6](https://github.com/dargmuesli/creal/compare/1.7.5...1.7.6) (2023-04-26)
+
+
+### Bug Fixes
+
+* **event:** correct date time usage ([d9c2931](https://github.com/dargmuesli/creal/commit/d9c2931426b7bc16e82f092d14eb0933b18950f7))
+
 ## [1.7.5](https://github.com/dargmuesli/creal/compare/1.7.4...1.7.5) (2023-04-25)
 
 
