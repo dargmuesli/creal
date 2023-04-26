@@ -61,12 +61,12 @@ export interface Props {
 }
 const props = withDefaults(defineProps<Props>(), {})
 
-const { $moment } = useNuxtApp()
 const { t } = useI18n()
+const dateTime = useDateTime()
 const getServiceHref = useGetServiceHref()
 
 // computations
-const dateFormat = (date: Date) => $moment(date).format('ddd D MMM YYYY, h:mm')
+const dateFormat = (date: Date) => dateTime(date).format('ddd D MMM YYYY, h:mm')
 const imageSrc = computed(
   () =>
     getServiceHref({ isSsr: false, name: 'creal-strapi', port: 1337 }) +
