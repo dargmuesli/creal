@@ -1,3 +1,10 @@
+## [1.8.2](https://github.com/dargmuesli/creal/compare/1.8.1...1.8.2) (2023-04-27)
+
+
+### Bug Fixes
+
+* **dayjs:** use localized format ([fd35efb](https://github.com/dargmuesli/creal/commit/fd35efb7b3641c08ae7c7d093c4f329cb8251cc1))
+
 ## [1.8.1](https://github.com/dargmuesli/creal/compare/1.8.0...1.8.1) (2023-04-26)
 
 
