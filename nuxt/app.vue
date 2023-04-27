@@ -9,7 +9,7 @@
 </template>
 
 <script setup lang="ts">
-const { $i18n, $moment } = useNuxtApp()
+const { $i18n, $dayjs } = useNuxtApp()
 const { t, locale } = useI18n()
 const cookieControl = useCookieControl()
 
@@ -22,7 +22,7 @@ const name = 'cReal'
 // methods
 const init = () => {
   $i18n.onLanguageSwitched = (_oldLocale: string, newLocale: string) =>
-    $moment.locale(newLocale)
+    $dayjs.locale(newLocale)
 
   if (process.client) {
     const cookieTimezone = useCookie(TIMEZONE_COOKIE_NAME, {
@@ -31,8 +31,8 @@ const init = () => {
       sameSite: 'strict',
       secure: true,
     })
-    // @ts-ignore `tz` should be part of `$moment` (https://github.com/iamkun/dayjs/issues/2106)
-    cookieTimezone.value = $moment.tz.guess()
+    // @ts-ignore `tz` should be part of `$dayjs` (https://github.com/iamkun/dayjs/issues/2106)
+    cookieTimezone.value = $dayjs.tz.guess()
   }
 }
 

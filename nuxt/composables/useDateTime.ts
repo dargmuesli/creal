@@ -2,7 +2,7 @@ import { Dayjs } from 'dayjs'
 
 export const useDateTime = () => {
   const event = useRequestEvent()
-  const { $moment } = useNuxtApp()
+  const { $dayjs } = useNuxtApp()
   const timezoneCookie = useCookie(TIMEZONE_COOKIE_NAME)
 
   const timezoneHeader = event?.node.req.headers[TIMEZONE_HEADER_KEY]
@@ -12,6 +12,6 @@ export const useDateTime = () => {
       : timezoneCookie.value || undefined
 
   return (dateTime?: string | number | Dayjs | Date | null) =>
-    // @ts-ignore `tz` should be part of `$moment` (https://github.com/iamkun/dayjs/issues/2106)
-    $moment(dateTime).tz(timezone)
+    // @ts-ignore `tz` should be part of `$dayjs` (https://github.com/iamkun/dayjs/issues/2106)
+    $dayjs(dateTime).tz(timezone)
 }
