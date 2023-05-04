@@ -34,6 +34,9 @@ CMD ["pnpm", "run", "--dir", "nuxt", "dev"]
 # Should be the specific version of `node:slim`.
 FROM node:20.0.0-slim@sha256:130e0957d64695f37eea9ff80541f628e811da1d969c36988759738e39a0ab3b AS prepare
 
+# The `CI` environment variable must be set for pnpm to run in headless mode
+ENV CI=true
+
 WORKDIR /srv/app/
 
 COPY ./pnpm-lock.yaml ./
