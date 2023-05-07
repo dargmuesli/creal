@@ -20,7 +20,9 @@
           </template>
         </i18n-t>
       </div>
-      <h2 class="m-0">{{ crealEvent.title }}</h2>
+      <span class="text-4xl font-bold block text-white">
+        {{ crealEvent.title }}
+      </span>
       <!-- eslint-disable vue/no-v-html -->
       <div
         v-if="crealEvent.description"

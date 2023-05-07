@@ -1,7 +1,7 @@
 <template>
   <div v-if="events?.length" class="flex flex-col gap-2 lg:gap-4">
     <div class="vio-prose-fullwidth">
-      <h2><slot /></h2>
+      <div class="text-5xl font-bold text-white"><slot /></div>
     </div>
     <ul>
       <li
