@@ -17,14 +17,14 @@ importers:
   nuxt:
     devDependencies:
       '@aws-sdk/client-s3':
-        specifier: 3.329.0
-        version: 3.329.0
+        specifier: 3.331.0
+        version: 3.331.0
       '@aws-sdk/credential-providers':
         specifier: 3.329.0
         version: 3.329.0
       '@aws-sdk/s3-request-presigner':
-        specifier: 3.329.0
-        version: 3.329.0
+        specifier: 3.331.0
+        version: 3.331.0
       '@babel/core':
         specifier: 7.21.8
         version: 7.21.8
@@ -438,8 +438,8 @@ packages:
       - aws-crt
     dev: true
 
-  /@aws-sdk/client-s3@3.329.0:
-    resolution: {integrity: sha512-FA55Dxlj7UKIvSVB0MWk6//a/mrX9M7/eAjVlaSn5/ZUKS02fej9QcUVGMGYE8yMih8IwNNhCzOoJXX4pfXeQA==}
+  /@aws-sdk/client-s3@3.331.0:
+    resolution: {integrity: sha512-HhoEBF6VxqiErExuDTbp034YjSGRXSyNlWRSfQUOO2uPf41LUINMiFj5FZmmAOUnPJl+GUIPwiVIXnO2zpjjrw==}
     engines: {node: '>=14.0.0'}
     dependencies:
       '@aws-crypto/sha1-browser': 3.0.0
@@ -461,7 +461,7 @@ packages:
       '@aws-sdk/middleware-content-length': 3.329.0
       '@aws-sdk/middleware-endpoint': 3.329.0
       '@aws-sdk/middleware-expect-continue': 3.329.0
-      '@aws-sdk/middleware-flexible-checksums': 3.329.0
+      '@aws-sdk/middleware-flexible-checksums': 3.331.0
       '@aws-sdk/middleware-host-header': 3.329.0
       '@aws-sdk/middleware-location-constraint': 3.329.0
       '@aws-sdk/middleware-logger': 3.329.0
@@ -488,7 +488,7 @@ packages:
       '@aws-sdk/util-endpoints': 3.329.0
       '@aws-sdk/util-retry': 3.329.0
       '@aws-sdk/util-stream-browser': 3.329.0
-      '@aws-sdk/util-stream-node': 3.329.0
+      '@aws-sdk/util-stream-node': 3.331.0
       '@aws-sdk/util-user-agent-browser': 3.329.0
       '@aws-sdk/util-user-agent-node': 3.329.0
       '@aws-sdk/util-utf8': 3.310.0
@@ -900,8 +900,8 @@ packages:
       tslib: 2.5.0
     dev: true
 
-  /@aws-sdk/middleware-flexible-checksums@3.329.0:
-    resolution: {integrity: sha512-epO5ANe4nKs0NiNJV0zAN1qZjpF4R6FA/z5ZtrH8nDfCljIoaskEB2HuC2QTprelSLCGxSq+EWhBYxYoxRSf3g==}
+  /@aws-sdk/middleware-flexible-checksums@3.331.0:
+    resolution: {integrity: sha512-rdRa4yvyqSQ/HDCh4p1Glv8Y/uRNuIwmOG4nDuL6/GYK1BQdpUpbgrhsszPormku10SnbAdsaWGmVhy3qlUSCQ==}
     engines: {node: '>=14.0.0'}
     dependencies:
       '@aws-crypto/crc32': 3.0.0
@@ -1078,8 +1078,8 @@ packages:
       tslib: 2.5.0
     dev: true
 
-  /@aws-sdk/s3-request-presigner@3.329.0:
-    resolution: {integrity: sha512-RU6T9DoUVQEP947iKP+tbayzW9W2PIJnmwbxHwVLmvUZg3OCfpJgF7lbu8OCZbtbEC4UC5e2OoGiZoUXsvgr2g==}
+  /@aws-sdk/s3-request-presigner@3.331.0:
+    resolution: {integrity: sha512-WGVzNJ79lQ/iXJ3a6/MXCXbW7T9/nIlofu35SKzWcTo6wC3Ku7EsbsDcJA3B7GNF+u/uAOCAmjQXpBJjlekjbw==}
     engines: {node: '>=14.0.0'}
     dependencies:
       '@aws-sdk/middleware-endpoint': 3.329.0
@@ -1293,8 +1293,8 @@ packages:
       tslib: 2.5.0
     dev: true
 
-  /@aws-sdk/util-stream-node@3.329.0:
-    resolution: {integrity: sha512-fpZYYfwklnbB4xEOOpJXRSRA1X1RN5jhrwP+M1vU4ElD6Ta/fdvfPbU7km5Q7LNJh+CZpavzYqEGWF7Gbe2hQQ==}
+  /@aws-sdk/util-stream-node@3.331.0:
+    resolution: {integrity: sha512-5YUatdh4vgkv7VFY+lSkF+b+6EFkiHvy+dlucfGoJEOcEzuA/NBZYebWbcJ5TiR6z3cQdA23OTyZz3ZofZY1hw==}
     engines: {node: '>=14.0.0'}
     dependencies:
       '@aws-sdk/node-http-handler': 3.329.0
