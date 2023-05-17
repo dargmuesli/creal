@@ -18,7 +18,7 @@
       <!-- eslint-disable vue/no-v-html -->
       <div
         class="vio-prose-fullwidth p-8"
-        v-html="$marked(faqItem.attributes.answer)"
+        v-html="marked(faqItem.attributes.answer)"
       />
       <!-- eslint-enable vue/no-v-html -->
     </div>
@@ -26,6 +26,8 @@
 </template>
 
 <script setup lang="ts">
+import { marked } from 'marked'
+
 import type { CrealFaq } from '~/types/creal'
 import type { CollectionItem } from '~/types/paging'
 

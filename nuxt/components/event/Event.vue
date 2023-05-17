@@ -24,7 +24,7 @@
       <!-- eslint-disable vue/no-v-html -->
       <div
         v-if="crealEvent.description"
-        v-html="$marked(crealEvent.description)"
+        v-html="marked(crealEvent.description)"
       />
       <!-- eslint-enable vue/no-v-html -->
     </div>
@@ -50,6 +50,8 @@
 </template>
 
 <script setup lang="ts">
+import { marked } from 'marked'
+
 import type { CrealEvent } from '~/types/creal'
 
 export interface Image {
