@@ -38,7 +38,7 @@
 <script setup lang="ts">
 import { consola } from 'consola'
 
-import type { CrealEvent } from '~/types/creal'
+import type { CrealEvent, CrealFaq } from '~/types/creal'
 import type { StrapiResult } from '~/types/fetch'
 
 definePageMeta({ colorMode: 'dark' })
@@ -55,7 +55,7 @@ const queryLimit = +(route.query.limit ? route.query.limit : 100)
 const queryStart = +(route.query.start ? route.query.start : 0)
 
 // async data
-let asyncData
+let asyncData: StrapiResult<CrealFaq> | undefined
 
 try {
   asyncData = await strapiFetch<StrapiResult<CrealEvent>>('/events', {

@@ -29,8 +29,8 @@ export interface Props {
 withDefaults(defineProps<Props>(), {})
 
 const emit = defineEmits<{
-  (e: 'download'): void
-  (e: 'play'): void
+  download: []
+  play: []
 }>()
 
 // methods

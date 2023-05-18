@@ -50,7 +50,8 @@ export default defineNuxtConfig({
     tsConfig: {
       compilerOptions: {
         esModuleInterop: true,
-        // types: ['jest'],
+        // moduleResolution: 'bundler',
+        // noErrorTruncation: true,
       },
       vueCompilerOptions: {
         htmlAttributes: [], // https://github.com/johnsoncodehk/volar/issues/1970#issuecomment-1276994634
