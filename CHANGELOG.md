@@ -1,3 +1,15 @@
+## [1.8.4](https://github.com/dargmuesli/creal/compare/1.8.3...1.8.4) (2023-05-18)
+
+
+### Bug Fixes
+
+* **nuxt:** use ofetch instead of $fetch ([2763818](https://github.com/dargmuesli/creal/commit/2763818ddef61f3ad7ee45ff87219652b4d9f256))
+
+
+### Performance Improvements
+
+* **marked:** replace plugin with page import ([34b0265](https://github.com/dargmuesli/creal/commit/34b0265a69a0bef44e7248d5180d6b4e6b1775c6))
+
 ## [1.8.3](https://github.com/dargmuesli/creal/compare/1.8.2...1.8.3) (2023-05-11)
 
 
