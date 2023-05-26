@@ -182,8 +182,8 @@ importers:
         specifier: 3.5.1
         version: 3.5.1(@types/node@20.1.7)(eslint@8.41.0)(rollup@3.23.0)(stylelint@15.6.2)(typescript@5.0.4)(vue-tsc@1.6.5)
       nuxt-schema-org:
-        specifier: 2.1.3
-        version: 2.1.3(@unhead/vue@1.1.27)(rollup@3.23.0)
+        specifier: 2.2.0
+        version: 2.2.0(@unhead/vue@1.1.27)(rollup@3.23.0)
       pinia:
         specifier: 2.1.3
         version: 2.1.3(typescript@5.0.4)(vue@3.3.4)
@@ -3600,33 +3600,6 @@ packages:
     resolution: {integrity: sha512-GBzP8zOc7CGWyFQS6dv1lQz8VVpz5C2yRszbXufwG/9zhStTIH50EtD87NmWbTMwXDvZLNg8GIpb1UFdH93JCA==}
     dev: true
 
-  /@nuxt/kit@3.4.2(rollup@3.23.0):
-    resolution: {integrity: sha512-bFUpkyG2ZF6RYqiW+tXnWssccHQQqMF4kZJJLP/0eKXf+Fkt/Is0R7IY768jy8ylnyqeMBbmpg4Zv5gSZjfZQw==}
-    engines: {node: ^14.18.0 || ^16.10.0 || ^17.0.0 || ^18.0.0 || ^19.0.0}
-    dependencies:
-      '@nuxt/schema': 3.4.2(rollup@3.23.0)
-      c12: 1.4.1
-      consola: 3.1.0
-      defu: 6.1.2
-      globby: 13.1.4
-      hash-sum: 2.0.0
-      ignore: 5.2.4
-      jiti: 1.18.2
-      knitwork: 1.0.0
-      lodash.template: 4.5.0
-      mlly: 1.2.1
-      pathe: 1.1.0
-      pkg-types: 1.0.3
-      scule: 1.0.0
-      semver: 7.5.1
-      unctx: 2.3.0
-      unimport: 3.0.6(rollup@3.23.0)
-      untyped: 1.3.2
-    transitivePeerDependencies:
-      - rollup
-      - supports-color
-    dev: true
-
   /@nuxt/kit@3.5.0(rollup@3.23.0):
     resolution: {integrity: sha512-QqhOPTan5cpaYCksSWdmtpldCGfnsqTd55blztMSF+OPxfGav4GE4BrBD3ZSMn2/5MxieF3GU/w5/tgcDXE3bA==}
     engines: {node: ^14.18.0 || >=16.10.0}
@@ -3674,24 +3647,6 @@ packages:
       scule: 1.0.0
       semver: 7.5.1
       unctx: 2.3.0
-      unimport: 3.0.7(rollup@3.23.0)
-      untyped: 1.3.2
-    transitivePeerDependencies:
-      - rollup
-      - supports-color
-    dev: true
-
-  /@nuxt/schema@3.4.2(rollup@3.23.0):
-    resolution: {integrity: sha512-DXB/fyjrAssFt9KGXyS+ZSfm1A0NYKhEoc01wyz1lGo//oETzUh3MmwE6X3x65NPqDlYZ6Mnj+IdftRRophv5Q==}
-    engines: {node: ^14.18.0 || ^16.10.0 || ^17.0.0 || ^18.0.0 || ^19.0.0}
-    dependencies:
-      defu: 6.1.2
-      hookable: 5.5.3
-      pathe: 1.1.0
-      pkg-types: 1.0.3
-      postcss-import-resolver: 2.0.0
-      std-env: 3.3.3
-      ufo: 1.1.2
       unimport: 3.0.7(rollup@3.23.0)
       untyped: 1.3.2
     transitivePeerDependencies:
@@ -4513,8 +4468,8 @@ packages:
       '@unhead/shared': 1.1.27
     dev: true
 
-  /@unhead/schema-org-vue@0.5.0(@unhead/vue@1.1.27):
-    resolution: {integrity: sha512-UEB54jF2+HBoHKqyqdw7oNLqdhDfEX/FSImtPT3oTDTfGBWpc7RGUPe2RG/j4N78Kk3SsfnHxxJO0GKIGPJRwQ==}
+  /@unhead/schema-org-vue@0.6.0(@unhead/vue@1.1.27):
+    resolution: {integrity: sha512-2zTVczJ8iI8jDOzaz2md8fr8j+jWqkmMdo89OI/VVPYWpA6Cy2BFCMvDqrptBZ2h3ieOZ/lhA/y+cTobBZEvaQ==}
     engines: {node: '>=14.0.0'}
     peerDependencies:
       '@unhead/vue': '>=1.1.9'
@@ -10031,11 +9986,11 @@ packages:
       fsevents: 2.3.2
     dev: true
 
-  /nuxt-schema-org@2.1.3(@unhead/vue@1.1.27)(rollup@3.23.0):
-    resolution: {integrity: sha512-y+KVeIONR/MR9o2sZ3WJX+/7KX9g+xWJKdZtyMhkvzN0KiLEIxnv3og6a1BUb/9eqkG8sLOb6Ui+PYpZFlwtTw==}
+  /nuxt-schema-org@2.2.0(@unhead/vue@1.1.27)(rollup@3.23.0):
+    resolution: {integrity: sha512-V0LHh4A3tZSRLGv9P+SG8zm9N4e1qZt2x6z7FgL9qYjpNDyCJ5G186vmTqT4kN0JErjRiYVxantBjDQa7DcVKQ==}
     dependencies:
-      '@nuxt/kit': 3.4.2(rollup@3.23.0)
-      '@unhead/schema-org-vue': 0.5.0(@unhead/vue@1.1.27)
+      '@nuxt/kit': 3.5.1(rollup@3.23.0)
+      '@unhead/schema-org-vue': 0.6.0(@unhead/vue@1.1.27)
       pathe: 1.1.0
     transitivePeerDependencies:
       - '@unhead/vue'
@@ -12580,24 +12535,6 @@ packages:
       '@unhead/schema': 1.1.27
       '@unhead/shared': 1.1.27
       hookable: 5.5.3
-    dev: true
-
-  /unimport@3.0.6(rollup@3.23.0):
-    resolution: {integrity: sha512-GYxGJ1Bri1oqx8VFDjdgooGzeK7jBk3bvhXmamTIpu3nONOcUMGwZbX7X0L5RA7OWMXpR4vzpSQP7pXUzJg1/Q==}
-    dependencies:
-      '@rollup/pluginutils': 5.0.2(rollup@3.23.0)
-      escape-string-regexp: 5.0.0
-      fast-glob: 3.2.12
-      local-pkg: 0.4.3
-      magic-string: 0.30.0
-      mlly: 1.2.1
-      pathe: 1.1.0
-      pkg-types: 1.0.3
-      scule: 1.0.0
-      strip-literal: 1.0.1
-      unplugin: 1.3.1
-    transitivePeerDependencies:
-      - rollup
     dev: true
 
   /unimport@3.0.7(rollup@3.23.0):
