@@ -1,3 +1,10 @@
+## [1.8.6](https://github.com/dargmuesli/creal/compare/1.8.5...1.8.6) (2023-05-29)
+
+
+### Bug Fixes
+
+* **events:** reverse order of upcoming events ([ddac482](https://github.com/dargmuesli/creal/commit/ddac482552508cb4d36c7bf3b6e3632939500541))
+
 ## [1.8.5](https://github.com/dargmuesli/creal/compare/1.8.4...1.8.5) (2023-05-25)
 
 
