@@ -106,9 +106,9 @@ const itemsFuture = computed(() => {
 
   const current = dateTime()
 
-  return events.filter((event) =>
-    dateTime(event.attributes.dateStart).isAfter(current)
-  )
+  return events
+    .filter((event) => dateTime(event.attributes.dateStart).isAfter(current))
+    .reverse()
 })
 const itemsPast = computed(() => {
   if (!events) return
