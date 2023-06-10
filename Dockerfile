@@ -1,7 +1,7 @@
 #############
 # Serve Nuxt in development mode.
 
-FROM node:20.2.0-slim@sha256:cecab40b439142634a5dda7f261684aae9683d3ae80b731173fc77ee2d1ef66e AS development
+FROM node:20.3.0-slim@sha256:f6910739207424c35f76a7fdb4a7803f93515ea2a7f638151e212fb6246f9e06 AS development
 
 COPY ./docker/entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 
@@ -29,7 +29,7 @@ CMD ["pnpm", "run", "--dir", "nuxt", "dev"]
 ########################
 # Prepare Nuxt.
 
-FROM node:20.2.0-slim@sha256:cecab40b439142634a5dda7f261684aae9683d3ae80b731173fc77ee2d1ef66e AS prepare
+FROM node:20.3.0-slim@sha256:f6910739207424c35f76a7fdb4a7803f93515ea2a7f638151e212fb6246f9e06 AS prepare
 
 # The `CI` environment variable must be set for pnpm to run in headless mode
 ENV CI=true
@@ -50,7 +50,7 @@ RUN pnpm install --offline
 # Build Nuxt.
 
 # Could be the specific version of `node:alpine`, but the `prepare` stage uses slim too.
-FROM node:20.2.0-slim@sha256:cecab40b439142634a5dda7f261684aae9683d3ae80b731173fc77ee2d1ef66e AS build
+FROM node:20.3.0-slim@sha256:f6910739207424c35f76a7fdb4a7803f93515ea2a7f638151e212fb6246f9e06 AS build
 
 ARG NUXT_PUBLIC_STACK_DOMAIN=jonas-thelemann.de
 ENV NUXT_PUBLIC_STACK_DOMAIN=${NUXT_PUBLIC_STACK_DOMAIN}
@@ -68,7 +68,7 @@ RUN corepack enable && \
 # Nuxt: lint
 
 # Could be the specific version of `node:alpine`, but the `prepare` stage uses slim too.
-FROM node:20.2.0-slim@sha256:cecab40b439142634a5dda7f261684aae9683d3ae80b731173fc77ee2d1ef66e AS lint
+FROM node:20.3.0-slim@sha256:f6910739207424c35f76a7fdb4a7803f93515ea2a7f638151e212fb6246f9e06 AS lint
 
 WORKDIR /srv/app/
 
@@ -139,7 +139,7 @@ RUN pnpm --dir nuxt run test:integration:prod
 # Collect build, lint and test results.
 
 # Could be the specific version of `node:alpine`, but the `prepare` stage uses slim too.
-FROM node:20.2.0-slim@sha256:cecab40b439142634a5dda7f261684aae9683d3ae80b731173fc77ee2d1ef66e AS collect
+FROM node:20.3.0-slim@sha256:f6910739207424c35f76a7fdb4a7803f93515ea2a7f638151e212fb6246f9e06 AS collect
 
 WORKDIR /srv/app/
 
@@ -153,7 +153,7 @@ COPY --from=test-integration-prod /srv/app/package.json /tmp/test/package.json
 # Provide a web server.
 # Requires node (cannot be static) as the server acts as backend too.
 
-FROM node:20.2.0-slim@sha256:cecab40b439142634a5dda7f261684aae9683d3ae80b731173fc77ee2d1ef66e AS production
+FROM node:20.3.0-slim@sha256:f6910739207424c35f76a7fdb4a7803f93515ea2a7f638151e212fb6246f9e06 AS production
 
 ENV NODE_ENV=production
 
