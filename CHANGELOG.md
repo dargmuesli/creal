@@ -1,3 +1,11 @@
+## [1.8.8](https://github.com/dargmuesli/creal/compare/1.8.7...1.8.8) (2023-06-18)
+
+
+### Bug Fixes
+
+* **legal:** update email address ([d608e38](https://github.com/dargmuesli/creal/commit/d608e38edc09a4abd2c6a9c08e18f6dc39a7bf7d))
+* **schema:** correct base url ([7853476](https://github.com/dargmuesli/creal/commit/7853476114ef704c54b3a078cbd22d22f41bbcd8))
+
 ## [1.8.7](https://github.com/dargmuesli/creal/compare/1.8.6...1.8.7) (2023-06-08)
 
 
