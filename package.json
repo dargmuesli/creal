@@ -11,5 +11,12 @@
   },
   "scripts": {
     "prepare": "husky install"
+  },
+  "pnpm": {
+    "peerDependencyRules": {
+      "ignoreMissing": [
+        "webpack"
+      ]
+    }
   }
 }
