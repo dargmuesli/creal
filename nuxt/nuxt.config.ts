@@ -3,7 +3,7 @@ import localeEn from './locales/en.json'
 import { LOCALES, TIMEZONE_COOKIE_NAME } from './utils/constants'
 
 const BASE_URL =
-  'https://' +
+  'https://creal.' +
   (process.env.NUXT_PUBLIC_STACK_DOMAIN ||
     `${process.env.HOST || 'localhost'}:3000`)
 
