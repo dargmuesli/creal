@@ -1,3 +1,10 @@
+## [1.9.1](https://github.com/dargmuesli/creal/compare/1.9.0...1.9.1) (2023-06-19)
+
+
+### Bug Fixes
+
+* **i18n:** lazy load ([31bbe9b](https://github.com/dargmuesli/creal/commit/31bbe9bfd3a1bec25716a7b9d38e3076a69d47e1))
+
 # [1.9.0](https://github.com/dargmuesli/creal/compare/1.8.9...1.9.0) (2023-06-19)
 
 
