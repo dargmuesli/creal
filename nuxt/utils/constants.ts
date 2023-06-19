@@ -5,11 +5,13 @@ export const FETCH_RETRY = 3
 export const LOCALES: LocaleObject[] = [
   {
     code: 'en',
+    file: 'en.json',
     name: 'English',
     iso: 'en', // Will be used as catchall locale by default.
   },
   {
     code: 'de',
+    file: 'de.json',
     name: 'Deutsch',
     iso: 'de',
   },

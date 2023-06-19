@@ -132,6 +132,8 @@ export default defineNuxtConfig({
       cookieSecure: true,
       redirectOn: 'root',
     },
+    langDir: 'locales',
+    lazy: true,
     locales: LOCALES,
     vueI18n: './i18n.config.ts',
   },
