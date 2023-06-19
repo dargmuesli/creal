@@ -1,3 +1,15 @@
+# [1.9.0](https://github.com/dargmuesli/creal/compare/1.8.9...1.9.0) (2023-06-19)
+
+
+### Bug Fixes
+
+* **e2e:** correct cypress base ([6794d29](https://github.com/dargmuesli/creal/commit/6794d29df938c544bdd42974e12bcc53d235f795))
+
+
+### Features
+
+* **index:** update image ([a14eb02](https://github.com/dargmuesli/creal/commit/a14eb02166fc8d13d34c1ecb6a093cd5dea5bf05))
+
 ## [1.8.9](https://github.com/dargmuesli/creal/compare/1.8.8...1.8.9) (2023-06-18)
 
 
