@@ -89,17 +89,25 @@ ARG GID=1000
 
 WORKDIR /srv/app/
 
+COPY ./docker/entrypoint-dev.sh /usr/local/bin/
+
 RUN corepack enable \
+    && apt-get update \
+    && apt-get install --no-install-recommends -y \
+        curl \
     # user
     && groupadd -g $GID -o $UNAME \
-    && useradd -m -u $UID -g $GID -o -s /bin/bash $UNAME
+    && useradd -m -l -u $UID -g $GID -o -s /bin/bash $UNAME
 
 # Use the Cypress version installed by pnpm, not as provided by the Docker image.
 COPY --from=prepare --chown=$UNAME /root/.cache/Cypress /root/.cache/Cypress
 
 USER $UNAME
 
+VOLUME /srv/.pnpm-store
 VOLUME /srv/app
+
+ENTRYPOINT ["entrypoint-dev.sh"]
 
 
 ########################
@@ -107,7 +115,10 @@ VOLUME /srv/app
 
 FROM cypress/included:12.14.0@sha256:0f86976b54fd1d7b28caf6c45504ee50e82a42baf6279c245c41d141412e8b4d AS test-integration-dev
 
-RUN corepack enable
+RUN corepack enable \
+    && apt-get update \
+    && apt-get install --no-install-recommends -y \
+        curl
 
 WORKDIR /srv/app/
 
@@ -123,7 +134,10 @@ RUN pnpm --dir nuxt run test:integration:dev
 
 FROM cypress/included:12.14.0@sha256:0f86976b54fd1d7b28caf6c45504ee50e82a42baf6279c245c41d141412e8b4d AS test-integration-prod
 
-RUN corepack enable
+RUN corepack enable \
+    && apt-get update \
+    && apt-get install --no-install-recommends -y \
+        curl
 
 WORKDIR /srv/app/
 
@@ -144,9 +158,9 @@ FROM node:20.3.0-slim@sha256:9d3d6a6ad1fb459efb295e77967ab9643e8fc3a3e3edc6ed4fe
 WORKDIR /srv/app/
 
 COPY --from=build /srv/app/nuxt/.output ./.output
-COPY --from=lint /srv/app/package.json /tmp/lint/package.json
-COPY --from=test-integration-dev /srv/app/package.json /tmp/test/package.json
-COPY --from=test-integration-prod /srv/app/package.json /tmp/test/package.json
+COPY --from=lint /srv/app/package.json /tmp/package.json
+COPY --from=test-integration-dev /srv/app/package.json /tmp/package.json
+COPY --from=test-integration-prod /srv/app/package.json /tmp/package.json
 
 
 #######################
