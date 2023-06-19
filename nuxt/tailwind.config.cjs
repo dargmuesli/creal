@@ -70,7 +70,7 @@ module.exports = {
           },
         },
         '.bg-creal': {
-          backgroundImage: 'url("/creal.jpg")',
+          backgroundImage: 'url("/creal.webp")',
         },
         '.form-input': {
           appearance: 'none',
