@@ -2,8 +2,8 @@
 **/node_modules/
 
 # Nuxt.js build / generate output
-nuxt/.nuxt
-nuxt/.output
+**/.nuxt
+**/.output
 
 # Git
 **/!.gitkeep
@@ -14,11 +14,6 @@ nuxt/.output
 # ESLint
 **/.eslintcache
 
-# Cypress
-**/cypress/results
-**/cypress/reports
-**/cypress/screenshots
-**/cypress/snapshots/actual
-**/cypress/snapshots/diff
-**/cypress/snapshots/result
-**/cypress/videos
+# Playwright
+**/tests/e2e/report
+**/tests/e2e/results

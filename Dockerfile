@@ -3,7 +3,8 @@
 
 FROM node:20.3.1-slim@sha256:d7217bdeecec017c8203155300857cecadf8e3a7719c60f5321f4446da84d90c AS development
 
-COPY ./docker/entrypoint.sh /usr/local/bin/docker-entrypoint.sh
+# The `CI` environment variable must be set for pnpm to run in headless mode
+ENV CI=true
 
 # Update and install dependencies.
 # - `libdbd-pg-perl postgresql-client sqitch` is required by the entrypoint
@@ -16,14 +17,17 @@ RUN apt-get update \
 
 WORKDIR /srv/app/
 
+COPY ./docker/entrypoint.sh /usr/local/bin/docker-entrypoint.sh
+
 VOLUME /srv/.pnpm-store
 VOLUME /srv/app
 
 ENTRYPOINT ["docker-entrypoint.sh"]
 CMD ["pnpm", "run", "--dir", "nuxt", "dev"]
+EXPOSE 3000
 
-# Waiting for https://github.com/nuxt/framework/issues/6915
-# HEALTHCHECK --interval=10s CMD wget -O /dev/null http://localhost:3000/api/healthcheck || exit 1
+# TODO: support healthcheck while starting (https://github.com/nuxt/framework/issues/6915)
+# HEALTHCHECK --interval=10s --start-period=60s CMD wget -O /dev/null http://localhost:3000/api/healthcheck || exit 1
 
 
 ########################
@@ -49,11 +53,13 @@ RUN pnpm install --offline
 ########################
 # Build Nuxt.
 
-# Could be the specific version of `node:alpine`, but the `prepare` stage uses slim too.
 FROM node:20.3.1-slim@sha256:d7217bdeecec017c8203155300857cecadf8e3a7719c60f5321f4446da84d90c AS build
 
 ARG NUXT_PUBLIC_STACK_DOMAIN=jonas-thelemann.de
 ENV NUXT_PUBLIC_STACK_DOMAIN=${NUXT_PUBLIC_STACK_DOMAIN}
+
+# The `CI` environment variable must be set for pnpm to run in headless mode
+ENV CI=true
 
 WORKDIR /srv/app/
 
@@ -67,8 +73,10 @@ RUN corepack enable && \
 ########################
 # Nuxt: lint
 
-# Could be the specific version of `node:alpine`, but the `prepare` stage uses slim too.
 FROM node:20.3.1-slim@sha256:d7217bdeecec017c8203155300857cecadf8e3a7719c60f5321f4446da84d90c AS lint
+
+# The `CI` environment variable must be set for pnpm to run in headless mode
+ENV CI=true
 
 WORKDIR /srv/app/
 
@@ -79,88 +87,107 @@ RUN corepack enable && \
 
 
 ########################
-# Nuxt: test (integration)
+# Nuxt: test (e2e)
 
-FROM cypress/included:12.15.0@sha256:074f3db5a81bfd0da47749a6bac4ae6e82aa4acf65cc89069ee28d8a7bcdb6b0 AS test-integration_base
+FROM mcr.microsoft.com/playwright:v1.34.2@sha256:d6cc296a938177cfaae55c8428c68ab81d143b2c54d2d1872136411228dbec20 AS test-e2e_base
 
-ARG UNAME=cypress
+ARG UNAME=e2e
 ARG UID=1000
 ARG GID=1000
 
+# The `CI` environment variable must be set for pnpm to run in headless mode
+ENV CI=true
+ENV NODE_ENV=development
+ENV PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1
+
 WORKDIR /srv/app/
 
-COPY ./docker/entrypoint-dev.sh /usr/local/bin/
+COPY ./docker/entrypoint.dev.sh /usr/local/bin/docker-entrypoint.dev.sh
 
 RUN corepack enable \
-    && apt-get update \
-    && apt-get install --no-install-recommends -y \
-        curl \
     # user
     && groupadd -g $GID -o $UNAME \
     && useradd -m -l -u $UID -g $GID -o -s /bin/bash $UNAME
-
-# Use the Cypress version installed by pnpm, not as provided by the Docker image.
-COPY --from=prepare --chown=$UNAME /root/.cache/Cypress /root/.cache/Cypress
 
 USER $UNAME
 
 VOLUME /srv/.pnpm-store
 VOLUME /srv/app
 
-ENTRYPOINT ["entrypoint-dev.sh"]
+ENTRYPOINT ["docker-entrypoint.dev.sh"]
 
 
 ########################
-# Nuxt: test (integration, development)
+# Nuxt: test (e2e, preparation)
 
-FROM cypress/included:12.15.0@sha256:27406ad25e5f27b86c4be28e73718db6674d922ffcc311b4bdb95dad388121ec AS test-integration-dev
+FROM mcr.microsoft.com/playwright:v1.34.2@sha256:d6cc296a938177cfaae55c8428c68ab81d143b2c54d2d1872136411228dbec20 AS test-e2e-prepare
 
-RUN corepack enable \
-    && apt-get update \
-    && apt-get install --no-install-recommends -y \
-        curl
+# The `CI` environment variable must be set for pnpm to run in headless mode
+ENV CI=true
+ENV PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1
 
 WORKDIR /srv/app/
 
-# Use the Cypress version installed by pnpm, not as provided by the Docker image.
-COPY --from=prepare /root/.cache/Cypress /root/.cache/Cypress
+RUN corepack enable
+
 COPY --from=prepare /srv/app/ ./
 
-RUN pnpm --dir nuxt run test:integration:dev
+RUN pnpm rebuild
 
 
 ########################
-# Nuxt: test (integration, production)
+# Nuxt: test (e2e, development)
 
-FROM cypress/included:12.15.0@sha256:27406ad25e5f27b86c4be28e73718db6674d922ffcc311b4bdb95dad388121ec AS test-integration-prod
+FROM mcr.microsoft.com/playwright:v1.34.2@sha256:d6cc296a938177cfaae55c8428c68ab81d143b2c54d2d1872136411228dbec20 AS test-e2e-dev
 
-RUN corepack enable \
-    && apt-get update \
-    && apt-get install --no-install-recommends -y \
-        curl
+# The `CI` environment variable must be set for pnpm to run in headless mode
+ENV CI=true
+ENV NODE_ENV=development
 
 WORKDIR /srv/app/
 
-# Use the Cypress version installed by pnpm, not as provided by the Docker image.
-COPY --from=prepare /root/.cache/Cypress /root/.cache/Cypress
-COPY --from=build /srv/app/ /srv/app/
-COPY --from=test-integration-dev /srv/app/package.json /tmp/test/package.json
+RUN corepack enable
 
-RUN pnpm --dir nuxt run test:integration:prod
+COPY --from=test-e2e-prepare /srv/app/ ./
+
+RUN pnpm --dir nuxt run test:e2e:dev
+
+
+########################
+# Nuxt: test (e2e, production)
+
+FROM mcr.microsoft.com/playwright:v1.34.2@sha256:d6cc296a938177cfaae55c8428c68ab81d143b2c54d2d1872136411228dbec20 AS test-e2e-prod
+
+# The `CI` environment variable must be set for pnpm to run in headless mode
+ENV CI=true
+
+WORKDIR /srv/app/
+
+RUN corepack enable
+
+COPY --from=test-e2e-prepare /srv/app/ ./
+COPY --from=build /srv/app/nuxt/.output /srv/app/nuxt/.output
+
+# # Do not run in parallel with `test-e2e-dev`
+# COPY --from=test-e2e-dev /srv/app/package.json /tmp/test/package.json
+
+RUN pnpm --dir nuxt run test:e2e:prod
 
 
 #######################
 # Collect build, lint and test results.
 
-# Could be the specific version of `node:alpine`, but the `prepare` stage uses slim too.
 FROM node:20.3.1-slim@sha256:d7217bdeecec017c8203155300857cecadf8e3a7719c60f5321f4446da84d90c AS collect
+
+# The `CI` environment variable must be set for pnpm to run in headless mode
+ENV CI=true
 
 WORKDIR /srv/app/
 
 COPY --from=build /srv/app/nuxt/.output ./.output
 COPY --from=lint /srv/app/package.json /tmp/package.json
-COPY --from=test-integration-dev /srv/app/package.json /tmp/package.json
-COPY --from=test-integration-prod /srv/app/package.json /tmp/package.json
+COPY --from=test-e2e-dev /srv/app/package.json /tmp/package.json
+COPY --from=test-e2e-prod /srv/app/package.json /tmp/package.json
 
 
 #######################
@@ -169,7 +196,11 @@ COPY --from=test-integration-prod /srv/app/package.json /tmp/package.json
 
 FROM node:20.3.1-slim@sha256:d7217bdeecec017c8203155300857cecadf8e3a7719c60f5321f4446da84d90c AS production
 
+# The `CI` environment variable must be set for pnpm to run in headless mode
+ENV CI=true
 ENV NODE_ENV=production
+
+WORKDIR /srv/app/
 
 # Update and install dependencies.
 # - `libdbd-pg-perl postgresql-client sqitch` is required by the entrypoint
@@ -181,8 +212,6 @@ RUN apt-get update \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-WORKDIR /srv/app/
-
 COPY --from=collect /srv/app/ ./
 
 COPY ./sqitch/ /srv/app/sqitch/
@@ -190,4 +219,5 @@ COPY ./docker/entrypoint.sh /usr/local/bin/
 
 ENTRYPOINT ["entrypoint.sh"]
 CMD ["node", ".output/server/index.mjs"]
-HEALTHCHECK --interval=10s CMD wget -O /dev/null http://localhost:3000/api/healthcheck || exit 1
+HEALTHCHECK --interval=10s CMD wget -O /dev/null http://localhost:3001/api/healthcheck || exit 1
+EXPOSE 3001
