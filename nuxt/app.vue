@@ -1,5 +1,5 @@
 <template>
-  <div :data-is-loading="isLoading">
+  <div :data-is-loading="isLoading" data-testid="is-loading">
     <!-- <SchemaOrgDebug /> -->
     <NuxtLayout>
       <NuxtLoadingIndicator color="#fff" />

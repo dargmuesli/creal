@@ -3,7 +3,11 @@ import { LOCALES, TIMEZONE_COOKIE_NAME } from './utils/constants'
 const BASE_URL =
   'https://creal.' +
   (process.env.NUXT_PUBLIC_STACK_DOMAIN ||
-    `${process.env.HOST || 'localhost'}:3000`)
+    `${process.env.HOST || 'localhost'}:${
+      !process.env.NODE_ENV || process.env.NODE_ENV === 'development'
+        ? '3000'
+        : '3001'
+    }`)
 
 export default defineNuxtConfig({
   app: {
@@ -35,6 +39,7 @@ export default defineNuxtConfig({
         baseUrl: BASE_URL,
       },
       isInProduction: process.env.NODE_ENV === 'production',
+      isTesting: false,
       s3Bucket: 'creal-audio',
       s3Endpoint: 'https://s3.nl-ams.scw.cloud',
       s3Region: 'nl-ams',
