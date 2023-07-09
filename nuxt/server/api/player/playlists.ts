@@ -98,7 +98,7 @@ const getPlaylist = (playlistDataExtended: PlaylistExtended): Playlist => {
 const getPlaylistExtended = (
   pathParts: Array<string>,
   size: number,
-  root = 'root'
+  root = 'root',
 ) => {
   const playlistDataExtended: PlaylistExtended = {
     name: root,
@@ -180,7 +180,7 @@ const fetchPlaylist = async (event: H3Event) => {
   const PLAYER_PREFIX_LENGTH = PLAYER_PREFIX.split('/').length - 1
   const urlSearchParams = new URL(
     req.url !== undefined ? req.url : '',
-    'https://example.org/'
+    'https://example.org/',
   ).searchParams
   const continuationToken = urlSearchParams.get('continuation-token')
   const paramPrefix = urlSearchParams.get('prefix')
@@ -199,7 +199,7 @@ const fetchPlaylist = async (event: H3Event) => {
       ...(paramPrefix !== null && {
         Prefix: PLAYER_PREFIX + paramPrefix + '/',
       }),
-    })
+    }),
   )
 
   if (!data) return
@@ -233,7 +233,7 @@ const fetchPlaylist = async (event: H3Event) => {
 
     if (
       ![paramPrefixLengthTotal + 1, paramPrefixLengthTotal + 2].includes(
-        keyParts.length
+        keyParts.length,
       )
     ) {
       // Not an item on any requested level.
@@ -244,7 +244,7 @@ const fetchPlaylist = async (event: H3Event) => {
 
     const nestedData = getPlaylistExtended(
       keyParts,
-      content.Size !== undefined ? content.Size : 0
+      content.Size !== undefined ? content.Size : 0,
     )
 
     mergeByKey(playlistDataExtended, nestedData, 'name')

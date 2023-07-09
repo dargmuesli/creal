@@ -17,7 +17,7 @@ const getObject = async (event: H3Event) => {
   const s3 = getS3Client()
   const key = new URL(
     req.url !== undefined ? req.url : '',
-    'https://example.org/'
+    'https://example.org/',
   ).searchParams.get('key')
 
   if (!key) {
@@ -28,7 +28,7 @@ const getObject = async (event: H3Event) => {
     new GetObjectCommand({
       Bucket: config.public.s3Bucket,
       Key: key,
-    })
+    }),
   )
 
   if (!data) return

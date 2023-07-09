@@ -22,7 +22,7 @@ export const getS3Client = (isExternal = false) => {
 
 export const proxy = async <T>(
   event: H3Event,
-  f: (req: H3Event) => Promise<T>
+  f: (req: H3Event) => Promise<T>,
 ) => {
   const config = useRuntimeConfig()
 
@@ -34,7 +34,7 @@ export const proxy = async <T>(
         host: getHost(req),
         name: 'creal',
         stagingHost: config.public.stagingHost,
-      }) + (req.url ?? '')
+      }) + (req.url ?? ''),
     )
   }
 

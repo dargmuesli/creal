@@ -74,7 +74,7 @@ const dateFormat = (date: Date) => dateTime(date).format('lll')
 const imageSrc = computed(
   () =>
     getServiceHref({ isSsr: false, name: 'creal-strapi', port: 1337 }) +
-    props.crealEvent.image.data.attributes.url
+    props.crealEvent.image.data.attributes.url,
 )
 </script>
 
