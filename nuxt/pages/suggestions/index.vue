@@ -108,7 +108,7 @@ const api = computed(() =>
   reactive({
     data: {},
     ...getApiMeta([createSuggestionMutation]),
-  })
+  }),
 )
 
 // data

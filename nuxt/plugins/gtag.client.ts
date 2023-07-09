@@ -13,6 +13,6 @@ export default defineNuxtPlugin((nuxtApp) => {
         id: config.public.googleAnalyticsId,
       },
     },
-    router
+    router,
   )
 })

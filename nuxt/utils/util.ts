@@ -39,7 +39,7 @@ export const copyText = (text: string) =>
 export const formPreSubmit = async (
   api: ApiData,
   v$: any,
-  isFormSent: Ref<boolean>
+  isFormSent: Ref<boolean>,
 ): Promise<boolean> => {
   api.value.errors = []
   v$.value.$touch()
@@ -58,7 +58,7 @@ export const getApiMeta = (
   queries?: {
     error: Ref<CombinedError | undefined>
     fetching: Ref<boolean>
-  }[]
+  }[],
 ) => ({
   errors: queries
     ? queries.reduce((p, c) => {
@@ -76,7 +76,7 @@ export const getApiMeta = (
 
 export const getCombinedErrorMessages = (
   errors: BackendError[],
-  pgIds?: Record<string, string>
+  pgIds?: Record<string, string>,
 ) => {
   const errorMessages: string[] = []
 
@@ -152,7 +152,7 @@ export const getTimezone = async (event: H3Event) =>
   getCookie(event, TIMEZONE_COOKIE_NAME) ||
   (
     await $fetch<{ timezone: string }>(
-      `http://ip-api.com/json/${event.node.req.headers['x-real-ip']}`
+      `http://ip-api.com/json/${event.node.req.headers['x-real-ip']}`,
     )
   ).timezone
 

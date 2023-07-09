@@ -48,7 +48,7 @@
             {{ t('on') }}
             {{
               dateTime(store.playerData.currentTrack.meta.createdTime).format(
-                'L'
+                'L',
               )
             }}
           </span>
@@ -81,7 +81,7 @@
         </ClientOnly>
       </div>
     </div>
-    <CookieControl :locale="(locale as Locale)" />
+    <CookieControl :locale="locale as Locale" />
   </div>
 </template>
 
@@ -128,7 +128,7 @@ const binarySearch = (ar: any[], el: any, compareFn: Function) => {
 }
 const getLocaleName = (locale: string) => {
   const locales: LocaleObject[] = LOCALES.filter(
-    (localeObject) => localeObject.code === locale
+    (localeObject) => localeObject.code === locale,
   )
 
   if (locales.length) {
@@ -164,7 +164,7 @@ const initPlyr = (plyr: { player: Plyr }) => {
       ) {
         play(
           store.playerData.currentPlaylist.items[i + 1],
-          store.playerData.currentPlaylist.name
+          store.playerData.currentPlaylist.name,
         )
         break
       }
@@ -186,7 +186,7 @@ const initPlyr = (plyr: { player: Plyr }) => {
         binarySearch(
           store.playerData.currentTrack.meta.tracklist,
           player.value.currentTime,
-          trackListItemComparator
+          trackListItemComparator,
         )
       ]
 
@@ -213,8 +213,8 @@ const share = () => {
 
   copyText(
     `${window.location.origin}/player?playlist=${encodeURIComponent(
-      store.playerData.currentPlaylist.name
-    )}&track=${encodeURIComponent(store.playerData.currentTrack.fileName)}`
+      store.playerData.currentPlaylist.name,
+    )}&track=${encodeURIComponent(store.playerData.currentTrack.fileName)}`,
   )
 }
 
@@ -243,7 +243,7 @@ watch(
       store.playerData.isPaused = false
       closeProtect()
     }
-  }
+  },
 )
 
 // initialization

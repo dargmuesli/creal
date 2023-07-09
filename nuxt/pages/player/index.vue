@@ -145,7 +145,7 @@ const getPlaylistLink = (name: string) => {
   queryObject.playlist = encodeURIComponent(
     [queryObject.playlist, name]
       .filter(Boolean) // Prevent initial join character.
-      .join('/')
+      .join('/'),
   )
   delete queryObject.track
 
@@ -224,7 +224,7 @@ watch(
     if (current.playlist === old.playlist) return
 
     await init()
-  }
+  },
 )
 
 // initialization

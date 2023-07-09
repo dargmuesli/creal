@@ -72,7 +72,7 @@ const { t } = useI18n()
 const errorMessages = computed(() =>
   props.errors
     ? getCombinedErrorMessages(props.errors, props.errorsPgIds)
-    : undefined
+    : undefined,
 )
 </script>
 

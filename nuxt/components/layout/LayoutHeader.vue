@@ -33,7 +33,7 @@
       class="basis-0 text-lg font-bold"
       :is-colored="false"
       :to="`mailto:e-mail+creal@jonas-thelemann.de?subject=${encodeURIComponent(
-        t('bookingSubject')
+        t('bookingSubject'),
       )}`"
     >
       <span class="basis-0 whitespace-nowrap">{{ t('bookCreal') }}</span>

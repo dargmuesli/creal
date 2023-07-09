@@ -18,7 +18,7 @@ const signedUrl = async (event: H3Event) => {
   const s3 = getS3Client(true)
   const key = new URL(
     req.url !== undefined ? req.url : '',
-    'https://example.org/'
+    'https://example.org/',
   ).searchParams.get('key')
 
   if (!key) {
@@ -33,6 +33,6 @@ const signedUrl = async (event: H3Event) => {
     }),
     {
       expiresIn: 21600, // 6h
-    }
+    },
   )
 }

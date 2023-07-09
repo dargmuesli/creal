@@ -119,7 +119,7 @@ useSchemaOrg([
     defineQuestion({
       name: faqItem.attributes.title,
       acceptedAnswer: faqItem.attributes.answer,
-    })
+    }),
   ),
 ])
 </script>

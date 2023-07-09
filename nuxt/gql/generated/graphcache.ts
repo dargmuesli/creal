@@ -369,19 +369,19 @@ export type WithTypename<T extends { __typename?: any }> = Partial<T> & {
 
 export type GraphCacheKeysConfig = {
   CreateSuggestionPayload?: (
-    data: WithTypename<CreateSuggestionPayload>
+    data: WithTypename<CreateSuggestionPayload>,
   ) => null | string
   DeleteSuggestionPayload?: (
-    data: WithTypename<DeleteSuggestionPayload>
+    data: WithTypename<DeleteSuggestionPayload>,
   ) => null | string
   PageInfo?: (data: WithTypename<PageInfo>) => null | string
   Suggestion?: (data: WithTypename<Suggestion>) => null | string
   SuggestionsConnection?: (
-    data: WithTypename<SuggestionsConnection>
+    data: WithTypename<SuggestionsConnection>,
   ) => null | string
   SuggestionsEdge?: (data: WithTypename<SuggestionsEdge>) => null | string
   UpdateSuggestionPayload?: (
-    data: WithTypename<UpdateSuggestionPayload>
+    data: WithTypename<UpdateSuggestionPayload>,
   ) => null | string
 }
 
