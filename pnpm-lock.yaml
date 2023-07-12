@@ -19,6 +19,10 @@ importers:
         version: 8.0.3
 
   nuxt:
+    dependencies:
+      playwright-core:
+        specifier: 1.36.0
+        version: 1.36.0
     devDependencies:
       '@aws-sdk/client-s3':
         specifier: 3.369.0
@@ -31,7 +35,7 @@ importers:
         version: 3.369.0
       '@axe-core/playwright':
         specifier: 4.7.3
-        version: 4.7.3(playwright-core@1.35.1)
+        version: 4.7.3(playwright-core@1.36.0)
       '@babel/core':
         specifier: 7.22.8
         version: 7.22.8
@@ -1058,13 +1062,13 @@ packages:
       tslib: 2.6.0
     dev: true
 
-  /@axe-core/playwright@4.7.3(playwright-core@1.35.1):
+  /@axe-core/playwright@4.7.3(playwright-core@1.36.0):
     resolution: {integrity: sha512-v2PRgAyGvop7bamrTpNJtc5b1R7giAPnMzZXrS/VDZBCY5+uwVYtCNgDvBsqp5P1QMZxUMoBN+CERJUTMjFN0A==}
     peerDependencies:
       playwright-core: '>= 1.0.0'
     dependencies:
       axe-core: 4.7.2
-      playwright-core: 1.35.1
+      playwright-core: 1.36.0
     dev: true
 
   /@babel/code-frame@7.22.5:
@@ -10211,17 +10215,10 @@ packages:
       pathe: 1.1.1
     dev: true
 
-  /playwright-core@1.35.1:
-    resolution: {integrity: sha512-pNXb6CQ7OqmGDRspEjlxE49w+4YtR6a3X6mT1hZXeJHWmsEz7SunmvZeiG/+y1yyMZdHnnn73WKYdtV1er0Xyg==}
-    engines: {node: '>=16'}
-    hasBin: true
-    dev: true
-
   /playwright-core@1.36.0:
     resolution: {integrity: sha512-7RTr8P6YJPAqB+8j5ATGHqD6LvLLM39sYVNsslh78g8QeLcBs5750c6+msjrHUwwGt+kEbczBj1XB22WMwn+WA==}
     engines: {node: '>=16'}
     hasBin: true
-    dev: true
 
   /pluralize@8.0.0:
     resolution: {integrity: sha512-Nc3IT5yHzflTfbjgqWcCPpo7DaKy4FnpB0l/zCAW0Tc7jxAiuqSxHasntB3D7887LSrA93kDJ9IXovxJYxyLCA==}
