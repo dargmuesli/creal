@@ -40,8 +40,8 @@ importers:
         specifier: 7.22.9
         version: 7.22.9
       '@dargmuesli/nuxt-cookie-control':
-        specifier: 5.10.4
-        version: 5.10.4(rollup@3.26.3)
+        specifier: 6.1.2
+        version: 6.1.2(rollup@3.26.3)
       '@funken-studio/sitemap-nuxt-3':
         specifier: 4.0.4
         version: 4.0.4(rollup@3.26.3)
@@ -1870,11 +1870,11 @@ packages:
       postcss-selector-parser: 6.0.13
     dev: true
 
-  /@dargmuesli/nuxt-cookie-control@5.10.4(rollup@3.26.3):
-    resolution: {integrity: sha512-x6Px53PfsN/Wko6hY64B+kFbUwETogkO7wT8/GXwQUwF33YyOJ8l2HL5KhBuUVfSzwXoUjnR3y3fOlDNpyY3YQ==}
+  /@dargmuesli/nuxt-cookie-control@6.1.2(rollup@3.26.3):
+    resolution: {integrity: sha512-bLGxjyhc4NFMijIIF290rOZAvBHw2g53jXU17che2ujk6vfe9OMGV/EeirVOYFbLiZ9nBWaX6rtXcj0QEgUnVA==}
     engines: {node: '>=16'}
     dependencies:
-      '@nuxt/kit': 3.6.2(rollup@3.26.3)
+      '@nuxt/kit': 3.6.3(rollup@3.26.3)
       '@sindresorhus/slugify': 2.2.1
       css-vars-ponyfill: 2.4.8
       string-replace-loader: 3.1.0
@@ -3533,7 +3533,7 @@ packages:
     resolution: {integrity: sha512-7kr2VDirYIXqyTHqaiWCrfQLgUjAa4qAHzykJOspMCFJWalHU9SVfnv+cTOKGqoXQ4TWOCd09tEd7sLlMFTEqw==}
     hasBin: true
     dependencies:
-      '@nuxt/kit': 3.6.2(rollup@3.26.3)
+      '@nuxt/kit': 3.6.3(rollup@3.26.3)
       chalk: 5.3.0
       ci-info: 3.8.0
       consola: 3.2.3
