@@ -1,3 +1,10 @@
+## [1.9.4](https://github.com/dargmuesli/creal/compare/1.9.3...1.9.4) (2023-07-26)
+
+
+### Bug Fixes
+
+* **typescript:** readd vue compiler options to configuration ([7efcaa2](https://github.com/dargmuesli/creal/commit/7efcaa2df88666ac445b72ce3405ca434d64a9e2))
+
 ## [1.9.3](https://github.com/dargmuesli/creal/compare/1.9.2...1.9.3) (2023-07-13)
 
 
