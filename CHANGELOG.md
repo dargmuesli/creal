@@ -1,3 +1,10 @@
+## [1.9.5](https://github.com/dargmuesli/creal/compare/1.9.4...1.9.5) (2023-07-26)
+
+
+### Bug Fixes
+
+* **error:** correct locale value ([56d5cbb](https://github.com/dargmuesli/creal/commit/56d5cbb6611f18355bd27748508df8dd5579f7aa))
+
 ## [1.9.4](https://github.com/dargmuesli/creal/compare/1.9.3...1.9.4) (2023-07-26)
 
 
