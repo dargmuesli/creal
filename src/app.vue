@@ -53,6 +53,14 @@ watch(
 
 // initialization
 init()
+updateSiteConfig({
+  description: t('globalOgSeoDescription'),
+})
+defineOgImage({
+  alt: t('globalOgImageAlt'),
+  // component: props.ogImageComponent,
+  description: t('globalOgSeoDescription'),
+})
 useSchemaOrg([
   definePerson({
     name,
