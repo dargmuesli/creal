@@ -64,7 +64,7 @@ defineOgImage({
 useSchemaOrg([
   definePerson({
     name,
-    logo: '/assets/static/logos/open-graph.png',
+    logo: '/__og_image__/og.png',
     // sameAs: ['https://twitter.com/company'],
   }),
   defineWebSite({
