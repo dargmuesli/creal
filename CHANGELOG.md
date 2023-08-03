@@ -1,3 +1,10 @@
+## [1.9.6](https://github.com/dargmuesli/creal/compare/1.9.5...1.9.6) (2023-08-03)
+
+
+### Bug Fixes
+
+* **seo:** correct open graph image paths ([5e090f8](https://github.com/dargmuesli/creal/commit/5e090f8a058af95039472fa826bbabbb4a125b66))
+
 ## [1.9.5](https://github.com/dargmuesli/creal/compare/1.9.4...1.9.5) (2023-07-26)
 
 
