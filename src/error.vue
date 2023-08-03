@@ -12,8 +12,9 @@ export interface Props {
 const props = withDefaults(defineProps<Props>(), {
   error: undefined,
 })
+const errorProp = toRef(() => props.error)
 
 useHead({
-  title: props.error?.statusCode?.toString(),
+  title: errorProp.value?.statusCode?.toString(),
 })
 </script>

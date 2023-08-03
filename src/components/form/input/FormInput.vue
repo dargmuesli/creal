@@ -142,6 +142,7 @@ const props = withDefaults(defineProps<Props>(), {
   valueFormatter: (x?: string) => x,
   warning: false,
 })
+const typeProp = toRef(() => props.type)
 
 const emit = defineEmits<{
   icon: []
@@ -154,7 +155,7 @@ const { t } = useI18n()
 // initialization
 if (
   !props.placeholder &&
-  props.type &&
+  typeProp.value &&
   ![
     'checkbox',
     'datetime-local',
@@ -163,15 +164,15 @@ if (
     'textarea',
     'tiptap',
     'radio',
-  ].includes(props.type)
+  ].includes(typeProp.value)
 ) {
   consola.warn(`placeholder is missing for ${props.idLabel}!`)
 }
 
 if (
   !props.value &&
-  props.type &&
-  !['checkbox', 'select'].includes(props.type)
+  typeProp.value &&
+  !['checkbox', 'select'].includes(typeProp.value)
 ) {
   consola.warn(`value is missing for ${props.idLabel}!`)
 }
