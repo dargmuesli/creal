@@ -53,10 +53,18 @@ watch(
 
 // initialization
 init()
+updateSiteConfig({
+  description: t('globalOgSeoDescription'),
+})
+defineOgImage({
+  alt: t('globalOgImageAlt'),
+  // component: props.ogImageComponent,
+  description: t('globalOgSeoDescription'),
+})
 useSchemaOrg([
   definePerson({
     name,
-    logo: '/assets/static/logos/open-graph.png',
+    logo: '/__og_image__/og.png',
     // sameAs: ['https://twitter.com/company'],
   }),
   defineWebSite({

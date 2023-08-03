@@ -62,6 +62,13 @@ const getCsp = (host: string): Record<string, Array<string>> => {
       `ws://${hostName}:24678/_nuxt/`,
       `wss://${hostName}:24678/_nuxt/`,
     ],
+    'default-src': ["'self'"], // nuxt-og-image
+    'font-src': ['https://fonts.gstatic.com/s/inter/v12/'], // nuxt-og-image
+    'frame-ancestors': ["'self'"], // nuxt-og-image
+    'script-src': ['https://cdn.tailwindcss.com/'], // nuxt-og-image
+    'style-src': [
+      'https://cdn.jsdelivr.net/npm/gardevoir https://fonts.googleapis.com/css2',
+    ], // nuxt-og-image
   }
 
   const production = {

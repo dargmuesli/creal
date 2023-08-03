@@ -16,5 +16,6 @@ export const LOCALES: LocaleObject[] = [
   },
 ]
 export const PLAYER_PREFIX = 'player/'
+export const SITE_NAME = 'cReal'
 export const TIMEZONE_COOKIE_NAME = 'c_tz'
 export const TIMEZONE_HEADER_KEY = 'X-Timezone'
