@@ -1,4 +1,9 @@
-import { LOCALES, SITE_NAME, TIMEZONE_COOKIE_NAME } from './utils/constants'
+import {
+  I18N_COOKIE_NAME,
+  LOCALES,
+  SITE_NAME,
+  TIMEZONE_COOKIE_NAME,
+} from './utils/constants'
 
 const BASE_URL =
   'https://creal.' +
@@ -93,7 +98,7 @@ export default defineNuxtConfig({
             de: 'Sprache',
             en: 'Language',
           },
-          targetCookieIds: ['i18n_redirected'],
+          targetCookieIds: [I18N_COOKIE_NAME],
         },
         {
           description: {
@@ -136,6 +141,7 @@ export default defineNuxtConfig({
   i18n: {
     defaultLocale: 'en', // Must be set for the default prefix_except_default prefix strategy.
     detectBrowserLanguage: {
+      cookieKey: I18N_COOKIE_NAME,
       cookieSecure: true,
     },
     langDir: 'locales',
