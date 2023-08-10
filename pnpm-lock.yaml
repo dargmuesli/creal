@@ -28,8 +28,8 @@ importers:
         specifier: 3.388.0
         version: 3.388.0
       '@aws-sdk/credential-providers':
-        specifier: 3.388.0
-        version: 3.388.0
+        specifier: 3.389.0
+        version: 3.389.0
       '@aws-sdk/s3-request-presigner':
         specifier: 3.388.0
         version: 3.388.0
@@ -661,8 +661,8 @@ packages:
       tslib: 2.6.1
     dev: true
 
-  /@aws-sdk/credential-providers@3.388.0:
-    resolution: {integrity: sha512-5opHLYjj6rHrw2OaxE+IcLhC9JfiopPH7hRknzKjFnSrJ+HjzcHCML5xghwHLJOLGcoWU40CCSlwJVPLlJluMw==}
+  /@aws-sdk/credential-providers@3.389.0:
+    resolution: {integrity: sha512-BwGDVg4o/GO7Ql1OeiPThfrG4Y8AYNNYznxepOs3972gvTCOW8mmrmeCkpMi50g3LEDz2emny2kWqEjCaXly+w==}
     engines: {node: '>=14.0.0'}
     dependencies:
       '@aws-sdk/client-cognito-identity': 3.388.0
@@ -2799,7 +2799,7 @@ packages:
       graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
     dependencies:
       graphql: 16.7.1
-      tslib: 2.4.1
+      tslib: 2.6.1
     dev: true
 
   /@graphql-tools/optimize@2.0.0(graphql@16.7.1):
@@ -2853,7 +2853,7 @@ packages:
       '@ardatan/relay-compiler': 12.0.0(graphql@16.7.1)
       '@graphql-tools/utils': 9.2.1(graphql@16.7.1)
       graphql: 16.7.1
-      tslib: 2.4.1
+      tslib: 2.6.1
     transitivePeerDependencies:
       - encoding
       - supports-color
@@ -2932,7 +2932,7 @@ packages:
       graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
     dependencies:
       graphql: 16.7.1
-      tslib: 2.4.1
+      tslib: 2.6.1
     dev: true
 
   /@graphql-tools/utils@9.2.1(graphql@16.7.1):
@@ -9180,7 +9180,7 @@ packages:
       graphql: ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
     dependencies:
       graphql: 16.7.1
-      tslib: 2.5.3
+      tslib: 2.6.1
     dev: true
 
   /graphql-ws@5.14.0(graphql@16.7.1):
