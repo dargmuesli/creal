@@ -1,7 +1,7 @@
 #############
 # Serve Nuxt in development mode.
 
-FROM node:20.5.0-slim@sha256:96e0a3aaa5a5cdb8d75a86d0f9003c0398e035898a43ee741b494582abe50406 AS development
+FROM node:20.5.1-slim@sha256:e75b8263563f1f2e5b76b602c78db8269ccfd6caeae808423781aad5909b46b4 AS development
 
 # The `CI` environment variable must be set for pnpm to run in headless mode
 ENV CI=true
@@ -33,7 +33,7 @@ EXPOSE 3000
 ########################
 # Prepare Nuxt.
 
-FROM node:20.5.0-slim@sha256:96e0a3aaa5a5cdb8d75a86d0f9003c0398e035898a43ee741b494582abe50406 AS prepare
+FROM node:20.5.1-slim@sha256:e75b8263563f1f2e5b76b602c78db8269ccfd6caeae808423781aad5909b46b4 AS prepare
 
 # The `CI` environment variable must be set for pnpm to run in headless mode
 ENV CI=true
@@ -53,7 +53,7 @@ RUN pnpm install --offline
 ########################
 # Build Nuxt.
 
-FROM node:20.5.0-slim@sha256:96e0a3aaa5a5cdb8d75a86d0f9003c0398e035898a43ee741b494582abe50406 AS build
+FROM node:20.5.1-slim@sha256:e75b8263563f1f2e5b76b602c78db8269ccfd6caeae808423781aad5909b46b4 AS build
 
 ARG NUXT_PUBLIC_STACK_DOMAIN=jonas-thelemann.de
 ENV NUXT_PUBLIC_STACK_DOMAIN=${NUXT_PUBLIC_STACK_DOMAIN}
@@ -73,7 +73,7 @@ RUN corepack enable && \
 ########################
 # Nuxt: lint
 
-FROM node:20.5.0-slim@sha256:96e0a3aaa5a5cdb8d75a86d0f9003c0398e035898a43ee741b494582abe50406 AS lint
+FROM node:20.5.1-slim@sha256:e75b8263563f1f2e5b76b602c78db8269ccfd6caeae808423781aad5909b46b4 AS lint
 
 # The `CI` environment variable must be set for pnpm to run in headless mode
 ENV CI=true
@@ -177,7 +177,7 @@ RUN pnpm --dir src run test:e2e:prod
 #######################
 # Collect build, lint and test results.
 
-FROM node:20.5.0-slim@sha256:96e0a3aaa5a5cdb8d75a86d0f9003c0398e035898a43ee741b494582abe50406 AS collect
+FROM node:20.5.1-slim@sha256:e75b8263563f1f2e5b76b602c78db8269ccfd6caeae808423781aad5909b46b4 AS collect
 
 # The `CI` environment variable must be set for pnpm to run in headless mode
 ENV CI=true
@@ -194,7 +194,7 @@ COPY --from=test-e2e-prod /srv/app/package.json /tmp/package.json
 # Provide a web server.
 # Requires node (cannot be static) as the server acts as backend too.
 
-FROM node:20.5.0-slim@sha256:96e0a3aaa5a5cdb8d75a86d0f9003c0398e035898a43ee741b494582abe50406 AS production
+FROM node:20.5.1-slim@sha256:e75b8263563f1f2e5b76b602c78db8269ccfd6caeae808423781aad5909b46b4 AS production
 
 # The `CI` environment variable must be set for pnpm to run in headless mode
 ENV CI=true
