@@ -21,8 +21,8 @@ importers:
   src:
     dependencies:
       playwright-core:
-        specifier: 1.36.2
-        version: 1.36.2
+        specifier: 1.37.0
+        version: 1.37.0
     devDependencies:
       '@aws-sdk/client-s3':
         specifier: 3.388.0
@@ -35,7 +35,7 @@ importers:
         version: 3.388.0
       '@axe-core/playwright':
         specifier: 4.7.3
-        version: 4.7.3(playwright-core@1.36.2)
+        version: 4.7.3(playwright-core@1.37.0)
       '@dargmuesli/nuxt-cookie-control':
         specifier: 6.3.0
         version: 6.3.0(webpack@5.88.2)
@@ -73,8 +73,8 @@ importers:
         specifier: 0.4.11
         version: 0.4.11(typescript@5.1.6)(vue@3.3.4)
       '@playwright/test':
-        specifier: 1.36.2
-        version: 1.36.2
+        specifier: 1.37.0
+        version: 1.37.0
       '@skjnldsv/vue-plyr':
         specifier: 7.3.1
         version: 7.3.1
@@ -964,13 +964,13 @@ packages:
       tslib: 2.6.1
     dev: true
 
-  /@axe-core/playwright@4.7.3(playwright-core@1.36.2):
+  /@axe-core/playwright@4.7.3(playwright-core@1.37.0):
     resolution: {integrity: sha512-v2PRgAyGvop7bamrTpNJtc5b1R7giAPnMzZXrS/VDZBCY5+uwVYtCNgDvBsqp5P1QMZxUMoBN+CERJUTMjFN0A==}
     peerDependencies:
       playwright-core: '>= 1.0.0'
     dependencies:
       axe-core: 4.7.2
-      playwright-core: 1.36.2
+      playwright-core: 1.37.0
     dev: true
 
   /@babel/code-frame@7.22.10:
@@ -3883,13 +3883,13 @@ packages:
       tslib: 2.6.1
     dev: true
 
-  /@playwright/test@1.36.2:
-    resolution: {integrity: sha512-2rVZeyPRjxfPH6J0oGJqE8YxiM1IBRyM8hyrXYK7eSiAqmbNhxwcLa7dZ7fy9Kj26V7FYia5fh9XJRq4Dqme+g==}
+  /@playwright/test@1.37.0:
+    resolution: {integrity: sha512-181WBLk4SRUyH1Q96VZl7BP6HcK0b7lbdeKisn3N/vnjitk+9HbdlFz/L5fey05vxaAhldIDnzo8KUoy8S3mmQ==}
     engines: {node: '>=16'}
     hasBin: true
     dependencies:
       '@types/node': 20.4.9
-      playwright-core: 1.36.2
+      playwright-core: 1.37.0
     optionalDependencies:
       fsevents: 2.3.2
     dev: true
@@ -11472,7 +11472,7 @@ packages:
       ofetch: 1.1.1
       ohash: 1.1.2
       pathe: 1.1.1
-      playwright-core: 1.36.2
+      playwright-core: 1.37.0
       radix3: 1.0.1
       satori: 0.10.1
       satori-html: 0.3.2
@@ -12249,8 +12249,8 @@ packages:
       pathe: 1.1.1
     dev: true
 
-  /playwright-core@1.36.2:
-    resolution: {integrity: sha512-sQYZt31dwkqxOrP7xy2ggDfEzUxM1lodjhsQ3NMMv5uGTRDsLxU0e4xf4wwMkF2gplIxf17QMBCodSFgm6bFVQ==}
+  /playwright-core@1.37.0:
+    resolution: {integrity: sha512-1c46jhTH/myQw6sesrcuHVtLoSNfJv8Pfy9t3rs6subY7kARv0HRw5PpyfPYPpPtQvBOmgbE6K+qgYUpj81LAA==}
     engines: {node: '>=16'}
     hasBin: true
 
