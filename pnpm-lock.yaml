@@ -21,8 +21,8 @@ importers:
   src:
     dependencies:
       playwright-core:
-        specifier: 1.37.0
-        version: 1.37.0
+        specifier: 1.37.1
+        version: 1.37.1
     devDependencies:
       '@aws-sdk/client-s3':
         specifier: 3.391.0
@@ -35,10 +35,10 @@ importers:
         version: 3.391.0
       '@axe-core/playwright':
         specifier: 4.7.3
-        version: 4.7.3(playwright-core@1.37.0)
+        version: 4.7.3(playwright-core@1.37.1)
       '@dargmuesli/nuxt-cookie-control':
-        specifier: 6.3.0
-        version: 6.3.0(webpack@5.88.2)
+        specifier: 6.4.0
+        version: 6.4.0(webpack@5.88.2)
       '@graphql-codegen/cli':
         specifier: 5.0.0
         version: 5.0.0(@types/node@20.5.0)(graphql@16.8.0)
@@ -47,7 +47,7 @@ importers:
         version: 4.1.0(graphql@16.8.0)
       '@graphql-codegen/typescript-urql-graphcache':
         specifier: 2.4.5
-        version: 2.4.5(@urql/exchange-graphcache@6.3.1)(graphql-tag@2.12.6)(graphql@16.8.0)
+        version: 2.4.5(@urql/exchange-graphcache@6.3.2)(graphql-tag@2.12.6)(graphql@16.8.0)
       '@graphql-codegen/urql-introspection':
         specifier: 2.2.1
         version: 2.2.1(graphql@16.8.0)
@@ -73,8 +73,8 @@ importers:
         specifier: 0.4.11
         version: 0.4.11(typescript@5.1.6)(vue@3.3.4)
       '@playwright/test':
-        specifier: 1.37.0
-        version: 1.37.0
+        specifier: 1.37.1
+        version: 1.37.1
       '@skjnldsv/vue-plyr':
         specifier: 7.3.1
         version: 7.3.1
@@ -103,8 +103,8 @@ importers:
         specifier: 2.0.3
         version: 2.0.3(@urql/core@4.1.1)(graphql@16.8.0)
       '@urql/exchange-graphcache':
-        specifier: 6.3.1
-        version: 6.3.1(graphql@16.8.0)
+        specifier: 6.3.2
+        version: 6.3.2(graphql@16.8.0)
       '@urql/vue':
         specifier: 1.1.2
         version: 1.1.2(graphql@16.8.0)(vue@3.3.4)
@@ -149,13 +149,13 @@ importers:
         version: 4.0.0(eslint@8.47.0)
       eslint-plugin-prettier:
         specifier: 5.0.0
-        version: 5.0.0(eslint-config-prettier@9.0.0)(eslint@8.47.0)(prettier@3.0.1)
+        version: 5.0.0(eslint-config-prettier@9.0.0)(eslint@8.47.0)(prettier@3.0.2)
       eslint-plugin-yml:
         specifier: 1.8.0
         version: 1.8.0(eslint@8.47.0)
       h3:
-        specifier: 1.7.1
-        version: 1.7.1
+        specifier: 1.8.0
+        version: 1.8.0
       is-https:
         specifier: 4.0.0
         version: 4.0.0
@@ -181,11 +181,11 @@ importers:
         specifier: 2.1.6
         version: 2.1.6(typescript@5.1.6)(vue@3.3.4)
       prettier:
-        specifier: 3.0.1
-        version: 3.0.1
+        specifier: 3.0.2
+        version: 3.0.2
       prettier-plugin-tailwindcss:
         specifier: 0.5.2
-        version: 0.5.2(prettier@3.0.1)
+        version: 0.5.2(prettier@3.0.2)
       pretty-bytes:
         specifier: 6.1.1
         version: 6.1.1
@@ -205,8 +205,8 @@ importers:
         specifier: 7.0.0
         version: 7.0.0(stylelint@15.10.2)
       sweetalert2:
-        specifier: 11.7.22
-        version: 11.7.22
+        specifier: 11.7.23
+        version: 11.7.23
       tailwindcss:
         specifier: 3.3.3
         version: 3.3.3(ts-node@10.9.1)
@@ -964,13 +964,13 @@ packages:
       tslib: 2.6.1
     dev: true
 
-  /@axe-core/playwright@4.7.3(playwright-core@1.37.0):
+  /@axe-core/playwright@4.7.3(playwright-core@1.37.1):
     resolution: {integrity: sha512-v2PRgAyGvop7bamrTpNJtc5b1R7giAPnMzZXrS/VDZBCY5+uwVYtCNgDvBsqp5P1QMZxUMoBN+CERJUTMjFN0A==}
     peerDependencies:
       playwright-core: '>= 1.0.0'
     dependencies:
       axe-core: 4.7.2
-      playwright-core: 1.37.0
+      playwright-core: 1.37.1
     dev: true
 
   /@babel/code-frame@7.22.10:
@@ -1779,8 +1779,8 @@ packages:
       postcss-selector-parser: 6.0.13
     dev: true
 
-  /@dargmuesli/nuxt-cookie-control@6.3.0(webpack@5.88.2):
-    resolution: {integrity: sha512-9kauc4FtWCTrBOCrQnYtkErRyWlo2rnn9KRZOUiyFNvTpmS7gTxk65Z3AJbfHsmvosg1alKIaz8rh5V7hYIfCA==}
+  /@dargmuesli/nuxt-cookie-control@6.4.0(webpack@5.88.2):
+    resolution: {integrity: sha512-hyzcvkjSJsVjQOnBwXPu4h9m70puKMfg8mSJyPOP6hikJkJSgVWUFsdpse+pMAPwQ2QE731co+da6N7ymF7Tnw==}
     engines: {node: '>=16'}
     dependencies:
       '@nuxt/kit': 3.6.5
@@ -2449,7 +2449,7 @@ packages:
       - supports-color
     dev: true
 
-  /@graphql-codegen/typescript-urql-graphcache@2.4.5(@urql/exchange-graphcache@6.3.1)(graphql-tag@2.12.6)(graphql@16.8.0):
+  /@graphql-codegen/typescript-urql-graphcache@2.4.5(@urql/exchange-graphcache@6.3.2)(graphql-tag@2.12.6)(graphql@16.8.0):
     resolution: {integrity: sha512-h+Px+Cj/9MMI5I8iQbSoJUWuq7I/hSCG5yM1tur8hzqzaQMbR5FGTwxlPnHFfUljvHj/bVdwYHwvO9p+PaNvww==}
     peerDependencies:
       '@urql/exchange-graphcache': ^4.1.1 || ^5.0.0
@@ -2458,7 +2458,7 @@ packages:
     dependencies:
       '@graphql-codegen/plugin-helpers': 3.1.2(graphql@16.8.0)
       '@graphql-codegen/visitor-plugin-common': 2.13.1(graphql@16.8.0)
-      '@urql/exchange-graphcache': 6.3.1(graphql@16.8.0)
+      '@urql/exchange-graphcache': 6.3.2(graphql@16.8.0)
       auto-bind: 4.0.0
       change-case-all: 1.0.15
       graphql: 16.8.0
@@ -3523,7 +3523,7 @@ packages:
       fast-glob: 3.3.1
       get-port-please: 3.0.1
       global-dirs: 3.0.1
-      h3: 1.7.1
+      h3: 1.8.0
       hookable: 5.5.3
       image-meta: 0.1.1
       is-installed-globally: 0.4.0
@@ -3654,7 +3654,7 @@ packages:
       externality: 1.0.2
       fs-extra: 11.1.1
       get-port-please: 3.0.1
-      h3: 1.7.1
+      h3: 1.8.0
       knitwork: 1.0.0
       magic-string: 0.30.2
       mlly: 1.4.0
@@ -3752,7 +3752,7 @@ packages:
       chalk: 5.3.0
       html-validate: 8.0.5
       pathe: 1.1.1
-      prettier: 3.0.1
+      prettier: 3.0.2
       std-env: 3.3.3
     transitivePeerDependencies:
       - jest
@@ -3986,13 +3986,13 @@ packages:
       tslib: 2.6.1
     dev: true
 
-  /@playwright/test@1.37.0:
-    resolution: {integrity: sha512-181WBLk4SRUyH1Q96VZl7BP6HcK0b7lbdeKisn3N/vnjitk+9HbdlFz/L5fey05vxaAhldIDnzo8KUoy8S3mmQ==}
+  /@playwright/test@1.37.1:
+    resolution: {integrity: sha512-bq9zTli3vWJo8S3LwB91U0qDNQDpEXnw7knhxLM0nwDvexQAwx9tO8iKDZSqqneVq+URd/WIoz+BALMqUTgdSg==}
     engines: {node: '>=16'}
     hasBin: true
     dependencies:
       '@types/node': 20.5.0
-      playwright-core: 1.37.0
+      playwright-core: 1.37.1
     optionalDependencies:
       fsevents: 2.3.2
     dev: true
@@ -5405,8 +5405,8 @@ packages:
       wonka: 6.3.4
     dev: true
 
-  /@urql/exchange-graphcache@6.3.1(graphql@16.8.0):
-    resolution: {integrity: sha512-oQ/qWgyhduazEWSiTEFljjefUsuHYVEzoczIj8QrrKih9AUNo4FEWiA7OTzTF9Z1NmCQ9dO8BDto715PvZ3J+g==}
+  /@urql/exchange-graphcache@6.3.2(graphql@16.8.0):
+    resolution: {integrity: sha512-ajBtuOkCkWgYJVk8MYqlhTF2vNojEREitcUE62q8tUxC6zDHZybk8DUPe6RM0HUyUw6IPAnzmDf6djK5JOEvvw==}
     dependencies:
       '@0no-co/graphql.web': 1.0.4(graphql@16.8.0)
       '@urql/core': 4.1.1(graphql@16.8.0)
@@ -8284,7 +8284,7 @@ packages:
       - supports-color
     dev: true
 
-  /eslint-plugin-prettier@5.0.0(eslint-config-prettier@9.0.0)(eslint@8.47.0)(prettier@3.0.1):
+  /eslint-plugin-prettier@5.0.0(eslint-config-prettier@9.0.0)(eslint@8.47.0)(prettier@3.0.2):
     resolution: {integrity: sha512-AgaZCVuYDXHUGxj/ZGu1u8H8CYgDY3iG6w5kUFw4AzMVXzB7VvbKgYR4nATIN+OvUrghMbiDLeimVjVY5ilq3w==}
     engines: {node: ^14.18.0 || >=16.0.0}
     peerDependencies:
@@ -8300,7 +8300,7 @@ packages:
     dependencies:
       eslint: 8.47.0
       eslint-config-prettier: 9.0.0(eslint@8.47.0)
-      prettier: 3.0.1
+      prettier: 3.0.2
       prettier-linter-helpers: 1.0.0
       synckit: 0.8.5
     dev: true
@@ -9343,18 +9343,6 @@ packages:
       duplexer: 0.1.2
     dev: true
 
-  /h3@1.7.1:
-    resolution: {integrity: sha512-A9V2NEDNHet7v1gCg7CMwerSigLi0SRbhTy7C3lGb0N4YKIpPmLDjedTUopqp4dnn7COHfqUjjaz3zbtz4QduA==}
-    dependencies:
-      cookie-es: 1.0.0
-      defu: 6.1.2
-      destr: 2.0.1
-      iron-webcrypto: 0.7.1
-      radix3: 1.0.1
-      ufo: 1.2.0
-      uncrypto: 0.1.3
-    dev: true
-
   /h3@1.8.0:
     resolution: {integrity: sha512-057VY83X7Tg5n4XU2GV9M3dsCWUU4jtw2Lc/r4GjAcf9Jb6GI1mD5F8TCQHUcvLMEgtx6lbfobOFu7Vdmejihg==}
     dependencies:
@@ -9811,10 +9799,6 @@ packages:
 
   /ip@2.0.0:
     resolution: {integrity: sha512-WKa+XuLG1A1R0UWhl2+1XQSi+fZWMsYKffMZTTYsiZaUD8k2yDAj5atimTUD2TZkyCkNEeYE5NhFZmupOGtjYQ==}
-    dev: true
-
-  /iron-webcrypto@0.7.1:
-    resolution: {integrity: sha512-K/UmlEhPCPXEHV5hAtH5C0tI5JnFuOrv4yO/j7ODPl3HaiiHBLbOLTde+ieUaAyfCATe4LoAnclyF+hmSCOVmQ==}
     dev: true
 
   /iron-webcrypto@0.8.0:
@@ -11244,7 +11228,7 @@ packages:
       fs-extra: 11.1.1
       globby: 13.2.2
       gzip-size: 7.0.0
-      h3: 1.7.1
+      h3: 1.8.0
       hookable: 5.5.3
       http-graceful-shutdown: 3.1.13
       http-proxy: 1.18.1
@@ -11617,7 +11601,7 @@ packages:
       ofetch: 1.1.1
       ohash: 1.1.3
       pathe: 1.1.1
-      playwright-core: 1.37.0
+      playwright-core: 1.37.1
       radix3: 1.0.1
       satori: 0.10.2
       satori-html: 0.3.2
@@ -11823,7 +11807,7 @@ packages:
       estree-walker: 3.0.3
       fs-extra: 11.1.1
       globby: 13.2.2
-      h3: 1.7.1
+      h3: 1.8.0
       hookable: 5.5.3
       jiti: 1.19.1
       klona: 2.0.6
@@ -12395,8 +12379,8 @@ packages:
       pathe: 1.1.1
     dev: true
 
-  /playwright-core@1.37.0:
-    resolution: {integrity: sha512-1c46jhTH/myQw6sesrcuHVtLoSNfJv8Pfy9t3rs6subY7kARv0HRw5PpyfPYPpPtQvBOmgbE6K+qgYUpj81LAA==}
+  /playwright-core@1.37.1:
+    resolution: {integrity: sha512-17EuQxlSIYCmEMwzMqusJ2ztDgJePjrbttaefgdsiqeLWidjYz9BxXaTaZWxH1J95SHGk6tjE+dwgWILJoUZfA==}
     engines: {node: '>=16'}
     hasBin: true
 
@@ -12835,7 +12819,7 @@ packages:
       fast-diff: 1.3.0
     dev: true
 
-  /prettier-plugin-tailwindcss@0.5.2(prettier@3.0.1):
+  /prettier-plugin-tailwindcss@0.5.2(prettier@3.0.2):
     resolution: {integrity: sha512-i4swJk4f8YWK99BRPX3DdDNwMr6U1X8y9rvxGeX5zf090+SsHpPSVjgOb041Hh6/nZJWPi/JYno9UgBDm+/RxA==}
     engines: {node: '>=14.21.3'}
     peerDependencies:
@@ -12887,11 +12871,11 @@ packages:
       prettier-plugin-twig-melody:
         optional: true
     dependencies:
-      prettier: 3.0.1
+      prettier: 3.0.2
     dev: true
 
-  /prettier@3.0.1:
-    resolution: {integrity: sha512-fcOWSnnpCrovBsmFZIGIy9UqK2FaI7Hqax+DIO0A9UxeVoY4iweyaFjS5TavZN97Hfehph0nhsZnjlVKzEQSrQ==}
+  /prettier@3.0.2:
+    resolution: {integrity: sha512-o2YR9qtniXvwEZlOKbveKfDQVyqxbEIWn48Z8m3ZJjBjcCmUy3xZGIv+7AkaeuaTr6yPXJjwv07ZWlsWbEy1rQ==}
     engines: {node: '>=14'}
     hasBin: true
     dev: true
@@ -14224,8 +14208,8 @@ packages:
       tslib: 2.4.1
     dev: true
 
-  /sweetalert2@11.7.22:
-    resolution: {integrity: sha512-Xu5now8VnxBKtdnoQw562zXldCOJ/pNsFHTcmSGgJHH+702Bulh4Ps00/js9HqFv00mZ6Hf1wm4BXxqssWyREg==}
+  /sweetalert2@11.7.23:
+    resolution: {integrity: sha512-zhc2Jc/coeUFPCM7LyVaUddbSz1Av9/EgQVXxZVPre8cwJrTZXCOEAboCT11StS3vaFTio74cumWustmNzDOEw==}
     dev: true
 
   /synckit@0.8.5:
@@ -14954,7 +14938,7 @@ packages:
       anymatch: 3.1.3
       chokidar: 3.5.3
       destr: 2.0.1
-      h3: 1.7.1
+      h3: 1.8.0
       ioredis: 5.3.2
       listhen: 1.3.0
       lru-cache: 10.0.1

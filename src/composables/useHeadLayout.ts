@@ -4,6 +4,8 @@ export const useHeadLayout = () => {
   const { t } = useI18n()
   const head = useLocaleHead({ addSeoAttributes: true })
 
+  const polyfills =
+    'https://polyfill.io/v3/polyfill.min.js?features=Promise&flags=gated'
   const title = 'DJ cReal'
 
   useHead(head.value)
@@ -13,6 +15,13 @@ export const useHeadLayout = () => {
         'bg-background-bright dark:bg-background-dark font-sans text-text-dark dark:text-text-bright',
     },
     link: [
+      {
+        rel: 'preload',
+        href: polyfills,
+        crossorigin: 'anonymous',
+        as: 'script',
+        'data-testid': 'polyfill-preload',
+      },
       {
         href: '/assets/static/favicon/apple-touch-icon.png?v=eEYRGn5b9R',
         rel: 'apple-touch-icon',
@@ -143,6 +152,13 @@ export const useHeadLayout = () => {
         key: 'twitter:title',
         property: 'twitter:title',
         content: title,
+      },
+    ],
+    script: [
+      {
+        src: polyfills,
+        crossorigin: 'anonymous',
+        'data-testid': 'polyfill-script',
       },
     ],
     titleTemplate: (titleChunk?: string) => {
