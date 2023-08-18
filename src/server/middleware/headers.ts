@@ -49,6 +49,7 @@ const getCsp = (host: string): Record<string, Array<string>> => {
       'https://static.cloudflareinsights.com',
       'https://*.google-analytics.com',
       'https://www.googletagmanager.com/gtag/js',
+      'https://polyfill.io/v3/polyfill.min.js', // ESLint plugin compat
       "'unsafe-inline'", // https://github.com/unjs/nitro/issues/81
       "'unsafe-eval'", // https://github.com/unjs/nitro/issues/81
     ],
