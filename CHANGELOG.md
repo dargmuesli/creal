@@ -1,3 +1,10 @@
+# [1.10.0](https://github.com/dargmuesli/creal/compare/1.9.6...1.10.0) (2023-08-18)
+
+
+### Features
+
+* load polyfills ([43b6589](https://github.com/dargmuesli/creal/commit/43b65895fcfb477cc5350a231922a8df39266c0f))
+
 ## [1.9.6](https://github.com/dargmuesli/creal/compare/1.9.5...1.9.6) (2023-08-03)
 
 
