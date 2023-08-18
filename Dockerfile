@@ -89,7 +89,7 @@ RUN corepack enable && \
 ########################
 # Nuxt: test (e2e)
 
-FROM mcr.microsoft.com/playwright:v1.37.0@sha256:76e516b6e5a0044298bb72431681e950cf1e22930a5c94de78eb2bf2dd88b41c AS test-e2e_base
+FROM mcr.microsoft.com/playwright:v1.37.1@sha256:58a3daf48cde7d593e4fbc267a4435deb0016aef4c4179ae7fb8b2a68f968f36 AS test-e2e_base
 
 ARG UNAME=e2e
 ARG UID=1000
@@ -120,7 +120,7 @@ ENTRYPOINT ["docker-entrypoint.dev.sh"]
 ########################
 # Nuxt: test (e2e, preparation)
 
-FROM mcr.microsoft.com/playwright:v1.37.0@sha256:76e516b6e5a0044298bb72431681e950cf1e22930a5c94de78eb2bf2dd88b41c AS test-e2e-prepare
+FROM mcr.microsoft.com/playwright:v1.37.1@sha256:58a3daf48cde7d593e4fbc267a4435deb0016aef4c4179ae7fb8b2a68f968f36 AS test-e2e-prepare
 
 # The `CI` environment variable must be set for pnpm to run in headless mode
 ENV CI=true
@@ -138,7 +138,7 @@ RUN pnpm rebuild -r
 ########################
 # Nuxt: test (e2e, development)
 
-FROM mcr.microsoft.com/playwright:v1.37.0@sha256:76e516b6e5a0044298bb72431681e950cf1e22930a5c94de78eb2bf2dd88b41c AS test-e2e-dev
+FROM mcr.microsoft.com/playwright:v1.37.1@sha256:58a3daf48cde7d593e4fbc267a4435deb0016aef4c4179ae7fb8b2a68f968f36 AS test-e2e-dev
 
 # The `CI` environment variable must be set for pnpm to run in headless mode
 ENV CI=true
@@ -156,7 +156,7 @@ RUN pnpm --dir src run test:e2e:dev
 ########################
 # Nuxt: test (e2e, production)
 
-FROM mcr.microsoft.com/playwright:v1.37.0@sha256:76e516b6e5a0044298bb72431681e950cf1e22930a5c94de78eb2bf2dd88b41c AS test-e2e-prod
+FROM mcr.microsoft.com/playwright:v1.37.1@sha256:58a3daf48cde7d593e4fbc267a4435deb0016aef4c4179ae7fb8b2a68f968f36 AS test-e2e-prod
 
 # The `CI` environment variable must be set for pnpm to run in headless mode
 ENV CI=true
