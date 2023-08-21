@@ -1,18 +1,20 @@
 import { defu } from 'defu'
 import { appendHeader, defineEventHandler } from 'h3'
 
-import { TIMEZONE_HEADER_KEY } from '~/utils/constants'
-import { getDomainTldPort, getHost, getTimezone } from '~/utils/util'
+import {
+  getDomainTldPort,
+  getHost,
+} from '@dargmuesli/nuxt-vio/utils/networking'
 
 const getCsp = (host: string): Record<string, Array<string>> => {
   const hostName = host.replace(/:[0-9]+$/, '')
   const config = useRuntimeConfig()
 
   const stagingHostOrHost = config.public.stagingHost || host
-  const s3EndpointHost =
+  const crealS3EndpointHost =
     (config.public.stagingHost || config.public.isInProduction
-      ? `${config.public.s3Bucket}.`
-      : '') + new URL(config.public.s3Endpoint).host // eslint-disable-line compat/compat
+      ? `${config.public.creal.s3.bucket}.`
+      : '') + new URL(config.public.creal.s3.endpoint).host // eslint-disable-line compat/compat
 
   const base = {
     'base-uri': ["'none'"], // Mozilla Observatory.
@@ -33,12 +35,12 @@ const getCsp = (host: string): Record<string, Array<string>> => {
       'data:',
       `https://creal-strapi.${getDomainTldPort(stagingHostOrHost)}`,
       'https://*.google-analytics.com',
-      `https://${s3EndpointHost}`, // Playlist cover.
+      `https://${crealS3EndpointHost}`, // Playlist cover.
     ],
     'manifest-src': ["'self'"],
     'media-src': [
       'https://cdn.plyr.io/static/blank.mp4', // Plyr.
-      `https://${s3EndpointHost}`, // Music.
+      `https://${crealS3EndpointHost}`, // Music.
     ],
     'prefetch-src': ["'self'"],
     'report-uri': ['https://dargmuesli.report-uri.com/r/d/csp/enforce'],
@@ -89,41 +91,8 @@ const getCspAsString = (host: string) => {
   return result
 }
 
-export default defineEventHandler(async (event) => {
-  event.node.req.headers[TIMEZONE_HEADER_KEY] = await getTimezone(event)
-
+export default defineEventHandler((event) => {
   const host = getHost(event.node.req)
 
   appendHeader(event, 'Content-Security-Policy', getCspAsString(host))
-  // appendHeader(event, 'Cross-Origin-Embedder-Policy', 'require-corp') // https://stackoverflow.com/questions/71904052/getting-notsameoriginafterdefaultedtosameoriginbycoep-error-with-helmet
-  appendHeader(event, 'Cross-Origin-Opener-Policy', 'same-origin')
-  appendHeader(event, 'Cross-Origin-Resource-Policy', 'same-origin')
-  // appendHeader(event, 'Expect-CT', 'max-age=0') // deprecated (https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Expect-CT)
-  appendHeader(
-    event,
-    'NEL',
-    '\'{"report_to":"default","max_age":31536000,"include_subdomains":true}\'',
-  )
-  appendHeader(event, 'Origin-Agent-Cluster', '?1')
-  appendHeader(event, 'Permissions-Policy', '')
-  appendHeader(event, 'Referrer-Policy', 'no-referrer')
-  appendHeader(
-    event,
-    'Report-To',
-    '\'{"group":"default","max_age":31536000,"endpoints":[{"url":"https://dargmuesli.report-uri.com/a/d/g"}],"include_subdomains":true}\'',
-  )
-  appendHeader(event, 'X-Content-Type-Options', 'nosniff')
-  appendHeader(event, 'X-DNS-Prefetch-Control', 'off')
-  appendHeader(event, 'X-Download-Options', 'noopen')
-  appendHeader(event, 'X-Frame-Options', 'SAMEORIGIN')
-  appendHeader(event, 'X-Permitted-Cross-Domain-Policies', 'none')
-  appendHeader(event, 'X-XSS-Protection', '0')
-
-  if (process.env.NODE_ENV === 'production') {
-    appendHeader(
-      event,
-      'Strict-Transport-Security',
-      'max-age=31536000; includeSubDomains; preload',
-    )
-  }
 })

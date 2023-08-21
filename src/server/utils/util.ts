@@ -1,8 +1,7 @@
 import { S3Client } from '@aws-sdk/client-s3'
 import { fromIni } from '@aws-sdk/credential-providers'
+import { getHost, getServiceHref } from '@dargmuesli/nuxt-vio/utils/networking'
 import { H3Event } from 'h3'
-
-import { getHost, getServiceHref } from '~/utils/util'
 
 export const getS3Client = (isExternal = false) => {
   const config = useRuntimeConfig()
@@ -13,10 +12,10 @@ export const getS3Client = (isExternal = false) => {
     }),
     endpoint:
       config.public.stagingHost || config.public.isInProduction || isExternal
-        ? config.public.s3Endpoint
+        ? config.public.creal.s3.endpoint
         : 'http://minio:9000',
     forcePathStyle: !config.public.stagingHost && !config.public.isInProduction,
-    region: config.public.s3Region,
+    region: config.public.creal.s3.region,
   })
 }
 

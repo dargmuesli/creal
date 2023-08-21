@@ -26,7 +26,7 @@ const getObject = async (event: H3Event) => {
 
   const data = await s3.send(
     new GetObjectCommand({
-      Bucket: config.public.s3Bucket,
+      Bucket: config.public.creal.s3.bucket,
       Key: key,
     }),
   )

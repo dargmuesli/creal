@@ -4,7 +4,7 @@ import { ListObjectsV2Command } from '@aws-sdk/client-s3'
 import { consola } from 'consola'
 import { defineEventHandler, H3Event, sendNoContent } from 'h3'
 
-import { mergeByKey } from '~/utils/util'
+import { mergeByKey } from '~/utils/player'
 import { PLAYER_PREFIX } from '~/utils/constants'
 
 import type {
@@ -190,7 +190,7 @@ const fetchPlaylist = async (event: H3Event) => {
   const data = await s3.send(
     new ListObjectsV2Command({
       ...{
-        Bucket: config.public.s3Bucket,
+        Bucket: config.public.creal.s3.bucket,
         // MaxKeys: 10,
       },
       ...(continuationToken !== null && {
