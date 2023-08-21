@@ -17,7 +17,7 @@
             <li
               v-for="collection in store.playerData.currentPlaylist.collections"
               :key="collection.name"
-              class="m-2 max-w-xxs min-w-xxs"
+              class="max-w-xxs min-w-xxs m-2"
             >
               <AppLink
                 class="block h-full w-full"

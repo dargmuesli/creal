@@ -5,15 +5,15 @@
       class="fullscreen transform-gpu transition-transform duration-1000 ease-in-out"
     >
       <div class="fullscreen bg-gray-800"></div>
-      <div class="bg-creal fullscreen bg-cover bg-center bg-no-repeat" />
+      <div class="fullscreen bg-creal bg-cover bg-center bg-no-repeat" />
       <div class="fullscreen bg-gray-800 opacity-75"></div>
       <div class="fullscreen flex">
-        <div class="m-auto text-center mb-20vh">
+        <div class="mb-20vh m-auto text-center">
           <h1 class="inline-block border-b border-gray-400">
             {{ t('creal') }}
           </h1>
           <i18n-t
-            class="mt-4 mb-16 whitespace-pre-line font-light"
+            class="mb-16 mt-4 whitespace-pre-line font-light"
             keypath="welcome"
             tag="p"
           >

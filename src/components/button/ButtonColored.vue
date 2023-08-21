@@ -7,10 +7,10 @@
       [
         ...(isPrimary
           ? [
-              'border-transparent bg-gray-800 text-text-bright hover:bg-black dark:bg-yellow-500  dark:text-gray-800 dark:hover:bg-yellow-600',
+              'text-text-bright border-transparent bg-gray-800 hover:bg-black dark:bg-yellow-500  dark:text-gray-800 dark:hover:bg-yellow-600',
             ]
           : [
-              'border-gray-300 text-text-dark hover:bg-black/5 dark:border-gray-600 dark:text-text-bright dark:hover:bg-black/30',
+              'text-text-dark dark:text-text-bright border-gray-300 hover:bg-black/5 dark:border-gray-600 dark:hover:bg-black/30',
             ]),
       ].join(' ')
     "

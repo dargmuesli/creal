@@ -20,7 +20,7 @@
           </template>
         </i18n-t>
       </div>
-      <span class="text-4xl font-bold block text-white">
+      <span class="block text-4xl font-bold text-white">
         {{ crealEvent.title }}
       </span>
       <!-- eslint-disable vue/no-v-html -->

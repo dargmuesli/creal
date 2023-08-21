@@ -21,7 +21,7 @@
           :key="faqItem.id"
           class="border duration-300 first:rounded-t last:rounded-b"
           :class="
-            itemFocusedId === faqItem.id ? 'my-4' : 'mx-8 -my-px last:my-0'
+            itemFocusedId === faqItem.id ? 'my-4' : '-my-px mx-8 last:my-0'
           "
         >
           <FaqItem

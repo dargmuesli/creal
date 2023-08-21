@@ -4,7 +4,7 @@
       <div class="flex items-center">
         <LayoutHr />
         <!-- alt="DJ cReals Logo" -->
-        <IconLogo class="mx-12 h-12 w-12 brightness-0 opacity-60 invert" />
+        <IconLogo class="mx-12 h-12 w-12 opacity-60 brightness-0 invert" />
         <LayoutHr />
       </div>
       <!-- Justifying evenly, instead of "between", centers a single element. -->
