@@ -37,9 +37,10 @@
 </template>
 
 <script setup lang="ts">
+import type { StrapiResult } from '@dargmuesli/nuxt-vio/types/fetch'
+import { FETCH_RETRY_AMOUNT } from '@dargmuesli/nuxt-vio/utils/constants'
 import { consola } from 'consola'
 
-import type { StrapiResult } from '~/types/fetch'
 import type { CrealFaq } from '~/types/creal'
 
 definePageMeta({ colorMode: 'dark' })
@@ -65,7 +66,7 @@ try {
       'pagination[start]': queryStart,
       sort: 'title:asc',
     },
-    retry: FETCH_RETRY,
+    retry: FETCH_RETRY_AMOUNT,
   })
 } catch (error: any) {
   requestError.value = error
@@ -98,19 +99,11 @@ onMounted(() => {
 // watchQuery: ['limit', 'start'],
 
 // initialization
-useHeadDefault(title, {
-  meta: [
-    {
-      hid: 'description',
-      property: 'description',
-      content: t('description'),
-    },
-    {
-      hid: 'og:description',
-      property: 'og:description',
-      content: t('description'),
-    },
-  ],
+useHeadDefault({
+  title,
+  extension: {
+    description: t('description'),
+  },
 })
 // TODO: remove markdown formatting
 useSchemaOrg([

@@ -7,7 +7,7 @@
       <div class="grow rounded bg-gray-900 p-4">
         <div v-if="isLoading" class="text-center">
           <LoaderIndicatorSpinner class="m-auto h-32 w-32" />
-          {{ t('globalLoading') }}
+          {{ t('globalStatusLoading') }}
         </div>
         <div v-else-if="store.playerData.currentPlaylist" class="m-auto w-5/6">
           <ul
@@ -229,19 +229,11 @@ watch(
 
 // initialization
 await init()
-useHeadDefault(titleHead(), {
-  meta: [
-    {
-      hid: 'description',
-      property: 'description',
-      content: t('description'),
-    },
-    {
-      hid: 'og:description',
-      property: 'og:description',
-      content: t('description'),
-    },
-  ],
+useHeadDefault({
+  title: titleHead(),
+  extension: {
+    description: t('description'),
+  },
 })
 </script>
 

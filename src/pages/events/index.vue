@@ -36,10 +36,11 @@
 </template>
 
 <script setup lang="ts">
+import type { StrapiResult } from '@dargmuesli/nuxt-vio/types/fetch'
+import { FETCH_RETRY_AMOUNT } from '@dargmuesli/nuxt-vio/utils/constants'
 import { consola } from 'consola'
 
 import type { CrealEvent, CrealFaq } from '~/types/creal'
-import type { StrapiResult } from '~/types/fetch'
 
 definePageMeta({ colorMode: 'dark' })
 
@@ -66,7 +67,7 @@ try {
       populate: 'image',
       sort: 'dateStart:desc',
     },
-    retry: FETCH_RETRY,
+    retry: FETCH_RETRY_AMOUNT,
   })
 } catch (error: any) {
   requestError.value = error
@@ -129,19 +130,11 @@ const itemsPast = computed(() => {
 // watchQuery: ['limit', 'start'],
 
 // initialization
-useHeadDefault(title, {
-  meta: [
-    {
-      hid: 'description',
-      property: 'description',
-      content: t('description'),
-    },
-    {
-      hid: 'og:description',
-      property: 'og:description',
-      content: t('description'),
-    },
-  ],
+useHeadDefault({
+  title,
+  extension: {
+    description: t('description'),
+  },
 })
 </script>
 

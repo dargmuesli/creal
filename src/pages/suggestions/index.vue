@@ -173,19 +173,11 @@ const rules = {
 const v$ = useVuelidate(rules, form)
 
 // initialization
-useHeadDefault(title, {
-  meta: [
-    {
-      hid: 'description',
-      property: 'description',
-      content: t('description'),
-    },
-    {
-      hid: 'og:description',
-      property: 'og:description',
-      content: t('description'),
-    },
-  ],
+useHeadDefault({
+  title,
+  extension: {
+    description: t('description'),
+  },
 })
 </script>
 

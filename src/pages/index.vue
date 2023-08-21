@@ -94,7 +94,7 @@ useHead({
     class: ['overflow-hidden'],
   },
 })
-useHeadDefault(title)
+useHeadDefault({ title })
 </script>
 
 <script lang="ts">
