@@ -1,4 +1,3 @@
-export default defineI18nConfig(() => ({
-  fallbackWarn: false, // covered by linting
-  missingWarn: false, // covered by linting
-}))
+import { I18N_VUE_CONFIG } from '@dargmuesli/nuxt-vio/utils/constants'
+
+export default defineI18nConfig(() => I18N_VUE_CONFIG)
