@@ -1,6 +1,6 @@
 <template>
   <div class="container mx-auto p-4 md:px-8">
-    <div class="flex flex-col min-h-screen pb-32">
+    <div class="flex min-h-screen flex-col pb-32">
       <LayoutHeader />
       <main class="flex flex-1 overflow-hidden">
         <slot />
@@ -22,7 +22,7 @@
           :data-testid="`i18n-${availableLocale}`"
           :to="switchLocalePath(availableLocale)"
         >
-          <div class="flex gap-2 items-center">
+          <div class="flex items-center gap-2">
             <!-- <component
               :is="getLocaleFlag(availableLocale)"
               :class="{ disabled: availableLocale === locale }"
@@ -81,14 +81,16 @@
         </ClientOnly>
       </div>
     </div>
-    <CookieControl :locale="locale as Locale" />
+    <CookieControl :locale="locale" />
   </div>
 </template>
 
 <script setup lang="ts">
 import { Locale } from '@dargmuesli/nuxt-cookie-control/dist/runtime/types'
+import { I18N_MODULE_CONFIG } from '@dargmuesli/nuxt-vio/utils/constants'
 import { LocaleObject } from '@nuxtjs/i18n/dist/runtime/composables'
 import Plyr from 'plyr'
+import { WritableComputedRef } from 'vue'
 
 import type { TrackListItem } from '~/types/player'
 import { useStore } from '~/store'
@@ -97,13 +99,15 @@ const { $dayjs } = useNuxtApp()
 const store = useStore()
 const localePath = useLocalePath()
 const switchLocalePath = useSwitchLocalePath()
-const { availableLocales, t, locale } = useI18n()
+const i18n = useI18n()
+const { availableLocales, t } = i18n
 const { play } = usePlyr()
 const fireError = useFireError()
 const dateTime = useDateTime()
 
 // data
 const isInitialized = ref(false)
+const locale = i18n.locale as WritableComputedRef<Locale>
 const plyrRef = ref<{ player: Plyr }>()
 
 // methods
@@ -127,7 +131,7 @@ const binarySearch = (ar: any[], el: any, compareFn: Function) => {
   return m - 1
 }
 const getLocaleName = (locale: string) => {
-  const locales: LocaleObject[] = LOCALES.filter(
+  const locales: LocaleObject[] = I18N_MODULE_CONFIG.locales.filter(
     (localeObject) => localeObject.code === locale,
   )
 
@@ -249,12 +253,6 @@ watch(
 // initialization
 useHeadLayout()
 $dayjs.locale(locale.value)
-</script>
-
-<script lang="ts">
-export default {
-  name: 'IndexPage',
-}
 </script>
 
 <i18n lang="yaml">
