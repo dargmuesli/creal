@@ -16,7 +16,7 @@
     "lint:js": "eslint --cache --ext .js,.ts,.vue --ignore-path .gitignore .",
     "lint:quiet": "pnpm lint:js --quiet && pnpm lint:style --quiet",
     "lint:staged": "lint-staged",
-    "lint:style": "stylelint **/*.{vue,css} --ignore-path .gitignore",
+    "lint:style": "stylelint --cache {,**/}*.{vue,css} --ignore-path .gitignore",
     "lint:ts": "nuxt typecheck",
     "lint": "pnpm lint:js && pnpm lint:ts && pnpm lint:style",
     "prepare": "nuxt prepare",
