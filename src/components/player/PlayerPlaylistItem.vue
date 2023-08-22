@@ -5,7 +5,7 @@
       :title="bytesToString(playlistItem.fileSize)"
       @click="onDownloadClick()"
     >
-      <IconDownload />
+      <VioIconDownload />
     </button>
     <button
       class="vio-prose-fullwidth max-w-full grow cursor-default py-2 text-left lg:py-3"
@@ -14,7 +14,7 @@
       {{ playlistItem.fileName.replace(/^cReal - /, '') }}
     </button>
     <button class="ml-3 mr-2 lg:ml-10" title="play" @click="onPlayClick()">
-      <IconPlay />
+      <VioIconPlay />
     </button>
   </div>
 </template>

@@ -32,19 +32,19 @@
       class="grid flex-1 grid-cols-1 items-stretch gap-4 xl:grid-cols-2 xl:gap-8"
     >
       <ButtonBig aria-label="Events" :to="localePath('/events')">
-        <IconCalendar classes="h-16 w-16" />
+        <VioIconCalendar classes="h-16 w-16" />
         {{ t('events') }}
       </ButtonBig>
       <ButtonBig aria-label="FAQ" :to="localePath('/faq')">
-        <IconChatOutline classes="h-16 w-16" />
+        <VioIconChatOutline classes="h-16 w-16" />
         {{ t('faq') }}
       </ButtonBig>
       <ButtonBig aria-label="Player" :to="localePath('/player')">
-        <IconMusic classes="h-16 w-16" />
+        <VioIconMusic classes="h-16 w-16" />
         {{ t('player') }}
       </ButtonBig>
       <ButtonBig aria-label="Suggestions" :to="localePath('/suggestions')">
-        <IconLightbulb classes="h-16 w-16" />
+        <VioIconLightbulb classes="h-16 w-16" />
         {{ t('suggestions') }}
       </ButtonBig>
     </div>

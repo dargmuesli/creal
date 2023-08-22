@@ -1,22 +1,22 @@
 <template>
   <div class="container mx-auto p-4 md:px-8">
     <div class="flex min-h-screen flex-col pb-32">
-      <LayoutHeader />
+      <VioLayoutHeader />
       <main class="flex flex-1 overflow-hidden">
         <slot />
       </main>
     </div>
-    <LayoutFooter :class="{ 'mb-20': store.playerData.isVisible }">
-      <LayoutFooterCategory :heading="t('legal')">
-        <AppLink :to="localePath('/legal-notice')">
+    <VioLayoutFooter :class="{ 'mb-20': store.playerData.isVisible }">
+      <VioLayoutFooterCategory :heading="t('legal')">
+        <VioAppLink :to="localePath('/legal-notice')">
           {{ t('legalNotice') }}
-        </AppLink>
-        <AppLink :to="localePath('/privacy-policy')">
+        </VioAppLink>
+        <VioAppLink :to="localePath('/privacy-policy')">
           {{ t('privacyPolicy') }}
-        </AppLink>
-      </LayoutFooterCategory>
-      <LayoutFooterCategory :heading="t('languages')">
-        <AppLink
+        </VioAppLink>
+      </VioLayoutFooterCategory>
+      <VioLayoutFooterCategory :heading="t('languages')">
+        <VioAppLink
           v-for="availableLocale in availableLocales"
           :key="availableLocale"
           :data-testid="`i18n-${availableLocale}`"
@@ -31,9 +31,9 @@
               {{ getLocaleName(availableLocale) }}
             </span>
           </div>
-        </AppLink>
-      </LayoutFooterCategory>
-    </LayoutFooter>
+        </VioAppLink>
+      </VioLayoutFooterCategory>
+    </VioLayoutFooter>
     <div class="fixed bottom-0 left-0 right-0">
       <div
         v-if="store.playerData.currentTrack?.fileName"
@@ -63,10 +63,10 @@
           rel="noopener noreferrer"
           target="_blank"
         >
-          <IconMixcloud classes="h-5 w-5" /> {{ t('mixcloud') }}
+          <VioIconMixcloud classes="h-5 w-5" /> {{ t('mixcloud') }}
         </a>
         <button class="flex items-center gap-1 font-bold" @click="share">
-          <IconShare classes="h-4 w-4" />
+          <VioIconShare classes="h-4 w-4" />
           {{ t('linkCopy') }}
         </button>
       </div>
