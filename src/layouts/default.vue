@@ -95,7 +95,6 @@ import { WritableComputedRef } from 'vue'
 import type { TrackListItem } from '~/types/player'
 import { useStore } from '~/store'
 
-const { $dayjs } = useNuxtApp()
 const store = useStore()
 const localePath = useLocalePath()
 const switchLocalePath = useSwitchLocalePath()
@@ -249,10 +248,6 @@ watch(
     }
   },
 )
-
-// initialization
-useHeadLayout()
-$dayjs.locale(locale.value)
 </script>
 
 <i18n lang="yaml">
