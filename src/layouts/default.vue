@@ -8,15 +8,15 @@
     </div>
     <VioLayoutFooter :class="{ 'mb-20': store.playerData.isVisible }">
       <VioLayoutFooterCategory :heading="t('legal')">
-        <VioAppLink :to="localePath('/legal-notice')">
+        <VioLink :to="localePath('/legal-notice')">
           {{ t('legalNotice') }}
-        </VioAppLink>
-        <VioAppLink :to="localePath('/privacy-policy')">
+        </VioLink>
+        <VioLink :to="localePath('/privacy-policy')">
           {{ t('privacyPolicy') }}
-        </VioAppLink>
+        </VioLink>
       </VioLayoutFooterCategory>
       <VioLayoutFooterCategory :heading="t('languages')">
-        <VioAppLink
+        <VioLink
           v-for="availableLocale in availableLocales"
           :key="availableLocale"
           :data-testid="`i18n-${availableLocale}`"
@@ -31,7 +31,7 @@
               {{ getLocaleName(availableLocale) }}
             </span>
           </div>
-        </VioAppLink>
+        </VioLink>
       </VioLayoutFooterCategory>
     </VioLayoutFooter>
     <div class="fixed bottom-0 left-0 right-0">

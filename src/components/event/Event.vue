@@ -40,14 +40,14 @@
         :src="imageSrc"
       />
       <div v-if="crealEvent.url && crealEvent.url !== ''" class="text-center">
-        <ButtonColored
+        <VioButtonColored
           :aria-label="t('details')"
           class="vio-prose-fullwidth prose-a:text-gray-800"
           :icon="false"
           :to="crealEvent.url"
         >
           {{ t('details') }}
-        </ButtonColored>
+        </VioButtonColored>
       </div>
     </div>
   </div>

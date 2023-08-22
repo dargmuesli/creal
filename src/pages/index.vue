@@ -19,12 +19,12 @@
           >
             <br />
           </i18n-t>
-          <ButtonColored
+          <VioButtonColored
             aria-label="start"
             @click="setShowGreeting({ save: true })"
           >
             {{ t('start') }}
-          </ButtonColored>
+          </VioButtonColored>
         </div>
       </div>
     </div>
