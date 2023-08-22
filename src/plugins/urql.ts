@@ -1,3 +1,4 @@
+import { useVioAuthStore } from '@dargmuesli/nuxt-vio/store/auth'
 import { Pinia } from '@pinia/nuxt/dist/runtime/composables'
 import {
   createClient,
@@ -22,7 +23,6 @@ import { GraphCacheConfig } from '~/gql/generated/graphcache'
 //   getJwtFromCookie,
 //   jwtRefresh,
 // } from '~/utils/auth'
-import { useStore } from '~/store'
 
 const ssrKey = '__URQL_DATA__'
 // const invalidateCache = (
@@ -126,7 +126,7 @@ export default defineNuxtPlugin((nuxtApp) => {
     requestPolicy: 'cache-and-network',
     fetchOptions: () => {
       const { $pinia } = useNuxtApp()
-      const store = useStore($pinia as Pinia) // TODO: remove `as` (https://github.com/vuejs/pinia/issues/2071)
+      const store = useVioAuthStore($pinia as Pinia) // TODO: remove `as` (https://github.com/vuejs/pinia/issues/2071)
       const jwt = store.jwt
 
       if (jwt) {
