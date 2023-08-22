@@ -14,7 +14,7 @@ const getCsp = (host: string): Record<string, Array<string>> => {
   const crealS3EndpointHost =
     (config.public.stagingHost || config.public.isInProduction
       ? `${config.public.creal.s3.bucket}.`
-      : '') + new URL(config.public.creal.s3.endpoint).host // eslint-disable-line compat/compat
+      : '') + new URL(config.public.creal.s3.endpoint).host
 
   const base = {
     'base-uri': ["'none'"], // Mozilla Observatory.
