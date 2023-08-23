@@ -89,7 +89,7 @@ onMounted(() => {
 })
 
 // initialization
-useHead({
+useServerHead({
   bodyAttrs: {
     class: ['overflow-hidden'],
   },
