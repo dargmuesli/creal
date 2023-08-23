@@ -11,10 +11,13 @@ export const getS3Client = (isExternal = false) => {
       filepath: '/run/secrets/creal_aws-credentials',
     }),
     endpoint:
-      config.public.stagingHost || config.public.isInProduction || isExternal
+      config.public.vio.stagingHost ||
+      config.public.vio.isInProduction ||
+      isExternal
         ? config.public.creal.s3.endpoint
         : 'http://minio:9000',
-    forcePathStyle: !config.public.stagingHost && !config.public.isInProduction,
+    forcePathStyle:
+      !config.public.vio.stagingHost && !config.public.vio.isInProduction,
     region: config.public.creal.s3.region,
   })
 }
@@ -27,12 +30,12 @@ export const proxy = async <T>(
 
   const { req } = event.node
 
-  if (config.public.stagingHost) {
+  if (config.public.vio.stagingHost) {
     return await $fetch<ReturnType<typeof f>>(
       getServiceHref({
         host: getHost(req),
         name: 'creal',
-        stagingHost: config.public.stagingHost,
+        stagingHost: config.public.vio.stagingHost,
       }) + (req.url ?? ''),
     )
   }

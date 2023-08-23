@@ -10,9 +10,9 @@ const getCsp = (host: string): Record<string, Array<string>> => {
   const hostName = host.replace(/:[0-9]+$/, '')
   const config = useRuntimeConfig()
 
-  const stagingHostOrHost = config.public.stagingHost || host
+  const stagingHostOrHost = config.public.vio.stagingHost || host
   const crealS3EndpointHost =
-    (config.public.stagingHost || config.public.isInProduction
+    (config.public.vio.stagingHost || config.public.vio.isInProduction
       ? `${config.public.creal.s3.bucket}.`
       : '') + new URL(config.public.creal.s3.endpoint).host
 
@@ -78,7 +78,7 @@ const getCsp = (host: string): Record<string, Array<string>> => {
     'connect-src': [`https://${stagingHostOrHost}/cdn-cgi/rum`],
   }
 
-  return defu(base, config.public.isInProduction ? production : development)
+  return defu(base, config.public.vio.isInProduction ? production : development)
 }
 
 const getCspAsString = (host: string) => {
