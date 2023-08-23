@@ -1,3 +1,39 @@
+# [1.11.0](https://github.com/dargmuesli/creal/compare/1.10.0...1.11.0) (2023-08-23)
+
+
+### Bug Fixes
+
+* **app:** correct email address ([69675de](https://github.com/dargmuesli/creal/commit/69675de2e953c939beb2e701e826bcef0431929e))
+* **components:** add icon prefix ([4b0d70b](https://github.com/dargmuesli/creal/commit/4b0d70bfadfb5e482aa2b03c985dcebc1be9c7c5))
+* **components:** correct names ([73c6c90](https://github.com/dargmuesli/creal/commit/73c6c90d7ff940e21ed0e89313fbcd4e462a2238))
+* correct components ([a756543](https://github.com/dargmuesli/creal/commit/a756543114721c577c47542a95084e0837f38033))
+* **docker:** do not ignore entrypoint directory ([3fcb8b5](https://github.com/dargmuesli/creal/commit/3fcb8b5099821d2d9ab37e90e0be855fe7e5a48b))
+* **docker:** do not ignore sqitch directory ([fd9b8c4](https://github.com/dargmuesli/creal/commit/fd9b8c493f0f4fb75d6200cf852c8067e7bb14c2))
+* **event:** replace headings with spans ([4207d3e](https://github.com/dargmuesli/creal/commit/4207d3ef20d42f2416973bb919adc4751650f18d))
+* **headers:** allow polyfill.io as script source ([8d7f5d1](https://github.com/dargmuesli/creal/commit/8d7f5d1f3c545e182d864f20a2458db8c41ef998))
+* **nuxt:** merge configurations deeply ([63225c2](https://github.com/dargmuesli/creal/commit/63225c24439e9f26c509eba9c344847c837c091f))
+* **pages:** migrate ([b4934ef](https://github.com/dargmuesli/creal/commit/b4934ef15dfd8d352ea593b377d60f738fe7eef9))
+* **player:** set link's query using object syntax ([65e2c9d](https://github.com/dargmuesli/creal/commit/65e2c9d0aa4492cfd266c515ae23d2ab636190dd))
+* **root:** set body attributes only serverside ([87e579a](https://github.com/dargmuesli/creal/commit/87e579a90122819851f1da9c3c43e6e67e244bdd))
+* **urql:** migrate to vio store ([cc9777d](https://github.com/dargmuesli/creal/commit/cc9777dea001717ed6fd420243df87825884c66b))
+
+
+### Features
+
+* **app:** add configuration ([0de2057](https://github.com/dargmuesli/creal/commit/0de20573b7d2da012802a7b455e45d656851a4b4))
+* **app:** remove error component ([8a8416b](https://github.com/dargmuesli/creal/commit/8a8416bef2f0e55c13ac6b43764311fca4ce6db8))
+* **components:** migrate to vio ([26a3baf](https://github.com/dargmuesli/creal/commit/26a3baf3e8d48b5c9e2f1c506556c41a0f38135f))
+* **composables:** remove ([013db3a](https://github.com/dargmuesli/creal/commit/013db3afa3fd522842020c4a2a1597805665f039))
+* **legal:** use vio components ([f2ef2ea](https://github.com/dargmuesli/creal/commit/f2ef2ea15b2a4ebb8c8ce3c02a0e8e19291447be))
+* **locales:** migrate to vio ([68e34fb](https://github.com/dargmuesli/creal/commit/68e34fbe99acfc1e8ed3d62d6b8e571cc194c126))
+* **package:** migrate to vio ([febf446](https://github.com/dargmuesli/creal/commit/febf446706eca7992113ba4b5ab2de0d841b4eed))
+* **plugins:** remove ([060d670](https://github.com/dargmuesli/creal/commit/060d67002d9c6916b136d516aea8bddfcdcb24c0))
+* **server:** migrate to vio ([35e8e67](https://github.com/dargmuesli/creal/commit/35e8e676c4c32b7c6c0aa9c2e2155c7771dbf9c6))
+* **server:** remove healthcheck ([0c4079c](https://github.com/dargmuesli/creal/commit/0c4079ccf126bc8911e6346dcb2aa366c454fceb))
+* **store:** migrate to vio ([36f2575](https://github.com/dargmuesli/creal/commit/36f25753625bffa9c6c1802660798451483f41f4))
+* **types:** remove ([1fc3e2f](https://github.com/dargmuesli/creal/commit/1fc3e2f618c8ff92b72c6a6d11c41116dba0d6c2))
+* **utils:** refactor ([212164e](https://github.com/dargmuesli/creal/commit/212164e6fe7f5680df0fe75c7e56e5dd8e8ab937))
+
 # [1.10.0](https://github.com/dargmuesli/creal/compare/1.9.6...1.10.0) (2023-08-18)
 
 
