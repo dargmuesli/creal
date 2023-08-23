@@ -1,12 +1,12 @@
 <template>
   <div class="container mx-auto">
     <section>
-      <LayoutBreadcrumbs :suffixes="breadcrumbSuffixes">
+      <VioLayoutBreadcrumbs :suffixes="breadcrumbSuffixes">
         {{ title }}
-      </LayoutBreadcrumbs>
+      </VioLayoutBreadcrumbs>
       <div class="grow rounded bg-gray-900 p-4">
         <div v-if="isLoading" class="text-center">
-          <LoaderIndicatorSpinner class="m-auto h-32 w-32" />
+          <VioLoaderIndicatorSpinner class="m-auto h-32 w-32" />
           {{ t('globalStatusLoading') }}
         </div>
         <div v-else-if="store.playerData.currentPlaylist" class="m-auto w-5/6">
@@ -19,14 +19,14 @@
               :key="collection.name"
               class="max-w-xxs min-w-xxs m-2"
             >
-              <AppLink
+              <VioLink
                 class="block h-full w-full"
                 :is-colored="false"
                 :title="collection.name"
                 :to="getPlaylistLink(collection.name)"
               >
                 <PlayerPlaylist class="h-full" :playlist="collection" />
-              </AppLink>
+              </VioLink>
             </li>
           </ul>
           <ul v-if="store.playerData.currentPlaylist.items.length">

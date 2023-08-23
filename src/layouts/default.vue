@@ -1,7 +1,7 @@
 <template>
   <div class="container mx-auto p-4 md:px-8">
     <div class="flex min-h-screen flex-col pb-32">
-      <VioLayoutHeader />
+      <LayoutHeader />
       <main class="flex flex-1 overflow-hidden">
         <slot />
       </main>
@@ -33,6 +33,9 @@
           </div>
         </VioLink>
       </VioLayoutFooterCategory>
+      <template #logo>
+        <IconLogo class="mx-12 h-12 w-12 opacity-60 brightness-0 invert" />
+      </template>
     </VioLayoutFooter>
     <div class="fixed bottom-0 left-0 right-0">
       <div

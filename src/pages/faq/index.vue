@@ -1,11 +1,11 @@
 <template>
   <div class="flex-1">
-    <LayoutBreadcrumbs>
+    <VioLayoutBreadcrumbs>
       {{ title }}
-    </LayoutBreadcrumbs>
-    <CardStateAlert v-if="requestError">
+    </VioLayoutBreadcrumbs>
+    <VioCardStateAlert v-if="requestError">
       {{ requestError }}
-    </CardStateAlert>
+    </VioCardStateAlert>
     <Paging
       v-if="faqItems?.length"
       :is-previous-allowed="paging.isPreviousAllowed"

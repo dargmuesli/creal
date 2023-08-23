@@ -7,7 +7,7 @@
       :src="coverUrl"
     />
     <div v-else class="m-auto h-16 w-16">
-      <LoaderIndicatorPing />
+      <VioLoaderIndicatorPing />
     </div>
     <h1 class="m-0 mt-1 line-clamp-2 text-left text-2xl leading-tight">
       {{ playlist.name }}
