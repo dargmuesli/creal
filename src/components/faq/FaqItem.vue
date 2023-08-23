@@ -5,7 +5,7 @@
       :class="{ 'border-b': isFocused }"
       type="button"
     >
-      <IconChatSolid class="shrink-0" />
+      <VioIconChatSolid class="shrink-0" />
       <strong class="vio-prose-fullwidth m-0 text-left">
         {{ faqItem.attributes.title }}
       </strong>

@@ -1,11 +1,11 @@
 <template>
   <div class="flex-1">
-    <LayoutBreadcrumbs>
+    <VioLayoutBreadcrumbs>
       {{ title }}
-    </LayoutBreadcrumbs>
-    <CardStateAlert v-if="requestError">
+    </VioLayoutBreadcrumbs>
+    <VioCardStateAlert v-if="requestError">
       {{ requestError }}
-    </CardStateAlert>
+    </VioCardStateAlert>
     <Paging
       v-if="faqItems?.length"
       :is-previous-allowed="paging.isPreviousAllowed"
@@ -21,7 +21,7 @@
           :key="faqItem.id"
           class="border duration-300 first:rounded-t last:rounded-b"
           :class="
-            itemFocusedId === faqItem.id ? 'my-4' : 'mx-8 -my-px last:my-0'
+            itemFocusedId === faqItem.id ? 'my-4' : '-my-px mx-8 last:my-0'
           "
         >
           <FaqItem
@@ -37,9 +37,10 @@
 </template>
 
 <script setup lang="ts">
+import type { StrapiResult } from '@dargmuesli/nuxt-vio/types/fetch'
+import { FETCH_RETRY_AMOUNT } from '@dargmuesli/nuxt-vio/utils/constants'
 import { consola } from 'consola'
 
-import type { StrapiResult } from '~/types/fetch'
 import type { CrealFaq } from '~/types/creal'
 
 definePageMeta({ colorMode: 'dark' })
@@ -65,7 +66,7 @@ try {
       'pagination[start]': queryStart,
       sort: 'title:asc',
     },
-    retry: FETCH_RETRY,
+    retry: FETCH_RETRY_AMOUNT,
   })
 } catch (error: any) {
   requestError.value = error
@@ -98,19 +99,11 @@ onMounted(() => {
 // watchQuery: ['limit', 'start'],
 
 // initialization
-useHeadDefault(title, {
-  meta: [
-    {
-      hid: 'description',
-      property: 'description',
-      content: t('description'),
-    },
-    {
-      hid: 'og:description',
-      property: 'og:description',
-      content: t('description'),
-    },
-  ],
+useHeadDefault({
+  title,
+  extension: {
+    description: t('description'),
+  },
 })
 // TODO: remove markdown formatting
 useSchemaOrg([

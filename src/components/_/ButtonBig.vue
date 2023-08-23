@@ -1,11 +1,11 @@
 <template>
-  <ButtonColored :aria-label="ariaLabel" :to="to">
+  <VioButtonColored :aria-label="ariaLabel" :to="to">
     <span
-      class="flex flex-col md:flex-row items-center justify-center md:gap-4 text-4xl sm:text-5xl lg:text-6xl"
+      class="flex flex-col items-center justify-center text-4xl sm:text-5xl md:flex-row md:gap-4 lg:text-6xl"
     >
       <slot />
     </span>
-  </ButtonColored>
+  </VioButtonColored>
 </template>
 
 <script setup lang="ts">

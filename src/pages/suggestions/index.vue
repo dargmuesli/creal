@@ -1,15 +1,15 @@
 <template>
   <div class="flex-1">
-    <LayoutBreadcrumbs>
+    <VioLayoutBreadcrumbs>
       {{ title }}
-    </LayoutBreadcrumbs>
-    <Form
+    </VioLayoutBreadcrumbs>
+    <VioForm
       :errors="api.errors"
       :form="v$"
       :is-form-sent="isFormSent"
       @submit.prevent="submit"
     >
-      <FormInput
+      <VioFormInput
         :error="v$.artist.$error"
         id-label="input-artist"
         is-required
@@ -20,22 +20,22 @@
         @input="form.artist = $event"
       >
         <template #inputError>
-          <FormInputStateError
+          <VioFormInputStateError
             :form-input="v$.artist"
             validation-property="maxLength"
           >
             {{ t('globalValidationLength') }}
-          </FormInputStateError>
-          <FormInputStateError
+          </VioFormInputStateError>
+          <VioFormInputStateError
             :form-input="v$.artist"
             validation-property="required"
           >
             {{ t('globalValidationRequired') }}
-          </FormInputStateError>
+          </VioFormInputStateError>
           <slot name="inputError" />
         </template>
-      </FormInput>
-      <FormInput
+      </VioFormInput>
+      <VioFormInput
         id-label="input-title"
         is-required
         :placeholder="t('titlePlaceholder')"
@@ -45,27 +45,27 @@
         @input="form.title = $event"
       >
         <template #inputError>
-          <FormInputStateError
+          <VioFormInputStateError
             :form-input="v$.title"
             validation-property="maxLength"
           >
             {{ t('globalValidationLength') }}
-          </FormInputStateError>
-          <FormInputStateError
+          </VioFormInputStateError>
+          <VioFormInputStateError
             :form-input="v$.title"
             validation-property="required"
           >
             {{ t('globalValidationRequired') }}
-          </FormInputStateError>
+          </VioFormInputStateError>
           <slot name="inputError" />
         </template>
-      </FormInput>
-      <!-- <FormInputUrl
+      </VioFormInput>
+      <!-- <VioFormInputUrl
         :form-input="v$.url"
         is-optional
         @input="form.url = $event"
       /> -->
-      <FormInput
+      <VioFormInput
         is-optional
         id-label="input-comment"
         :title="t('comment')"
@@ -77,16 +77,16 @@
           class="form-input"
         />
         <template #inputError>
-          <FormInputStateError
+          <VioFormInputStateError
             :form-input="v$.comment"
             validation-property="maxLength"
           >
             {{ t('globalValidationLength') }}
-          </FormInputStateError>
+          </VioFormInputStateError>
           <slot name="inputError" />
         </template>
-      </FormInput>
-    </Form>
+      </VioFormInput>
+    </VioForm>
   </div>
 </template>
 
@@ -173,19 +173,11 @@ const rules = {
 const v$ = useVuelidate(rules, form)
 
 // initialization
-useHeadDefault(title, {
-  meta: [
-    {
-      hid: 'description',
-      property: 'description',
-      content: t('description'),
-    },
-    {
-      hid: 'og:description',
-      property: 'og:description',
-      content: t('description'),
-    },
-  ],
+useHeadDefault({
+  title,
+  extension: {
+    description: t('description'),
+  },
 })
 </script>
 

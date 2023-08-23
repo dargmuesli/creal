@@ -2,7 +2,7 @@
   <div class="text-center">
     <div class="my-4">{{ partString }}</div>
     <div class="inline-grid grid-cols-2">
-      <Button
+      <VioButton
         :aria-label="t('previous')"
         :icon="false"
         :disabled="!isPreviousAllowed"
@@ -10,8 +10,8 @@
         @click="goPrevious"
       >
         {{ t('previous') }}
-      </Button>
-      <Button
+      </VioButton>
+      <VioButton
         :aria-label="t('next')"
         :icon="false"
         :disabled="!isNextAllowed"
@@ -19,7 +19,7 @@
         @click="goNext"
       >
         {{ t('next') }}
-      </Button>
+      </VioButton>
     </div>
   </div>
 </template>

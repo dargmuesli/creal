@@ -1,22 +1,11 @@
-import { LocaleObject } from '@nuxtjs/i18n/dist/runtime/composables'
-
-export const I18N_COOKIE_NAME = 'i18n_r'
-export const FETCH_RETRY = 3
-export const LOCALES: LocaleObject[] = [
-  {
-    code: 'en',
-    file: 'en.json',
-    name: 'English',
-    iso: 'en', // Will be used as catchall locale by default.
-  },
-  {
-    code: 'de',
-    file: 'de.json',
-    name: 'Deutsch',
-    iso: 'de',
-  },
-]
+export const BASE_URL =
+  (process.env.NUXT_PUBLIC_STACK_DOMAIN ? 'https' : 'http') +
+  '://creal.' +
+  (process.env.NUXT_PUBLIC_STACK_DOMAIN ||
+    `${process.env.HOST || 'localhost'}:${
+      !process.env.NODE_ENV || process.env.NODE_ENV === 'development'
+        ? '3000'
+        : '3001'
+    }`)
 export const PLAYER_PREFIX = 'player/'
-export const SITE_NAME = 'cReal'
-export const TIMEZONE_COOKIE_NAME = 'c_tz'
-export const TIMEZONE_HEADER_KEY = 'X-Timezone'
+export const SITE_NAME = 'DJ cReal'

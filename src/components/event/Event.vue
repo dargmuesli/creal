@@ -20,7 +20,9 @@
           </template>
         </i18n-t>
       </div>
-      <h2 class="m-0">{{ crealEvent.title }}</h2>
+      <span class="block text-4xl font-bold text-white">
+        {{ crealEvent.title }}
+      </span>
       <!-- eslint-disable vue/no-v-html -->
       <div
         v-if="crealEvent.description"
@@ -38,14 +40,14 @@
         :src="imageSrc"
       />
       <div v-if="crealEvent.url && crealEvent.url !== ''" class="text-center">
-        <ButtonColored
+        <VioButtonColored
           :aria-label="t('details')"
           class="vio-prose-fullwidth prose-a:text-gray-800"
           :icon="false"
           :to="crealEvent.url"
         >
           {{ t('details') }}
-        </ButtonColored>
+        </VioButtonColored>
       </div>
     </div>
   </div>

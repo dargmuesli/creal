@@ -1,19 +1,12 @@
-# Dependency directories
-**/node_modules/
-
-# Nuxt.js build / generate output
-**/.nuxt
-**/.output
-
-# Git
-**/!.gitkeep
-
-# Environment variables
-**/.env
-
-# ESLint
-**/.eslintcache
-
-# Playwright
-**/tests/e2e/report
-**/tests/e2e/results
+*
+!docker/
+!sqitch/
+!src/
+src/.nuxt/
+src/node_modules/
+src/.nuxt
+src/.eslintcache
+!.npmrc
+!package.json
+!pnpm-lock.yaml
+!pnpm-workspace.yaml

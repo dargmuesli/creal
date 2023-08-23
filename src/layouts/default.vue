@@ -1,28 +1,29 @@
 <template>
   <div class="container mx-auto p-4 md:px-8">
-    <div class="flex flex-col min-h-screen pb-32">
+    <div class="flex min-h-screen flex-col pb-32">
       <LayoutHeader />
       <main class="flex flex-1 overflow-hidden">
         <slot />
       </main>
     </div>
-    <LayoutFooter :class="{ 'mb-20': store.playerData.isVisible }">
-      <LayoutFooterCategory :heading="t('legal')">
-        <AppLink :to="localePath('/legal-notice')">
+    <VioLayoutFooter :class="{ 'mb-20': store.playerData.isVisible }">
+      <VioLayoutFooterCategory :heading="t('legal')">
+        <VioLink :to="localePath('/legal-notice')">
           {{ t('legalNotice') }}
-        </AppLink>
-        <AppLink :to="localePath('/privacy-policy')">
+        </VioLink>
+        <VioLink :to="localePath('/privacy-policy')">
           {{ t('privacyPolicy') }}
-        </AppLink>
-      </LayoutFooterCategory>
-      <LayoutFooterCategory :heading="t('languages')">
-        <AppLink
+        </VioLink>
+      </VioLayoutFooterCategory>
+      <VioLayoutFooterCategory :heading="t('languages')">
+        <VioLink
           v-for="availableLocale in availableLocales"
           :key="availableLocale"
           :data-testid="`i18n-${availableLocale}`"
-          :to="switchLocalePath(availableLocale)"
+          :locale="availableLocale"
+          :to="$route.path"
         >
-          <div class="flex gap-2 items-center">
+          <div class="flex items-center gap-2">
             <!-- <component
               :is="getLocaleFlag(availableLocale)"
               :class="{ disabled: availableLocale === locale }"
@@ -31,9 +32,12 @@
               {{ getLocaleName(availableLocale) }}
             </span>
           </div>
-        </AppLink>
-      </LayoutFooterCategory>
-    </LayoutFooter>
+        </VioLink>
+      </VioLayoutFooterCategory>
+      <template #logo>
+        <IconLogo class="mx-12 h-12 w-12 opacity-60 brightness-0 invert" />
+      </template>
+    </VioLayoutFooter>
     <div class="fixed bottom-0 left-0 right-0">
       <div
         v-if="store.playerData.currentTrack?.fileName"
@@ -63,10 +67,10 @@
           rel="noopener noreferrer"
           target="_blank"
         >
-          <IconMixcloud classes="h-5 w-5" /> {{ t('mixcloud') }}
+          <VioIconMixcloud classes="h-5 w-5" /> {{ t('mixcloud') }}
         </a>
         <button class="flex items-center gap-1 font-bold" @click="share">
-          <IconShare classes="h-4 w-4" />
+          <VioIconShare classes="h-4 w-4" />
           {{ t('linkCopy') }}
         </button>
       </div>
@@ -81,29 +85,31 @@
         </ClientOnly>
       </div>
     </div>
-    <CookieControl :locale="locale as Locale" />
+    <CookieControl :locale="locale" />
   </div>
 </template>
 
 <script setup lang="ts">
 import { Locale } from '@dargmuesli/nuxt-cookie-control/dist/runtime/types'
+import { I18N_MODULE_CONFIG } from '@dargmuesli/nuxt-vio/utils/constants'
 import { LocaleObject } from '@nuxtjs/i18n/dist/runtime/composables'
 import Plyr from 'plyr'
+import { WritableComputedRef } from 'vue'
 
 import type { TrackListItem } from '~/types/player'
 import { useStore } from '~/store'
 
-const { $dayjs } = useNuxtApp()
 const store = useStore()
 const localePath = useLocalePath()
-const switchLocalePath = useSwitchLocalePath()
-const { availableLocales, t, locale } = useI18n()
+const i18n = useI18n()
+const { availableLocales, t } = i18n
 const { play } = usePlyr()
 const fireError = useFireError()
 const dateTime = useDateTime()
 
 // data
 const isInitialized = ref(false)
+const locale = i18n.locale as WritableComputedRef<Locale>
 const plyrRef = ref<{ player: Plyr }>()
 
 // methods
@@ -127,7 +133,7 @@ const binarySearch = (ar: any[], el: any, compareFn: Function) => {
   return m - 1
 }
 const getLocaleName = (locale: string) => {
-  const locales: LocaleObject[] = LOCALES.filter(
+  const locales: LocaleObject[] = I18N_MODULE_CONFIG.locales.filter(
     (localeObject) => localeObject.code === locale,
   )
 
@@ -245,16 +251,6 @@ watch(
     }
   },
 )
-
-// initialization
-useHeadLayout()
-$dayjs.locale(locale.value)
-</script>
-
-<script lang="ts">
-export default {
-  name: 'IndexPage',
-}
 </script>
 
 <i18n lang="yaml">

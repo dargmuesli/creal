@@ -28,7 +28,7 @@ const signedUrl = async (event: H3Event) => {
   return await getSignedUrl(
     s3,
     new GetObjectCommand({
-      Bucket: config.public.s3Bucket,
+      Bucket: config.public.creal.s3.bucket,
       Key: key,
     }),
     {

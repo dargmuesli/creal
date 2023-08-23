@@ -21,6 +21,8 @@ const name = 'cReal'
 
 // methods
 const init = () => {
+  $dayjs.locale(locale.value)
+
   if (process.client) {
     const cookieTimezone = useCookie(TIMEZONE_COOKIE_NAME, {
       // default: () => undefined, // setting `default` on the client side only does not write the cookie
@@ -52,14 +54,15 @@ watch(
 )
 
 // initialization
-init()
+useAppLayout()
+useFavicons()
+usePolyfills()
 updateSiteConfig({
-  description: t('globalOgSeoDescription'),
+  description: t('globalSeoSiteDescription'),
 })
 defineOgImage({
-  alt: t('globalOgImageAlt'),
+  alt: t('globalSeoOgImageAlt'),
   // component: props.ogImageComponent,
-  description: t('globalOgSeoDescription'),
 })
 useSchemaOrg([
   definePerson({
@@ -68,10 +71,11 @@ useSchemaOrg([
     // sameAs: ['https://twitter.com/company'],
   }),
   defineWebSite({
-    description: t('globalOgSeoDescription'),
+    description: t('globalSeoSiteDescription'),
     inLanguage: locale,
     name,
   }),
   defineWebPage(),
 ])
+init()
 </script>
