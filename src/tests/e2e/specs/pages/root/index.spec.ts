@@ -50,15 +50,14 @@ test.describe('internationalization', () => {
 
   test('switches between English and German translations', async ({ page }) => {
     await page.goto('/')
+    await page.getByText('Start').click()
     expect(page.getByText(textEnglish)).toBeDefined()
 
-    await page.getByRole('link', { name: 'German flag Deutsch' }).click()
+    await page.getByRole('link', { name: 'Deutsch' }).click()
     await page.waitForURL('/de')
     expect(page.getByText(textGerman)).toBeDefined()
 
-    await page
-      .getByRole('link', { name: 'Flagge des Vereinigten Königreichs English' })
-      .click()
+    await page.getByRole('link', { name: 'English' }).click()
     await page.waitForURL('/')
     expect(page.getByText(textEnglish)).toBeDefined()
   })

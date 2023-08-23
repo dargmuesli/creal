@@ -20,7 +20,8 @@
           v-for="availableLocale in availableLocales"
           :key="availableLocale"
           :data-testid="`i18n-${availableLocale}`"
-          :to="switchLocalePath(availableLocale)"
+          :locale="availableLocale"
+          :to="$route.path"
         >
           <div class="flex items-center gap-2">
             <!-- <component
@@ -100,7 +101,6 @@ import { useStore } from '~/store'
 
 const store = useStore()
 const localePath = useLocalePath()
-const switchLocalePath = useSwitchLocalePath()
 const i18n = useI18n()
 const { availableLocales, t } = i18n
 const { play } = usePlyr()
