@@ -1,23 +1,13 @@
-import { I18N_MODULE_CONFIG } from '@dargmuesli/nuxt-vio/utils/constants'
+import { VIO_NUXT_BASE_CONFIG } from '@dargmuesli/nuxt-vio/utils/constants'
 
-import { SITE_NAME } from './utils/constants'
-
-const BASE_URL =
-  (process.env.NUXT_PUBLIC_STACK_DOMAIN ? 'https' : 'http') +
-  '://creal.' +
-  (process.env.NUXT_PUBLIC_STACK_DOMAIN ||
-    `${process.env.HOST || 'localhost'}:${
-      !process.env.NODE_ENV || process.env.NODE_ENV === 'development'
-        ? '3000'
-        : '3001'
-    }`)
+import { BASE_URL, SITE_NAME } from './utils/constants'
 
 export default defineNuxtConfig({
-  app: {
-    head: {
-      title: SITE_NAME, // fallback data to prevent invalid html at generation
-    },
-  },
+  ...VIO_NUXT_BASE_CONFIG({
+    baseUrl: BASE_URL,
+    siteName: SITE_NAME,
+    stagingHost: 'jonas-thelemann.de',
+  }),
   extends: ['@dargmuesli/nuxt-vio'],
   runtimeConfig: {
     public: {
@@ -28,32 +18,6 @@ export default defineNuxtConfig({
           region: 'nl-ams',
         },
       },
-      i18n: {
-        baseUrl: BASE_URL,
-      },
-      vio: {
-        stagingHost:
-          process.env.NODE_ENV !== 'production' &&
-          !process.env.NUXT_PUBLIC_STACK_DOMAIN
-            ? 'jonas-thelemann.de'
-            : undefined,
-      },
     },
-  },
-  typescript: {
-    tsConfig: {
-      compilerOptions: {
-        esModuleInterop: true,
-        // moduleResolution: 'bundler',
-        // noErrorTruncation: true,
-      },
-    },
-  },
-
-  // modules
-  i18n: I18N_MODULE_CONFIG, // `langDir`, `lazy` and `locales` must be configured to extend a layer having lazy-loaded translations (https://v8.i18n.nuxtjs.org/guide/layers#locales)
-  site: {
-    name: SITE_NAME,
-    url: BASE_URL,
   },
 })
