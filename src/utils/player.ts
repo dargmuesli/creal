@@ -59,13 +59,3 @@ export const mergeByKey = (target: any, source: any, key: string | number) =>
         }
       })
     : undefined
-
-export const serializeQueryString = (object: any) => {
-  const playlistLinkParts: Array<string> = []
-
-  for (const [key, value] of Object.entries(object)) {
-    playlistLinkParts.push(!value ? key : `${key}=${value}`)
-  }
-
-  return `?${playlistLinkParts.join('&')}`
-}

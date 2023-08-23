@@ -23,7 +23,7 @@
                 class="block h-full w-full"
                 :is-colored="false"
                 :title="collection.name"
-                :to="getPlaylistLink(collection.name)"
+                :to="{ query: getPlaylistLink(collection.name) }"
               >
                 <PlayerPlaylist class="h-full" :playlist="collection" />
               </VioLink>
@@ -149,7 +149,7 @@ const getPlaylistLink = (name: string) => {
   )
   delete queryObject.track
 
-  return serializeQueryString(queryObject)
+  return queryObject
 }
 const download = async (playlistItem: PlaylistItem) => {
   const link = document.createElement('a')
