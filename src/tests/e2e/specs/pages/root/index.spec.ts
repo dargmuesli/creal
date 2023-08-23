@@ -47,6 +47,21 @@ test.describe('internationalization', () => {
     await page.goto('/de')
     expect(page.getByText(textGerman)).toBeDefined()
   })
+
+  test('switches between English and German translations', async ({ page }) => {
+    await page.goto('/')
+    expect(page.getByText(textEnglish)).toBeDefined()
+
+    await page.getByRole('link', { name: 'German flag Deutsch' }).click()
+    await page.waitForURL('/de')
+    expect(page.getByText(textGerman)).toBeDefined()
+
+    await page
+      .getByRole('link', { name: 'Flagge des Vereinigten Königreichs English' })
+      .click()
+    await page.waitForURL('/')
+    expect(page.getByText(textEnglish)).toBeDefined()
+  })
 })
 
 test.describe('visual regression', () => {
