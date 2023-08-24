@@ -37,8 +37,8 @@ importers:
         specifier: 4.7.3
         version: 4.7.3(playwright-core@1.37.1)
       '@dargmuesli/nuxt-vio':
-        specifier: 3.1.1
-        version: 3.1.1(@nuxt/devtools@0.7.6)(@unhead/vue@1.3.5)(graphql@16.8.0)(nuxt@3.6.5)(postcss@8.4.28)(tailwindcss@3.3.3)(ts-node@10.9.1)(typescript@5.1.6)(vite@4.4.9)(vue@3.3.4)(webpack@5.88.2)
+        specifier: 3.2.0
+        version: 3.2.0(@nuxt/devtools@0.7.6)(@unhead/vue@1.3.5)(graphql@16.8.0)(nuxt@3.6.5)(postcss@8.4.28)(tailwindcss@3.3.3)(ts-node@10.9.1)(typescript@5.1.6)(vite@4.4.9)(vue@3.3.4)(webpack@5.88.2)
       '@graphql-codegen/cli':
         specifier: 5.0.0
         version: 5.0.0(@types/node@20.5.4)(graphql@16.8.0)
@@ -1738,8 +1738,8 @@ packages:
       - webpack
     dev: true
 
-  /@dargmuesli/nuxt-vio@3.1.1(@nuxt/devtools@0.7.6)(@unhead/vue@1.3.5)(graphql@16.8.0)(nuxt@3.6.5)(postcss@8.4.28)(tailwindcss@3.3.3)(ts-node@10.9.1)(typescript@5.1.6)(vite@4.4.9)(vue@3.3.4)(webpack@5.88.2):
-    resolution: {integrity: sha512-8hPkU70KhV1Rtvbr5FwKHOmC1N060erc0FYsr2ANyuwOEbMmY3z3Nhnvm1H/Lj9KgZtH4ghck+JhOEGGSC27ew==}
+  /@dargmuesli/nuxt-vio@3.2.0(@nuxt/devtools@0.7.6)(@unhead/vue@1.3.5)(graphql@16.8.0)(nuxt@3.6.5)(postcss@8.4.28)(tailwindcss@3.3.3)(ts-node@10.9.1)(typescript@5.1.6)(vite@4.4.9)(vue@3.3.4)(webpack@5.88.2):
+    resolution: {integrity: sha512-8p3eV3lVMYMZnSpQJaBw9zRAIVkM1djzvxr5oBm5nB/fx3IgmHrH4v7Md9sXRjWGJGTZMNHzsUclL4D5mjWfrQ==}
     engines: {node: '20'}
     dependencies:
       '@dargmuesli/nuxt-cookie-control': 6.4.1(webpack@5.88.2)
@@ -1752,6 +1752,7 @@ packages:
       '@pinia/nuxt': 0.4.11(typescript@5.1.6)(vue@3.3.4)
       '@tailwindcss/forms': 0.5.5(tailwindcss@3.3.3)
       '@tailwindcss/typography': 0.5.9(tailwindcss@3.3.3)
+      '@types/cookie': 0.5.1
       '@urql/core': 4.1.1(graphql@16.8.0)
       '@urql/devtools': 2.0.3(@urql/core@4.1.1)(graphql@16.8.0)
       '@urql/exchange-graphcache': 6.3.2(graphql@16.8.0)
@@ -1759,6 +1760,7 @@ packages:
       '@vuelidate/core': 2.0.3(vue@3.3.4)
       '@vuelidate/validators': 2.0.3(vue@3.3.4)
       clipboard: 2.0.11
+      cookie: 0.5.0
       dayjs: 2.0.0-alpha.4
       is-https: 4.0.0
       jose: 4.14.4
@@ -5174,6 +5176,10 @@ packages:
       minimatch: 9.0.3
     dev: true
 
+  /@types/cookie@0.5.1:
+    resolution: {integrity: sha512-COUnqfB2+ckwXXSFInsFdOAWQzCCx+a5hq2ruyj+Vjund94RJQd4LG2u9hnvJrTgunKAaax7ancBYlDrNYxA0g==}
+    dev: true
+
   /@types/eslint-scope@3.7.4:
     resolution: {integrity: sha512-9K4zoImiZc3HlIp6AVUDE4CWYx22a+lhSZMYNpbjW04+YF0KWj4pJXnEMjdnFTiQibFFmElcsasJXDbdI/EPhA==}
     dependencies:
@@ -7586,6 +7592,11 @@ packages:
 
   /cookie-es@1.0.0:
     resolution: {integrity: sha512-mWYvfOLrfEc996hlKcdABeIiPHUPC6DM2QYZdGGOvhOTbA3tjm2eBwqlJpoFdjC89NI4Qt6h0Pu06Mp+1Pj5OQ==}
+    dev: true
+
+  /cookie@0.5.0:
+    resolution: {integrity: sha512-YZ3GUyn/o8gfKJlnlX7g7xq4gyO6OSuhGPKaaGssGB2qgDUS0gPgtTvoyZLTt9Ab6dC4hfc9dV5arkvc/OCmrw==}
+    engines: {node: '>= 0.6'}
     dev: true
 
   /cookiejar@2.1.4:
