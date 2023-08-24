@@ -16,9 +16,6 @@ const cookieControl = useCookieControl()
 const loadingId = Math.random()
 const loadingIds = useState('loadingIds', () => [loadingId])
 
-// data
-const name = 'cReal'
-
 // methods
 const init = () => {
   $dayjs.locale(locale.value)
@@ -66,14 +63,14 @@ defineOgImage({
 })
 useSchemaOrg([
   definePerson({
-    name,
+    name: SITE_NAME,
     logo: '/__og_image__/og.png',
     // sameAs: ['https://twitter.com/company'],
   }),
   defineWebSite({
     description: t('globalSeoSiteDescription'),
     inLanguage: locale,
-    name,
+    name: SITE_NAME,
   }),
   defineWebPage(),
 ])
