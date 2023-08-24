@@ -2,8 +2,10 @@
   <div :data-is-loading="isLoading" data-testid="is-loading">
     <!-- <SchemaOrgDebug /> -->
     <NuxtLayout>
-      <NuxtLoadingIndicator color="#fff" />
-      <NuxtPage />
+      <div>
+        <NuxtLoadingIndicator color="#fff" />
+        <NuxtPage />
+      </div>
     </NuxtLayout>
   </div>
 </template>
