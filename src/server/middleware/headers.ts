@@ -81,19 +81,8 @@ const getCsp = (host: string): Record<string, Array<string>> => {
   return defu(base, config.public.vio.isInProduction ? production : development)
 }
 
-const getCspAsString = (host: string) => {
-  const csp = getCsp(host)
-  let result = ''
-
-  Object.keys(csp).forEach((key) => {
-    result += `${key} ${csp[key].join(' ')};`
-  })
-
-  return result
-}
-
 export default defineEventHandler((event) => {
   const host = getHost(event.node.req)
 
-  appendHeader(event, 'Content-Security-Policy', getCspAsString(host))
+  appendHeader(event, 'Content-Security-Policy', getCspAsString(getCsp(host)))
 })
