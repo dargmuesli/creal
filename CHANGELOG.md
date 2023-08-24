@@ -1,3 +1,15 @@
+# [1.12.0](https://github.com/dargmuesli/creal/compare/1.11.0...1.12.0) (2023-08-24)
+
+
+### Bug Fixes
+
+* **app:** wrap layout children ([4bba4af](https://github.com/dargmuesli/creal/commit/4bba4af91215cbeda09847895a61a02b1f6c1d3c))
+
+
+### Features
+
+* **app:** use site name for schema ([5886abd](https://github.com/dargmuesli/creal/commit/5886abdddfc6cbf3efe127d392ac85de50acadbe))
+
 # [1.11.0](https://github.com/dargmuesli/creal/compare/1.10.0...1.11.0) (2023-08-23)
 
 
