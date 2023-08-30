@@ -22,7 +22,7 @@ test.describe('a11y', () => {
     await PAGE_READY({ page })
     const accessibilityScanResults = await new AxeBuilder({ page }).analyze()
     expect(accessibilityScanResults.violations.length).toEqual(
-      process.env.NODE_ENV === 'production' ? 3 : 4,
+      process.env.NODE_ENV === 'production' ? 2 : 3,
     ) // TODO: get rid of all violations
   })
 })
