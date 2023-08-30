@@ -40,8 +40,8 @@ importers:
         specifier: 4.7.3
         version: 4.7.3(playwright-core@1.37.1)
       '@dargmuesli/nuxt-vio':
-        specifier: 3.2.3
-        version: 3.2.3(@nuxt/devtools@0.8.0)(@unhead/vue@1.3.9)(graphql@16.8.0)(nuxt@3.6.5)(postcss@8.4.28)(tailwindcss@3.3.3)(ts-node@10.9.1)(typescript@5.2.2)(vite@4.4.9)(vue@3.3.4)(webpack@5.88.2)
+        specifier: 3.2.5
+        version: 3.2.5(@nuxt/devtools@0.8.0)(@unhead/vue@1.3.9)(graphql@16.8.0)(nuxt@3.6.5)(playwright-core@1.37.1)(postcss@8.4.28)(tailwindcss@3.3.3)(ts-node@10.9.1)(typescript@5.2.2)(vite@4.4.9)(vue@3.3.4)(webpack@5.88.2)
       '@graphql-codegen/cli':
         specifier: 5.0.0
         version: 5.0.0(@types/node@20.5.7)(graphql@16.8.0)
@@ -1741,10 +1741,13 @@ packages:
       - webpack
     dev: true
 
-  /@dargmuesli/nuxt-vio@3.2.3(@nuxt/devtools@0.8.0)(@unhead/vue@1.3.9)(graphql@16.8.0)(nuxt@3.6.5)(postcss@8.4.28)(tailwindcss@3.3.3)(ts-node@10.9.1)(typescript@5.2.2)(vite@4.4.9)(vue@3.3.4)(webpack@5.88.2):
-    resolution: {integrity: sha512-AqTOttMRliwvb8t1rx2COjDh0R36d+uEqtZHE5BPzKQx1NT+4A4CdfOu35j12sD3s50gY9wTXvkfnVU/3n0Cwg==}
+  /@dargmuesli/nuxt-vio@3.2.5(@nuxt/devtools@0.8.0)(@unhead/vue@1.3.9)(graphql@16.8.0)(nuxt@3.6.5)(playwright-core@1.37.1)(postcss@8.4.28)(tailwindcss@3.3.3)(ts-node@10.9.1)(typescript@5.2.2)(vite@4.4.9)(vue@3.3.4)(webpack@5.88.2):
+    resolution: {integrity: sha512-GlH+cfNIXyETlWIrguRnk8nFdUsd7R4gi37gz2iF+blnpANhKpUK48JAfstce5SlYjhI8IwPYDg5djg8uJgRuQ==}
     engines: {node: '20'}
+    peerDependencies:
+      playwright-core: 1.37.1
     dependencies:
+      '@axe-core/playwright': 4.7.3(playwright-core@1.37.1)
       '@dargmuesli/nuxt-cookie-control': 6.4.1(webpack@5.88.2)
       '@http-util/status-i18n': 0.8.1
       '@nuxt/image': 1.0.0-rc.1
@@ -1752,8 +1755,10 @@ packages:
       '@nuxtjs/html-validator': 1.5.2
       '@nuxtjs/i18n': 8.0.0-rc.3(vue@3.3.4)
       '@nuxtjs/tailwindcss': 6.8.0(ts-node@10.9.1)(webpack@5.88.2)
+      '@nuxtseo/module': 2.0.0-beta.19(@nuxt/devtools@0.8.0)(@unhead/vue@1.3.9)(nuxt@3.6.5)(postcss@8.4.28)(vite@4.4.9)(vue@3.3.4)(webpack@5.88.2)
       '@pinia/nuxt': 0.4.11(typescript@5.2.2)(vue@3.3.4)
-      '@tailwindcss/forms': 0.5.5(tailwindcss@3.3.3)
+      '@playwright/test': 1.37.1
+      '@tailwindcss/forms': 0.5.6(tailwindcss@3.3.3)
       '@tailwindcss/typography': 0.5.9(tailwindcss@3.3.3)
       '@types/cookie': 0.5.1
       '@types/lodash-es': 4.17.8
@@ -1769,9 +1774,9 @@ packages:
       is-https: 4.0.0
       jose: 4.14.4
       lodash-es: 4.17.21
-      marked: 7.0.4
-      nuxt-seo-kit-module: 2.0.0-beta.13(@nuxt/devtools@0.8.0)(@unhead/vue@1.3.9)(nuxt@3.6.5)(postcss@8.4.28)(vite@4.4.9)(vue@3.3.4)(webpack@5.88.2)
+      marked: 7.0.5
       pinia: 2.1.6(typescript@5.2.2)(vue@3.3.4)
+      playwright-core: 1.37.1
       sweetalert2: 11.7.27
       vue-gtag: 2.0.1(vue@3.3.4)
       vue-tsc: 1.8.8(typescript@5.2.2)
@@ -3318,11 +3323,28 @@ packages:
       '@intlify/vue-devtools': 9.3.0-beta.26
     dev: true
 
+  /@intlify/core-base@9.3.0-beta.27:
+    resolution: {integrity: sha512-hWI8dZh9rRLxDt1IqPJQnXgMW5KZrNX2Z4uJCN348gsPVvsN8eB/J71TcNJs+C1mfIjQPwtmzUWPNhTewi8QGg==}
+    engines: {node: '>= 16'}
+    dependencies:
+      '@intlify/devtools-if': 9.3.0-beta.27
+      '@intlify/message-compiler': 9.3.0-beta.27
+      '@intlify/shared': 9.3.0-beta.27
+      '@intlify/vue-devtools': 9.3.0-beta.27
+    dev: true
+
   /@intlify/devtools-if@9.3.0-beta.26:
     resolution: {integrity: sha512-N13XwjkT/payWlr8DqBVylsPlwjm4WyaI+eaG+eVdBKPw0yI/9c4zJ3U+/ASRBRuzArVJxALE+LT/cI1NxWGvw==}
     engines: {node: '>= 16'}
     dependencies:
       '@intlify/shared': 9.3.0-beta.26
+    dev: true
+
+  /@intlify/devtools-if@9.3.0-beta.27:
+    resolution: {integrity: sha512-hA0rBQmVy7fN6UGZa+o0DrFTYnUvqD3E2Vqw35XV+huLlMQ2Zui9IpVhWozSy+ov/bdRFIhaxW11DAEG3BHa4w==}
+    engines: {node: '>= 16'}
+    dependencies:
+      '@intlify/shared': 9.3.0-beta.27
     dev: true
 
   /@intlify/eslint-plugin-vue-i18n@3.0.0-next.3(eslint@8.48.0):
@@ -3332,8 +3354,8 @@ packages:
       eslint: ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0
     dependencies:
       '@eslint/eslintrc': 2.1.2
-      '@intlify/core-base': 9.3.0-beta.26
-      '@intlify/message-compiler': 9.3.0-beta.26
+      '@intlify/core-base': 9.3.0-beta.27
+      '@intlify/message-compiler': 9.3.0-beta.27
       debug: 4.3.4
       eslint: 8.48.0
       glob: 10.3.3
@@ -3367,6 +3389,14 @@ packages:
       source-map-js: 1.0.2
     dev: true
 
+  /@intlify/message-compiler@9.3.0-beta.27:
+    resolution: {integrity: sha512-GC8rSbd7V67Zu+a9Z0bpV4riBek11YCURJU50YaEhV4Ub2JHEPtoYxK5r2eIsq/kp+M2hJyGLiC4NJUrGa2VwQ==}
+    engines: {node: '>= 16'}
+    dependencies:
+      '@intlify/shared': 9.3.0-beta.27
+      source-map-js: 1.0.2
+    dev: true
+
   /@intlify/shared@9.3.0-beta.24:
     resolution: {integrity: sha512-AKxJ8s7eKIQWkNaf4wyyoLRwf4puCuQgjSChlDJm5JBEt6T8HGgnYTJLRXu6LD/JACn3Qwu6hM/XRX1c9yvjmQ==}
     engines: {node: '>= 16'}
@@ -3374,6 +3404,11 @@ packages:
 
   /@intlify/shared@9.3.0-beta.26:
     resolution: {integrity: sha512-RpCtfSYIg4tSskrazTr5+WCHyw6qpgwdIxC+x3nCnrPGxyk+en9FoSbadVfx/w7uDTdyhKslEw4d2+qhNc0s4Q==}
+    engines: {node: '>= 16'}
+    dev: true
+
+  /@intlify/shared@9.3.0-beta.27:
+    resolution: {integrity: sha512-hPMsmVCs+ZUVHHU5VORG6LopzXZT7zmyVNqc9OQG80YpA/N4lT/pkJ4B6DTNIsv2C7mwfGM7RdK+0qPki43YgA==}
     engines: {node: '>= 16'}
     dev: true
 
@@ -3416,6 +3451,14 @@ packages:
     dependencies:
       '@intlify/core-base': 9.3.0-beta.26
       '@intlify/shared': 9.3.0-beta.26
+    dev: true
+
+  /@intlify/vue-devtools@9.3.0-beta.27:
+    resolution: {integrity: sha512-XqES1UsntZjyo5sLgmVol42RK7YpAos3bvCh6NbzFMjPZVJf08PYs+KsUvYi2y0D3OSfmXbZSSh4A5s2O9MT0w==}
+    engines: {node: '>= 16'}
+    dependencies:
+      '@intlify/core-base': 9.3.0-beta.27
+      '@intlify/shared': 9.3.0-beta.27
     dev: true
 
   /@intlify/vue-i18n-bridge@0.8.0(vue-i18n@9.3.0-beta.26):
@@ -4162,6 +4205,48 @@ packages:
       - rollup
       - supports-color
       - ts-node
+      - webpack
+    dev: true
+
+  /@nuxtseo/module@2.0.0-beta.19(@nuxt/devtools@0.8.0)(@unhead/vue@1.3.9)(nuxt@3.6.5)(postcss@8.4.28)(vite@4.4.9)(vue@3.3.4)(webpack@5.88.2):
+    resolution: {integrity: sha512-NU0SXaFwrgVahLm0mVE2aVMhR/xB5cSfXm31D8J92MtHdAa6P1pYFUAvIE+iad7S39J3q456DBrgvKOc0KnuZA==}
+    dependencies:
+      '@nuxt/kit': 3.7.0
+      chalk: 5.3.0
+      defu: 6.1.2
+      nuxt-link-checker: 2.1.4(@nuxt/devtools@0.8.0)(nuxt@3.6.5)(postcss@8.4.28)(vite@4.4.9)(vue@3.3.4)(webpack@5.88.2)
+      nuxt-og-image: 2.0.20
+      nuxt-schema-org: 2.2.0(@unhead/vue@1.3.9)
+      nuxt-seo-experiments: 3.1.1
+      nuxt-seo-ui: 0.3.1
+      nuxt-simple-robots: 3.1.2
+      nuxt-simple-sitemap: 3.2.6(nuxt@3.6.5)(vite@4.4.9)
+      nuxt-site-config: 1.0.11
+      nuxt-site-config-kit: 1.0.11
+      ufo: 1.3.0
+    transitivePeerDependencies:
+      - '@nuxt/devtools'
+      - '@unhead/vue'
+      - '@unocss/webpack'
+      - '@vue/composition-api'
+      - async-validator
+      - axios
+      - bufferutil
+      - change-case
+      - drauu
+      - idb-keyval
+      - jwt-decode
+      - nprogress
+      - nuxt
+      - postcss
+      - qrcode
+      - rollup
+      - sortablejs
+      - supports-color
+      - universal-cookie
+      - utf-8-validate
+      - vite
+      - vue
       - webpack
     dev: true
 
@@ -5166,8 +5251,8 @@ packages:
       tslib: 2.6.2
     dev: true
 
-  /@tailwindcss/forms@0.5.5(tailwindcss@3.3.3):
-    resolution: {integrity: sha512-03sXK1DcPt44GZ0Yg6AcAfQln89IKdbE79g2OwoKqBm1ukaadLO2AH3EiB3mXHeQnxa3tzm7eE0x7INXSjbuug==}
+  /@tailwindcss/forms@0.5.6(tailwindcss@3.3.3):
+    resolution: {integrity: sha512-Fw+2BJ0tmAwK/w01tEFL5TiaJBX1NLT1/YbWgvm7ws3Qcn11kiXxzNTEQDMs5V3mQemhB56l3u0i9dwdzSQldA==}
     peerDependencies:
       tailwindcss: '>=3.0.0 || >= 3.0.0-alpha.1'
     dependencies:
@@ -7132,7 +7217,7 @@ packages:
     resolution: {integrity: sha512-gxGWBrTT1JuMx6R+o5PTXMmUnhnVzLQ9SNutD4YqKtI6ap897t3tKECYla6gCWEkplXnlNybEkZg9GEGxKFCgw==}
     dependencies:
       pascal-case: 3.1.2
-      tslib: 2.4.1
+      tslib: 2.6.2
     dev: true
 
   /camelcase-css@2.0.1:
@@ -7195,7 +7280,7 @@ packages:
     resolution: {integrity: sha512-ds37W8CytHgwnhGGTi88pcPyR15qoNkOpYwmMMfnWqqWgESapLqvDx6huFjQ5vqWSn2Z06173XNA7LtMOeUh1A==}
     dependencies:
       no-case: 3.0.4
-      tslib: 2.4.1
+      tslib: 2.6.2
       upper-case-first: 2.0.2
     dev: true
 
@@ -7606,7 +7691,7 @@ packages:
     resolution: {integrity: sha512-I2hSBi7Vvs7BEuJDr5dDHfzb/Ruj3FyvFyh7KLilAjNQw3Be+xgqUBA2W6scVEcL0hL1dwPRtIqEPVUCKkSsyQ==}
     dependencies:
       no-case: 3.0.4
-      tslib: 2.4.1
+      tslib: 2.6.2
       upper-case: 2.0.2
     dev: true
 
@@ -8352,7 +8437,7 @@ packages:
     resolution: {integrity: sha512-Kv5nKlh6yRrdrGvxeJ2e5y2eRUpkUosIW4A2AS38zwSz27zu7ufDwQPi5Jhs3XAlGNetl3bmnGhQsMtkKJnj3w==}
     dependencies:
       no-case: 3.0.4
-      tslib: 2.4.1
+      tslib: 2.6.2
     dev: true
 
   /dot-prop@5.3.0:
@@ -10099,7 +10184,7 @@ packages:
     resolution: {integrity: sha512-H/vuk5TEEVZwrR0lp2zed9OCo1uAILMlx0JEMgC26rzyJJ3N1v6XkwHHXJQdR2doSjcGPM6OKPYoJgf0plJ11Q==}
     dependencies:
       capital-case: 1.0.4
-      tslib: 2.4.1
+      tslib: 2.6.2
     dev: true
 
   /hex-rgb@4.3.0:
@@ -11635,12 +11720,6 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
-  /marked@7.0.4:
-    resolution: {integrity: sha512-t8eP0dXRJMtMvBojtkcsA7n48BkauktUKzfkPSCq85ZMTJ0v76Rke4DYz01omYpPTUh4p/f7HePgRo3ebG8+QQ==}
-    engines: {node: '>= 16'}
-    hasBin: true
-    dev: true
-
   /marked@7.0.5:
     resolution: {integrity: sha512-lwNAFTfXgqpt/XvK17a/8wY9/q6fcSPZT1aP6QW0u74VwaJF/Z9KbRcX23sWE4tODM+AolJNcUtErTkgOeFP/Q==}
     engines: {node: '>= 16'}
@@ -12137,7 +12216,7 @@ packages:
     resolution: {integrity: sha512-fgAN3jGAh+RoxUGZHTSOLJIqUc2wmoBwGR4tbpNAKmmovFoWq0OdRkb0VkldReO2a2iBT/OEulG9XSUc10r3zg==}
     dependencies:
       lower-case: 2.0.2
-      tslib: 2.4.1
+      tslib: 2.6.2
     dev: true
 
   /node-abi@3.47.0:
@@ -12520,48 +12599,6 @@ packages:
     transitivePeerDependencies:
       - rollup
       - supports-color
-    dev: true
-
-  /nuxt-seo-kit-module@2.0.0-beta.13(@nuxt/devtools@0.8.0)(@unhead/vue@1.3.9)(nuxt@3.6.5)(postcss@8.4.28)(vite@4.4.9)(vue@3.3.4)(webpack@5.88.2):
-    resolution: {integrity: sha512-B2tgFOGdNhrp6m7saaq3HN6tUJjXCKiWuqbMmB9MT88aLAm6POOcwUcM2fznnc/QerP4gXFoWNMjmkWJfO0EHw==}
-    dependencies:
-      '@nuxt/kit': 3.7.0
-      chalk: 5.3.0
-      defu: 6.1.2
-      nuxt-link-checker: 2.1.4(@nuxt/devtools@0.8.0)(nuxt@3.6.5)(postcss@8.4.28)(vite@4.4.9)(vue@3.3.4)(webpack@5.88.2)
-      nuxt-og-image: 2.0.20
-      nuxt-schema-org: 2.2.0(@unhead/vue@1.3.9)
-      nuxt-seo-experiments: 3.1.1
-      nuxt-seo-ui: 0.3.1
-      nuxt-simple-robots: 3.1.2
-      nuxt-simple-sitemap: 3.2.6(nuxt@3.6.5)(vite@4.4.9)
-      nuxt-site-config: 1.0.11
-      nuxt-site-config-kit: 1.0.11
-      ufo: 1.3.0
-    transitivePeerDependencies:
-      - '@nuxt/devtools'
-      - '@unhead/vue'
-      - '@unocss/webpack'
-      - '@vue/composition-api'
-      - async-validator
-      - axios
-      - bufferutil
-      - change-case
-      - drauu
-      - idb-keyval
-      - jwt-decode
-      - nprogress
-      - nuxt
-      - postcss
-      - qrcode
-      - rollup
-      - sortablejs
-      - supports-color
-      - universal-cookie
-      - utf-8-validate
-      - vite
-      - vue
-      - webpack
     dev: true
 
   /nuxt-seo-ui@0.3.1:
@@ -13072,7 +13109,7 @@ packages:
     resolution: {integrity: sha512-RXlj7zCYokReqWpOPH9oYivUzLYZ5vAPIfEmCTNViosC78F8F0H9y7T7gG2M39ymgutxF5gcFEsyZQSph9Bp3A==}
     dependencies:
       dot-case: 3.0.4
-      tslib: 2.4.1
+      tslib: 2.6.2
     dev: true
 
   /parent-module@1.0.1:
@@ -13157,14 +13194,14 @@ packages:
     resolution: {integrity: sha512-uWlGT3YSnK9x3BQJaOdcZwrnV6hPpd8jFH1/ucpiLRPh/2zCVJKS19E4GvYHvaCcACn3foXZ0cLB9Wrx1KGe5g==}
     dependencies:
       no-case: 3.0.4
-      tslib: 2.4.1
+      tslib: 2.6.2
     dev: true
 
   /path-case@3.0.4:
     resolution: {integrity: sha512-qO4qCFjXqVTrcbPt/hQfhTQ+VhFsqNKOPtytgNKkKxSoEp3XPUQ8ObFuePylOIok5gjn69ry8XiULxCwot3Wfg==}
     dependencies:
       dot-case: 3.0.4
-      tslib: 2.4.1
+      tslib: 2.6.2
     dev: true
 
   /path-exists@4.0.0:
@@ -14601,7 +14638,7 @@ packages:
     resolution: {integrity: sha512-8LS0JInaQMCRoQ7YUytAo/xUu5W2XnQxV2HI/6uM6U7CITS1RqPElr30V6uIqyMKM9lJGRVFy5/4CuzcixNYSg==}
     dependencies:
       no-case: 3.0.4
-      tslib: 2.4.1
+      tslib: 2.6.2
       upper-case-first: 2.0.2
     dev: true
 
@@ -14824,7 +14861,7 @@ packages:
     resolution: {integrity: sha512-LAOh4z89bGQvl9pFfNF8V146i7o7/CqFPbqzYgP+yYzDIDeS9HaNFtXABamRW+AQzEVODcvE79ljJ+8a9YSdMg==}
     dependencies:
       dot-case: 3.0.4
-      tslib: 2.4.1
+      tslib: 2.6.2
     dev: true
 
   /socks-proxy-agent@5.0.1:
@@ -15045,6 +15082,7 @@ packages:
 
   /string_decoder@1.3.0:
     resolution: {integrity: sha512-hkRX8U1WjJFd8LsDJ2yQ/wWWxaopEsABU1XfkM8A+j0+85JAGppt16cr1Whg6KIbb4okU6Mql6BOj+uup/wKeA==}
+    requiresBuild: true
     dependencies:
       safe-buffer: 5.2.1
     dev: true
@@ -16634,7 +16672,7 @@ packages:
       vue-router:
         optional: true
     dependencies:
-      '@intlify/shared': 9.3.0-beta.26
+      '@intlify/shared': 9.3.0-beta.27
       '@intlify/vue-i18n-bridge': 0.8.0(vue-i18n@9.3.0-beta.26)
       '@intlify/vue-router-bridge': 0.8.0(vue@3.3.4)
       ufo: 1.3.0
