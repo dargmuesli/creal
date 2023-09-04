@@ -18,9 +18,7 @@
       <!-- eslint-disable vue/no-v-html -->
       <div
         class="vio-prose-fullwidth p-8"
-        v-html="
-          marked(faqItem.attributes.answer, { mangle: false, headerIds: false })
-        "
+        v-html="marked(faqItem.attributes.answer)"
       />
       <!-- eslint-enable vue/no-v-html -->
     </div>
