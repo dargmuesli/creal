@@ -1,3 +1,10 @@
+## [1.12.1](https://github.com/dargmuesli/creal/compare/1.12.0...1.12.1) (2023-09-06)
+
+
+### Bug Fixes
+
+* **app:** correct schema's person image ([621ee06](https://github.com/dargmuesli/creal/commit/621ee06da95ff3671f21eb7ae53dfbde87edcdbc))
+
 # [1.12.0](https://github.com/dargmuesli/creal/compare/1.11.0...1.12.0) (2023-08-24)
 
 
