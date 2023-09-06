@@ -1,6 +1,5 @@
 <template>
   <div :data-is-loading="isLoading" data-testid="is-loading">
-    <!-- <SchemaOrgDebug /> -->
     <NuxtLayout>
       <div>
         <NuxtLoadingIndicator color="#fff" />
@@ -66,7 +65,7 @@ defineOgImage({
 useSchemaOrg([
   definePerson({
     name: SITE_NAME,
-    logo: '/__og_image__/og.png',
+    image: '/__og_image__/og.png',
     // sameAs: ['https://twitter.com/company'],
   }),
   defineWebSite({
