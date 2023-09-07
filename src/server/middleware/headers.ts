@@ -82,7 +82,7 @@ const getCsp = (host: string): Record<string, Array<string>> => {
 }
 
 export default defineEventHandler((event) => {
-  const host = getHost(event.node.req)
+  const host = getHost(event)
 
   appendHeader(event, 'Content-Security-Policy', getCspAsString(getCsp(host)))
 })

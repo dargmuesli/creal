@@ -24,19 +24,17 @@ export const getS3Client = (isExternal = false) => {
 
 export const proxy = async <T>(
   event: H3Event,
-  f: (req: H3Event) => Promise<T>,
+  f: (event: H3Event) => Promise<T>,
 ) => {
   const config = useRuntimeConfig()
-
-  const { req } = event.node
 
   if (config.public.vio.stagingHost) {
     return await $fetch<ReturnType<typeof f>>(
       getServiceHref({
-        host: getHost(req),
+        host: getHost(event),
         name: 'creal',
         stagingHost: config.public.vio.stagingHost,
-      }) + (req.url ?? ''),
+      }) + (event.node.req.url ?? ''),
     )
   }
 
