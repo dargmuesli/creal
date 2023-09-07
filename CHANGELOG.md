@@ -1,3 +1,10 @@
+## [1.12.4](https://github.com/dargmuesli/creal/compare/1.12.3...1.12.4) (2023-09-07)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @dargmuesli/nuxt-vio to v3.5.1 ([81d114c](https://github.com/dargmuesli/creal/commit/81d114ccc879ce045c8030aae8d3e9b2ffca1be9))
+
 ## [1.12.3](https://github.com/dargmuesli/creal/compare/1.12.2...1.12.3) (2023-09-07)
 
 
