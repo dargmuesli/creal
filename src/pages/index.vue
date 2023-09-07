@@ -56,10 +56,10 @@ definePageMeta({ colorMode: 'dark' })
 
 const localePath = useLocalePath()
 const { t } = useI18n()
+const siteConfig = useSiteConfig()
 
 // data
 const showGreeting = ref(true)
-const title = t('title')
 
 // methods
 const setShowGreeting = ({ save }: { save: boolean }) => {
@@ -94,7 +94,7 @@ useServerHead({
     class: ['overflow-hidden'],
   },
 })
-useHeadDefault({ title })
+useHeadDefault({ title: siteConfig.name })
 </script>
 
 <script lang="ts">
@@ -111,7 +111,6 @@ de:
   player: Player
   start: Start
   suggestions: Vorschläge
-  title: Willkommen!
   welcome: DJ und Event-Organisator,{0}manchmal am Doubletime rappen.
 en:
   creal: cReal
@@ -120,6 +119,5 @@ en:
   player: Player
   start: Start
   suggestions: Suggestions
-  title: Welcome!
   welcome: DJ and event organizer,{0}occasionally rapping double times.
 </i18n>
