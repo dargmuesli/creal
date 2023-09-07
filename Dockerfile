@@ -185,6 +185,7 @@ ENV CI=true
 WORKDIR /srv/app/
 
 COPY --from=build /srv/app/src/.output ./.output
+COPY --from=build /srv/app/src/package.json ./package.json
 COPY --from=lint /srv/app/package.json /tmp/package.json
 COPY --from=test-e2e-dev /srv/app/package.json /tmp/package.json
 COPY --from=test-e2e-prod /srv/app/package.json /tmp/package.json
@@ -218,6 +219,6 @@ COPY ./sqitch/ /srv/app/sqitch/
 COPY ./docker/entrypoint.sh /usr/local/bin/
 
 ENTRYPOINT ["entrypoint.sh"]
-CMD ["node", ".output/server/index.mjs"]
+CMD ["pnpm", "run", "start"]
 HEALTHCHECK --interval=10s CMD wget -O /dev/null http://localhost:3001/api/healthcheck || exit 1
 EXPOSE 3001
