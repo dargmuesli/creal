@@ -211,7 +211,8 @@ RUN apt-get update \
         libdbd-pg-perl postgresql-client sqitch \
         wget \
     && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/* \
+    && corepack enable
 
 COPY --from=collect /srv/app/ ./
 
