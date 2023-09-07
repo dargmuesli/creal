@@ -1,3 +1,11 @@
+## [1.12.2](https://github.com/dargmuesli/creal/compare/1.12.1...1.12.2) (2023-09-07)
+
+
+### Bug Fixes
+
+* **app:** correct open graph image i18n ([32091bb](https://github.com/dargmuesli/creal/commit/32091bb930e1d981e2f4c8d04802a003d3f2e1c4))
+* **layout:** use single child element ([f02de0c](https://github.com/dargmuesli/creal/commit/f02de0cf151011f92a3f684033c6468a9d923f40))
+
 ## [1.12.1](https://github.com/dargmuesli/creal/compare/1.12.0...1.12.1) (2023-09-06)
 
 
