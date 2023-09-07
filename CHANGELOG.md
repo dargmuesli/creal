@@ -1,3 +1,10 @@
+## [1.12.5](https://github.com/dargmuesli/creal/compare/1.12.4...1.12.5) (2023-09-07)
+
+
+### Bug Fixes
+
+* **docker:** correct start command ([686dfc5](https://github.com/dargmuesli/creal/commit/686dfc5f5ed7c86fef0eed15c15e580f033905f5))
+
 ## [1.12.4](https://github.com/dargmuesli/creal/compare/1.12.3...1.12.4) (2023-09-07)
 
 
