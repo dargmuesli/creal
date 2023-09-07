@@ -1,3 +1,10 @@
+## [1.12.6](https://github.com/dargmuesli/creal/compare/1.12.5...1.12.6) (2023-09-07)
+
+
+### Bug Fixes
+
+* **docker:** enable corepack for production ([9555419](https://github.com/dargmuesli/creal/commit/9555419fcf6c1f52948473479cc8086195a1cf10))
+
 ## [1.12.5](https://github.com/dargmuesli/creal/compare/1.12.4...1.12.5) (2023-09-07)
 
 
