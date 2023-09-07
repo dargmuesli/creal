@@ -1,3 +1,10 @@
+## [1.13.0](https://github.com/dargmuesli/creal/compare/1.12.6...1.13.0) (2023-09-07)
+
+
+### Features
+
+* **index:** use site configuration ([4036990](https://github.com/dargmuesli/creal/commit/40369903730022fa263a23e0e0ff6477123ed64f))
+
 ## [1.12.6](https://github.com/dargmuesli/creal/compare/1.12.5...1.12.6) (2023-09-07)
 
 
