@@ -40,8 +40,8 @@ importers:
         specifier: 4.7.3
         version: 4.7.3(playwright-core@1.37.1)
       '@dargmuesli/nuxt-vio':
-        specifier: 3.5.1
-        version: 3.5.1(@nuxt/devtools@0.8.3)(@unhead/shared@1.5.3)(graphql@16.8.0)(nuxt@3.7.1)(playwright-core@1.37.1)(postcss@8.4.29)(tailwindcss@3.3.3)(ts-node@10.9.1)(typescript@5.2.2)(unhead@1.5.3)(vite@4.4.9)(vue@3.3.4)(webpack@5.88.2)
+        specifier: 3.6.0
+        version: 3.6.0(@nuxt/devtools@0.8.3)(@unhead/shared@1.5.3)(graphql@16.8.0)(nuxt@3.7.1)(playwright-core@1.37.1)(postcss@8.4.29)(tailwindcss@3.3.3)(ts-node@10.9.1)(typescript@5.2.2)(unhead@1.5.3)(vite@4.4.9)(vue@3.3.4)(webpack@5.88.2)
       '@graphql-codegen/cli':
         specifier: 5.0.0
         version: 5.0.0(@types/node@20.5.9)(graphql@16.8.0)(typescript@5.2.2)
@@ -1743,8 +1743,8 @@ packages:
       - webpack
     dev: true
 
-  /@dargmuesli/nuxt-vio@3.5.1(@nuxt/devtools@0.8.3)(@unhead/shared@1.5.3)(graphql@16.8.0)(nuxt@3.7.1)(playwright-core@1.37.1)(postcss@8.4.29)(tailwindcss@3.3.3)(ts-node@10.9.1)(typescript@5.2.2)(unhead@1.5.3)(vite@4.4.9)(vue@3.3.4)(webpack@5.88.2):
-    resolution: {integrity: sha512-GHOsCeHeGpX5Mj1JK5WpSdlFHDUifDGzETmqoezUBDkxT/K8pKJK9DMWAEO7dRCJd9ZnfB97lTFwWJy7jTn6Bw==}
+  /@dargmuesli/nuxt-vio@3.6.0(@nuxt/devtools@0.8.3)(@unhead/shared@1.5.3)(graphql@16.8.0)(nuxt@3.7.1)(playwright-core@1.37.1)(postcss@8.4.29)(tailwindcss@3.3.3)(ts-node@10.9.1)(typescript@5.2.2)(unhead@1.5.3)(vite@4.4.9)(vue@3.3.4)(webpack@5.88.2):
+    resolution: {integrity: sha512-518Gp1hzNC0GNX3YxeafMRcmaEqb5DoLtREWBcY5AYYTUg/ywPk7ljiCvh6eUkvZW+WVA4doCmTggZ99YSG+8Q==}
     engines: {node: '20'}
     peerDependencies:
       playwright-core: 1.37.1
@@ -1774,7 +1774,7 @@ packages:
       cookie: 0.5.0
       dayjs: 2.0.0-alpha.4
       is-https: 4.0.0
-      jiti: 1.19.3
+      jiti: 1.20.0
       jose: 4.14.6
       lodash-es: 4.17.21
       pinia: 2.1.6(typescript@5.2.2)(vue@3.3.4)
@@ -7076,7 +7076,7 @@ packages:
       path-case: 3.0.4
       sentence-case: 3.0.4
       snake-case: 3.0.4
-      tslib: 2.4.1
+      tslib: 2.6.2
     dev: true
 
   /chardet@0.7.0:
@@ -10395,7 +10395,7 @@ packages:
   /is-lower-case@2.0.2:
     resolution: {integrity: sha512-bVcMJy4X5Og6VZfdOZstSexlEy20Sr0k/p/b2IlQJlfdKAQuMpiv5w2Ccxb8sKdRUNAG1PnHVHjFSdRDVS6NlQ==}
     dependencies:
-      tslib: 2.4.1
+      tslib: 2.6.2
     dev: true
 
   /is-module@1.0.0:
@@ -10542,7 +10542,7 @@ packages:
   /is-upper-case@2.0.2:
     resolution: {integrity: sha512-44pxmxAvnnAOwBg4tHPnkfvgjPwbc5QIsSstNU+YcJ1ovxVzCWpSGosPJOZh/a1tdl81fbgnLc9LLv+x2ywbPQ==}
     dependencies:
-      tslib: 2.4.1
+      tslib: 2.6.2
     dev: true
 
   /is-weakref@1.0.2:
@@ -10612,6 +10612,11 @@ packages:
 
   /jiti@1.19.3:
     resolution: {integrity: sha512-5eEbBDQT/jF1xg6l36P+mWGGoH9Spuy0PCdSr2dtWRDGC6ph/w9ZCL4lmESW8f8F7MwT3XKescfP0wnZWAKL9w==}
+    hasBin: true
+    dev: true
+
+  /jiti@1.20.0:
+    resolution: {integrity: sha512-3TV69ZbrvV6U5DfQimop50jE9Dl6J8O1ja1dvBbMba/sZ3YBEQqJ2VZRoQPVnhlzjNtU1vaXRZVrVjU4qtm8yA==}
     hasBin: true
     dev: true
 
@@ -10963,7 +10968,7 @@ packages:
       get-port-please: 3.1.1
       h3: 1.8.1
       http-shutdown: 1.2.2
-      jiti: 1.19.3
+      jiti: 1.20.0
       mlly: 1.4.2
       node-forge: 1.3.1
       pathe: 1.1.1
@@ -11181,13 +11186,13 @@ packages:
   /lower-case-first@2.0.2:
     resolution: {integrity: sha512-EVm/rR94FJTZi3zefZ82fLWab+GX14LJN4HrWBcuo6Evmsl9hEfnqxgcHCKb9q+mNf6EVdsjx/qucYFIIB84pg==}
     dependencies:
-      tslib: 2.4.1
+      tslib: 2.6.2
     dev: true
 
   /lower-case@2.0.2:
     resolution: {integrity: sha512-7fm3l3NAF9WfN6W3JOmf5drwpVqX78JtoGJ3A6W0a6ZnldM41w2fV5D490psKFTpMds8TJse/eHLFFsNHHjHgg==}
     dependencies:
-      tslib: 2.4.1
+      tslib: 2.6.2
     dev: true
 
   /lru-cache@10.0.1:
@@ -14559,7 +14564,7 @@ packages:
   /sponge-case@1.0.1:
     resolution: {integrity: sha512-dblb9Et4DAtiZ5YSUZHLl4XhH4uK80GhAZrVXdN4O2P4gQ40Wa5UIOPUHlA/nFd2PLblBZWUioLMMAVrgpoYcA==}
     dependencies:
-      tslib: 2.4.1
+      tslib: 2.6.2
     dev: true
 
   /ssri@10.0.5:
@@ -14688,6 +14693,7 @@ packages:
 
   /string_decoder@1.3.0:
     resolution: {integrity: sha512-hkRX8U1WjJFd8LsDJ2yQ/wWWxaopEsABU1XfkM8A+j0+85JAGppt16cr1Whg6KIbb4okU6Mql6BOj+uup/wKeA==}
+    requiresBuild: true
     dependencies:
       safe-buffer: 5.2.1
     dev: true
@@ -14994,7 +15000,7 @@ packages:
   /swap-case@2.0.2:
     resolution: {integrity: sha512-kc6S2YS/2yXbtkSMunBtKdah4VFETZ8Oh6ONSmSd9bRxhqTrtARUCBUiWXH3xVPpvR7tz2CSnkuXVE42EcGnMw==}
     dependencies:
-      tslib: 2.4.1
+      tslib: 2.6.2
     dev: true
 
   /sweetalert2@11.7.27:
@@ -15244,7 +15250,7 @@ packages:
   /title-case@3.0.3:
     resolution: {integrity: sha512-e1zGYRvbffpcHIrnuqT0Dh+gEJtDaxDSoG4JAIpq4oDFyooziLBIiYQv0GBT4FUAnUop5uZ1hiIAj7oAF6sOCA==}
     dependencies:
-      tslib: 2.4.1
+      tslib: 2.6.2
     dev: true
 
   /titleize@3.0.0:
@@ -15553,7 +15559,7 @@ packages:
     dependencies:
       '@antfu/utils': 0.7.6
       defu: 6.1.2
-      jiti: 1.19.3
+      jiti: 1.20.0
       mlly: 1.4.2
     dev: true
 
@@ -15845,13 +15851,13 @@ packages:
   /upper-case-first@2.0.2:
     resolution: {integrity: sha512-514ppYHBaKwfJRK/pNC6c/OxfGa0obSnAl106u97Ed0I625Nin96KAjttZF6ZL3e1XLtphxnqrOi9iWgm+u+bg==}
     dependencies:
-      tslib: 2.4.1
+      tslib: 2.6.2
     dev: true
 
   /upper-case@2.0.2:
     resolution: {integrity: sha512-KgdgDGJt2TpuwBUIjgG6lzw2GWFRCW9Qkfkiv0DxqHHLYJHmtmdUIKcZd8rHgFSjopVTlw6ggzCm1b8MFQwikg==}
     dependencies:
-      tslib: 2.4.1
+      tslib: 2.6.2
     dev: true
 
   /uqr@0.1.2:
