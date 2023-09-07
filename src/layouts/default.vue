@@ -3,6 +3,7 @@
     <div class="flex min-h-screen flex-col pb-32">
       <LayoutHeader />
       <main class="flex flex-1 overflow-hidden">
+        <NuxtLoadingIndicator color="#fff" />
         <slot />
       </main>
     </div>

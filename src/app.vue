@@ -1,10 +1,8 @@
 <template>
   <div :data-is-loading="isLoading" data-testid="is-loading">
     <NuxtLayout>
-      <div>
-        <NuxtLoadingIndicator color="#fff" />
-        <NuxtPage />
-      </div>
+      <!-- `NuxtLayout` can't have mulitple child nodes (https://github.com/nuxt/nuxt/issues/21759) -->
+      <NuxtPage />
     </NuxtLayout>
   </div>
 </template>
