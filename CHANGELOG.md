@@ -1,3 +1,10 @@
+## [1.12.3](https://github.com/dargmuesli/creal/compare/1.12.2...1.12.3) (2023-09-07)
+
+
+### Bug Fixes
+
+* **headers:** correct event usage ([6047d0b](https://github.com/dargmuesli/creal/commit/6047d0b2ef339990439274750b1611e2ad6d65e1))
+
 ## [1.12.2](https://github.com/dargmuesli/creal/compare/1.12.1...1.12.2) (2023-09-07)
 
 
