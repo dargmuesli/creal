@@ -55,9 +55,6 @@ RUN pnpm install --offline
 
 FROM node:20.5.1-slim@sha256:75404fc5825f24222276501c09944a5bee8ed04517dede5a9934f1654ca84caf AS build
 
-ARG NUXT_PUBLIC_STACK_DOMAIN=jonas-thelemann.de
-ENV NUXT_PUBLIC_STACK_DOMAIN=${NUXT_PUBLIC_STACK_DOMAIN}
-
 # The `CI` environment variable must be set for pnpm to run in headless mode
 ENV CI=true
 

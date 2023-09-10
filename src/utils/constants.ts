@@ -1,7 +1,7 @@
 export const BASE_URL =
-  (process.env.NUXT_PUBLIC_STACK_DOMAIN ? 'https' : 'http') +
+  (process.env.NUXT_PUBLIC_HOST ? 'https' : 'http') +
   '://creal.' +
-  (process.env.NUXT_PUBLIC_STACK_DOMAIN ||
+  (process.env.NUXT_PUBLIC_HOST ||
     `${process.env.HOST || 'localhost'}:${
       !process.env.NODE_ENV || process.env.NODE_ENV === 'development'
         ? '3000'
