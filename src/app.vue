@@ -11,7 +11,6 @@
 const { $dayjs } = useNuxtApp()
 const { t, locale } = useI18n()
 const cookieControl = useCookieControl()
-const siteConfig = useSiteConfig()
 
 const loadingId = Math.random()
 const loadingIds = useState('loadingIds', () => [loadingId])
@@ -62,18 +61,5 @@ defineOgImage({
   // component: props.ogImageComponent,
   description: t('globalSeoSiteDescription'),
 })
-useSchemaOrg([
-  definePerson({
-    name: siteConfig.name,
-    image: '/__og_image__/og.png',
-    // sameAs: ['https://twitter.com/company'],
-  }),
-  defineWebSite({
-    description: t('globalSeoSiteDescription'),
-    inLanguage: locale,
-    name: siteConfig.name,
-  }),
-  defineWebPage(),
-])
 init()
 </script>

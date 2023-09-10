@@ -18,6 +18,12 @@ export default defineNuxtConfig(
           },
         },
       },
+      site: {
+        identity: {
+          type: 'Person',
+        },
+        twitter: '@dargmuesli',
+      },
     },
     VIO_NUXT_BASE_CONFIG({
       baseUrl: BASE_URL,

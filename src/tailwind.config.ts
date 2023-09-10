@@ -1,11 +1,10 @@
-import type { Config } from 'tailwindcss'
+import type { ModuleOptions } from '@nuxtjs/tailwindcss'
 import type { PluginAPI } from 'tailwindcss/types/config'
 import colors from 'tailwindcss/colors'
 
 const { gray, yellow } = colors
 
 export default {
-  content: [],
   plugins: [
     ({ addComponents }: PluginAPI) => {
       addComponents({
@@ -27,4 +26,4 @@ export default {
       },
     },
   },
-} as Config
+} as ModuleOptions['config']
