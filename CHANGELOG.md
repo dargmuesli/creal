@@ -1,3 +1,11 @@
+## [1.14.0](https://github.com/dargmuesli/creal/compare/1.13.0...1.14.0) (2023-09-10)
+
+
+### Features
+
+* **environment:** rework variables ([5101fcd](https://github.com/dargmuesli/creal/commit/5101fcdae6b311cb2fd60a976563c085126390f9))
+* **site:** add identity and twitter ([911ebe7](https://github.com/dargmuesli/creal/commit/911ebe7edad9af60c1e03c6e55ef8cf176526fd6))
+
 ## [1.13.0](https://github.com/dargmuesli/creal/compare/1.12.6...1.13.0) (2023-09-07)
 
 
