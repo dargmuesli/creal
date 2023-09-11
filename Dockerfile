@@ -1,7 +1,7 @@
 #############
 # Serve Nuxt in development mode.
 
-FROM node:20.6.0-slim@sha256:e1eb4a77df4da741c10c17497cec32898692d849d4b4c5a7d214b13604b9fa7d AS development
+FROM node:20.6.1-slim@sha256:2dab2d0e8813ee1601f8d25a8e4aa5530ffc4d0cc16600ec4fd080263b5b1ccd AS development
 
 # The `CI` environment variable must be set for pnpm to run in headless mode
 ENV CI=true
@@ -33,7 +33,7 @@ EXPOSE 3000
 ########################
 # Prepare Nuxt.
 
-FROM node:20.6.0-slim@sha256:e1eb4a77df4da741c10c17497cec32898692d849d4b4c5a7d214b13604b9fa7d AS prepare
+FROM node:20.6.1-slim@sha256:2dab2d0e8813ee1601f8d25a8e4aa5530ffc4d0cc16600ec4fd080263b5b1ccd AS prepare
 
 # The `CI` environment variable must be set for pnpm to run in headless mode
 ENV CI=true
@@ -53,7 +53,7 @@ RUN pnpm install --offline
 ########################
 # Build Nuxt.
 
-FROM node:20.6.0-slim@sha256:e1eb4a77df4da741c10c17497cec32898692d849d4b4c5a7d214b13604b9fa7d AS build
+FROM node:20.6.1-slim@sha256:2dab2d0e8813ee1601f8d25a8e4aa5530ffc4d0cc16600ec4fd080263b5b1ccd AS build
 
 # The `CI` environment variable must be set for pnpm to run in headless mode
 ENV CI=true
@@ -70,7 +70,7 @@ RUN corepack enable && \
 ########################
 # Nuxt: lint
 
-FROM node:20.6.0-slim@sha256:e1eb4a77df4da741c10c17497cec32898692d849d4b4c5a7d214b13604b9fa7d AS lint
+FROM node:20.6.1-slim@sha256:2dab2d0e8813ee1601f8d25a8e4aa5530ffc4d0cc16600ec4fd080263b5b1ccd AS lint
 
 # The `CI` environment variable must be set for pnpm to run in headless mode
 ENV CI=true
@@ -174,7 +174,7 @@ RUN pnpm --dir src run test:e2e:prod
 #######################
 # Collect build, lint and test results.
 
-FROM node:20.6.0-slim@sha256:e1eb4a77df4da741c10c17497cec32898692d849d4b4c5a7d214b13604b9fa7d AS collect
+FROM node:20.6.1-slim@sha256:2dab2d0e8813ee1601f8d25a8e4aa5530ffc4d0cc16600ec4fd080263b5b1ccd AS collect
 
 # The `CI` environment variable must be set for pnpm to run in headless mode
 ENV CI=true
@@ -192,7 +192,7 @@ COPY --from=test-e2e-prod /srv/app/package.json /tmp/package.json
 # Provide a web server.
 # Requires node (cannot be static) as the server acts as backend too.
 
-FROM node:20.6.0-slim@sha256:e1eb4a77df4da741c10c17497cec32898692d849d4b4c5a7d214b13604b9fa7d AS production
+FROM node:20.6.1-slim@sha256:2dab2d0e8813ee1601f8d25a8e4aa5530ffc4d0cc16600ec4fd080263b5b1ccd AS production
 
 # The `CI` environment variable must be set for pnpm to run in headless mode
 ENV CI=true
