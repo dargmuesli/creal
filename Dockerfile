@@ -273,6 +273,6 @@ COPY ./sqitch/ ./sqitch/
 COPY ./docker/entrypoint.sh /usr/local/bin/
 
 ENTRYPOINT ["entrypoint.sh"]
-CMD ["pnpm", "run", "start"]
+CMD ["pnpm", "run", "start:node"]
 HEALTHCHECK --interval=10s CMD wget -O /dev/null http://localhost:3000/api/healthcheck || exit 1
 EXPOSE 3000
