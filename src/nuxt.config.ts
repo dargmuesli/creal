@@ -1,7 +1,10 @@
-import { VIO_NUXT_BASE_CONFIG } from '@dargmuesli/nuxt-vio/utils/constants'
+import {
+  VIO_NUXT_BASE_CONFIG,
+  SITE_URL,
+} from '@dargmuesli/nuxt-vio/utils/constants'
 import { defu } from 'defu'
 
-import { BASE_URL, SITE_NAME } from './utils/constants'
+import { SITE_NAME } from './utils/constants'
 
 export default defineNuxtConfig(
   defu(
@@ -26,7 +29,7 @@ export default defineNuxtConfig(
       },
     },
     VIO_NUXT_BASE_CONFIG({
-      baseUrl: BASE_URL,
+      siteUrl: SITE_URL,
       siteName: SITE_NAME,
       stagingHost: 'jonas-thelemann.de',
     }),
