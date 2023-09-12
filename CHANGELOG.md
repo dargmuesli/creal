@@ -1,3 +1,10 @@
+## [1.14.2](https://github.com/dargmuesli/creal/compare/1.14.1...1.14.2) (2023-09-12)
+
+
+### Bug Fixes
+
+* **docker:** correct start script ([020b201](https://github.com/dargmuesli/creal/commit/020b2019afc23fc68426dd0b75dde2fe49ea89fe))
+
 ## [1.14.1](https://github.com/dargmuesli/creal/compare/1.14.0...1.14.1) (2023-09-12)
 
 
