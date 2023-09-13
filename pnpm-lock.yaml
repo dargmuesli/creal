@@ -28,14 +28,14 @@ importers:
         version: 1.37.1
     devDependencies:
       '@aws-sdk/client-s3':
-        specifier: 3.410.0
-        version: 3.410.0
+        specifier: 3.412.0
+        version: 3.412.0
       '@aws-sdk/credential-providers':
         specifier: 3.410.0
         version: 3.410.0
       '@aws-sdk/s3-request-presigner':
-        specifier: 3.410.0
-        version: 3.410.0
+        specifier: 3.412.0
+        version: 3.412.0
       '@dargmuesli/nuxt-vio':
         specifier: 5.0.2
         version: 5.0.2(@nuxt/devtools@0.8.3)(@types/node@20.4.7)(@unhead/shared@1.7.0)(graphql@16.8.0)(playwright-core@1.37.1)(postcss-html@1.5.0)(postcss@8.4.29)(ts-node@10.9.1)(typescript@5.2.2)(unhead@1.7.0)(vite@4.4.9)(webpack@5.88.2)
@@ -266,8 +266,8 @@ packages:
       - aws-crt
     dev: true
 
-  /@aws-sdk/client-s3@3.410.0:
-    resolution: {integrity: sha512-9pInvFl3xgk+CnbHFZVk0wAicZUiokIGQ05e/ZDBHjiWK5ph/XeQ4CCTuh7JxT0yABNhua8/6txsyq/uNXOzoA==}
+  /@aws-sdk/client-s3@3.412.0:
+    resolution: {integrity: sha512-sNrlx9sSBmFUCqMgTznwk9Fee3PJat0nZ3RIDR5Crhsld/eexxrqb6TYKsxzFfBfXTL/oPh+/S5driRV2xsB8A==}
     engines: {node: '>=14.0.0'}
     dependencies:
       '@aws-crypto/sha1-browser': 3.0.0
@@ -286,7 +286,7 @@ packages:
       '@aws-sdk/middleware-signing': 3.410.0
       '@aws-sdk/middleware-ssec': 3.410.0
       '@aws-sdk/middleware-user-agent': 3.410.0
-      '@aws-sdk/signature-v4-multi-region': 3.410.0
+      '@aws-sdk/signature-v4-multi-region': 3.412.0
       '@aws-sdk/types': 3.410.0
       '@aws-sdk/util-endpoints': 3.410.0
       '@aws-sdk/util-user-agent-browser': 3.410.0
@@ -325,7 +325,6 @@ packages:
       fast-xml-parser: 4.2.5
       tslib: 2.6.2
     transitivePeerDependencies:
-      - '@aws-sdk/signature-v4-crt'
       - aws-crt
     dev: true
 
@@ -663,11 +662,11 @@ packages:
       tslib: 2.6.2
     dev: true
 
-  /@aws-sdk/s3-request-presigner@3.410.0:
-    resolution: {integrity: sha512-In2/XPdPA874XH0MdhLJ7tG74Yay/ATCMpMQcy+summlPhmO1G3BiKMoaDPRks+zJNhgiy6++PlcP93fwDSxcA==}
+  /@aws-sdk/s3-request-presigner@3.412.0:
+    resolution: {integrity: sha512-P51VoH2wC6dPfDnDyUUvrNHM8BOQHjLO1rAK88njCvQjsSCKA/E57jk31pOAzMQb3Sauw0qHL8Y+RbFT9YmIJw==}
     engines: {node: '>=14.0.0'}
     dependencies:
-      '@aws-sdk/signature-v4-multi-region': 3.410.0
+      '@aws-sdk/signature-v4-multi-region': 3.412.0
       '@aws-sdk/types': 3.410.0
       '@aws-sdk/util-format-url': 3.410.0
       '@smithy/middleware-endpoint': 2.0.7
@@ -675,18 +674,11 @@ packages:
       '@smithy/smithy-client': 2.1.4
       '@smithy/types': 2.3.1
       tslib: 2.6.2
-    transitivePeerDependencies:
-      - '@aws-sdk/signature-v4-crt'
     dev: true
 
-  /@aws-sdk/signature-v4-multi-region@3.410.0:
-    resolution: {integrity: sha512-abgcl9/i9frxGUVAfHHWj49UMCFEmzkYwKmV/4kw9MYn6BZ3HKb5M00tBLn9/PcAKfANS7O+qJRiEQT66rmfhg==}
+  /@aws-sdk/signature-v4-multi-region@3.412.0:
+    resolution: {integrity: sha512-ijxOeYpNDuk2T940S9HYcZ1C+wTP9vqp1Cw37zw9whVY2mKV3Vr7i+44D4FQ5HhWULgdwhjD7IctbNxPIPzUZQ==}
     engines: {node: '>=14.0.0'}
-    peerDependencies:
-      '@aws-sdk/signature-v4-crt': ^3.118.0
-    peerDependenciesMeta:
-      '@aws-sdk/signature-v4-crt':
-        optional: true
     dependencies:
       '@aws-sdk/types': 3.410.0
       '@smithy/protocol-http': 3.0.3
@@ -2657,7 +2649,7 @@ packages:
     dependencies:
       graphql: 16.8.0
       lodash.sortby: 4.7.0
-      tslib: 2.5.3
+      tslib: 2.6.2
     dev: true
 
   /@graphql-tools/executor-graphql-ws@1.1.0(graphql@16.8.0):
@@ -2861,7 +2853,7 @@ packages:
       graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
     dependencies:
       graphql: 16.8.0
-      tslib: 2.5.3
+      tslib: 2.6.2
     dev: true
 
   /@graphql-tools/prisma-loader@8.0.1(@types/node@20.4.7)(graphql@16.8.0):
@@ -2920,7 +2912,7 @@ packages:
       '@ardatan/relay-compiler': 12.0.0(graphql@16.8.0)
       '@graphql-tools/utils': 10.0.6(graphql@16.8.0)
       graphql: 16.8.0
-      tslib: 2.5.3
+      tslib: 2.6.2
     transitivePeerDependencies:
       - encoding
       - supports-color
@@ -6771,6 +6763,7 @@ packages:
 
   /base64-js@1.5.1:
     resolution: {integrity: sha512-AKpaYlHn8t4SVbOHCy+b5+KKgvR4vrsD8vbvrbiQJps7fKDTkjkDry6ji0rUJjC0kzbNePLwzxq8iypo41qeWA==}
+    requiresBuild: true
     dev: true
 
   /batch@0.6.1:
@@ -6899,6 +6892,7 @@ packages:
 
   /buffer@5.7.1:
     resolution: {integrity: sha512-EHcyIPBQ4BSGlvjB16k5KgAJ27CIsHY/2JBmCRReo48y9rQ3MaUzWX3KVlBa4U7MyX02HdVj0K7C3WaB3ju7FQ==}
+    requiresBuild: true
     dependencies:
       base64-js: 1.5.1
       ieee754: 1.2.1
@@ -10154,6 +10148,7 @@ packages:
 
   /ieee754@1.2.1:
     resolution: {integrity: sha512-dcyqhDvX1C46lXZcVqCpK+FtMRQVdIMN6/Df5js2zouUsqG7I6sFxitIC+7KYK29KdXOLHdu9zL4sFnoVQnqaA==}
+    requiresBuild: true
     dev: true
 
   /ignore-walk@6.0.3:
@@ -11836,6 +11831,7 @@ packages:
 
   /napi-wasm@1.1.0:
     resolution: {integrity: sha512-lHwIAJbmLSjF9VDRm9GoVOy9AGp3aIvkjv+Kvz9h16QR3uSVYH78PNQUnT2U4X53mhlnV2M7wrhibQ3GHicDmg==}
+    requiresBuild: true
     dev: true
 
   /natural-compare@1.4.0:
