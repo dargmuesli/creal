@@ -37,8 +37,8 @@ importers:
         specifier: 3.410.0
         version: 3.410.0
       '@dargmuesli/nuxt-vio':
-        specifier: 5.0.1
-        version: 5.0.1(@nuxt/devtools@0.8.3)(@types/node@20.4.7)(@unhead/shared@1.7.0)(graphql@16.8.0)(playwright-core@1.37.1)(postcss-html@1.5.0)(postcss@8.4.29)(ts-node@10.9.1)(typescript@5.2.2)(unhead@1.7.0)(vite@4.4.9)(webpack@5.88.2)
+        specifier: 5.0.2
+        version: 5.0.2(@nuxt/devtools@0.8.3)(@types/node@20.4.7)(@unhead/shared@1.7.0)(graphql@16.8.0)(playwright-core@1.37.1)(postcss-html@1.5.0)(postcss@8.4.29)(ts-node@10.9.1)(typescript@5.2.2)(unhead@1.7.0)(vite@4.4.9)(webpack@5.88.2)
       '@graphql-codegen/cli':
         specifier: 5.0.0
         version: 5.0.0(@types/node@20.4.7)(graphql@16.8.0)(typescript@5.2.2)
@@ -1700,8 +1700,8 @@ packages:
       - webpack
     dev: true
 
-  /@dargmuesli/nuxt-vio@5.0.1(@nuxt/devtools@0.8.3)(@types/node@20.4.7)(@unhead/shared@1.7.0)(graphql@16.8.0)(playwright-core@1.37.1)(postcss-html@1.5.0)(postcss@8.4.29)(ts-node@10.9.1)(typescript@5.2.2)(unhead@1.7.0)(vite@4.4.9)(webpack@5.88.2):
-    resolution: {integrity: sha512-dkiO4OL1G9xVRy6WMzuA3+tD/bzUJHh4jrbMGIVuQKnHqF+tfLri+wcWq27cwigT21A0WDSaS+4CsFxItCSD+g==}
+  /@dargmuesli/nuxt-vio@5.0.2(@nuxt/devtools@0.8.3)(@types/node@20.4.7)(@unhead/shared@1.7.0)(graphql@16.8.0)(playwright-core@1.37.1)(postcss-html@1.5.0)(postcss@8.4.29)(ts-node@10.9.1)(typescript@5.2.2)(unhead@1.7.0)(vite@4.4.9)(webpack@5.88.2):
+    resolution: {integrity: sha512-j+fVXOG5RzjfuqAvToaK+UG9MalNtUM6hpBrKX+dl8abPvKZD5+aywH/kyvyKCH5Pc9sidau6uhztTjXzEBk6w==}
     engines: {node: '20'}
     peerDependencies:
       playwright-core: 1.37.1
@@ -2851,7 +2851,7 @@ packages:
       graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
     dependencies:
       graphql: 16.8.0
-      tslib: 2.4.1
+      tslib: 2.6.2
     dev: true
 
   /@graphql-tools/optimize@2.0.0(graphql@16.8.0):
@@ -2905,7 +2905,7 @@ packages:
       '@ardatan/relay-compiler': 12.0.0(graphql@16.8.0)
       '@graphql-tools/utils': 9.2.1(graphql@16.8.0)
       graphql: 16.8.0
-      tslib: 2.4.1
+      tslib: 2.6.2
     transitivePeerDependencies:
       - encoding
       - supports-color
@@ -2984,7 +2984,7 @@ packages:
       graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
     dependencies:
       graphql: 16.8.0
-      tslib: 2.4.1
+      tslib: 2.6.2
     dev: true
 
   /@graphql-tools/utils@9.2.1(graphql@16.8.0):
@@ -7167,7 +7167,7 @@ packages:
       path-case: 3.0.4
       sentence-case: 3.0.4
       snake-case: 3.0.4
-      tslib: 2.4.1
+      tslib: 2.6.2
     dev: true
 
   /chardet@0.7.0:
@@ -9798,7 +9798,7 @@ packages:
       graphql: ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
     dependencies:
       graphql: 16.8.0
-      tslib: 2.4.1
+      tslib: 2.6.2
     dev: true
 
   /graphql-ws@5.14.0(graphql@16.8.0):
@@ -10506,7 +10506,7 @@ packages:
   /is-lower-case@2.0.2:
     resolution: {integrity: sha512-bVcMJy4X5Og6VZfdOZstSexlEy20Sr0k/p/b2IlQJlfdKAQuMpiv5w2Ccxb8sKdRUNAG1PnHVHjFSdRDVS6NlQ==}
     dependencies:
-      tslib: 2.4.1
+      tslib: 2.6.2
     dev: true
 
   /is-module@1.0.0:
@@ -10658,7 +10658,7 @@ packages:
   /is-upper-case@2.0.2:
     resolution: {integrity: sha512-44pxmxAvnnAOwBg4tHPnkfvgjPwbc5QIsSstNU+YcJ1ovxVzCWpSGosPJOZh/a1tdl81fbgnLc9LLv+x2ywbPQ==}
     dependencies:
-      tslib: 2.4.1
+      tslib: 2.6.2
     dev: true
 
   /is-weakref@1.0.2:
@@ -11297,13 +11297,13 @@ packages:
   /lower-case-first@2.0.2:
     resolution: {integrity: sha512-EVm/rR94FJTZi3zefZ82fLWab+GX14LJN4HrWBcuo6Evmsl9hEfnqxgcHCKb9q+mNf6EVdsjx/qucYFIIB84pg==}
     dependencies:
-      tslib: 2.4.1
+      tslib: 2.6.2
     dev: true
 
   /lower-case@2.0.2:
     resolution: {integrity: sha512-7fm3l3NAF9WfN6W3JOmf5drwpVqX78JtoGJ3A6W0a6ZnldM41w2fV5D490psKFTpMds8TJse/eHLFFsNHHjHgg==}
     dependencies:
-      tslib: 2.4.1
+      tslib: 2.6.2
     dev: true
 
   /lru-cache@10.0.1:
@@ -14764,7 +14764,7 @@ packages:
   /sponge-case@1.0.1:
     resolution: {integrity: sha512-dblb9Et4DAtiZ5YSUZHLl4XhH4uK80GhAZrVXdN4O2P4gQ40Wa5UIOPUHlA/nFd2PLblBZWUioLMMAVrgpoYcA==}
     dependencies:
-      tslib: 2.4.1
+      tslib: 2.6.2
     dev: true
 
   /ssri@10.0.5:
@@ -15197,7 +15197,7 @@ packages:
   /swap-case@2.0.2:
     resolution: {integrity: sha512-kc6S2YS/2yXbtkSMunBtKdah4VFETZ8Oh6ONSmSd9bRxhqTrtARUCBUiWXH3xVPpvR7tz2CSnkuXVE42EcGnMw==}
     dependencies:
-      tslib: 2.4.1
+      tslib: 2.6.2
     dev: true
 
   /sweetalert2@11.7.27:
@@ -15447,7 +15447,7 @@ packages:
   /title-case@3.0.3:
     resolution: {integrity: sha512-e1zGYRvbffpcHIrnuqT0Dh+gEJtDaxDSoG4JAIpq4oDFyooziLBIiYQv0GBT4FUAnUop5uZ1hiIAj7oAF6sOCA==}
     dependencies:
-      tslib: 2.4.1
+      tslib: 2.6.2
     dev: true
 
   /titleize@3.0.0:
@@ -16055,13 +16055,13 @@ packages:
   /upper-case-first@2.0.2:
     resolution: {integrity: sha512-514ppYHBaKwfJRK/pNC6c/OxfGa0obSnAl106u97Ed0I625Nin96KAjttZF6ZL3e1XLtphxnqrOi9iWgm+u+bg==}
     dependencies:
-      tslib: 2.4.1
+      tslib: 2.6.2
     dev: true
 
   /upper-case@2.0.2:
     resolution: {integrity: sha512-KgdgDGJt2TpuwBUIjgG6lzw2GWFRCW9Qkfkiv0DxqHHLYJHmtmdUIKcZd8rHgFSjopVTlw6ggzCm1b8MFQwikg==}
     dependencies:
-      tslib: 2.4.1
+      tslib: 2.6.2
     dev: true
 
   /uqr@0.1.2:
