@@ -53,13 +53,9 @@ watch(
 useAppLayout()
 useFavicons()
 usePolyfills()
-updateSiteConfig({
-  description: t('globalSeoSiteDescription'),
-})
 defineOgImage({
   alt: t('globalSeoOgImageAlt'),
   // component: props.ogImageComponent,
-  description: t('globalSeoSiteDescription'),
 })
 init()
 </script>

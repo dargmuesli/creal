@@ -124,7 +124,7 @@ const isFormSent = ref(false)
 // methods
 const submit = async () => {
   try {
-    await formPreSubmit(api, v$, isFormSent)
+    await isFormValid({ v$, isFormSent })
   } catch (error) {
     consola.error(error)
     return
