@@ -40,6 +40,8 @@
 import type { StrapiResult } from '@dargmuesli/nuxt-vio/types/fetch'
 import { FETCH_RETRY_AMOUNT } from '@dargmuesli/nuxt-vio/utils/constants'
 import { consola } from 'consola'
+import { htmlToText } from 'html-to-text'
+import { marked } from 'marked'
 
 import type { CrealFaq } from '~/types/creal'
 
@@ -111,7 +113,7 @@ useSchemaOrg([
   (faqItems || []).map((faqItem) =>
     defineQuestion({
       name: faqItem.attributes.title,
-      acceptedAnswer: faqItem.attributes.answer,
+      acceptedAnswer: htmlToText(marked(faqItem.attributes.answer)),
     }),
   ),
 ])
