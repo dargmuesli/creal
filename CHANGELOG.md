@@ -1,3 +1,10 @@
+## [1.14.4](https://github.com/dargmuesli/creal/compare/1.14.3...1.14.4) (2023-09-15)
+
+
+### Bug Fixes
+
+* **schema:** display markdown as text ([d4aa4cb](https://github.com/dargmuesli/creal/commit/d4aa4cb545158c6f7fefeed6d36eea4c8adb9bf4))
+
 ## [1.14.3](https://github.com/dargmuesli/creal/compare/1.14.2...1.14.3) (2023-09-12)
 
 
