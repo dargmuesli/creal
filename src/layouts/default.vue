@@ -16,24 +16,32 @@
           {{ t('privacyPolicy') }}
         </VioLink>
       </VioLayoutFooterCategory>
-      <VioLayoutFooterCategory :heading="t('languages')">
-        <VioLink
-          v-for="availableLocale in availableLocales"
-          :key="availableLocale"
-          :data-testid="`i18n-${availableLocale}`"
-          :locale="availableLocale"
-          :to="$route.path"
-        >
-          <div class="flex items-center gap-2">
-            <!-- <component
-              :is="getLocaleFlag(availableLocale)"
-              :class="{ disabled: availableLocale === locale }"
-            /> -->
-            <span :class="{ disabled: availableLocale === locale }">
+      <VioLayoutFooterCategory :heading="t('preferences')">
+        <div class="grid grid-cols-2 grid-rows-2 items-center gap-2">
+          <label for="vio-i18n-select">{{ t('language') }}</label>
+          <select
+            id="vio-i18n-select"
+            class="form-input pr-8"
+            @change="onI18nChange"
+          >
+            <option
+              v-for="availableLocale in availableLocales"
+              :key="availableLocale"
+              :selected="availableLocale === locale"
+              :value="availableLocale"
+            >
               {{ getLocaleName(availableLocale) }}
-            </span>
-          </div>
-        </VioLink>
+            </option>
+          </select>
+          <label for="vio-i18n-select">{{ t('cookies') }}</label>
+          <VioButtonColored
+            :aria-label="t('preferences')"
+            :is-primary="false"
+            @click="cookieControl.isModalActive.value = true"
+          >
+            {{ t('preferences') }}
+          </VioButtonColored>
+        </div>
       </VioLayoutFooterCategory>
       <template #logo>
         <IconLogo class="mx-12 h-12 w-12 opacity-60 brightness-0 invert" />
@@ -107,6 +115,9 @@ const { availableLocales, t } = i18n
 const { play } = usePlyr()
 const fireError = useFireError()
 const dateTime = useDateTime()
+const router = useRouter()
+const switchLocalePath = useSwitchLocalePath()
+const cookieControl = useCookieControl()
 
 // data
 const isInitialized = ref(false)
@@ -210,6 +221,11 @@ const initPlyr = (plyr: { player: Plyr }) => {
 
   isInitialized.value = true
 }
+const onI18nChange = (event: Event) => {
+  router.push({
+    path: switchLocalePath((event.target as HTMLInputElement).value),
+  })
+}
 const share = () => {
   if (
     !window ||
@@ -256,21 +272,25 @@ watch(
 
 <i18n lang="yaml">
 de:
+  cookies: Cookies
   copyError: Das Kopieren war nicht erfolgreich.
-  languages: Sprachen
+  language: Sprache
   legal: Rechtliches
   legalNotice: Impressum
   linkCopy: Copy link
   mixcloud: Mixcloud
   on: on
+  preferences: Einstellungen
   privacyPolicy: Datenschutz
 en:
+  cookies: Cookies
   copyError: Copying failed.
-  languages: Languages
+  language: Language
   legal: Legal
   legalNotice: Legal notice
   linkCopy: Link kopieren
   mixcloud: Mixcloud
   on: am
+  preferences: Preferences
   privacyPolicy: Privacy policy
 </i18n>
