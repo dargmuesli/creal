@@ -3,8 +3,8 @@ module.exports = {
     '@nuxtjs/eslint-config-typescript',
     'plugin:@intlify/vue-i18n/recommended',
     'plugin:compat/recommended',
-    'plugin:prettier/recommended',
     'plugin:nuxt/recommended',
+    'plugin:prettier/recommended',
     'plugin:yml/standard',
   ],
   overrides: [
