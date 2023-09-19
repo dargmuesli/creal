@@ -33,8 +33,9 @@
               {{ getLocaleName(availableLocale) }}
             </option>
           </select>
-          <label for="vio-i18n-select">{{ t('cookies') }}</label>
+          <label for="vio-cookie-preferences">{{ t('cookies') }}</label>
           <VioButtonColored
+            id="vio-cookie-preferences"
             :aria-label="t('preferences')"
             :is-primary="false"
             @click="cookieControl.isModalActive.value = true"
@@ -221,11 +222,10 @@ const initPlyr = (plyr: { player: Plyr }) => {
 
   isInitialized.value = true
 }
-const onI18nChange = (event: Event) => {
-  router.push({
+const onI18nChange = async (event: Event) =>
+  await router.push({
     path: switchLocalePath((event.target as HTMLInputElement).value),
   })
-}
 const share = () => {
   if (
     !window ||
