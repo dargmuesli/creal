@@ -18,6 +18,11 @@ export default defineNuxtConfig(
           },
         },
       },
+
+      // modules
+      cookieControl: {
+        isControlButtonEnabled: false,
+      },
       site: {
         identity: {
           type: 'Person',

@@ -13,11 +13,11 @@ export const PAGE_READY = async ({
     isLoading?: boolean
   }
 }) => {
-  if (!options || options.cookieControl !== false) {
-    await expect(
-      page.getByRole('button', { name: 'Cookie control' }),
-    ).toBeVisible()
-  }
+  // if (!options || options.cookieControl !== false) {
+  //   await expect(
+  //     page.getByRole('button', { name: 'Cookie control' }),
+  //   ).toBeVisible()
+  // }
 
   // if (
   //   process.env.NODE_ENV === 'development' &&
