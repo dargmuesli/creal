@@ -14,7 +14,7 @@ test.beforeEach(async ({ context }) => {
   ])
 })
 
-test.describe('a11y', () => {
+test.describe('accessibility', () => {
   test('should not have any automatically detectable accessibility issues', async ({
     page,
   }) => {
@@ -48,26 +48,24 @@ test.describe('internationalization', () => {
 
   test('displays English translations', async ({ page }) => {
     await page.goto('/')
-    expect(page.getByText(textEnglish)).toBeDefined()
+    await expect(page.getByText(textEnglish)).toBeVisible()
   })
 
   test('displays German translations', async ({ page }) => {
     await page.goto('/de')
-    expect(page.getByText(textGerman)).toBeDefined()
+    await expect(page.getByText(textGerman)).toBeVisible()
   })
 
   test('switches between English and German translations', async ({ page }) => {
     await page.goto('/')
-    await page.getByText('Start').click()
-    expect(page.getByText(textEnglish)).toBeDefined()
+    await PAGE_READY({ page })
+    await expect(page.getByText(textEnglish).first()).toBeVisible()
 
-    await page.getByRole('link', { name: 'Deutsch' }).click()
-    await page.waitForURL('/de')
-    expect(page.getByText(textGerman)).toBeDefined()
+    await page.getByLabel('Language').selectOption('de')
+    await expect(page.getByText(textGerman).first()).toBeVisible()
 
-    await page.getByRole('link', { name: 'English' }).click()
-    await page.waitForURL('/')
-    expect(page.getByText(textEnglish)).toBeDefined()
+    await page.getByLabel('Sprache').selectOption('en')
+    await expect(page.getByText(textEnglish).first()).toBeVisible()
   })
 })
 
