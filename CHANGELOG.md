@@ -1,3 +1,15 @@
+## [1.15.0](https://github.com/dargmuesli/creal/compare/1.14.4...1.15.0) (2023-09-19)
+
+
+### Features
+
+* **footer:** implement preferences ([3dadffd](https://github.com/dargmuesli/creal/commit/3dadffdf9534616d87daf948ddf210294fa8b0cb))
+
+
+### Bug Fixes
+
+* **layout:** correct label ([d7f83fc](https://github.com/dargmuesli/creal/commit/d7f83fc8642418c8572b65b823063901c16326c2))
+
 ## [1.14.4](https://github.com/dargmuesli/creal/compare/1.14.3...1.14.4) (2023-09-15)
 
 
