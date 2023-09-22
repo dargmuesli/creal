@@ -1,3 +1,10 @@
+## [1.16.0](https://github.com/dargmuesli/creal/compare/1.15.0...1.16.0) (2023-09-22)
+
+
+### Features
+
+* **api:** respond to `GET` requests only ([08f59c6](https://github.com/dargmuesli/creal/commit/08f59c6dfcb4797556bc6e543a14b9b33d487f4b))
+
 ## [1.15.0](https://github.com/dargmuesli/creal/compare/1.14.4...1.15.0) (2023-09-19)
 
 
