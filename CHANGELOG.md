@@ -1,3 +1,10 @@
+## [1.17.0](https://github.com/dargmuesli/creal/compare/1.16.0...1.17.0) (2023-09-26)
+
+
+### Features
+
+* **nitro:** enable api documentation ([6956239](https://github.com/dargmuesli/creal/commit/6956239309069f7a3c824dd1bee9d7f13f678576))
+
 ## [1.16.0](https://github.com/dargmuesli/creal/compare/1.15.0...1.16.0) (2023-09-22)
 
 
