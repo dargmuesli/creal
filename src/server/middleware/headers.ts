@@ -55,7 +55,10 @@ const getCsp = (host: string): Record<string, Array<string>> => {
       "'unsafe-inline'", // https://github.com/unjs/nitro/issues/81
       "'unsafe-eval'", // https://github.com/unjs/nitro/issues/81
     ],
-    'style-src': ["'self'", "'unsafe-inline'"], // Tailwind
+    'style-src': [
+      "'self'", // TODO: replace with `"'nonce-{{nonce}}'",` (https://github.com/vitejs/vite/pull/11864)
+      "'unsafe-inline'", // TODO: replace with `"'nonce-{{nonce}}'",` (https://github.com/vitejs/vite/pull/11864)
+    ],
   }
 
   const development = {
@@ -68,10 +71,14 @@ const getCsp = (host: string): Record<string, Array<string>> => {
     'default-src': ["'self'"], // nuxt-og-image
     'font-src': ['https://fonts.gstatic.com/s/inter/v12/'], // nuxt-og-image
     'frame-ancestors': ["'self'"], // nuxt-og-image
-    'script-src': ['https://cdn.tailwindcss.com/'], // nuxt-og-image
+    'script-src': [
+      'https://cdn.tailwindcss.com/', // nuxt-og-image
+      'https://cdn.jsdelivr.net/npm/', // Nitro Swagger // TODO: increase precision (https://github.com/unjs/nitro/issues/1757)
+    ],
     'style-src': [
-      'https://cdn.jsdelivr.net/npm/gardevoir https://fonts.googleapis.com/css2',
-    ], // nuxt-og-image
+      'https://cdn.jsdelivr.net/npm/gardevoir https://fonts.googleapis.com/css2', // nuxt-og-image
+      'https://cdn.jsdelivr.net/npm/', // Nitro Swagger // TODO: increase precision (https://github.com/unjs/nitro/issues/1757)
+    ],
   }
 
   const production = {

@@ -18,6 +18,11 @@ export default defineNuxtConfig(
           },
         },
       },
+      nitro: {
+        experimental: {
+          openAPI: process.env.NODE_ENV === 'development',
+        },
+      },
 
       // modules
       cookieControl: {
