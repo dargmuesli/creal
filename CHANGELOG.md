@@ -1,3 +1,10 @@
+## [1.17.1](https://github.com/dargmuesli/creal/compare/1.17.0...1.17.1) (2023-09-27)
+
+
+### Bug Fixes
+
+* **player:** correct uri encoding ([0ec5bb0](https://github.com/dargmuesli/creal/commit/0ec5bb0b43e6bdd2d5d86cef562487e4184ce2cc))
+
 ## [1.17.0](https://github.com/dargmuesli/creal/compare/1.16.0...1.17.0) (2023-09-26)
 
 
