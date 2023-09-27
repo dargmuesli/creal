@@ -142,11 +142,10 @@ const getPlaylistLink = (name: string) => {
   const queryObject = JSON.parse(JSON.stringify(route.query))
 
   // Append chosen playlist's name to current playlist path.
-  queryObject.playlist = encodeURIComponent(
-    [queryObject.playlist, name]
-      .filter(Boolean) // Prevent initial join character.
-      .join('/'),
-  )
+  queryObject.playlist = [queryObject.playlist, name]
+    .filter(Boolean) // Prevent initial join character.
+    .join('/')
+
   delete queryObject.track
 
   return queryObject
