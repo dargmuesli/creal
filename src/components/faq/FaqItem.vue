@@ -31,7 +31,7 @@ import { marked } from 'marked'
 import type { CrealFaq } from '~/types/creal'
 import type { CollectionItem } from '~/types/paging'
 
-export interface Props {
+interface Props {
   faqItem: CollectionItem<CrealFaq>
   isFocused: boolean
 }

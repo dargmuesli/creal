@@ -19,7 +19,7 @@
 import type { CollectionItem } from '~/types/paging'
 import type { CrealEvent } from '~/types/creal'
 
-export interface Props {
+interface Props {
   events: Array<CollectionItem<CrealEvent>>
 }
 withDefaults(defineProps<Props>(), {})

@@ -25,7 +25,7 @@
 </template>
 
 <script setup lang="ts">
-export interface Props {
+interface Props {
   isPreviousAllowed: boolean
   isNextAllowed: boolean
   partString: string

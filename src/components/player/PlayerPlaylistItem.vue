@@ -23,7 +23,7 @@
 import prettyBytes from 'pretty-bytes'
 import type { PlaylistItem } from '~/types/player'
 
-export interface Props {
+interface Props {
   playlistItem: PlaylistItem
 }
 withDefaults(defineProps<Props>(), {})

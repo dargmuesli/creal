@@ -18,7 +18,7 @@
 <script setup lang="ts">
 import type { Playlist } from '~/types/player'
 
-export interface Props {
+interface Props {
   playlist: Playlist
 }
 const props = withDefaults(defineProps<Props>(), {})

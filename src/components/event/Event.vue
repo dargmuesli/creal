@@ -60,7 +60,7 @@ export interface Image {
   url: URL
 }
 
-export interface Props {
+interface Props {
   crealEvent: CrealEvent
 }
 const props = withDefaults(defineProps<Props>(), {})
