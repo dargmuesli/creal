@@ -1,6 +1,6 @@
 import { mergeWith } from 'lodash-es'
 
-import { PlaylistItem } from '~/types/player'
+import type { PlaylistItem } from '~/types/player'
 
 export const getSignedUrl = async ({
   playlistItem,
@@ -20,6 +20,7 @@ export const getSignedUrl = async ({
   } = await useFetch('/api/player/signed-url', {
     params: { key },
   })
+
   return value
 }
 

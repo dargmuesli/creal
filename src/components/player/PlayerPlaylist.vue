@@ -48,6 +48,7 @@ const setCoverUrl = async (name: string) => {
   if (!signedUrl)
     return fireError({ error: new Error('Could not get signed url!') })
 
+  // @ts-ignore
   displayImageWhenFullyLoaded(signedUrl)
 }
 const displayImageWhenFullyLoaded = (src: string) => {

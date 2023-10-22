@@ -1,11 +1,11 @@
 import { useVioAuthStore } from '@dargmuesli/nuxt-vio/store/auth'
-import { Pinia } from '@pinia/nuxt/dist/runtime/composables'
+import type { Pinia } from '@pinia/nuxt/dist/runtime/composables'
 import {
   createClient,
   ssrExchange,
   fetchExchange,
-  ClientOptions,
-  SSRData,
+  type ClientOptions,
+  type SSRData,
 } from '@urql/core'
 // import type { Data } from '@urql/exchange-graphcache'
 import { /* Cache, */ cacheExchange } from '@urql/exchange-graphcache'
@@ -16,7 +16,7 @@ import { consola } from 'consola'
 import { ref } from 'vue'
 
 import schema from '~/gql/generated/introspection'
-import { GraphCacheConfig } from '~/gql/generated/graphcache'
+import type { GraphCacheConfig } from '~/gql/generated/graphcache'
 
 // import {
 //   authenticationAnonymous,

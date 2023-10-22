@@ -1,7 +1,7 @@
 import { ofetch } from 'ofetch'
 
 import { useStore } from '~/store'
-import { PlaylistItem } from '~/types/player'
+import type { PlaylistItem } from '~/types/player'
 
 export const usePlyr = () => {
   const route = useRoute()
@@ -52,6 +52,7 @@ export const usePlyr = () => {
         type: 'audio',
         sources: [
           {
+            // @ts-ignore
             src: signedUrl,
             type: 'audio/mp3',
           },
