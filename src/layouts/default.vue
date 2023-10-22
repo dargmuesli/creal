@@ -100,11 +100,11 @@
 </template>
 
 <script setup lang="ts">
-import { Locale } from '@dargmuesli/nuxt-cookie-control/dist/runtime/types'
+import type { Locale } from '@dargmuesli/nuxt-cookie-control/dist/runtime/types'
 import { I18N_MODULE_CONFIG } from '@dargmuesli/nuxt-vio/utils/constants'
-import { LocaleObject } from '@nuxtjs/i18n/dist/runtime/composables'
+import type { LocaleObject } from '@nuxtjs/i18n/dist/runtime/composables'
 import Plyr from 'plyr'
-import { WritableComputedRef } from 'vue'
+import type { WritableComputedRef } from 'vue'
 
 import type { TrackListItem } from '~/types/player'
 import { useStore } from '~/store'

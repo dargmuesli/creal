@@ -108,7 +108,9 @@ const init = async () => {
       },
     })
 
+    // @ts-ignore
     mergeByKey(playlistDataFetch, data.value?.playlistData, 'name')
+    // @ts-ignore
     continuationToken = data.value?.nextContinuationToken
   } while (continuationToken)
 
@@ -160,6 +162,7 @@ const download = async (playlistItem: PlaylistItem) => {
   if (!signedUrl)
     return fireError({ error: new Error('Could not get signed url!') })
 
+  // @ts-ignore
   link.setAttribute('href', signedUrl)
   link.setAttribute('download', '123.mp3') // This value is never shown to the user in current browser implementations.
   link.click()

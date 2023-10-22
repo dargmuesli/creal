@@ -1,5 +1,5 @@
 /* eslint-disable no-use-before-define */
-import {
+import type {
   Resolver as GraphCacheResolver,
   UpdateResolver as GraphCacheUpdateResolver,
   OptimisticMutationResolver as GraphCacheOptimisticMutationResolver,
