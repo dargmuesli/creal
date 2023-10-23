@@ -33,18 +33,6 @@ export default defineNuxtConfig(
           },
         },
       },
-      nitro: {
-        experimental: {
-          openAPI: process.env.NODE_ENV === 'development',
-        },
-      },
-      typescript: {
-        tsConfig: {
-          compilerOptions: {
-            esModuleInterop: false,
-          },
-        },
-      },
 
       // modules
       cookieControl: {

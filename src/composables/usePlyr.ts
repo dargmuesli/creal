@@ -52,7 +52,6 @@ export const usePlyr = () => {
         type: 'audio',
         sources: [
           {
-            // @ts-ignore
             src: signedUrl,
             type: 'audio/mp3',
           },
