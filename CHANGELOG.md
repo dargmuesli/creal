@@ -1,3 +1,10 @@
+## [1.18.1](https://github.com/dargmuesli/creal/compare/1.18.0...1.18.1) (2023-11-07)
+
+
+### Performance Improvements
+
+* **ci:** speed up dockerfile ([c23af7c](https://github.com/dargmuesli/creal/commit/c23af7c01dadaa6ec5c11979c2acbaf73a85394a))
+
 ## [1.18.0](https://github.com/dargmuesli/creal/compare/1.17.5...1.18.0) (2023-11-07)
 
 
