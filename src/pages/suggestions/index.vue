@@ -70,9 +70,12 @@
         id-label="input-comment"
         :title="t('comment')"
         type="textarea"
+        :value="v$.comment"
       >
         <textarea
-          id="input-comment"
+          :id="`vio-${
+            runtimeConfig.public.vio.isInProduction ? 'prod' : 'dev'
+          }-input-comment`"
           v-model.trim="v$.comment.$model"
           class="form-input"
         />
@@ -101,6 +104,7 @@ definePageMeta({ colorMode: 'dark' })
 
 const { t } = useI18n()
 const fireError = useFireError()
+const runtimeConfig = useRuntimeConfig()
 const createSuggestionMutation = useCreateSuggestionMutation()
 
 // api data

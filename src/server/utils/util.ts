@@ -1,7 +1,7 @@
 import { S3Client } from '@aws-sdk/client-s3'
 import { fromIni } from '@aws-sdk/credential-providers'
 import { getHost, getServiceHref } from '@dargmuesli/nuxt-vio/utils/networking'
-import { H3Event } from 'h3'
+import type { H3Event } from 'h3'
 
 export const getS3Client = (isExternal = false) => {
   const config = useRuntimeConfig()

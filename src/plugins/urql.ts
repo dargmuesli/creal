@@ -8,7 +8,8 @@ import {
   type SSRData,
 } from '@urql/core'
 // import type { Data } from '@urql/exchange-graphcache'
-import { /* Cache, */ cacheExchange } from '@urql/exchange-graphcache'
+import { /* Cache, */ offlineExchange } from '@urql/exchange-graphcache'
+// import { makeDefaultStorage } from '@urql/exchange-graphcache/default-storage'
 // import { relayPagination } from '@urql/exchange-graphcache/extras'
 import { devtoolsExchange } from '@urql/devtools'
 import { provideClient } from '@urql/vue'
@@ -16,7 +17,8 @@ import { consola } from 'consola'
 import { ref } from 'vue'
 
 import schema from '~/gql/generated/introspection'
-import type { GraphCacheConfig } from '~/gql/generated/graphcache'
+// import type { GraphCacheConfig } from '~/gql/generated/graphcache'
+// import { cacheExchange } from '@urql/exchange-graphcache'
 
 // import {
 //   authenticationAnonymous,
@@ -67,7 +69,7 @@ const ssrKey = '__URQL_DATA__'
 //   return Array.isArray(value) && value.every((item) => typeof item === 'string')
 // }
 
-export default defineNuxtPlugin((nuxtApp) => {
+export default defineNuxtPlugin(async (nuxtApp) => {
   const config = useRuntimeConfig()
   const getServiceHref = useGetServiceHref()
 
@@ -87,40 +89,48 @@ export default defineNuxtPlugin((nuxtApp) => {
     })
   }
 
-  const cacheConfig: GraphCacheConfig = {
-    schema,
-    // resolvers: {
-    //   Query: {
-    //     allContacts: relayPagination(),
-    //     allEvents: relayPagination(),
-    //     allInvitations: relayPagination(),
-    //     allUploads: relayPagination(),
-    //   },
-    // },
-    // updates: {
-    //   Mutation: {
-    //     // create
-    //     createContact: (_parent, _args, cache, _info) =>
-    //       invalidateCache(cache, 'allContacts'),
-    //     createInvitation: (_parent, _args, cache, _info) =>
-    //       invalidateCache(cache, 'allInvitations'),
-    //     // TODO: create manual updates that do not require invalidation (https://github.com/maevsi/maevsi/issues/720)
-    //     // listPush(cache, 'allInvitations', parent.createInvitation),
+  // const cacheConfig: GraphCacheConfig = {
+  //   schema,
+  //   // resolvers: {
+  //   //   Query: {
+  //   //     allContacts: relayPagination(),
+  //   //     allEvents: relayPagination(),
+  //   //     allInvitations: relayPagination(),
+  //   //     allUploads: relayPagination(),
+  //   //   },
+  //   // },
+  //   storage: makeDefaultStorage(),
+  //   // updates: {
+  //   //   Mutation: {
+  //   //     // create
+  //   //     createContact: (_parent, _args, cache, _info) =>
+  //   //       invalidateCache(cache, 'allContacts'),
+  //   //     createInvitation: (_parent, _args, cache, _info) =>
+  //   //       invalidateCache(cache, 'allInvitations'),
+  //   //     // TODO: create manual updates that do not require invalidation (https://github.com/maevsi/maevsi/issues/720)
+  //   //     // listPush(cache, 'allInvitations', parent.createInvitation),
 
-    //     // update
-    //     profilePictureSet: (_parent, _args, cache, _info) =>
-    //       invalidateCache(cache, 'profilePictureByUsername'),
+  //   //     // update
+  //   //     profilePictureSet: (_parent, _args, cache, _info) =>
+  //   //       invalidateCache(cache, 'profilePictureByUsername'),
 
-    //     // delete
-    //     deleteContactById: (_parent, args, cache, _info) =>
-    //       invalidateCache(cache, 'Contact', args),
-    //     deleteInvitationById: (_parent, args, cache, _info) =>
-    //       invalidateCache(cache, 'Invitation', args),
-    //   },
-    // },
-  }
+  //   //     // delete
+  //   //     deleteContactById: (_parent, args, cache, _info) =>
+  //   //       invalidateCache(cache, 'Contact', args),
+  //   //     deleteInvitationById: (_parent, args, cache, _info) =>
+  //   //       invalidateCache(cache, 'Invitation', args),
+  //   //   },
+  //   // },
+  // }
 
-  const cache = cacheExchange(cacheConfig)
+  const cache = process.client
+    ? offlineExchange({
+        schema,
+        storage: (
+          await import('@urql/exchange-graphcache/default-storage')
+        ).makeDefaultStorage(),
+      })
+    : undefined
 
   const options: ClientOptions = {
     requestPolicy: 'cache-and-network',
@@ -143,7 +153,7 @@ export default defineNuxtPlugin((nuxtApp) => {
       getServiceHref({ name: 'creal-postgraphile', port: 5000 }) + '/graphql',
     exchanges: [
       ...(config.public.vio.isInProduction ? [] : [devtoolsExchange]),
-      cache,
+      ...(cache ? [cache] : []),
       ssr, // `ssr` must be before `fetchExchange`
       fetchExchange,
     ],
