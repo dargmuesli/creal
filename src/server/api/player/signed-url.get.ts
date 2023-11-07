@@ -1,6 +1,6 @@
 import { URL } from 'node:url'
 
-import { defineEventHandler, H3Event } from 'h3'
+import type { H3Event } from 'h3'
 
 import { GetObjectCommand } from '@aws-sdk/client-s3'
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner'

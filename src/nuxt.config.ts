@@ -33,6 +33,21 @@ export default defineNuxtConfig(
           },
         },
       },
+      vite: {
+        optimizeDeps: {
+          include: [
+            '@dargmuesli/nuxt-vio/utils/constants',
+            '@vuelidate/core',
+            '@vuelidate/validators',
+            'html-to-text',
+            'lodash-es',
+            'marked',
+            'plyr',
+            'pretty-bytes',
+            'sweetalert2',
+          ],
+        },
+      },
 
       // modules
       cookieControl: {

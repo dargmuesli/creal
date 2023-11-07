@@ -2,7 +2,7 @@ import { URL } from 'node:url'
 
 import { ListObjectsV2Command } from '@aws-sdk/client-s3'
 import { consola } from 'consola'
-import { defineEventHandler, H3Event, sendNoContent } from 'h3'
+import type { H3Event } from 'h3'
 
 import { mergeByKey } from '~/utils/player'
 import { PLAYER_PREFIX } from '~/utils/constants'

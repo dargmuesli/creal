@@ -1,10 +1,9 @@
 /* eslint-disable no-use-before-define */
 import type {
+  offlineExchange,
   Resolver as GraphCacheResolver,
   UpdateResolver as GraphCacheUpdateResolver,
   OptimisticMutationResolver as GraphCacheOptimisticMutationResolver,
-  StorageAdapter as GraphCacheStorageAdapter,
-  CacheExchangeOpts,
 } from '@urql/exchange-graphcache'
 
 export type Maybe<T> = T | null
@@ -18,15 +17,24 @@ export type MakeOptional<T, K extends keyof T> = Omit<T, K> & {
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & {
   [SubKey in K]: Maybe<T[SubKey]>
 }
+export type MakeEmpty<
+  T extends { [key: string]: unknown },
+  K extends keyof T,
+> = { [_ in K]?: never }
+export type Incremental<T> =
+  | T
+  | {
+      [P in keyof T]?: P extends ' $fragmentName' | '__typename' ? T[P] : never
+    }
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
-  ID: string
-  String: string
-  Boolean: boolean
-  Int: number
-  Float: number
-  Cursor: any
-  Datetime: any
+  ID: { input: string; output: string }
+  String: { input: string; output: string }
+  Boolean: { input: boolean; output: boolean }
+  Int: { input: number; output: number }
+  Float: { input: number; output: number }
+  Cursor: { input: any; output: any }
+  Datetime: { input: any; output: any }
 }
 
 /** All input for the create `Suggestion` mutation. */
@@ -35,7 +43,7 @@ export type CreateSuggestionInput = {
    * An arbitrary string value with no semantic meaning. Will be included in the
    * payload verbatim. May be used to track mutations by the client.
    */
-  clientMutationId?: InputMaybe<Scalars['String']>
+  clientMutationId?: InputMaybe<Scalars['String']['input']>
   /** The `Suggestion` to be created by this mutation. */
   suggestion: SuggestionInput
 }
@@ -47,7 +55,7 @@ export type CreateSuggestionPayload = {
    * The exact same `clientMutationId` that was provided in the mutation input,
    * unchanged and unused. May be used by a client to track mutations.
    */
-  clientMutationId?: Maybe<Scalars['String']>
+  clientMutationId?: Maybe<Scalars['String']['output']>
   /** Our root query field type. Allows us to run any query from our mutation payload. */
   query?: Maybe<Query>
   /** The `Suggestion` that was created by this mutation. */
@@ -67,9 +75,9 @@ export type DeleteSuggestionByIdInput = {
    * An arbitrary string value with no semantic meaning. Will be included in the
    * payload verbatim. May be used to track mutations by the client.
    */
-  clientMutationId?: InputMaybe<Scalars['String']>
+  clientMutationId?: InputMaybe<Scalars['String']['input']>
   /** The record's id. */
-  id: Scalars['Int']
+  id: Scalars['Int']['input']
 }
 
 /** All input for the `deleteSuggestion` mutation. */
@@ -78,9 +86,9 @@ export type DeleteSuggestionInput = {
    * An arbitrary string value with no semantic meaning. Will be included in the
    * payload verbatim. May be used to track mutations by the client.
    */
-  clientMutationId?: InputMaybe<Scalars['String']>
+  clientMutationId?: InputMaybe<Scalars['String']['input']>
   /** The globally unique `ID` which will identify a single `Suggestion` to be deleted. */
-  nodeId: Scalars['ID']
+  nodeId: Scalars['ID']['input']
 }
 
 /** The output of our delete `Suggestion` mutation. */
@@ -90,8 +98,8 @@ export type DeleteSuggestionPayload = {
    * The exact same `clientMutationId` that was provided in the mutation input,
    * unchanged and unused. May be used by a client to track mutations.
    */
-  clientMutationId?: Maybe<Scalars['String']>
-  deletedSuggestionId?: Maybe<Scalars['ID']>
+  clientMutationId?: Maybe<Scalars['String']['output']>
+  deletedSuggestionId?: Maybe<Scalars['ID']['output']>
   /** Our root query field type. Allows us to run any query from our mutation payload. */
   query?: Maybe<Query>
   /** The `Suggestion` that was deleted by this mutation. */
@@ -148,20 +156,20 @@ export type MutationUpdateSuggestionByIdArgs = {
 /** An object with a globally unique `ID`. */
 export type Node = {
   /** A globally unique identifier. Can be used in various places throughout the system to identify this single value. */
-  nodeId: Scalars['ID']
+  nodeId: Scalars['ID']['output']
 }
 
 /** Information about pagination in a connection. */
 export type PageInfo = {
   __typename?: 'PageInfo'
   /** When paginating forwards, the cursor to continue. */
-  endCursor?: Maybe<Scalars['Cursor']>
+  endCursor?: Maybe<Scalars['Cursor']['output']>
   /** When paginating forwards, are there more items? */
-  hasNextPage: Scalars['Boolean']
+  hasNextPage: Scalars['Boolean']['output']
   /** When paginating backwards, are there more items? */
-  hasPreviousPage: Scalars['Boolean']
+  hasPreviousPage: Scalars['Boolean']['output']
   /** When paginating backwards, the cursor to continue. */
-  startCursor?: Maybe<Scalars['Cursor']>
+  startCursor?: Maybe<Scalars['Cursor']['output']>
 }
 
 /** The root query type which gives access points into the data universe. */
@@ -172,7 +180,7 @@ export type Query = Node & {
   /** Fetches an object given its globally unique `ID`. */
   node?: Maybe<Node>
   /** The root query type must be a `Node` to work well with Relay 1 mutations. This just resolves to `query`. */
-  nodeId: Scalars['ID']
+  nodeId: Scalars['ID']['output']
   /**
    * Exposes the root query type nested one level down. This is helpful for Relay 1
    * which can only query top level fields if they are in a particular form.
@@ -185,47 +193,47 @@ export type Query = Node & {
 
 /** The root query type which gives access points into the data universe. */
 export type QueryAllSuggestionsArgs = {
-  after?: InputMaybe<Scalars['Cursor']>
-  before?: InputMaybe<Scalars['Cursor']>
+  after?: InputMaybe<Scalars['Cursor']['input']>
+  before?: InputMaybe<Scalars['Cursor']['input']>
   condition?: InputMaybe<SuggestionCondition>
-  first?: InputMaybe<Scalars['Int']>
-  last?: InputMaybe<Scalars['Int']>
-  offset?: InputMaybe<Scalars['Int']>
+  first?: InputMaybe<Scalars['Int']['input']>
+  last?: InputMaybe<Scalars['Int']['input']>
+  offset?: InputMaybe<Scalars['Int']['input']>
   orderBy?: InputMaybe<Array<SuggestionsOrderBy>>
 }
 
 /** The root query type which gives access points into the data universe. */
 export type QueryNodeArgs = {
-  nodeId: Scalars['ID']
+  nodeId: Scalars['ID']['input']
 }
 
 /** The root query type which gives access points into the data universe. */
 export type QuerySuggestionArgs = {
-  nodeId: Scalars['ID']
+  nodeId: Scalars['ID']['input']
 }
 
 /** The root query type which gives access points into the data universe. */
 export type QuerySuggestionByIdArgs = {
-  id: Scalars['Int']
+  id: Scalars['Int']['input']
 }
 
 /** A song suggestion. */
 export type Suggestion = Node & {
   __typename?: 'Suggestion'
   /** The suggestion's artist name. */
-  artist: Scalars['String']
+  artist: Scalars['String']['output']
   /** A comment on the suggestion. */
-  comment?: Maybe<Scalars['String']>
+  comment?: Maybe<Scalars['String']['output']>
   /** The record's id. */
-  id: Scalars['Int']
+  id: Scalars['Int']['output']
   /** A globally unique identifier. Can be used in various places throughout the system to identify this single value. */
-  nodeId: Scalars['ID']
+  nodeId: Scalars['ID']['output']
   /** Indicates at which time the record is suggested. */
-  timestamp: Scalars['Datetime']
+  timestamp: Scalars['Datetime']['output']
   /** The suggestion's title. */
-  title: Scalars['String']
+  title: Scalars['String']['output']
   /** The suggestion's url. */
-  url?: Maybe<Scalars['String']>
+  url?: Maybe<Scalars['String']['output']>
 }
 
 /**
@@ -234,45 +242,45 @@ export type Suggestion = Node & {
  */
 export type SuggestionCondition = {
   /** Checks for equality with the object’s `artist` field. */
-  artist?: InputMaybe<Scalars['String']>
+  artist?: InputMaybe<Scalars['String']['input']>
   /** Checks for equality with the object’s `comment` field. */
-  comment?: InputMaybe<Scalars['String']>
+  comment?: InputMaybe<Scalars['String']['input']>
   /** Checks for equality with the object’s `id` field. */
-  id?: InputMaybe<Scalars['Int']>
+  id?: InputMaybe<Scalars['Int']['input']>
   /** Checks for equality with the object’s `timestamp` field. */
-  timestamp?: InputMaybe<Scalars['Datetime']>
+  timestamp?: InputMaybe<Scalars['Datetime']['input']>
   /** Checks for equality with the object’s `title` field. */
-  title?: InputMaybe<Scalars['String']>
+  title?: InputMaybe<Scalars['String']['input']>
   /** Checks for equality with the object’s `url` field. */
-  url?: InputMaybe<Scalars['String']>
+  url?: InputMaybe<Scalars['String']['input']>
 }
 
 /** An input for mutations affecting `Suggestion` */
 export type SuggestionInput = {
   /** The suggestion's artist name. */
-  artist: Scalars['String']
+  artist: Scalars['String']['input']
   /** A comment on the suggestion. */
-  comment?: InputMaybe<Scalars['String']>
+  comment?: InputMaybe<Scalars['String']['input']>
   /** The suggestion's title. */
-  title: Scalars['String']
+  title: Scalars['String']['input']
   /** The suggestion's url. */
-  url?: InputMaybe<Scalars['String']>
+  url?: InputMaybe<Scalars['String']['input']>
 }
 
 /** Represents an update to a `Suggestion`. Fields that are set will be updated. */
 export type SuggestionPatch = {
   /** The suggestion's artist name. */
-  artist?: InputMaybe<Scalars['String']>
+  artist?: InputMaybe<Scalars['String']['input']>
   /** A comment on the suggestion. */
-  comment?: InputMaybe<Scalars['String']>
+  comment?: InputMaybe<Scalars['String']['input']>
   /** The record's id. */
-  id?: InputMaybe<Scalars['Int']>
+  id?: InputMaybe<Scalars['Int']['input']>
   /** Indicates at which time the record is suggested. */
-  timestamp?: InputMaybe<Scalars['Datetime']>
+  timestamp?: InputMaybe<Scalars['Datetime']['input']>
   /** The suggestion's title. */
-  title?: InputMaybe<Scalars['String']>
+  title?: InputMaybe<Scalars['String']['input']>
   /** The suggestion's url. */
-  url?: InputMaybe<Scalars['String']>
+  url?: InputMaybe<Scalars['String']['input']>
 }
 
 /** A connection to a list of `Suggestion` values. */
@@ -285,14 +293,14 @@ export type SuggestionsConnection = {
   /** Information to aid in pagination. */
   pageInfo: PageInfo
   /** The count of *all* `Suggestion` you could get from the connection. */
-  totalCount: Scalars['Int']
+  totalCount: Scalars['Int']['output']
 }
 
 /** A `Suggestion` edge in the connection. */
 export type SuggestionsEdge = {
   __typename?: 'SuggestionsEdge'
   /** A cursor for use in pagination. */
-  cursor?: Maybe<Scalars['Cursor']>
+  cursor?: Maybe<Scalars['Cursor']['output']>
   /** The `Suggestion` at the end of the edge. */
   node?: Maybe<Suggestion>
 }
@@ -322,9 +330,9 @@ export type UpdateSuggestionByIdInput = {
    * An arbitrary string value with no semantic meaning. Will be included in the
    * payload verbatim. May be used to track mutations by the client.
    */
-  clientMutationId?: InputMaybe<Scalars['String']>
+  clientMutationId?: InputMaybe<Scalars['String']['input']>
   /** The record's id. */
-  id: Scalars['Int']
+  id: Scalars['Int']['input']
   /** An object where the defined keys will be set on the `Suggestion` being updated. */
   suggestionPatch: SuggestionPatch
 }
@@ -335,9 +343,9 @@ export type UpdateSuggestionInput = {
    * An arbitrary string value with no semantic meaning. Will be included in the
    * payload verbatim. May be used to track mutations by the client.
    */
-  clientMutationId?: InputMaybe<Scalars['String']>
+  clientMutationId?: InputMaybe<Scalars['String']['input']>
   /** The globally unique `ID` which will identify a single `Suggestion` to be updated. */
-  nodeId: Scalars['ID']
+  nodeId: Scalars['ID']['input']
   /** An object where the defined keys will be set on the `Suggestion` being updated. */
   suggestionPatch: SuggestionPatch
 }
@@ -349,7 +357,7 @@ export type UpdateSuggestionPayload = {
    * The exact same `clientMutationId` that was provided in the mutation input,
    * unchanged and unused. May be used by a client to track mutations.
    */
-  clientMutationId?: Maybe<Scalars['String']>
+  clientMutationId?: Maybe<Scalars['String']['output']>
   /** Our root query field type. Allows us to run any query from our mutation payload. */
   query?: Maybe<Query>
   /** The `Suggestion` that was updated by this mutation. */
@@ -608,6 +616,32 @@ export type GraphCacheOptimisticUpdaters = {
 }
 
 export type GraphCacheUpdaters = {
+  Query?: {
+    allSuggestions?: GraphCacheUpdateResolver<
+      { allSuggestions: Maybe<WithTypename<SuggestionsConnection>> },
+      QueryAllSuggestionsArgs
+    >
+    node?: GraphCacheUpdateResolver<
+      { node: Maybe<WithTypename<Query> | WithTypename<Suggestion>> },
+      QueryNodeArgs
+    >
+    nodeId?: GraphCacheUpdateResolver<
+      { nodeId: Scalars['ID'] },
+      Record<string, never>
+    >
+    query?: GraphCacheUpdateResolver<
+      { query: WithTypename<Query> },
+      Record<string, never>
+    >
+    suggestion?: GraphCacheUpdateResolver<
+      { suggestion: Maybe<WithTypename<Suggestion>> },
+      QuerySuggestionArgs
+    >
+    suggestionById?: GraphCacheUpdateResolver<
+      { suggestionById: Maybe<WithTypename<Suggestion>> },
+      QuerySuggestionByIdArgs
+    >
+  }
   Mutation?: {
     createSuggestion?: GraphCacheUpdateResolver<
       { createSuggestion: Maybe<WithTypename<CreateSuggestionPayload>> },
@@ -631,13 +665,145 @@ export type GraphCacheUpdaters = {
     >
   }
   Subscription?: {}
+  CreateSuggestionPayload?: {
+    clientMutationId?: GraphCacheUpdateResolver<
+      Maybe<WithTypename<CreateSuggestionPayload>>,
+      Record<string, never>
+    >
+    query?: GraphCacheUpdateResolver<
+      Maybe<WithTypename<CreateSuggestionPayload>>,
+      Record<string, never>
+    >
+    suggestion?: GraphCacheUpdateResolver<
+      Maybe<WithTypename<CreateSuggestionPayload>>,
+      Record<string, never>
+    >
+    suggestionEdge?: GraphCacheUpdateResolver<
+      Maybe<WithTypename<CreateSuggestionPayload>>,
+      CreateSuggestionPayloadSuggestionEdgeArgs
+    >
+  }
+  DeleteSuggestionPayload?: {
+    clientMutationId?: GraphCacheUpdateResolver<
+      Maybe<WithTypename<DeleteSuggestionPayload>>,
+      Record<string, never>
+    >
+    deletedSuggestionId?: GraphCacheUpdateResolver<
+      Maybe<WithTypename<DeleteSuggestionPayload>>,
+      Record<string, never>
+    >
+    query?: GraphCacheUpdateResolver<
+      Maybe<WithTypename<DeleteSuggestionPayload>>,
+      Record<string, never>
+    >
+    suggestion?: GraphCacheUpdateResolver<
+      Maybe<WithTypename<DeleteSuggestionPayload>>,
+      Record<string, never>
+    >
+    suggestionEdge?: GraphCacheUpdateResolver<
+      Maybe<WithTypename<DeleteSuggestionPayload>>,
+      DeleteSuggestionPayloadSuggestionEdgeArgs
+    >
+  }
+  PageInfo?: {
+    endCursor?: GraphCacheUpdateResolver<
+      Maybe<WithTypename<PageInfo>>,
+      Record<string, never>
+    >
+    hasNextPage?: GraphCacheUpdateResolver<
+      Maybe<WithTypename<PageInfo>>,
+      Record<string, never>
+    >
+    hasPreviousPage?: GraphCacheUpdateResolver<
+      Maybe<WithTypename<PageInfo>>,
+      Record<string, never>
+    >
+    startCursor?: GraphCacheUpdateResolver<
+      Maybe<WithTypename<PageInfo>>,
+      Record<string, never>
+    >
+  }
+  Suggestion?: {
+    artist?: GraphCacheUpdateResolver<
+      Maybe<WithTypename<Suggestion>>,
+      Record<string, never>
+    >
+    comment?: GraphCacheUpdateResolver<
+      Maybe<WithTypename<Suggestion>>,
+      Record<string, never>
+    >
+    id?: GraphCacheUpdateResolver<
+      Maybe<WithTypename<Suggestion>>,
+      Record<string, never>
+    >
+    nodeId?: GraphCacheUpdateResolver<
+      Maybe<WithTypename<Suggestion>>,
+      Record<string, never>
+    >
+    timestamp?: GraphCacheUpdateResolver<
+      Maybe<WithTypename<Suggestion>>,
+      Record<string, never>
+    >
+    title?: GraphCacheUpdateResolver<
+      Maybe<WithTypename<Suggestion>>,
+      Record<string, never>
+    >
+    url?: GraphCacheUpdateResolver<
+      Maybe<WithTypename<Suggestion>>,
+      Record<string, never>
+    >
+  }
+  SuggestionsConnection?: {
+    edges?: GraphCacheUpdateResolver<
+      Maybe<WithTypename<SuggestionsConnection>>,
+      Record<string, never>
+    >
+    nodes?: GraphCacheUpdateResolver<
+      Maybe<WithTypename<SuggestionsConnection>>,
+      Record<string, never>
+    >
+    pageInfo?: GraphCacheUpdateResolver<
+      Maybe<WithTypename<SuggestionsConnection>>,
+      Record<string, never>
+    >
+    totalCount?: GraphCacheUpdateResolver<
+      Maybe<WithTypename<SuggestionsConnection>>,
+      Record<string, never>
+    >
+  }
+  SuggestionsEdge?: {
+    cursor?: GraphCacheUpdateResolver<
+      Maybe<WithTypename<SuggestionsEdge>>,
+      Record<string, never>
+    >
+    node?: GraphCacheUpdateResolver<
+      Maybe<WithTypename<SuggestionsEdge>>,
+      Record<string, never>
+    >
+  }
+  UpdateSuggestionPayload?: {
+    clientMutationId?: GraphCacheUpdateResolver<
+      Maybe<WithTypename<UpdateSuggestionPayload>>,
+      Record<string, never>
+    >
+    query?: GraphCacheUpdateResolver<
+      Maybe<WithTypename<UpdateSuggestionPayload>>,
+      Record<string, never>
+    >
+    suggestion?: GraphCacheUpdateResolver<
+      Maybe<WithTypename<UpdateSuggestionPayload>>,
+      Record<string, never>
+    >
+    suggestionEdge?: GraphCacheUpdateResolver<
+      Maybe<WithTypename<UpdateSuggestionPayload>>,
+      UpdateSuggestionPayloadSuggestionEdgeArgs
+    >
+  }
 }
 
-export type GraphCacheConfig = {
-  schema?: CacheExchangeOpts['schema']
+export type GraphCacheConfig = Parameters<typeof offlineExchange>[0] & {
   updates?: GraphCacheUpdaters
   keys?: GraphCacheKeysConfig
   optimistic?: GraphCacheOptimisticUpdaters
   resolvers?: GraphCacheResolvers
-  storage?: GraphCacheStorageAdapter
 }

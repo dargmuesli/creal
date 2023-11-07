@@ -1,8 +1,7 @@
 import { URL } from 'node:url'
-import { Readable } from 'node:stream'
 
 import { GetObjectCommand } from '@aws-sdk/client-s3'
-import { defineEventHandler, H3Event } from 'h3'
+import type { H3Event } from 'h3'
 
 import { getS3Client, proxy } from '~/server/utils/util'
 
@@ -33,13 +32,5 @@ const getObject = async (event: H3Event) => {
 
   if (!data) return
 
-  return await streamToString(data.Body as Readable)
+  return await data.Body?.transformToString()
 }
-
-const streamToString = async (stream: Readable): Promise<string> =>
-  await new Promise((resolve, reject) => {
-    const chunks: Uint8Array[] = []
-    stream.on('data', (chunk) => chunks.push(chunk))
-    stream.on('error', reject)
-    stream.on('end', () => resolve(Buffer.concat(chunks).toString('utf-8')))
-  })

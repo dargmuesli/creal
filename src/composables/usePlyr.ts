@@ -1,5 +1,3 @@
-import { ofetch } from 'ofetch'
-
 import { useStore } from '~/store'
 import type { PlaylistItem } from '~/types/player'
 
@@ -39,11 +37,10 @@ export const usePlyr = () => {
       if (!signedUrl)
         return fireError({ error: new Error('Could not get signed url!') })
 
-      // TODO: switch back to $fetch (https://github.com/unjs/nitro/issues/470)
       store.playerData.currentTrack = {
         ...playlistItem,
         meta: playlistItem.isMetaAvailable
-          ? await ofetch('/api/player/get-object', {
+          ? await $fetch('/api/player/get-object', {
               params: { key },
             })
           : undefined,

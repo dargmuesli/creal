@@ -9,9 +9,9 @@
     <div v-else class="m-auto h-16 w-16">
       <VioLoaderIndicatorPing />
     </div>
-    <h1 class="m-0 mt-1 line-clamp-2 text-left text-2xl leading-tight">
+    <strong class="m-0 mt-1 line-clamp-2 text-left text-2xl leading-tight">
       {{ playlist.name }}
-    </h1>
+    </strong>
   </section>
 </template>
 
