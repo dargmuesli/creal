@@ -1,3 +1,10 @@
+## [1.18.0](https://github.com/dargmuesli/creal/compare/1.17.5...1.18.0) (2023-11-07)
+
+
+### Features
+
+* **urql:** use offline exchange ([d53256b](https://github.com/dargmuesli/creal/commit/d53256bd329eebd861d93ee976d8269987f48045))
+
 ## [1.17.5](https://github.com/dargmuesli/creal/compare/1.17.4...1.17.5) (2023-11-02)
 
 
