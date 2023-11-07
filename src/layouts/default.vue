@@ -226,7 +226,7 @@ const onI18nChange = async (event: Event) =>
   await router.push({
     path: switchLocalePath((event.target as HTMLInputElement).value),
   })
-const share = () => {
+const share = async () => {
   if (
     !window ||
     !store.playerData.currentPlaylist?.name ||
@@ -234,7 +234,7 @@ const share = () => {
   )
     return fireError({ error: new Error(t('copyError')) })
 
-  copyText(
+  await copyText(
     `${window.location.origin}/player?playlist=${encodeURIComponent(
       store.playerData.currentPlaylist.name,
     )}&track=${encodeURIComponent(store.playerData.currentTrack.fileName)}`,
