@@ -1,14 +1,15 @@
 import { useVioAuthStore } from '@dargmuesli/nuxt-vio/store/auth'
-import type { Pinia } from '@pinia/nuxt/dist/runtime/composables'
 import {
   createClient,
-  ssrExchange,
+  ssrExchange as getSsrExchange,
   fetchExchange,
   type ClientOptions,
   type SSRData,
 } from '@urql/core'
 // import type { Data } from '@urql/exchange-graphcache'
-import { /* Cache, */ offlineExchange } from '@urql/exchange-graphcache'
+import {
+  /* Cache, */ offlineExchange as getOfflineExchange,
+} from '@urql/exchange-graphcache'
 // import { makeDefaultStorage } from '@urql/exchange-graphcache/default-storage'
 // import { relayPagination } from '@urql/exchange-graphcache/extras'
 import { devtoolsExchange } from '@urql/devtools'
@@ -26,7 +27,7 @@ import schema from '~/gql/generated/introspection'
 //   jwtRefresh,
 // } from '~/utils/auth'
 
-const ssrKey = '__URQL_DATA__'
+const SSR_KEY = '__URQL_DATA__'
 // const invalidateCache = (
 //   cache: Cache,
 //   name: string,
@@ -70,22 +71,22 @@ const ssrKey = '__URQL_DATA__'
 // }
 
 export default defineNuxtPlugin(async (nuxtApp) => {
-  const config = useRuntimeConfig()
+  const runtimeConfig = useRuntimeConfig()
   const getServiceHref = useGetServiceHref()
 
-  const ssr = ssrExchange({
+  const ssrExchange = getSsrExchange({
     isClient: process.client,
   })
 
   if (process.client) {
     nuxtApp.hook('app:created', () => {
-      ssr.restoreData(nuxtApp.payload[ssrKey] as SSRData)
+      ssrExchange.restoreData(nuxtApp.payload[SSR_KEY] as SSRData)
     })
   }
 
   if (process.server) {
     nuxtApp.hook('app:rendered', () => {
-      nuxtApp.payload[ssrKey] = ssr.extractData()
+      nuxtApp.payload[SSR_KEY] = ssrExchange.extractData()
     })
   }
 
@@ -123,8 +124,8 @@ export default defineNuxtPlugin(async (nuxtApp) => {
   //   // },
   // }
 
-  const cache = process.client
-    ? offlineExchange({
+  const cacheExchange = process.client
+    ? getOfflineExchange({
         schema,
         storage: (
           await import('@urql/exchange-graphcache/default-storage')
@@ -132,35 +133,35 @@ export default defineNuxtPlugin(async (nuxtApp) => {
       })
     : undefined
 
-  const options: ClientOptions = {
+  const clientOptions: ClientOptions = {
     requestPolicy: 'cache-and-network',
     fetchOptions: () => {
       const { $pinia } = useNuxtApp()
-      const store = useVioAuthStore($pinia as Pinia) // TODO: remove `as` (https://github.com/vuejs/pinia/issues/2071)
+      const store = useVioAuthStore($pinia)
+      const headers = {} as Record<string, any>
       const jwt = store.jwt
 
       if (jwt) {
         consola.trace('GraphQL request authenticated with: ' + jwt)
-        return {
-          headers: { authorization: `Bearer ${jwt}` },
-        }
+        headers.authorization = `Bearer ${jwt}`
       } else {
         consola.trace('GraphQL request without authentication.')
-        return {}
       }
+
+      return { headers }
     },
     url:
       getServiceHref({ name: 'creal-postgraphile', port: 5000 }) + '/graphql',
     exchanges: [
-      ...(config.public.vio.isInProduction ? [] : [devtoolsExchange]),
-      ...(cache ? [cache] : []),
-      ssr, // `ssr` must be before `fetchExchange`
+      ...(runtimeConfig.public.vio.isInProduction ? [] : [devtoolsExchange]),
+      ...(cacheExchange ? [cacheExchange] : []),
+      ssrExchange, // `ssr` must be before `fetchExchange`
       fetchExchange,
     ],
   }
-  const client = ref(createClient(options))
+  const client = ref(createClient(clientOptions))
 
-  const urqlReset = () => (client.value = createClient(options))
+  const urqlReset = () => (client.value = createClient(clientOptions))
 
   nuxtApp.hook('vue:setup', () => {
     const { $urql } = useNuxtApp()
