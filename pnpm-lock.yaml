@@ -34,13 +34,13 @@ importers:
         version: 3.451.0
       '@axe-core/playwright':
         specifier: 4.8.1
-        version: 4.8.1(playwright-core@1.39.0)
+        version: 4.8.1(playwright-core@1.40.0)
       '@dargmuesli/nuxt-cookie-control':
         specifier: 7.1.2
         version: 7.1.2(webpack@5.89.0)
       '@dargmuesli/nuxt-vio':
         specifier: 9.0.1
-        version: 9.0.1(@unhead/shared@1.8.3)(@vue/compiler-core@3.3.8)(graphql@16.8.1)(nuxt@3.8.1)(playwright-core@1.39.0)(postcss@8.4.31)(tailwindcss@3.3.5)(typescript@5.2.2)(unhead@1.8.4)(vite@4.5.0)(vue-router@4.2.5)(vue@3.3.8)(webpack@5.89.0)
+        version: 9.0.1(@unhead/shared@1.8.3)(@vue/compiler-core@3.3.8)(graphql@16.8.1)(nuxt@3.8.1)(playwright-core@1.40.0)(postcss@8.4.31)(tailwindcss@3.3.5)(typescript@5.2.2)(unhead@1.8.4)(vite@4.5.0)(vue-router@4.2.5)(vue@3.3.8)(webpack@5.89.0)
       '@graphql-codegen/cli':
         specifier: 5.0.0
         version: 5.0.0(@types/node@18.18.9)(graphql@16.8.1)(typescript@5.2.2)
@@ -72,8 +72,8 @@ importers:
         specifier: 0.5.1
         version: 0.5.1(typescript@5.2.2)(vue@3.3.8)
       '@playwright/test':
-        specifier: 1.39.0
-        version: 1.39.0
+        specifier: 1.40.0
+        version: 1.40.0
       '@skjnldsv/vue-plyr':
         specifier: 7.4.0
         version: 7.4.0(typescript@5.2.2)
@@ -156,8 +156,8 @@ importers:
         specifier: 3.8.1
         version: 3.8.1(@types/node@18.18.9)(eslint@8.53.0)(stylelint@15.11.0)(typescript@5.2.2)(vite@4.5.0)(vue-tsc@1.8.22)
       playwright-core:
-        specifier: 1.39.0
-        version: 1.39.0
+        specifier: 1.40.0
+        version: 1.40.0
       plyr:
         specifier: 3.7.8
         version: 3.7.8
@@ -983,13 +983,13 @@ packages:
       tslib: 2.6.2
     dev: true
 
-  /@axe-core/playwright@4.8.1(playwright-core@1.39.0):
+  /@axe-core/playwright@4.8.1(playwright-core@1.40.0):
     resolution: {integrity: sha512-KC1X++UdRAwMLRvB+BIKFheyLHUnbJTL0t0Wbv6TJMozn2V2QyEtAcN6jyUiudtGiLUGhHCtj/eWorBnVZ4dAA==}
     peerDependencies:
       playwright-core: '>= 1.0.0'
     dependencies:
       axe-core: 4.8.2
-      playwright-core: 1.39.0
+      playwright-core: 1.40.0
     dev: true
 
   /@babel/code-frame@7.22.13:
@@ -1862,7 +1862,7 @@ packages:
       - webpack
     dev: true
 
-  /@dargmuesli/nuxt-vio@9.0.1(@unhead/shared@1.8.3)(@vue/compiler-core@3.3.8)(graphql@16.8.1)(nuxt@3.8.1)(playwright-core@1.39.0)(postcss@8.4.31)(tailwindcss@3.3.5)(typescript@5.2.2)(unhead@1.8.4)(vite@4.5.0)(vue-router@4.2.5)(vue@3.3.8)(webpack@5.89.0):
+  /@dargmuesli/nuxt-vio@9.0.1(@unhead/shared@1.8.3)(@vue/compiler-core@3.3.8)(graphql@16.8.1)(nuxt@3.8.1)(playwright-core@1.40.0)(postcss@8.4.31)(tailwindcss@3.3.5)(typescript@5.2.2)(unhead@1.8.4)(vite@4.5.0)(vue-router@4.2.5)(vue@3.3.8)(webpack@5.89.0):
     resolution: {integrity: sha512-T9+k9skBbxsefrKU7lkqq40jCVfrwUc/GK6P5JoxKEGOPpBTl0zw+dXay9emFH09R33/HSuxzvOK73fwDAr3pw==}
     engines: {node: '20'}
     peerDependencies:
@@ -1893,7 +1893,7 @@ packages:
       jose: 5.1.0
       nuxt: 3.8.1(@types/node@18.18.9)(eslint@8.53.0)(stylelint@15.11.0)(typescript@5.2.2)(vite@4.5.0)(vue-tsc@1.8.22)
       nuxt-security: 1.0.0-rc.2
-      playwright-core: 1.39.0
+      playwright-core: 1.40.0
       sweetalert2: 11.9.0
       vue: 3.3.8(typescript@5.2.2)
       vue-gtag: 2.0.1(vue@3.3.8)
@@ -4528,12 +4528,12 @@ packages:
       tslib: 2.6.2
     dev: true
 
-  /@playwright/test@1.39.0:
-    resolution: {integrity: sha512-3u1iFqgzl7zr004bGPYiN/5EZpRUSFddQBra8Rqll5N0/vfpqlP9I9EXqAoGacuAbX6c9Ulg/Cjqglp5VkK6UQ==}
+  /@playwright/test@1.40.0:
+    resolution: {integrity: sha512-PdW+kn4eV99iP5gxWNSDQCbhMaDVej+RXL5xr6t04nbKLCBwYtA046t7ofoczHOm8u6c+45hpDKQVZqtqwkeQg==}
     engines: {node: '>=16'}
     hasBin: true
     dependencies:
-      playwright: 1.39.0
+      playwright: 1.40.0
     dev: true
 
   /@polka/url@1.0.0-next.23:
@@ -12246,7 +12246,7 @@ packages:
       ofetch: 1.3.3
       ohash: 1.1.3
       pathe: 1.1.1
-      playwright-core: 1.39.0
+      playwright-core: 1.40.0
       radix3: 1.1.0
       satori: 0.10.9
       satori-html: 0.3.2
@@ -13032,18 +13032,18 @@ packages:
       pathe: 1.1.1
     dev: true
 
-  /playwright-core@1.39.0:
-    resolution: {integrity: sha512-+k4pdZgs1qiM+OUkSjx96YiKsXsmb59evFoqv8SKO067qBA+Z2s/dCzJij/ZhdQcs2zlTAgRKfeiiLm8PQ2qvw==}
+  /playwright-core@1.40.0:
+    resolution: {integrity: sha512-fvKewVJpGeca8t0ipM56jkVSU6Eo0RmFvQ/MaCQNDYm+sdvKkMBBWTE1FdeMqIdumRaXXjZChWHvIzCGM/tA/Q==}
     engines: {node: '>=16'}
     hasBin: true
     dev: true
 
-  /playwright@1.39.0:
-    resolution: {integrity: sha512-naE5QT11uC/Oiq0BwZ50gDmy8c8WLPRTEWuSSFVG2egBka/1qMoSqYQcROMT9zLwJ86oPofcTH2jBY/5wWOgIw==}
+  /playwright@1.40.0:
+    resolution: {integrity: sha512-gyHAgQjiDf1m34Xpwzaqb76KgfzYrhK7iih+2IzcOCoZWr/8ZqmdBw+t0RU85ZmfJMgtgAiNtBQ/KS2325INXw==}
     engines: {node: '>=16'}
     hasBin: true
     dependencies:
-      playwright-core: 1.39.0
+      playwright-core: 1.40.0
     optionalDependencies:
       fsevents: 2.3.2
     dev: true
