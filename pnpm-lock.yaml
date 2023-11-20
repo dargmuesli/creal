@@ -132,8 +132,8 @@ importers:
         specifier: 16.8.1
         version: 16.8.1
       h3:
-        specifier: 1.8.2
-        version: 1.8.2
+        specifier: 1.9.0
+        version: 1.9.0
       html-to-text:
         specifier: 9.0.5
         version: 9.0.5
@@ -3734,7 +3734,7 @@ packages:
       fast-glob: 3.3.2
       flatted: 3.2.9
       get-port-please: 3.1.1
-      h3: 1.8.2
+      h3: 1.9.0
       hookable: 5.5.3
       image-meta: 0.2.0
       is-installed-globally: 1.0.0
@@ -3790,7 +3790,7 @@ packages:
       '@nuxt/kit': 3.8.1
       consola: 3.2.3
       defu: 6.1.3
-      h3: 1.8.2
+      h3: 1.9.0
       image-meta: 0.2.0
       node-fetch-native: 1.4.1
       ohash: 1.1.3
@@ -3928,7 +3928,7 @@ packages:
       externality: 1.0.2
       fs-extra: 11.1.1
       get-port-please: 3.1.1
-      h3: 1.8.2
+      h3: 1.9.0
       knitwork: 1.0.0
       magic-string: 0.30.5
       mlly: 1.4.2
@@ -4121,7 +4121,7 @@ packages:
       cookie-es: 1.0.0
       defu: 6.1.3
       destr: 2.0.2
-      h3: 1.8.2
+      h3: 1.9.0
       iron-webcrypto: 1.0.0
       micromatch: 4.0.5
       pathe: 1.1.1
@@ -4272,6 +4272,7 @@ packages:
     dependencies:
       is-glob: 4.0.3
       micromatch: 4.0.5
+      napi-wasm: 1.1.0
     dev: true
     bundledDependencies:
       - napi-wasm
@@ -9682,13 +9683,13 @@ packages:
       duplexer: 0.1.2
     dev: true
 
-  /h3@1.8.2:
-    resolution: {integrity: sha512-1Ca0orJJlCaiFY68BvzQtP2lKLk46kcLAxVM8JgYbtm2cUg6IY7pjpYgWMwUvDO9QI30N5JAukOKoT8KD3Q0PQ==}
+  /h3@1.9.0:
+    resolution: {integrity: sha512-+F3ZqrNV/CFXXfZ2lXBINHi+rM4Xw3CDC5z2CDK3NMPocjonKipGLLDSkrqY9DOrioZNPTIdDMWfQKm//3X2DA==}
     dependencies:
       cookie-es: 1.0.0
       defu: 6.1.3
       destr: 2.0.2
-      iron-webcrypto: 0.10.1
+      iron-webcrypto: 1.0.0
       radix3: 1.1.0
       ufo: 1.3.2
       uncrypto: 0.1.3
@@ -10132,7 +10133,7 @@ packages:
       defu: 6.1.3
       destr: 2.0.2
       etag: 1.8.1
-      h3: 1.8.2
+      h3: 1.9.0
       image-meta: 0.2.0
       listhen: 1.5.5
       ofetch: 1.3.3
@@ -10158,10 +10159,6 @@ packages:
       - supports-color
     dev: true
     optional: true
-
-  /iron-webcrypto@0.10.1:
-    resolution: {integrity: sha512-QGOS8MRMnj/UiOa+aMIgfyHcvkhqNUsUxb1XzskENvbo+rEfp6TOwqd1KPuDzXC4OnGHcMSVxDGRoilqB8ViqA==}
-    dev: true
 
   /iron-webcrypto@1.0.0:
     resolution: {integrity: sha512-anOK1Mktt8U1Xi7fCM3RELTuYbnFikQY5VtrDj7kPgpejV7d43tWKhzgioO0zpkazLEL/j/iayRqnJhrGfqUsg==}
@@ -10882,7 +10879,7 @@ packages:
       consola: 3.2.3
       defu: 6.1.3
       get-port-please: 3.1.1
-      h3: 1.8.2
+      h3: 1.9.0
       http-shutdown: 1.2.2
       jiti: 1.21.0
       mlly: 1.4.2
@@ -11597,6 +11594,10 @@ packages:
     dev: true
     optional: true
 
+  /napi-wasm@1.1.0:
+    resolution: {integrity: sha512-lHwIAJbmLSjF9VDRm9GoVOy9AGp3aIvkjv+Kvz9h16QR3uSVYH78PNQUnT2U4X53mhlnV2M7wrhibQ3GHicDmg==}
+    dev: true
+
   /natural-compare@1.4.0:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
     dev: true
@@ -11649,7 +11650,7 @@ packages:
       fs-extra: 11.1.1
       globby: 13.2.2
       gzip-size: 7.0.0
-      h3: 1.8.2
+      h3: 1.9.0
       hookable: 5.5.3
       httpxy: 0.1.5
       is-primitive: 3.0.1
@@ -12403,7 +12404,7 @@ packages:
       estree-walker: 3.0.3
       fs-extra: 11.1.1
       globby: 13.2.2
-      h3: 1.8.2
+      h3: 1.9.0
       hookable: 5.5.3
       jiti: 1.21.0
       klona: 2.0.6
@@ -15750,7 +15751,7 @@ packages:
       anymatch: 3.1.3
       chokidar: 3.5.3
       destr: 2.0.2
-      h3: 1.8.2
+      h3: 1.9.0
       ioredis: 5.3.2
       listhen: 1.5.5
       lru-cache: 10.0.3
