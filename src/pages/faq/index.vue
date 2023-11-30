@@ -110,10 +110,10 @@ useHeadDefault({
 // TODO: remove markdown formatting
 useSchemaOrg([
   defineWebPage({ '@type': 'FAQPage' }),
-  (faqItems || []).map((faqItem) =>
+  (faqItems || []).map(async (faqItem) =>
     defineQuestion({
       name: faqItem.attributes.title,
-      acceptedAnswer: htmlToText(marked(faqItem.attributes.answer)),
+      acceptedAnswer: htmlToText(await marked(faqItem.attributes.answer)),
     }),
   ),
 ])
