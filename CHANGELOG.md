@@ -1,3 +1,10 @@
+## [1.18.3](https://github.com/dargmuesli/creal/compare/1.18.2...1.18.3) (2023-11-30)
+
+
+### Bug Fixes
+
+* schedule release ([d893d8d](https://github.com/dargmuesli/creal/commit/d893d8db4736cdd967d624bf9c3721823abf9674))
+
 ## [1.18.2](https://github.com/dargmuesli/creal/compare/1.18.1...1.18.2) (2023-11-16)
 
 
