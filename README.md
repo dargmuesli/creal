@@ -4,7 +4,7 @@
 
 cReal's website: [creal.jonas-thelemann.de](https://creal.jonas-thelemann.de).
 
-![DJ cReal](https://creal.jonas-thelemann.de/__og_image__/og.png "DJ cReal")
+![DJ cReal](https://creal.jonas-thelemann.de/__og-image__/image/og.png "DJ cReal")
 
 ## Table of Contents
 1. **[Development](#development)**
