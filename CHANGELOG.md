@@ -1,3 +1,10 @@
+## [1.18.7](https://github.com/dargmuesli/creal/compare/1.18.6...1.18.7) (2024-01-06)
+
+
+### Bug Fixes
+
+* **paging:** do not override canonical link ([d8fc630](https://github.com/dargmuesli/creal/commit/d8fc6309e3210073a67e3e3502ad4e070c1b532f))
+
 ## [1.18.6](https://github.com/dargmuesli/creal/compare/1.18.5...1.18.6) (2024-01-03)
 
 
