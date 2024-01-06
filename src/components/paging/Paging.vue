@@ -36,10 +36,11 @@ const init = () => {
 
   useHead({
     link: [
-      {
-        href: route.path,
-        rel: 'canonical',
-      },
+      // // Overrides nuxtseo's canonical link, breaking Google's SEO
+      // {
+      //   href: route.path,
+      //   rel: 'canonical',
+      // },
       ...(props.isPreviousAllowed
         ? [
             {
