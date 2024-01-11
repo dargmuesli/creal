@@ -21,14 +21,14 @@ importers:
   src:
     devDependencies:
       '@aws-sdk/client-s3':
-        specifier: 3.489.0
-        version: 3.489.0
+        specifier: 3.490.0
+        version: 3.490.0
       '@aws-sdk/credential-providers':
-        specifier: 3.489.0
-        version: 3.489.0
+        specifier: 3.490.0
+        version: 3.490.0
       '@aws-sdk/s3-request-presigner':
-        specifier: 3.489.0
-        version: 3.489.0
+        specifier: 3.490.0
+        version: 3.490.0
       '@axe-core/playwright':
         specifier: 4.8.2
         version: 4.8.2(playwright-core@1.40.1)
@@ -37,7 +37,7 @@ importers:
         version: 7.2.3(rollup@4.9.4)(webpack@5.89.0)
       '@dargmuesli/nuxt-vio':
         specifier: 10.2.1
-        version: 10.2.1(@unhead/shared@1.8.9)(@vue/compiler-core@3.4.8)(graphql@16.8.1)(h3@1.10.0)(nuxt@3.9.1)(playwright-core@1.40.1)(postcss@8.4.33)(rollup@4.9.4)(tailwindcss@3.4.1)(typescript@5.3.3)(unhead@1.8.9)(vite@5.0.11)(vue-router@4.2.5)(vue@3.4.10)(webpack@5.89.0)
+        version: 10.2.1(@unhead/shared@1.8.9)(@vue/compiler-core@3.4.10)(graphql@16.8.1)(h3@1.10.0)(nuxt@3.9.1)(playwright-core@1.40.1)(postcss@8.4.33)(rollup@4.9.4)(tailwindcss@3.4.1)(typescript@5.3.3)(unhead@1.8.9)(vite@5.0.11)(vue-router@4.2.5)(vue@3.4.10)(webpack@5.89.0)
       '@graphql-codegen/cli':
         specifier: 5.0.0
         version: 5.0.0(@types/node@20.10.7)(graphql@16.8.1)(typescript@5.3.3)
@@ -344,15 +344,15 @@ packages:
       tslib: 1.14.1
     dev: true
 
-  /@aws-sdk/client-cognito-identity@3.489.0:
-    resolution: {integrity: sha512-NGcvONQwyq/zEVy8S++G+aKpNeUYa2QngxKa2qP+5sL6LGIigXQQjR8+IfG/zbu91hsx5R9P0QYuUnvXrlZotQ==}
+  /@aws-sdk/client-cognito-identity@3.490.0:
+    resolution: {integrity: sha512-P2C8yBOUK0iIIYMb6AUkiE5qoWu032tMVxIZWya9dBYu8uqlnzO0duC5P3UGn6lETZX/59PQ926vRc/6YMyMLg==}
     engines: {node: '>=14.0.0'}
     dependencies:
       '@aws-crypto/sha256-browser': 3.0.0
       '@aws-crypto/sha256-js': 3.0.0
-      '@aws-sdk/client-sts': 3.489.0
-      '@aws-sdk/core': 3.485.0
-      '@aws-sdk/credential-provider-node': 3.489.0
+      '@aws-sdk/client-sts': 3.490.0
+      '@aws-sdk/core': 3.490.0
+      '@aws-sdk/credential-provider-node': 3.490.0
       '@aws-sdk/middleware-host-header': 3.489.0
       '@aws-sdk/middleware-logger': 3.489.0
       '@aws-sdk/middleware-recursion-detection': 3.489.0
@@ -392,16 +392,16 @@ packages:
       - aws-crt
     dev: true
 
-  /@aws-sdk/client-s3@3.489.0:
-    resolution: {integrity: sha512-8NvXqtncf0GJIVqunxwIKjCZv7L7LEEYgY38Mm/EWjiKZ76E7TJ7gsZAB7Wgp2kabmMvDDqDsA7Q5X2qg65AdA==}
+  /@aws-sdk/client-s3@3.490.0:
+    resolution: {integrity: sha512-fBj3CJ3+5R+l/sc93Z9mKw8gM2b9K6vEhC9qSCG2XNymLd9YqlRft1peQ7VymrWywAHX3Koz1GCUrFEVNONiMw==}
     engines: {node: '>=14.0.0'}
     dependencies:
       '@aws-crypto/sha1-browser': 3.0.0
       '@aws-crypto/sha256-browser': 3.0.0
       '@aws-crypto/sha256-js': 3.0.0
-      '@aws-sdk/client-sts': 3.489.0
-      '@aws-sdk/core': 3.485.0
-      '@aws-sdk/credential-provider-node': 3.489.0
+      '@aws-sdk/client-sts': 3.490.0
+      '@aws-sdk/core': 3.490.0
+      '@aws-sdk/credential-provider-node': 3.490.0
       '@aws-sdk/middleware-bucket-endpoint': 3.489.0
       '@aws-sdk/middleware-expect-continue': 3.489.0
       '@aws-sdk/middleware-flexible-checksums': 3.489.0
@@ -458,13 +458,13 @@ packages:
       - aws-crt
     dev: true
 
-  /@aws-sdk/client-sso@3.489.0:
-    resolution: {integrity: sha512-SZPXiYnByYnd3Vy0qY/PnWD2e9JA3Lwi000Tyz+ZQvjK9emH0B6aeWaxFZ7W4jscJVwQVc5kgvRPsJi5zY3w1w==}
+  /@aws-sdk/client-sso@3.490.0:
+    resolution: {integrity: sha512-yfxoHmCL1w/IKmFRfzCxdVCQrGlSQf4eei9iVEm5oi3iE8REFyPj3o/BmKQEHG3h2ITK5UbdYDb5TY4xoYHsyA==}
     engines: {node: '>=14.0.0'}
     dependencies:
       '@aws-crypto/sha256-browser': 3.0.0
       '@aws-crypto/sha256-js': 3.0.0
-      '@aws-sdk/core': 3.485.0
+      '@aws-sdk/core': 3.490.0
       '@aws-sdk/middleware-host-header': 3.489.0
       '@aws-sdk/middleware-logger': 3.489.0
       '@aws-sdk/middleware-recursion-detection': 3.489.0
@@ -503,14 +503,14 @@ packages:
       - aws-crt
     dev: true
 
-  /@aws-sdk/client-sts@3.489.0:
-    resolution: {integrity: sha512-AAQ9+oEJPIPHXWtQL7ahZCKata+d+vZMXpQp92st7KzgmcgsUBdDTBOH0ImN8LXwZwIMAzfn98wWf4s1xtqUeg==}
+  /@aws-sdk/client-sts@3.490.0:
+    resolution: {integrity: sha512-n2vQ5Qu2qi2I0XMI+IH99ElpIRHOJTa1+sqNC4juMYxKQBMvw+EnsqUtaL3QvTHoyxNB/R7mpkeBB6SzPQ1TtA==}
     engines: {node: '>=14.0.0'}
     dependencies:
       '@aws-crypto/sha256-browser': 3.0.0
       '@aws-crypto/sha256-js': 3.0.0
-      '@aws-sdk/core': 3.485.0
-      '@aws-sdk/credential-provider-node': 3.489.0
+      '@aws-sdk/core': 3.490.0
+      '@aws-sdk/credential-provider-node': 3.490.0
       '@aws-sdk/middleware-host-header': 3.489.0
       '@aws-sdk/middleware-logger': 3.489.0
       '@aws-sdk/middleware-recursion-detection': 3.489.0
@@ -551,8 +551,8 @@ packages:
       - aws-crt
     dev: true
 
-  /@aws-sdk/core@3.485.0:
-    resolution: {integrity: sha512-Yvi80DQcbjkYCft471ClE3HuetuNVqntCs6eFOomDcrJaqdOFrXv2kJAxky84MRA/xb7bGlDGAPbTuj1ICputg==}
+  /@aws-sdk/core@3.490.0:
+    resolution: {integrity: sha512-TSBWkXtxMU7q1Zo6w3v5wIOr/sj7P5Jw3OyO7lJrFGsPsDC2xwpxkVqTesDxkzgMRypO52xjYEmveagn1xxBHg==}
     engines: {node: '>=14.0.0'}
     dependencies:
       '@smithy/core': 1.2.2
@@ -563,11 +563,11 @@ packages:
       tslib: 2.6.2
     dev: true
 
-  /@aws-sdk/credential-provider-cognito-identity@3.489.0:
-    resolution: {integrity: sha512-OlcNLOeIq4kdMAJNhM/FuiolTUf4B6e/kb4LJW4vzcI8/Il55xfLGihuGJHIgbKi4HW5RSvMXCVAoUAALQAsiQ==}
+  /@aws-sdk/credential-provider-cognito-identity@3.490.0:
+    resolution: {integrity: sha512-tm07p+jladfKJYFhFqQjT8PC3mM0zagVud/NnYx6w/MB7pHPrixhCRoG1hK+ckAjnUAUVP2uuGXhTVkTfrkTXg==}
     engines: {node: '>=14.0.0'}
     dependencies:
-      '@aws-sdk/client-cognito-identity': 3.489.0
+      '@aws-sdk/client-cognito-identity': 3.490.0
       '@aws-sdk/types': 3.489.0
       '@smithy/property-provider': 2.0.17
       '@smithy/types': 2.8.0
@@ -601,13 +601,13 @@ packages:
       tslib: 2.6.2
     dev: true
 
-  /@aws-sdk/credential-provider-ini@3.489.0:
-    resolution: {integrity: sha512-lB5yufriHMzraQaAlsVKgzXKLGhRHt+ybgcVD+SIegw0QwabWL2va8h1KuRUGqEOUFH6BNTCx9HnI+uH5EadVA==}
+  /@aws-sdk/credential-provider-ini@3.490.0:
+    resolution: {integrity: sha512-7m63zyCpVqj9FsoDxWMWWRvL6c7zZzOcXYkHZmHujVVlmAXH0RT/vkXFkYgt+Ku+ov+v5NQrzwO5TmVoRt6O8g==}
     engines: {node: '>=14.0.0'}
     dependencies:
       '@aws-sdk/credential-provider-env': 3.489.0
       '@aws-sdk/credential-provider-process': 3.489.0
-      '@aws-sdk/credential-provider-sso': 3.489.0
+      '@aws-sdk/credential-provider-sso': 3.490.0
       '@aws-sdk/credential-provider-web-identity': 3.489.0
       '@aws-sdk/types': 3.489.0
       '@smithy/credential-provider-imds': 2.1.5
@@ -619,14 +619,14 @@ packages:
       - aws-crt
     dev: true
 
-  /@aws-sdk/credential-provider-node@3.489.0:
-    resolution: {integrity: sha512-HXjYjG5oqQflLOSkxjDTfWOeE5UX3CvPhcvexZLen8TWyI7azIT81PjFVLq5CJdnFaoeVRxvhp/DIgL7RrNivw==}
+  /@aws-sdk/credential-provider-node@3.490.0:
+    resolution: {integrity: sha512-Gh33u2O5Xbout8G3z/Z5H/CZzdG1ophxf/XS3iMFxA1cazQ7swY1UMmGvB7Lm7upvax5anXouItD1Ph3gzKc4w==}
     engines: {node: '>=14.0.0'}
     dependencies:
       '@aws-sdk/credential-provider-env': 3.489.0
-      '@aws-sdk/credential-provider-ini': 3.489.0
+      '@aws-sdk/credential-provider-ini': 3.490.0
       '@aws-sdk/credential-provider-process': 3.489.0
-      '@aws-sdk/credential-provider-sso': 3.489.0
+      '@aws-sdk/credential-provider-sso': 3.490.0
       '@aws-sdk/credential-provider-web-identity': 3.489.0
       '@aws-sdk/types': 3.489.0
       '@smithy/credential-provider-imds': 2.1.5
@@ -649,11 +649,11 @@ packages:
       tslib: 2.6.2
     dev: true
 
-  /@aws-sdk/credential-provider-sso@3.489.0:
-    resolution: {integrity: sha512-tN+7q7xKA4VZmVSMolStvBd8UeHf43kt3TR/tTfqaSvOQR1hKUrDyVgg2rTdyXWxyQPy1O3rtwMKPsorhc/BTA==}
+  /@aws-sdk/credential-provider-sso@3.490.0:
+    resolution: {integrity: sha512-3UUBUoPbFvT58IhS4Vb23omYj/QPNkjgxu9p9ruQ3KSjLkanI4w8t/l/jljA65q83P7CoLnM5UKG9L7RA8/V1Q==}
     engines: {node: '>=14.0.0'}
     dependencies:
-      '@aws-sdk/client-sso': 3.489.0
+      '@aws-sdk/client-sso': 3.490.0
       '@aws-sdk/token-providers': 3.489.0
       '@aws-sdk/types': 3.489.0
       '@smithy/property-provider': 2.0.17
@@ -674,20 +674,20 @@ packages:
       tslib: 2.6.2
     dev: true
 
-  /@aws-sdk/credential-providers@3.489.0:
-    resolution: {integrity: sha512-18u+qDG4R5YuGORgTZfVTxSTFbNL9UgTNdihJXCxlVeJzK3LcboilMabig9fN0pEJs8BryRocBzQm/pZyem8gw==}
+  /@aws-sdk/credential-providers@3.490.0:
+    resolution: {integrity: sha512-b66SfI3A2H5qVKYkuaYtnNmHApcj2Vju6wRWDr+nZX2iVqBcpCFIs6jMBY0QWmwn+xhlVvAX9tI4AoqGumzKWg==}
     engines: {node: '>=14.0.0'}
     dependencies:
-      '@aws-sdk/client-cognito-identity': 3.489.0
-      '@aws-sdk/client-sso': 3.489.0
-      '@aws-sdk/client-sts': 3.489.0
-      '@aws-sdk/credential-provider-cognito-identity': 3.489.0
+      '@aws-sdk/client-cognito-identity': 3.490.0
+      '@aws-sdk/client-sso': 3.490.0
+      '@aws-sdk/client-sts': 3.490.0
+      '@aws-sdk/credential-provider-cognito-identity': 3.490.0
       '@aws-sdk/credential-provider-env': 3.489.0
       '@aws-sdk/credential-provider-http': 3.489.0
-      '@aws-sdk/credential-provider-ini': 3.489.0
-      '@aws-sdk/credential-provider-node': 3.489.0
+      '@aws-sdk/credential-provider-ini': 3.490.0
+      '@aws-sdk/credential-provider-node': 3.490.0
       '@aws-sdk/credential-provider-process': 3.489.0
-      '@aws-sdk/credential-provider-sso': 3.489.0
+      '@aws-sdk/credential-provider-sso': 3.490.0
       '@aws-sdk/credential-provider-web-identity': 3.489.0
       '@aws-sdk/types': 3.489.0
       '@smithy/credential-provider-imds': 2.1.5
@@ -833,8 +833,8 @@ packages:
       tslib: 2.6.2
     dev: true
 
-  /@aws-sdk/s3-request-presigner@3.489.0:
-    resolution: {integrity: sha512-YSG69ZKad/GLMdxgHD49uBuqDZXdrng8SzvQmy606hKEAi1HJtoFlIs2yjrxpXYtkKtsvjkyJsgFK12klsfODw==}
+  /@aws-sdk/s3-request-presigner@3.490.0:
+    resolution: {integrity: sha512-ZHs+FlcTv9MKMM0b9svxxQio4FiRxDNstKYG8sbm9YEoahYV25h3K3butUiThaiOeYePOD7jHdbdXz4/XasxXg==}
     engines: {node: '>=14.0.0'}
     dependencies:
       '@aws-sdk/signature-v4-multi-region': 3.489.0
@@ -1966,7 +1966,7 @@ packages:
       - webpack
     dev: true
 
-  /@dargmuesli/nuxt-vio@10.2.1(@unhead/shared@1.8.9)(@vue/compiler-core@3.4.8)(graphql@16.8.1)(h3@1.10.0)(nuxt@3.9.1)(playwright-core@1.40.1)(postcss@8.4.33)(rollup@4.9.4)(tailwindcss@3.4.1)(typescript@5.3.3)(unhead@1.8.9)(vite@5.0.11)(vue-router@4.2.5)(vue@3.4.10)(webpack@5.89.0):
+  /@dargmuesli/nuxt-vio@10.2.1(@unhead/shared@1.8.9)(@vue/compiler-core@3.4.10)(graphql@16.8.1)(h3@1.10.0)(nuxt@3.9.1)(playwright-core@1.40.1)(postcss@8.4.33)(rollup@4.9.4)(tailwindcss@3.4.1)(typescript@5.3.3)(unhead@1.8.9)(vite@5.0.11)(vue-router@4.2.5)(vue@3.4.10)(webpack@5.89.0):
     resolution: {integrity: sha512-ZpxMEa4HeUA8I/ah/GgZluWv5GActdt/pVcBNnaJddhHaDMeVVDYKe9qt6UTsH1NriDU8TfDIC7DFMFDOwCWSw==}
     engines: {node: '20'}
     peerDependencies:
@@ -1983,7 +1983,7 @@ packages:
       '@nuxtjs/color-mode': 3.3.2(rollup@4.9.4)
       '@nuxtjs/html-validator': 1.6.0(rollup@4.9.4)
       '@nuxtjs/i18n': 8.0.0(rollup@4.9.4)(vue-router@4.2.5)(vue@3.4.10)
-      '@nuxtjs/seo': 2.0.0-rc.4(@nuxt/devtools@1.0.6)(@unhead/shared@1.8.9)(@vue/compiler-core@3.4.8)(h3@1.10.0)(nuxt@3.9.1)(postcss@8.4.33)(rollup@4.9.4)(unhead@1.8.9)(vite@5.0.11)(vue@3.4.10)(webpack@5.89.0)
+      '@nuxtjs/seo': 2.0.0-rc.4(@nuxt/devtools@1.0.6)(@unhead/shared@1.8.9)(@vue/compiler-core@3.4.10)(h3@1.10.0)(nuxt@3.9.1)(postcss@8.4.33)(rollup@4.9.4)(unhead@1.8.9)(vite@5.0.11)(vue@3.4.10)(webpack@5.89.0)
       '@nuxtjs/tailwindcss': 6.10.3(rollup@4.9.4)
       '@pinia/nuxt': 0.5.1(rollup@4.9.4)(typescript@5.3.3)(vue@3.4.10)
       '@tailwindcss/forms': 0.5.7(tailwindcss@3.4.1)
@@ -3587,7 +3587,7 @@ packages:
       - supports-color
     dev: true
 
-  /@nuxt/devtools-ui-kit@1.0.6(@nuxt/devtools@1.0.6)(@vue/compiler-core@3.4.8)(fuse.js@7.0.0)(nuxt@3.9.1)(postcss@8.4.33)(rollup@4.9.4)(vite@5.0.11)(vue@3.4.10)(webpack@5.89.0):
+  /@nuxt/devtools-ui-kit@1.0.6(@nuxt/devtools@1.0.6)(@vue/compiler-core@3.4.10)(fuse.js@7.0.0)(nuxt@3.9.1)(postcss@8.4.33)(rollup@4.9.4)(vite@5.0.11)(vue@3.4.10)(webpack@5.89.0):
     resolution: {integrity: sha512-4k/fvIn5iHCWsAqVKnl/1X/xsOFxRKWhLLdLq3JK+UAKPaegVVBypUx4RmxHFsbciQMmAQn56LztfLKQRCUBXg==}
     peerDependencies:
       '@nuxt/devtools': 1.0.6
@@ -3613,7 +3613,7 @@ packages:
       focus-trap: 7.5.4
       splitpanes: 3.1.5
       unocss: 0.58.3(@unocss/webpack@0.58.3)(postcss@8.4.33)(rollup@4.9.4)(vite@5.0.11)
-      v-lazy-show: 0.2.4(@vue/compiler-core@3.4.8)
+      v-lazy-show: 0.2.4(@vue/compiler-core@3.4.10)
     transitivePeerDependencies:
       - '@unocss/webpack'
       - '@vue/compiler-core'
@@ -3996,19 +3996,19 @@ packages:
       - vue-router
     dev: true
 
-  /@nuxtjs/seo@2.0.0-rc.4(@nuxt/devtools@1.0.6)(@unhead/shared@1.8.9)(@vue/compiler-core@3.4.8)(h3@1.10.0)(nuxt@3.9.1)(postcss@8.4.33)(rollup@4.9.4)(unhead@1.8.9)(vite@5.0.11)(vue@3.4.10)(webpack@5.89.0):
+  /@nuxtjs/seo@2.0.0-rc.4(@nuxt/devtools@1.0.6)(@unhead/shared@1.8.9)(@vue/compiler-core@3.4.10)(h3@1.10.0)(nuxt@3.9.1)(postcss@8.4.33)(rollup@4.9.4)(unhead@1.8.9)(vite@5.0.11)(vue@3.4.10)(webpack@5.89.0):
     resolution: {integrity: sha512-uq31QBILIv3kzNEJ7uuL0wDPmlusNrGEj+EVvjsH/SYau4Js8BbkCL82PH7B8nvm2UODOpb8f0vMtHMWAlaaZg==}
     dependencies:
       '@nuxt/kit': 3.9.1(rollup@4.9.4)
-      '@nuxtjs/sitemap': 5.0.1(@nuxt/devtools@1.0.6)(@vue/compiler-core@3.4.8)(h3@1.10.0)(nuxt@3.9.1)(postcss@8.4.33)(rollup@4.9.4)(vite@5.0.11)(vue@3.4.10)(webpack@5.89.0)
+      '@nuxtjs/sitemap': 5.0.1(@nuxt/devtools@1.0.6)(@vue/compiler-core@3.4.10)(h3@1.10.0)(nuxt@3.9.1)(postcss@8.4.33)(rollup@4.9.4)(vite@5.0.11)(vue@3.4.10)(webpack@5.89.0)
       chalk: 5.3.0
       defu: 6.1.4
-      nuxt-link-checker: 3.0.0-rc.4(@nuxt/devtools@1.0.6)(@vue/compiler-core@3.4.8)(nuxt@3.9.1)(postcss@8.4.33)(rollup@4.9.4)(vite@5.0.11)(vue@3.4.10)(webpack@5.89.0)
-      nuxt-og-image: 3.0.0-rc.24(@nuxt/devtools@1.0.6)(@vue/compiler-core@3.4.8)(nuxt@3.9.1)(postcss@8.4.33)(rollup@4.9.4)(vite@5.0.11)(vue@3.4.10)(webpack@5.89.0)
-      nuxt-schema-org: 3.3.2(@nuxt/devtools@1.0.6)(@unhead/shared@1.8.9)(@vue/compiler-core@3.4.8)(nuxt@3.9.1)(postcss@8.4.33)(rollup@4.9.4)(unhead@1.8.9)(vite@5.0.11)(vue@3.4.10)(webpack@5.89.0)
-      nuxt-seo-experiments: 4.0.0-rc.0(@nuxt/devtools@1.0.6)(@vue/compiler-core@3.4.8)(nuxt@3.9.1)(postcss@8.4.33)(rollup@4.9.4)(vite@5.0.11)(vue@3.4.10)(webpack@5.89.0)
-      nuxt-simple-robots: 4.0.0-rc.11(@nuxt/devtools@1.0.6)(@vue/compiler-core@3.4.8)(nuxt@3.9.1)(postcss@8.4.33)(rollup@4.9.4)(vite@5.0.11)(vue@3.4.10)(webpack@5.89.0)
-      nuxt-site-config: 2.2.5(@nuxt/devtools@1.0.6)(@vue/compiler-core@3.4.8)(nuxt@3.9.1)(postcss@8.4.33)(rollup@4.9.4)(vite@5.0.11)(vue@3.4.10)(webpack@5.89.0)
+      nuxt-link-checker: 3.0.0-rc.4(@nuxt/devtools@1.0.6)(@vue/compiler-core@3.4.10)(nuxt@3.9.1)(postcss@8.4.33)(rollup@4.9.4)(vite@5.0.11)(vue@3.4.10)(webpack@5.89.0)
+      nuxt-og-image: 3.0.0-rc.24(@nuxt/devtools@1.0.6)(@vue/compiler-core@3.4.10)(nuxt@3.9.1)(postcss@8.4.33)(rollup@4.9.4)(vite@5.0.11)(vue@3.4.10)(webpack@5.89.0)
+      nuxt-schema-org: 3.3.2(@nuxt/devtools@1.0.6)(@unhead/shared@1.8.9)(@vue/compiler-core@3.4.10)(nuxt@3.9.1)(postcss@8.4.33)(rollup@4.9.4)(unhead@1.8.9)(vite@5.0.11)(vue@3.4.10)(webpack@5.89.0)
+      nuxt-seo-experiments: 4.0.0-rc.0(@nuxt/devtools@1.0.6)(@vue/compiler-core@3.4.10)(nuxt@3.9.1)(postcss@8.4.33)(rollup@4.9.4)(vite@5.0.11)(vue@3.4.10)(webpack@5.89.0)
+      nuxt-simple-robots: 4.0.0-rc.11(@nuxt/devtools@1.0.6)(@vue/compiler-core@3.4.10)(nuxt@3.9.1)(postcss@8.4.33)(rollup@4.9.4)(vite@5.0.11)(vue@3.4.10)(webpack@5.89.0)
+      nuxt-site-config: 2.2.5(@nuxt/devtools@1.0.6)(@vue/compiler-core@3.4.10)(nuxt@3.9.1)(postcss@8.4.33)(rollup@4.9.4)(vite@5.0.11)(vue@3.4.10)(webpack@5.89.0)
       nuxt-site-config-kit: 2.2.5(rollup@4.9.4)(vue@3.4.10)
       pkg-types: 1.0.3
       ufo: 1.3.2
@@ -4040,18 +4040,18 @@ packages:
       - webpack
     dev: true
 
-  /@nuxtjs/sitemap@5.0.1(@nuxt/devtools@1.0.6)(@vue/compiler-core@3.4.8)(h3@1.10.0)(nuxt@3.9.1)(postcss@8.4.33)(rollup@4.9.4)(vite@5.0.11)(vue@3.4.10)(webpack@5.89.0):
+  /@nuxtjs/sitemap@5.0.1(@nuxt/devtools@1.0.6)(@vue/compiler-core@3.4.10)(h3@1.10.0)(nuxt@3.9.1)(postcss@8.4.33)(rollup@4.9.4)(vite@5.0.11)(vue@3.4.10)(webpack@5.89.0):
     resolution: {integrity: sha512-pAczbbSJ/MvsnwDENz3M3QX++iDrno/TUt/AO3vD0Hh9CRYHLxT3+w6Sw38af7WTHVa6q0eYFilYK8CHFtwmFg==}
     dependencies:
       '@nuxt/devtools-kit': 1.0.6(nuxt@3.9.1)(rollup@4.9.4)(vite@5.0.11)
-      '@nuxt/devtools-ui-kit': 1.0.6(@nuxt/devtools@1.0.6)(@vue/compiler-core@3.4.8)(fuse.js@7.0.0)(nuxt@3.9.1)(postcss@8.4.33)(rollup@4.9.4)(vite@5.0.11)(vue@3.4.10)(webpack@5.89.0)
+      '@nuxt/devtools-ui-kit': 1.0.6(@nuxt/devtools@1.0.6)(@vue/compiler-core@3.4.10)(fuse.js@7.0.0)(nuxt@3.9.1)(postcss@8.4.33)(rollup@4.9.4)(vite@5.0.11)(vue@3.4.10)(webpack@5.89.0)
       '@nuxt/kit': 3.9.1(rollup@4.9.4)
       '@vueuse/core': 10.7.1(vue@3.4.10)
       chalk: 5.3.0
       defu: 6.1.4
       floating-vue: 2.0.0-beta.24(@nuxt/kit@3.9.1)(vue@3.4.10)
       h3-compression: 0.3.2(h3@1.10.0)
-      nuxt-site-config: 2.2.5(@nuxt/devtools@1.0.6)(@vue/compiler-core@3.4.8)(nuxt@3.9.1)(postcss@8.4.33)(rollup@4.9.4)(vite@5.0.11)(vue@3.4.10)(webpack@5.89.0)
+      nuxt-site-config: 2.2.5(@nuxt/devtools@1.0.6)(@vue/compiler-core@3.4.10)(nuxt@3.9.1)(postcss@8.4.33)(rollup@4.9.4)(vite@5.0.11)(vue@3.4.10)(webpack@5.89.0)
       nuxt-site-config-kit: 2.2.5(rollup@4.9.4)(vue@3.4.10)
       ofetch: 1.3.3
       pathe: 1.1.1
@@ -12008,11 +12008,11 @@ packages:
       - supports-color
     dev: true
 
-  /nuxt-link-checker@3.0.0-rc.4(@nuxt/devtools@1.0.6)(@vue/compiler-core@3.4.8)(nuxt@3.9.1)(postcss@8.4.33)(rollup@4.9.4)(vite@5.0.11)(vue@3.4.10)(webpack@5.89.0):
+  /nuxt-link-checker@3.0.0-rc.4(@nuxt/devtools@1.0.6)(@vue/compiler-core@3.4.10)(nuxt@3.9.1)(postcss@8.4.33)(rollup@4.9.4)(vite@5.0.11)(vue@3.4.10)(webpack@5.89.0):
     resolution: {integrity: sha512-3JrUmO2xE4/Cy2dQo/KTqdDUifaTM2qXzAyy1dwlbtuEQbAPWRcWJbtp4ZDTU80tVEdPU/nDBnKQW8CiJ6ic3Q==}
     dependencies:
       '@nuxt/devtools-kit': 1.0.6(nuxt@3.9.1)(rollup@4.9.4)(vite@5.0.11)
-      '@nuxt/devtools-ui-kit': 1.0.6(@nuxt/devtools@1.0.6)(@vue/compiler-core@3.4.8)(fuse.js@7.0.0)(nuxt@3.9.1)(postcss@8.4.33)(rollup@4.9.4)(vite@5.0.11)(vue@3.4.10)(webpack@5.89.0)
+      '@nuxt/devtools-ui-kit': 1.0.6(@nuxt/devtools@1.0.6)(@vue/compiler-core@3.4.10)(fuse.js@7.0.0)(nuxt@3.9.1)(postcss@8.4.33)(rollup@4.9.4)(vite@5.0.11)(vue@3.4.10)(webpack@5.89.0)
       '@nuxt/kit': 3.9.1(rollup@4.9.4)
       '@vueuse/core': 10.7.1(vue@3.4.10)
       chalk: 5.3.0
@@ -12021,7 +12021,7 @@ packages:
       floating-vue: 2.0.0-beta.24(@nuxt/kit@3.9.1)(vue@3.4.10)
       fuse.js: 7.0.0
       magic-string: 0.30.5
-      nuxt-site-config: 2.2.0(@nuxt/devtools@1.0.6)(@vue/compiler-core@3.4.8)(fuse.js@7.0.0)(nuxt@3.9.1)(postcss@8.4.33)(rollup@4.9.4)(vite@5.0.11)(vue@3.4.10)(webpack@5.89.0)
+      nuxt-site-config: 2.2.0(@nuxt/devtools@1.0.6)(@vue/compiler-core@3.4.10)(fuse.js@7.0.0)(nuxt@3.9.1)(postcss@8.4.33)(rollup@4.9.4)(vite@5.0.11)(vue@3.4.10)(webpack@5.89.0)
       nuxt-site-config-kit: 2.2.0(rollup@4.9.4)(vue@3.4.10)
       pathe: 1.1.1
       radix3: 1.1.0
@@ -12053,7 +12053,7 @@ packages:
       - webpack
     dev: true
 
-  /nuxt-og-image@3.0.0-rc.24(@nuxt/devtools@1.0.6)(@vue/compiler-core@3.4.8)(nuxt@3.9.1)(postcss@8.4.33)(rollup@4.9.4)(vite@5.0.11)(vue@3.4.10)(webpack@5.89.0):
+  /nuxt-og-image@3.0.0-rc.24(@nuxt/devtools@1.0.6)(@vue/compiler-core@3.4.10)(nuxt@3.9.1)(postcss@8.4.33)(rollup@4.9.4)(vite@5.0.11)(vue@3.4.10)(webpack@5.89.0):
     resolution: {integrity: sha512-4CDxdbwTh1y2Xs0oQGZvIG0Jc+Cn1cKU2ffJ6VuuH3Plydv8Ak/bk1xxTpK/SidmJHc2VHe578mfs5k+cvl8HA==}
     dependencies:
       '@css-inline/css-inline': 0.12.1
@@ -12071,7 +12071,7 @@ packages:
       execa: 8.0.1
       floating-vue: 2.0.0-beta.24(@nuxt/kit@3.9.1)(vue@3.4.10)
       image-size: 1.1.1
-      nuxt-site-config: 2.2.5(@nuxt/devtools@1.0.6)(@vue/compiler-core@3.4.8)(nuxt@3.9.1)(postcss@8.4.33)(rollup@4.9.4)(vite@5.0.11)(vue@3.4.10)(webpack@5.89.0)
+      nuxt-site-config: 2.2.5(@nuxt/devtools@1.0.6)(@vue/compiler-core@3.4.10)(nuxt@3.9.1)(postcss@8.4.33)(rollup@4.9.4)(vite@5.0.11)(vue@3.4.10)(webpack@5.89.0)
       nuxt-site-config-kit: 2.2.5(rollup@4.9.4)(vue@3.4.10)
       nypm: 0.3.4
       ofetch: 1.3.3
@@ -12112,15 +12112,15 @@ packages:
       - webpack
     dev: true
 
-  /nuxt-schema-org@3.3.2(@nuxt/devtools@1.0.6)(@unhead/shared@1.8.9)(@vue/compiler-core@3.4.8)(nuxt@3.9.1)(postcss@8.4.33)(rollup@4.9.4)(unhead@1.8.9)(vite@5.0.11)(vue@3.4.10)(webpack@5.89.0):
+  /nuxt-schema-org@3.3.2(@nuxt/devtools@1.0.6)(@unhead/shared@1.8.9)(@vue/compiler-core@3.4.10)(nuxt@3.9.1)(postcss@8.4.33)(rollup@4.9.4)(unhead@1.8.9)(vite@5.0.11)(vue@3.4.10)(webpack@5.89.0):
     resolution: {integrity: sha512-OAxv9qSowUkDA+RUX0LDa/KST38Y0719T8d5XjcVAyUVXyVWAOHXCjzUWaLiepgqrSlvVbYyccR+puIuPe40cQ==}
     dependencies:
       '@nuxt/devtools-kit': 1.0.6(nuxt@3.9.1)(rollup@4.9.4)(vite@5.0.11)
-      '@nuxt/devtools-ui-kit': 1.0.6(@nuxt/devtools@1.0.6)(@vue/compiler-core@3.4.8)(fuse.js@7.0.0)(nuxt@3.9.1)(postcss@8.4.33)(rollup@4.9.4)(vite@5.0.11)(vue@3.4.10)(webpack@5.89.0)
+      '@nuxt/devtools-ui-kit': 1.0.6(@nuxt/devtools@1.0.6)(@vue/compiler-core@3.4.10)(fuse.js@7.0.0)(nuxt@3.9.1)(postcss@8.4.33)(rollup@4.9.4)(vite@5.0.11)(vue@3.4.10)(webpack@5.89.0)
       '@nuxt/kit': 3.9.1(rollup@4.9.4)
       '@unhead/schema-org': 1.8.9(@unhead/shared@1.8.9)(unhead@1.8.9)
       floating-vue: 2.0.0-beta.24(@nuxt/kit@3.9.1)(vue@3.4.10)
-      nuxt-site-config: 2.2.5(@nuxt/devtools@1.0.6)(@vue/compiler-core@3.4.8)(nuxt@3.9.1)(postcss@8.4.33)(rollup@4.9.4)(vite@5.0.11)(vue@3.4.10)(webpack@5.89.0)
+      nuxt-site-config: 2.2.5(@nuxt/devtools@1.0.6)(@vue/compiler-core@3.4.10)(nuxt@3.9.1)(postcss@8.4.33)(rollup@4.9.4)(vite@5.0.11)(vue@3.4.10)(webpack@5.89.0)
       nuxt-site-config-kit: 2.2.5(rollup@4.9.4)(vue@3.4.10)
       pathe: 1.1.1
       shiki-es: 0.14.0
@@ -12168,7 +12168,7 @@ packages:
       - supports-color
     dev: true
 
-  /nuxt-seo-experiments@4.0.0-rc.0(@nuxt/devtools@1.0.6)(@vue/compiler-core@3.4.8)(nuxt@3.9.1)(postcss@8.4.33)(rollup@4.9.4)(vite@5.0.11)(vue@3.4.10)(webpack@5.89.0):
+  /nuxt-seo-experiments@4.0.0-rc.0(@nuxt/devtools@1.0.6)(@vue/compiler-core@3.4.10)(nuxt@3.9.1)(postcss@8.4.33)(rollup@4.9.4)(vite@5.0.11)(vue@3.4.10)(webpack@5.89.0):
     resolution: {integrity: sha512-PUx8KlUngNKZjcF6mv/takJtrDhwjRHzS3i6p3rg7gYa1LN0I9jX8Q8ti/Hbc5mZ3pDPypTUMz836Z03DbVcKw==}
     dependencies:
       '@nuxt/kit': 3.9.1(rollup@4.9.4)
@@ -12177,7 +12177,7 @@ packages:
       escape-string-regexp: 5.0.0
       fast-glob: 3.3.2
       image-size: 1.1.1
-      nuxt-site-config: 2.2.5(@nuxt/devtools@1.0.6)(@vue/compiler-core@3.4.8)(nuxt@3.9.1)(postcss@8.4.33)(rollup@4.9.4)(vite@5.0.11)(vue@3.4.10)(webpack@5.89.0)
+      nuxt-site-config: 2.2.5(@nuxt/devtools@1.0.6)(@vue/compiler-core@3.4.10)(nuxt@3.9.1)(postcss@8.4.33)(rollup@4.9.4)(vite@5.0.11)(vue@3.4.10)(webpack@5.89.0)
       nuxt-site-config-kit: 2.2.5(rollup@4.9.4)(vue@3.4.10)
       pathe: 1.1.1
       ufo: 1.3.2
@@ -12206,13 +12206,13 @@ packages:
       - webpack
     dev: true
 
-  /nuxt-simple-robots@4.0.0-rc.11(@nuxt/devtools@1.0.6)(@vue/compiler-core@3.4.8)(nuxt@3.9.1)(postcss@8.4.33)(rollup@4.9.4)(vite@5.0.11)(vue@3.4.10)(webpack@5.89.0):
+  /nuxt-simple-robots@4.0.0-rc.11(@nuxt/devtools@1.0.6)(@vue/compiler-core@3.4.10)(nuxt@3.9.1)(postcss@8.4.33)(rollup@4.9.4)(vite@5.0.11)(vue@3.4.10)(webpack@5.89.0):
     resolution: {integrity: sha512-GdERaULKmMu7AA4wyeGyNDigo9CXDRdFdLTiTlpI6QTm9v+TiXv1dzmrXyeX3N8m1ZcseeWWng+zrCo4zuCaRA==}
     dependencies:
       '@nuxt/devtools-kit': 1.0.6(nuxt@3.9.1)(rollup@4.9.4)(vite@5.0.11)
       '@nuxt/kit': 3.9.1(rollup@4.9.4)
       defu: 6.1.4
-      nuxt-site-config: 2.2.5(@nuxt/devtools@1.0.6)(@vue/compiler-core@3.4.8)(nuxt@3.9.1)(postcss@8.4.33)(rollup@4.9.4)(vite@5.0.11)(vue@3.4.10)(webpack@5.89.0)
+      nuxt-site-config: 2.2.5(@nuxt/devtools@1.0.6)(@vue/compiler-core@3.4.10)(nuxt@3.9.1)(postcss@8.4.33)(rollup@4.9.4)(vite@5.0.11)(vue@3.4.10)(webpack@5.89.0)
       nuxt-site-config-kit: 2.2.5(rollup@4.9.4)(vue@3.4.10)
       pathe: 1.1.1
       sirv: 2.0.4
@@ -12272,11 +12272,11 @@ packages:
       - vue
     dev: true
 
-  /nuxt-site-config@2.2.0(@nuxt/devtools@1.0.6)(@vue/compiler-core@3.4.8)(fuse.js@7.0.0)(nuxt@3.9.1)(postcss@8.4.33)(rollup@4.9.4)(vite@5.0.11)(vue@3.4.10)(webpack@5.89.0):
+  /nuxt-site-config@2.2.0(@nuxt/devtools@1.0.6)(@vue/compiler-core@3.4.10)(fuse.js@7.0.0)(nuxt@3.9.1)(postcss@8.4.33)(rollup@4.9.4)(vite@5.0.11)(vue@3.4.10)(webpack@5.89.0):
     resolution: {integrity: sha512-YBQzUsBu3d+aYW9pWF/xDn7bsKG26jVhrkUVOC6+m7VOqJfYzCAckbbKt/shYAAlgQ9W203p3SXJRE++fGAwJA==}
     dependencies:
       '@nuxt/devtools-kit': 1.0.6(nuxt@3.9.1)(rollup@4.9.4)(vite@5.0.11)
-      '@nuxt/devtools-ui-kit': 1.0.6(@nuxt/devtools@1.0.6)(@vue/compiler-core@3.4.8)(fuse.js@7.0.0)(nuxt@3.9.1)(postcss@8.4.33)(rollup@4.9.4)(vite@5.0.11)(vue@3.4.10)(webpack@5.89.0)
+      '@nuxt/devtools-ui-kit': 1.0.6(@nuxt/devtools@1.0.6)(@vue/compiler-core@3.4.10)(fuse.js@7.0.0)(nuxt@3.9.1)(postcss@8.4.33)(rollup@4.9.4)(vite@5.0.11)(vue@3.4.10)(webpack@5.89.0)
       '@nuxt/kit': 3.9.1(rollup@4.9.4)
       '@nuxt/schema': 3.9.1(rollup@4.9.4)
       nuxt-site-config-kit: 2.2.0(rollup@4.9.4)(vue@3.4.10)
@@ -12310,11 +12310,11 @@ packages:
       - webpack
     dev: true
 
-  /nuxt-site-config@2.2.5(@nuxt/devtools@1.0.6)(@vue/compiler-core@3.4.8)(nuxt@3.9.1)(postcss@8.4.33)(rollup@4.9.4)(vite@5.0.11)(vue@3.4.10)(webpack@5.89.0):
+  /nuxt-site-config@2.2.5(@nuxt/devtools@1.0.6)(@vue/compiler-core@3.4.10)(nuxt@3.9.1)(postcss@8.4.33)(rollup@4.9.4)(vite@5.0.11)(vue@3.4.10)(webpack@5.89.0):
     resolution: {integrity: sha512-E8qp+/8GRya1Gyt13Vo9MLW36TDJ52YVXJdSEmZAlNBIplAoVSEkizFlppaStKpGmqXXFXmkLuD8rm3jHZsvMQ==}
     dependencies:
       '@nuxt/devtools-kit': 1.0.6(nuxt@3.9.1)(rollup@4.9.4)(vite@5.0.11)
-      '@nuxt/devtools-ui-kit': 1.0.6(@nuxt/devtools@1.0.6)(@vue/compiler-core@3.4.8)(fuse.js@7.0.0)(nuxt@3.9.1)(postcss@8.4.33)(rollup@4.9.4)(vite@5.0.11)(vue@3.4.10)(webpack@5.89.0)
+      '@nuxt/devtools-ui-kit': 1.0.6(@nuxt/devtools@1.0.6)(@vue/compiler-core@3.4.10)(fuse.js@7.0.0)(nuxt@3.9.1)(postcss@8.4.33)(rollup@4.9.4)(vite@5.0.11)(vue@3.4.10)(webpack@5.89.0)
       '@nuxt/kit': 3.9.1(rollup@4.9.4)
       '@nuxt/schema': 3.9.1(rollup@4.9.4)
       floating-vue: 2.0.0-beta.24(@nuxt/kit@3.9.1)(vue@3.4.10)
@@ -15756,12 +15756,12 @@ packages:
     hasBin: true
     dev: true
 
-  /v-lazy-show@0.2.4(@vue/compiler-core@3.4.8):
+  /v-lazy-show@0.2.4(@vue/compiler-core@3.4.10):
     resolution: {integrity: sha512-Lx9Str2i+HTh+zGzs9O3YyhGAZOAAfU+6MUUPcQPPiPxQO1sHBEv9sH3MO9bPc4T09gsjsS2+sbaCWQ1MdhpJQ==}
     peerDependencies:
       '@vue/compiler-core': ^3.3
     dependencies:
-      '@vue/compiler-core': 3.4.8
+      '@vue/compiler-core': 3.4.10
     dev: true
 
   /validate-npm-package-license@3.0.4:
