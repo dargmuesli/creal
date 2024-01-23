@@ -45,7 +45,6 @@ export default defineNuxtConfig(
             'marked',
             'plyr',
             'pretty-bytes',
-            'sweetalert2',
           ],
         },
       },
