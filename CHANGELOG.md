@@ -1,3 +1,10 @@
+## [1.18.9](https://github.com/dargmuesli/creal/compare/1.18.8...1.18.9) (2024-01-23)
+
+
+### Bug Fixes
+
+* **csp:** hardcode variables temporarily ([fccd731](https://github.com/dargmuesli/creal/commit/fccd7312c382761dac985e177ef158c56d8a8377))
+
 ## [1.18.8](https://github.com/dargmuesli/creal/compare/1.18.7...1.18.8) (2024-01-18)
 
 
