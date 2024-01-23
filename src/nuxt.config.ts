@@ -12,11 +12,12 @@ const isInProduction = process.env.NODE_ENV === 'production'
 
 const crealS3EndpointHost =
   (stagingHost || isInProduction
-    ? `${process.env.NUXT_PUBLIC_CREAL_S3_BUCKET}.`
+    ? `${process.env.NUXT_PUBLIC_CREAL_S3_BUCKET || 'creal-audio'}.`
     : '') +
   // eslint-disable-next-line compat/compat
-  new URL(process.env.NUXT_PUBLIC_CREAL_S3_ENDPOINT || 'https://example.com')
-    .host
+  new URL(
+    process.env.NUXT_PUBLIC_CREAL_S3_ENDPOINT || 'https://s3.nl-ams.scw.cloud',
+  ).host
 
 export default defineNuxtConfig(
   defu(
