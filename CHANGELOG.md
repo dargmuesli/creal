@@ -1,3 +1,10 @@
+## [1.18.10](https://github.com/dargmuesli/creal/compare/1.18.9...1.18.10) (2024-01-23)
+
+
+### Performance Improvements
+
+* **urql:** drop dynamic import ([d4d6a87](https://github.com/dargmuesli/creal/commit/d4d6a871b3275aa13ed8ad6eaa0595b0f236deb6))
+
 ## [1.18.9](https://github.com/dargmuesli/creal/compare/1.18.8...1.18.9) (2024-01-23)
 
 
