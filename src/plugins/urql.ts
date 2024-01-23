@@ -10,7 +10,7 @@ import {
 import {
   /* Cache, */ offlineExchange as getOfflineExchange,
 } from '@urql/exchange-graphcache'
-// import { makeDefaultStorage } from '@urql/exchange-graphcache/default-storage'
+import { makeDefaultStorage } from '@urql/exchange-graphcache/default-storage'
 // import { relayPagination } from '@urql/exchange-graphcache/extras'
 import { devtoolsExchange } from '@urql/devtools'
 import { provideClient } from '@urql/vue'
@@ -70,7 +70,7 @@ const SSR_KEY = '__URQL_DATA__'
 //   return Array.isArray(value) && value.every((item) => typeof item === 'string')
 // }
 
-export default defineNuxtPlugin(async (nuxtApp) => {
+export default defineNuxtPlugin((nuxtApp) => {
   const runtimeConfig = useRuntimeConfig()
   const getServiceHref = useGetServiceHref()
 
@@ -127,9 +127,7 @@ export default defineNuxtPlugin(async (nuxtApp) => {
   const cacheExchange = process.client
     ? getOfflineExchange({
         schema,
-        storage: (
-          await import('@urql/exchange-graphcache/default-storage')
-        ).makeDefaultStorage(),
+        storage: makeDefaultStorage(),
       })
     : undefined
 
