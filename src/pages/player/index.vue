@@ -17,7 +17,7 @@
             <li
               v-for="collection in store.playerData.currentPlaylist.collections"
               :key="collection.name"
-              class="max-w-xxs min-w-xxs m-2"
+              class="m-2 min-w-[15rem] max-w-[15rem]"
             >
               <VioLink
                 class="block h-full w-full"
@@ -70,8 +70,6 @@
 <script setup lang="ts">
 import type { Playlist, PlaylistItem } from '~/types/player'
 import { useStore } from '~/store'
-
-definePageMeta({ colorMode: 'dark' })
 
 const store = useStore()
 const { t } = useI18n()

@@ -50,6 +50,9 @@ export default defineNuxtConfig(
       },
 
       // modules
+      colorMode: {
+        preference: 'dark',
+      },
       cookieControl: {
         isControlButtonEnabled: false,
       },

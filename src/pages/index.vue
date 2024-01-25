@@ -1,99 +1,58 @@
 <template>
-  <div class="flex flex-1">
-    <div
-      :class="{ '-translate-y-full': !showGreeting }"
-      class="fullscreen transform-gpu transition-transform duration-1000 ease-in-out"
-    >
-      <div class="fullscreen bg-gray-800"></div>
-      <div class="fullscreen bg-creal bg-cover bg-center bg-no-repeat" />
-      <div class="fullscreen bg-gray-800 opacity-75"></div>
-      <div class="fullscreen flex">
-        <div class="mb-20vh m-auto text-center">
-          <h1 class="inline-block border-b border-gray-400">
-            {{ t('creal') }}
-          </h1>
-          <i18n-t
-            class="mb-16 mt-4 whitespace-pre-line font-light"
-            keypath="welcome"
-            tag="p"
+  <div class="relative flex flex-1 items-end justify-center">
+    <div class="mb-[15vh] max-w-2xl">
+      <div class="hidden sm:mb-8 sm:flex sm:justify-center">
+        <div
+          class="relative rounded-full px-3 py-1 text-sm leading-6 text-gray-400 ring-1 ring-white/10 hover:ring-white/20"
+        >
+          {{ t('cities') }}
+          <VioLink
+            :to="localePath('/events')"
+            :is-colored="false"
+            class="font-semibold text-white"
           >
-            <br />
-          </i18n-t>
-          <VioButtonColored
-            aria-label="start"
-            @click="setShowGreeting({ save: true })"
-          >
-            {{ t('start') }}
-          </VioButtonColored>
+            <span class="absolute inset-0" aria-hidden="true" />
+            {{ t('viewAll') }}
+            <span aria-hidden="true">{{ t('arrow') }}</span>
+          </VioLink>
         </div>
       </div>
-    </div>
-    <div
-      class="grid flex-1 grid-cols-1 items-stretch gap-4 xl:grid-cols-2 xl:gap-8"
-    >
-      <ButtonBig aria-label="Events" :to="localePath('/events')">
-        <VioIconCalendar classes="h-16 w-16" />
-        {{ t('events') }}
-      </ButtonBig>
-      <ButtonBig aria-label="FAQ" :to="localePath('/faq')">
-        <VioIconChatOutline classes="h-16 w-16" />
-        {{ t('faq') }}
-      </ButtonBig>
-      <ButtonBig aria-label="Player" :to="localePath('/player')">
-        <VioIconMusic classes="h-16 w-16" />
-        {{ t('player') }}
-      </ButtonBig>
-      <ButtonBig aria-label="Suggestions" :to="localePath('/suggestions')">
-        <VioIconLightbulb classes="h-16 w-16" />
-        {{ t('suggestions') }}
-      </ButtonBig>
+      <div class="text-center">
+        <h1 class="text-4xl font-bold tracking-tight text-white sm:text-6xl">
+          {{ t('cReal') }}
+        </h1>
+        <i18n-t
+          class="mt-6 text-lg leading-8 text-gray-300"
+          keypath="welcome"
+          tag="p"
+        >
+          <br />
+        </i18n-t>
+        <div class="mt-10 flex items-center justify-center gap-x-6">
+          <VioButtonColored
+            :aria-label="t('testimonialsRead')"
+            class="text-sm font-semibold shadow-sm"
+            :to="localePath('/testimonials')"
+          >
+            {{ t('testimonialsRead') }}
+          </VioButtonColored>
+          <LinkBooking class="text-sm font-semibold leading-6" />
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-definePageMeta({ colorMode: 'dark' })
+definePageMeta({
+  layout: 'root',
+})
 
 const localePath = useLocalePath()
 const { t } = useI18n()
 const siteConfig = useSiteConfig()
 
-// data
-const showGreeting = ref(true)
-
-// methods
-const setShowGreeting = ({ save }: { save: boolean }) => {
-  if (save) {
-    sessionStorage.setItem('cReal_showGreeting', 'shown')
-  }
-
-  if (sessionStorage.getItem('cReal_showGreeting') !== 'shown') {
-    showGreeting.value = true
-  } else {
-    showGreeting.value = false
-    document.body.classList.remove('overflow-hidden')
-  }
-}
-
-// lifecycle
-onBeforeMount(() => {
-  window.addEventListener('keypress', (event) => {
-    if (event.key === 'Enter') {
-      setShowGreeting({ save: true })
-    }
-  })
-})
-
-onMounted(() => {
-  setShowGreeting({ save: false })
-})
-
 // initialization
-useServerHead({
-  bodyAttrs: {
-    class: ['overflow-hidden'],
-  },
-})
 useHeadDefault({ title: siteConfig.name })
 </script>
 
@@ -105,19 +64,17 @@ export default {
 
 <i18n lang="yaml">
 de:
-  creal: cReal
-  events: Veranstaltungen
-  faq: FAQ
-  player: Player
-  start: Start
-  suggestions: Vorschläge
+  arrow: →
+  cities: Köln, Karlsruhe, Frankfurt, Kassel, …
+  cReal: cReal
+  testimonialsRead: Erfahrungsberichte lesen
+  viewAll: Alle anzeigen
   welcome: DJ und Event-Organisator,{0}manchmal am Doubletime rappen.
 en:
-  creal: cReal
-  events: Events
-  faq: FAQ
-  player: Player
-  start: Start
-  suggestions: Suggestions
+  arrow: →
+  cities: Cologne, Karlsruhe, Frankfurt, Kassel, …
+  cReal: cReal
+  testimonialsRead: Read testimonials
+  viewAll: View all
   welcome: DJ and event organizer,{0}occasionally rapping double times.
 </i18n>

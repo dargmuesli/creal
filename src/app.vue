@@ -1,19 +1,29 @@
 <template>
   <div :data-is-loading="isLoading" data-testid="is-loading">
+    <NuxtLoadingIndicator color="#fff" />
     <NuxtLayout>
       <!-- `NuxtLayout` can't have mulitple child nodes (https://github.com/nuxt/nuxt/issues/21759) -->
       <NuxtPage />
     </NuxtLayout>
+    <PlayerPlyr />
+    <CookieControl :locale="locale" />
   </div>
 </template>
 
 <script setup lang="ts">
+import type { Locale } from '@dargmuesli/nuxt-cookie-control/dist/runtime/types'
+import type { WritableComputedRef } from 'vue'
+
 const { $dayjs } = useNuxtApp()
-const { t, locale } = useI18n()
+const i18n = useI18n()
+const { t } = i18n
 const cookieControl = useCookieControl()
 
 const loadingId = Math.random()
 const loadingIds = useState('loadingIds', () => [loadingId])
+
+// data
+const locale = i18n.locale as WritableComputedRef<Locale>
 
 // methods
 const init = () => {

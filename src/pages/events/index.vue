@@ -42,8 +42,6 @@ import { consola } from 'consola'
 
 import type { CrealEvent, CrealFaq } from '~/types/creal'
 
-definePageMeta({ colorMode: 'dark' })
-
 const { t, locale } = useI18n()
 const route = useRoute()
 const strapiFetch = useStrapiFetch()
