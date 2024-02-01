@@ -12,7 +12,9 @@
   "scripts": {
     "prepare": "husky"
   },
-  "resolutions": {
-    "@nuxtjs/tailwindcss": "6.11.2"
+  "pnpm": {
+    "overrides": {
+      "@nuxtjs/tailwindcss": "6.11.0"
+    }
   }
 }
