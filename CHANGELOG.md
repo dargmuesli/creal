@@ -1,3 +1,10 @@
+## [1.19.1](https://github.com/dargmuesli/creal/compare/1.19.0...1.19.1) (2024-02-01)
+
+
+### Bug Fixes
+
+* **i18n:** workaround newline issue ([17d8cfe](https://github.com/dargmuesli/creal/commit/17d8cfe9760e788d38a17aff168117281f2b0d90))
+
 ## [1.19.0](https://github.com/dargmuesli/creal/compare/1.18.11...1.19.0) (2024-02-01)
 
 
