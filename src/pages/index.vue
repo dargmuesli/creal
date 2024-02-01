@@ -26,7 +26,9 @@
           keypath="welcome"
           tag="p"
         >
-          <br />
+          <template #newline>
+            <br />
+          </template>
         </i18n-t>
         <div class="mt-10 flex items-center justify-center gap-x-6">
           <VioButtonColored
@@ -69,12 +71,12 @@ de:
   cReal: cReal
   testimonialsRead: Erfahrungsberichte lesen
   viewAll: Alle anzeigen
-  welcome: DJ und Event-Organisator,{0}manchmal am Doubletime rappen.
+  welcome: DJ und Event-Organisator,{newline}manchmal am Doubletime rappen.
 en:
   arrow: →
   cities: Cologne, Karlsruhe, Frankfurt, Kassel, …
   cReal: cReal
   testimonialsRead: Read testimonials
   viewAll: View all
-  welcome: DJ and event organizer,{0}occasionally rapping double times.
+  welcome: DJ and event organizer,{newline}occasionally rapping double times.
 </i18n>
