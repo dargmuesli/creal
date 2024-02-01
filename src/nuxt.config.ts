@@ -23,6 +23,7 @@ export default defineNuxtConfig(
   defu(
     {
       extends: ['@dargmuesli/nuxt-vio'],
+      modules: ['@nuxtjs/turnstile'],
       runtimeConfig: {
         public: {
           creal: {
@@ -31,6 +32,9 @@ export default defineNuxtConfig(
               endpoint: 'https://s3.nl-ams.scw.cloud',
               region: 'nl-ams',
             },
+          },
+          turnstile: {
+            siteKey: '0x4AAAAAAAQiMSbON1vdesv0',
           },
         },
       },
@@ -50,29 +54,46 @@ export default defineNuxtConfig(
       },
 
       // modules
+      colorMode: {
+        preference: 'dark',
+      },
       cookieControl: {
         isControlButtonEnabled: false,
       },
       security: {
         headers: {
-          contentSecurityPolicy: {
-            'connect-src': [
-              `https://creal-postgraphile.${STAGING_HOST}`, // TODO: use `${getDomainTldPort(stagingHostOrHost)}` (https://github.com/Baroshem/nuxt-security/pull/233)
-              `https://creal-strapi.${STAGING_HOST}`, // TODO: use `${getDomainTldPort(stagingHostOrHost)}` (https://github.com/Baroshem/nuxt-security/pull/233)
-              'https://cdn.plyr.io', // plyr
-            ],
-            'form-action': ["'self'"],
-            'img-src': [
-              `https://creal-strapi.${STAGING_HOST}`, // TODO: use `${getDomainTldPort(stagingHostOrHost)}` (https://github.com/Baroshem/nuxt-security/pull/233)
-              `https://${crealS3EndpointHost}`, // playlist cover
-            ],
-            'media-src': [
-              'https://cdn.plyr.io/static/blank.mp4', // plyr
-              `https://${crealS3EndpointHost}`, // music
-            ],
-            'prefetch-src': ["'self'"],
-            'report-uri': ['https://dargmuesli.report-uri.com/r/d/csp/enforce'],
-          },
+          contentSecurityPolicy: defu(
+            {
+              // creal
+              'connect-src': [
+                `https://backend.${STAGING_HOST}/api/`, // contact form
+                `https://creal-postgraphile.${STAGING_HOST}`, // TODO: use `${getDomainTldPort(stagingHostOrHost)}` (https://github.com/Baroshem/nuxt-security/pull/233)
+                `https://creal-strapi.${STAGING_HOST}`, // TODO: use `${getDomainTldPort(stagingHostOrHost)}` (https://github.com/Baroshem/nuxt-security/pull/233)
+                'https://cdn.plyr.io', // plyr
+              ],
+              'form-action': ["'self'"],
+              'img-src': [
+                `https://creal-strapi.${STAGING_HOST}`, // TODO: use `${getDomainTldPort(stagingHostOrHost)}` (https://github.com/Baroshem/nuxt-security/pull/233)
+                `https://${crealS3EndpointHost}`, // playlist cover
+              ],
+              'media-src': [
+                'https://cdn.plyr.io/static/blank.mp4', // plyr
+                `https://${crealS3EndpointHost}`, // music
+              ],
+              'prefetch-src': ["'self'"],
+              'report-uri': [
+                'https://dargmuesli.report-uri.com/r/d/csp/enforce',
+              ],
+            },
+            {
+              // Cloudflare Turnstile
+              'frame-src': ['https://challenges.cloudflare.com'],
+              'script-src': [
+                'https://challenges.cloudflare.com',
+                "'sha256-oHL20tRmipXhd3ivYNMpZSHAVebPXJMetWmfG3i5FKY='",
+              ],
+            },
+          ),
         },
       },
       site: {
@@ -80,6 +101,13 @@ export default defineNuxtConfig(
           type: 'Person',
         },
         twitter: '@dargmuesli',
+      },
+      turnstile: {
+        secretKeyPath:
+          process.env.NUXT_PUBLIC_SITE_URL ||
+          process.env.NODE_ENV === 'production'
+            ? '/run/secrets/jonas-thelemann_turnstile-key'
+            : undefined,
       },
     },
     VIO_NUXT_BASE_CONFIG({

@@ -100,8 +100,6 @@ import { consola } from 'consola'
 
 import { useCreateSuggestionMutation } from '~/gql/documents/mutations/suggestion/suggestionCreate'
 
-definePageMeta({ colorMode: 'dark' })
-
 const { t } = useI18n()
 const fireError = useFireError()
 const runtimeConfig = useRuntimeConfig()
