@@ -1,3 +1,10 @@
+## [1.19.2](https://github.com/dargmuesli/creal/compare/1.19.1...1.19.2) (2024-02-01)
+
+
+### Bug Fixes
+
+* **og-image:** correct locales ([730734a](https://github.com/dargmuesli/creal/commit/730734aafd08af7b98d2e38c939a3c8baa1da95a))
+
 ## [1.19.1](https://github.com/dargmuesli/creal/compare/1.19.0...1.19.1) (2024-02-01)
 
 
