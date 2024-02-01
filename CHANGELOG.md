@@ -1,3 +1,11 @@
+## [1.19.0](https://github.com/dargmuesli/creal/compare/1.18.11...1.19.0) (2024-02-01)
+
+
+### Features
+
+* add contact ([95bf4fe](https://github.com/dargmuesli/creal/commit/95bf4fe102917217d2c2bfe2c4045e79b438f4e2))
+* add testimonials ([3d2e557](https://github.com/dargmuesli/creal/commit/3d2e557da20b4012818932c4020ef46e5d138d3b))
+
 ## [1.18.11](https://github.com/dargmuesli/creal/compare/1.18.10...1.18.11) (2024-02-01)
 
 
