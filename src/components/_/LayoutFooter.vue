@@ -45,7 +45,7 @@
 <script setup lang="ts">
 import type { Locale } from '@dargmuesli/nuxt-cookie-control/dist/runtime/types'
 import { I18N_MODULE_CONFIG } from '@dargmuesli/nuxt-vio/utils/constants'
-import type { LocaleObject } from '@nuxtjs/i18n/dist/runtime/composables'
+import type { LocaleObject } from '@nuxtjs/i18n'
 import type { WritableComputedRef } from 'vue'
 
 import { useStore } from '~/store'
