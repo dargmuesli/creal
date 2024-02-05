@@ -62,11 +62,11 @@ const { t } = useI18n()
 
 <i18n lang="yaml">
 de:
-  text: Auf der Suche nach DJs denke ich direkt an cReal. Viele gemeinsame Parties zu veranstalten war jedes Mal eine tolle Erfahrung!
+  text: Auf der Suche nach DJs denke ich direkt an cReal. Viele gemeinsame Parties zu veranstalten war jedes Mal eine tolle Erfahrung.
   name: Alex Steckler
   role: Webentwickler & privater Gastgeber
 en:
-  text: Looking for DJs I immediately think of cReal. Hosting many parties together was always a great experience!
+  text: Looking for DJs I think of cReal first. Hosting many parties together has always been a great experience.
   name: Alex Steckler
   role: Web developer & private host
 </i18n>
