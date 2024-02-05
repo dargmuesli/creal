@@ -4,9 +4,6 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
-overrides:
-  '@nuxtjs/tailwindcss': 6.11.0
-
 importers:
 
   .:
@@ -71,9 +68,6 @@ importers:
       '@nuxtjs/i18n':
         specifier: 8.0.1
         version: 8.0.1(rollup@4.9.6)(vue@3.4.15)
-      '@nuxtjs/tailwindcss':
-        specifier: 6.11.0
-        version: 6.11.0(rollup@4.9.6)
       '@nuxtjs/turnstile':
         specifier: 0.6.3
         version: 0.6.3(rollup@4.9.6)
@@ -2094,7 +2088,7 @@ packages:
       '@nuxtjs/html-validator': 1.6.0(rollup@4.9.6)
       '@nuxtjs/i18n': 8.0.1(rollup@4.9.6)(vue@3.4.15)
       '@nuxtjs/seo': 2.0.0-rc.7(@lezer/common@1.2.1)(@nuxt/devtools@1.0.8)(@unhead/shared@1.8.10)(@vue/compiler-core@3.4.15)(h3@1.10.1)(nuxt@3.10.0)(postcss@8.4.33)(rollup@4.9.6)(unhead@1.8.10)(vite@5.0.12)(vue@3.4.15)(webpack@5.90.1)
-      '@nuxtjs/tailwindcss': 6.11.0(rollup@4.9.6)
+      '@nuxtjs/tailwindcss': 6.11.3(rollup@4.9.6)
       '@pinia/nuxt': 0.5.1(rollup@4.9.6)(typescript@5.3.3)(vue@3.4.15)
       '@tailwindcss/forms': 0.5.7(tailwindcss@3.4.1)
       '@tailwindcss/typography': 0.5.10(tailwindcss@3.4.1)
@@ -4649,8 +4643,8 @@ packages:
       - webpack
     dev: true
 
-  /@nuxtjs/tailwindcss@6.11.0(rollup@4.9.6):
-    resolution: {integrity: sha512-uZkhV+O4oiAuOsy7VR1P5FMg1kMFOKPrxA9cYtwqpXSy6T4YAmGP0y4ekfvvuWW9903lVsd9cPvCC39ZJhnldw==}
+  /@nuxtjs/tailwindcss@6.11.3(rollup@4.9.6):
+    resolution: {integrity: sha512-l2iww/zOiHMuNERo6XB9MTJ8MEcq3NHFW/TPWmwPLGdOobV9zYUZ75otqi+mTK+/vgzQTtNXpIe2V0DLuTeb4A==}
     dependencies:
       '@nuxt/kit': 3.10.0(rollup@4.9.6)
       autoprefixer: 10.4.17(postcss@8.4.33)
