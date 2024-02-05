@@ -1,3 +1,10 @@
+## [1.20.0](https://github.com/dargmuesli/creal/compare/1.19.2...1.20.0) (2024-02-05)
+
+
+### Features
+
+* **testimonials:** tweak strings ([454902a](https://github.com/dargmuesli/creal/commit/454902a9ad03ab5d3f5fa42ede973847528a8c8d))
+
 ## [1.19.2](https://github.com/dargmuesli/creal/compare/1.19.1...1.19.2) (2024-02-01)
 
 
