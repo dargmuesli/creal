@@ -39,8 +39,8 @@ importers:
         specifier: 7.2.5
         version: 7.2.5(rollup@4.9.6)(webpack@5.90.1)
       '@dargmuesli/nuxt-vio':
-        specifier: 10.2.6
-        version: 10.2.6(@lezer/common@1.2.1)(@unhead/shared@1.8.10)(@vue/compiler-core@3.4.15)(graphql@16.8.1)(h3@1.10.1)(nuxt@3.10.0)(playwright-core@1.41.2)(postcss@8.4.33)(rollup@4.9.6)(tailwindcss@3.4.1)(typescript@5.3.3)(unhead@1.8.10)(vite@5.0.12)(vue-router@4.2.5)(vue@3.4.15)(webpack@5.90.1)
+        specifier: 10.2.7
+        version: 10.2.7(@lezer/common@1.2.1)(@unhead/shared@1.8.10)(@vue/compiler-core@3.4.15)(graphql@16.8.1)(h3@1.10.1)(nuxt@3.10.0)(playwright-core@1.41.2)(postcss@8.4.33)(rollup@4.9.6)(tailwindcss@3.4.1)(typescript@5.3.3)(unhead@1.8.10)(vite@5.0.12)(vue-router@4.2.5)(vue@3.4.15)(webpack@5.90.1)
       '@graphql-codegen/cli':
         specifier: 5.0.0
         version: 5.0.0(@types/node@20.11.16)(graphql@16.8.1)(typescript@5.3.3)
@@ -2076,8 +2076,8 @@ packages:
       - webpack
     dev: true
 
-  /@dargmuesli/nuxt-vio@10.2.6(@lezer/common@1.2.1)(@unhead/shared@1.8.10)(@vue/compiler-core@3.4.15)(graphql@16.8.1)(h3@1.10.1)(nuxt@3.10.0)(playwright-core@1.41.2)(postcss@8.4.33)(rollup@4.9.6)(tailwindcss@3.4.1)(typescript@5.3.3)(unhead@1.8.10)(vite@5.0.12)(vue-router@4.2.5)(vue@3.4.15)(webpack@5.90.1):
-    resolution: {integrity: sha512-YrBb0I3sShgf31IjrNREoFdCAmKtQyOgzmgT2MWRWAVPDIeRkTNTDOZlbyby/yaMdPX+oZUNu9xSLUmor+q1gQ==}
+  /@dargmuesli/nuxt-vio@10.2.7(@lezer/common@1.2.1)(@unhead/shared@1.8.10)(@vue/compiler-core@3.4.15)(graphql@16.8.1)(h3@1.10.1)(nuxt@3.10.0)(playwright-core@1.41.2)(postcss@8.4.33)(rollup@4.9.6)(tailwindcss@3.4.1)(typescript@5.3.3)(unhead@1.8.10)(vite@5.0.12)(vue-router@4.2.5)(vue@3.4.15)(webpack@5.90.1):
+    resolution: {integrity: sha512-ynin8+zRRR6ekpgoxPf1gNWqt8SB9PrkDdqSNpiodv8NJdSob1WyMiXIFrK6Y6xwc+X7wVN237Wt1hDWG9itkA==}
     engines: {node: '20'}
     peerDependencies:
       nuxt: 3.10.0
@@ -2104,7 +2104,7 @@ packages:
       '@vuelidate/validators': 2.0.4(vue@3.4.15)
       clipboardy: 4.0.0
       dayjs: 2.0.0-alpha.4
-      jose: 5.2.0
+      jose: 5.2.1
       nuxt: 3.10.0(@types/node@20.11.16)(eslint@8.56.0)(rollup@4.9.6)(stylelint@16.2.1)(typescript@5.3.3)(vite@5.0.12)(vue-tsc@1.8.27)
       nuxt-security: 1.1.0(rollup@4.9.6)
       playwright-core: 1.41.2
@@ -7583,7 +7583,7 @@ packages:
     dependencies:
       ansi-align: 3.0.1
       camelcase: 7.0.1
-      chalk: 5.0.1
+      chalk: 5.3.0
       cli-boxes: 3.0.0
       string-width: 5.1.2
       type-fest: 2.19.0
@@ -10330,7 +10330,7 @@ packages:
       graphql: ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
     dependencies:
       graphql: 16.8.1
-      tslib: 2.5.3
+      tslib: 2.6.2
     dev: true
 
   /graphql-ws@5.14.3(graphql@16.8.1):
@@ -11251,10 +11251,6 @@ packages:
   /jmespath@0.16.0:
     resolution: {integrity: sha512-9FzQjJ7MATs1tSpnco1K6ayiYE3figslrXA72G2HQ/n76RzvYlofyi5QM+iX4YRs/pu3yzxlVQSST23+dMDknw==}
     engines: {node: '>= 0.6.0'}
-    dev: true
-
-  /jose@5.2.0:
-    resolution: {integrity: sha512-oW3PCnvyrcm1HMvGTzqjxxfnEs9EoFOFWi2HsEGhlFVOXxTE3K9GKWVMFoFw06yPUqwpvEWic1BmtUZBI/tIjw==}
     dev: true
 
   /jose@5.2.1:
