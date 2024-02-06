@@ -29,7 +29,6 @@ const isFormSent = ref(false)
 // methods
 const submit = async (body: any) => {
   try {
-    console.log(JSON.stringify({ ...body, siteName: siteConfig.name }))
     await backendFetch('/api/contact', {
       method: 'POST',
       body: { ...body, siteName: siteConfig.name },
