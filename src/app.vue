@@ -11,8 +11,7 @@
 </template>
 
 <script setup lang="ts">
-import type { Locale } from '@dargmuesli/nuxt-cookie-control/dist/runtime/types'
-import type { WritableComputedRef } from 'vue'
+import type { Locale } from '@dargmuesli/nuxt-cookie-control/runtime/types'
 
 const { $dayjs } = useNuxtApp()
 const i18n = useI18n()
@@ -21,9 +20,6 @@ const cookieControl = useCookieControl()
 
 const loadingId = Math.random()
 const loadingIds = useState('loadingIds', () => [loadingId])
-
-// data
-const locale = i18n.locale as WritableComputedRef<Locale>
 
 // methods
 const init = () => {
@@ -43,6 +39,7 @@ const init = () => {
 
 // computations
 const isLoading = computed(() => !!loadingIds.value.length)
+const locale = computed(() => i18n.locale.value as Locale)
 
 // lifecycle
 onMounted(() => loadingIds.value.splice(loadingIds.value.indexOf(loadingId), 1))

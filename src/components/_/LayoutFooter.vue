@@ -43,10 +43,9 @@
 </template>
 
 <script setup lang="ts">
-import type { Locale } from '@dargmuesli/nuxt-cookie-control/dist/runtime/types'
+import type { Locale } from '@dargmuesli/nuxt-cookie-control/runtime/types'
 import { I18N_MODULE_CONFIG } from '@dargmuesli/nuxt-vio/utils/constants'
 import type { LocaleObject } from '@nuxtjs/i18n'
-import type { WritableComputedRef } from 'vue'
 
 import { useStore } from '~/store'
 
@@ -57,9 +56,6 @@ const { availableLocales, t } = i18n
 const router = useRouter()
 const switchLocalePath = useSwitchLocalePath()
 const cookieControl = useCookieControl()
-
-// data
-const locale = i18n.locale as WritableComputedRef<Locale>
 
 // methods
 const getLocaleName = (locale: string) => {
@@ -77,6 +73,9 @@ const onI18nChange = async (event: Event) =>
   await router.push({
     path: switchLocalePath((event.target as HTMLInputElement).value),
   })
+
+// computations
+const locale = computed(() => i18n.locale.value as Locale)
 </script>
 
 <i18n lang="yaml">
