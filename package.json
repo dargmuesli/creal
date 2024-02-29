@@ -34,5 +34,6 @@
     "test:e2e:server:dev": "pnpm --dir src run test:e2e:server:dev",
     "test:e2e:server:node": "pnpm --dir src run test:e2e:server:node",
     "test:e2e:server:static": "pnpm --dir src run test:e2e:server:static"
-  }
+  },
+  "type": "module"
 }
