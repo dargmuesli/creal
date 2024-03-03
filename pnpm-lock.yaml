@@ -87,11 +87,11 @@ importers:
         specifier: 4.17.12
         version: 4.17.12
       '@urql/core':
-        specifier: 4.2.3
-        version: 4.2.3(graphql@16.8.1)
+        specifier: 4.3.0
+        version: 4.3.0(graphql@16.8.1)
       '@urql/devtools':
         specifier: 2.0.3
-        version: 2.0.3(@urql/core@4.2.3)(graphql@16.8.1)
+        version: 2.0.3(@urql/core@4.3.0)(graphql@16.8.1)
       '@urql/exchange-graphcache':
         specifier: 6.4.1
         version: 6.4.1(graphql@16.8.1)
@@ -6481,13 +6481,22 @@ packages:
       - graphql
     dev: true
 
-  /@urql/devtools@2.0.3(@urql/core@4.2.3)(graphql@16.8.1):
+  /@urql/core@4.3.0(graphql@16.8.1):
+    resolution: {integrity: sha512-wT+FeL8DG4x5o6RfHEnONNFVDM3616ouzATMYUClB6CB+iIu2mwfBKd7xSUxYOZmwtxna5/hDRQdMl3nbQZlnw==}
+    dependencies:
+      '@0no-co/graphql.web': 1.0.4(graphql@16.8.1)
+      wonka: 6.3.4
+    transitivePeerDependencies:
+      - graphql
+    dev: true
+
+  /@urql/devtools@2.0.3(@urql/core@4.3.0)(graphql@16.8.1):
     resolution: {integrity: sha512-TktPLiBS9LcBPHD6qcnb8wqOVcg3Bx0iCtvQ80uPpfofwwBGJmqnQTjUdEFU6kwaLOFZULQ9+Uo4831G823mQw==}
     peerDependencies:
       '@urql/core': '>= 1.14.0'
       graphql: '>= 0.11.0'
     dependencies:
-      '@urql/core': 4.2.3(graphql@16.8.1)
+      '@urql/core': 4.3.0(graphql@16.8.1)
       graphql: 16.8.1
       wonka: 6.3.4
     dev: true
@@ -6496,7 +6505,7 @@ packages:
     resolution: {integrity: sha512-hWa4/5B7Op93oA6yWvffPU3L0XH55tlluEaq6aoFE9zsiNhktFjhp/SU2CKvSD8iD0Tfreoo63drv64Ad0+Gxw==}
     dependencies:
       '@0no-co/graphql.web': 1.0.4(graphql@16.8.1)
-      '@urql/core': 4.2.3(graphql@16.8.1)
+      '@urql/core': 4.3.0(graphql@16.8.1)
       wonka: 6.3.4
     transitivePeerDependencies:
       - graphql
@@ -6515,7 +6524,7 @@ packages:
     peerDependencies:
       vue: ^2.7.0 || ^3.0.0
     dependencies:
-      '@urql/core': 4.2.3(graphql@16.8.1)
+      '@urql/core': 4.3.0(graphql@16.8.1)
       vue: 3.4.21(typescript@5.3.3)
       wonka: 6.3.4
     transitivePeerDependencies:
