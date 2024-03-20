@@ -43,9 +43,7 @@
 </template>
 
 <script setup lang="ts">
-import type { Locale } from '@dargmuesli/nuxt-cookie-control/runtime/types'
 import { I18N_MODULE_CONFIG } from '@dargmuesli/nuxt-vio/utils/constants'
-import type { LocaleObject } from '@nuxtjs/i18n'
 
 import { useStore } from '~/store'
 
@@ -59,7 +57,7 @@ const cookieControl = useCookieControl()
 
 // methods
 const getLocaleName = (locale: string) => {
-  const locales: LocaleObject[] = I18N_MODULE_CONFIG.locales.filter(
+  const locales = I18N_MODULE_CONFIG.locales.filter(
     (localeObject) => localeObject.code === locale,
   )
 
@@ -75,7 +73,7 @@ const onI18nChange = async (event: Event) =>
   })
 
 // computations
-const locale = computed(() => i18n.locale.value as Locale)
+const locale = computed(() => i18n.locale.value)
 </script>
 
 <i18n lang="yaml">
