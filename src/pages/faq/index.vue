@@ -100,10 +100,8 @@ onMounted(() => {
 
 // initialization
 useHeadDefault({
+  description: t('description'),
   title,
-  extension: {
-    description: t('description'),
-  },
 })
 // TODO: remove markdown formatting
 useSchemaOrg([

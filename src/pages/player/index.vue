@@ -227,10 +227,8 @@ watch(
 // initialization
 await init()
 useHeadDefault({
+  description: t('description'),
   title: titleHead(),
-  extension: {
-    description: t('description'),
-  },
 })
 </script>
 
