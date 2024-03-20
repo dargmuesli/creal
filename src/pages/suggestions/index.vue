@@ -176,10 +176,8 @@ const v$ = useVuelidate(rules, form)
 
 // initialization
 useHeadDefault({
+  description: t('description'),
   title,
-  extension: {
-    description: t('description'),
-  },
 })
 </script>
 
