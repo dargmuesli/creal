@@ -1,4 +1,3 @@
-/* eslint-disable compat/compat */
 // TODO: remove jiti (https://github.com/microsoft/playwright/issues/14303)
 import jiti from 'jiti'
 

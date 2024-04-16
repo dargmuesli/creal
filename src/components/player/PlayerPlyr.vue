@@ -61,7 +61,11 @@ const isInitialized = ref(false)
 const plyrRef = ref<{ player: Plyr }>()
 
 // methods
-const binarySearch = (ar: any[], el: any, compareFn: Function) => {
+const binarySearch = <A, B>(
+  ar: B[],
+  el: A,
+  compareFn: (a: A, b: B) => number,
+) => {
   let m = 0
   let n = ar.length - 1
 

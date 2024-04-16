@@ -28,9 +28,7 @@ const itemSort = (a: PlaylistItem, b: PlaylistItem) => {
     const charB = bN.charAt(i)
 
     if (
-      !isNaN(charA as any) &&
       !isNaN(parseFloat(charA)) &&
-      !isNaN(charB as any) &&
       !isNaN(parseFloat(charB)) &&
       charA !== charB
     ) {
@@ -38,7 +36,7 @@ const itemSort = (a: PlaylistItem, b: PlaylistItem) => {
     }
   }
 
-  return (aN as any) - (bN as any)
+  return aN.length - bN.length
 }
 
 const getPlaylist = (playlistDataExtended: PlaylistExtended): Playlist => {

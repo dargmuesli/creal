@@ -51,7 +51,7 @@ const setCoverUrl = async (name: string) => {
   displayImageWhenFullyLoaded(signedUrl)
 }
 const displayImageWhenFullyLoaded = (src: string) => {
-  if (process.server) return
+  if (import.meta.server) return
 
   const img = new Image()
 

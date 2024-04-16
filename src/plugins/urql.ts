@@ -75,16 +75,16 @@ export default defineNuxtPlugin((nuxtApp) => {
   const getServiceHref = useGetServiceHref()
 
   const ssrExchange = getSsrExchange({
-    isClient: process.client,
+    isClient: import.meta.client,
   })
 
-  if (process.client) {
+  if (import.meta.client) {
     nuxtApp.hook('app:created', () => {
       ssrExchange.restoreData(nuxtApp.payload[SSR_KEY] as SSRData)
     })
   }
 
-  if (process.server) {
+  if (import.meta.server) {
     nuxtApp.hook('app:rendered', () => {
       nuxtApp.payload[SSR_KEY] = ssrExchange.extractData()
     })
@@ -124,7 +124,7 @@ export default defineNuxtPlugin((nuxtApp) => {
   //   // },
   // }
 
-  const cacheExchange = process.client
+  const cacheExchange = import.meta.client
     ? getOfflineExchange({
         schema,
         storage: makeDefaultStorage(),
@@ -136,7 +136,7 @@ export default defineNuxtPlugin((nuxtApp) => {
     fetchOptions: () => {
       const { $pinia } = useNuxtApp()
       const store = useVioAuthStore($pinia)
-      const headers = {} as Record<string, any>
+      const headers = {} as Record<string, string>
       const jwt = store.jwt
 
       if (jwt) {

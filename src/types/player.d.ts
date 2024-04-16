@@ -1,5 +1,5 @@
-import Plyr from 'plyr'
-import { Ref } from 'vue'
+import type Plyr from 'plyr'
+import type { Ref } from 'vue'
 
 export interface PlaylistItem {
   fileExtension: string
@@ -43,7 +43,7 @@ export interface FetchPlaylist {
 
 export interface PlayerData {
   currentPlaylist: Ref<Playlist | undefined>
-  currentTrack: Ref<PlaylistItem & { meta?: PlaylistItemMeta } | undefined>,
+  currentTrack: Ref<(PlaylistItem & { meta?: PlaylistItemMeta }) | undefined>
   isPaused: Ref<boolean>
   isVisible: Ref<boolean>
   sourceInfo: Ref<Plyr.SourceInfo | undefined>

@@ -1,15 +1,16 @@
+import type { LocationQuery } from '#vue-router'
 import type { Paging } from '~/types/paging'
 
-export const getPaging = ({
+export const getPaging = <T>({
   items,
   itemsCountTotal,
   query,
   start,
   limit,
 }: {
-  items?: Array<any>
+  items?: Array<T>
   itemsCountTotal?: number
-  query: Record<any, any>
+  query: LocationQuery
   start: number
   limit: number
 }) => {
@@ -23,11 +24,11 @@ export const getPaging = ({
   const startPrevious = Math.max(0, start - limit)
   const queryPrevious = {
     ...(query.limit && { limit: query.limit }),
-    ...(startPrevious > 0 && { start: startPrevious }),
+    ...(startPrevious > 0 && { start: `${startPrevious}` }),
   }
   const queryNext = {
     ...(query.limit && { limit: query.limit }),
-    start: start + limit,
+    start: `${start + limit}`,
   }
 
   const isNextAllowed = start + (items?.length || 0) < (itemsCountTotal || 0)

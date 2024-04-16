@@ -203,16 +203,12 @@ const breadcrumbSuffixes = computed(() => {
 
   return breadcrumbSuffixes
 })
-const routeQueryPlaylist = computed(() => {
-  if (typeof route.query.playlist === 'string') {
-    return route.query.playlist
-  }
-})
-const routeQueryTrack = computed(() => {
-  if (typeof route.query.track === 'string') {
-    return route.query.track
-  }
-})
+const routeQueryPlaylist = computed(() =>
+  typeof route.query.playlist === 'string' ? route.query.playlist : undefined,
+)
+const routeQueryTrack = computed(() =>
+  typeof route.query.track === 'string' ? route.query.track : undefined,
+)
 
 // lifecycle
 watch(
