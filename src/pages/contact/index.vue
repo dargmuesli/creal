@@ -27,7 +27,7 @@ const siteConfig = useSiteConfig()
 const isFormSent = ref(false)
 
 // methods
-const submit = async (body: any) => {
+const submit = async (body: object) => {
   try {
     await backendFetch('/api/contact', {
       method: 'POST',
@@ -35,12 +35,16 @@ const submit = async (body: any) => {
     })
 
     isFormSent.value = true
-  } catch (error: any) {
-    fireError({
-      // level: 'error',
-      error,
-      // text: t('iCalFetchError'),
-    })
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      fireError({
+        // level: 'error',
+        error,
+        // text: t('iCalFetchError'),
+      })
+    } else {
+      alert(`Unexpected error: ${error}`)
+    }
   }
 }
 

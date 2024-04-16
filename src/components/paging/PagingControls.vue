@@ -25,12 +25,14 @@
 </template>
 
 <script setup lang="ts">
+import type { LocationQuery } from '#vue-router'
+
 interface Props {
   isPreviousAllowed: boolean
   isNextAllowed: boolean
   partString: string
-  queryPrevious: Record<any, any>
-  queryNext: Record<any, any>
+  queryPrevious: LocationQuery
+  queryNext: LocationQuery
 }
 const props = withDefaults(defineProps<Props>(), {
   isPreviousAllowed: true,

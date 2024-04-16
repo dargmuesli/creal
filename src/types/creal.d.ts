@@ -5,7 +5,11 @@ export interface CrealEvent {
   title: string
   description: string
   image: {
-    data: any
+    data: {
+      attributes: {
+        url: string
+      }
+    }
   }
   url: string
 }

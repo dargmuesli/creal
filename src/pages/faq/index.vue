@@ -68,7 +68,7 @@ try {
     },
     retry: FETCH_RETRY_AMOUNT,
   })
-} catch (error: any) {
+} catch (error) {
   requestError.value = error
   consola.error(error)
 }

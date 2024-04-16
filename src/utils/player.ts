@@ -24,11 +24,15 @@ export const getSignedUrl = async ({
   return value
 }
 
-const isObject = (a: any) => !!a && a.constructor === Object
+const isObject = (a: unknown) => !!a && a.constructor === Object
 
-export const mergeByKey = (target: any, source: any, key: string | number) =>
+export const mergeByKey = (
+  target: unknown,
+  source: unknown,
+  key: string | number,
+) =>
   key
-    ? mergeWith(target, source, (targetValue: any, srcValue: any) => {
+    ? mergeWith(target, source, (targetValue: unknown, srcValue: unknown) => {
         if (Array.isArray(targetValue) && Array.isArray(srcValue)) {
           let matchFound = false
 

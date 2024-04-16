@@ -36,7 +36,7 @@ const emit = defineEmits<{
 // methods
 const bytesToString = (bytes: number) => prettyBytes(bytes)
 const onDownloadClick = () => emit('download')
-const onItemClick = (event: any) => {
+const onItemClick = (event: MouseEvent) => {
   // double click
   if (event.detail === 2) onPlayClick()
 }
