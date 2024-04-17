@@ -60,6 +60,9 @@ export default defineNuxtConfig(
       cookieControl: {
         isControlButtonEnabled: false,
       },
+      gtag: {
+        id: 'G-K4R41W62BR',
+      },
       security: {
         headers: {
           contentSecurityPolicy: defu(
