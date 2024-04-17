@@ -1,3 +1,10 @@
+## [1.20.7](https://github.com/dargmuesli/creal/compare/1.20.6...1.20.7) (2024-04-17)
+
+
+### Bug Fixes
+
+* **gtag:** add id ([6e161ef](https://github.com/dargmuesli/creal/commit/6e161efd8e9e0ea836dcd13d65013b05a8c08392))
+
 ## [1.20.6](https://github.com/dargmuesli/creal/compare/1.20.5...1.20.6) (2024-04-11)
 
 
