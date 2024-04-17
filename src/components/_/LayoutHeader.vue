@@ -9,7 +9,7 @@
       </VioButton>
       <VioButton
         :aria-label="t('menuToggle')"
-        class="inline-flex items-center justify-center rounded-md p-2.5 text-gray-400 lg:hidden"
+        class="justify-center rounded-md p-2.5 text-gray-400 lg:hidden"
         @click="mobileMenuOpen = true"
       >
         <Bars3Icon class="h-6 w-6" aria-hidden="true" />
