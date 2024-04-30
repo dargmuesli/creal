@@ -42,6 +42,7 @@ export default defineNuxtConfig(
           include: [
             '@dargmuesli/nuxt-vio/utils/constants',
             '@headlessui/vue',
+            '@heroicons/vue/24/outline',
             '@vuelidate/core',
             '@vuelidate/validators',
             'html-to-text',
