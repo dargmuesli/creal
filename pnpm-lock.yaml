@@ -72,8 +72,8 @@ importers:
         specifier: 1.43.1
         version: 1.43.1
       '@skjnldsv/vue-plyr':
-        specifier: 7.4.0
-        version: 7.4.0(typescript@5.4.5)
+        specifier: 7.5.0
+        version: 7.5.0(typescript@5.4.5)
       '@types/html-to-text':
         specifier: 9.0.4
         version: 9.0.4
@@ -2225,9 +2225,9 @@ packages:
     resolution: {integrity: sha512-LtoMMhxAlorcGhmFYI+LhPgbPZCkgP6ra1YL604EeF6U98pLlQ3iWIGMdWSC+vWmPBWBNgmDBAhnAobLROJmwg==}
     engines: {node: '>=18'}
 
-  '@skjnldsv/vue-plyr@7.4.0':
-    resolution: {integrity: sha512-BD1sQjSfpPAbd+TacxY6fVkoGuIAY0TFRh7gyIumyC2YdBCsjLlYBg3A8MzPHjUH6HuHpgS3AvBKjTZMRTXCbQ==}
-    engines: {node: ^18.0.0 || ^20.0.0, npm: ^9.0.0}
+  '@skjnldsv/vue-plyr@7.5.0':
+    resolution: {integrity: sha512-JmbKPe8Eh0yTP+7w4VYeqGhrUqDKM4qSsCn37CbADAvvwMvceBwYC0IBXil0RBtyzStxwXPtOj1oI//lQ5DeTw==}
+    engines: {node: ^18.0.0 || ^20.0.0, npm: ^9.0.0 || ^10.0.0}
 
   '@smithy/abort-controller@2.2.0':
     resolution: {integrity: sha512-wRlta7GuLWpTqtFfGo+nZyOO1vEvewdNR1R4rTxpC8XU6vG/NDyrFBhwLZsqg1NUoR1noVaXJPC/7ZK47QCySw==}
@@ -11287,7 +11287,7 @@ snapshots:
 
   '@sindresorhus/merge-streams@2.3.0': {}
 
-  '@skjnldsv/vue-plyr@7.4.0(typescript@5.4.5)':
+  '@skjnldsv/vue-plyr@7.5.0(typescript@5.4.5)':
     dependencies:
       plyr: 3.7.8
       vue: 3.4.26(typescript@5.4.5)
