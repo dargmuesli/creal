@@ -1,3 +1,10 @@
+## [1.21.0](https://github.com/dargmuesli/creal/compare/1.20.11...1.21.0) (2024-05-17)
+
+
+### Features
+
+* **csp:** report to sentry ([5bca0f3](https://github.com/dargmuesli/creal/commit/5bca0f312edfd43494eab519bffd30a33136982c))
+
 ## [1.20.11](https://github.com/dargmuesli/creal/compare/1.20.10...1.20.11) (2024-05-12)
 
 
