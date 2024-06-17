@@ -1,4 +1,4 @@
-import commitlintConfigConventional from "@commitlint/config-conventional"
+import commitlintConfigConventional from "@commitlint/config-conventional";
 
 const ruleMaxLineLength =
   commitlintConfigConventional.rules["body-max-line-length"];
