@@ -8,7 +8,12 @@ ENV CI=true
 
 WORKDIR /srv/app/
 
-RUN corepack enable
+RUN corepack enable \
+  && apt-get update \
+  && apt-get install --no-install-recommends -y \
+      mkcert \
+  && apt-get clean \
+  && rm -rf /var/lib/apt/lists/*
 
 
 #############
@@ -30,7 +35,7 @@ VOLUME /srv/.pnpm-store
 VOLUME /srv/app
 
 ENTRYPOINT ["docker-entrypoint.sh"]
-CMD ["pnpm", "run", "dev", "--host"]
+CMD ["pnpm", "--dir", "src", "run", "dev", "--host"]
 EXPOSE 3000
 
 # TODO: support healthcheck while starting (https://github.com/nuxt/framework/issues/6915)
@@ -57,7 +62,7 @@ RUN pnpm install --offline
 FROM prepare AS build-node
 
 ENV NODE_ENV=production
-RUN pnpm run build:node
+RUN pnpm --dir src run build:node
 
 
 # ########################
@@ -65,11 +70,11 @@ RUN pnpm run build:node
 
 # FROM prepare AS build-static
 
-# ARG SITE_URL=http://localhost:3002
+# ARG SITE_URL=https://localhost:3002
 # ENV SITE_URL=${SITE_URL}
 
 # ENV NODE_ENV=production
-# RUN pnpm run build:static
+# RUN pnpm --dir src run build:static
 
 
 ########################
@@ -99,7 +104,8 @@ ENV PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1
 
 WORKDIR /srv/app/
 
-RUN corepack enable
+RUN corepack enable \
+  && apt update && apt install mkcert
 
 
 ########################
@@ -141,7 +147,7 @@ RUN pnpm rebuild -r
 
 # ENV NODE_ENV=development
 
-# RUN pnpm run test:e2e:server:dev
+# RUN pnpm --dir tests run test:e2e:server:dev
 
 
 ########################
@@ -151,7 +157,7 @@ FROM test-e2e-prepare AS test-e2e-node
 
 COPY --from=build-node /srv/app/src/.output ./src/.output
 
-RUN pnpm run test:e2e:server:node
+RUN pnpm --dir tests run test:e2e:server:node
 
 
 # ########################
@@ -159,9 +165,14 @@ RUN pnpm run test:e2e:server:node
 
 # FROM test-e2e-prepare AS test-e2e-static
 
+# ARG SITE_URL=https://localhost:3002
+# ENV SITE_URL=${SITE_URL}
+# ARG PORT=3002
+# ENV PORT=${PORT}
+
 # COPY --from=build-static /srv/app/src/.output/public ./src/.output/public
 
-# RUN pnpm run test:e2e:server:static
+# RUN pnpm --dir tests run test:e2e:server:static
 
 
 #######################

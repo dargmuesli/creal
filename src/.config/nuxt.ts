@@ -1,4 +1,4 @@
-import { VIO_NUXT_BASE_CONFIG } from '@dargmuesli/nuxt-vio/utils/constants'
+import { VIO_NUXT_BASE_CONFIG } from '@dargmuesli/nuxt-vio/utils/nuxt'
 import { defu } from 'defu'
 
 import { SITE_NAME } from '../utils/constants'
@@ -71,13 +71,13 @@ export default defineNuxtConfig(
               // creal
               'connect-src': [
                 `https://backend.${STAGING_HOST}/api/`, // contact form
-                `https://creal-postgraphile.${STAGING_HOST}`, // TODO: use `${getDomainTldPort(stagingHostOrHost)}` (https://github.com/Baroshem/nuxt-security/pull/233)
-                `https://creal-strapi.${STAGING_HOST}`, // TODO: use `${getDomainTldPort(stagingHostOrHost)}` (https://github.com/Baroshem/nuxt-security/pull/233)
+                `https://creal-postgraphile.${STAGING_HOST}`,
+                `https://creal-strapi.${STAGING_HOST}`,
                 'https://cdn.plyr.io', // plyr
               ],
               'form-action': ["'self'"],
               'img-src': [
-                `https://creal-strapi.${STAGING_HOST}`, // TODO: use `${getDomainTldPort(stagingHostOrHost)}` (https://github.com/Baroshem/nuxt-security/pull/233)
+                `https://creal-strapi.${STAGING_HOST}`,
                 `https://${crealS3EndpointHost}`, // playlist cover
               ],
               'media-src': [
