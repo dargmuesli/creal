@@ -59,7 +59,7 @@ watch(
 // initialization
 useAppLayout()
 useFavicons()
-usePolyfills()
+// usePolyfills() // hijacked ⚠️
 defineOgImage({
   alt: t('globalSeoOgImageAlt'),
   // component: props.ogImageComponent,
