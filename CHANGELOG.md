@@ -1,3 +1,9 @@
+## [1.21.9](https://github.com/dargmuesli/creal/compare/1.21.8...1.21.9) (2024-06-28)
+
+### Bug Fixes
+
+* **csp:** trim query ([c0219e9](https://github.com/dargmuesli/creal/commit/c0219e95e6d59bb7084ae51faef72615f4cd1e8b))
+
 ## [1.21.8](https://github.com/dargmuesli/creal/compare/1.21.7...1.21.8) (2024-06-28)
 
 ### Bug Fixes
