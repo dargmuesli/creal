@@ -74,7 +74,7 @@ export default defineNuxtConfig(
                 `https://creal-postgraphile.${STAGING_HOST}`,
                 `https://creal-strapi.${STAGING_HOST}`,
                 'https://cdn.plyr.io', // plyr
-                'https://o4507259039973376.ingest.sentry.io/api/4507260561653840/security/?sentry_key=1e53178c1dba9b39147de4a21853a3e3', // TODO: remove together with `report-uri` once browsers support the `Report-To` header (https://caniuse.com/mdn-http_headers_report-to)
+                'https://o4507259039973376.ingest.sentry.io/api/4507260561653840/security/', // TODO: remove together with `report-uri` once browsers support the `Report-To` header (https://caniuse.com/mdn-http_headers_report-to)
               ],
               'form-action': ["'self'"],
               'img-src': [
