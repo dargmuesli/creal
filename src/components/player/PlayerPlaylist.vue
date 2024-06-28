@@ -56,10 +56,10 @@ const displayImageWhenFullyLoaded = (src: string) => {
 
   const img = new Image()
 
+  img.crossOrigin = 'anonymous'
   img.onload = () => {
     coverUrl.value = img.src
   }
-
   img.src = src
 }
 
