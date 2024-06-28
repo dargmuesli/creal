@@ -1,3 +1,9 @@
+## [1.21.6](https://github.com/dargmuesli/creal/compare/1.21.5...1.21.6) (2024-06-28)
+
+### Bug Fixes
+
+* **polyfills:** remove ([441ce91](https://github.com/dargmuesli/creal/commit/441ce91014066c2567e8e4d59c42705b41b374f7))
+
 ## [1.21.5](https://github.com/dargmuesli/creal/compare/1.21.4...1.21.5) (2024-06-28)
 
 ### Bug Fixes
