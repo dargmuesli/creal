@@ -1,3 +1,9 @@
+## [1.21.12](https://github.com/dargmuesli/creal/compare/1.21.11...1.21.12) (2024-06-28)
+
+### Bug Fixes
+
+* **csp:** allow unsafe inline styles ([af45d41](https://github.com/dargmuesli/creal/commit/af45d41eff4ce734425cd914581755f45cc546c5))
+
 ## [1.21.11](https://github.com/dargmuesli/creal/compare/1.21.10...1.21.11) (2024-06-28)
 
 ### Bug Fixes
