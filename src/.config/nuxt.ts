@@ -96,10 +96,7 @@ export default defineNuxtConfig(
             {
               // Cloudflare Turnstile
               'frame-src': ['https://challenges.cloudflare.com'],
-              'script-src': [
-                'https://challenges.cloudflare.com',
-                "'sha256-oHL20tRmipXhd3ivYNMpZSHAVebPXJMetWmfG3i5FKY='",
-              ],
+              'script-src-elem': ['https://challenges.cloudflare.com'],
             },
           ),
         },
