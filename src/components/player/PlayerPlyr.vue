@@ -39,7 +39,7 @@
           ref="plyrRef"
           :emit="['ended', 'pause', 'playing', 'timeupdate']"
         >
-          <audio />
+          <audio crossorigin="anonymous" />
         </vue-plyr>
       </ClientOnly>
     </div>

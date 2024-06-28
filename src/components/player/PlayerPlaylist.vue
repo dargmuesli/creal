@@ -4,6 +4,7 @@
       v-if="coverUrl !== ''"
       alt="Cover image."
       class="rounded"
+      crossorigin="anonymous"
       :src="coverUrl"
     />
     <div v-else class="m-auto h-16 w-16">
