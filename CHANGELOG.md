@@ -1,3 +1,9 @@
+## [1.21.13](https://github.com/dargmuesli/creal/compare/1.21.12...1.21.13) (2024-06-28)
+
+### Bug Fixes
+
+* **csp:** correct quotation ([f37144e](https://github.com/dargmuesli/creal/commit/f37144e693eabf6234a963b8f0ff16874fa2ae88))
+
 ## [1.21.12](https://github.com/dargmuesli/creal/compare/1.21.11...1.21.12) (2024-06-28)
 
 ### Bug Fixes
