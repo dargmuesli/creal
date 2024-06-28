@@ -1,3 +1,9 @@
+## [1.21.11](https://github.com/dargmuesli/creal/compare/1.21.10...1.21.11) (2024-06-28)
+
+### Bug Fixes
+
+* **player:** anonymize crossorigin on load ([6b6606e](https://github.com/dargmuesli/creal/commit/6b6606e03928c5ce5cc2245591675529fa3d126e))
+
 ## [1.21.10](https://github.com/dargmuesli/creal/compare/1.21.9...1.21.10) (2024-06-28)
 
 ### Bug Fixes
