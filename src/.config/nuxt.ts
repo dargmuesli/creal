@@ -22,7 +22,7 @@ export default defineNuxtConfig(
   defu(
     {
       extends: ['@dargmuesli/nuxt-vio'],
-      modules: ['@nuxtjs/turnstile'],
+      modules: ['@nuxt/scripts', '@nuxtjs/turnstile'],
       runtimeConfig: {
         public: {
           creal: {
