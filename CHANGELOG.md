@@ -1,3 +1,9 @@
+## [1.21.14](https://github.com/dargmuesli/creal/compare/1.21.13...1.21.14) (2024-06-28)
+
+### Bug Fixes
+
+* **csp:** correct script source specifity ([9435597](https://github.com/dargmuesli/creal/commit/9435597801951f6d70014baff96d742ec21a7dd1))
+
 ## [1.21.13](https://github.com/dargmuesli/creal/compare/1.21.12...1.21.13) (2024-06-28)
 
 ### Bug Fixes
