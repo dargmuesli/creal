@@ -1,3 +1,9 @@
+## [1.21.8](https://github.com/dargmuesli/creal/compare/1.21.7...1.21.8) (2024-06-28)
+
+### Bug Fixes
+
+* **csp:** allow report uri as connect source ([7615830](https://github.com/dargmuesli/creal/commit/7615830856569046e9d4f5fefc80e593cb0d9d36))
+
 ## [1.21.7](https://github.com/dargmuesli/creal/compare/1.21.6...1.21.7) (2024-06-28)
 
 ### Bug Fixes
