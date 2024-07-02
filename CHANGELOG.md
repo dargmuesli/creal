@@ -1,3 +1,9 @@
+## [1.21.16](https://github.com/dargmuesli/creal/compare/1.21.15...1.21.16) (2024-07-02)
+
+### Bug Fixes
+
+* **strapi:** correct csp url ([77b1ce8](https://github.com/dargmuesli/creal/commit/77b1ce89d414a7c0272e2f444fd4717f0669faaf))
+
 ## [1.21.15](https://github.com/dargmuesli/creal/compare/1.21.14...1.21.15) (2024-06-28)
 
 ### Bug Fixes
