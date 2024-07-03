@@ -1,3 +1,9 @@
+## [2.1.0](https://github.com/dargmuesli/creal/compare/2.0.1...2.1.0) (2024-07-03)
+
+### Features
+
+* **player:** rename to mixes ([99bb7ad](https://github.com/dargmuesli/creal/commit/99bb7ad665e44855ebeaf289e25e3ac1d82f0c74))
+
 ## [2.0.1](https://github.com/dargmuesli/creal/compare/2.0.0...2.0.1) (2024-07-03)
 
 ### Bug Fixes
