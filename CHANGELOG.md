@@ -1,3 +1,9 @@
+## [2.1.1](https://github.com/dargmuesli/creal/compare/2.1.0...2.1.1) (2024-07-03)
+
+### Bug Fixes
+
+* **header:** correct translation ([2d9a7ea](https://github.com/dargmuesli/creal/commit/2d9a7ea713e3e5752ca0d59372954b2b512d778f))
+
 ## [2.1.0](https://github.com/dargmuesli/creal/compare/2.0.1...2.1.0) (2024-07-03)
 
 ### Features
