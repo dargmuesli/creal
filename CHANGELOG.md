@@ -1,3 +1,9 @@
+## [2.2.0](https://github.com/dargmuesli/creal/compare/2.1.1...2.2.0) (2024-07-03)
+
+### Features
+
+* **testimonial:** link to author ([1a8ec52](https://github.com/dargmuesli/creal/commit/1a8ec52812db7b902292303abc432dbdf59840ec))
+
 ## [2.1.1](https://github.com/dargmuesli/creal/compare/2.1.0...2.1.1) (2024-07-03)
 
 ### Bug Fixes
