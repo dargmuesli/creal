@@ -23,12 +23,12 @@ const localePath = useLocalePath()
 </script>
 
 <i18n lang="yaml">
-en:
-  arrow: →
-  bookCreal: Book cReal
-  # bookingSubject: Booking Request
 de:
   arrow: →
   bookCreal: cReal buchen
   # bookingSubject: Buchungsanfrage
+en:
+  arrow: →
+  bookCreal: Book cReal
+  # bookingSubject: Booking Request
 </i18n>

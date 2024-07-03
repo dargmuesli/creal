@@ -195,16 +195,6 @@ const mobileMenuOpen = ref(false)
 </script>
 
 <i18n lang="yaml">
-en:
-  creal: cReal
-  events: Events
-  # eventsFuture: Upcoming events
-  # faq: FAQ
-  # live: Live
-  menuToggle: Toggle menu
-  player: Mixes
-  suggestions: Suggestions
-  testimonials: Testimonials
 de:
   creal: cReal
   events: Veranstaltungen
@@ -214,5 +204,15 @@ de:
   menuToggle: Menü umschalten
   player: Mixe
   suggestions: Vorschläge
+  testimonials: Testimonials
+en:
+  creal: cReal
+  events: Events
+  # eventsFuture: Upcoming events
+  # faq: FAQ
+  # live: Live
+  menuToggle: Toggle menu
+  player: Mixes
+  suggestions: Suggestions
   testimonials: Testimonials
 </i18n>
