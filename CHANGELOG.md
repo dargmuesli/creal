@@ -1,3 +1,18 @@
+## [2.0.0](https://github.com/dargmuesli/creal/compare/1.21.16...2.0.0) (2024-07-03)
+
+### ⚠ BREAKING CHANGES
+
+* add testimonials
+
+### Features
+
+* add testimonials ([2b0635b](https://github.com/dargmuesli/creal/commit/2b0635bcfbfd1b1a98ae873ea856b9a9ad974a88))
+
+### Bug Fixes
+
+* **csp:** use variable site url ([2797474](https://github.com/dargmuesli/creal/commit/27974743e40ca994fefd255d8b2b20cb4ecbb92f))
+* **sqitch:** account for user group ([07a3024](https://github.com/dargmuesli/creal/commit/07a30244f4b3e03c884dad00805941de209c8a26))
+
 ## [1.21.16](https://github.com/dargmuesli/creal/compare/1.21.15...1.21.16) (2024-07-02)
 
 ### Bug Fixes
