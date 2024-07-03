@@ -1,31 +1,30 @@
 import { VIO_NUXT_BASE_CONFIG } from '@dargmuesli/nuxt-vio/utils/nuxt'
-import { SITE_URL } from '@dargmuesli/nuxt-vio/utils/constants'
-import { getDomainTldPort } from '@dargmuesli/nuxt-vio/utils/networking'
+// import { SITE_URL } from '@dargmuesli/nuxt-vio/utils/constants'
 import { defu } from 'defu'
 
-import { SITE_NAME } from '../utils/constants'
-
-const SITE_URL_PARSED = new URL(SITE_URL)
-const STAGING_HOST = 'jonas-thelemann.de'
-const stagingHost =
-  process.env.NODE_ENV !== 'production' && !process.env.NUXT_PUBLIC_SITE_URL
-    ? STAGING_HOST
-    : undefined
-const isInProduction = process.env.NODE_ENV === 'production'
-
-const crealS3EndpointHost =
-  (stagingHost || isInProduction
-    ? `${process.env.NUXT_PUBLIC_CREAL_S3_BUCKET || 'creal-audio'}.`
-    : '') +
-  new URL(
-    process.env.NUXT_PUBLIC_CREAL_S3_ENDPOINT || 'https://s3.nl-ams.scw.cloud',
-  ).host
+import { SITE_NAME, STAGING_HOST } from '../utils/constants'
+// import { GET_CSP } from '../server/utils/constants'
 
 export default defineNuxtConfig(
   defu(
     {
       extends: ['@dargmuesli/nuxt-vio'],
-      modules: ['@nuxt/scripts', '@nuxtjs/turnstile'],
+      modules: [
+        '@nuxt/scripts',
+        '@nuxtjs/turnstile',
+
+        // // nuxt-security: apply content security policy at build time
+        // (_options, nuxt) => {
+        //   if (nuxt.options._generate) {
+        //     if (nuxt.options.security.headers) {
+        //       nuxt.options.security.headers.contentSecurityPolicy = defu(
+        //         GET_CSP(SITE_URL),
+        //         nuxt.options.security.headers.contentSecurityPolicy,
+        //       )
+        //     }
+        //   }
+        // },
+      ],
       runtimeConfig: {
         public: {
           creal: {
@@ -66,43 +65,6 @@ export default defineNuxtConfig(
       },
       gtag: {
         id: 'G-K4R41W62BR',
-      },
-      security: {
-        headers: {
-          contentSecurityPolicy: defu(
-            {
-              // creal
-              'connect-src': [
-                `https://backend.${getDomainTldPort(SITE_URL_PARSED.host)}/api/`, // contact form
-                `https://creal-postgraphile.${getDomainTldPort(SITE_URL_PARSED.host)}`,
-                `https://creal-strapi.${getDomainTldPort(SITE_URL_PARSED.host)}`,
-                'https://cdn.plyr.io', // plyr
-                'https://o4507259039973376.ingest.sentry.io/api/4507260561653840/security/', // TODO: remove together with `report-uri` once browsers support the `Report-To` header (https://caniuse.com/mdn-http_headers_report-to)
-              ],
-              'form-action': ["'self'"],
-              'img-src': [
-                `https://creal-strapi.${getDomainTldPort(SITE_URL_PARSED.host)}`,
-                `https://${crealS3EndpointHost}`, // playlist cover
-              ],
-              'media-src': [
-                'https://cdn.plyr.io/static/blank.mp4', // plyr
-                `https://${crealS3EndpointHost}`, // music
-              ],
-              'prefetch-src': ["'self'"],
-              'report-to': 'csp-endpoint',
-              'report-uri':
-                'https://o4507259039973376.ingest.de.sentry.io/api/4507260561653840/security/?sentry_key=1e53178c1dba9b39147de4a21853a3e3',
-              'style-src': [
-                "'unsafe-inline'", // Nuxt loading indicator, headlessui (Dialog)
-              ],
-            },
-            {
-              // Cloudflare Turnstile
-              'frame-src': ['https://challenges.cloudflare.com'],
-              'script-src-elem': ['https://challenges.cloudflare.com'],
-            },
-          ),
-        },
       },
       site: {
         identity: {
