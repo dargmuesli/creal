@@ -1,3 +1,9 @@
+## [2.0.1](https://github.com/dargmuesli/creal/compare/2.0.0...2.0.1) (2024-07-03)
+
+### Bug Fixes
+
+* **csp:** account for runtime ([0527179](https://github.com/dargmuesli/creal/commit/0527179b48ec9b917930cf92620f341382b38f85))
+
 ## [2.0.0](https://github.com/dargmuesli/creal/compare/1.21.16...2.0.0) (2024-07-03)
 
 ### ⚠ BREAKING CHANGES
