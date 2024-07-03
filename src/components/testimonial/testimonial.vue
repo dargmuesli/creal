@@ -12,7 +12,19 @@
             <div
               class="relative aspect-[2/1] h-full md:-mx-8 xl:mx-0 xl:aspect-auto"
             >
+              <VioLink
+                v-if="testimonial.link"
+                is-external-icon-disabled
+                :to="testimonial.link"
+              >
+                <img
+                  class="absolute inset-0 h-full w-full rounded-2xl bg-gray-800 object-cover object-top shadow-2xl"
+                  :src="pictureSource"
+                  :alt="t('imageAlt', { name: testimonial.name })"
+                />
+              </VioLink>
               <img
+                v-else
                 class="absolute inset-0 h-full w-full rounded-2xl bg-gray-800 object-cover object-top shadow-2xl"
                 :src="pictureSource"
                 :alt="t('imageAlt', { name: testimonial.name })"
@@ -43,13 +55,13 @@
                 <!-- eslint-enable vue/no-v-html -->
               </blockquote>
               <figcaption class="mt-8 text-base">
-                <a
+                <VioLink
                   v-if="testimonial.link"
-                  :href="testimonial.link"
+                  :to="testimonial.link"
                   class="font-semibold text-white"
                 >
                   {{ testimonial.name }}
-                </a>
+                </VioLink>
                 <template v-else>
                   {{ testimonial.name }}
                 </template>
