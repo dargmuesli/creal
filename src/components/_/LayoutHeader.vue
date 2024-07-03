@@ -204,7 +204,7 @@ de:
   menuToggle: Menü umschalten
   player: Mixe
   suggestions: Vorschläge
-  testimonials: Testimonials
+  testimonials: Erfahrungsberichte
 en:
   creal: cReal
   events: Events
