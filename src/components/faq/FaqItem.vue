@@ -26,10 +26,10 @@
 </template>
 
 <script setup lang="ts">
+import type { CollectionItem } from '@dargmuesli/nuxt-vio/types/fetch'
 import { marked } from 'marked'
 
 import type { CrealFaq } from '~/types/creal'
-import type { CollectionItem } from '~/types/paging'
 
 interface Props {
   faqItem: CollectionItem<CrealFaq>

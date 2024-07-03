@@ -16,7 +16,8 @@
 </template>
 
 <script setup lang="ts">
-import type { CollectionItem } from '~/types/paging'
+import type { CollectionItem } from '@dargmuesli/nuxt-vio/types/fetch'
+
 import type { CrealEvent } from '~/types/creal'
 
 interface Props {

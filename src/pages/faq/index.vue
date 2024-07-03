@@ -7,7 +7,7 @@
       {{ requestError }}
     </VioCardStateAlert>
     <Paging
-      v-if="faqItems?.length"
+      v-if="faqs?.length"
       :is-previous-allowed="paging.isPreviousAllowed"
       :is-next-allowed="paging.isNextAllowed"
       :part-string="paging.partString"
@@ -16,18 +16,16 @@
     >
       <ul>
         <li
-          v-for="faqItem in faqItems"
-          :id="faqItem.id"
-          :key="faqItem.id"
+          v-for="faq in faqs"
+          :id="faq.id"
+          :key="faq.id"
           class="border duration-300 first:rounded-t last:rounded-b"
-          :class="
-            itemFocusedId === faqItem.id ? 'my-4' : '-my-px mx-8 last:my-0'
-          "
+          :class="itemFocusedId === faq.id ? 'my-4' : '-my-px mx-8 last:my-0'"
         >
           <FaqItem
-            :faq-item="faqItem"
-            :is-focused="itemFocusedId === faqItem.id"
-            @click="toggleItemFocus(faqItem.id)"
+            :faq-item="faq"
+            :is-focused="itemFocusedId === faq.id"
+            @click="toggleItemFocus(faq.id)"
           />
         </li>
       </ul>
@@ -37,49 +35,27 @@
 </template>
 
 <script setup lang="ts">
-import type { StrapiResult } from '@dargmuesli/nuxt-vio/types/fetch'
-import { FETCH_RETRY_AMOUNT } from '@dargmuesli/nuxt-vio/utils/constants'
-import { consola } from 'consola'
 import { htmlToText } from 'html-to-text'
 import { marked } from 'marked'
 
 import type { CrealFaq } from '~/types/creal'
 
-const { t, locale } = useI18n()
+const { t } = useI18n()
 const route = useRoute()
-const strapiFetch = useStrapiFetch()
+const {
+  items: faqs,
+  paging,
+  requestError,
+} = await useStrapiData<CrealFaq>({
+  path: '/faqs',
+  query: {
+    sort: 'title:asc',
+  },
+})
 
 // data
 const itemFocusedId = ref<number>()
 const title = t('titlePage')
-const requestError = ref()
-const querylimit = +(route.query.limit ? route.query.limit : 100)
-const queryStart = +(route.query.start ? route.query.start : 0)
-
-// async data
-let asyncData: StrapiResult<CrealFaq> | undefined
-try {
-  asyncData = await strapiFetch('/faqs', {
-    query: {
-      locale: locale.value,
-      'pagination[limit]': querylimit,
-      'pagination[start]': queryStart,
-      sort: 'title:asc',
-    },
-    retry: FETCH_RETRY_AMOUNT,
-  })
-} catch (error) {
-  requestError.value = error
-  consola.error(error)
-}
-const faqItems = asyncData?.data
-const paging = getPaging({
-  items: faqItems,
-  itemsCountTotal: asyncData?.meta.pagination.total,
-  query: route.query,
-  start: queryStart,
-  limit: querylimit,
-})
 
 // methods
 const toggleItemFocus = (id: number) => {
@@ -106,10 +82,10 @@ useHeadDefault({
 // TODO: remove markdown formatting
 useSchemaOrg([
   defineWebPage({ '@type': 'FAQPage' }),
-  (faqItems || []).map(async (faqItem) =>
+  (faqs || []).map(async (faq) =>
     defineQuestion({
-      name: faqItem.attributes.title,
-      acceptedAnswer: htmlToText(await marked(faqItem.attributes.answer)),
+      name: faq.attributes.title,
+      acceptedAnswer: htmlToText(await marked(faq.attributes.answer)),
     }),
   ),
 ])

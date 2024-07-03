@@ -1,8 +1,11 @@
 import { VIO_NUXT_BASE_CONFIG } from '@dargmuesli/nuxt-vio/utils/nuxt'
+import { SITE_URL } from '@dargmuesli/nuxt-vio/utils/constants'
+import { getDomainTldPort } from '@dargmuesli/nuxt-vio/utils/networking'
 import { defu } from 'defu'
 
 import { SITE_NAME } from '../utils/constants'
 
+const SITE_URL_PARSED = new URL(SITE_URL)
 const STAGING_HOST = 'jonas-thelemann.de'
 const stagingHost =
   process.env.NODE_ENV !== 'production' && !process.env.NUXT_PUBLIC_SITE_URL
@@ -70,15 +73,15 @@ export default defineNuxtConfig(
             {
               // creal
               'connect-src': [
-                `https://backend.${STAGING_HOST}/api/`, // contact form
-                `https://creal-postgraphile.${STAGING_HOST}`,
-                `https://creal-strapi.${STAGING_HOST}`,
+                `https://backend.${getDomainTldPort(SITE_URL_PARSED.host)}/api/`, // contact form
+                `https://creal-postgraphile.${getDomainTldPort(SITE_URL_PARSED.host)}`,
+                `https://creal-strapi.${getDomainTldPort(SITE_URL_PARSED.host)}`,
                 'https://cdn.plyr.io', // plyr
                 'https://o4507259039973376.ingest.sentry.io/api/4507260561653840/security/', // TODO: remove together with `report-uri` once browsers support the `Report-To` header (https://caniuse.com/mdn-http_headers_report-to)
               ],
               'form-action': ["'self'"],
               'img-src': [
-                `https://creal-strapi.${STAGING_HOST}`,
+                `https://creal-strapi.${getDomainTldPort(SITE_URL_PARSED.host)}`,
                 `https://${crealS3EndpointHost}`, // playlist cover
               ],
               'media-src': [

@@ -15,19 +15,19 @@
       :query-previous="paging.queryPrevious"
       :query-next="paging.queryNext"
     >
-      <EventList v-if="itemsCurrent" :events="itemsCurrent">
+      <EventList v-if="eventsCurrent" :events="eventsCurrent">
         <div class="flex items-center gap-2">
           {{ t('eventsCurrent') }}
           <LivePulse />
         </div>
       </EventList>
-      <EventList v-if="itemsFuture" :events="itemsFuture">
+      <EventList v-if="eventsFuture" :events="eventsFuture">
         <div class="flex items-center gap-2">
           {{ t('eventsFuture') }}
-          <LivePulse v-if="!itemsCurrent || itemsCurrent.length === 0" />
+          <LivePulse v-if="!eventsCurrent || eventsCurrent.length === 0" />
         </div>
       </EventList>
-      <EventList v-if="itemsPast" :events="itemsPast">
+      <EventList v-if="eventsPast" :events="eventsPast">
         {{ t('eventsPast') }}
       </EventList>
     </Paging>
@@ -36,52 +36,28 @@
 </template>
 
 <script setup lang="ts">
-import type { StrapiResult } from '@dargmuesli/nuxt-vio/types/fetch'
-import { FETCH_RETRY_AMOUNT } from '@dargmuesli/nuxt-vio/utils/constants'
-import { consola } from 'consola'
+import type { CrealEvent } from '~/types/creal'
 
-import type { CrealEvent, CrealFaq } from '~/types/creal'
+const {
+  items: events,
+  paging,
+  requestError,
+} = await useStrapiData<CrealEvent>({
+  path: '/events',
+  query: {
+    populate: 'image',
+    sort: 'dateStart:desc',
+  },
+})
 
-const { t, locale } = useI18n()
-const route = useRoute()
-const strapiFetch = useStrapiFetch()
+const { t } = useI18n()
 const dateTime = useDateTime()
 
 // data
-const requestError = ref()
 const title = t('titlePage')
-const queryLimit = +(route.query.limit ? route.query.limit : 100)
-const queryStart = +(route.query.start ? route.query.start : 0)
-
-// async data
-let asyncData: StrapiResult<CrealFaq> | undefined
-
-try {
-  asyncData = await strapiFetch<StrapiResult<CrealEvent>>('/events', {
-    query: {
-      locale: locale.value,
-      'pagination[limit]': String(queryLimit),
-      'pagination[start]': String(queryStart),
-      populate: 'image',
-      sort: 'dateStart:desc',
-    },
-    retry: FETCH_RETRY_AMOUNT,
-  })
-} catch (error) {
-  requestError.value = error
-  consola.error(error)
-}
-const events = asyncData?.data
-const paging = getPaging({
-  items: events,
-  itemsCountTotal: asyncData?.meta.pagination.total,
-  query: route.query,
-  start: queryStart,
-  limit: queryLimit,
-})
 
 // computations
-const itemsCurrent = computed(() => {
+const eventsCurrent = computed(() => {
   if (!events) return
 
   const current = dateTime()
@@ -100,7 +76,7 @@ const itemsCurrent = computed(() => {
     }
   })
 })
-const itemsFuture = computed(() => {
+const eventsFuture = computed(() => {
   if (!events) return
 
   const current = dateTime()
@@ -109,7 +85,7 @@ const itemsFuture = computed(() => {
     .filter((event) => dateTime(event.attributes.dateStart).isAfter(current))
     .reverse()
 })
-const itemsPast = computed(() => {
+const eventsPast = computed(() => {
   if (!events) return
 
   const current = dateTime()

@@ -7,8 +7,3 @@ export interface Paging {
   queryNext: LocationQuery
   queryPrevious: LocationQuery
 }
-
-export interface CollectionItem<T> {
-  id: number
-  attributes: T
-}

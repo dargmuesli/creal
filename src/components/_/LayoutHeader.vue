@@ -22,8 +22,12 @@
         >
           {{ t('events') }}
         </VioLink>
-        <VioLink aria-label="FAQ" :is-colored="false" :to="localePath('/faq')">
-          {{ t('faq') }}
+        <VioLink
+          aria-label="FAQ"
+          :is-colored="false"
+          :to="localePath('/testimonials')"
+        >
+          {{ t('testimonials') }}
         </VioLink>
         <VioLink
           aria-label="Player"
@@ -105,9 +109,9 @@
                 aria-label="FAQ"
                 class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-white hover:bg-gray-800"
                 :is-colored="false"
-                :to="localePath('/faq')"
+                :to="localePath('/testimonials')"
               >
-                {{ t('faq') }}
+                {{ t('testimonials') }}
               </VioLink>
               <VioLink
                 aria-label="Player"
@@ -195,18 +199,20 @@ en:
   creal: cReal
   events: Events
   # eventsFuture: Upcoming events
-  faq: FAQ
+  # faq: FAQ
   # live: Live
   menuToggle: Toggle menu
   player: Player
   suggestions: Suggestions
+  testimonials: Testimonials
 de:
   creal: cReal
   events: Veranstaltungen
   # eventsFuture: Kommende Veranstaltungen
-  faq: FAQ
+  # faq: FAQ
   # live: Live
   menuToggle: Menü umschalten
   player: Player
   suggestions: Vorschläge
+  testimonials: Testimonials
 </i18n>

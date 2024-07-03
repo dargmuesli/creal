@@ -19,3 +19,17 @@ export interface CrealFaq {
   title: string
   isFocused: boolean
 }
+
+export interface CrealTestimonial {
+  link?: string
+  name: string
+  picture: {
+    data?: {
+      attributes: {
+        url: string
+      }
+    }
+  }
+  quote: string
+  role: string
+}
