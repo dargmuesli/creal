@@ -238,9 +238,9 @@ export default {
 de:
   description: Mixe von DJ cReal anhören.
   itemsNone: Keine Elemente gefunden.
-  titlePage: Player
+  titlePage: Mixe
 en:
   description: Listen to mixes by DJ cReal.
   itemsNone: No items found.
-  titlePage: Player
+  titlePage: Mixes
 </i18n>

@@ -202,7 +202,7 @@ en:
   # faq: FAQ
   # live: Live
   menuToggle: Toggle menu
-  player: Player
+  player: Mixes
   suggestions: Suggestions
   testimonials: Testimonials
 de:
@@ -212,7 +212,7 @@ de:
   # faq: FAQ
   # live: Live
   menuToggle: Menü umschalten
-  player: Player
+  player: Mixe
   suggestions: Vorschläge
   testimonials: Testimonials
 </i18n>
