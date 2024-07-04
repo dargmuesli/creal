@@ -7,7 +7,7 @@
       {{ requestError }}
     </VioCardStateAlert>
     <Paging
-      v-else-if="items?.length"
+      v-else-if="items?.length && paging"
       class="flex flex-col gap-4 lg:gap-8"
       :is-previous-allowed="paging.isPreviousAllowed"
       :is-next-allowed="paging.isNextAllowed"
@@ -16,7 +16,7 @@
       :query-next="paging.queryNext"
     >
       <ul>
-        <li v-for="item in items" :id="item.id" :key="item.id">
+        <li v-for="item in items" :id="`${item.id}`" :key="item.id">
           <Testimonial :testimonial="item.attributes" />
         </li>
       </ul>
