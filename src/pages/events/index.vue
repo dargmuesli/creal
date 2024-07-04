@@ -7,7 +7,7 @@
       {{ requestError }}
     </VioCardStateAlert>
     <Paging
-      v-else-if="events?.length"
+      v-else-if="events?.length && paging"
       class="flex flex-col gap-4 lg:gap-8"
       :is-previous-allowed="paging.isPreviousAllowed"
       :is-next-allowed="paging.isNextAllowed"

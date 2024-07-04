@@ -7,7 +7,7 @@
       {{ requestError }}
     </VioCardStateAlert>
     <Paging
-      v-if="faqs?.length"
+      v-if="faqs?.length && paging"
       :is-previous-allowed="paging.isPreviousAllowed"
       :is-next-allowed="paging.isNextAllowed"
       :part-string="paging.partString"
@@ -17,7 +17,7 @@
       <ul>
         <li
           v-for="faq in faqs"
-          :id="faq.id"
+          :id="`${faq.id}`"
           :key="faq.id"
           class="border duration-300 first:rounded-t last:rounded-b"
           :class="itemFocusedId === faq.id ? 'my-4' : '-my-px mx-8 last:my-0'"
