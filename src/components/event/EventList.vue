@@ -3,14 +3,12 @@
     <div class="vio-prose-fullwidth">
       <div class="text-5xl font-bold text-white"><slot /></div>
     </div>
-    <ul>
-      <li
+    <ul class="flex flex-col gap-4 lg:gap-8">
+      <Event
         v-for="eventItem in events"
         :key="eventItem.id"
-        class="relative my-4 rounded border p-4 first:mt-0 last:mb-0"
-      >
-        <Event :creal-event="eventItem.attributes" />
-      </li>
+        :creal-event="eventItem.attributes"
+      />
     </ul>
   </div>
 </template>
