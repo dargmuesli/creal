@@ -17,7 +17,6 @@
             <VioLink
               v-for="collection in store.playerData.currentPlaylist.collections"
               :key="collection.name"
-              class="rounded-lg bg-gray-900 p-4"
               :is-colored="false"
               :title="collection.name"
               :to="{ query: getPlaylistLink(collection.name) }"

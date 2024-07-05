@@ -1,5 +1,7 @@
 <template>
-  <li class="flex flex-col gap-1 lg:gap-2">
+  <li
+    class="flex flex-col gap-1 rounded-lg bg-gray-900 p-4 hover:bg-gray-950 lg:gap-2"
+  >
     <img
       v-if="coverUrl !== ''"
       alt="Cover image."
