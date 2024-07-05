@@ -135,6 +135,7 @@ const getPlaylistExtended = (
           break
         case 'jpg':
         case 'png':
+        case 'webp':
           playlistDataExtended.covers.push(matchName)
           break
         case 'json':
