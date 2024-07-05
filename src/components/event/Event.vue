@@ -1,26 +1,24 @@
 <template>
-  <div
-    class="flex flex-col justify-center space-y-4 lg:flex-row lg:items-center lg:space-x-4 lg:space-y-0"
+  <li
+    class="flex flex-col justify-center gap-4 rounded-lg bg-gray-900 p-4 lg:flex-row lg:items-center lg:p-8"
   >
-    <div class="vio-prose-fullwidth space-y-2 lg:w-1/2">
-      <div class="flex gap-2">
-        <i18n-t keypath="datetime">
-          <template #start>
-            {{ dateFormat(new Date(crealEvent.dateStart)) }}
-          </template>
-          <template v-if="crealEvent.dateEnd" #end>
-            {{
-              t('datetimeEnd', {
-                end: dateFormat(new Date(crealEvent.dateEnd)),
-              })
-            }}
-          </template>
-          <template v-if="crealEvent.location" #location>
-            {{ t('datetimeLocation', { location: crealEvent.location }) }}
-          </template>
-        </i18n-t>
-      </div>
-      <span class="block text-4xl font-bold text-white">
+    <div class="vio-prose-fullwidth flex flex-col gap-2 lg:w-1/2">
+      <i18n-t keypath="datetime" tag="span">
+        <template #start>
+          {{ dateFormat(new Date(crealEvent.dateStart)) }}
+        </template>
+        <template v-if="crealEvent.dateEnd" #end>
+          {{
+            t('datetimeEnd', {
+              end: dateFormat(new Date(crealEvent.dateEnd)),
+            })
+          }}
+        </template>
+        <template v-if="crealEvent.location" #location>
+          {{ t('datetimeLocation', { location: crealEvent.location }) }}
+        </template>
+      </i18n-t>
+      <span class="block text-2xl font-bold text-white lg:text-4xl">
         {{ crealEvent.title }}
       </span>
       <!-- eslint-disable vue/no-v-html -->
@@ -30,7 +28,7 @@
       />
       <!-- eslint-enable vue/no-v-html -->
     </div>
-    <div class="space-y-4 lg:w-1/2">
+    <div class="flex flex-col gap-4 lg:w-1/2">
       <img
         v-if="crealEvent.image.data"
         class="m-auto"
@@ -48,7 +46,7 @@
         </VioButtonColored>
       </div>
     </div>
-  </div>
+  </li>
 </template>
 
 <script setup lang="ts">
