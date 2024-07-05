@@ -102,6 +102,7 @@
                 class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-white hover:bg-gray-800"
                 :is-colored="false"
                 :to="localePath('/events')"
+                @click="mobileMenuOpen = false"
               >
                 {{ t('events') }}
               </VioLink>
@@ -110,6 +111,7 @@
                 class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-white hover:bg-gray-800"
                 :is-colored="false"
                 :to="localePath('/testimonials')"
+                @click="mobileMenuOpen = false"
               >
                 {{ t('testimonials') }}
               </VioLink>
@@ -118,6 +120,7 @@
                 class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-white hover:bg-gray-800"
                 :is-colored="false"
                 :to="localePath('/player')"
+                @click="mobileMenuOpen = false"
               >
                 {{ t('player') }}
               </VioLink>
@@ -126,6 +129,7 @@
                 class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-white hover:bg-gray-800"
                 :is-colored="false"
                 :to="localePath('/suggestions')"
+                @click="mobileMenuOpen = false"
               >
                 {{ t('suggestions') }}
               </VioLink>
@@ -134,7 +138,10 @@
                 :key="item.name"
                 :href="item.href"
                 class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-white hover:bg-gray-800"
-                >{{ item.name }}</a
+                @click="mobileMenuOpen = false"
+              >
+                {{ item.name }}
+              </a
               > -->
             </div>
             <div class="py-6">

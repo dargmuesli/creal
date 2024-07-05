@@ -1,6 +1,6 @@
 <template>
   <div :data-is-loading="isLoading" data-testid="is-loading">
-    <NuxtLoadingIndicator color="#fff" />
+    <NuxtRouteAnnouncer />
     <NuxtLayout>
       <!-- `NuxtLayout` can't have mulitple child nodes (https://github.com/nuxt/nuxt/issues/21759) -->
       <NuxtPage />
@@ -16,10 +16,9 @@ import type { Locale } from '@dargmuesli/nuxt-cookie-control/runtime/types'
 const { $dayjs } = useNuxtApp()
 const i18n = useI18n()
 const { t } = i18n
-const cookieControl = useCookieControl()
+const siteConfig = useSiteConfig()
 
-const loadingId = Math.random()
-const loadingIds = useState('loadingIds', () => [loadingId])
+const { loadingIds, indicateLoadingDone } = useLoadingDoneIndicator('app')
 
 // methods
 const init = () => {
@@ -42,27 +41,26 @@ const isLoading = computed(() => !!loadingIds.value.length)
 const locale = computed(() => i18n.locale.value as Locale)
 
 // lifecycle
-onMounted(() => loadingIds.value.splice(loadingIds.value.indexOf(loadingId), 1))
-watch(
-  () => cookieControl.cookiesEnabledIds.value,
-  (current, previous) => {
-    if (
-      (!previous?.includes('ga') && current?.includes('ga')) ||
-      (previous?.includes('ga') && !current?.includes('ga'))
-    ) {
-      window.location.reload()
-    }
-  },
-  { deep: true },
-)
+onMounted(() => indicateLoadingDone())
 
 // initialization
+defineOgImageComponent(
+  'Default',
+  {
+    description: siteConfig.description,
+  },
+  {
+    alt: t('globalSeoOgImageAlt'),
+  },
+)
 useAppLayout()
 useFavicons()
 // usePolyfills() // hijacked ⚠️
-defineOgImage({
-  alt: t('globalSeoOgImageAlt'),
-  // component: props.ogImageComponent,
-})
+useSchemaOrg([
+  defineWebSite({
+    description: siteConfig.description,
+  }),
+])
+useVioGtag()
 init()
 </script>
