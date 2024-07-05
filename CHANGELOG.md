@@ -1,3 +1,9 @@
+## [2.5.0](https://github.com/dargmuesli/creal/compare/2.4.0...2.5.0) (2024-07-05)
+
+### Features
+
+* **event:** redesign ([f72e252](https://github.com/dargmuesli/creal/commit/f72e252202e7b33de090dc7adbffac8b36d79766))
+
 ## [2.4.0](https://github.com/dargmuesli/creal/compare/2.3.0...2.4.0) (2024-07-05)
 
 ### Features
