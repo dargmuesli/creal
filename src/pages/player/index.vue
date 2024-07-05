@@ -4,53 +4,48 @@
       <VioLayoutBreadcrumbs :suffixes="breadcrumbSuffixes">
         {{ title }}
       </VioLayoutBreadcrumbs>
-      <div class="grow rounded bg-gray-900 p-4">
+      <div class="grow rounded p-4">
         <div v-if="isLoading" class="text-center">
           <VioLoaderIndicatorSpinner class="m-auto h-32 w-32" />
           {{ t('globalStatusLoading') }}
         </div>
-        <div v-else-if="store.playerData.currentPlaylist" class="m-auto w-5/6">
+        <div v-else-if="store.playerData.currentPlaylist">
           <ul
             v-if="store.playerData.currentPlaylist.collections.length"
-            class="flex flex-wrap justify-center"
+            class="flex flex-wrap gap-2 lg:gap-4"
           >
-            <li
+            <VioLink
               v-for="collection in store.playerData.currentPlaylist.collections"
               :key="collection.name"
-              class="m-2 min-w-[15rem] max-w-[15rem]"
+              class="rounded-lg bg-gray-900 p-4"
+              :is-colored="false"
+              :title="collection.name"
+              :to="{ query: getPlaylistLink(collection.name) }"
             >
-              <VioLink
-                class="block h-full w-full"
-                :is-colored="false"
-                :title="collection.name"
-                :to="{ query: getPlaylistLink(collection.name) }"
-              >
-                <PlayerPlaylist class="h-full" :playlist="collection" />
-              </VioLink>
-            </li>
+              <PlayerPlaylist class="h-full" :playlist="collection" />
+            </VioLink>
           </ul>
-          <ul v-if="store.playerData.currentPlaylist.items.length">
-            <li
+          <ul
+            v-if="store.playerData.currentPlaylist.items.length"
+            class="flex flex-col gap-2"
+          >
+            <PlayerPlaylistItem
               v-for="playlistItem of store.playerData.currentPlaylist.items"
               :key="playlistItem.fileName"
-              class="border-b border-gray-800 first:border-t hover:bg-gray-800"
-            >
-              <PlayerPlaylistItem
-                :class="{
-                  'text-yellow-500':
-                    routeQueryPlaylist &&
-                    store.playerData.currentPlaylist &&
-                    store.playerData.currentTrack &&
-                    routeQueryPlaylist ===
-                      store.playerData.currentPlaylist.name &&
-                    playlistItem.fileName ===
-                      store.playerData.currentTrack.fileName,
-                }"
-                :playlist-item="playlistItem"
-                @download="download(playlistItem)"
-                @play="play(playlistItem, routeQueryPlaylist)"
-              />
-            </li>
+              :class="{
+                'text-yellow-500':
+                  routeQueryPlaylist &&
+                  store.playerData.currentPlaylist &&
+                  store.playerData.currentTrack &&
+                  routeQueryPlaylist ===
+                    store.playerData.currentPlaylist.name &&
+                  playlistItem.fileName ===
+                    store.playerData.currentTrack.fileName,
+              }"
+              :playlist-item="playlistItem"
+              @download="download(playlistItem)"
+              @play="play(playlistItem, routeQueryPlaylist)"
+            />
           </ul>
           <div
             v-if="

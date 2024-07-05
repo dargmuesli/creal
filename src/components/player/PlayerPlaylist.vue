@@ -1,19 +1,21 @@
 <template>
-  <section class="flex w-full flex-col">
+  <li class="flex flex-col gap-1 lg:gap-2">
     <img
       v-if="coverUrl !== ''"
       alt="Cover image."
-      class="rounded"
+      class="h-64 w-64 rounded"
       crossorigin="anonymous"
       :src="coverUrl"
     />
-    <div v-else class="m-auto h-16 w-16">
-      <VioLoaderIndicatorPing />
+    <div v-else class="flex h-64 w-64 items-center justify-center">
+      <div class="h-16 w-16">
+        <VioLoaderIndicatorPing />
+      </div>
     </div>
-    <strong class="m-0 mt-1 line-clamp-2 text-left text-2xl leading-tight">
+    <strong class="line-clamp-2 text-left text-2xl leading-tight">
       {{ playlist.name }}
     </strong>
-  </section>
+  </li>
 </template>
 
 <script setup lang="ts">

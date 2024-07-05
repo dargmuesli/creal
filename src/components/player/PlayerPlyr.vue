@@ -5,7 +5,9 @@
       class="flex flex-col justify-evenly bg-white px-2 font-bold text-black sm:flex-row"
     >
       <span>
-        {{ store.playerData.currentTrack.fileName }}
+        {{
+          store.playerData.currentTrack.fileName.replace(/^([0-9-]+ - )/, '')
+        }}
         <span
           v-if="store.playerData.currentTrack.meta?.createdTime"
           class="font-normal"
