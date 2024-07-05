@@ -1,3 +1,9 @@
+## [2.2.2](https://github.com/dargmuesli/creal/compare/2.2.1...2.2.2) (2024-07-05)
+
+### Bug Fixes
+
+* **player:** allow webp as cover image ([50eff29](https://github.com/dargmuesli/creal/commit/50eff292c4240783e07a6b6d2911f54f0f6e1803))
+
 ## [2.2.1](https://github.com/dargmuesli/creal/compare/2.2.0...2.2.1) (2024-07-05)
 
 ### Bug Fixes
