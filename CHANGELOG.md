@@ -1,3 +1,9 @@
+## [2.2.1](https://github.com/dargmuesli/creal/compare/2.2.0...2.2.1) (2024-07-05)
+
+### Bug Fixes
+
+* schedule release ([4ebdea9](https://github.com/dargmuesli/creal/commit/4ebdea9f193084131331c3c33abd7e89855291b9))
+
 ## [2.2.0](https://github.com/dargmuesli/creal/compare/2.1.1...2.2.0) (2024-07-03)
 
 ### Features
