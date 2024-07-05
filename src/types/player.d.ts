@@ -1,11 +1,16 @@
 import type Plyr from 'plyr'
 import type { Ref } from 'vue'
 
+export interface Cover {
+  fileExtension: 'jpg' | 'png' | 'webp'
+  name: string
+}
+
 export interface PlaylistItem {
+  cover?: Cover
   fileExtension: string
   fileName: string
   fileSize: number
-  isCoverAvailable: boolean
   isMetaAvailable: boolean
 }
 
@@ -25,14 +30,14 @@ export interface PlaylistItemMeta {
 
 export interface Playlist {
   collections: Playlist[]
-  isCoverAvailable: boolean
+  cover?: Cover
   items: PlaylistItem[]
   name: string
 }
 
 export interface PlaylistExtended extends Playlist {
   collections: PlaylistExtended[]
-  covers: string[]
+  covers: Cover[]
   metas: string[]
 }
 

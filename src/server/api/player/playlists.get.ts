@@ -40,39 +40,31 @@ const itemSort = (a: PlaylistItem, b: PlaylistItem) => {
 }
 
 const getPlaylist = (playlistDataExtended: PlaylistExtended): Playlist => {
-  // Set cover properties.
-  for (let i = 0; i < playlistDataExtended.covers.length; i++) {
-    // For collections.
-    for (let j = 0; j < playlistDataExtended.collections.length; j++) {
-      if (
-        playlistDataExtended.covers[i] ===
-        playlistDataExtended.collections[j].name
-      ) {
-        playlistDataExtended.collections[j].isCoverAvailable = true
+  // set cover properties
+  for (const cover of playlistDataExtended.covers) {
+    // for collections
+    for (const collection of playlistDataExtended.collections) {
+      if (cover.name === collection.name) {
+        collection.cover = cover
         break
       }
     }
 
-    // For items.
-    for (let j = 0; j < playlistDataExtended.items.length; j++) {
-      if (
-        playlistDataExtended.covers[i] ===
-        playlistDataExtended.items[j].fileName
-      ) {
-        playlistDataExtended.items[j].isCoverAvailable = true
+    // for items
+    for (const playlistItem of playlistDataExtended.items) {
+      if (cover.name === playlistItem.fileName) {
+        playlistItem.cover = cover
         break
       }
     }
   }
 
-  // Set meta properties.
-  for (let i = 0; i < playlistDataExtended.metas.length; i++) {
-    // For items.
-    for (let j = 0; j < playlistDataExtended.items.length; j++) {
-      if (
-        playlistDataExtended.metas[i] === playlistDataExtended.items[j].fileName
-      ) {
-        playlistDataExtended.items[j].isMetaAvailable = true
+  // set meta properties
+  for (const playlistMeta of playlistDataExtended.metas) {
+    // for items
+    for (const playlistItem of playlistDataExtended.items) {
+      if (playlistMeta === playlistItem.fileName) {
+        playlistItem.isMetaAvailable = true
         break
       }
     }
@@ -89,7 +81,7 @@ const getPlaylist = (playlistDataExtended: PlaylistExtended): Playlist => {
     name: playlistDataExtended.name,
     collections: subCollections,
     items: playlistDataExtended.items.sort(itemSort),
-    isCoverAvailable: playlistDataExtended.isCoverAvailable,
+    cover: playlistDataExtended.cover,
   }
 }
 
@@ -102,7 +94,7 @@ const getPlaylistExtended = (
     name: root,
     collections: [],
     items: [],
-    isCoverAvailable: false,
+    cover: undefined,
     covers: [],
     metas: [],
   }
@@ -129,14 +121,17 @@ const getPlaylistExtended = (
             fileName: matchName,
             fileExtension: matchEnding,
             fileSize: size,
-            isCoverAvailable: false,
+            cover: undefined,
             isMetaAvailable: false,
           })
           break
         case 'jpg':
         case 'png':
         case 'webp':
-          playlistDataExtended.covers.push(matchName)
+          playlistDataExtended.covers.push({
+            fileExtension: matchEnding,
+            name: matchName,
+          })
           break
         case 'json':
           playlistDataExtended.metas.push(matchName)
@@ -150,7 +145,7 @@ const getPlaylistExtended = (
         name: itemName,
         collections: [],
         items: [],
-        isCoverAvailable: false,
+        cover: undefined,
         covers: [],
         metas: [],
       })
@@ -211,7 +206,7 @@ const fetchPlaylist = async (event: H3Event) => {
     name: paramPrefix || 'root',
     collections: [],
     items: [],
-    isCoverAvailable: false,
+    cover: undefined,
     covers: [],
     metas: [],
   }
