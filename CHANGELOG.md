@@ -1,3 +1,16 @@
+## [2.4.0](https://github.com/dargmuesli/creal/compare/2.3.0...2.4.0) (2024-07-05)
+
+### Features
+
+* **og:** customize image ([f36435d](https://github.com/dargmuesli/creal/commit/f36435d2cbeac7aa2e7e6e6aeb9a68b190d19a4d))
+* **player:** add hover effect for playlists ([435bbf9](https://github.com/dargmuesli/creal/commit/435bbf9c5dcd48ed4e3f84b9dfd5983324f1a876))
+* **player:** redesign ([79f72b8](https://github.com/dargmuesli/creal/commit/79f72b8502661bd5ca5b82297f023433a3843391))
+
+### Bug Fixes
+
+* **csp:** correct for frontend development ([7b500d1](https://github.com/dargmuesli/creal/commit/7b500d1f605931bab9cbc46c45c66b09a3da7ac8))
+* **header:** close menu on link click ([2a3a2b7](https://github.com/dargmuesli/creal/commit/2a3a2b760716def9153f5c0e5306d42e87e4b641))
+
 ## [2.3.0](https://github.com/dargmuesli/creal/compare/2.2.3...2.3.0) (2024-07-05)
 
 ### Features
