@@ -1,36 +1,39 @@
-import { getDomainTldPort } from '@dargmuesli/nuxt-vio/utils/networking'
+import { getDomainTldPort as getSiteAndPort } from '@dargmuesli/nuxt-vio/utils/networking'
 import { defu } from 'defu'
 
-import { STAGING_HOST } from '../../utils/constants'
+import { STAGING_HOST as PRODUCTION_HOST } from '../../utils/constants'
 
-const stagingHost =
-  process.env.NODE_ENV !== 'production' && !process.env.NUXT_PUBLIC_SITE_URL
-    ? STAGING_HOST
-    : undefined
-const isInProduction = process.env.NODE_ENV === 'production'
+const IS_IN_PRODUCTION = process.env.NODE_ENV === 'production'
+const IS_IN_STACK = !!process.env.NUXT_PUBLIC_SITE_URL
+const IS_IN_FRONTEND_DEVELOPMENT = !IS_IN_PRODUCTION && !IS_IN_STACK
+
+// const productionHost =
+//   !IS_IN_PRODUCTION && !IS_IN_STACK ? PRODUCTION_HOST : undefined
 const crealS3EndpointHost =
-  (stagingHost || isInProduction
+  (IS_IN_FRONTEND_DEVELOPMENT || IS_IN_PRODUCTION
     ? `${process.env.NUXT_PUBLIC_CREAL_S3_BUCKET || 'creal-audio'}.`
     : '') +
   new URL(
     process.env.NUXT_PUBLIC_CREAL_S3_ENDPOINT || 'https://s3.nl-ams.scw.cloud',
   ).host
 
-export const GET_CSP = (siteUrl: string) => {
-  const siteUrlParsed = new URL(siteUrl)
+export const GET_CSP = (siteUrl: URL) => {
+  const domainTldPort = IS_IN_FRONTEND_DEVELOPMENT
+    ? PRODUCTION_HOST
+    : getSiteAndPort(siteUrl.host)
 
   return defu(
     {
       // creal
       'connect-src': [
-        `https://backend.${getDomainTldPort(siteUrlParsed.host)}/api/`, // contact form
-        `https://creal-postgraphile.${getDomainTldPort(siteUrlParsed.host)}`,
-        `https://creal-strapi.${getDomainTldPort(siteUrlParsed.host)}`,
+        `https://backend.${domainTldPort}/api/`, // contact form
+        `https://creal-postgraphile.${domainTldPort}`,
+        `https://creal-strapi.${domainTldPort}`,
         'https://cdn.plyr.io', // plyr
       ],
       'form-action': ["'self'"],
       'img-src': [
-        `https://creal-strapi.${getDomainTldPort(siteUrlParsed.host)}`,
+        `https://creal-strapi.${domainTldPort}`,
         `https://${crealS3EndpointHost}`, // playlist cover
       ],
       'media-src': [
