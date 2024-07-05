@@ -1,3 +1,9 @@
+## [2.5.1](https://github.com/dargmuesli/creal/compare/2.5.0...2.5.1) (2024-07-05)
+
+### Bug Fixes
+
+* **deps:** update all non-major dependencies to v13.1.19 ([f8ead17](https://github.com/dargmuesli/creal/commit/f8ead17980ce86a8f6f9253b68f9789dba1901be))
+
 ## [2.5.0](https://github.com/dargmuesli/creal/compare/2.4.0...2.5.0) (2024-07-05)
 
 ### Features
