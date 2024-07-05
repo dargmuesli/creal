@@ -1,3 +1,9 @@
+## [2.3.0](https://github.com/dargmuesli/creal/compare/2.2.3...2.3.0) (2024-07-05)
+
+### Features
+
+* **player:** support multiple cover file extensions ([741fdb8](https://github.com/dargmuesli/creal/commit/741fdb8a5a1dd86cb95ac4b707f8838800221ae7))
+
 ## [2.2.3](https://github.com/dargmuesli/creal/compare/2.2.2...2.2.3) (2024-07-05)
 
 ### Bug Fixes
