@@ -1,3 +1,9 @@
+## [2.9.0](https://github.com/dargmuesli/creal/compare/2.8.0...2.9.0) (2024-07-06)
+
+### Features
+
+* **testimonial:** color names yellow ([5fee50a](https://github.com/dargmuesli/creal/commit/5fee50a06c23808efcd797edd4f42cbe126b4104))
+
 ## [2.8.0](https://github.com/dargmuesli/creal/compare/2.7.1...2.8.0) (2024-07-06)
 
 ### Features
