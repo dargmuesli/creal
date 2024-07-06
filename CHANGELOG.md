@@ -1,3 +1,9 @@
+## [2.7.1](https://github.com/dargmuesli/creal/compare/2.7.0...2.7.1) (2024-07-06)
+
+### Bug Fixes
+
+* **testimonials:** improve layout ([39f305e](https://github.com/dargmuesli/creal/commit/39f305ed46cdb9a8267097431f5118f761373a64))
+
 ## [2.7.0](https://github.com/dargmuesli/creal/compare/2.6.0...2.7.0) (2024-07-06)
 
 ### Features
