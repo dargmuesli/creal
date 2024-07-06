@@ -4,57 +4,54 @@
       <VioLayoutBreadcrumbs :suffixes="breadcrumbSuffixes">
         {{ title }}
       </VioLayoutBreadcrumbs>
-      <div class="grow rounded p-4">
-        <div v-if="isLoading" class="text-center">
-          <VioLoaderIndicatorSpinner class="m-auto h-32 w-32" />
-          {{ t('globalStatusLoading') }}
-        </div>
-        <div v-else-if="store.playerData.currentPlaylist">
-          <ul
-            v-if="store.playerData.currentPlaylist.collections.length"
-            class="flex flex-col flex-wrap items-center gap-4 md:flex-row"
+      <div v-if="isLoading" class="text-center">
+        <VioLoaderIndicatorSpinner class="m-auto h-32 w-32" />
+        {{ t('globalStatusLoading') }}
+      </div>
+      <div v-else-if="store.playerData.currentPlaylist">
+        <ul
+          v-if="store.playerData.currentPlaylist.collections.length"
+          class="flex flex-col flex-wrap items-center gap-4 md:flex-row"
+        >
+          <VioLink
+            v-for="collection in store.playerData.currentPlaylist.collections"
+            :key="collection.name"
+            :is-colored="false"
+            :title="collection.name"
+            :to="{ query: getPlaylistLink(collection.name) }"
           >
-            <VioLink
-              v-for="collection in store.playerData.currentPlaylist.collections"
-              :key="collection.name"
-              :is-colored="false"
-              :title="collection.name"
-              :to="{ query: getPlaylistLink(collection.name) }"
-            >
-              <PlayerPlaylist class="h-full" :playlist="collection" />
-            </VioLink>
-          </ul>
-          <ul
-            v-if="store.playerData.currentPlaylist.items.length"
-            class="flex flex-col gap-4"
-          >
-            <PlayerPlaylistItem
-              v-for="playlistItem of store.playerData.currentPlaylist.items"
-              :key="playlistItem.fileName"
-              :class="{
-                'text-yellow-500':
-                  routeQueryPlaylist &&
-                  store.playerData.currentPlaylist &&
-                  store.playerData.currentTrack &&
-                  routeQueryPlaylist ===
-                    store.playerData.currentPlaylist.name &&
-                  playlistItem.fileName ===
-                    store.playerData.currentTrack.fileName,
-              }"
-              :playlist-item="playlistItem"
-              @download="download(playlistItem)"
-              @play="play(playlistItem, routeQueryPlaylist)"
-            />
-          </ul>
-          <div
-            v-if="
-              !store.playerData.currentPlaylist.collections.length &&
-              !store.playerData.currentPlaylist.items.length
-            "
-            class="text-center"
-          >
-            {{ t('itemsNone') }}
-          </div>
+            <PlayerPlaylist class="h-full" :playlist="collection" />
+          </VioLink>
+        </ul>
+        <ul
+          v-if="store.playerData.currentPlaylist.items.length"
+          class="flex flex-col gap-4"
+        >
+          <PlayerPlaylistItem
+            v-for="playlistItem of store.playerData.currentPlaylist.items"
+            :key="playlistItem.fileName"
+            :class="{
+              'text-yellow-500':
+                routeQueryPlaylist &&
+                store.playerData.currentPlaylist &&
+                store.playerData.currentTrack &&
+                routeQueryPlaylist === store.playerData.currentPlaylist.name &&
+                playlistItem.fileName ===
+                  store.playerData.currentTrack.fileName,
+            }"
+            :playlist-item="playlistItem"
+            @download="download(playlistItem)"
+            @play="play(playlistItem, routeQueryPlaylist)"
+          />
+        </ul>
+        <div
+          v-if="
+            !store.playerData.currentPlaylist.collections.length &&
+            !store.playerData.currentPlaylist.items.length
+          "
+          class="text-center"
+        >
+          {{ t('itemsNone') }}
         </div>
       </div>
     </section>
