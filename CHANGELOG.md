@@ -1,3 +1,14 @@
+## [2.8.0](https://github.com/dargmuesli/creal/compare/2.7.1...2.8.0) (2024-07-06)
+
+### Features
+
+* **footer:** add faq link ([91bb067](https://github.com/dargmuesli/creal/commit/91bb067afb71a9e86ac5986513625238c8034d2a))
+
+### Bug Fixes
+
+* **faq:** imitate zoom only on selection ([d100ef7](https://github.com/dargmuesli/creal/commit/d100ef772a8ce16cc7ad83ef9bf3865b3fbe80c9))
+* **footer:** add link label ([821c677](https://github.com/dargmuesli/creal/commit/821c677ee63479066fea9a06948e7be83143abac))
+
 ## [2.7.1](https://github.com/dargmuesli/creal/compare/2.7.0...2.7.1) (2024-07-06)
 
 ### Bug Fixes
