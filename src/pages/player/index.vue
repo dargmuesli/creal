@@ -13,15 +13,19 @@
           v-if="store.playerData.currentPlaylist.collections.length"
           class="flex flex-col flex-wrap items-center gap-4 md:flex-row"
         >
-          <VioLink
+          <li
             v-for="collection in store.playerData.currentPlaylist.collections"
             :key="collection.name"
-            :is-colored="false"
-            :title="collection.name"
-            :to="{ query: getPlaylistLink(collection.name) }"
           >
-            <PlayerPlaylist class="h-full" :playlist="collection" />
-          </VioLink>
+            <VioLink
+              :is-colored="false"
+              class="block"
+              :title="collection.name"
+              :to="{ query: getPlaylistLink(collection.name) }"
+            >
+              <PlayerPlaylist class="h-full" :playlist="collection" />
+            </VioLink>
+          </li>
         </ul>
         <ul
           v-if="store.playerData.currentPlaylist.items.length"

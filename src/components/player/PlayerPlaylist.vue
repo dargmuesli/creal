@@ -1,5 +1,5 @@
 <template>
-  <li
+  <div
     class="flex flex-col gap-1 rounded-lg bg-gray-900 p-4 hover:bg-gray-950 lg:gap-2"
   >
     <img
@@ -17,7 +17,7 @@
     <strong class="line-clamp-2 text-left text-2xl leading-tight">
       {{ playlist.name }}
     </strong>
-  </li>
+  </div>
 </template>
 
 <script setup lang="ts">
