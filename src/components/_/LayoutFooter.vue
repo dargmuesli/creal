@@ -1,6 +1,6 @@
 <template>
   <VioLayoutFooter :class="{ 'mb-20': store.playerData.isVisible }">
-    <VioLayoutFooterCategory :heading="t('legal')">
+    <VioLayoutFooterCategory class="basis-full" :heading="t('legal')">
       <VioLink :to="localePath('/legal-notice')">
         {{ t('legalNotice') }}
       </VioLink>
@@ -8,7 +8,7 @@
         {{ t('privacyPolicy') }}
       </VioLink>
     </VioLayoutFooterCategory>
-    <VioLayoutFooterCategory :heading="t('preferences')">
+    <VioLayoutFooterCategory class="basis-full" :heading="t('preferences')">
       <div class="grid grid-cols-2 grid-rows-2 items-center gap-2">
         <label for="vio-i18n-select">{{ t('language') }}</label>
         <select
