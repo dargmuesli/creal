@@ -29,19 +29,36 @@
         height="700"
         style="position: absolute; opacity: 0.025; left: 100"
       />
-      <div
-        style="
-          color: rgb(209 213 219);
-          font-size: 40px;
-          font-weight: 600;
-          margin-top: 80px;
-        "
-      >
-        {{ t('description') }}
-      </div>
-      <h1 style="font-size: 72px; line-height: 1; max-width: 600px">
-        {{ title }}
-      </h1>
+      <template v-if="title !== t('description')">
+        <div
+          style="
+            color: rgb(209 213 219);
+            font-size: 40px;
+            font-weight: 600;
+            margin-top: 80px;
+          "
+        >
+          {{ t('description') }}
+        </div>
+        <h1 style="font-size: 72px; line-height: 1; max-width: 600px">
+          {{ title }}
+        </h1>
+      </template>
+      <template v-else>
+        <div
+          style="
+            color: rgb(209 213 219);
+            font-size: 40px;
+            font-weight: 600;
+            margin-top: 80px;
+          "
+        >
+          {{ t('headline') }}
+        </div>
+        <h1 style="font-size: 72px; line-height: 1; max-width: 600px">
+          {{ t('name') }}
+        </h1>
+      </template>
     </div>
   </div>
 </template>
@@ -65,6 +82,10 @@ export default {
 <i18n lang="yaml">
 de:
   description: DJ cReal
+  headline: DJ und Event-Organisator
+  name: cReal
 en:
   description: DJ cReal
+  headline: DJ and event organizer
+  name: cReal
 </i18n>
