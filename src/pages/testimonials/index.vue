@@ -6,21 +6,37 @@
     <VioCardStateAlert v-if="requestError">
       {{ requestError }}
     </VioCardStateAlert>
-    <Paging
-      v-else-if="items?.length && paging"
-      class="flex flex-col gap-4 lg:gap-8"
-      :is-previous-allowed="paging.isPreviousAllowed"
-      :is-next-allowed="paging.isNextAllowed"
-      :part-string="paging.partString"
-      :query-previous="paging.queryPrevious"
-      :query-next="paging.queryNext"
-    >
-      <ul>
-        <li v-for="item in items" :id="`${item.id}`" :key="item.id">
-          <Testimonial :testimonial="item.attributes" />
-        </li>
-      </ul>
-    </Paging>
+    <div v-else-if="items?.length && paging">
+      <Paging
+        class="flex flex-col gap-4 lg:gap-8"
+        :is-previous-allowed="paging.isPreviousAllowed"
+        :is-next-allowed="paging.isNextAllowed"
+        :part-string="paging.partString"
+        :query-previous="paging.queryPrevious"
+        :query-next="paging.queryNext"
+      >
+        <ul>
+          <li v-for="item in items" :id="`${item.id}`" :key="item.id">
+            <Testimonial :testimonial="item.attributes" />
+          </li>
+        </ul>
+      </Paging>
+      <div
+        class="bg-background-darken flex items-center justify-between gap-4 rounded-lg p-8"
+      >
+        <div class="flex flex-col gap-4">
+          <span class="text-4xl font-bold">{{ t('ctaTitle') }}</span>
+          <span class="text-xl">{{ t('ctaText') }}</span>
+        </div>
+        <VioButtonColored
+          aria-label="Book cReal"
+          class="text-lg font-semibold shadow-sm"
+          :to="localePath('/contact')"
+        >
+          {{ t('ctaButton') }}
+        </VioButtonColored>
+      </div>
+    </div>
     <div v-else class="text-center">{{ t('none') }}</div>
   </div>
 </template>
@@ -29,6 +45,7 @@
 import type { CrealTestimonial } from '~/types/creal'
 
 const { t } = useI18n()
+const localePath = useLocalePath()
 const { items, paging, requestError } = await useStrapiData<CrealTestimonial>({
   path: '/testimonials',
   query: {
@@ -43,9 +60,15 @@ const title = t('title')
 
 <i18n lang="yaml">
 de:
+  ctaButton: cReal buchen →
+  ctaText: Buche mich und füge dein Feedback hinzu! 😉
+  ctaTitle: Das ist alles?
   none: Keine Erfahrungsberichte verfügbar
   title: Erfahrungsberichte
 en:
+  ctaButton: Book cReal →
+  ctaText: Book me and add your feedback! 😉
+  ctaTitle: That's all?
   none: No testimonials available
   title: Testimonials
 </i18n>
