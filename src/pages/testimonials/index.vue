@@ -69,7 +69,7 @@ de:
   title: Erfahrungsberichte
 en:
   ctaButton: Book cReal →
-  ctaText: Book me and add your feedback! 😉
+  ctaText: Book me and get quoted! 😉
   ctaTitle: That's all?
   none: No testimonials available
   title: Testimonials
