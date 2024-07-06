@@ -10,7 +10,7 @@
       >
         <VioIconDownload />
       </VioButton>
-      <button
+      <VioButton
         :aria-label="
           playlistItem.fileName
             .replace(/cReal - /, '')
@@ -29,7 +29,7 @@
             .reverse()
             .join(' · ')
         }}
-      </button>
+      </VioButton>
       <VioButton
         :aria-label="t('play')"
         class="p-4"
@@ -62,7 +62,9 @@ const { t } = useI18n()
 // methods
 const bytesToString = (bytes: number) => prettyBytes(bytes)
 const onDownloadClick = () => emit('download')
-const onItemClick = (event: MouseEvent) => {
+const onItemClick = (event?: MouseEvent) => {
+  if (!event) return
+
   // double click
   if (event.detail === 2) onPlayClick()
 }
