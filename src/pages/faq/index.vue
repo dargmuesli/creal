@@ -20,7 +20,13 @@
           :id="`${faq.id}`"
           :key="faq.id"
           class="border duration-300 first:rounded-t last:rounded-b"
-          :class="itemFocusedId === faq.id ? 'my-4' : '-my-px mx-8 last:my-0'"
+          :class="
+            itemFocusedId
+              ? itemFocusedId === faq.id
+                ? 'my-4'
+                : '-my-px mx-8 last:my-0'
+              : '-my-px'
+          "
         >
           <FaqItem
             :faq-item="faq"
