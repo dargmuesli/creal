@@ -1,9 +1,9 @@
 <template>
   <div class="relative flex flex-1 items-end justify-center">
     <div class="mb-[15vh] max-w-2xl">
-      <div class="hidden sm:mb-8 sm:flex sm:justify-center">
+      <div class="mb-8 flex justify-center">
         <div
-          class="relative rounded-full px-3 py-1 text-sm leading-6 text-gray-400 ring-1 ring-white/10 hover:ring-white/20"
+          class="relative rounded-full px-3 py-1 text-sm leading-6 text-gray-400 ring-1 ring-white/10 backdrop-blur-md hover:ring-white/20"
         >
           {{ t('cities') }}
           <VioLink
@@ -18,7 +18,7 @@
         </div>
       </div>
       <div class="text-center">
-        <h1 class="text-4xl font-bold tracking-tight text-white sm:text-6xl">
+        <h1 class="text-6xl font-bold tracking-tight text-white">
           {{ t('cReal') }}
         </h1>
         <i18n-t
