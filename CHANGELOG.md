@@ -1,3 +1,9 @@
+## [2.6.0](https://github.com/dargmuesli/creal/compare/2.5.3...2.6.0) (2024-07-06)
+
+### Features
+
+* **event:** reorder place and time ([03514e9](https://github.com/dargmuesli/creal/commit/03514e9681a0114bfd148d669dfb698c70178a9f))
+
 ## [2.5.3](https://github.com/dargmuesli/creal/compare/2.5.2...2.5.3) (2024-07-06)
 
 ### Bug Fixes
