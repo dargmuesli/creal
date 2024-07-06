@@ -37,7 +37,7 @@
       </div>
     </VioLayoutFooterCategory>
     <template #logo>
-      <VioLink :to="localePath('/faq')">
+      <VioLink :aria-label="t('faq')" :to="localePath('/faq')">
         <IconLogo class="mx-12 h-12 w-12 opacity-60 brightness-0 invert" />
       </VioLink>
     </template>
@@ -81,6 +81,7 @@ const locale = computed(() => i18n.locale.value)
 <i18n lang="yaml">
 de:
   cookies: Cookies
+  faq: FAQ
   language: Sprache
   legal: Rechtliches
   legalNotice: Impressum
@@ -88,6 +89,7 @@ de:
   privacyPolicy: Datenschutz
 en:
   cookies: Cookies
+  faq: FAQ
   language: Language
   legal: Legal
   legalNotice: Legal notice
