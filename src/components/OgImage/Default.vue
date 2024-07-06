@@ -29,7 +29,7 @@
         height="700"
         style="position: absolute; opacity: 0.025; left: 100"
       />
-      <template v-if="title !== t('description')">
+      <template v-if="title !== siteConfig.name">
         <div
           style="
             color: rgb(209 213 219);
@@ -38,7 +38,7 @@
             margin-top: 80px;
           "
         >
-          {{ t('description') }}
+          {{ siteConfig.name }}
         </div>
         <h1 style="font-size: 72px; line-height: 1; max-width: 600px">
           {{ title }}
@@ -71,6 +71,7 @@ interface Props {
 withDefaults(defineProps<Props>(), {})
 
 const { t } = useI18n()
+const siteConfig = useSiteConfig()
 </script>
 
 <script lang="ts">
@@ -81,11 +82,9 @@ export default {
 
 <i18n lang="yaml">
 de:
-  description: DJ cReal
   headline: DJ und Event-Organisator
   name: cReal
 en:
-  description: DJ cReal
   headline: DJ and event organizer
   name: cReal
 </i18n>

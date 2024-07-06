@@ -52,10 +52,9 @@ definePageMeta({
 
 const localePath = useLocalePath()
 const { t } = useI18n()
-const siteConfig = useSiteConfig()
 
 // initialization
-useHeadDefault({ title: siteConfig.name })
+useHeadDefault({})
 </script>
 
 <script lang="ts">
