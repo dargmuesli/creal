@@ -1,3 +1,9 @@
+## [2.10.1](https://github.com/dargmuesli/creal/compare/2.10.0...2.10.1) (2024-07-06)
+
+### Bug Fixes
+
+* **og:** correct root image ([783c8bf](https://github.com/dargmuesli/creal/commit/783c8bf569348b3cbf758e9fa1190e1bf5196eb3))
+
 ## [2.10.0](https://github.com/dargmuesli/creal/compare/2.9.0...2.10.0) (2024-07-06)
 
 ### Features
