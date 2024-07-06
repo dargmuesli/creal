@@ -1,3 +1,15 @@
+## [2.7.0](https://github.com/dargmuesli/creal/compare/2.6.0...2.7.0) (2024-07-06)
+
+### Features
+
+* **index:** show locations on small screens ([f961752](https://github.com/dargmuesli/creal/commit/f9617525912817a327b0180478e6ca513ab947f9))
+* **layout:** add glare ([41faec4](https://github.com/dargmuesli/creal/commit/41faec4aefea5fdc0b0a0e5ebde8abf88f4bbe20))
+* **testimonials:** add call to action ([7b6e890](https://github.com/dargmuesli/creal/commit/7b6e890763cac01bc3988c14c7240541f10ee01a))
+
+### Bug Fixes
+
+* **player:** correct padding ([1e82ea6](https://github.com/dargmuesli/creal/commit/1e82ea618aa3da73d99e1cc8529b979b3d06af7f))
+
 ## [2.6.0](https://github.com/dargmuesli/creal/compare/2.5.3...2.6.0) (2024-07-06)
 
 ### Features
