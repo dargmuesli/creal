@@ -58,7 +58,8 @@
                 <VioLink
                   v-if="testimonial.link"
                   :to="testimonial.link"
-                  class="font-semibold text-white"
+                  :is-colored="false"
+                  class="font-semibold text-yellow-500"
                 >
                   {{ testimonial.name }}
                 </VioLink>
