@@ -1,3 +1,9 @@
+## [2.5.2](https://github.com/dargmuesli/creal/compare/2.5.1...2.5.2) (2024-07-06)
+
+### Bug Fixes
+
+* **og:** correct image description ([c549492](https://github.com/dargmuesli/creal/commit/c549492226f636d36b026c2c7a5a332328326120))
+
 ## [2.5.1](https://github.com/dargmuesli/creal/compare/2.5.0...2.5.1) (2024-07-05)
 
 ### Bug Fixes
