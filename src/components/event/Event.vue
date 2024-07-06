@@ -84,13 +84,13 @@ export default {
 
 <i18n lang="yaml">
 de:
-  datetime: '{start}{end}{location}'
+  datetime: '{location}{start}{end}'
   datetimeEnd: ' - {end}'
-  datetimeLocation: ' ⋅ {location}'
+  datetimeLocation: '{location} ⋅ '
   details: Details
 en:
-  datetime: '{start}{end}{location}'
+  datetime: '{location}{start}{end}'
   datetimeEnd: ' - {end}'
-  datetimeLocation: ' ⋅ {location}'
+  datetimeLocation: '{location} ⋅ '
   details: Details
 </i18n>
