@@ -6,7 +6,7 @@
     <VioCardStateAlert v-if="requestError">
       {{ requestError }}
     </VioCardStateAlert>
-    <div v-else-if="items?.length && paging" class="flex flex-col gap-16">
+    <div v-else-if="items?.length && paging" class="flex flex-col gap-32">
       <Paging
         class="flex flex-col gap-4 lg:gap-8"
         :is-previous-allowed="paging.isPreviousAllowed"
@@ -21,7 +21,7 @@
           </li>
         </ul>
       </Paging>
-      <div class="flex justify-center">
+      <div class="mb-32 flex justify-center">
         <div
           class="bg-background-darken flex flex-col items-center gap-8 rounded-lg p-8 lg:flex-row lg:gap-16 lg:px-16"
         >
