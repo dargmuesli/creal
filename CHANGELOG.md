@@ -1,3 +1,10 @@
+## [2.10.0](https://github.com/dargmuesli/creal/compare/2.9.0...2.10.0) (2024-07-06)
+
+### Features
+
+* **testimonials:** add whitespace to call to action ([924d0c5](https://github.com/dargmuesli/creal/commit/924d0c5973b82dff6a340184caa549bffde3f506))
+* **testimonials:** phrase pun ([b00fcd8](https://github.com/dargmuesli/creal/commit/b00fcd8a18bc22fd0804b49843a5000cb57e93a3))
+
 ## [2.9.0](https://github.com/dargmuesli/creal/compare/2.8.0...2.9.0) (2024-07-06)
 
 ### Features
