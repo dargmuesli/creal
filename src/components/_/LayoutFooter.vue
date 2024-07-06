@@ -37,7 +37,9 @@
       </div>
     </VioLayoutFooterCategory>
     <template #logo>
-      <IconLogo class="mx-12 h-12 w-12 opacity-60 brightness-0 invert" />
+      <VioLink :to="localePath('/faq')">
+        <IconLogo class="mx-12 h-12 w-12 opacity-60 brightness-0 invert" />
+      </VioLink>
     </template>
   </VioLayoutFooter>
 </template>
