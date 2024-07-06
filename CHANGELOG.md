@@ -1,3 +1,11 @@
+## [2.5.3](https://github.com/dargmuesli/creal/compare/2.5.2...2.5.3) (2024-07-06)
+
+### Bug Fixes
+
+* design ([fdba4a5](https://github.com/dargmuesli/creal/commit/fdba4a529a67e1b2ce79fe860351dff898d1af1a))
+* **footer:** wrap ([6a85b6d](https://github.com/dargmuesli/creal/commit/6a85b6dc1462c0891c3e94bdc8a23ba0aacb3aa6))
+* **header:** close on booking link click ([f6a1890](https://github.com/dargmuesli/creal/commit/f6a1890b632eb91b3495878b0ebb2d1cf90a6eb3))
+
 ## [2.5.2](https://github.com/dargmuesli/creal/compare/2.5.1...2.5.2) (2024-07-06)
 
 ### Bug Fixes
