@@ -1,3 +1,9 @@
+## [2.10.3](https://github.com/dargmuesli/creal/compare/2.10.2...2.10.3) (2024-07-06)
+
+### Bug Fixes
+
+* correct html ([32dad40](https://github.com/dargmuesli/creal/commit/32dad4058996a9e8a404e922dc20b97c7ba61338))
+
 ## [2.10.2](https://github.com/dargmuesli/creal/compare/2.10.1...2.10.2) (2024-07-06)
 
 ### Bug Fixes
