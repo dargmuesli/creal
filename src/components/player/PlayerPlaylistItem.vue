@@ -2,7 +2,7 @@
   <li class="rounded-lg bg-gray-900 hover:bg-gray-950">
     <div class="flex select-none">
       <button
-        class="p-2 lg:p-4"
+        class="p-4"
         :title="bytesToString(playlistItem.fileSize)"
         @click="onDownloadClick()"
       >
@@ -20,7 +20,7 @@
             .join(' · ')
         }}
       </button>
-      <button class="p-2 lg:p-4" title="play" @click="onPlayClick()">
+      <button class="p-4" title="play" @click="onPlayClick()">
         <VioIconPlay />
       </button>
     </div>

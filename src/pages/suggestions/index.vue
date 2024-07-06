@@ -66,7 +66,6 @@
         @input="form.url = $event"
       /> -->
       <VioFormInput
-        is-optional
         id-label="input-comment"
         :title="t('comment')"
         type="textarea"

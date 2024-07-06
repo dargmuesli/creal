@@ -12,7 +12,7 @@
         <div v-else-if="store.playerData.currentPlaylist">
           <ul
             v-if="store.playerData.currentPlaylist.collections.length"
-            class="flex flex-wrap gap-2 lg:gap-4"
+            class="flex flex-col flex-wrap items-center gap-4 md:flex-row"
           >
             <VioLink
               v-for="collection in store.playerData.currentPlaylist.collections"
@@ -26,7 +26,7 @@
           </ul>
           <ul
             v-if="store.playerData.currentPlaylist.items.length"
-            class="flex flex-col gap-2"
+            class="flex flex-col gap-4"
           >
             <PlayerPlaylistItem
               v-for="playlistItem of store.playerData.currentPlaylist.items"

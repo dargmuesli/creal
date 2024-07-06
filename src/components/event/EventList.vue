@@ -1,5 +1,5 @@
 <template>
-  <div v-if="events?.length" class="flex flex-col gap-2 lg:gap-4">
+  <div v-if="events?.length" class="flex flex-col gap-8">
     <div class="vio-prose-fullwidth">
       <div class="text-5xl font-bold text-white"><slot /></div>
     </div>
