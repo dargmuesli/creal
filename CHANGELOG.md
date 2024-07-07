@@ -1,3 +1,10 @@
+## [2.10.4](https://github.com/dargmuesli/creal/compare/2.10.3...2.10.4) (2024-07-07)
+
+### Bug Fixes
+
+* **deps:** update vio ([db72101](https://github.com/dargmuesli/creal/commit/db721015071b4b4ee81fadfa2a7de4a605f35dd4))
+* **testimonials:** add title ([5f4d9a7](https://github.com/dargmuesli/creal/commit/5f4d9a7c705cdd15581f83c8b5dc6e71e486188d))
+
 ## [2.10.3](https://github.com/dargmuesli/creal/compare/2.10.2...2.10.3) (2024-07-06)
 
 ### Bug Fixes
