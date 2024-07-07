@@ -58,6 +58,9 @@ const { items, paging, requestError } = await useStrapiData<CrealTestimonial>({
 
 // data
 const title = t('title')
+
+// initialization
+useHeadDefault({ title })
 </script>
 
 <i18n lang="yaml">
