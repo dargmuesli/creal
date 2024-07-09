@@ -1,8 +1,14 @@
 <template>
-  <li
-    class="flex flex-col justify-center gap-4 rounded-lg bg-gray-900 p-4 lg:flex-row lg:items-center lg:p-8"
-  >
-    <div class="vio-prose-fullwidth flex flex-col gap-2 lg:w-1/2">
+  <div class="flex flex-col rounded-lg bg-gray-900 lg:flex-row lg:items-center">
+    <div class="shrink-0 basis-1/3 self-stretch">
+      <img
+        v-if="crealEvent.image.data"
+        :alt="t('imageAlt')"
+        class="h-full max-h-64 w-full rounded-t-lg object-cover lg:max-h-none lg:rounded-l-lg lg:rounded-r-none"
+        :src="imageSrc"
+      />
+    </div>
+    <div class="flex min-w-0 flex-col gap-2 p-4 lg:p-8">
       <i18n-t keypath="datetime" tag="span">
         <template #start>
           {{ dateFormat(new Date(crealEvent.dateStart)) }}
@@ -18,35 +24,29 @@
           {{ t('datetimeLocation', { location: crealEvent.location }) }}
         </template>
       </i18n-t>
-      <span class="block text-2xl font-bold text-white lg:text-4xl">
+      <span class="truncate text-4xl font-bold text-white lg:text-5xl">
         {{ crealEvent.title }}
       </span>
       <!-- eslint-disable vue/no-v-html -->
       <div
         v-if="crealEvent.description"
+        class="*:truncate"
         v-html="marked(crealEvent.description)"
       />
       <!-- eslint-enable vue/no-v-html -->
-    </div>
-    <div class="flex flex-col gap-4 lg:w-1/2">
-      <img
-        v-if="crealEvent.image.data"
-        class="m-auto"
-        alt="Event image."
-        :src="imageSrc"
-      />
-      <div v-if="crealEvent.url && crealEvent.url !== ''" class="text-center">
-        <VioButtonColored
+      <div class="prose-a:text-yellow-500">
+        <VioLink
+          v-if="crealEvent.url && crealEvent.url !== ''"
           :aria-label="t('details')"
-          class="vio-prose-fullwidth prose-a:text-gray-800"
+          :is-colored="false"
           :icon="false"
           :to="crealEvent.url"
         >
           {{ t('details') }}
-        </VioButtonColored>
+        </VioLink>
       </div>
     </div>
-  </li>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -88,9 +88,11 @@ de:
   datetimeEnd: ' - {end}'
   datetimeLocation: '{location} ⋅ '
   details: Details
+  imageAlt: Ein Foto von oder ein Titelbild der Veranstaltung.
 en:
   datetime: '{location}{start}{end}'
   datetimeEnd: ' - {end}'
   datetimeLocation: '{location} ⋅ '
   details: Details
+  imageAlt: A photo of the event or the event's title picture.
 </i18n>

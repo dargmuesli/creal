@@ -1,14 +1,10 @@
 <template>
   <div v-if="events?.length" class="flex flex-col gap-8">
-    <div class="vio-prose-fullwidth">
-      <div class="text-5xl font-bold text-white"><slot /></div>
-    </div>
+    <div class="text-3xl font-bold text-white lg:text-4xl"><slot /></div>
     <ul class="flex flex-col gap-4 lg:gap-8">
-      <Event
-        v-for="eventItem in events"
-        :key="eventItem.id"
-        :creal-event="eventItem.attributes"
-      />
+      <li v-for="eventItem in events" :key="eventItem.id">
+        <Event :creal-event="eventItem.attributes" />
+      </li>
     </ul>
   </div>
 </template>

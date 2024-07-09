@@ -1,5 +1,5 @@
 <template>
-  <div class="flex-1">
+  <div class="min-w-0 flex-1">
     <VioLayoutBreadcrumbs>
       {{ title }}
     </VioLayoutBreadcrumbs>
