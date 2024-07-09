@@ -1,3 +1,9 @@
+## [2.11.1](https://github.com/dargmuesli/creal/compare/2.11.0...2.11.1) (2024-07-09)
+
+### Bug Fixes
+
+* **event:** correct whitespace ([f0a5095](https://github.com/dargmuesli/creal/commit/f0a50959f3889a605a3f2afb35d4b5a3be9bdb6f))
+
 ## [2.11.0](https://github.com/dargmuesli/creal/compare/2.10.4...2.11.0) (2024-07-09)
 
 ### Features
