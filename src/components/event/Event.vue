@@ -24,13 +24,15 @@
           {{ t('datetimeLocation', { location: crealEvent.location }) }}
         </template>
       </i18n-t>
-      <span class="truncate text-4xl font-bold text-white lg:text-5xl">
+      <span
+        class="overflow-hidden text-ellipsis text-4xl font-bold leading-snug text-white lg:text-5xl"
+      >
         {{ crealEvent.title }}
       </span>
       <!-- eslint-disable vue/no-v-html -->
       <div
         v-if="crealEvent.description"
-        class="*:truncate"
+        class="*:overflow-hidden *:text-ellipsis"
         v-html="marked(crealEvent.description)"
       />
       <!-- eslint-enable vue/no-v-html -->
