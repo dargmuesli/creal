@@ -1,3 +1,9 @@
+## [2.11.3](https://github.com/dargmuesli/creal/compare/2.11.2...2.11.3) (2024-07-09)
+
+### Bug Fixes
+
+* **layout:** automate hyphens ([31e31ef](https://github.com/dargmuesli/creal/commit/31e31efae085fcbc1d18f6d3fe1b7d4db2f9350b))
+
 ## [2.11.2](https://github.com/dargmuesli/creal/compare/2.11.1...2.11.2) (2024-07-09)
 
 ### Bug Fixes
