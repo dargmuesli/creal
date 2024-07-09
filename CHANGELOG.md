@@ -1,3 +1,9 @@
+## [2.11.0](https://github.com/dargmuesli/creal/compare/2.10.4...2.11.0) (2024-07-09)
+
+### Features
+
+* **events:** redesign ([ebc218b](https://github.com/dargmuesli/creal/commit/ebc218bed857c4f0357c635bf47341136d3acf9e))
+
 ## [2.10.4](https://github.com/dargmuesli/creal/compare/2.10.3...2.10.4) (2024-07-07)
 
 ### Bug Fixes
