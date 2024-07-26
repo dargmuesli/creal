@@ -202,8 +202,8 @@ importers:
         specifier: 13.2.2
         version: 13.2.2(playwright-core@1.45.3)
       '@eslint/js':
-        specifier: 9.7.0
-        version: 9.7.0
+        specifier: 10.0.0
+        version: 10.0.0
       '@playwright/test':
         specifier: 1.45.3
         version: 1.45.3
@@ -1380,6 +1380,10 @@ packages:
 
   '@eslint/eslintrc@3.1.0':
     resolution: {integrity: sha512-4Bfj15dVJdoy3RfZmmo86RK1Fwzn6SstsvK9JS+BaVKqC6QQQQyXekNaC+g+LKNgkQ+2VhGAzm6hO40AhMR3zQ==}
+    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+
+  '@eslint/js@10.0.0':
+    resolution: {integrity: sha512-J2VKrn6YUBegZFzRQVOVA8jk7VViV/MXhQUvXuCUK1I2RGGT2E+bmNGOsgtdO9Wo25Kd3hfZFuCm8LcfsUFV7g==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
   '@eslint/js@9.7.0':
@@ -10132,6 +10136,8 @@ snapshots:
       strip-json-comments: 3.1.1
     transitivePeerDependencies:
       - supports-color
+
+  '@eslint/js@10.0.0': {}
 
   '@eslint/js@9.7.0': {}
 
