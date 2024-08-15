@@ -1,3 +1,9 @@
+## [2.11.6](https://github.com/dargmuesli/creal/compare/2.11.5...2.11.6) (2024-08-15)
+
+### Bug Fixes
+
+* schedule release ([cf9e734](https://github.com/dargmuesli/creal/commit/cf9e73473099e6e503566484c7463fa70c602a5c))
+
 ## [2.11.5](https://github.com/dargmuesli/creal/compare/2.11.4...2.11.5) (2024-08-01)
 
 ### Bug Fixes
