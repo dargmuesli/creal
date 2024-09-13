@@ -1,3 +1,9 @@
+## [2.12.0](https://github.com/dargmuesli/creal/compare/2.11.8...2.12.0) (2024-09-13)
+
+### Features
+
+* **polyfills:** reenable ([0d3efe4](https://github.com/dargmuesli/creal/commit/0d3efe4c25ec97830530e530095bd757c995ba83))
+
 ## [2.11.8](https://github.com/dargmuesli/creal/compare/2.11.7...2.11.8) (2024-09-05)
 
 ### Bug Fixes
