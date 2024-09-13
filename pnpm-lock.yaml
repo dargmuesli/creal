@@ -209,8 +209,8 @@ importers:
         specifier: 1.47.1
         version: 1.47.1
       '@types/node':
-        specifier: 20.16.5
-        version: 20.16.5
+        specifier: 22.5.4
+        version: 22.5.4
       cross-env:
         specifier: 7.0.3
         version: 7.0.3
@@ -2809,9 +2809,6 @@ packages:
 
   '@types/minimatch@3.0.5':
     resolution: {integrity: sha512-Klz949h02Gz2uZCMGwDUSDS1YBlTdDDgbWHi+81l29tQALUtvz4rAYi5uoVhE5Lagoq6DeqAUlbrHvW/mXDgdQ==}
-
-  '@types/node@20.16.5':
-    resolution: {integrity: sha512-VwYCweNo3ERajwy0IUlqqcyZ8/A7Zwa9ZP3MnENWcB11AejO+tLy3pu850goUW2FC/IJMdZUfKpX/yxL1gymCA==}
 
   '@types/node@22.5.4':
     resolution: {integrity: sha512-FDuKUJQm/ju9fT/SeX/6+gBzoPzlVCzfzmGkwKvRHQVxi4BntVbyIwf6a4Xn62mrvndLiml6z/UBXIdEVjQLXg==}
@@ -5523,9 +5520,6 @@ packages:
   jiti@2.0.0-beta.3:
     resolution: {integrity: sha512-pmfRbVRs/7khFrSAYnSiJ8C0D5GvzkE4Ey2pAvUcJsw1ly/p+7ut27jbJrjY79BpAJQJ4gXYFtK6d1Aub+9baQ==}
     hasBin: true
-
-  jose@5.9.0:
-    resolution: {integrity: sha512-i7z1nVNeS4rvKGp6SePhUPJ1TQUBR7p8u4aBxxdEaMiRKO5fCfcT/mSMeOsqrb40NxPhoHhTyq5CcC4imLBFcg==}
 
   jose@5.9.1:
     resolution: {integrity: sha512-8verKvy4GThlXSRe1qOcHGcRW9tKVv0YrLildFf6q3RQh3V/OxCXAkVsLhsw9tNOXFJ/EsIGOxWMmISBd/osTQ==}
@@ -10536,7 +10530,7 @@ snapshots:
       graphql-request: 6.1.0(graphql@16.9.0)
       http-proxy-agent: 7.0.2
       https-proxy-agent: 7.0.5
-      jose: 5.9.0
+      jose: 5.9.1
       js-yaml: 4.1.0
       lodash: 4.17.21
       scuid: 1.1.0
@@ -12395,7 +12389,7 @@ snapshots:
 
   '@types/conventional-commits-parser@5.0.0':
     dependencies:
-      '@types/node': 20.16.5
+      '@types/node': 22.5.4
 
   '@types/eslint@9.6.1':
     dependencies:
@@ -12415,7 +12409,7 @@ snapshots:
 
   '@types/http-proxy@1.17.15':
     dependencies:
-      '@types/node': 20.16.5
+      '@types/node': 22.5.4
 
   '@types/js-yaml@4.0.9': {}
 
@@ -12428,10 +12422,6 @@ snapshots:
   '@types/lodash@4.17.7': {}
 
   '@types/minimatch@3.0.5': {}
-
-  '@types/node@20.16.5':
-    dependencies:
-      undici-types: 6.19.8
 
   '@types/node@22.5.4':
     dependencies:
@@ -12453,7 +12443,7 @@ snapshots:
 
   '@types/ws@8.5.12':
     dependencies:
-      '@types/node': 20.16.5
+      '@types/node': 22.5.4
 
   '@types/youtube@0.1.0': {}
 
@@ -15673,15 +15663,13 @@ snapshots:
 
   jest-worker@27.5.1:
     dependencies:
-      '@types/node': 20.16.5
+      '@types/node': 22.5.4
       merge-stream: 2.0.0
       supports-color: 8.1.1
 
   jiti@1.21.6: {}
 
   jiti@2.0.0-beta.3: {}
-
-  jose@5.9.0: {}
 
   jose@5.9.1: {}
 
