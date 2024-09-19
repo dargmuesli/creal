@@ -7,7 +7,7 @@
     >
       <VioIconChatSolid class="shrink-0" />
       <strong class="vio-prose-fullwidth m-0 text-left">
-        {{ faqItem.attributes.title }}
+        {{ faqItem.title }}
       </strong>
     </button>
     <div
@@ -16,10 +16,7 @@
       :style="`max-height: ${getMaxHeight()}px`"
     >
       <!-- eslint-disable vue/no-v-html -->
-      <div
-        class="vio-prose-fullwidth p-8"
-        v-html="marked(faqItem.attributes.answer)"
-      />
+      <div class="vio-prose-fullwidth p-8" v-html="marked(faqItem.answer)" />
       <!-- eslint-enable vue/no-v-html -->
     </div>
   </section>

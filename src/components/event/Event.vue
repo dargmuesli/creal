@@ -2,7 +2,7 @@
   <div class="flex flex-col rounded-lg bg-gray-900 lg:flex-row lg:items-center">
     <div class="shrink-0 basis-1/3 self-stretch">
       <img
-        v-if="crealEvent.image.data"
+        v-if="crealEvent.image"
         :alt="t('imageAlt')"
         class="h-full max-h-64 w-full rounded-t-lg object-cover lg:max-h-none lg:rounded-l-lg lg:rounded-r-none"
         :src="imageSrc"
@@ -74,7 +74,7 @@ const dateFormat = (date: Date) => dateTime(date).format('lll')
 const imageSrc = computed(
   () =>
     getServiceHref({ isSsr: false, name: 'creal-strapi', port: 1337 }) +
-    props.crealEvent.image.data.attributes.url,
+    props.crealEvent.image.url,
 )
 </script>
 

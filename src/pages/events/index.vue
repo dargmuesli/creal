@@ -63,15 +63,15 @@ const eventsCurrent = computed(() => {
   const current = dateTime()
 
   return events.filter((event) => {
-    if (event.attributes.dateEnd) {
+    if (event.dateEnd) {
       return (
-        dateTime(event.attributes.dateStart).isSameOrBefore(current) &&
-        dateTime(event.attributes.dateEnd).isAfter(current)
+        dateTime(event.dateStart).isSameOrBefore(current) &&
+        dateTime(event.dateEnd).isAfter(current)
       )
     } else {
       return (
-        dateTime(event.attributes.dateStart).isSameOrBefore(current) &&
-        dateTime(event.attributes.dateStart).isSame(current, 'day')
+        dateTime(event.dateStart).isSameOrBefore(current) &&
+        dateTime(event.dateStart).isSame(current, 'day')
       )
     }
   })
@@ -82,7 +82,7 @@ const eventsFuture = computed(() => {
   const current = dateTime()
 
   return events
-    .filter((event) => dateTime(event.attributes.dateStart).isAfter(current))
+    .filter((event) => dateTime(event.dateStart).isAfter(current))
     .reverse()
 })
 const eventsPast = computed(() => {
@@ -91,12 +91,12 @@ const eventsPast = computed(() => {
   const current = dateTime()
 
   return events.filter((event) => {
-    if (event.attributes.dateEnd) {
-      return dateTime(event.attributes.dateEnd).isBefore(current)
+    if (event.dateEnd) {
+      return dateTime(event.dateEnd).isBefore(current)
     } else {
       return (
-        dateTime(event.attributes.dateStart).isBefore(current) &&
-        !dateTime(event.attributes.dateStart).isSame(current, 'day')
+        dateTime(event.dateStart).isBefore(current) &&
+        !dateTime(event.dateStart).isSame(current, 'day')
       )
     }
   })
