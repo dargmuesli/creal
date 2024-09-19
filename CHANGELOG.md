@@ -1,3 +1,13 @@
+## [3.0.0](https://github.com/dargmuesli/creal/compare/2.12.0...3.0.0) (2024-09-19)
+
+### ⚠ BREAKING CHANGES
+
+* **strapi:** migrate to v5
+
+### Code Refactoring
+
+* **strapi:** migrate to v5 ([ca7fc6b](https://github.com/dargmuesli/creal/commit/ca7fc6b9938e026a01c00d70b4cf24620172f4d8))
+
 ## [2.12.0](https://github.com/dargmuesli/creal/compare/2.11.8...2.12.0) (2024-09-13)
 
 ### Features
