@@ -16,8 +16,12 @@
         :query-next="paging.queryNext"
       >
         <ul>
-          <li v-for="item in items" :id="`${item.id}`" :key="item.id">
-            <Testimonial :testimonial="item.attributes" />
+          <li
+            v-for="item in items"
+            :id="`${item.documentId}`"
+            :key="item.documentId"
+          >
+            <Testimonial :testimonial="item" />
           </li>
         </ul>
       </Paging>

@@ -5,11 +5,7 @@ export interface CrealEvent {
   title: string
   description: string
   image: {
-    data: {
-      attributes: {
-        url: string
-      }
-    }
+    url: string
   }
   url: string
 }
@@ -24,11 +20,7 @@ export interface CrealTestimonial {
   link?: string
   name: string
   picture: {
-    data?: {
-      attributes: {
-        url: string
-      }
-    }
+    url: string
   }
   quote: string
   role: string

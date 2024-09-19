@@ -91,9 +91,9 @@ const getServiceHref = useGetServiceHref()
 
 // computed
 const pictureSource = computed(() =>
-  props.testimonial.picture.data
+  props.testimonial.picture
     ? getServiceHref({ isSsr: false, name: 'creal-strapi', port: 1337 }) +
-      props.testimonial.picture.data.attributes.url
+      props.testimonial.picture.url
     : undefined,
 )
 </script>

@@ -17,12 +17,12 @@
       <ul>
         <li
           v-for="faq in faqs"
-          :id="`${faq.id}`"
-          :key="faq.id"
+          :id="`${faq.documentId}`"
+          :key="faq.documentId"
           class="border duration-300 first:rounded-t last:rounded-b"
           :class="
             itemFocusedId
-              ? itemFocusedId === faq.id
+              ? itemFocusedId === faq.documentId
                 ? 'my-4'
                 : '-my-px mx-8 last:my-0'
               : '-my-px'
@@ -30,8 +30,8 @@
         >
           <FaqItem
             :faq-item="faq"
-            :is-focused="itemFocusedId === faq.id"
-            @click="toggleItemFocus(faq.id)"
+            :is-focused="itemFocusedId === faq.documentId"
+            @click="toggleItemFocus(faq.documentId)"
           />
         </li>
       </ul>
@@ -60,11 +60,11 @@ const {
 })
 
 // data
-const itemFocusedId = ref<number>()
+const itemFocusedId = ref<string>()
 const title = t('titlePage')
 
 // methods
-const toggleItemFocus = (id: number) => {
+const toggleItemFocus = (id: string) => {
   if (itemFocusedId.value === id) {
     itemFocusedId.value = undefined
     history.replaceState(undefined, '', '')
@@ -76,7 +76,7 @@ const toggleItemFocus = (id: number) => {
 
 // lifecycle
 onMounted(() => {
-  itemFocusedId.value = parseInt(route.hash.substring(1))
+  itemFocusedId.value = route.hash.substring(1)
 })
 // watchQuery: ['limit', 'start'],
 
@@ -90,8 +90,8 @@ useSchemaOrg([
   defineWebPage({ '@type': 'FAQPage' }),
   (faqs || []).map(async (faq) =>
     defineQuestion({
-      name: faq.attributes.title,
-      acceptedAnswer: htmlToText(await marked(faq.attributes.answer)),
+      name: faq.title,
+      acceptedAnswer: htmlToText(await marked(faq.answer)),
     }),
   ),
 ])
