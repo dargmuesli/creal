@@ -1,3 +1,9 @@
+## [3.0.4](https://github.com/dargmuesli/creal/compare/3.0.3...3.0.4) (2024-11-14)
+
+### Bug Fixes
+
+* schedule release ([a39ca3d](https://github.com/dargmuesli/creal/commit/a39ca3dbef39187eb78bcd83b956ac877c07ae9e))
+
 ## [3.0.3](https://github.com/dargmuesli/creal/compare/3.0.2...3.0.3) (2024-10-31)
 
 ### Bug Fixes
