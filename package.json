@@ -5,7 +5,7 @@
     "@semantic-release/changelog": "6.0.3",
     "@semantic-release/commit-analyzer": "13.0.0",
     "@semantic-release/git": "10.0.1",
-    "@semantic-release/github": "11.0.0",
+    "@semantic-release/github": "11.0.1",
     "@semantic-release/npm": "12.0.1",
     "@semantic-release/release-notes-generator": "14.0.1",
     "husky": "9.1.6",
@@ -15,7 +15,7 @@
   "engines": {
     "node": "22"
   },
-  "packageManager": "pnpm@9.12.3",
+  "packageManager": "pnpm@9.13.2",
   "private": true,
   "scripts": {
     "build": "pnpm --dir src run build",
@@ -35,6 +35,13 @@
     "test:e2e:docker:server:node:update": "pnpm --dir tests run test:e2e:docker:server:node:update",
     "test:e2e:docker:server:static": "pnpm --dir tests run test:e2e:docker:server:static",
     "test:e2e:docker:server:static:update": "pnpm --dir tests run test:e2e:docker:server:static:update"
+  },
+  "pnpm": {
+    "overrides": {
+      "@eslint/js": "9.14.0",
+      "@pinia/nuxt": "0.5.5",
+      "eslint": "9.14.0"
+    }
   },
   "type": "module"
 }
