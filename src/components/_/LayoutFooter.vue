@@ -45,6 +45,7 @@
 </template>
 
 <script setup lang="ts">
+import type { I18N_LOCALE_CODE } from '@dargmuesli/nuxt-vio/types/i18n'
 import { I18N_MODULE_CONFIG } from '@dargmuesli/nuxt-vio/utils/constants'
 
 import { useStore } from '~/store'
@@ -69,10 +70,13 @@ const getLocaleName = (locale: string) => {
     return undefined
   }
 }
-const onI18nChange = async (event: Event) =>
+const onI18nChange = async (event: Event) => {
   await router.push({
-    path: switchLocalePath((event.target as HTMLInputElement).value),
+    path: switchLocalePath(
+      (event.target as HTMLInputElement).value as I18N_LOCALE_CODE,
+    ),
   })
+}
 
 // computations
 const locale = computed(() => i18n.locale.value)
