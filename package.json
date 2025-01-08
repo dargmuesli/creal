@@ -36,11 +36,5 @@
     "test:e2e:docker:server:static": "pnpm --dir tests run test:e2e:docker:server:static",
     "test:e2e:docker:server:static:update": "pnpm --dir tests run test:e2e:docker:server:static:update"
   },
-  "pnpm": {
-    "overrides": {
-      "@pinia/nuxt": "0.5.5",
-      "typescript": "5.6.3"
-    }
-  },
   "type": "module"
 }
