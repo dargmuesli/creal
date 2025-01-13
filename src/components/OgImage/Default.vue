@@ -27,7 +27,7 @@
         src="/assets/static/logos/creal.svg"
         width="700"
         height="700"
-        style="position: absolute; opacity: 0.025; left: 100"
+        style="position: absolute; opacity: 0.025; left: 100px"
       />
       <template v-if="title !== siteConfig.name">
         <div
