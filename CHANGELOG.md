@@ -1,3 +1,9 @@
+## [3.0.9](https://github.com/dargmuesli/creal/compare/3.0.8...3.0.9) (2025-01-13)
+
+### Bug Fixes
+
+* **deps:** pin nuxt-og-image to v4.0.1 ([df2a158](https://github.com/dargmuesli/creal/commit/df2a15828e654f3ad6f76e89483f084412a1fe72))
+
 ## [3.0.8](https://github.com/dargmuesli/creal/compare/3.0.7...3.0.8) (2025-01-09)
 
 ### Bug Fixes
