@@ -6,9 +6,11 @@
       type="button"
     >
       <VioIconChatSolid class="shrink-0" />
-      <strong class="vio-prose-fullwidth m-0 text-left">
-        {{ faqItem.title }}
-      </strong>
+      <VioLayoutProse is-full-width>
+        <strong class="m-0 text-left">
+          {{ faqItem.title }}
+        </strong>
+      </VioLayoutProse>
     </button>
     <div
       ref="answerRef"
@@ -16,7 +18,9 @@
       :style="`max-height: ${getMaxHeight()}px`"
     >
       <!-- eslint-disable vue/no-v-html -->
-      <div class="vio-prose-fullwidth p-8" v-html="marked(faqItem.answer)" />
+      <VioLayoutProse class="p-8" is-full-width>
+        <div v-html="marked(faqItem.answer)" />
+      </VioLayoutProse>
       <!-- eslint-enable vue/no-v-html -->
     </div>
   </section>
