@@ -1,88 +1,60 @@
-import AxeBuilder from '@axe-core/playwright'
-import { test, expect } from '@playwright/test'
+import { expect } from '@playwright/test'
 
+import { vioTest } from '#tests/e2e/fixtures/vioTest'
 import {
-  COOKIE_CONTROL_CONSENT_COOKIE_DEFAULT,
-  PAGE_READY,
-} from '../../../utils/constants'
+  testA11y,
+  testOgImage,
+  testPageLoad,
+  testVisualRegression,
+} from '#tests/e2e/utils/tests'
+import { PAGE_READY } from '#tests/e2e/utils/constants'
 
-test.beforeEach(async ({ context }) => {
-  await context.addCookies([
-    {
-      name: 'ncc_c',
-      value: COOKIE_CONTROL_CONSENT_COOKIE_DEFAULT,
-      domain: 'localhost',
-      path: '/',
-    },
-  ])
-})
+const PAGE_PATH = '/'
 
-test.describe('accessibility', () => {
-  test('should not have any automatically detectable accessibility issues', async ({
-    page,
-  }) => {
-    await page.goto('/')
-    await PAGE_READY({ page })
-    const accessibilityScanResults = await new AxeBuilder({ page }).analyze()
-    // expect(
-    //   accessibilityScanResults.violations
-    //     .map(
-    //       (x) =>
-    //         `${x.id}\n${x.nodes.map(
-    //           (y) => `${y.failureSummary}\n(${y.html})`,
-    //         )}`,
-    //     )
-    //     .join('\n'),
-    // ).toEqual('')
-    expect(accessibilityScanResults.violations.length).toEqual(0)
-  })
-})
+testA11y(PAGE_PATH)
+testOgImage(PAGE_PATH)
+testPageLoad(PAGE_PATH)
+testVisualRegression(PAGE_PATH)
 
-test.describe('page load', () => {
-  test('loads the page successfully', async ({ request }) => {
-    const resp = await request.get('/')
-    expect(resp.status()).toBe(200)
-  })
-})
-
-test.describe('internationalization', () => {
+vioTest.describe('internationalization', () => {
   const textEnglish = 'DJ and event organizer'
   const textGerman = 'DJ und Event-Organisator'
 
-  test('displays English translations', async ({ page }) => {
-    await page.goto('/')
-    await expect(page.getByText(textEnglish)).toBeVisible()
+  vioTest('displays English translations', async ({ defaultPage }) => {
+    await defaultPage.goto('/')
+    await expect(defaultPage.page.getByText(textEnglish)).toBeVisible()
   })
 
-  test('displays German translations', async ({ page }) => {
-    await page.goto('/de')
-    await expect(page.getByText(textGerman)).toBeVisible()
+  vioTest('displays German translations', async ({ defaultPage }) => {
+    await defaultPage.goto('/de')
+    await expect(defaultPage.page.getByText(textGerman)).toBeVisible()
   })
 
-  test('switches between English and German translations', async ({ page }) => {
-    await page.goto('/')
-    await PAGE_READY({ page })
-    await expect(page.getByText(textEnglish).first()).toBeVisible()
+  vioTest(
+    'switches between English and German translations',
+    async ({ defaultPage }) => {
+      await defaultPage.goto('/')
+      await PAGE_READY({
+        page: defaultPage.page,
+        options: { cookieControl: false },
+      })
+      await expect(
+        defaultPage.page.getByText(textEnglish).first(),
+      ).toBeVisible()
 
-    await page.getByLabel('Language').selectOption('de')
-    await expect(page.getByText(textGerman).first()).toBeVisible()
+      await defaultPage.page.getByLabel('Language').selectOption('de')
+      await expect(defaultPage.page.getByText(textGerman).first()).toBeVisible()
 
-    await page.getByLabel('Sprache').selectOption('en')
-    await expect(page.getByText(textEnglish).first()).toBeVisible()
-  })
+      await defaultPage.page.getByLabel('Sprache').selectOption('en')
+      await expect(
+        defaultPage.page.getByText(textEnglish).first(),
+      ).toBeVisible()
+    },
+  )
 })
 
-test.describe('visual regression', () => {
-  test('looks as before', async ({ page }) => {
-    await page.goto('/')
-    await PAGE_READY({ page })
-    await expect(page).toHaveScreenshot({ fullPage: true })
-  })
-
-  test('displays the cookie banner', async ({ context, page }) => {
-    // TODO: only remove the cookie control cookie (https://github.com/microsoft/playwright/issues/10143)
-    await context.clearCookies()
-
+vioTest.describe('visual regression', () => {
+  vioTest('displays the cookie banner', async ({ page }) => {
     await page.goto('/')
     await PAGE_READY({ page, options: { cookieControl: false } })
     await expect(page).toHaveScreenshot({ fullPage: true })

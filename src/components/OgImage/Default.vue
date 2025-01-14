@@ -1,61 +1,32 @@
 <template>
-  <div
-    style="
-      background: rgb(31 41 55);
-      color: rgb(249 250 251);
-      display: flex;
-      height: 100%;
-      width: 100%;
-    "
-  >
+  <div class="h-full w-full flex-row bg-gray-800 text-gray-50">
     <img
       alt="DJ cReal"
       src="/assets/static/images/og.jpg"
       width="400"
       height="600"
     />
-    <div
-      style="
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        margin-left: 64px;
-      "
-    >
+    <div class="ml-16 justify-center">
       <img
         alt="DJ cReal"
+        class="absolute left-[100px] opacity-[0.025]"
         src="/assets/static/logos/creal.svg"
         width="700"
         height="700"
-        style="position: absolute; opacity: 0.025; left: 100px"
       />
       <template v-if="title !== siteConfig.name">
-        <div
-          style="
-            color: rgb(209 213 219);
-            font-size: 40px;
-            font-weight: 600;
-            margin-top: 80px;
-          "
-        >
+        <div class="mt-20 text-[40px] font-semibold text-gray-300">
           {{ siteConfig.name }}
         </div>
-        <h1 style="font-size: 72px; line-height: 1; max-width: 600px">
+        <h1 class="text-[72px] leading-none">
           {{ title }}
         </h1>
       </template>
       <template v-else>
-        <div
-          style="
-            color: rgb(209 213 219);
-            font-size: 40px;
-            font-weight: 600;
-            margin-top: 80px;
-          "
-        >
+        <div class="mt-20 text-[40px] font-semibold text-gray-300">
           {{ t('headline') }}
         </div>
-        <h1 style="font-size: 72px; line-height: 1; max-width: 600px">
+        <h1 class="text-[72px] leading-none">
           {{ t('name') }}
         </h1>
       </template>
