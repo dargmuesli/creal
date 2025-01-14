@@ -1,3 +1,9 @@
+## [3.0.10](https://github.com/dargmuesli/creal/compare/3.0.9...3.0.10) (2025-01-14)
+
+### Bug Fixes
+
+* **open-graph:** correct image ([5b2451a](https://github.com/dargmuesli/creal/commit/5b2451adc2a5c838d984e8398766ae14502b20a7))
+
 ## [3.0.9](https://github.com/dargmuesli/creal/compare/3.0.8...3.0.9) (2025-01-13)
 
 ### Bug Fixes
