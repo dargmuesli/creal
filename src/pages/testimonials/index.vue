@@ -35,7 +35,7 @@
           </div>
           <VioButtonColored
             aria-label="Book cReal"
-            class="font-semibold shadow-sm"
+            class="font-semibold shadow-xs"
             :to="localePath('/contact')"
           >
             {{ t('ctaButton') }}

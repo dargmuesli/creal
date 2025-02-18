@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-1 items-center justify-center">
-    <div class="pb-8 pt-16 sm:pb-16 sm:pt-24 xl:pb-24">
+    <div class="pt-16 pb-8 sm:pt-24 sm:pb-16 xl:pb-24">
       <div class="bg-gray-900 pb-20 sm:pb-24 xl:pb-0">
         <div
           class="mx-auto flex max-w-7xl flex-col items-center gap-x-8 gap-y-10 px-6 sm:gap-y-8 lg:px-8 xl:flex-row xl:items-stretch"
@@ -39,7 +39,7 @@
                 viewBox="0 0 162 128"
                 fill="none"
                 aria-hidden="true"
-                class="absolute left-0 top-0 -z-10 h-32 stroke-white/20"
+                class="absolute top-0 left-0 -z-10 h-32 stroke-white/20"
               >
                 <path
                   id="b56e9dab-6ccb-4d32-ad02-6b4bb5d9bbeb"
@@ -48,7 +48,7 @@
                 <use href="#b56e9dab-6ccb-4d32-ad02-6b4bb5d9bbeb" x="86" />
               </svg>
               <blockquote
-                class="text-xl font-semibold leading-8 text-white sm:text-2xl sm:leading-9"
+                class="text-xl leading-8 font-semibold text-white sm:text-2xl sm:leading-9"
               >
                 <!-- eslint-disable vue/no-v-html -->
                 <div v-html="marked(testimonial.quote)" />

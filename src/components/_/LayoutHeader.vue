@@ -99,7 +99,7 @@
             <div class="space-y-2 py-6">
               <VioLink
                 aria-label="Events"
-                class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-white hover:bg-gray-800"
+                class="-mx-3 block rounded-lg px-3 py-2 text-base leading-7 font-semibold text-white hover:bg-gray-800"
                 :is-colored="false"
                 :to="localePath('/events')"
                 @click="mobileMenuOpen = false"
@@ -108,7 +108,7 @@
               </VioLink>
               <VioLink
                 aria-label="FAQ"
-                class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-white hover:bg-gray-800"
+                class="-mx-3 block rounded-lg px-3 py-2 text-base leading-7 font-semibold text-white hover:bg-gray-800"
                 :is-colored="false"
                 :to="localePath('/testimonials')"
                 @click="mobileMenuOpen = false"
@@ -117,7 +117,7 @@
               </VioLink>
               <VioLink
                 aria-label="Player"
-                class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-white hover:bg-gray-800"
+                class="-mx-3 block rounded-lg px-3 py-2 text-base leading-7 font-semibold text-white hover:bg-gray-800"
                 :is-colored="false"
                 :to="localePath('/player')"
                 @click="mobileMenuOpen = false"
@@ -126,7 +126,7 @@
               </VioLink>
               <VioLink
                 aria-label="Suggestions"
-                class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-white hover:bg-gray-800"
+                class="-mx-3 block rounded-lg px-3 py-2 text-base leading-7 font-semibold text-white hover:bg-gray-800"
                 :is-colored="false"
                 :to="localePath('/suggestions')"
                 @click="mobileMenuOpen = false"
@@ -146,7 +146,7 @@
             </div>
             <div class="py-6">
               <LinkBooking
-                class="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-white hover:bg-gray-800"
+                class="-mx-3 block rounded-lg px-3 py-2.5 text-base leading-7 font-semibold text-white hover:bg-gray-800"
                 @click="mobileMenuOpen = false"
               />
             </div>

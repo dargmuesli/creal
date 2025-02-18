@@ -33,12 +33,12 @@
         <div class="mt-10 flex items-center justify-center gap-x-6">
           <VioButtonColored
             :aria-label="t('testimonialsRead')"
-            class="text-sm font-semibold shadow-sm"
+            class="text-sm font-semibold shadow-xs"
             :to="localePath('/testimonials')"
           >
             {{ t('testimonialsRead') }}
           </VioButtonColored>
-          <LinkBooking class="text-sm font-semibold leading-6" />
+          <LinkBooking class="text-sm leading-6 font-semibold" />
         </div>
       </div>
     </div>
