@@ -25,7 +25,7 @@
         </template>
       </i18n-t>
       <span
-        class="overflow-hidden text-ellipsis text-4xl font-bold leading-snug text-white lg:text-5xl"
+        class="overflow-hidden text-4xl leading-snug font-bold text-ellipsis text-white lg:text-5xl"
       >
         {{ crealEvent.title }}
       </span>

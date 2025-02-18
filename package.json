@@ -16,6 +16,11 @@
     "node": "22"
   },
   "packageManager": "pnpm@10.4.1",
+  "pnpm": {
+    "patchedDependencies": {
+      "nuxt": "patches/nuxt.patch"
+    }
+  },
   "private": true,
   "scripts": {
     "build": "pnpm --dir src run build",

@@ -5,7 +5,7 @@
     <img
       v-if="coverUrl !== ''"
       alt="Cover image."
-      class="h-64 w-64 rounded"
+      class="h-64 w-64 rounded-sm"
       crossorigin="anonymous"
       :src="coverUrl"
     />

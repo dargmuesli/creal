@@ -19,12 +19,12 @@
           v-for="faq in faqs"
           :id="`${faq.documentId}`"
           :key="faq.documentId"
-          class="border duration-300 first:rounded-t last:rounded-b"
+          class="border duration-300 first:rounded-t-sm last:rounded-b-sm"
           :class="
             itemFocusedId
               ? itemFocusedId === faq.documentId
                 ? 'my-4'
-                : '-my-px mx-8 last:my-0'
+                : 'mx-8 -my-px last:my-0'
               : '-my-px'
           "
         >

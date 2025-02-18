@@ -1,5 +1,5 @@
 <template>
-  <div class="fixed bottom-0 left-0 right-0">
+  <div class="fixed right-0 bottom-0 left-0">
     <div
       v-if="store.playerData.currentTrack?.fileName"
       class="flex flex-col justify-evenly bg-white px-2 font-bold text-black sm:flex-row"
