@@ -86,11 +86,11 @@ importers:
         specifier: 2.2.0
         version: 2.2.0(vue@3.5.13(typescript@5.7.3))
       '@nuxt/scripts':
-        specifier: 0.10.4
-        version: 0.10.4(@unhead/vue@1.11.19(vue@3.5.13(typescript@5.7.3)))(db0@0.2.4)(ioredis@5.5.0)(magicast@0.3.5)(typescript@5.7.3)
+        specifier: 0.10.5
+        version: 0.10.5(@unhead/vue@1.11.19(vue@3.5.13(typescript@5.7.3)))(db0@0.2.4)(ioredis@5.5.0)(magicast@0.3.5)(typescript@5.7.3)
       '@nuxtjs/turnstile':
         specifier: 0.9.12
-        version: 0.9.12(@nuxt/scripts@0.10.4(@unhead/vue@1.11.19(vue@3.5.13(typescript@5.7.3)))(db0@0.2.4)(ioredis@5.5.0)(magicast@0.3.5)(typescript@5.7.3))(magicast@0.3.5)
+        version: 0.9.12(@nuxt/scripts@0.10.5(@unhead/vue@1.11.19(vue@3.5.13(typescript@5.7.3)))(db0@0.2.4)(ioredis@5.5.0)(magicast@0.3.5)(typescript@5.7.3))(magicast@0.3.5)
       '@pinia/nuxt':
         specifier: 0.10.1
         version: 0.10.1(magicast@0.3.5)(pinia@3.0.1(typescript@5.7.3)(vue@3.5.13(typescript@5.7.3)))
@@ -1819,8 +1819,8 @@ packages:
     resolution: {integrity: sha512-pAYZb/3ocSC/db1EFd5y+otmgHqUkvfxfhd9EknDB5DygnJuOIQNuGJ7LMJM6S2c0DYgBIHOdEelLxKHOjwbgQ==}
     engines: {node: ^14.18.0 || >=16.10.0}
 
-  '@nuxt/scripts@0.10.4':
-    resolution: {integrity: sha512-wGKVPABskj8wIdbSwJMkx8ZBWtG1ihI7Vw65jDohQ8L+P6OxVVA4l3Gj1lqi6J6KlbeRMnMut5ZFHrkqckI9iw==}
+  '@nuxt/scripts@0.10.5':
+    resolution: {integrity: sha512-MZTGWN/kjkKBZzuJssIrzHO9evMWtceaLowF9R7FMZjACFLYWqnf127EP/2pzDfwii5+NkZUe5mfyeIDxXbkUw==}
     peerDependencies:
       '@stripe/stripe-js': ^5.6.0
       '@types/google.maps': ^3.58.1
@@ -10710,7 +10710,7 @@ snapshots:
       scule: 1.3.0
       semver: 7.7.1
       simple-git: 3.27.0
-      sirv: 3.0.0
+      sirv: 3.0.1
       tinyglobby: 0.2.10
       unimport: 3.14.6(rollup@4.34.7)
       vite: 6.1.1(@types/node@22.13.5)(jiti@2.4.2)(lightningcss@1.29.1)(terser@5.39.0)(yaml@2.7.0)
@@ -10898,7 +10898,7 @@ snapshots:
       pathe: 2.0.3
       std-env: 3.8.0
 
-  '@nuxt/scripts@0.10.4(@unhead/vue@1.11.19(vue@3.5.13(typescript@5.7.3)))(db0@0.2.4)(ioredis@5.5.0)(magicast@0.3.5)(typescript@5.7.3)':
+  '@nuxt/scripts@0.10.5(@unhead/vue@1.11.19(vue@3.5.13(typescript@5.7.3)))(db0@0.2.4)(ioredis@5.5.0)(magicast@0.3.5)(typescript@5.7.3)':
     dependencies:
       '@nuxt/kit': 3.15.4(magicast@0.3.5)
       '@unhead/vue': 1.11.19(vue@3.5.13(typescript@5.7.3))
@@ -11090,7 +11090,7 @@ snapshots:
       nuxt-site-config: 3.0.6(magicast@0.3.5)(vite@6.1.1(@types/node@22.13.5)(jiti@2.4.2)(lightningcss@1.29.1)(terser@5.39.0)(yaml@2.7.0))(vue@3.5.13(typescript@5.7.3))
       pathe: 2.0.3
       pkg-types: 1.3.1
-      sirv: 3.0.0
+      sirv: 3.0.1
       std-env: 3.8.0
       ufo: 1.5.4
     transitivePeerDependencies:
@@ -11133,7 +11133,7 @@ snapshots:
       pkg-types: 1.3.1
       radix3: 1.1.2
       semver: 7.7.1
-      sirv: 3.0.0
+      sirv: 3.0.1
       ufo: 1.5.4
     transitivePeerDependencies:
       - h3
@@ -11142,10 +11142,10 @@ snapshots:
       - vite
       - vue
 
-  '@nuxtjs/turnstile@0.9.12(@nuxt/scripts@0.10.4(@unhead/vue@1.11.19(vue@3.5.13(typescript@5.7.3)))(db0@0.2.4)(ioredis@5.5.0)(magicast@0.3.5)(typescript@5.7.3))(magicast@0.3.5)':
+  '@nuxtjs/turnstile@0.9.12(@nuxt/scripts@0.10.5(@unhead/vue@1.11.19(vue@3.5.13(typescript@5.7.3)))(db0@0.2.4)(ioredis@5.5.0)(magicast@0.3.5)(typescript@5.7.3))(magicast@0.3.5)':
     dependencies:
       '@nuxt/kit': 3.15.4(magicast@0.3.5)
-      '@nuxt/scripts': 0.10.4(@unhead/vue@1.11.19(vue@3.5.13(typescript@5.7.3)))(db0@0.2.4)(ioredis@5.5.0)(magicast@0.3.5)(typescript@5.7.3)
+      '@nuxt/scripts': 0.10.5(@unhead/vue@1.11.19(vue@3.5.13(typescript@5.7.3)))(db0@0.2.4)(ioredis@5.5.0)(magicast@0.3.5)(typescript@5.7.3)
       '@types/cloudflare-turnstile': 0.2.2
       defu: 6.1.4
       pathe: 2.0.3
@@ -15831,7 +15831,7 @@ snapshots:
       pathe: 2.0.3
       pkg-types: 1.3.1
       radix3: 1.1.2
-      sirv: 3.0.0
+      sirv: 3.0.1
       ufo: 1.5.4
     transitivePeerDependencies:
       - magicast
@@ -15864,7 +15864,7 @@ snapshots:
       radix3: 1.1.2
       satori: 0.12.1
       satori-html: 0.3.2
-      sirv: 3.0.0
+      sirv: 3.0.1
       std-env: 3.8.0
       strip-literal: 3.0.0
       ufo: 1.5.4
@@ -15886,7 +15886,7 @@ snapshots:
       nuxt-site-config: 3.0.6(magicast@0.3.5)(vite@6.1.1(@types/node@22.13.5)(jiti@2.4.2)(lightningcss@1.29.1)(terser@5.39.0)(yaml@2.7.0))(vue@3.5.13(typescript@5.7.3))
       pathe: 2.0.3
       pkg-types: 1.3.1
-      sirv: 3.0.0
+      sirv: 3.0.1
     transitivePeerDependencies:
       - '@unhead/vue'
       - magicast
@@ -15951,7 +15951,7 @@ snapshots:
       nuxt-site-config-kit: 3.0.6(magicast@0.3.5)(vue@3.5.13(typescript@5.7.3))
       pathe: 1.1.2
       pkg-types: 1.3.1
-      sirv: 3.0.0
+      sirv: 3.0.1
       site-config-stack: 3.0.6(vue@3.5.13(typescript@5.7.3))
       ufo: 1.5.4
     transitivePeerDependencies:
@@ -18055,7 +18055,7 @@ snapshots:
       open: 10.1.0
       perfect-debounce: 1.0.0
       picocolors: 1.1.1
-      sirv: 3.0.0
+      sirv: 3.0.1
       vite: 6.1.1(@types/node@22.13.5)(jiti@2.4.2)(lightningcss@1.29.1)(terser@5.39.0)(yaml@2.7.0)
     optionalDependencies:
       '@nuxt/kit': 3.15.4(magicast@0.3.5)
@@ -18069,7 +18069,7 @@ snapshots:
       debug: 4.4.0(supports-color@9.4.0)
       error-stack-parser-es: 1.0.5
       open: 10.1.0
-      sirv: 3.0.0
+      sirv: 3.0.1
       vite: 6.1.1(@types/node@22.13.5)(jiti@2.4.2)(lightningcss@1.29.1)(terser@5.39.0)(yaml@2.7.0)
     optionalDependencies:
       '@nuxt/kit': 3.15.4(magicast@0.3.5)
