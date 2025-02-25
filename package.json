@@ -17,6 +17,13 @@
   },
   "packageManager": "pnpm@10.4.1",
   "pnpm": {
+    "ignoredBuiltDependencies": [
+      "@parcel/watcher",
+      "core-js",
+      "esbuild",
+      "sharp",
+      "vue-demi"
+    ],
     "patchedDependencies": {
       "nuxt": "patches/nuxt.patch"
     }
