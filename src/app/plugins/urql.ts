@@ -18,7 +18,7 @@ import { consola } from 'consola'
 import { ref } from 'vue'
 
 import schema from '~~/gql/generated/introspection'
-// import type { GraphCacheConfig } from '~/gql/generated/graphcache'
+// import type { GraphCacheConfig } from '~~/gql/generated/graphcache'
 // import { cacheExchange } from '@urql/exchange-graphcache'
 
 const SSR_KEY = '__URQL_DATA__'

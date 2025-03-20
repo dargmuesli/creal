@@ -1,9 +1,6 @@
+import { IS_IN_PRODUCTION } from '@dargmuesli/nuxt-vio/node'
 import { getRootHost } from '@dargmuesli/nuxt-vio/shared/utils/networking'
 import { defu } from 'defu'
-
-const IS_IN_PRODUCTION = process.env.NODE_ENV === 'production'
-const IS_IN_STACK = !!process.env.NUXT_PUBLIC_SITE_URL
-const IS_IN_FRONTEND_DEVELOPMENT = !IS_IN_PRODUCTION && !IS_IN_STACK
 
 // const productionHost =
 //   !IS_IN_PRODUCTION && !IS_IN_STACK ? PRODUCTION_HOST : undefined

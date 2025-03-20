@@ -46,6 +46,7 @@ export default defineNuxtConfig(
       vite: {
         optimizeDeps: {
           include: [
+            '@dargmuesli/nuxt-vio/app/stores/auth',
             '@dargmuesli/nuxt-vio/shared/utils/constants',
             '@headlessui/vue',
             '@heroicons/vue/24/outline',
