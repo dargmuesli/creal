@@ -1,7 +1,5 @@
-import { getDomainTldPort as getSiteAndPort } from '@dargmuesli/nuxt-vio/utils/networking'
+import { getRootHost } from '@dargmuesli/nuxt-vio/shared/utils/networking'
 import { defu } from 'defu'
-
-import { STAGING_HOST as PRODUCTION_HOST } from '../../utils/constants'
 
 const IS_IN_PRODUCTION = process.env.NODE_ENV === 'production'
 const IS_IN_STACK = !!process.env.NUXT_PUBLIC_SITE_URL
@@ -20,7 +18,7 @@ const crealS3EndpointHost =
 export const GET_CSP = (siteUrl: URL) => {
   const domainTldPort = IS_IN_FRONTEND_DEVELOPMENT
     ? PRODUCTION_HOST
-    : getSiteAndPort(siteUrl.host)
+    : getRootHost(siteUrl.host)
 
   return defu(
     {

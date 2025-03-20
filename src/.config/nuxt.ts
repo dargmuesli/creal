@@ -1,8 +1,8 @@
-import { VIO_NUXT_BASE_CONFIG } from '@dargmuesli/nuxt-vio/utils/nuxt'
-// import { SITE_URL } from '@dargmuesli/nuxt-vio/utils/constants'
+import { VIO_NUXT_BASE_CONFIG } from '@dargmuesli/nuxt-vio/shared/utils/nuxt'
+// import { SITE_URL } from '@dargmuesli/nuxt-vio/shared/utils/constants'
 import { defu } from 'defu'
 
-import { SITE_NAME, STAGING_HOST } from '../utils/constants'
+import { SITE_NAME, PRODUCTION_HOST } from '../shared/utils/constants'
 // import { GET_CSP } from '../server/utils/constants'
 
 export default defineNuxtConfig(
@@ -10,6 +10,9 @@ export default defineNuxtConfig(
     {
       css: ['~/assets/css/creal.css'],
       extends: ['@dargmuesli/nuxt-vio'],
+      future: {
+        compatibilityVersion: 4,
+      },
       modules: [
         '@nuxt/scripts',
         '@nuxtjs/turnstile',
@@ -43,11 +46,10 @@ export default defineNuxtConfig(
       vite: {
         optimizeDeps: {
           include: [
-            '@dargmuesli/nuxt-vio/utils/constants',
+            '@dargmuesli/nuxt-vio/shared/utils/constants',
             '@headlessui/vue',
             '@heroicons/vue/24/outline',
             '@vuelidate/core',
-            '@vuelidate/validators',
             'html-to-text',
             'lodash-es',
             'marked',
@@ -83,7 +85,7 @@ export default defineNuxtConfig(
     },
     VIO_NUXT_BASE_CONFIG({
       siteName: SITE_NAME,
-      stagingHost: STAGING_HOST,
+      stagingHost: PRODUCTION_HOST,
     }),
   ),
 )

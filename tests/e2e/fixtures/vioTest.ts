@@ -7,7 +7,7 @@ import {
 import { jiti } from '#tests/playwright.config'
 
 const constants = await jiti.import(
-  './node_modules/@dargmuesli/nuxt-vio/utils/constants',
+  './node_modules/@dargmuesli/nuxt-vio/shared/utils/constants',
 )
 const {
   COOKIE_CONTROL_CONSENT_COOKIE_NAME,

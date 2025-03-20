@@ -5,8 +5,6 @@ import type { H3Event } from 'h3'
 import { GetObjectCommand } from '@aws-sdk/client-s3'
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner'
 
-import { getS3Client, proxy } from '~/server/utils/util'
-
 export default defineEventHandler(async (event) => {
   return await proxy(event, signedUrl)
 })

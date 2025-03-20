@@ -4,17 +4,6 @@ import { ListObjectsV2Command } from '@aws-sdk/client-s3'
 import { consola } from 'consola'
 import type { H3Event } from 'h3'
 
-import { mergeByKey } from '~/utils/player'
-import { PLAYER_PREFIX } from '~/utils/constants'
-
-import type {
-  FetchPlaylist,
-  Playlist,
-  PlaylistItem,
-  PlaylistExtended,
-} from '~/types/player'
-import { getS3Client, proxy } from '~/server/utils/util'
-
 export default defineEventHandler(async (event) => {
   return await proxy(event, fetchPlaylist)
 })
@@ -72,8 +61,8 @@ const getPlaylist = (playlistDataExtended: PlaylistExtended): Playlist => {
 
   const subCollections: Playlist[] = []
 
-  for (let i = 0; i < playlistDataExtended.collections.length; i++) {
-    subCollections.push(getPlaylist(playlistDataExtended.collections[i]))
+  for (const collection of playlistDataExtended.collections) {
+    subCollections.push(getPlaylist(collection))
   }
 
   // Leave out the helper properties `covers` and `metas`.
@@ -86,7 +75,7 @@ const getPlaylist = (playlistDataExtended: PlaylistExtended): Playlist => {
 }
 
 const getPlaylistExtended = (
-  pathParts: Array<string>,
+  pathParts: string[],
   size: number,
   root = 'root',
 ) => {
@@ -103,12 +92,13 @@ const getPlaylistExtended = (
     // An item.
     const itemName = pathParts[0]
 
+    if (!itemName) return
+
     if (size) {
       // A file.
-
       const match = itemName.match(/^(.+)\.(.+)$/)
 
-      if (!match) {
+      if (!match || !match[1] || !match[2]) {
         return undefined
       }
 
