@@ -8,9 +8,7 @@ ENV CI=true
 
 WORKDIR /srv/app/
 
-RUN npm install -g corepack@latest \
-  # TODO: remove (https://github.com/nodejs/corepack/issues/612)
-  && corepack enable \
+RUN corepack enable \
   && apt-get update \
   && apt-get install --no-install-recommends -y \
       mkcert \
@@ -106,9 +104,7 @@ ENV PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1
 
 WORKDIR /srv/app/
 
-RUN npm install -g corepack@latest \
-  # TODO: remove (https://github.com/nodejs/corepack/issues/612)
-  && corepack enable \
+RUN corepack enable \
   && apt update && apt install mkcert
 
 
