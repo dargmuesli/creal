@@ -1,6 +1,9 @@
 import { S3Client } from '@aws-sdk/client-s3'
 import { fromIni } from '@aws-sdk/credential-providers'
-import { getHost, getServiceHref } from '@dargmuesli/nuxt-vio/utils/networking'
+import {
+  getHost,
+  getServiceHref,
+} from '@dargmuesli/nuxt-vio/shared/utils/networking'
 import type { H3Event } from 'h3'
 
 export const getS3Client = (isExternal = false) => {

@@ -3,8 +3,6 @@ import { URL } from 'node:url'
 import { GetObjectCommand } from '@aws-sdk/client-s3'
 import type { H3Event } from 'h3'
 
-import { getS3Client, proxy } from '~/server/utils/util'
-
 export default defineEventHandler(async (event) => {
   return await proxy(event, getObject)
 })
