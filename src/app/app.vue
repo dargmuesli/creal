@@ -11,7 +11,7 @@
 </template>
 
 <script setup lang="ts">
-import type { Locale } from '@dargmuesli/nuxt-cookie-control/runtime/types'
+import type { Locale } from '@dargmuesli/nuxt-cookie-control/runtime/types.js'
 
 const { $dayjs } = useNuxtApp()
 const i18n = useI18n()
