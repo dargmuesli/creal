@@ -1,6 +1,8 @@
 <template>
-  <div class="flex flex-col rounded-lg bg-gray-900 lg:flex-row lg:items-center">
-    <div class="shrink-0 basis-1/3 self-stretch">
+  <div
+    class="flex flex-col max-lg:border-l-2 max-lg:border-dashed max-lg:border-gray-700 max-lg:pl-4 lg:flex-row lg:items-center"
+  >
+    <div class="mt-4 shrink-0 basis-1/3 self-stretch lg:mb-4">
       <img
         v-if="crealEvent.image"
         :alt="t('imageAlt')"
@@ -8,44 +10,58 @@
         :src="imageSrc"
       />
     </div>
-    <div class="flex min-w-0 flex-col gap-2 p-4 lg:p-8">
-      <i18n-t keypath="datetime" tag="span">
-        <template #start>
-          {{ dateFormat(new Date(crealEvent.dateStart)) }}
-        </template>
-        <template v-if="crealEvent.dateEnd" #end>
-          {{
-            t('datetimeEnd', {
-              end: dateFormat(new Date(crealEvent.dateEnd)),
-            })
-          }}
-        </template>
-        <template v-if="crealEvent.location" #location>
-          {{ t('datetimeLocation', { location: crealEvent.location }) }}
-        </template>
-      </i18n-t>
-      <span
-        class="overflow-hidden text-4xl leading-snug font-bold text-ellipsis text-white lg:text-5xl"
-      >
-        {{ crealEvent.title }}
-      </span>
-      <!-- eslint-disable vue/no-v-html -->
+    <div
+      class="min-w-0 flex-1 gap-2 lg:border-l-2 lg:border-dashed lg:border-gray-700"
+    >
       <div
-        v-if="crealEvent.description"
-        class="*:overflow-hidden *:text-ellipsis"
-        v-html="marked(crealEvent.description)"
-      />
-      <!-- eslint-enable vue/no-v-html -->
-      <div class="prose-a:text-yellow-500">
-        <VioLink
-          v-if="crealEvent.url && crealEvent.url !== ''"
-          :aria-label="t('details')"
-          :is-colored="false"
-          :icon="false"
-          :to="crealEvent.url"
-        >
-          {{ t('details') }}
-        </VioLink>
+        class="mb-4 flex flex-col p-4 lg:mt-4 lg:p-8"
+        :class="[
+          crealEvent.image
+            ? 'rounded-b-lg bg-gray-900 lg:rounded-l-none lg:rounded-r-lg'
+            : '',
+        ]"
+      >
+        <i18n-t keypath="datetime" tag="span">
+          <template #start>
+            {{ dateFormat(new Date(crealEvent.dateStart)) }}
+          </template>
+          <template v-if="crealEvent.dateEnd" #end>
+            {{
+              t('datetimeEnd', {
+                end: dateFormat(new Date(crealEvent.dateEnd)),
+              })
+            }}
+          </template>
+          <template v-if="crealEvent.location" #location>
+            {{ t('datetimeLocation', { location: crealEvent.location }) }}
+          </template>
+        </i18n-t>
+        <div class="relative flex items-center">
+          <div class="absolute -left-9.75 size-3 rounded-full bg-gray-700" />
+          <span
+            class="overflow-hidden text-4xl leading-snug font-bold text-ellipsis text-white lg:text-5xl"
+          >
+            {{ crealEvent.title }}
+          </span>
+        </div>
+        <!-- eslint-disable vue/no-v-html -->
+        <div
+          v-if="crealEvent.description"
+          class="*:overflow-hidden *:text-ellipsis"
+          v-html="marked(crealEvent.description)"
+        />
+        <!-- eslint-enable vue/no-v-html -->
+        <div class="prose-a:text-yellow-500">
+          <VioLink
+            v-if="crealEvent.url && crealEvent.url !== ''"
+            :aria-label="t('details')"
+            :is-colored="false"
+            :icon="false"
+            :to="crealEvent.url"
+          >
+            {{ t('details') }}
+          </VioLink>
+        </div>
       </div>
     </div>
   </div>
