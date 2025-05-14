@@ -8,7 +8,7 @@
     </VioCardStateAlert>
     <Paging
       v-else-if="events?.length && paging"
-      class="flex flex-col gap-4 lg:gap-8"
+      class="flex flex-col gap-16"
       :is-previous-allowed="paging.isPreviousAllowed"
       :is-next-allowed="paging.isNextAllowed"
       :part-string="paging.partString"
@@ -22,10 +22,7 @@
         </div>
       </EventList>
       <EventList v-if="eventsFuture" :events="eventsFuture">
-        <div class="flex items-center gap-2">
-          {{ t('eventsFuture') }}
-          <LivePulse v-if="!eventsCurrent || eventsCurrent.length === 0" />
-        </div>
+        {{ t('eventsFuture') }}
       </EventList>
       <EventList v-if="eventsPast" :events="eventsPast">
         {{ t('eventsPast') }}
