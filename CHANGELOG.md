@@ -1,3 +1,9 @@
+## [3.1.1](https://github.com/dargmuesli/creal/compare/3.1.0...3.1.1) (2025-05-14)
+
+### Bug Fixes
+
+* **event:** correct spacing ([b2fc392](https://github.com/dargmuesli/creal/commit/b2fc392ffb8bd73a9e7828d156a07d3079ee4c56))
+
 ## [3.1.0](https://github.com/dargmuesli/creal/compare/3.0.18...3.1.0) (2025-05-14)
 
 ### Features
