@@ -1,20 +1,20 @@
 <template>
   <div
-    class="flex flex-col max-lg:border-l-2 max-lg:border-dashed max-lg:border-gray-700 max-lg:pl-4 lg:flex-row lg:items-center"
+    class="flex flex-col max-lg:border-l-2 max-lg:border-dashed max-lg:border-gray-700 max-lg:pl-4 lg:flex-row lg:items-stretch"
   >
-    <div class="mt-4 shrink-0 basis-1/3 self-stretch lg:mb-4">
+    <div class="shrink-0 basis-1/3">
       <img
         v-if="crealEvent.image"
         :alt="t('imageAlt')"
-        class="h-full max-h-64 w-full rounded-t-lg object-cover lg:max-h-none lg:rounded-l-lg lg:rounded-r-none"
+        class="mt-4 h-full max-h-64 w-full rounded-t-lg object-cover lg:mb-4 lg:max-h-none lg:rounded-l-lg lg:rounded-r-none"
         :src="imageSrc"
       />
     </div>
     <div
-      class="min-w-0 flex-1 gap-2 lg:border-l-2 lg:border-dashed lg:border-gray-700"
+      class="flex min-w-0 flex-1 gap-2 lg:border-l-2 lg:border-dashed lg:border-gray-700"
     >
       <div
-        class="mb-4 flex flex-col p-4 lg:mt-4 lg:p-8"
+        class="mb-4 flex flex-1 flex-col justify-center p-4 lg:mt-4 lg:p-8"
         :class="[
           crealEvent.image
             ? 'rounded-b-lg bg-gray-900 lg:rounded-l-none lg:rounded-r-lg'
