@@ -1,3 +1,9 @@
+## [3.1.0](https://github.com/dargmuesli/creal/compare/3.0.18...3.1.0) (2025-05-14)
+
+### Features
+
+* **events:** style timeline ([b9d030a](https://github.com/dargmuesli/creal/commit/b9d030a5cfc18c9a85ea1a2307f21323d0e2874b))
+
 ## [3.0.18](https://github.com/dargmuesli/creal/compare/3.0.17...3.0.18) (2025-05-01)
 
 ### Bug Fixes
