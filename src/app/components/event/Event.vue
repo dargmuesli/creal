@@ -6,7 +6,7 @@
       <img
         v-if="crealEvent.image"
         :alt="t('imageAlt')"
-        class="mt-4 h-full max-h-64 w-full rounded-t-lg object-cover lg:mb-4 lg:max-h-none lg:rounded-l-lg lg:rounded-r-none"
+        class="mt-4 max-h-64 w-full rounded-t-lg object-cover lg:mb-4 lg:max-h-none lg:rounded-l-lg lg:rounded-r-none"
         :src="imageSrc"
       />
     </div>
