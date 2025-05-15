@@ -37,7 +37,10 @@
           </template>
         </i18n-t>
         <div class="relative flex items-center">
-          <div class="absolute -left-9.75 size-3 rounded-full bg-gray-700" />
+          <div
+            class="absolute -left-9.75 size-3 rounded-full bg-gray-700"
+            :class="[...(crealEvent.image ? ['lg:hidden'] : [])]"
+          />
           <span
             class="overflow-hidden text-4xl leading-snug font-bold text-ellipsis text-white lg:text-5xl"
           >
