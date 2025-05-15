@@ -1,3 +1,9 @@
+## [3.1.3](https://github.com/dargmuesli/creal/compare/3.1.2...3.1.3) (2025-05-15)
+
+### Bug Fixes
+
+* **event:** simplify timeline for images ([58ce1e5](https://github.com/dargmuesli/creal/commit/58ce1e5ea3f4bc99331b647c02ec3cb07a509ce5))
+
 ## [3.1.2](https://github.com/dargmuesli/creal/compare/3.1.1...3.1.2) (2025-05-15)
 
 ### Bug Fixes
