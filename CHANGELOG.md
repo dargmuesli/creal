@@ -1,3 +1,9 @@
+## [3.1.4](https://github.com/dargmuesli/creal/compare/3.1.3...3.1.4) (2025-05-15)
+
+### Bug Fixes
+
+* **event:** correct overflow ([113d340](https://github.com/dargmuesli/creal/commit/113d3408f5b25b71942e14352672c84216a75d42))
+
 ## [3.1.3](https://github.com/dargmuesli/creal/compare/3.1.2...3.1.3) (2025-05-15)
 
 ### Bug Fixes
