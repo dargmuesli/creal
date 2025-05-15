@@ -1,3 +1,9 @@
+## [3.1.2](https://github.com/dargmuesli/creal/compare/3.1.1...3.1.2) (2025-05-15)
+
+### Bug Fixes
+
+* **event:** correct image sizing ([927aa86](https://github.com/dargmuesli/creal/commit/927aa862f0420ef5080c9d628c226c4adcd999a4))
+
 ## [3.1.1](https://github.com/dargmuesli/creal/compare/3.1.0...3.1.1) (2025-05-14)
 
 ### Bug Fixes
