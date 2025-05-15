@@ -14,7 +14,7 @@
       class="flex min-w-0 flex-1 gap-2 lg:border-l-2 lg:border-dashed lg:border-gray-700"
     >
       <div
-        class="mb-4 flex flex-1 flex-col justify-center p-4 lg:mt-4 lg:p-8"
+        class="mb-4 flex min-w-0 flex-1 flex-col justify-center p-4 lg:mt-4 lg:p-8"
         :class="[
           crealEvent.image
             ? 'rounded-b-lg bg-gray-900 lg:rounded-l-none lg:rounded-r-lg'
