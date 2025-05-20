@@ -138,8 +138,8 @@ importers:
         specifier: 4.17.21
         version: 4.17.21
       marked:
-        specifier: 15.0.11
-        version: 15.0.11
+        specifier: 15.0.12
+        version: 15.0.12
       nuxt:
         specifier: 3.17.3
         version: 3.17.3(@parcel/watcher@2.5.1)(@types/node@22.15.19)(db0@0.3.2)(eslint@9.27.0(jiti@2.4.2))(ioredis@5.6.1)(lightningcss@1.29.2)(magicast@0.3.5)(meow@13.2.0)(optionator@0.9.4)(rollup@4.41.0)(stylelint@16.19.1(typescript@5.8.3))(terser@5.39.2)(typescript@5.8.3)(vite@6.3.5(@types/node@22.15.19)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.39.2)(yaml@2.8.0))(vue-tsc@2.2.10(typescript@5.8.3))(yaml@2.8.0)
@@ -6190,8 +6190,8 @@ packages:
     peerDependencies:
       marked: '>=1 <16'
 
-  marked@15.0.11:
-    resolution: {integrity: sha512-1BEXAU2euRCG3xwgLVT1y0xbJEld1XOrmRJpUwRCcy7rxhSCwMrmEu9LXoPhHSCJG41V7YcQ2mjKRr5BA3ITIA==}
+  marked@15.0.12:
+    resolution: {integrity: sha512-8dD6FusOQSrpv9Z1rdNMdlSgQOIP880DHqnohobOmYLElGEqAL/JvxvuxZO16r4HtjTlfPRDC1hbvxC9dPN2nA==}
     engines: {node: '>= 18'}
     hasBin: true
 
@@ -10044,7 +10044,7 @@ snapshots:
       '@eslint/compat': 1.2.9(eslint@9.26.0(jiti@2.4.2))
       '@heroicons/vue': 2.2.0(vue@3.5.14(typescript@5.8.3))
       '@http-util/status-i18n': 0.9.0
-      '@intlify/eslint-plugin-vue-i18n': 4.0.1(eslint@9.26.0(jiti@2.4.2))(jsonc-eslint-parser@2.4.0)(vue-eslint-parser@10.1.3(eslint@9.27.0(jiti@2.4.2)))(yaml-eslint-parser@1.3.0)
+      '@intlify/eslint-plugin-vue-i18n': 4.0.1(eslint@9.26.0(jiti@2.4.2))(jsonc-eslint-parser@2.4.0)(vue-eslint-parser@10.1.3(eslint@9.26.0(jiti@2.4.2)))(yaml-eslint-parser@1.3.0)
       '@nuxt/devtools': 2.4.0(vite@6.3.5(@types/node@22.15.19)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.39.2)(yaml@2.8.0))(vue@3.5.14(typescript@5.8.3))
       '@nuxt/eslint': 1.3.0(@vue/compiler-sfc@3.5.14)(eslint@9.26.0(jiti@2.4.2))(magicast@0.3.5)(typescript@5.8.3)(vite@6.3.5(@types/node@22.15.19)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.39.2)(yaml@2.8.0))
       '@nuxt/image': 1.10.0(db0@0.3.2)(ioredis@5.6.1)(magicast@0.3.5)
@@ -11105,7 +11105,7 @@ snapshots:
       '@intlify/core-base': 10.0.7
       '@intlify/shared': 10.0.7
 
-  '@intlify/eslint-plugin-vue-i18n@4.0.1(eslint@9.26.0(jiti@2.4.2))(jsonc-eslint-parser@2.4.0)(vue-eslint-parser@10.1.3(eslint@9.27.0(jiti@2.4.2)))(yaml-eslint-parser@1.3.0)':
+  '@intlify/eslint-plugin-vue-i18n@4.0.1(eslint@9.26.0(jiti@2.4.2))(jsonc-eslint-parser@2.4.0)(vue-eslint-parser@10.1.3(eslint@9.26.0(jiti@2.4.2)))(yaml-eslint-parser@1.3.0)':
     dependencies:
       '@eslint/eslintrc': 3.3.1
       '@intlify/core-base': 11.1.3
@@ -11126,6 +11126,31 @@ snapshots:
       semver: 7.7.2
       synckit: 0.10.3
       vue-eslint-parser: 10.1.3(eslint@9.26.0(jiti@2.4.2))
+      yaml-eslint-parser: 1.3.0
+    transitivePeerDependencies:
+      - supports-color
+
+  '@intlify/eslint-plugin-vue-i18n@4.0.1(eslint@9.26.0(jiti@2.4.2))(jsonc-eslint-parser@2.4.0)(vue-eslint-parser@10.1.3(eslint@9.27.0(jiti@2.4.2)))(yaml-eslint-parser@1.3.0)':
+    dependencies:
+      '@eslint/eslintrc': 3.3.1
+      '@intlify/core-base': 11.1.3
+      '@intlify/message-compiler': 11.1.3
+      debug: 4.4.1
+      eslint: 9.26.0(jiti@2.4.2)
+      eslint-compat-utils: 0.6.5(eslint@9.26.0(jiti@2.4.2))
+      glob: 10.4.5
+      globals: 16.1.0
+      ignore: 7.0.4
+      import-fresh: 3.3.1
+      is-language-code: 3.1.0
+      js-yaml: 4.1.0
+      json5: 2.2.3
+      jsonc-eslint-parser: 2.4.0
+      lodash: 4.17.21
+      parse5: 7.3.0
+      semver: 7.7.2
+      synckit: 0.10.3
+      vue-eslint-parser: 10.1.3(eslint@9.27.0(jiti@2.4.2))
       yaml-eslint-parser: 1.3.0
     transitivePeerDependencies:
       - supports-color
@@ -16683,18 +16708,18 @@ snapshots:
 
   map-cache@0.2.2: {}
 
-  marked-terminal@7.3.0(marked@15.0.11):
+  marked-terminal@7.3.0(marked@15.0.12):
     dependencies:
       ansi-escapes: 7.0.0
       ansi-regex: 6.1.0
       chalk: 5.4.1
       cli-highlight: 2.1.11
       cli-table3: 0.6.5
-      marked: 15.0.11
+      marked: 15.0.12
       node-emoji: 2.2.0
       supports-hyperlinks: 3.2.0
 
-  marked@15.0.11: {}
+  marked@15.0.12: {}
 
   marky@1.3.0: {}
 
@@ -18329,8 +18354,8 @@ snapshots:
       hosted-git-info: 8.1.0
       import-from-esm: 2.0.0
       lodash-es: 4.17.21
-      marked: 15.0.11
-      marked-terminal: 7.3.0(marked@15.0.11)
+      marked: 15.0.12
+      marked-terminal: 7.3.0(marked@15.0.12)
       micromatch: 4.0.8
       p-each-series: 3.0.0
       p-reduce: 3.0.0
@@ -19463,6 +19488,19 @@ snapshots:
     dependencies:
       debug: 4.4.1
       eslint: 9.26.0(jiti@2.4.2)
+      eslint-scope: 8.3.0
+      eslint-visitor-keys: 4.2.0
+      espree: 10.3.0
+      esquery: 1.6.0
+      lodash: 4.17.21
+      semver: 7.7.2
+    transitivePeerDependencies:
+      - supports-color
+
+  vue-eslint-parser@10.1.3(eslint@9.27.0(jiti@2.4.2)):
+    dependencies:
+      debug: 4.4.1
+      eslint: 9.27.0(jiti@2.4.2)
       eslint-scope: 8.3.0
       eslint-visitor-keys: 4.2.0
       espree: 10.3.0
