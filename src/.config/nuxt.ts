@@ -19,7 +19,7 @@ export default defineNuxtConfig(
 
         // // nuxt-security: apply content security policy at build time
         // (_options, nuxt) => {
-        //   if (nuxt.options._generate) {
+        //   if (nuxt.options.nitro.static) {
         //     if (nuxt.options.security.headers) {
         //       nuxt.options.security.headers.contentSecurityPolicy = defu(
         //         GET_CSP(SITE_URL),
