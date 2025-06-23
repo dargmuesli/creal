@@ -1,3 +1,10 @@
+## [3.3.0](https://github.com/dargmuesli/creal/compare/3.2.0...3.3.0) (2025-06-23)
+
+### Features
+
+* **s3:** configure new bucket ([232231e](https://github.com/dargmuesli/creal/commit/232231edae1e22cba85b918c650c4641b3e65d84))
+* **vio:** allow to toggle proxy ([db013dd](https://github.com/dargmuesli/creal/commit/db013dd6df11224e6fda8805509e25efb83d52bc))
+
 ## [3.2.0](https://github.com/dargmuesli/creal/compare/3.1.6...3.2.0) (2025-06-23)
 
 ### Features
