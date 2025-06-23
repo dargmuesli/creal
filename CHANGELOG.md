@@ -1,3 +1,9 @@
+## [3.2.0](https://github.com/dargmuesli/creal/compare/3.1.6...3.2.0) (2025-06-23)
+
+### Features
+
+* **docker:** source secrets as environment variables ([46b525e](https://github.com/dargmuesli/creal/commit/46b525e88620673b182fc58b4e6f89b24b661aad))
+
 ## [3.1.6](https://github.com/dargmuesli/creal/compare/3.1.5...3.1.6) (2025-06-12)
 
 ### Bug Fixes
