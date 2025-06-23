@@ -1,3 +1,13 @@
+## [4.0.0-beta.1](https://github.com/dargmuesli/creal/compare/3.3.0...4.0.0-beta.1) (2025-06-23)
+
+### ⚠ BREAKING CHANGES
+
+* **s3:** load secrets from environment
+
+### Features
+
+* **s3:** load secrets from environment ([237a303](https://github.com/dargmuesli/creal/commit/237a30339044536d2d7d787127d75855230ba834))
+
 ## [3.3.0](https://github.com/dargmuesli/creal/compare/3.2.0...3.3.0) (2025-06-23)
 
 ### Features
