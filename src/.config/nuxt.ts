@@ -30,6 +30,14 @@ export default defineNuxtConfig(
         // },
       ],
       runtimeConfig: {
+        private: {
+          creal: {
+            s3: {
+              accessKeyId: '',
+              secretAccessKey: '',
+            },
+          },
+        },
         public: {
           creal: {
             s3: {
