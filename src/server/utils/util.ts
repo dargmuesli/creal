@@ -1,18 +1,33 @@
 import { S3Client } from '@aws-sdk/client-s3'
-import { fromIni } from '@aws-sdk/credential-providers'
 import {
   getHost,
   getServiceHref,
 } from '@dargmuesli/nuxt-vio/shared/utils/networking'
+import { consola } from 'consola'
 import type { H3Event } from 'h3'
 
 export const getS3Client = (isExternal = false) => {
   const config = useRuntimeConfig()
 
+  if (!config.private.creal.s3.accessKeyId) {
+    ;(import.meta.dev ? consola.warn : consola.error)(
+      'AWS access key id is not set',
+    )
+    return
+  }
+
+  if (!config.private.creal.s3.secretAccessKey) {
+    ;(import.meta.dev ? consola.warn : consola.error)(
+      'AWS secret access key is not set',
+    )
+    return
+  }
+
   return new S3Client({
-    credentials: fromIni({
-      filepath: '/run/secrets/creal_aws-credentials',
-    }),
+    credentials: {
+      accessKeyId: config.private.creal.s3.accessKeyId,
+      secretAccessKey: config.private.creal.s3.secretAccessKey,
+    },
     endpoint:
       config.public.vio.stagingHost ||
       config.public.vio.isInProduction ||

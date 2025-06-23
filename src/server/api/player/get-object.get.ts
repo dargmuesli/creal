@@ -19,6 +19,10 @@ const getObject = async (event: H3Event) => {
   const s3 = getS3Client()
   const key = parseQuery(parseURL(req.url).search).key
 
+  if (!s3) {
+    throw createError({ statusCode: 500, message: 'S3 client is not set' })
+  }
+
   if (!key || Array.isArray(key)) {
     throw createError({ statusCode: 401, message: 'Key is undefined or array' })
   }
