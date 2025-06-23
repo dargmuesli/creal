@@ -33,9 +33,10 @@ export default defineNuxtConfig(
         public: {
           creal: {
             s3: {
-              bucket: 'creal-audio',
-              endpoint: 'https://s3.nl-ams.scw.cloud',
-              region: 'nl-ams',
+              bucket: 'sutin',
+              endpoint:
+                'https://f00135e2a8cc575a4bc4817c9521fe71.eu.r2.cloudflarestorage.com',
+              region: 'auto',
             },
           },
           turnstile: {
