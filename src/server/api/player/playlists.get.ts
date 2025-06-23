@@ -4,7 +4,13 @@ import type { H3Event } from 'h3'
 import { parseURL, parseQuery } from 'ufo'
 
 export default defineEventHandler(async (event) => {
-  return await proxy(event, fetchPlaylist)
+  const runtimeConfig = useRuntimeConfig()
+
+  if (runtimeConfig.public.vio.proxy) {
+    return await proxy(event, fetchPlaylist)
+  }
+
+  return await fetchPlaylist(event)
 })
 
 const itemSort = (a: PlaylistItem, b: PlaylistItem) => {

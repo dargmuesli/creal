@@ -42,6 +42,9 @@ export default defineNuxtConfig(
           turnstile: {
             siteKey: '0x4AAAAAAAQiMSbON1vdesv0',
           },
+          vio: {
+            proxy: true,
+          },
         },
       },
       vite: {

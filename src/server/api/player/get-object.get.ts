@@ -3,7 +3,13 @@ import type { H3Event } from 'h3'
 import { parseURL, parseQuery } from 'ufo'
 
 export default defineEventHandler(async (event) => {
-  return await proxy(event, getObject)
+  const runtimeConfig = useRuntimeConfig()
+
+  if (runtimeConfig.public.vio.proxy) {
+    return await proxy(event, getObject)
+  }
+
+  return await getObject(event)
 })
 
 const getObject = async (event: H3Event) => {
