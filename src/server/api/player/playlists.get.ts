@@ -166,6 +166,11 @@ const fetchPlaylist = async (event: H3Event) => {
   const config = useRuntimeConfig()
 
   const s3 = getS3Client()
+
+  if (!s3) {
+    throw createError({ statusCode: 500, message: 'S3 client is not set' })
+  }
+
   const PLAYER_PREFIX_LENGTH = PLAYER_PREFIX.split('/').length - 1
   const urlSearchParams = parseQuery(parseURL(req.url).search)
 
