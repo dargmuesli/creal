@@ -1,11 +1,16 @@
-import { URL } from 'node:url'
-
 import { ListObjectsV2Command } from '@aws-sdk/client-s3'
 import { consola } from 'consola'
 import type { H3Event } from 'h3'
+import { parseURL, parseQuery } from 'ufo'
 
 export default defineEventHandler(async (event) => {
-  return await proxy(event, fetchPlaylist)
+  const runtimeConfig = useRuntimeConfig()
+
+  if (runtimeConfig.public.vio.proxy) {
+    return await proxy(event, fetchPlaylist)
+  }
+
+  return await fetchPlaylist(event)
 })
 
 const itemSort = (a: PlaylistItem, b: PlaylistItem) => {
@@ -162,12 +167,28 @@ const fetchPlaylist = async (event: H3Event) => {
 
   const s3 = getS3Client()
   const PLAYER_PREFIX_LENGTH = PLAYER_PREFIX.split('/').length - 1
-  const urlSearchParams = new URL(
-    req.url !== undefined ? req.url : '',
-    'https://example.org/',
-  ).searchParams
-  const continuationToken = urlSearchParams.get('continuation-token')
-  const paramPrefix = urlSearchParams.get('prefix')
+  const urlSearchParams = parseQuery(
+    parseURL(req.url !== undefined ? req.url : '', 'https://example.org/')
+      .search,
+  )
+  const continuationToken = urlSearchParams['continuation-token']
+
+  if (Array.isArray(continuationToken)) {
+    throw createError({
+      statusCode: 401,
+      message: 'Continuation token is an array',
+    })
+  }
+
+  const paramPrefix = urlSearchParams.prefix
+
+  if (Array.isArray(paramPrefix)) {
+    throw createError({
+      statusCode: 401,
+      message: 'Prefix is an array',
+    })
+  }
+
   const paramPrefixLength = paramPrefix ? paramPrefix.split('/').length : 0
   const paramPrefixLengthTotal = PLAYER_PREFIX_LENGTH + paramPrefixLength
 

@@ -1,10 +1,15 @@
-import { URL } from 'node:url'
-
 import { GetObjectCommand } from '@aws-sdk/client-s3'
 import type { H3Event } from 'h3'
+import { parseURL, parseQuery } from 'ufo'
 
 export default defineEventHandler(async (event) => {
-  return await proxy(event, getObject)
+  const runtimeConfig = useRuntimeConfig()
+
+  if (runtimeConfig.public.vio.proxy) {
+    return await proxy(event, getObject)
+  }
+
+  return await getObject(event)
 })
 
 const getObject = async (event: H3Event) => {
@@ -12,13 +17,10 @@ const getObject = async (event: H3Event) => {
   const config = useRuntimeConfig()
 
   const s3 = getS3Client()
-  const key = new URL(
-    req.url !== undefined ? req.url : '',
-    'https://example.org/',
-  ).searchParams.get('key')
+  const key = parseQuery(parseURL(req.url).search).key
 
-  if (!key) {
-    throw createError({ statusCode: 401, message: 'Key missing!' })
+  if (!key || Array.isArray(key)) {
+    throw createError({ statusCode: 401, message: 'Key is undefined or array' })
   }
 
   const data = await s3.send(

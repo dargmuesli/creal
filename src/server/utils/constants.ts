@@ -1,16 +1,14 @@
 import { IS_IN_PRODUCTION } from '@dargmuesli/nuxt-vio/node'
 import { getRootHost } from '@dargmuesli/nuxt-vio/shared/utils/networking'
 import { defu } from 'defu'
+import { parseURL } from 'ufo'
 
 // const productionHost =
 //   !IS_IN_PRODUCTION && !IS_IN_STACK ? PRODUCTION_HOST : undefined
 const crealS3EndpointHost =
   (IS_IN_FRONTEND_DEVELOPMENT || IS_IN_PRODUCTION
-    ? `${process.env.NUXT_PUBLIC_CREAL_S3_BUCKET || 'creal-audio'}.`
-    : '') +
-  new URL(
-    process.env.NUXT_PUBLIC_CREAL_S3_ENDPOINT || 'https://s3.nl-ams.scw.cloud',
-  ).host
+    ? `${process.env.NUXT_PUBLIC_CREAL_S3_BUCKET}.`
+    : '') + parseURL(process.env.NUXT_PUBLIC_CREAL_S3_ENDPOINT).host
 
 export const GET_CSP = (siteUrl: URL) => {
   const domainTldPort = IS_IN_FRONTEND_DEVELOPMENT

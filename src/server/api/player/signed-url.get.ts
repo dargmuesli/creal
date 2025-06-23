@@ -1,12 +1,16 @@
-import { URL } from 'node:url'
-
-import type { H3Event } from 'h3'
-
 import { GetObjectCommand } from '@aws-sdk/client-s3'
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner'
+import type { H3Event } from 'h3'
+import { parseURL, parseQuery } from 'ufo'
 
 export default defineEventHandler(async (event) => {
-  return await proxy(event, signedUrl)
+  const runtimeConfig = useRuntimeConfig()
+
+  if (runtimeConfig.public.vio.proxy) {
+    return await proxy(event, signedUrl)
+  }
+
+  return await signedUrl(event)
 })
 
 const signedUrl = async (event: H3Event) => {
@@ -14,13 +18,18 @@ const signedUrl = async (event: H3Event) => {
   const config = useRuntimeConfig()
 
   const s3 = getS3Client(true)
-  const key = new URL(
-    req.url !== undefined ? req.url : '',
-    'https://example.org/',
-  ).searchParams.get('key')
 
-  if (!key) {
-    throw createError({ statusCode: 401, message: 'Key missing!' })
+  if (!s3) {
+    throw createError({ statusCode: 500, message: 'S3 client is not set' })
+  }
+
+  const key = parseQuery(
+    parseURL(req.url !== undefined ? req.url : '', 'https://example.org/')
+      .search,
+  ).key
+
+  if (!key || Array.isArray(key)) {
+    throw createError({ statusCode: 401, message: 'Key is undefined or array' })
   }
 
   return await getSignedUrl(
