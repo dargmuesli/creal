@@ -167,10 +167,8 @@ const fetchPlaylist = async (event: H3Event) => {
 
   const s3 = getS3Client()
   const PLAYER_PREFIX_LENGTH = PLAYER_PREFIX.split('/').length - 1
-  const urlSearchParams = parseQuery(
-    parseURL(req.url !== undefined ? req.url : '', 'https://example.org/')
-      .search,
-  )
+  const urlSearchParams = parseQuery(parseURL(req.url).search)
+
   const continuationToken = urlSearchParams['continuation-token']
 
   if (Array.isArray(continuationToken)) {
@@ -198,10 +196,10 @@ const fetchPlaylist = async (event: H3Event) => {
         Bucket: config.public.creal.s3.bucket,
         // MaxKeys: 10,
       },
-      ...(continuationToken !== null && {
+      ...(continuationToken && {
         ContinuationToken: continuationToken,
       }),
-      ...(paramPrefix !== null && {
+      ...(paramPrefix && {
         Prefix: PLAYER_PREFIX + paramPrefix + '/',
       }),
     }),
