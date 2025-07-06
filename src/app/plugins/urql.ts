@@ -3,9 +3,8 @@ import {
   createClient,
   ssrExchange as getSsrExchange,
   fetchExchange,
-  type ClientOptions,
-  type SSRData,
 } from '@urql/core'
+import type { ClientOptions, SSRData } from '@urql/core'
 // import type { Data } from '@urql/exchange-graphcache'
 import {
   /* Cache, */ offlineExchange as getOfflineExchange,
