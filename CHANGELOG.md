@@ -1,3 +1,9 @@
+## [4.0.3](https://github.com/dargmuesli/creal/compare/4.0.2...4.0.3) (2025-07-17)
+
+### Bug Fixes
+
+* **composables:** correct i18n scope ([8253559](https://github.com/dargmuesli/creal/commit/8253559c8c6d203bd0fa54b7e88caec9616ce07a))
+
 ## [4.0.2](https://github.com/dargmuesli/creal/compare/4.0.1...4.0.2) (2025-07-17)
 
 ### Bug Fixes
