@@ -10,9 +10,6 @@ export default defineNuxtConfig(
     {
       css: ['~/assets/css/creal.css'],
       extends: ['@dargmuesli/nuxt-vio'],
-      future: {
-        compatibilityVersion: 4,
-      },
       modules: [
         '@nuxt/scripts',
         '@nuxtjs/turnstile',
