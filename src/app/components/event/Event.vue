@@ -44,7 +44,7 @@
                 ? dateTime().isBefore(crealEvent.dateEnd)
                 : dateTime().isBefore(crealEvent.dateStart))
             "
-            class="-left-9.75"
+            class="absolute -left-9.75"
           />
           <div
             v-else
