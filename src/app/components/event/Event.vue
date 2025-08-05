@@ -37,7 +37,17 @@
           </template>
         </i18n-t>
         <div class="relative flex items-center">
+          <LivePulse
+            v-if="
+              index === 0 &&
+              (crealEvent.dateEnd
+                ? dateTime().isBefore(crealEvent.dateEnd)
+                : dateTime().isBefore(crealEvent.dateStart))
+            "
+            class="-left-9.75"
+          />
           <div
+            v-else
             class="absolute -left-9.75 size-3 rounded-full bg-gray-700"
             :class="[...(crealEvent.image ? ['lg:hidden'] : [])]"
           />
@@ -79,6 +89,7 @@ export interface Image {
 
 interface Props {
   crealEvent: CrealEvent
+  index: number
 }
 const props = withDefaults(defineProps<Props>(), {})
 

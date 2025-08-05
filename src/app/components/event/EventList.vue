@@ -5,21 +5,11 @@
     </div>
     <ul class="flex flex-col">
       <li
-        v-for="(eventItem, index) in events"
-        :key="eventItem.documentId"
+        v-for="(crealEvent, index) in events"
+        :key="crealEvent.documentId"
         class="relative"
       >
-        <Event :creal-event="eventItem" />
-        <div class="absolute top-2.5 -right-1">
-          <LivePulse
-            v-if="
-              index === 0 &&
-              (eventItem.dateEnd
-                ? dateTime().isBefore(eventItem.dateEnd)
-                : dateTime().isBefore(eventItem.dateStart))
-            "
-          />
-        </div>
+        <Event :creal-event :index />
       </li>
     </ul>
   </div>
@@ -32,6 +22,4 @@ interface Props {
   events: CollectionItem<CrealEvent>[]
 }
 withDefaults(defineProps<Props>(), {})
-
-const dateTime = useDateTime()
 </script>
