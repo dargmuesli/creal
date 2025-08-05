@@ -1,3 +1,9 @@
+## [4.1.1](https://github.com/dargmuesli/creal/compare/4.1.0...4.1.1) (2025-08-05)
+
+### Bug Fixes
+
+* **event:** correct indentation for first upcoming event ([45b5f06](https://github.com/dargmuesli/creal/commit/45b5f062cfb847ed060e1b00cb0be102a6425938))
+
 ## [4.1.0](https://github.com/dargmuesli/creal/compare/4.0.4...4.1.0) (2025-08-05)
 
 ### Features
