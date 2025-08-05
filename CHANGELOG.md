@@ -1,3 +1,9 @@
+## [4.1.0](https://github.com/dargmuesli/creal/compare/4.0.4...4.1.0) (2025-08-05)
+
+### Features
+
+* **event:** move live pulse ([c770127](https://github.com/dargmuesli/creal/commit/c7701274c9ebd428df9a985f439354d247f44d4c))
+
 ## [4.0.4](https://github.com/dargmuesli/creal/compare/4.0.3...4.0.4) (2025-07-31)
 
 ### Bug Fixes
