@@ -3,9 +3,11 @@ export default {
   __schema: {
     queryType: {
       name: 'Query',
+      kind: 'OBJECT',
     },
     mutationType: {
       name: 'Mutation',
+      kind: 'OBJECT',
     },
     subscriptionType: null,
     types: [

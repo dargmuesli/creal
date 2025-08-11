@@ -19,9 +19,6 @@ export default withNuxt(
     },
   },
   {
-    ignores: ['gql/generated/**/*'],
-  },
-  {
     files: ['i18n/locales/**/*'],
     rules: {
       '@intlify/vue-i18n/no-duplicate-keys-in-locale': 'off',
