@@ -11,8 +11,13 @@ import type { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-
  * 3. It does not support dead code elimination, so it will add unused operations.
  *
  * Therefore it is highly recommended to use the babel or swc plugin for production.
+ * Learn more about it here: https://the-guild.dev/graphql/codegen/plugins/presets/preset-client#reducing-bundle-size
  */
-const documents = {
+type Documents = {
+  '\n  fragment SuggestionItem on Suggestion {\n    id\n    nodeId\n    artist\n    comment\n    title\n  }\n': typeof types.SuggestionItemFragmentDoc
+  '\n      mutation createSuggestion($suggestionInput: SuggestionInput!) {\n        createSuggestion(input: { suggestion: $suggestionInput }) {\n          suggestion {\n            ...SuggestionItem\n          }\n        }\n      }\n    ': typeof types.CreateSuggestionDocument
+}
+const documents: Documents = {
   '\n  fragment SuggestionItem on Suggestion {\n    id\n    nodeId\n    artist\n    comment\n    title\n  }\n':
     types.SuggestionItemFragmentDoc,
   '\n      mutation createSuggestion($suggestionInput: SuggestionInput!) {\n        createSuggestion(input: { suggestion: $suggestionInput }) {\n          suggestion {\n            ...SuggestionItem\n          }\n        }\n      }\n    ':

@@ -1,6 +1,8 @@
-/* eslint-disable no-use-before-define */
+/* eslint-disable @typescript-eslint/no-empty-object-type */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import type {
-  offlineExchange,
+  cacheExchange,
   Resolver as GraphCacheResolver,
   UpdateResolver as GraphCacheUpdateResolver,
   OptimisticMutationResolver as GraphCacheOptimisticMutationResolver,
@@ -801,7 +803,7 @@ export type GraphCacheUpdaters = {
   }
 }
 
-export type GraphCacheConfig = Parameters<typeof offlineExchange>[0] & {
+export type GraphCacheConfig = Parameters<typeof cacheExchange>[0] & {
   updates?: GraphCacheUpdaters
   keys?: GraphCacheKeysConfig
   optimistic?: GraphCacheOptimisticUpdaters
