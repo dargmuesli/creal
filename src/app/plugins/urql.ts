@@ -17,6 +17,7 @@ import schema from '~~/gql/generated/introspection'
 const SSR_KEY = '__URQL_DATA__'
 
 export default defineNuxtPlugin(async (nuxtApp) => {
+  const store = useVioAuthStore()
   const runtimeConfig = useRuntimeConfig()
   const getServiceHref = useGetServiceHref()
 
@@ -46,14 +47,11 @@ export default defineNuxtPlugin(async (nuxtApp) => {
   const clientOptions: ClientOptions = {
     requestPolicy: 'cache-and-network',
     fetchOptions: () => {
-      const { $pinia } = useNuxtApp()
-      const store = useVioAuthStore($pinia)
       const headers = {} as Record<string, string>
-      const jwt = store.jwt
 
-      if (jwt) {
-        consola.trace('GraphQL request authenticated with: ' + jwt)
-        headers.authorization = `Bearer ${jwt}`
+      if (store.jwt) {
+        consola.trace('GraphQL request authenticated with: ' + store.jwt)
+        headers.authorization = `Bearer ${store.jwt}`
       } else {
         consola.trace('GraphQL request without authentication.')
       }
