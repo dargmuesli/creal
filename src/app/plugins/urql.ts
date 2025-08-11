@@ -60,7 +60,7 @@ export default defineNuxtPlugin(async (nuxtApp) => {
     },
     preferGetMethod: false, // TODO: remove with Postgraphile v5
     url:
-      getServiceHref({ name: 'creal-postgraphile', port: 5000 }) + '/graphql',
+      getServiceHref({ name: 'creal_postgraphile', port: 5000 }) + '/graphql',
     exchanges: [
       ...(runtimeConfig.public.vio.isInProduction ? [] : [devtoolsExchange]),
       ...(cacheExchange ? [cacheExchange] : []),
