@@ -1,3 +1,10 @@
+## [4.1.2](https://github.com/dargmuesli/creal/compare/4.1.1...4.1.2) (2025-08-11)
+
+### Bug Fixes
+
+* **urql:** correct service name ([2fbb180](https://github.com/dargmuesli/creal/commit/2fbb1801527c8ac5780111c8277dd0227ec5f2fd))
+* **urql:** prefer post method ([6fd2060](https://github.com/dargmuesli/creal/commit/6fd20606670fc509956d76ac0077c61fc95f0474))
+
 ## [4.1.1](https://github.com/dargmuesli/creal/compare/4.1.0...4.1.1) (2025-08-05)
 
 ### Bug Fixes
