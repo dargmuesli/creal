@@ -55,7 +55,7 @@ importers:
         version: 9.1.6(magicast@0.3.5)(webpack@5.102.1(esbuild@0.25.10))
       '@dargmuesli/nuxt-vio':
         specifier: 18.3.15
-        version: 18.3.15(366bdb9d54d594621cb3a7ab45cc89bd)
+        version: 18.3.15(0b463bafabaf898b14e02ce7dd70f825)
       '@graphql-codegen/cli':
         specifier: 6.0.0
         version: 6.0.0(@parcel/watcher@2.5.1)(@types/node@22.18.10)(crossws@0.3.5)(graphql@16.11.0)(typescript@5.9.3)
@@ -195,8 +195,8 @@ importers:
         specifier: 3.5.22
         version: 3.5.22(typescript@5.9.3)
       vue-router:
-        specifier: 4.6.2
-        version: 4.6.2(vue@3.5.22(typescript@5.9.3))
+        specifier: 4.6.3
+        version: 4.6.3(vue@3.5.22(typescript@5.9.3))
       vue-tsc:
         specifier: 3.1.1
         version: 3.1.1(typescript@5.9.3)
@@ -212,7 +212,7 @@ importers:
         version: 4.10.2(playwright-core@1.56.0)
       '@dargmuesli/nuxt-vio':
         specifier: 18.3.15
-        version: 18.3.15(5fb60478c686de9417b41f425339d0a4)
+        version: 18.3.15(1d0717a39deebce71125b552c0e5ab18)
       '@dargmuesli/nuxt-vio-testing':
         specifier: 18.3.15
         version: 18.3.15(playwright-core@1.56.0)
@@ -8728,8 +8728,8 @@ packages:
     peerDependencies:
       vue: ^3.0.0
 
-  vue-router@4.6.2:
-    resolution: {integrity: sha512-my83mxQKXyCms9EegBXZldehOihxBjgSjZqrZwgg4vBacNGl0oBCO+xT//wgOYpLV1RW93ZfqxrjTozd+82nbA==}
+  vue-router@4.6.3:
+    resolution: {integrity: sha512-ARBedLm9YlbvQomnmq91Os7ck6efydTSpRP3nuOKCvgJOHNrhRoJDSKtee8kcL1Vf7nz6U+PMBL+hTvR3bTVQg==}
     peerDependencies:
       vue: ^3.5.0
 
@@ -10027,7 +10027,7 @@ snapshots:
     dependencies:
       playwright-core: 1.56.0
 
-  '@dargmuesli/nuxt-vio@18.3.15(366bdb9d54d594621cb3a7ab45cc89bd)':
+  '@dargmuesli/nuxt-vio@18.3.15(0b463bafabaf898b14e02ce7dd70f825)':
     dependencies:
       '@dargmuesli/nuxt-cookie-control': 9.1.5(magicast@0.3.5)(webpack@5.102.1(esbuild@0.25.10))
       '@eslint/compat': 1.4.0(eslint@9.36.0(jiti@2.6.1))
@@ -10065,7 +10065,7 @@ snapshots:
       nuxt-security: 2.4.0(magicast@0.3.5)(rollup@4.52.4)
       sweetalert2: 11.23.0
       vue: 3.5.22(typescript@5.9.3)
-      vue-router: 4.6.2(vue@3.5.22(typescript@5.9.3))
+      vue-router: 4.6.3(vue@3.5.22(typescript@5.9.3))
       vue-tsc: 3.1.0(typescript@5.9.3)
     transitivePeerDependencies:
       - '@azure/app-configuration'
@@ -10127,7 +10127,7 @@ snapshots:
       - webpack
       - yaml-eslint-parser
 
-  '@dargmuesli/nuxt-vio@18.3.15(5fb60478c686de9417b41f425339d0a4)':
+  '@dargmuesli/nuxt-vio@18.3.15(1d0717a39deebce71125b552c0e5ab18)':
     dependencies:
       '@dargmuesli/nuxt-cookie-control': 9.1.5(magicast@0.3.5)(webpack@5.102.1)
       '@eslint/compat': 1.4.0(eslint@9.36.0(jiti@2.6.1))
@@ -10165,7 +10165,7 @@ snapshots:
       nuxt-security: 2.4.0(magicast@0.3.5)(rollup@4.52.4)
       sweetalert2: 11.23.0
       vue: 3.5.22(typescript@5.9.3)
-      vue-router: 4.6.2(vue@3.5.22(typescript@5.9.3))
+      vue-router: 4.6.3(vue@3.5.22(typescript@5.9.3))
       vue-tsc: 3.1.0(typescript@5.9.3)
     transitivePeerDependencies:
       - '@azure/app-configuration'
@@ -11842,10 +11842,10 @@ snapshots:
       typescript: 5.9.3
       ufo: 1.6.1
       unplugin: 2.3.10
-      unplugin-vue-router: 0.14.0(@vue/compiler-sfc@3.5.22)(vue-router@4.6.2(vue@3.5.22(typescript@5.9.3)))(vue@3.5.22(typescript@5.9.3))
+      unplugin-vue-router: 0.14.0(@vue/compiler-sfc@3.5.22)(vue-router@4.6.3(vue@3.5.22(typescript@5.9.3)))(vue@3.5.22(typescript@5.9.3))
       unstorage: 1.17.1(db0@0.3.4)(ioredis@5.8.1)
       vue-i18n: 11.1.12(vue@3.5.22(typescript@5.9.3))
-      vue-router: 4.6.2(vue@3.5.22(typescript@5.9.3))
+      vue-router: 4.6.3(vue@3.5.22(typescript@5.9.3))
     transitivePeerDependencies:
       - '@azure/app-configuration'
       - '@azure/cosmos'
@@ -17051,13 +17051,13 @@ snapshots:
       unctx: 2.4.1
       unimport: 5.4.1
       unplugin: 2.3.10
-      unplugin-vue-router: 0.15.0(@vue/compiler-sfc@3.5.22)(typescript@5.9.3)(vue-router@4.6.2(vue@3.5.22(typescript@5.9.3)))(vue@3.5.22(typescript@5.9.3))
+      unplugin-vue-router: 0.15.0(@vue/compiler-sfc@3.5.22)(typescript@5.9.3)(vue-router@4.6.3(vue@3.5.22(typescript@5.9.3)))(vue@3.5.22(typescript@5.9.3))
       unstorage: 1.17.1(db0@0.3.4)(ioredis@5.8.1)
       untyped: 2.0.0
       vue: 3.5.22(typescript@5.9.3)
       vue-bundle-renderer: 2.2.0
       vue-devtools-stub: 0.1.0
-      vue-router: 4.6.2(vue@3.5.22(typescript@5.9.3))
+      vue-router: 4.6.3(vue@3.5.22(typescript@5.9.3))
     optionalDependencies:
       '@parcel/watcher': 2.5.1
       '@types/node': 22.18.10
@@ -18888,7 +18888,7 @@ snapshots:
       pathe: 2.0.3
       picomatch: 4.0.3
 
-  unplugin-vue-router@0.14.0(@vue/compiler-sfc@3.5.22)(vue-router@4.6.2(vue@3.5.22(typescript@5.9.3)))(vue@3.5.22(typescript@5.9.3)):
+  unplugin-vue-router@0.14.0(@vue/compiler-sfc@3.5.22)(vue-router@4.6.3(vue@3.5.22(typescript@5.9.3)))(vue@3.5.22(typescript@5.9.3)):
     dependencies:
       '@vue-macros/common': 3.0.0-beta.15(vue@3.5.22(typescript@5.9.3))
       '@vue/compiler-sfc': 3.5.22
@@ -18906,11 +18906,11 @@ snapshots:
       unplugin-utils: 0.2.5
       yaml: 2.8.1
     optionalDependencies:
-      vue-router: 4.6.2(vue@3.5.22(typescript@5.9.3))
+      vue-router: 4.6.3(vue@3.5.22(typescript@5.9.3))
     transitivePeerDependencies:
       - vue
 
-  unplugin-vue-router@0.15.0(@vue/compiler-sfc@3.5.22)(typescript@5.9.3)(vue-router@4.6.2(vue@3.5.22(typescript@5.9.3)))(vue@3.5.22(typescript@5.9.3)):
+  unplugin-vue-router@0.15.0(@vue/compiler-sfc@3.5.22)(typescript@5.9.3)(vue-router@4.6.3(vue@3.5.22(typescript@5.9.3)))(vue@3.5.22(typescript@5.9.3)):
     dependencies:
       '@vue-macros/common': 3.0.0-beta.16(vue@3.5.22(typescript@5.9.3))
       '@vue/compiler-sfc': 3.5.22
@@ -18930,7 +18930,7 @@ snapshots:
       unplugin-utils: 0.2.5
       yaml: 2.8.1
     optionalDependencies:
-      vue-router: 4.6.2(vue@3.5.22(typescript@5.9.3))
+      vue-router: 4.6.3(vue@3.5.22(typescript@5.9.3))
     transitivePeerDependencies:
       - typescript
       - vue
@@ -19188,7 +19188,7 @@ snapshots:
       '@vue/devtools-api': 6.6.4
       vue: 3.5.22(typescript@5.9.3)
 
-  vue-router@4.6.2(vue@3.5.22(typescript@5.9.3)):
+  vue-router@4.6.3(vue@3.5.22(typescript@5.9.3)):
     dependencies:
       '@vue/devtools-api': 6.6.4
       vue: 3.5.22(typescript@5.9.3)
