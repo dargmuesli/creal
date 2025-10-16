@@ -1,3 +1,9 @@
+## [4.1.7](https://github.com/dargmuesli/creal/compare/4.1.6...4.1.7) (2025-10-16)
+
+### Bug Fixes
+
+* schedule release ([3ccbe66](https://github.com/dargmuesli/creal/commit/3ccbe66088f19a5d8fc318601fd7bd937c28aac4))
+
 ## [4.1.6](https://github.com/dargmuesli/creal/compare/4.1.5...4.1.6) (2025-10-02)
 
 ### Bug Fixes
