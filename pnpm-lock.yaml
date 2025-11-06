@@ -214,8 +214,8 @@ importers:
         specifier: 19.0.0
         version: 19.0.0(73ae37b7c879ac31af5a718fe26751ca)
       '@dargmuesli/nuxt-vio-testing':
-        specifier: 18.3.17
-        version: 18.3.17(playwright-core@1.56.1)
+        specifier: 19.0.0
+        version: 19.0.0(playwright-core@1.56.1)
       '@eslint/js':
         specifier: 9.39.1
         version: 9.39.1
@@ -866,9 +866,9 @@ packages:
     resolution: {integrity: sha512-RAIaua+h42YPhgccWKXbBDMolYceWg8DLMKTEMR+LVzoYt8ECWv8VlwUWJstXMOkrdjug542gpWS+RzO/wqdQA==}
     engines: {node: '>=16'}
 
-  '@dargmuesli/nuxt-vio-testing@18.3.17':
-    resolution: {integrity: sha512-ORgA2otunAXnu5nEdpeLHZ9fqmVT3jhfMEHlV3A9S0vtvpXDhkp1UBs70I6H9mWMRpZ9+Kw7ykto+RJp0WHQLQ==}
-    engines: {node: '22'}
+  '@dargmuesli/nuxt-vio-testing@19.0.0':
+    resolution: {integrity: sha512-P84mhnXGGk/roF04zYt/6AAIVOUDibY01/NMgWDoFSPS0zULUw7HXTMHoCp4PLtx1PLUl3pkW38zm/Ls3xP9qw==}
+    engines: {node: '24'}
     peerDependencies:
       playwright-core: 1.56.1
 
@@ -9575,7 +9575,7 @@ snapshots:
       - magicast
       - webpack
 
-  '@dargmuesli/nuxt-vio-testing@18.3.17(playwright-core@1.56.1)':
+  '@dargmuesli/nuxt-vio-testing@19.0.0(playwright-core@1.56.1)':
     dependencies:
       playwright-core: 1.56.1
 
