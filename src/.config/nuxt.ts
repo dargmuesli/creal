@@ -76,6 +76,14 @@ export default defineNuxtConfig(
       gtag: {
         id: 'G-K4R41W62BR',
       },
+      security: {
+        headers: {
+          contentSecurityPolicy: {
+            'require-trusted-types-for': "'script'",
+          },
+          crossOriginEmbedderPolicy: 'require-corp',
+        },
+      },
       site: {
         identity: {
           type: 'Person',
