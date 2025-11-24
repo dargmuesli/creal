@@ -14,9 +14,9 @@
         width="700"
         height="700"
       />
-      <template v-if="title !== siteConfig.name">
+      <template v-if="title !== siteConfigName">
         <div class="mt-20 text-[40px] font-semibold text-gray-300">
-          {{ siteConfig.name }}
+          {{ siteConfigName }}
         </div>
         <h1 class="text-[72px] leading-none">
           {{ title }}
@@ -24,10 +24,10 @@
       </template>
       <template v-else>
         <div class="mt-20 text-[40px] font-semibold text-gray-300">
-          {{ t('headline') }}
+          {{ headline }}
         </div>
         <h1 class="text-[72px] leading-none">
-          {{ t('name') }}
+          {{ name }}
         </h1>
       </template>
     </div>
@@ -37,12 +37,12 @@
 <script setup lang="ts">
 interface Props {
   description: string
+  headline: string
+  name: string
+  siteConfigName: string
   title: string
 }
 withDefaults(defineProps<Props>(), {})
-
-const { t } = useI18n()
-const siteConfig = useSiteConfig()
 </script>
 
 <script lang="ts">
@@ -50,12 +50,3 @@ export default {
   name: 'OgImage',
 }
 </script>
-
-<i18n lang="yaml">
-de:
-  headline: DJ und Event-Organisator
-  name: cReal
-en:
-  headline: DJ and event organizer
-  name: cReal
-</i18n>

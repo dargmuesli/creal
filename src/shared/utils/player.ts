@@ -1,27 +1,5 @@
 import { mergeWith } from 'lodash-es'
 
-export const getSignedUrl = async ({
-  playlistItem,
-  playlistPath,
-}: {
-  playlistItem: PlaylistItem
-  playlistPath?: string
-}) => {
-  const key =
-    PLAYER_PREFIX +
-    (playlistPath ? playlistPath + '/' : '') +
-    playlistItem.fileName +
-    '.' +
-    playlistItem.fileExtension
-  const {
-    data: { value },
-  } = await useFetch('/api/player/signed-url', {
-    params: { key },
-  })
-
-  return value
-}
-
 const isObject = (a: unknown) => !!a && a.constructor === Object
 
 export const mergeByKey = (
