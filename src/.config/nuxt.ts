@@ -1,31 +1,19 @@
 import { VIO_NUXT_BASE_CONFIG } from '@dargmuesli/nuxt-vio/shared/utils/nuxt'
-// import { SITE_URL } from '@dargmuesli/nuxt-vio/shared/utils/constants'
 import { defu } from 'defu'
 
 import { SITE_NAME, PRODUCTION_HOST } from '../shared/utils/constants'
-// import { GET_CSP } from '../server/utils/constants'
 
 export default defineNuxtConfig(
   defu(
     {
       css: ['~/assets/css/creal.css'],
       extends: ['@dargmuesli/nuxt-vio'],
-      modules: [
-        '@nuxt/scripts',
-        '@nuxtjs/turnstile',
-
-        // // nuxt-security: apply content security policy at build time
-        // (_options, nuxt) => {
-        //   if (nuxt.options.nitro.static) {
-        //     if (nuxt.options.security.headers) {
-        //       nuxt.options.security.headers.contentSecurityPolicy = defu(
-        //         GET_CSP(SITE_URL),
-        //         nuxt.options.security.headers.contentSecurityPolicy,
-        //       )
-        //     }
-        //   }
-        // },
-      ],
+      modules: ['@nuxt/scripts', '@nuxtjs/turnstile'],
+      nitro: {
+        experimental: {
+          asyncContext: true,
+        },
+      },
       runtimeConfig: {
         private: {
           creal: {

@@ -1,16 +1,17 @@
 import { ListObjectsV2Command } from '@aws-sdk/client-s3'
 import { consola } from 'consola'
-import type { H3Event } from 'h3'
 import { parseURL, parseQuery } from 'ufo'
 
-export default defineEventHandler(async (event) => {
+export default defineEventHandler(async () => {
   const runtimeConfig = useRuntimeConfig()
+  const proxy = useProxy()
+  const fetchPlaylist = useFetchPlaylist()
 
   if (runtimeConfig.public.vio.proxy) {
-    return await proxy(event, fetchPlaylist)
+    return await proxy(fetchPlaylist)
   }
 
-  return await fetchPlaylist(event)
+  return await fetchPlaylist()
 })
 
 const itemSort = (a: PlaylistItem, b: PlaylistItem) => {
@@ -161,15 +162,12 @@ const getPlaylistExtended = (
   return playlistDataExtended
 }
 
-const fetchPlaylist = async (event: H3Event) => {
-  const { req } = event.node
+const useFetchPlaylist = () => {
+  const event = useEvent()
   const config = useRuntimeConfig()
+  const { client: s3 } = useS3()
 
-  const s3 = getS3Client()
-
-  if (!s3) {
-    throw createError({ statusCode: 500, message: 'S3 client is not set' })
-  }
+  const { req } = event.node
 
   const PLAYER_PREFIX_LENGTH = PLAYER_PREFIX.split('/').length - 1
   const urlSearchParams = parseQuery(parseURL(req.url).search)
@@ -195,76 +193,75 @@ const fetchPlaylist = async (event: H3Event) => {
   const paramPrefixLength = paramPrefix ? paramPrefix.split('/').length : 0
   const paramPrefixLengthTotal = PLAYER_PREFIX_LENGTH + paramPrefixLength
 
-  const data = await s3.send(
-    new ListObjectsV2Command({
-      ...{
-        Bucket: config.public.creal.s3.bucket,
-        // MaxKeys: 10,
-      },
-      ...(continuationToken && {
-        ContinuationToken: continuationToken,
+  return async () => {
+    const data = await s3.send(
+      new ListObjectsV2Command({
+        ...{
+          Bucket: config.public.creal.s3.bucket,
+          // MaxKeys: 10,
+        },
+        ...(continuationToken && {
+          ContinuationToken: continuationToken,
+        }),
+        ...(paramPrefix && {
+          Prefix: PLAYER_PREFIX + paramPrefix + '/',
+        }),
       }),
-      ...(paramPrefix && {
-        Prefix: PLAYER_PREFIX + paramPrefix + '/',
-      }),
-    }),
-  )
-
-  if (!data) return
-
-  if (data.Contents === undefined) {
-    return sendNoContent(event)
-  }
-
-  const playlistDataExtended: PlaylistExtended = {
-    name: paramPrefix || 'root',
-    collections: [],
-    items: [],
-    cover: undefined,
-    covers: [],
-    metas: [],
-  }
-
-  // Iterate all subdirectories and files.
-  data.Contents.forEach((content) => {
-    // The content's key is the directory's/file's path.
-    if (content.Key === undefined) {
-      throw createError({ statusCode: 500, message: 'Content key undefined' })
-    }
-
-    const keyParts = content.Key.split('/')
-
-    // Normalize directories.
-    if (keyParts[keyParts.length - 1] === '') {
-      keyParts.pop()
-    }
-
-    if (
-      ![paramPrefixLengthTotal + 1, paramPrefixLengthTotal + 2].includes(
-        keyParts.length,
-      )
-    ) {
-      // Not an item on any requested level.
-      return
-    }
-
-    keyParts.splice(0, paramPrefixLengthTotal)
-
-    const nestedData = getPlaylistExtended(
-      keyParts,
-      content.Size !== undefined ? content.Size : 0,
     )
 
-    mergeByKey(playlistDataExtended, nestedData, 'name')
-  })
+    if (!data) return
 
-  const playlistData = getPlaylist(playlistDataExtended)
-  const result: FetchPlaylist = {
-    playlistData,
-    ...(data.NextContinuationToken !== undefined && {
-      nextContinuationToken: data.NextContinuationToken,
-    }),
+    if (!data.Contents) {
+      return sendNoContent(event)
+    }
+
+    const playlistDataExtended: PlaylistExtended = {
+      name: paramPrefix || 'root',
+      collections: [],
+      items: [],
+      cover: undefined,
+      covers: [],
+      metas: [],
+    }
+
+    // Iterate all subdirectories and files.
+    for (const content of data.Contents) {
+      // The content's key is the directory's/file's path.
+      if (!content.Key) {
+        throw createError({ statusCode: 500, message: 'Content key undefined' })
+      }
+
+      const keyParts = content.Key.split('/')
+
+      // Normalize directories.
+      if (keyParts[keyParts.length - 1] === '') {
+        keyParts.pop()
+      }
+
+      if (
+        ![paramPrefixLengthTotal + 1, paramPrefixLengthTotal + 2].includes(
+          keyParts.length,
+        )
+      ) {
+        // Not an item on any requested level.
+        continue
+      }
+
+      keyParts.splice(0, paramPrefixLengthTotal)
+
+      const nestedData = getPlaylistExtended(keyParts, content.Size || 0)
+
+      mergeByKey(playlistDataExtended, nestedData, 'name')
+    }
+
+    const playlistData = getPlaylist(playlistDataExtended)
+    const result: FetchPlaylist = {
+      playlistData,
+      ...(data.NextContinuationToken && {
+        nextContinuationToken: data.NextContinuationToken,
+      }),
+    }
+
+    return result
   }
-
-  return result
 }

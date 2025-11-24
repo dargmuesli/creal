@@ -1,42 +1,40 @@
 import { GetObjectCommand } from '@aws-sdk/client-s3'
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner'
-import type { H3Event } from 'h3'
 import { parseURL, parseQuery } from 'ufo'
 
-export default defineEventHandler(async (event) => {
+export default defineEventHandler(async () => {
   const runtimeConfig = useRuntimeConfig()
+  const proxy = useProxy()
+  const getSignedUrlCustom = useGetSignedUrl()
 
   if (runtimeConfig.public.vio.proxy) {
-    return await proxy(event, signedUrl)
+    return proxy(getSignedUrlCustom)
   }
 
-  return await signedUrl(event)
+  return getSignedUrlCustom()
 })
 
-const signedUrl = async (event: H3Event) => {
-  const { req } = event.node
+const useGetSignedUrl = () => {
+  const event = useEvent()
   const config = useRuntimeConfig()
+  const { client: s3 } = useS3()
 
-  const s3 = getS3Client(true)
-
-  if (!s3) {
-    throw createError({ statusCode: 500, message: 'S3 client is not set' })
-  }
-
+  const { req } = event.node
   const key = parseQuery(parseURL(req.url).search).key
 
   if (!key || Array.isArray(key)) {
     throw createError({ statusCode: 401, message: 'Key is undefined or array' })
   }
 
-  return await getSignedUrl(
-    s3,
-    new GetObjectCommand({
-      Bucket: config.public.creal.s3.bucket,
-      Key: key,
-    }),
-    {
-      expiresIn: 21600, // 6h
-    },
-  )
+  return async () =>
+    await getSignedUrl(
+      s3,
+      new GetObjectCommand({
+        Bucket: config.public.creal.s3.bucket,
+        Key: key,
+      }),
+      {
+        expiresIn: 21600, // 6h
+      },
+    )
 }
