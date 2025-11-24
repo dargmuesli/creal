@@ -176,7 +176,7 @@ const useFetchPlaylist = () => {
 
   if (Array.isArray(continuationToken)) {
     throw createError({
-      statusCode: 401,
+      statusCode: 400,
       message: 'Continuation token is an array',
     })
   }
@@ -185,7 +185,7 @@ const useFetchPlaylist = () => {
 
   if (Array.isArray(paramPrefix)) {
     throw createError({
-      statusCode: 401,
+      statusCode: 400,
       message: 'Prefix is an array',
     })
   }

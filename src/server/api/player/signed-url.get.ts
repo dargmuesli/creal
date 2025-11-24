@@ -23,7 +23,7 @@ const useGetSignedUrl = () => {
   const key = parseQuery(parseURL(req.url).search).key
 
   if (!key || Array.isArray(key)) {
-    throw createError({ statusCode: 401, message: 'Key is undefined or array' })
+    throw createError({ statusCode: 400, message: 'Key is undefined or array' })
   }
 
   return async () =>
