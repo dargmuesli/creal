@@ -1,3 +1,13 @@
+## [5.0.0](https://github.com/dargmuesli/creal/compare/4.2.1...5.0.0) (2025-11-25)
+
+### ⚠ BREAKING CHANGES
+
+* **turnstile:** load secret key through environment variable
+
+### Features
+
+* **turnstile:** load secret key through environment variable ([04d5199](https://github.com/dargmuesli/creal/commit/04d5199b0327da5745c126f30cd0852eac59dc2d))
+
 ## [4.2.1](https://github.com/dargmuesli/creal/compare/4.2.0...4.2.1) (2025-11-25)
 
 ### Performance Improvements
