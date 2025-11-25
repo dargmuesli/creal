@@ -15,6 +15,8 @@ RUN corepack enable \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 
+COPY ./docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
+
 
 #############
 # Serve Nuxt in development mode.
@@ -28,8 +30,6 @@ RUN apt-get update \
         libdbd-pg-perl postgresql-client sqitch \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
-
-COPY ./docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 
 VOLUME /srv/.pnpm-store
 VOLUME /srv/app
@@ -107,6 +107,8 @@ WORKDIR /srv/app/
 RUN corepack enable \
   && apt update && apt install mkcert
 
+COPY ./docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
+
 
 ########################
 # Nuxt: test (e2e)
@@ -116,8 +118,6 @@ FROM test-e2e-base-image AS test-e2e_development
 ARG UNAME=e2e
 ARG UID=1000
 ARG GID=1000
-
-COPY ./docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 
 RUN groupadd -g $GID -o $UNAME \
     && useradd -m -l -u $UID -g $GID -o -s /bin/bash $UNAME
@@ -228,7 +228,6 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/*
 
 COPY ./sqitch/ ./sqitch/
-COPY ./docker-entrypoint.sh /usr/local/bin/
 
 ENTRYPOINT ["docker-entrypoint.sh"]
 CMD ["pnpm", "run", "start:node"]
