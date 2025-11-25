@@ -89,12 +89,6 @@ export default defineNuxtConfig(
         },
         twitter: '@dargmuesli',
       },
-      turnstile: {
-        secretKeyPath:
-          process.env.NUXT_PUBLIC_SITE_URL ||
-          process.env.NODE_ENV === 'production'
-            ? '/run/secrets/jonas-thelemann_turnstile-key'
-            : undefined,
 
       $production: {
         security: {
