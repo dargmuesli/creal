@@ -1,14 +1,10 @@
-import { IS_IN_PRODUCTION } from '@dargmuesli/nuxt-vio/node'
 import { getRootHost } from '@dargmuesli/nuxt-vio/shared/utils/networking'
 import { defu } from 'defu'
 import { parseURL } from 'ufo'
 
-// const productionHost =
-//   !IS_IN_PRODUCTION && !IS_IN_STACK ? PRODUCTION_HOST : undefined
-const crealS3EndpointHost =
-  (IS_IN_FRONTEND_DEVELOPMENT || IS_IN_PRODUCTION
-    ? `${process.env.NUXT_PUBLIC_CREAL_S3_BUCKET}.`
-    : '') + parseURL(process.env.NUXT_PUBLIC_CREAL_S3_ENDPOINT).host
+export const DARGSTACK_SECRET_UNUSED_THIRD_PARTY = 'UNSET THIRD PARTY SECRET'
+
+const crealS3EndpointHost = `${process.env.NUXT_PUBLIC_CREAL_S3_BUCKET}.${parseURL(process.env.NUXT_PUBLIC_CREAL_S3_ENDPOINT).host}`
 
 export const GET_CSP = (siteUrl: URL) => {
   const domainTldPort = IS_IN_FRONTEND_DEVELOPMENT
@@ -33,7 +29,6 @@ export const GET_CSP = (siteUrl: URL) => {
         'https://cdn.plyr.io/static/blank.mp4', // plyr
         `https://${crealS3EndpointHost}`, // music
       ],
-      'prefetch-src': ["'self'"],
       'report-to': 'csp-endpoint',
       'report-uri':
         'https://o4507259039973376.ingest.de.sentry.io/api/4507260561653840/security/?sentry_key=1e53178c1dba9b39147de4a21853a3e3',

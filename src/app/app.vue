@@ -48,6 +48,9 @@ defineOgImageComponent(
   'Default',
   {
     description: siteConfig.description,
+    headline: t('headline'),
+    name: t('name'),
+    siteConfigName: siteConfig.name,
   },
   {
     alt: t('globalSeoOgImageAlt'),
@@ -63,3 +66,12 @@ useSchemaOrg([
 useVioGtag()
 init()
 </script>
+
+<i18n lang="yaml">
+de:
+  headline: DJ und Event-Organisator
+  name: cReal
+en:
+  headline: DJ and event organizer
+  name: cReal
+</i18n>

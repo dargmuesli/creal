@@ -1,40 +1,43 @@
 import { GetObjectCommand } from '@aws-sdk/client-s3'
-import type { H3Event } from 'h3'
 import { parseURL, parseQuery } from 'ufo'
 
-export default defineEventHandler(async (event) => {
+export default defineEventHandler(async () => {
   const runtimeConfig = useRuntimeConfig()
+  const proxy = useProxy()
+  const getObject = useGetObject()
 
   if (runtimeConfig.public.vio.proxy) {
-    return await proxy(event, getObject)
+    return await proxy(getObject)
   }
 
-  return await getObject(event)
+  return await getObject()
 })
 
-const getObject = async (event: H3Event) => {
-  const { req } = event.node
+const useGetObject = () => {
+  const event = useEvent()
   const config = useRuntimeConfig()
+  const { client: s3 } = useS3()
 
-  const s3 = getS3Client()
+  const { req } = event.node
   const key = parseQuery(parseURL(req.url).search).key
 
-  if (!s3) {
-    throw createError({ statusCode: 500, message: 'S3 client is not set' })
-  }
-
   if (!key || Array.isArray(key)) {
-    throw createError({ statusCode: 401, message: 'Key is undefined or array' })
+    throw createError({
+      statusCode: 400,
+      message: 'Key is undefined or array',
+    })
   }
 
-  const data = await s3.send(
-    new GetObjectCommand({
-      Bucket: config.public.creal.s3.bucket,
-      Key: key,
-    }),
-  )
+  return async () => {
+    const data = await s3.send(
+      new GetObjectCommand({
+        Bucket: config.public.creal.s3.bucket,
+        Key: key,
+      }),
+    )
 
-  if (!data) return
+    if (!data) return
 
-  return await data.Body?.transformToString()
+    return await data.Body?.transformToString()
+  }
 }
