@@ -67,7 +67,7 @@ const store = useStore()
 const { t } = useI18n()
 const localePath = useLocalePath()
 const route = useRoute()
-const fireError = useFireError()
+const alertError = useAlertError()
 const { play } = usePlyr()
 
 // data
@@ -147,8 +147,7 @@ const download = async (playlistItem: PlaylistItem) => {
     playlistPath: routeQueryPlaylist.value,
   })
 
-  if (!signedUrl)
-    return fireError({ error: new Error('Could not get signed url!') })
+  if (!signedUrl) return alertError('Could not get signed url!')
 
   link.setAttribute('href', signedUrl)
   link.setAttribute('download', '123.mp3') // This value is never shown to the user in current browser implementations.
@@ -218,12 +217,6 @@ useHeadDefault({
   description: t('description'),
   title: titleHead(),
 })
-</script>
-
-<script lang="ts">
-export default {
-  name: 'IndexPage',
-}
 </script>
 
 <i18n lang="yaml">

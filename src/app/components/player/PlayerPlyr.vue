@@ -13,9 +13,10 @@
           class="font-normal"
         >
           {{ t('on') }}
-          {{
-            dateTime(store.playerData.currentTrack.meta.createdTime).format('L')
-          }}
+          <VioTime
+            :datetime="store.playerData.currentTrack.meta.createdTime"
+            :options="{ dateStyle: 'short' }"
+          />
         </span>
       </span>
       <span v-if="store.playerData.currentTrack.meta?.description">
@@ -49,11 +50,10 @@
 </template>
 
 <script setup lang="ts">
-const dateTime = useDateTime()
 const store = useStore()
 const { t } = useI18n()
 const { play } = usePlyr()
-const fireError = useFireError()
+const alertError = useAlertError()
 
 // data
 const isInitialized = ref(false)
@@ -153,7 +153,7 @@ const share = async () => {
     !store.playerData.currentPlaylist?.name ||
     !store.playerData.currentTrack?.fileName
   )
-    return fireError({ error: new Error(t('copyError')) })
+    return alertError(t('copyError'))
 
   await copyText(
     `${window.location.origin}/player?playlist=${encodeURIComponent(
@@ -196,10 +196,10 @@ de:
   copyError: Das Kopieren war nicht erfolgreich.
   linkCopy: Copy link
   mixcloud: Mixcloud
-  on: on
+  on: am
 en:
   copyError: Copying failed.
   linkCopy: Link kopieren
   mixcloud: Mixcloud
-  on: am
+  on: on
 </i18n>

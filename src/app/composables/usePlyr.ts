@@ -2,7 +2,7 @@ export const usePlyr = () => {
   const route = useRoute()
   const router = useRouter()
   const store = useStore()
-  const fireError = useFireError()
+  const alertError = useAlertError()
 
   return {
     play: async (playlistItem: PlaylistItem, playlistPath?: string) => {
@@ -31,15 +31,16 @@ export const usePlyr = () => {
 
       const signedUrl = await getSignedUrl({ playlistItem, playlistPath })
 
-      if (!signedUrl)
-        return fireError({ error: new Error('Could not get signed url!') })
+      if (!signedUrl) return alertError('Could not get signed url!')
 
       store.playerData.currentTrack = {
         ...playlistItem,
         meta: playlistItem.isMetaAvailable
-          ? await $fetch('/api/player/get-object', {
-              params: { key },
-            })
+          ? JSON.parse(
+              await $fetch('/api/player/get-object', {
+                params: { key },
+              }),
+            )
           : undefined,
       }
       store.playerData.sourceInfo = {
