@@ -5,8 +5,8 @@ ENVIRONMENT_VARIABLES_PATH="/run/environment-variables"
 
 is_valid_var_name() {
   case "$1" in
-    *[!a-zA-Z0-9_]*|'') return 1 ;;
-    *) return 0 ;;
+  *[!a-zA-Z0-9_]* | '') return 1 ;;
+  *) return 0 ;;
   esac
 }
 
@@ -33,8 +33,8 @@ load_environment_variables
 sqitch -C /srv/app/sqitch/ deploy "$(cat /run/secrets/creal_sqitch-target)"
 
 if [ "${NODE_ENV:-}" != "production" ]; then
-    pnpm config set store-dir "/srv/.pnpm-store"
-    pnpm install
+  pnpm config set store-dir "/srv/.pnpm-store"
+  pnpm install
 fi
 
 exec "$@"
