@@ -81,7 +81,6 @@ export default defineNuxtConfig(
           contentSecurityPolicy: {
             'require-trusted-types-for': "'script'",
           },
-          crossOriginEmbedderPolicy: 'require-corp',
         },
       },
       site: {
@@ -90,12 +89,13 @@ export default defineNuxtConfig(
         },
         twitter: '@dargmuesli',
       },
-      turnstile: {
-        secretKeyPath:
-          process.env.NUXT_PUBLIC_SITE_URL ||
-          process.env.NODE_ENV === 'production'
-            ? '/run/secrets/jonas-thelemann_turnstile-key'
-            : undefined,
+
+      $production: {
+        security: {
+          headers: {
+            crossOriginEmbedderPolicy: 'require-corp', // breaks nuxt devtools
+          },
+        },
       },
     },
     VIO_NUXT_BASE_CONFIG({
