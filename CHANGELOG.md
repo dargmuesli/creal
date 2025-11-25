@@ -1,3 +1,9 @@
+## [4.2.1](https://github.com/dargmuesli/creal/compare/4.2.0...4.2.1) (2025-11-25)
+
+### Performance Improvements
+
+* **docker:** improve secret loading resilience ([d8238e5](https://github.com/dargmuesli/creal/commit/d8238e5c277f9a92379efdd61b21cb8bff4826d2))
+
 ## [4.2.0](https://github.com/dargmuesli/creal/compare/4.1.9...4.2.0) (2025-11-25)
 
 ### Features
