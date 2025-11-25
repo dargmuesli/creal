@@ -1,3 +1,13 @@
+## [4.2.0](https://github.com/dargmuesli/creal/compare/4.1.9...4.2.0) (2025-11-25)
+
+### Features
+
+* **player:** update status codes ([5d9f3a7](https://github.com/dargmuesli/creal/commit/5d9f3a7e1f3298ce336ee7e1aa82ad057007b0f0))
+
+### Performance Improvements
+
+* **security:** tighten headers ([f2c1173](https://github.com/dargmuesli/creal/commit/f2c1173d3c99429d7aa4a1c40adace790198e2e1))
+
 ## [4.1.9](https://github.com/dargmuesli/creal/compare/4.1.8...4.1.9) (2025-11-13)
 
 ### Bug Fixes
