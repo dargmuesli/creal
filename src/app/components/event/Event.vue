@@ -95,7 +95,7 @@ const props = withDefaults(defineProps<Props>(), {})
 
 const { t } = useI18n()
 const getServiceHref = useGetServiceHref()
-const now = useState('dateTimeNow', () => new Date())
+const now = useNow()
 
 // computations
 const imageSrc = computed(

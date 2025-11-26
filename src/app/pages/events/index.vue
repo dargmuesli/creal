@@ -46,7 +46,7 @@ const {
 })
 
 const { t } = useI18n()
-const now = useState('dateTimeNow', () => new Date())
+const now = useNow()
 const typicalSetLengthMilliseconds = 2 * 60 * 60 * 1000 // 2h
 
 // data

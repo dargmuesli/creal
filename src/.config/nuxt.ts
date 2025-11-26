@@ -9,11 +9,6 @@ export default defineNuxtConfig(
       css: ['~/assets/css/creal.css'],
       extends: ['@dargmuesli/nuxt-vio'],
       modules: ['@nuxt/scripts', '@nuxtjs/turnstile'],
-      nitro: {
-        experimental: {
-          asyncContext: true,
-        },
-      },
       runtimeConfig: {
         private: {
           creal: {

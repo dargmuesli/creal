@@ -52,10 +52,10 @@ importers:
         version: 3.940.0
       '@dargmuesli/nuxt-cookie-control':
         specifier: 9.1.9
-        version: 9.1.9(magicast@0.5.1)(webpack@5.103.0(esbuild@0.27.0))
+        version: 9.1.9(magicast@0.5.1)(webpack@5.103.0)
       '@dargmuesli/nuxt-vio':
-        specifier: 20.0.0-beta.7
-        version: 20.0.0-beta.7(d31d099fc7048134b98b1463daf8d916)
+        specifier: 20.0.0-beta.8
+        version: 20.0.0-beta.8(958e4a7db0b17a8f6709346e727ff1d6)
       '@graphql-codegen/cli':
         specifier: 6.1.0
         version: 6.1.0(@parcel/watcher@2.5.1)(@types/node@24.10.1)(crossws@0.3.5)(graphql@16.12.0)(typescript@5.9.3)
@@ -106,7 +106,7 @@ importers:
         version: 8.1.0(@urql/core@6.0.1(graphql@16.12.0))(graphql@16.12.0)
       '@urql/vue':
         specifier: 2.0.0
-        version: 2.0.0(@urql/core@6.0.1)(vue@3.5.25(typescript@5.9.3))
+        version: 2.0.0(@urql/core@6.0.1(graphql@16.12.0))(vue@3.5.25(typescript@5.9.3))
       '@vuelidate/core':
         specifier: 2.0.3
         version: 2.0.3(vue@3.5.25(typescript@5.9.3))
@@ -208,11 +208,11 @@ importers:
         specifier: 4.11.0
         version: 4.11.0(playwright-core@1.57.0)
       '@dargmuesli/nuxt-vio':
-        specifier: 20.0.0-beta.7
-        version: 20.0.0-beta.7(3bb543f5f2e229e253bf1352eac4dd14)
+        specifier: 20.0.0-beta.8
+        version: 20.0.0-beta.8(8f6bd5a3898dfcff8383f7f0c41c47ba)
       '@dargmuesli/nuxt-vio-testing':
-        specifier: 20.0.0-beta.7
-        version: 20.0.0-beta.7(playwright-core@1.57.0)
+        specifier: 20.0.0-beta.8
+        version: 20.0.0-beta.8(playwright-core@1.57.0)
       '@eslint/js':
         specifier: 9.39.1
         version: 9.39.1
@@ -868,14 +868,14 @@ packages:
     resolution: {integrity: sha512-RaSuvqVfW+KUSt5sJDu8ofrXYyYUD9b7Alczrn7kqmjulj5FcAupWV9GWYy2rrJJB0K8rarR+VUKv0gCrWiq6g==}
     engines: {node: '>=16'}
 
-  '@dargmuesli/nuxt-vio-testing@20.0.0-beta.7':
-    resolution: {integrity: sha512-4d9zpYCG7PIf1hWsXc+JXVXforp1J3sh4ihNSKp3m5m6u1AwwWGKaGnE936JT9BRFAEdpzvY+JdzUQYF8M5Kdw==}
+  '@dargmuesli/nuxt-vio-testing@20.0.0-beta.8':
+    resolution: {integrity: sha512-V/vfKkTW9fU/NTYsCpGrtRkM2NdXS+MdDn2fnzbFABjLmPzye7iL5Jhz+iVdyxdk2VZhquhgtGtYs7yydy53wA==}
     engines: {node: '24'}
     peerDependencies:
       playwright-core: 1.56.1
 
-  '@dargmuesli/nuxt-vio@20.0.0-beta.7':
-    resolution: {integrity: sha512-zwXYA+7uWAuk9N/tfAU3Ai2fJXnsNpAN7OmlZfjNkWcmRd1vm1a0waA2EnnCfmaPgFLzPco/Iryufl61tu4jiA==}
+  '@dargmuesli/nuxt-vio@20.0.0-beta.8':
+    resolution: {integrity: sha512-M/AnBgQOVbS8PjAdwevcnlV6GT1HP05JYAguGOxcIA6e0ZzeKCvX7WG8OhM4rq9UBJPToI4h2hx4hka7diKlKw==}
     engines: {node: '24'}
     peerDependencies:
       nuxt: ^4.1.0
@@ -10202,23 +10202,23 @@ snapshots:
       - magicast
       - webpack
 
-  '@dargmuesli/nuxt-cookie-control@9.1.9(magicast@0.5.1)(webpack@5.103.0(esbuild@0.27.0))':
+  '@dargmuesli/nuxt-cookie-control@9.1.9(magicast@0.5.1)(webpack@5.103.0)':
     dependencies:
       '@nuxt/kit': 4.2.1(magicast@0.5.1)
       css-vars-ponyfill: 2.4.9
       defu: 6.1.4
-      string-replace-loader: 3.2.0(webpack@5.103.0(esbuild@0.27.0))
+      string-replace-loader: 3.2.0(webpack@5.103.0)
     transitivePeerDependencies:
       - magicast
       - webpack
 
-  '@dargmuesli/nuxt-vio-testing@20.0.0-beta.7(playwright-core@1.57.0)':
+  '@dargmuesli/nuxt-vio-testing@20.0.0-beta.8(playwright-core@1.57.0)':
     dependencies:
       playwright-core: 1.57.0
 
-  '@dargmuesli/nuxt-vio@20.0.0-beta.7(3bb543f5f2e229e253bf1352eac4dd14)':
+  '@dargmuesli/nuxt-vio@20.0.0-beta.8(8f6bd5a3898dfcff8383f7f0c41c47ba)':
     dependencies:
-      '@dargmuesli/nuxt-cookie-control': 9.1.8(magicast@0.5.1)(webpack@5.103.0)
+      '@dargmuesli/nuxt-cookie-control': 9.1.8(magicast@0.5.1)(webpack@5.103.0(esbuild@0.27.0))
       '@eslint/compat': 2.0.0(eslint@9.39.1(jiti@2.6.1))
       '@heroicons/vue': 2.2.0(vue@3.5.25(typescript@5.9.3))
       '@http-util/status-i18n': 0.9.0
@@ -10236,7 +10236,7 @@ snapshots:
       '@tailwindcss/vite': 4.1.17(vite@7.2.4(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.44.1)(yaml@2.8.1))
       '@types/lodash-es': 4.17.12
       '@urql/core': 6.0.1(graphql@16.12.0)
-      '@urql/vue': 2.0.0(@urql/core@6.0.1)(vue@3.5.25(typescript@5.9.3))
+      '@urql/vue': 2.0.0(@urql/core@6.0.1(graphql@16.12.0))(vue@3.5.25(typescript@5.9.3))
       '@vuelidate/core': 2.0.3(vue@3.5.25(typescript@5.9.3))
       '@vuelidate/validators': 2.0.4(vue@3.5.25(typescript@5.9.3))
       '@vueuse/core': 14.0.0(vue@3.5.25(typescript@5.9.3))
@@ -10323,9 +10323,9 @@ snapshots:
       - webpack
       - yaml-eslint-parser
 
-  '@dargmuesli/nuxt-vio@20.0.0-beta.7(d31d099fc7048134b98b1463daf8d916)':
+  '@dargmuesli/nuxt-vio@20.0.0-beta.8(958e4a7db0b17a8f6709346e727ff1d6)':
     dependencies:
-      '@dargmuesli/nuxt-cookie-control': 9.1.8(magicast@0.5.1)(webpack@5.103.0(esbuild@0.27.0))
+      '@dargmuesli/nuxt-cookie-control': 9.1.8(magicast@0.5.1)(webpack@5.103.0)
       '@eslint/compat': 2.0.0(eslint@9.39.1(jiti@2.6.1))
       '@heroicons/vue': 2.2.0(vue@3.5.25(typescript@5.9.3))
       '@http-util/status-i18n': 0.9.0
@@ -10343,7 +10343,7 @@ snapshots:
       '@tailwindcss/vite': 4.1.17(vite@7.2.4(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.44.1)(yaml@2.8.1))
       '@types/lodash-es': 4.17.12
       '@urql/core': 6.0.1(graphql@16.12.0)
-      '@urql/vue': 2.0.0(@urql/core@6.0.1)(vue@3.5.25(typescript@5.9.3))
+      '@urql/vue': 2.0.0(@urql/core@6.0.1(graphql@16.12.0))(vue@3.5.25(typescript@5.9.3))
       '@vuelidate/core': 2.0.3(vue@3.5.25(typescript@5.9.3))
       '@vuelidate/validators': 2.0.4(vue@3.5.25(typescript@5.9.3))
       '@vueuse/core': 14.0.0(vue@3.5.25(typescript@5.9.3))
@@ -14050,7 +14050,7 @@ snapshots:
     dependencies:
       graphql: 16.12.0
 
-  '@urql/vue@2.0.0(@urql/core@6.0.1)(vue@3.5.25(typescript@5.9.3))':
+  '@urql/vue@2.0.0(@urql/core@6.0.1(graphql@16.12.0))(vue@3.5.25(typescript@5.9.3))':
     dependencies:
       '@urql/core': 6.0.1(graphql@16.12.0)
       vue: 3.5.25(typescript@5.9.3)
