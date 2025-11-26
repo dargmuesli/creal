@@ -1,3 +1,9 @@
+## [5.0.1](https://github.com/dargmuesli/creal/compare/5.0.0...5.0.1) (2025-11-26)
+
+### Bug Fixes
+
+* **deps:** update @dargmuesli/nuxt-vio to v20.0.0-beta.8 ([c0461e3](https://github.com/dargmuesli/creal/commit/c0461e36cff8f4436dca5f06e3d453da6052a5d1))
+
 ## [5.0.0](https://github.com/dargmuesli/creal/compare/4.2.1...5.0.0) (2025-11-25)
 
 ### ⚠ BREAKING CHANGES
