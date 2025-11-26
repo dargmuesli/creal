@@ -100,7 +100,7 @@ import { consola } from 'consola'
 import { useCreateSuggestionMutation } from '~~/gql/documents/mutations/suggestion/suggestionCreate'
 
 const { t } = useI18n()
-const fireError = useFireError()
+const alertError = useAlertError()
 const runtimeConfig = useRuntimeConfig()
 const createSuggestionMutation = useCreateSuggestionMutation()
 
@@ -140,12 +140,12 @@ const submit = async () => {
   })
 
   if (result.error) {
-    fireError({ error: result.error }, api)
+    alertError({ error: result.error, messageI18n: t('submitError') })
   }
 
   if (!result.data) return
 
-  showToast({ title: t('submitSuccess') })
+  toast.success(t('submitSuccess'))
 
   form.artist = undefined
   form.comment = undefined
@@ -180,18 +180,13 @@ useHeadDefault({
 })
 </script>
 
-<script lang="ts">
-export default {
-  name: 'IndexPage',
-}
-</script>
-
 <i18n lang="yaml">
 de:
   artist: Künstler*in
   artistPlaceholder: Abba
   comment: Kommentar
   description: Schlage DJ cReal Lieder vor.
+  submitError: Es gab ein Problem beim Einreichen des Vorschlags.
   submitSuccess: Erfolgreich eingereicht.
   title: Titel
   titlePage: Liedvorschläge
@@ -201,6 +196,7 @@ en:
   artistPlaceholder: Abba
   comment: Comment
   description: Suggest songs to DJ cReal.
+  submitError: There was an error submitting the suggestion.
   submitSuccess: Submitted successfully.
   title: Title
   titlePage: Song Suggestions

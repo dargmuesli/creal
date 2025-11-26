@@ -23,6 +23,8 @@ COPY ./docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 
 FROM base-image AS development
 
+ENV CI=false
+
 # Update and install dependencies.
 # - `libdbd-pg-perl postgresql-client sqitch` is required by the entrypoint
 RUN apt-get update \

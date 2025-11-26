@@ -23,14 +23,14 @@
       >
         <i18n-t keypath="datetime" tag="span">
           <template #start>
-            {{ dateFormat(new Date(crealEvent.dateStart)) }}
+            <VioTime :datetime="crealEvent.dateStart" />
           </template>
           <template v-if="crealEvent.dateEnd" #end>
-            {{
-              t('datetimeEnd', {
-                end: dateFormat(new Date(crealEvent.dateEnd)),
-              })
-            }}
+            <i18n-t keypath="datetimeEnd" tag="span">
+              <template #end>
+                <VioTime :datetime="crealEvent.dateEnd" />
+              </template>
+            </i18n-t>
           </template>
           <template v-if="crealEvent.location" #location>
             {{ t('datetimeLocation', { location: crealEvent.location }) }}
@@ -41,8 +41,8 @@
             v-if="
               index === 0 &&
               (crealEvent.dateEnd
-                ? dateTime().isBefore(crealEvent.dateEnd)
-                : dateTime().isBefore(crealEvent.dateStart))
+                ? now < new Date(crealEvent.dateEnd)
+                : now < new Date(crealEvent.dateStart))
             "
             class="absolute -left-9.75"
           />
@@ -94,11 +94,10 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {})
 
 const { t } = useI18n()
-const dateTime = useDateTime()
 const getServiceHref = useGetServiceHref()
+const now = useState('dateTimeNow', () => new Date())
 
 // computations
-const dateFormat = (date: Date) => dateTime(date).format('lll')
 const imageSrc = computed(
   () =>
     getServiceHref({ isSsr: false, name: 'creal-strapi', port: 1337 }) +

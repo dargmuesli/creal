@@ -164,7 +164,6 @@ import { Bars3Icon, XMarkIcon } from '@heroicons/vue/24/outline'
 const { t } = useI18n()
 const localePath = useLocalePath()
 // const strapiFetch = useStrapiFetch()
-// const dateTime = useDateTime()
 
 // async data
 // let eventsCurrentCount = 0

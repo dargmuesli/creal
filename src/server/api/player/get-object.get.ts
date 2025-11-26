@@ -36,8 +36,8 @@ const useGetObject = () => {
       }),
     )
 
-    if (!data) return
+    if (!data.Body) return
 
-    return await data.Body?.transformToString()
+    return await data.Body.transformToString()
   }
 }

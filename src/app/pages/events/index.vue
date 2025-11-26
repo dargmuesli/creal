@@ -46,7 +46,8 @@ const {
 })
 
 const { t } = useI18n()
-const dateTime = useDateTime()
+const now = useState('dateTimeNow', () => new Date())
+const typicalSetLengthMilliseconds = 2 * 60 * 60 * 1000 // 2h
 
 // data
 const title = t('titlePage')
@@ -55,60 +56,48 @@ const title = t('titlePage')
 const eventsCurrent = computed(() => {
   if (!events) return
 
-  const current = dateTime()
-
   return events.filter((event) => {
+    const dateStart = new Date(event.dateStart)
+    const dateStartPlus2h = new Date(
+      dateStart.getTime() + typicalSetLengthMilliseconds,
+    )
+
     if (event.dateEnd) {
-      return (
-        dateTime(event.dateStart).isSameOrBefore(current) &&
-        dateTime(event.dateEnd).isAfter(current)
-      )
+      return dateStart <= now.value && now.value < new Date(event.dateEnd)
     } else {
-      return (
-        dateTime(event.dateStart).isSameOrBefore(current) &&
-        dateTime(event.dateStart).isSame(current, 'day')
-      )
+      return dateStart <= now.value && now.value < dateStartPlus2h
     }
   })
 })
 const eventsFuture = computed(() => {
   if (!events) return
 
-  const current = dateTime()
-
   return events
-    .filter((event) => dateTime(event.dateStart).isAfter(current))
+    .filter((event) => now.value < new Date(event.dateStart))
     .reverse()
 })
 const eventsPast = computed(() => {
   if (!events) return
 
-  const current = dateTime()
-
   return events.filter((event) => {
+    const dateStart = new Date(event.dateStart)
+    const dateStartPlus2h = new Date(
+      dateStart.getTime() + typicalSetLengthMilliseconds,
+    )
+
     if (event.dateEnd) {
-      return dateTime(event.dateEnd).isBefore(current)
+      return new Date(event.dateEnd) < now.value
     } else {
-      return (
-        dateTime(event.dateStart).isBefore(current) &&
-        !dateTime(event.dateStart).isSame(current, 'day')
-      )
+      return dateStartPlus2h < now.value
     }
   })
 })
-// watchQuery: ['limit', 'start'],
 
 // initialization
 useHeadDefault({
   description: t('description'),
   title,
 })
-</script>
-
-<script lang="ts">
-export default {
-  name: 'IndexPage',
-}
 </script>
 
 <i18n lang="yaml">

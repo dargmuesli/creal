@@ -27,7 +27,7 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {})
 
 const route = useRoute()
-const fireError = useFireError()
+const alertError = useAlertError()
 
 // data
 const coverUrl = ref('')
@@ -50,8 +50,7 @@ const setCoverUrl = async (cover: Cover) => {
     params: { key },
   })
 
-  if (!signedUrl)
-    return fireError({ error: new Error('Could not get signed url!') })
+  if (!signedUrl) return alertError('Could not get signed url!')
 
   displayImageWhenFullyLoaded(signedUrl)
 }
