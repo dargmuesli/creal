@@ -31,10 +31,17 @@ RUN apt-get update \
     && apt-get install --no-install-recommends -y \
         libdbd-pg-perl postgresql-client sqitch \
     && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/* \
+    && mkdir \
+        /srv/app/node_modules \
+        /srv/.pnpm-store \
+    && chown node:node \
+        /srv/app/node_modules \
+        /srv/.pnpm-store
 
 VOLUME /srv/.pnpm-store
 VOLUME /srv/app
+VOLUME /srv/app/node_modules
 
 ENTRYPOINT ["docker-entrypoint.sh"]
 CMD ["pnpm", "--dir", "src", "run", "dev", "--host", "0.0.0.0"]
