@@ -74,7 +74,7 @@ export default defineNuxtConfig(
       security: {
         headers: {
           contentSecurityPolicy: {
-            'require-trusted-types-for': "'script'",
+            // 'require-trusted-types-for': "'script'", // breaks vue-plyr (test in Chrome!)
           },
         },
       },
