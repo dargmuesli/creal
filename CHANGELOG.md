@@ -1,3 +1,9 @@
+## [5.0.6](https://github.com/dargmuesli/creal/compare/5.0.5...5.0.6) (2026-01-02)
+
+### Bug Fixes
+
+* **security:** disable trusted types requirement ([4d417e9](https://github.com/dargmuesli/creal/commit/4d417e9c635f446fcf9745c1b3c87c51d6e15544))
+
 ## [5.0.5](https://github.com/dargmuesli/creal/compare/5.0.4...5.0.5) (2026-01-01)
 
 ### Bug Fixes
