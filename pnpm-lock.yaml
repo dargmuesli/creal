@@ -153,8 +153,8 @@ importers:
         specifier: 3.0.4
         version: 3.0.4(typescript@5.9.3)(vue@3.5.26(typescript@5.9.3))
       plyr:
-        specifier: 3.8.3
-        version: 3.8.3
+        specifier: 3.8.4
+        version: 3.8.4
       prettier:
         specifier: 3.7.4
         version: 3.7.4
@@ -7326,8 +7326,8 @@ packages:
     resolution: {integrity: sha512-Nc3IT5yHzflTfbjgqWcCPpo7DaKy4FnpB0l/zCAW0Tc7jxAiuqSxHasntB3D7887LSrA93kDJ9IXovxJYxyLCA==}
     engines: {node: '>=4'}
 
-  plyr@3.8.3:
-    resolution: {integrity: sha512-0+iI5uw0WRvtKBpgPCkmQQv7ucHVQKTEo6UFJjgJ8cy/JZhy0dQqshHQVitHXV6l2O3MzhgnuvQ95VSkWcWeSw==}
+  plyr@3.8.4:
+    resolution: {integrity: sha512-DrzLbK9Wol3zeiuZCleD9aUOl0KAaBHR9H6WVVVYPZ4Ya+LYxUFTgSF1jooHcMQCv96Ws96wCaZzIoP3bES8pQ==}
 
   postcss-calc@10.1.1:
     resolution: {integrity: sha512-NYEsLHh8DgG/PRH2+G9BTuUdtf9ViS+vdoQ0YA5OQdGsfN4ztiwtDWNtBl9EKeqNMFnIu8IKZ0cLxEQ5r5KVMw==}
@@ -13237,7 +13237,7 @@ snapshots:
 
   '@skjnldsv/vue-plyr@7.5.0(typescript@5.9.3)':
     dependencies:
-      plyr: 3.8.3
+      plyr: 3.8.4
       vue: 3.5.26(typescript@5.9.3)
     transitivePeerDependencies:
       - typescript
@@ -17981,7 +17981,7 @@ snapshots:
 
   pluralize@8.0.0: {}
 
-  plyr@3.8.3:
+  plyr@3.8.4:
     dependencies:
       core-js: 3.47.0
       custom-event-polyfill: 1.0.7
