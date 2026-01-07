@@ -30,7 +30,9 @@ load_environment_variables() {
 
 load_environment_variables
 
-sqitch -C /srv/app/sqitch/ deploy "$(cat /run/secrets/creal_sqitch-target)"
+if [ "${CI:-}" != "true" ]; then
+  sqitch -C /srv/app/sqitch/ deploy "$(cat /run/secrets/creal_sqitch-target)"
+fi
 
 if [ "${NODE_ENV:-}" != "production" ]; then
   pnpm config set store-dir "/srv/.pnpm-store"
