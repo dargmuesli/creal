@@ -36,13 +36,14 @@ const submit = async (body: object) => {
     })
 
     isFormSent.value = true
-    isFormSubmitting.value = false
   } catch (error: unknown) {
     alertError({
       ...(error instanceof Error ? { error } : {}),
       messageI18n: t('fetchError'),
     })
   }
+
+  isFormSubmitting.value = false
 }
 
 // initialization
