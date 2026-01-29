@@ -10,7 +10,7 @@
     </VioCardStateInfo>
     <section v-else>
       <h1>{{ t('title') }}</h1>
-      <FormContact @submit="submit" />
+      <FormContact :is-loading="isFormSubmitting" @submit="submit" />
     </section>
   </div>
 </template>
@@ -23,18 +23,20 @@ const backendFetch = useServiceFetch({
 })
 const siteConfig = useSiteConfig()
 
-// data
-const isFormSent = ref(false)
-
-// methods
+// form
+const isFormSent = ref<boolean>()
+const isFormSubmitting = ref<boolean>()
 const submit = async (body: object) => {
   try {
+    isFormSubmitting.value = true
+
     await backendFetch('/api/contact', {
       method: 'POST',
       body: { ...body, siteName: siteConfig.name },
     })
 
     isFormSent.value = true
+    isFormSubmitting.value = false
   } catch (error: unknown) {
     alertError({
       ...(error instanceof Error ? { error } : {}),
