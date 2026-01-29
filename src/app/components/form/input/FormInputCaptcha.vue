@@ -8,7 +8,7 @@
   >
     <NuxtTurnstile
       ref="turnstileRef"
-      :class="{ 'h-[65px]': isVisible }"
+      :class="{ 'h-16.25': isVisible }"
       :options="{
         'error-callback': () => (isLoading = false),
         'expired-callback': () => emit('input', undefined),
@@ -49,10 +49,12 @@
 <script setup lang="ts">
 import type { BaseValidation } from '@vuelidate/core'
 
-export interface Props {
-  formInput: BaseValidation
-}
-withDefaults(defineProps<Props>(), {})
+withDefaults(
+  defineProps<{
+    formInput: BaseValidation
+  }>(),
+  {},
+)
 
 const emit = defineEmits<{
   input: [event?: string]
