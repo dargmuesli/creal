@@ -1,3 +1,9 @@
+## [5.1.0](https://github.com/dargmuesli/creal/compare/5.0.9...5.1.0) (2026-01-29)
+
+### Features
+
+* **contact:** add form button loading indicator ([be93e76](https://github.com/dargmuesli/creal/commit/be93e76e39e5b41645b0b56fbf46c00d1e31e9c0))
+
 ## [5.0.9](https://github.com/dargmuesli/creal/compare/5.0.8...5.0.9) (2026-01-29)
 
 ### Bug Fixes
