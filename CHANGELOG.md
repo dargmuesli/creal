@@ -1,3 +1,9 @@
+## [5.1.1](https://github.com/dargmuesli/creal/compare/5.1.0...5.1.1) (2026-01-30)
+
+### Bug Fixes
+
+* **contact:** account for errors at loading display ([1511b2b](https://github.com/dargmuesli/creal/commit/1511b2b662fd100d2cba4c4e325de88c5627fd77))
+
 ## [5.1.0](https://github.com/dargmuesli/creal/compare/5.0.9...5.1.0) (2026-01-29)
 
 ### Features
