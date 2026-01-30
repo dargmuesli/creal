@@ -1,3 +1,9 @@
+## [5.2.0](https://github.com/dargmuesli/creal/compare/5.1.1...5.2.0) (2026-01-30)
+
+### Features
+
+* **contact:** migrate contact form to vio ([#603](https://github.com/dargmuesli/creal/issues/603)) ([2572029](https://github.com/dargmuesli/creal/commit/25720292cdecd3caa5511fb9d6bc68bfd0186409))
+
 ## [5.1.1](https://github.com/dargmuesli/creal/compare/5.1.0...5.1.1) (2026-01-30)
 
 ### Bug Fixes
