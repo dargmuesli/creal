@@ -38,7 +38,7 @@
     </VioLayoutFooterCategory>
     <template #logo>
       <VioLink :aria-label="t('faq')" :to="localePath('/faq')">
-        <IconLogo class="mx-12 h-12 w-12 opacity-60 brightness-0 invert" />
+        <CrIconLogo class="mx-12 h-12 w-12 opacity-60 brightness-0 invert" />
       </VioLink>
     </template>
   </VioLayoutFooter>

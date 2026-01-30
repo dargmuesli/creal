@@ -10,7 +10,7 @@
     </VioCardStateInfo>
     <section v-else>
       <h1>{{ t('title') }}</h1>
-      <FormContact :is-loading="isFormSubmitting" @submit="submit" />
+      <CrFormContact :is-loading="isFormSubmitting" @submit="submit" />
     </section>
   </div>
 </template>

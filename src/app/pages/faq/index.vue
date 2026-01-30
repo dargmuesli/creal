@@ -6,7 +6,7 @@
     <VioCardStateAlert v-if="requestError">
       {{ requestError }}
     </VioCardStateAlert>
-    <Paging
+    <CrPaging
       v-if="faqs?.length && paging"
       :is-previous-allowed="paging.isPreviousAllowed"
       :is-next-allowed="paging.isNextAllowed"
@@ -28,14 +28,14 @@
               : '-my-px'
           "
         >
-          <FaqItem
+          <CrFaqItem
             :faq-item="faq"
             :is-focused="itemFocusedId === faq.documentId"
             @click="toggleItemFocus(faq.documentId)"
           />
         </li>
       </ul>
-    </Paging>
+    </CrPaging>
     <div v-else class="text-center">{{ t('faqNone') }}</div>
   </div>
 </template>
