@@ -8,7 +8,7 @@ export default defineNuxtConfig(
     {
       css: ['~/assets/css/creal.css'],
       extends: ['@dargmuesli/nuxt-vio'],
-      modules: ['@nuxt/scripts', '@nuxtjs/turnstile'],
+      modules: ['@nuxt/scripts'],
       runtimeConfig: {
         private: {
           creal: {
