@@ -10,11 +10,11 @@ export default defineNuxtConfig(
       extends: ['@dargmuesli/nuxt-vio'],
       modules: ['@nuxt/scripts'],
       runtimeConfig: {
-        private: {
-          creal: {
-            s3: {
-              accessKeyId: '',
-              secretAccessKey: '',
+        creal: {
+          s3: {
+            accessKey: {
+              id: '',
+              secret: '',
             },
           },
         },
