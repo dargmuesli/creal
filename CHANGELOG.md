@@ -1,3 +1,13 @@
+## [6.0.0-beta.1](https://github.com/dargmuesli/creal/compare/5.2.0...6.0.0-beta.1) (2026-01-30)
+
+### ⚠ BREAKING CHANGES
+
+* **nuxt:** drop private property in runtime configuration
+
+### Code Refactoring
+
+* **nuxt:** drop private property in runtime configuration ([f75469c](https://github.com/dargmuesli/creal/commit/f75469ca0194db97fc7bc973f68b779b288e76c2))
+
 ## [5.2.0](https://github.com/dargmuesli/creal/compare/5.1.1...5.2.0) (2026-01-30)
 
 ### Features
