@@ -5,7 +5,7 @@
       <!-- `NuxtLayout` can't have mulitple child nodes (https://github.com/nuxt/nuxt/issues/21759) -->
       <NuxtPage />
     </NuxtLayout>
-    <PlayerPlyr />
+    <CrPlayerPlyr />
     <CookieControl :locale="locale" />
     <VioSonner />
   </div>

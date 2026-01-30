@@ -9,7 +9,7 @@
         :key="crealEvent.documentId"
         class="relative"
       >
-        <Event :creal-event :index />
+        <CrEvent :creal-event :index />
       </li>
     </ul>
   </div>

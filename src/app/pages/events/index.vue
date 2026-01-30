@@ -6,7 +6,7 @@
     <VioCardStateAlert v-if="requestError">
       {{ requestError }}
     </VioCardStateAlert>
-    <Paging
+    <CrPaging
       v-else-if="events?.length && paging"
       class="flex flex-col gap-16"
       :is-previous-allowed="paging.isPreviousAllowed"
@@ -15,19 +15,19 @@
       :query-previous="paging.queryPrevious"
       :query-next="paging.queryNext"
     >
-      <EventList v-if="eventsCurrent" :events="eventsCurrent">
+      <CrEventList v-if="eventsCurrent" :events="eventsCurrent">
         <div class="flex items-center gap-2">
           {{ t('eventsCurrent') }}
-          <LivePulse />
+          <CrLivePulse />
         </div>
-      </EventList>
-      <EventList v-if="eventsFuture" :events="eventsFuture">
+      </CrEventList>
+      <CrEventList v-if="eventsFuture" :events="eventsFuture">
         {{ t('eventsFuture') }}
-      </EventList>
-      <EventList v-if="eventsPast" :events="eventsPast">
+      </CrEventList>
+      <CrEventList v-if="eventsPast" :events="eventsPast">
         {{ t('eventsPast') }}
-      </EventList>
-    </Paging>
+      </CrEventList>
+    </CrPaging>
     <div v-else class="text-center">{{ t('eventsNone') }}</div>
   </div>
 </template>

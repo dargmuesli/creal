@@ -60,12 +60,12 @@
     </div>
     <div class="container mx-auto p-4 md:px-8">
       <div class="flex min-h-screen flex-col pb-32">
-        <LayoutHeader />
+        <CrLayoutHeader />
         <main class="flex flex-1 hyphens-auto">
           <slot />
         </main>
       </div>
-      <LayoutFooter />
+      <CrLayoutFooter />
     </div>
   </div>
 </template>

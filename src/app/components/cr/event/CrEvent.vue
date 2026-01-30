@@ -37,7 +37,7 @@
           </template>
         </i18n-t>
         <div class="relative flex items-center">
-          <LivePulse
+          <CrLivePulse
             v-if="
               index === 0 &&
               (crealEvent.dateEnd

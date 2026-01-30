@@ -1,7 +1,7 @@
 <template>
   <div>
     <slot />
-    <PagingControls
+    <CrPagingControls
       v-if="isPreviousAllowed || isNextAllowed"
       :is-previous-allowed="isPreviousAllowed"
       :is-next-allowed="isNextAllowed"

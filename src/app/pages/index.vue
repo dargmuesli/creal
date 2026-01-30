@@ -38,7 +38,7 @@
           >
             {{ t('testimonialsRead') }}
           </VioButtonColored>
-          <LinkBooking class="text-sm leading-6 font-semibold" />
+          <CrLinkBooking class="text-sm leading-6 font-semibold" />
         </div>
       </div>
     </div>

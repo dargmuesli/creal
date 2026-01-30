@@ -23,7 +23,7 @@
               :title="collection.name"
               :to="{ query: getPlaylistLink(collection.name) }"
             >
-              <PlayerPlaylist class="h-full" :playlist="collection" />
+              <CrPlayerPlaylist class="h-full" :playlist="collection" />
             </VioLink>
           </li>
         </ul>
@@ -31,7 +31,7 @@
           v-if="store.playerData.currentPlaylist.items.length"
           class="flex flex-col gap-4"
         >
-          <PlayerPlaylistItem
+          <CrPlayerPlaylistItem
             v-for="playlistItem of store.playerData.currentPlaylist.items"
             :key="playlistItem.fileName"
             :class="{

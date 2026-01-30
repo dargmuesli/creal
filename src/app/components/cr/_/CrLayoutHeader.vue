@@ -4,7 +4,7 @@
       <VioButton :aria-label="t('creal')" :to="localePath('/')">
         <span class="text-lg font-bold">{{ t('creal') }}</span>
         <template #prefix>
-          <IconLogo class="h-10 w-10" />
+          <CrIconLogo class="h-10 w-10" />
         </template>
       </VioButton>
       <VioButton
@@ -50,7 +50,7 @@
       :is-colored="false"
       :to="localePath('/events')"
     >
-      <LivePulse />
+      <CrLivePulse />
       <span class="hidden whitespace-nowrap sm:inline">
         {{ t('live') }}
       </span>
@@ -61,12 +61,12 @@
       :is-colored="false"
       :to="localePath('/events')"
     >
-      <LivePulse />
+      <CrLivePulse />
       <span class="hidden whitespace-nowrap sm:inline">
         {{ t('eventsFuture') }}
       </span>
     </VioLink> -->
-      <LinkBooking class="hidden text-lg font-bold lg:flex" />
+      <CrLinkBooking class="hidden text-lg font-bold lg:flex" />
     </nav>
     <Dialog
       as="div"
@@ -82,7 +82,7 @@
           <VioButton :aria-label="t('creal')" :to="localePath('/')">
             <span class="text-lg font-bold">{{ t('creal') }}</span>
             <template #prefix>
-              <IconLogo class="h-10 w-10" />
+              <CrIconLogo class="h-10 w-10" />
             </template>
           </VioButton>
           <button
@@ -145,7 +145,7 @@
               > -->
             </div>
             <div class="py-6">
-              <LinkBooking
+              <CrLinkBooking
                 class="-mx-3 block rounded-lg px-3 py-2.5 text-base leading-7 font-semibold text-white hover:bg-gray-800"
                 @click="mobileMenuOpen = false"
               />
