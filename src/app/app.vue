@@ -46,7 +46,7 @@ onMounted(() => indicateLoadingDone())
 defineOgImageComponent(
   'Default',
   {
-    description: siteConfig.description,
+    // description: siteConfig.description,
     headline: t('headline'),
     name: t('name'),
     siteConfigName: siteConfig.name,

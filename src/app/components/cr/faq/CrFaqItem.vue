@@ -30,18 +30,17 @@
 import type { CollectionItem } from '@dargmuesli/nuxt-vio/shared/types/fetch'
 import { marked } from 'marked'
 
-interface Props {
+const { faqItem, isFocused } = defineProps<{
   faqItem: CollectionItem<CrealFaq>
   isFocused: boolean
-}
-const props = withDefaults(defineProps<Props>(), {})
+}>()
 
 // data
 const answerRef = ref()
 
 // methods
 const getMaxHeight = () => {
-  if (props.isFocused && answerRef.value instanceof Element) {
+  if (isFocused && answerRef.value instanceof Element) {
     return answerRef.value.scrollHeight
   } else {
     return 0

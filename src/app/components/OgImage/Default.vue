@@ -9,7 +9,7 @@
     <div class="ml-16 justify-center">
       <img
         alt="DJ cReal"
-        class="absolute left-[100px] opacity-[0.025]"
+        class="absolute left-25 opacity-[0.025]"
         src="/assets/static/logos/creal.svg"
         width="700"
         height="700"
@@ -35,14 +35,12 @@
 </template>
 
 <script setup lang="ts">
-interface Props {
-  description: string
+const { headline, name, siteConfigName, title } = defineProps<{
   headline: string
   name: string
   siteConfigName: string
   title: string
-}
-withDefaults(defineProps<Props>(), {})
+}>()
 </script>
 
 <script lang="ts">
