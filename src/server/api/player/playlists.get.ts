@@ -176,8 +176,8 @@ const useFetchPlaylist = () => {
 
   if (Array.isArray(continuationToken)) {
     throw createError({
-      statusCode: 400,
-      message: 'Continuation token is an array',
+      status: 400,
+      statusText: 'Continuation token is an array',
     })
   }
 
@@ -185,8 +185,8 @@ const useFetchPlaylist = () => {
 
   if (Array.isArray(paramPrefix)) {
     throw createError({
-      statusCode: 400,
-      message: 'Prefix is an array',
+      status: 400,
+      statusText: 'Prefix is an array',
     })
   }
 
@@ -228,7 +228,7 @@ const useFetchPlaylist = () => {
     for (const content of data.Contents) {
       // The content's key is the directory's/file's path.
       if (!content.Key) {
-        throw createError({ statusCode: 500, message: 'Content key undefined' })
+        throw createError({ status: 500, statusText: 'Content key undefined' })
       }
 
       const keyParts = content.Key.split('/')
