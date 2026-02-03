@@ -9,11 +9,8 @@
 </template>
 
 <script setup lang="ts">
-interface Props {
+const { ariaLabel, to = undefined } = defineProps<{
   ariaLabel: string
   to?: string
-}
-withDefaults(defineProps<Props>(), {
-  to: undefined,
-})
+}>()
 </script>

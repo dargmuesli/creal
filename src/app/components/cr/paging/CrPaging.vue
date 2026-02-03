@@ -15,26 +15,27 @@
 <script setup lang="ts">
 import type { LocationQuery } from '#vue-router'
 
-interface Props {
+const {
+  isPreviousAllowed = true,
+  isNextAllowed = true,
+  partString,
+  queryPrevious,
+  queryNext,
+} = defineProps<{
   isPreviousAllowed?: boolean
   isNextAllowed?: boolean
   partString: string
   queryPrevious: LocationQuery
   queryNext: LocationQuery
-}
-const props = withDefaults(defineProps<Props>(), {
-  isPreviousAllowed: true,
-  isNextAllowed: true,
-})
+}>()
 
 const route = useRoute()
 
 // methods
 const init = () => {
-  if (props.queryPrevious === undefined || props.queryNext === undefined)
-    return {}
+  if (queryPrevious === undefined || queryNext === undefined) return {}
 
-  const queryPreviousSearchParamsString = '?' + props.queryPrevious.toString()
+  const queryPreviousSearchParamsString = '?' + queryPrevious.toString()
 
   useHead({
     link: [
@@ -43,7 +44,7 @@ const init = () => {
       //   href: route.path,
       //   rel: 'canonical',
       // },
-      ...(props.isPreviousAllowed
+      ...(isPreviousAllowed
         ? [
             {
               href:
@@ -54,13 +55,13 @@ const init = () => {
             },
           ]
         : []),
-      ...(props.isNextAllowed
+      ...(isNextAllowed
         ? [
             {
               href:
                 route.path +
                 '?' +
-                (props.queryNext as Record<string, string>).toString(),
+                (queryNext as Record<string, string>).toString(),
               rel: 'next',
             },
           ]

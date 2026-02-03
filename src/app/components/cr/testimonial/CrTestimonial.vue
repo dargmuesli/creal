@@ -10,7 +10,7 @@
             class="-mt-8 w-full max-w-2xl xl:-mb-8 xl:w-96 xl:flex-none"
           >
             <div
-              class="relative aspect-[2/1] h-full md:-mx-8 xl:mx-0 xl:aspect-auto"
+              class="relative aspect-2/1 h-full md:-mx-8 xl:mx-0 xl:aspect-auto"
             >
               <VioLink
                 v-if="testimonial.link"
@@ -79,19 +79,18 @@
 <script setup lang="ts">
 import { marked } from 'marked'
 
-interface Props {
+const { testimonial } = defineProps<{
   testimonial: CrealTestimonial
-}
-const props = withDefaults(defineProps<Props>(), {})
+}>()
 
 const { t } = useI18n()
 const getServiceHref = useGetServiceHref()
 
 // computed
 const pictureSource = computed(() =>
-  props.testimonial.picture
+  testimonial.picture
     ? getServiceHref({ isSsr: false, name: 'creal-strapi', port: 1337 }) +
-      props.testimonial.picture.url
+      testimonial.picture.url
     : undefined,
 )
 </script>
