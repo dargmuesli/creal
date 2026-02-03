@@ -23,8 +23,8 @@ const useGetObject = () => {
 
   if (!key || Array.isArray(key)) {
     throw createError({
-      statusCode: 400,
-      message: 'Key is undefined or array',
+      status: 400,
+      statusText: 'Key is undefined or array',
     })
   }
 

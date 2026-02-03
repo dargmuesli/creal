@@ -4,8 +4,8 @@ export const useS3 = () => {
 
   if (!s3)
     return throwError({
-      statusCode: 500,
-      statusMessage: 'Event context is missing S3 data',
+      status: 500,
+      statusText: 'Event context is missing S3 data',
     })
 
   return {
