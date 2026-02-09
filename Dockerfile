@@ -52,7 +52,7 @@ CMD ["pnpm", "run", "--dir", "src", "dev", "--host", "0.0.0.0"]
 EXPOSE 3000
 
 # TODO: support healthcheck while starting (https://github.com/nuxt/framework/issues/6915)
-# HEALTHCHECK --interval=10s --start-period=60s CMD wget -O /dev/null https://localhost:3000/api/healthcheck || exit 1
+# HEALTHCHECK --interval=10s --start-period=60s CMD wget -O /dev/null http://localhost:3000/api/healthcheck || exit 1
 
 
 ########################
@@ -221,7 +221,7 @@ COPY --from=test-e2e-node /srv/app/package.json /dev/null
 
 # COPY --from=collect /srv/app/.output/public/ ./
 
-# HEALTHCHECK --interval=10s CMD wget -O /dev/null https://localhost:3000/api/healthcheck || exit 1
+# HEALTHCHECK --interval=10s CMD wget -O /dev/null http://localhost:3000/api/healthcheck || exit 1
 # EXPOSE 3000
 # LABEL org.opencontainers.image.source="https://github.com/dargmuesli/creal"
 # LABEL org.opencontainers.image.description="DJ cReal's website."
@@ -233,6 +233,7 @@ COPY --from=test-e2e-node /srv/app/package.json /dev/null
 
 FROM collect AS production
 
+ENV CI=false
 ENV NODE_ENV=production
 
 # Update and install dependencies.
@@ -251,7 +252,7 @@ USER node
 
 ENTRYPOINT ["docker-entrypoint.sh"]
 CMD ["pnpm", "run", "start:node"]
-HEALTHCHECK --interval=10s CMD wget -O /dev/null https://localhost:3000/api/healthcheck || exit 1
+HEALTHCHECK --interval=10s CMD wget -O /dev/null http://localhost:3000/api/healthcheck || exit 1
 EXPOSE 3000
 LABEL org.opencontainers.image.source="https://github.com/dargmuesli/creal"
 LABEL org.opencontainers.image.description="DJ cReal's website."
