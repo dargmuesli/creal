@@ -1,3 +1,9 @@
+## [5.2.2](https://github.com/dargmuesli/creal/compare/5.2.1...5.2.2) (2026-02-09)
+
+### Bug Fixes
+
+* **docker:** correct production environment ([b29e7cc](https://github.com/dargmuesli/creal/commit/b29e7cc036a21e9e04e143638817dd22369757d2))
+
 ## [5.2.1](https://github.com/dargmuesli/creal/compare/5.2.0...5.2.1) (2026-02-09)
 
 ### Bug Fixes
