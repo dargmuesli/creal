@@ -1,3 +1,9 @@
+## [5.2.1](https://github.com/dargmuesli/creal/compare/5.2.0...5.2.1) (2026-02-09)
+
+### Bug Fixes
+
+* **docker:** include node server script ([1ca9fbe](https://github.com/dargmuesli/creal/commit/1ca9fbe372b14772a349a9ef2db094121e628d4d))
+
 ## [5.2.0](https://github.com/dargmuesli/creal/compare/5.1.1...5.2.0) (2026-01-30)
 
 ### Features
