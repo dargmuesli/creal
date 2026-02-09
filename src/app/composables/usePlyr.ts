@@ -37,6 +37,7 @@ export const usePlyr = () => {
         ...playlistItem,
         meta: playlistItem.isMetaAvailable
           ? JSON.parse(
+              // @ts-expect-error TODO: remove typecast when excessive stack depth is resolved
               await $fetch('/api/player/get-object', {
                 params: { key },
               }),
