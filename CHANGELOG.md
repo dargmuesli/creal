@@ -1,3 +1,9 @@
+## [5.2.3](https://github.com/dargmuesli/creal/compare/5.2.2...5.2.3) (2026-02-22)
+
+### Bug Fixes
+
+* **ci:** upgrade to dargmuesli/github-actions v5.0.0-beta.1 ([16d0202](https://github.com/dargmuesli/creal/commit/16d0202c7764e172c8ab44cee3b191e5e13b633f))
+
 ## [5.2.2](https://github.com/dargmuesli/creal/compare/5.2.1...5.2.2) (2026-02-09)
 
 ### Bug Fixes
