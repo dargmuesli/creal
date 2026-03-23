@@ -5470,8 +5470,8 @@ packages:
     resolution: {integrity: sha512-kVCxPF3vQM/N0B1PmoqVUqgHP+EeVjmZSQn+1oCRPxd2P21P2F19lIgbR3HBosbB1PUhOAoctJnfEn2GbN2eZA==}
     engines: {node: '>=18'}
 
-  get-tsconfig@4.13.6:
-    resolution: {integrity: sha512-shZT/QMiSHc/YBLxxOkMtgSid5HFoauqCE3/exfsEcwg1WkeqjG+V40yBbBrsD+jW2HDXcs28xOfcbm2jI8Ddw==}
+  get-tsconfig@4.13.7:
+    resolution: {integrity: sha512-7tN6rFgBlMgpBML5j8typ92BKFi2sFQvIdpAqLA2beia5avZDrMs0FLZiM5etShWq5irVyGcGMEA1jcDaK7A/Q==}
 
   giget@2.0.0:
     resolution: {integrity: sha512-L5bGsVkxJbJgdnwyuheIunkGatUF/zssUoxxjACCseZYAVbaqdh9Tsmmlkl8vYan09H7sbvKt4pS8GqKLBrEzA==}
@@ -10088,7 +10088,7 @@ snapshots:
     dependencies:
       graphql: 16.13.1
       lodash.sortby: 4.7.0
-      tslib: 2.8.1
+      tslib: 2.6.3
 
   '@graphql-tools/executor-common@1.0.6(graphql@16.13.1)':
     dependencies:
@@ -10229,14 +10229,14 @@ snapshots:
   '@graphql-tools/optimize@2.0.0(graphql@16.13.1)':
     dependencies:
       graphql: 16.13.1
-      tslib: 2.8.1
+      tslib: 2.6.3
 
   '@graphql-tools/relay-operation-optimizer@7.1.1(graphql@16.13.1)':
     dependencies:
       '@ardatan/relay-compiler': 13.0.0(graphql@16.13.1)
       '@graphql-tools/utils': 11.0.0(graphql@16.13.1)
       graphql: 16.13.1
-      tslib: 2.8.1
+      tslib: 2.6.3
 
   '@graphql-tools/schema@10.0.31(graphql@16.13.1)':
     dependencies:
@@ -14269,7 +14269,7 @@ snapshots:
 
   eslint-import-context@0.1.9(unrs-resolver@1.11.1):
     dependencies:
-      get-tsconfig: 4.13.6
+      get-tsconfig: 4.13.7
       stable-hash-x: 0.2.0
     optionalDependencies:
       unrs-resolver: 1.11.1
@@ -14697,7 +14697,7 @@ snapshots:
       '@sec-ant/readable-stream': 0.4.1
       is-stream: 4.0.1
 
-  get-tsconfig@4.13.6:
+  get-tsconfig@4.13.7:
     dependencies:
       resolve-pkg-maps: 1.0.0
 
@@ -14814,7 +14814,7 @@ snapshots:
   graphql-tag@2.12.6(graphql@16.13.1):
     dependencies:
       graphql: 16.13.1
-      tslib: 2.8.1
+      tslib: 2.6.3
 
   graphql-ws@6.0.7(crossws@0.3.5)(graphql@16.13.1)(ws@8.20.0):
     dependencies:
