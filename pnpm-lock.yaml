@@ -27,11 +27,11 @@ importers:
   src:
     devDependencies:
       '@aws-sdk/client-s3':
-        specifier: 3.1018.0
-        version: 3.1018.0
+        specifier: 3.1019.0
+        version: 3.1019.0
       '@aws-sdk/s3-request-presigner':
-        specifier: 3.1018.0
-        version: 3.1018.0
+        specifier: 3.1019.0
+        version: 3.1019.0
       '@dargmuesli/nuxt-cookie-control':
         specifier: 9.1.19
         version: 9.1.19(magicast@0.5.2)(webpack@5.105.4(esbuild@0.27.4))
@@ -276,8 +276,8 @@ packages:
   '@aws-crypto/util@5.2.0':
     resolution: {integrity: sha512-4RkU9EsI6ZpBve5fseQlGNUWKMa1RLPQ1dnjnQoe07ldfIzcsGb5hC5W0Dm7u423KWzawlrpbjXBrXCEv9zazQ==}
 
-  '@aws-sdk/client-s3@3.1018.0':
-    resolution: {integrity: sha512-BiGKMjrkAJkyse1ECpVyxVYugf82FB3cM9zgKpx3boFuWobyolG5ri6XjoMIY8fpHddaO8ZClXEedACyelSLWA==}
+  '@aws-sdk/client-s3@3.1019.0':
+    resolution: {integrity: sha512-0pb9x7PPhS4oEi4c0rL3vzQQoXA4cWKtPuGga/UfVYLZ68yrqdq0NDKg0fr55qzdhNvWFCpmGx73g9Iyy03kkA==}
     engines: {node: '>=20.0.0'}
 
   '@aws-sdk/core@3.973.25':
@@ -368,8 +368,8 @@ packages:
     resolution: {integrity: sha512-1dq9ToC6e070QvnVhhbAs3bb5r6cQ10gTVc6cyRV5uvQe7P138TV2uG2i6+Yok4bAkVAcx5AqkTEBUvWEtBlsQ==}
     engines: {node: '>=20.0.0'}
 
-  '@aws-sdk/s3-request-presigner@3.1018.0':
-    resolution: {integrity: sha512-DEb/p6275ZRKnScU2IhFiiB6U8B1HYjBwSGWNuAZxf7aNqOc1ZQeM31yUb3qBw6aezyNRYly8JqE7/Vyc3vbwA==}
+  '@aws-sdk/s3-request-presigner@3.1019.0':
+    resolution: {integrity: sha512-KFv5UaIORIF6MTmEc79MQTPQSnRZjUmOIaOzXn9g6ujtViQLIrNYJiaSmVw8LqK1ebcndS6L6s4bBdLd9AQVJA==}
     engines: {node: '>=20.0.0'}
 
   '@aws-sdk/signature-v4-multi-region@3.996.14':
@@ -8499,7 +8499,7 @@ snapshots:
       '@smithy/util-utf8': 2.3.0
       tslib: 2.8.1
 
-  '@aws-sdk/client-s3@3.1018.0':
+  '@aws-sdk/client-s3@3.1019.0':
     dependencies:
       '@aws-crypto/sha1-browser': 5.2.0
       '@aws-crypto/sha256-browser': 5.2.0
@@ -8830,7 +8830,7 @@ snapshots:
       '@smithy/types': 4.13.1
       tslib: 2.8.1
 
-  '@aws-sdk/s3-request-presigner@3.1018.0':
+  '@aws-sdk/s3-request-presigner@3.1019.0':
     dependencies:
       '@aws-sdk/signature-v4-multi-region': 3.996.14
       '@aws-sdk/types': 3.973.6
@@ -10086,7 +10086,7 @@ snapshots:
     dependencies:
       graphql: 16.13.2
       lodash.sortby: 4.7.0
-      tslib: 2.6.3
+      tslib: 2.8.1
 
   '@graphql-tools/executor-common@1.0.6(graphql@16.13.2)':
     dependencies:
@@ -10227,14 +10227,14 @@ snapshots:
   '@graphql-tools/optimize@2.0.0(graphql@16.13.2)':
     dependencies:
       graphql: 16.13.2
-      tslib: 2.6.3
+      tslib: 2.8.1
 
   '@graphql-tools/relay-operation-optimizer@7.1.1(graphql@16.13.2)':
     dependencies:
       '@ardatan/relay-compiler': 13.0.0(graphql@16.13.2)
       '@graphql-tools/utils': 11.0.0(graphql@16.13.2)
       graphql: 16.13.2
-      tslib: 2.6.3
+      tslib: 2.8.1
 
   '@graphql-tools/schema@10.0.31(graphql@16.13.2)':
     dependencies:
@@ -14901,7 +14901,7 @@ snapshots:
   graphql-tag@2.12.6(graphql@16.13.2):
     dependencies:
       graphql: 16.13.2
-      tslib: 2.6.3
+      tslib: 2.8.1
 
   graphql-ws@6.0.8(crossws@0.3.5)(graphql@16.13.2)(ws@8.20.0):
     dependencies:
