@@ -1,3 +1,9 @@
+## [5.3.0](https://github.com/dargmuesli/creal/compare/5.2.5...5.3.0) (2026-04-01)
+
+### Features
+
+* **deps:** upgrade @dargmuesli/nuxt-vio to v21 ([261a4ea](https://github.com/dargmuesli/creal/commit/261a4ea651bf036e59bd2a9bc626c919f22b47d9))
+
 ## [5.2.5](https://github.com/dargmuesli/creal/compare/5.2.4...5.2.5) (2026-03-19)
 
 ### Bug Fixes
