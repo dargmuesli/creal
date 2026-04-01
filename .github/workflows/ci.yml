@@ -9,7 +9,6 @@ on:
       - alpha
       - beta
       - main
-      - master
       - renovate/**
 
 jobs:
@@ -29,7 +28,6 @@ jobs:
     secrets:
       GH_APP_PRIVATE_KEY: ${{ secrets.GH_APP_PRIVATE_KEY }}
     with:
-      APT_PACKAGES: mkcert
       DRY_RUN: true
       GH_APP_ID: ${{ vars.GH_APP_ID }}
   build:
@@ -39,6 +37,8 @@ jobs:
     permissions:
       packages: write
     with:
+      BUILD_ADD_HOSTS: |
+        app.localhost=127.0.0.1
       TAG: ${{ needs.release_semantic_dry.outputs.new_release_version }}
   release_semantic:
     needs: build
@@ -50,5 +50,4 @@ jobs:
     secrets:
       GH_APP_PRIVATE_KEY: ${{ secrets.GH_APP_PRIVATE_KEY }}
     with:
-      APT_PACKAGES: mkcert
       GH_APP_ID: ${{ vars.GH_APP_ID }}

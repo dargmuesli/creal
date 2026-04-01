@@ -54,7 +54,7 @@ const localePath = useLocalePath()
 const { t } = useI18n()
 
 // initialization
-useHeadDefault({})
+useCrealHeadDefault({}, { headline: t('headline'), title: t('cReal') })
 </script>
 
 <i18n lang="yaml">
@@ -62,6 +62,7 @@ de:
   arrow: →
   cities: Köln, Karlsruhe, Frankfurt, Kassel, …
   cReal: cReal
+  headline: DJ und Event-Organisator
   testimonialsRead: Erfahrungsberichte lesen
   viewAll: Alle anzeigen
   welcome: DJ und Event-Organisator,{newline}manchmal am Doubletime rappen.
@@ -69,6 +70,7 @@ en:
   arrow: →
   cities: Cologne, Karlsruhe, Frankfurt, Kassel, …
   cReal: cReal
+  headline: DJ and event organizer
   testimonialsRead: Read testimonials
   viewAll: View all
   welcome: DJ and event organizer,{newline}occasionally rapping double times.

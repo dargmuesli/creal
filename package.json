@@ -19,10 +19,7 @@
       "sharp",
       "unrs-resolver",
       "vue-demi"
-    ],
-    "overrides": {
-      "nuxt-og-image": "5.1.12"
-    }
+    ]
   },
   "private": true,
   "scripts": {
@@ -42,7 +39,8 @@
     "test:e2e:docker:server:node": "pnpm run --dir tests test:e2e:docker:server:node",
     "test:e2e:docker:server:node:update": "pnpm run --dir tests test:e2e:docker:server:node:update",
     "test:e2e:docker:server:static": "pnpm run --dir tests test:e2e:docker:server:static",
-    "test:e2e:docker:server:static:update": "pnpm run --dir tests test:e2e:docker:server:static:update"
+    "test:e2e:docker:server:static:update": "pnpm run --dir tests test:e2e:docker:server:static:update",
+    "test:e2e:ui": "pnpm run --dir tests test:e2e:ui"
   },
   "type": "module"
 }

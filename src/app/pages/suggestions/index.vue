@@ -174,7 +174,7 @@ const rules = {
 const v$ = useVuelidate(rules, form)
 
 // initialization
-useHeadDefault({
+useCrealHeadDefault({
   description: t('description'),
   title,
 })
