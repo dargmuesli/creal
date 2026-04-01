@@ -17,6 +17,7 @@ export const GET_CSP = ({ siteUrl }: { siteUrl: URL }) => {
       `https://creal-strapi.${domainTldPort}`,
       'https://cdn.plyr.io', // plyr
     ],
+    'font-src': ["'self'"], // og-image
     'form-action': ["'self'"],
     'img-src': [
       `https://creal-strapi.${domainTldPort}`,

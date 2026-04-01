@@ -147,6 +147,7 @@ const initPlyr = (plyr: { player: Plyr }) => {
 
   isInitialized.value = true
 }
+const { copy: copyText } = useCopy()
 const share = async () => {
   if (
     !window ||

@@ -17,7 +17,6 @@ RUN corepack enable \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 
-COPY ./docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 
 
 #############
@@ -40,6 +39,8 @@ RUN apt-get update \
     && chown node:node \
         /srv/.pnpm-store \
         /srv/app/node_modules
+
+COPY ./docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 
 VOLUME /srv/.pnpm-store
 VOLUME /srv/app
@@ -85,8 +86,8 @@ RUN pnpm run --dir src build:node
 
 # FROM prepare AS build-static
 
-# ARG NUXT_PUBLIC_SITE_URL=https://localhost:3002
-# ENV NUXT_PUBLIC_SITE_URL=${NUXT_PUBLIC_SITE_URL}
+# ARG NUXT_PUBLIC_I18N_BASE_URL=https://creal.jonas-thelemann.de
+# ENV NUXT_PUBLIC_I18N_BASE_URL=${NUXT_PUBLIC_I18N_BASE_URL}
 
 # ENV NODE_ENV=production
 # RUN pnpm run --dir src build:static
@@ -142,8 +143,12 @@ ARG GROUP_ID=1000
 
 RUN groupadd -g $GROUP_ID -o $USER_NAME \
     && useradd -m -l -u $USER_ID -g $GROUP_ID -o -s /bin/bash $USER_NAME \
-    && mkdir /srv/app/node_modules \
-    && chown $USER_ID:$GROUP_ID /srv/app/node_modules
+    && mkdir \
+        /srv/.pnpm-store \
+        /srv/app/node_modules \
+    && chown $USER_ID:$GROUP_ID \
+        /srv/.pnpm-store \
+        /srv/app/node_modules
 
 COPY ./docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 

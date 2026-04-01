@@ -213,7 +213,7 @@ watch(
 
 // initialization
 await init()
-useHeadDefault({
+useCrealHeadDefault({
   description: t('description'),
   title: titleHead(),
 })

@@ -47,7 +47,7 @@ const submit = async (body: object) => {
 }
 
 // initialization
-useHeadDefault({ title: t('title') })
+useCrealHeadDefault({ title: t('title') })
 </script>
 
 <i18n lang="yaml">
