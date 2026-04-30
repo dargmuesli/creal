@@ -1,3 +1,9 @@
+## [5.3.3](https://github.com/dargmuesli/creal/compare/5.3.2...5.3.3) (2026-04-30)
+
+### Bug Fixes
+
+* schedule release ([58092ab](https://github.com/dargmuesli/creal/commit/58092aba1c1411b78eaaaf4fb658d2678a92041b))
+
 ## [5.3.2](https://github.com/dargmuesli/creal/compare/5.3.1...5.3.2) (2026-04-16)
 
 ### Bug Fixes
