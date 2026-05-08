@@ -1,6 +1,4 @@
-/* eslint-disable @typescript-eslint/no-empty-object-type */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-
 import type {
   cacheExchange,
   Resolver as GraphCacheResolver,
@@ -10,24 +8,6 @@ import type {
 
 export type Maybe<T> = T | null
 export type InputMaybe<T> = Maybe<T>
-export type Exact<T extends { [key: string]: unknown }> = {
-  [K in keyof T]: T[K]
-}
-export type MakeOptional<T, K extends keyof T> = Omit<T, K> & {
-  [SubKey in K]?: Maybe<T[SubKey]>
-}
-export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & {
-  [SubKey in K]: Maybe<T[SubKey]>
-}
-export type MakeEmpty<
-  T extends { [key: string]: unknown },
-  K extends keyof T,
-> = { [_ in K]?: never }
-export type Incremental<T> =
-  | T
-  | {
-      [P in keyof T]?: P extends ' $fragmentName' | '__typename' ? T[P] : never
-    }
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: { input: string; output: string }
@@ -35,8 +15,8 @@ export type Scalars = {
   Boolean: { input: boolean; output: boolean }
   Int: { input: number; output: number }
   Float: { input: number; output: number }
-  Cursor: { input: any; output: any }
-  Datetime: { input: any; output: any }
+  Cursor: { input: string; output: string }
+  Datetime: { input: string; output: string }
 }
 
 /** All input for the create `Suggestion` mutation. */
@@ -410,7 +390,7 @@ export type GraphCacheResolvers = {
     nodeId?: GraphCacheResolver<
       WithTypename<Query>,
       Record<string, never>,
-      Scalars['ID'] | string
+      Scalars['ID']['output'] | string
     >
     query?: GraphCacheResolver<
       WithTypename<Query>,
@@ -432,7 +412,7 @@ export type GraphCacheResolvers = {
     clientMutationId?: GraphCacheResolver<
       WithTypename<CreateSuggestionPayload>,
       Record<string, never>,
-      Scalars['String'] | string
+      Scalars['String']['output'] | string
     >
     query?: GraphCacheResolver<
       WithTypename<CreateSuggestionPayload>,
@@ -454,12 +434,12 @@ export type GraphCacheResolvers = {
     clientMutationId?: GraphCacheResolver<
       WithTypename<DeleteSuggestionPayload>,
       Record<string, never>,
-      Scalars['String'] | string
+      Scalars['String']['output'] | string
     >
     deletedSuggestionId?: GraphCacheResolver<
       WithTypename<DeleteSuggestionPayload>,
       Record<string, never>,
-      Scalars['ID'] | string
+      Scalars['ID']['output'] | string
     >
     query?: GraphCacheResolver<
       WithTypename<DeleteSuggestionPayload>,
@@ -481,59 +461,59 @@ export type GraphCacheResolvers = {
     endCursor?: GraphCacheResolver<
       WithTypename<PageInfo>,
       Record<string, never>,
-      Scalars['Cursor'] | string
+      Scalars['Cursor']['output'] | string
     >
     hasNextPage?: GraphCacheResolver<
       WithTypename<PageInfo>,
       Record<string, never>,
-      Scalars['Boolean'] | string
+      Scalars['Boolean']['output'] | string
     >
     hasPreviousPage?: GraphCacheResolver<
       WithTypename<PageInfo>,
       Record<string, never>,
-      Scalars['Boolean'] | string
+      Scalars['Boolean']['output'] | string
     >
     startCursor?: GraphCacheResolver<
       WithTypename<PageInfo>,
       Record<string, never>,
-      Scalars['Cursor'] | string
+      Scalars['Cursor']['output'] | string
     >
   }
   Suggestion?: {
     artist?: GraphCacheResolver<
       WithTypename<Suggestion>,
       Record<string, never>,
-      Scalars['String'] | string
+      Scalars['String']['output'] | string
     >
     comment?: GraphCacheResolver<
       WithTypename<Suggestion>,
       Record<string, never>,
-      Scalars['String'] | string
+      Scalars['String']['output'] | string
     >
     id?: GraphCacheResolver<
       WithTypename<Suggestion>,
       Record<string, never>,
-      Scalars['Int'] | string
+      Scalars['Int']['output'] | string
     >
     nodeId?: GraphCacheResolver<
       WithTypename<Suggestion>,
       Record<string, never>,
-      Scalars['ID'] | string
+      Scalars['ID']['output'] | string
     >
     timestamp?: GraphCacheResolver<
       WithTypename<Suggestion>,
       Record<string, never>,
-      Scalars['Datetime'] | string
+      Scalars['Datetime']['output'] | string
     >
     title?: GraphCacheResolver<
       WithTypename<Suggestion>,
       Record<string, never>,
-      Scalars['String'] | string
+      Scalars['String']['output'] | string
     >
     url?: GraphCacheResolver<
       WithTypename<Suggestion>,
       Record<string, never>,
-      Scalars['String'] | string
+      Scalars['String']['output'] | string
     >
   }
   SuggestionsConnection?: {
@@ -555,14 +535,14 @@ export type GraphCacheResolvers = {
     totalCount?: GraphCacheResolver<
       WithTypename<SuggestionsConnection>,
       Record<string, never>,
-      Scalars['Int'] | string
+      Scalars['Int']['output'] | string
     >
   }
   SuggestionsEdge?: {
     cursor?: GraphCacheResolver<
       WithTypename<SuggestionsEdge>,
       Record<string, never>,
-      Scalars['Cursor'] | string
+      Scalars['Cursor']['output'] | string
     >
     node?: GraphCacheResolver<
       WithTypename<SuggestionsEdge>,
@@ -574,7 +554,7 @@ export type GraphCacheResolvers = {
     clientMutationId?: GraphCacheResolver<
       WithTypename<UpdateSuggestionPayload>,
       Record<string, never>,
-      Scalars['String'] | string
+      Scalars['String']['output'] | string
     >
     query?: GraphCacheResolver<
       WithTypename<UpdateSuggestionPayload>,
@@ -628,7 +608,7 @@ export type GraphCacheUpdaters = {
       QueryNodeArgs
     >
     nodeId?: GraphCacheUpdateResolver<
-      { nodeId: Scalars['ID'] },
+      { nodeId: Scalars['ID']['output'] },
       Record<string, never>
     >
     query?: GraphCacheUpdateResolver<
@@ -666,7 +646,7 @@ export type GraphCacheUpdaters = {
       MutationUpdateSuggestionByIdArgs
     >
   }
-  Subscription?: {}
+  Subscription?: object
   CreateSuggestionPayload?: {
     clientMutationId?: GraphCacheUpdateResolver<
       Maybe<WithTypename<CreateSuggestionPayload>>,

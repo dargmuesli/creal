@@ -1,12 +1,21 @@
 import type { CodegenConfig } from '@graphql-codegen/cli'
 
-export const codegenConfig: CodegenConfig = {
-  // schema: 'https://creal-postgraphile.localhost/graphql',
-  schema: 'https://creal-postgraphile.jonas-thelemann.de/graphql',
-  documents: ['gql/documents/**/*.ts', 'app/**/*.vue'],
+export const codegenConfigBase: CodegenConfig = {
+  documents: [
+    'gql/documents/**/*.ts',
+    'app/**/*.ts',
+    'app/**/*.vue',
+    'server/**/*.ts',
+  ],
   hooks: { afterAllFileWrite: ['prettier --write', 'eslint --fix'] },
   config: {
     useTypeImports: true,
+    scalars: {
+      Cursor: 'string',
+      Datetime: 'string',
+      Jwt: 'string',
+      UUID: 'string',
+    },
   },
   generates: {
     './gql/generated/': {
@@ -16,7 +25,7 @@ export const codegenConfig: CodegenConfig = {
       plugins: [
         {
           add: {
-            content: `/* eslint-disable @typescript-eslint/no-empty-object-type */\n/* eslint-disable @typescript-eslint/no-explicit-any */\n/* eslint-disable import/no-duplicates */`,
+            content: `/* eslint-disable @typescript-eslint/no-explicit-any */`,
           },
         },
         'typescript',
@@ -28,5 +37,3 @@ export const codegenConfig: CodegenConfig = {
     },
   },
 }
-
-export default codegenConfig
