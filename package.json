@@ -8,19 +8,7 @@
   "engines": {
     "node": "24"
   },
-  "packageManager": "pnpm@11.0.5",
-  "pnpm": {
-    "ignoredBuiltDependencies": [
-      "@dargmuesli/nuxt-vio",
-      "@parcel/watcher",
-      "@tailwindcss/oxide",
-      "core-js",
-      "esbuild",
-      "sharp",
-      "unrs-resolver",
-      "vue-demi"
-    ]
-  },
+  "packageManager": "pnpm@11.0.8",
   "private": true,
   "scripts": {
     "build": "pnpm run --dir src build",
