@@ -1,3 +1,9 @@
+## [5.3.6](https://github.com/dargmuesli/creal/compare/5.3.5...5.3.6) (2026-05-21)
+
+### Bug Fixes
+
+* **docker:** change app directory owner ([eb010a3](https://github.com/dargmuesli/creal/commit/eb010a36ccbb7be12ef0b1336f62c0a971154bc6))
+
 ## [5.3.5](https://github.com/dargmuesli/creal/compare/5.3.4...5.3.5) (2026-05-21)
 
 ### Bug Fixes
