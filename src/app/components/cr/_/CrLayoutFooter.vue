@@ -17,12 +17,12 @@
           @change="onI18nChange"
         >
           <option
-            v-for="availableLocale in availableLocales"
-            :key="availableLocale"
-            :selected="availableLocale === locale"
-            :value="availableLocale"
+            v-for="localeItem in locales"
+            :key="localeItem.code"
+            :selected="localeItem.code === locale"
+            :value="localeItem.code"
           >
-            {{ getLocaleName(availableLocale) }}
+            {{ localeItem.name }}
           </option>
         </select>
         <label for="vio-cookie-preferences">{{ t('cookies') }}</label>
@@ -45,39 +45,21 @@
 </template>
 
 <script setup lang="ts">
-import type { I18N_LOCALE_CODE } from '@dargmuesli/nuxt-vio/shared/types/i18n'
-import { I18N_MODULE_CONFIG } from '@dargmuesli/nuxt-vio/shared/utils/constants'
+import type { Locale } from '@intlify/core-base'
 
 const store = useStore()
 const localePath = useLocalePath()
-const i18n = useI18n()
-const { availableLocales, t } = i18n
+const { t, locale, locales } = useI18n()
 const router = useRouter()
 const switchLocalePath = useSwitchLocalePath()
 const cookieControl = useCookieControl()
 
 // methods
-const getLocaleName = (locale: string) => {
-  const locales = I18N_MODULE_CONFIG.locales.filter(
-    (localeObject) => localeObject.code === locale,
-  )
-
-  if (locales[0]) {
-    return locales[0].name
-  } else {
-    return undefined
-  }
-}
 const onI18nChange = async (event: Event) => {
   await router.push({
-    path: switchLocalePath(
-      (event.target as HTMLInputElement).value as I18N_LOCALE_CODE,
-    ),
+    path: switchLocalePath((event.target as HTMLInputElement).value as Locale),
   })
 }
-
-// computations
-const locale = computed(() => i18n.locale.value)
 </script>
 
 <i18n lang="yaml">

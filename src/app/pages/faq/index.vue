@@ -79,7 +79,7 @@ onMounted(() => {
 // watchQuery: ['limit', 'start'],
 
 // initialization
-useHeadDefault({
+useCrealHeadDefault({
   description: t('description'),
   title,
 })

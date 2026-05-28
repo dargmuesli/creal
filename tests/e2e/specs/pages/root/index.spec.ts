@@ -1,18 +1,22 @@
-import { expect } from '@playwright/test'
-
-import { vioTest } from '#tests/e2e/fixtures/vioTest'
+import { vioTest } from '@dargmuesli/nuxt-vio-testing/e2e/fixtures/vioTest'
 import {
   testA11y,
   testOgImage,
   testPageLoad,
   testVisualRegression,
-} from '#tests/e2e/utils/tests'
-import { PAGE_READY } from '#tests/e2e/utils/constants'
+} from '@dargmuesli/nuxt-vio-testing/e2e/utils/tests'
+import { PAGE_READY } from '@dargmuesli/nuxt-vio-testing/e2e/utils/constants'
+import { expect } from '@playwright/test'
 
 const PAGE_PATH = '/'
 
 testA11y(PAGE_PATH)
-testOgImage(PAGE_PATH)
+testOgImage({
+  dynamic: {
+    de: 'a_~RWluIEJpbGQgdm9uIERKIGNSZWFsLCBzZWluIExvZ28gdW5kIE5hbWUgc293aWUgZGVyIFRpdGVsIGRlciBTZWl0ZS4,c_Default.takumi,description_DJ+cReals+Webseite.,title_cReal,headline_DJ+und+Event-Organisator,p_Ii9kZSI.png',
+    en: `a_~QSBwaWN0dXJlIG9mIERKIGNSZWFsLCBoaXMgbG9nbyBhbmQgbmFtZSBhcyB3ZWxsIGFzIHBhZ2UncyB0aXRsZS4,c_Default.takumi,description_DJ+cReal's+website.,title_cReal,headline_DJ+and+event+organizer.png`,
+  },
+})
 testPageLoad(PAGE_PATH)
 testVisualRegression(PAGE_PATH)
 

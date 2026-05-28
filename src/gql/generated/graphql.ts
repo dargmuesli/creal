@@ -1,381 +1,30 @@
 /* eslint-disable */
-import type { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core'
-export type Maybe<T> = T | null
-export type InputMaybe<T> = Maybe<T>
-export type Exact<T extends { [key: string]: unknown }> = {
-  [K in keyof T]: T[K]
-}
-export type MakeOptional<T, K extends keyof T> = Omit<T, K> & {
-  [SubKey in K]?: Maybe<T[SubKey]>
-}
-export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & {
-  [SubKey in K]: Maybe<T[SubKey]>
-}
-export type MakeEmpty<
-  T extends { [key: string]: unknown },
-  K extends keyof T,
-> = { [_ in K]?: never }
+/** Internal type. DO NOT USE DIRECTLY. */
+type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] }
+/** Internal type. DO NOT USE DIRECTLY. */
 export type Incremental<T> =
   | T
   | {
       [P in keyof T]?: P extends ' $fragmentName' | '__typename' ? T[P] : never
     }
-/** All built-in and custom scalars, mapped to their actual values */
-export type Scalars = {
-  ID: { input: string; output: string }
-  String: { input: string; output: string }
-  Boolean: { input: boolean; output: boolean }
-  Int: { input: number; output: number }
-  Float: { input: number; output: number }
-  /** A location in a connection that can be used for resuming pagination. */
-  Cursor: { input: any; output: any }
-  /**
-   * A point in time as described by the [ISO
-   * 8601](https://en.wikipedia.org/wiki/ISO_8601) standard. May or may not include a timezone.
-   */
-  Datetime: { input: any; output: any }
-}
-
-/** All input for the create `Suggestion` mutation. */
-export type CreateSuggestionInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
-  clientMutationId?: InputMaybe<Scalars['String']['input']>
-  /** The `Suggestion` to be created by this mutation. */
-  suggestion: SuggestionInput
-}
-
-/** The output of our create `Suggestion` mutation. */
-export type CreateSuggestionPayload = {
-  __typename?: 'CreateSuggestionPayload'
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
-  clientMutationId?: Maybe<Scalars['String']['output']>
-  /** Our root query field type. Allows us to run any query from our mutation payload. */
-  query?: Maybe<Query>
-  /** The `Suggestion` that was created by this mutation. */
-  suggestion?: Maybe<Suggestion>
-  /** An edge for our `Suggestion`. May be used by Relay 1. */
-  suggestionEdge?: Maybe<SuggestionsEdge>
-}
-
-/** The output of our create `Suggestion` mutation. */
-export type CreateSuggestionPayloadSuggestionEdgeArgs = {
-  orderBy?: InputMaybe<Array<SuggestionsOrderBy>>
-}
-
-/** All input for the `deleteSuggestionById` mutation. */
-export type DeleteSuggestionByIdInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
-  clientMutationId?: InputMaybe<Scalars['String']['input']>
-  /** The record's id. */
-  id: Scalars['Int']['input']
-}
-
-/** All input for the `deleteSuggestion` mutation. */
-export type DeleteSuggestionInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
-  clientMutationId?: InputMaybe<Scalars['String']['input']>
-  /** The globally unique `ID` which will identify a single `Suggestion` to be deleted. */
-  nodeId: Scalars['ID']['input']
-}
-
-/** The output of our delete `Suggestion` mutation. */
-export type DeleteSuggestionPayload = {
-  __typename?: 'DeleteSuggestionPayload'
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
-  clientMutationId?: Maybe<Scalars['String']['output']>
-  deletedSuggestionId?: Maybe<Scalars['ID']['output']>
-  /** Our root query field type. Allows us to run any query from our mutation payload. */
-  query?: Maybe<Query>
-  /** The `Suggestion` that was deleted by this mutation. */
-  suggestion?: Maybe<Suggestion>
-  /** An edge for our `Suggestion`. May be used by Relay 1. */
-  suggestionEdge?: Maybe<SuggestionsEdge>
-}
-
-/** The output of our delete `Suggestion` mutation. */
-export type DeleteSuggestionPayloadSuggestionEdgeArgs = {
-  orderBy?: InputMaybe<Array<SuggestionsOrderBy>>
-}
-
-/** The root mutation type which contains root level fields which mutate data. */
-export type Mutation = {
-  __typename?: 'Mutation'
-  /** Creates a single `Suggestion`. */
-  createSuggestion?: Maybe<CreateSuggestionPayload>
-  /** Deletes a single `Suggestion` using its globally unique id. */
-  deleteSuggestion?: Maybe<DeleteSuggestionPayload>
-  /** Deletes a single `Suggestion` using a unique key. */
-  deleteSuggestionById?: Maybe<DeleteSuggestionPayload>
-  /** Updates a single `Suggestion` using its globally unique id and a patch. */
-  updateSuggestion?: Maybe<UpdateSuggestionPayload>
-  /** Updates a single `Suggestion` using a unique key and a patch. */
-  updateSuggestionById?: Maybe<UpdateSuggestionPayload>
-}
-
-/** The root mutation type which contains root level fields which mutate data. */
-export type MutationCreateSuggestionArgs = {
-  input: CreateSuggestionInput
-}
-
-/** The root mutation type which contains root level fields which mutate data. */
-export type MutationDeleteSuggestionArgs = {
-  input: DeleteSuggestionInput
-}
-
-/** The root mutation type which contains root level fields which mutate data. */
-export type MutationDeleteSuggestionByIdArgs = {
-  input: DeleteSuggestionByIdInput
-}
-
-/** The root mutation type which contains root level fields which mutate data. */
-export type MutationUpdateSuggestionArgs = {
-  input: UpdateSuggestionInput
-}
-
-/** The root mutation type which contains root level fields which mutate data. */
-export type MutationUpdateSuggestionByIdArgs = {
-  input: UpdateSuggestionByIdInput
-}
-
-/** An object with a globally unique `ID`. */
-export type Node = {
-  /** A globally unique identifier. Can be used in various places throughout the system to identify this single value. */
-  nodeId: Scalars['ID']['output']
-}
-
-/** Information about pagination in a connection. */
-export type PageInfo = {
-  __typename?: 'PageInfo'
-  /** When paginating forwards, the cursor to continue. */
-  endCursor?: Maybe<Scalars['Cursor']['output']>
-  /** When paginating forwards, are there more items? */
-  hasNextPage: Scalars['Boolean']['output']
-  /** When paginating backwards, are there more items? */
-  hasPreviousPage: Scalars['Boolean']['output']
-  /** When paginating backwards, the cursor to continue. */
-  startCursor?: Maybe<Scalars['Cursor']['output']>
-}
-
-/** The root query type which gives access points into the data universe. */
-export type Query = Node & {
-  __typename?: 'Query'
-  /** Reads and enables pagination through a set of `Suggestion`. */
-  allSuggestions?: Maybe<SuggestionsConnection>
-  /** Fetches an object given its globally unique `ID`. */
-  node?: Maybe<Node>
-  /** The root query type must be a `Node` to work well with Relay 1 mutations. This just resolves to `query`. */
-  nodeId: Scalars['ID']['output']
-  /**
-   * Exposes the root query type nested one level down. This is helpful for Relay 1
-   * which can only query top level fields if they are in a particular form.
-   */
-  query: Query
-  /** Reads a single `Suggestion` using its globally unique `ID`. */
-  suggestion?: Maybe<Suggestion>
-  suggestionById?: Maybe<Suggestion>
-}
-
-/** The root query type which gives access points into the data universe. */
-export type QueryAllSuggestionsArgs = {
-  after?: InputMaybe<Scalars['Cursor']['input']>
-  before?: InputMaybe<Scalars['Cursor']['input']>
-  condition?: InputMaybe<SuggestionCondition>
-  first?: InputMaybe<Scalars['Int']['input']>
-  last?: InputMaybe<Scalars['Int']['input']>
-  offset?: InputMaybe<Scalars['Int']['input']>
-  orderBy?: InputMaybe<Array<SuggestionsOrderBy>>
-}
-
-/** The root query type which gives access points into the data universe. */
-export type QueryNodeArgs = {
-  nodeId: Scalars['ID']['input']
-}
-
-/** The root query type which gives access points into the data universe. */
-export type QuerySuggestionArgs = {
-  nodeId: Scalars['ID']['input']
-}
-
-/** The root query type which gives access points into the data universe. */
-export type QuerySuggestionByIdArgs = {
-  id: Scalars['Int']['input']
-}
-
-/** A song suggestion. */
-export type Suggestion = Node & {
-  __typename?: 'Suggestion'
-  /** The suggestion's artist name. */
-  artist: Scalars['String']['output']
-  /** A comment on the suggestion. */
-  comment?: Maybe<Scalars['String']['output']>
-  /** The record's id. */
-  id: Scalars['Int']['output']
-  /** A globally unique identifier. Can be used in various places throughout the system to identify this single value. */
-  nodeId: Scalars['ID']['output']
-  /** Indicates at which time the record is suggested. */
-  timestamp: Scalars['Datetime']['output']
-  /** The suggestion's title. */
-  title: Scalars['String']['output']
-  /** The suggestion's url. */
-  url?: Maybe<Scalars['String']['output']>
-}
-
-/**
- * A condition to be used against `Suggestion` object types. All fields are tested
- * for equality and combined with a logical ‘and.’
- */
-export type SuggestionCondition = {
-  /** Checks for equality with the object’s `artist` field. */
-  artist?: InputMaybe<Scalars['String']['input']>
-  /** Checks for equality with the object’s `comment` field. */
-  comment?: InputMaybe<Scalars['String']['input']>
-  /** Checks for equality with the object’s `id` field. */
-  id?: InputMaybe<Scalars['Int']['input']>
-  /** Checks for equality with the object’s `timestamp` field. */
-  timestamp?: InputMaybe<Scalars['Datetime']['input']>
-  /** Checks for equality with the object’s `title` field. */
-  title?: InputMaybe<Scalars['String']['input']>
-  /** Checks for equality with the object’s `url` field. */
-  url?: InputMaybe<Scalars['String']['input']>
-}
-
+import type { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core'
 /** An input for mutations affecting `Suggestion` */
 export type SuggestionInput = {
   /** The suggestion's artist name. */
-  artist: Scalars['String']['input']
+  artist: string
   /** A comment on the suggestion. */
-  comment?: InputMaybe<Scalars['String']['input']>
+  comment?: string | null | undefined
   /** The suggestion's title. */
-  title: Scalars['String']['input']
+  title: string
   /** The suggestion's url. */
-  url?: InputMaybe<Scalars['String']['input']>
-}
-
-/** Represents an update to a `Suggestion`. Fields that are set will be updated. */
-export type SuggestionPatch = {
-  /** The suggestion's artist name. */
-  artist?: InputMaybe<Scalars['String']['input']>
-  /** A comment on the suggestion. */
-  comment?: InputMaybe<Scalars['String']['input']>
-  /** The record's id. */
-  id?: InputMaybe<Scalars['Int']['input']>
-  /** Indicates at which time the record is suggested. */
-  timestamp?: InputMaybe<Scalars['Datetime']['input']>
-  /** The suggestion's title. */
-  title?: InputMaybe<Scalars['String']['input']>
-  /** The suggestion's url. */
-  url?: InputMaybe<Scalars['String']['input']>
-}
-
-/** A connection to a list of `Suggestion` values. */
-export type SuggestionsConnection = {
-  __typename?: 'SuggestionsConnection'
-  /** A list of edges which contains the `Suggestion` and cursor to aid in pagination. */
-  edges: Array<SuggestionsEdge>
-  /** A list of `Suggestion` objects. */
-  nodes: Array<Maybe<Suggestion>>
-  /** Information to aid in pagination. */
-  pageInfo: PageInfo
-  /** The count of *all* `Suggestion` you could get from the connection. */
-  totalCount: Scalars['Int']['output']
-}
-
-/** A `Suggestion` edge in the connection. */
-export type SuggestionsEdge = {
-  __typename?: 'SuggestionsEdge'
-  /** A cursor for use in pagination. */
-  cursor?: Maybe<Scalars['Cursor']['output']>
-  /** The `Suggestion` at the end of the edge. */
-  node?: Maybe<Suggestion>
-}
-
-/** Methods to use when ordering `Suggestion`. */
-export enum SuggestionsOrderBy {
-  ArtistAsc = 'ARTIST_ASC',
-  ArtistDesc = 'ARTIST_DESC',
-  CommentAsc = 'COMMENT_ASC',
-  CommentDesc = 'COMMENT_DESC',
-  IdAsc = 'ID_ASC',
-  IdDesc = 'ID_DESC',
-  Natural = 'NATURAL',
-  PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
-  PrimaryKeyDesc = 'PRIMARY_KEY_DESC',
-  TimestampAsc = 'TIMESTAMP_ASC',
-  TimestampDesc = 'TIMESTAMP_DESC',
-  TitleAsc = 'TITLE_ASC',
-  TitleDesc = 'TITLE_DESC',
-  UrlAsc = 'URL_ASC',
-  UrlDesc = 'URL_DESC',
-}
-
-/** All input for the `updateSuggestionById` mutation. */
-export type UpdateSuggestionByIdInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
-  clientMutationId?: InputMaybe<Scalars['String']['input']>
-  /** The record's id. */
-  id: Scalars['Int']['input']
-  /** An object where the defined keys will be set on the `Suggestion` being updated. */
-  suggestionPatch: SuggestionPatch
-}
-
-/** All input for the `updateSuggestion` mutation. */
-export type UpdateSuggestionInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
-  clientMutationId?: InputMaybe<Scalars['String']['input']>
-  /** The globally unique `ID` which will identify a single `Suggestion` to be updated. */
-  nodeId: Scalars['ID']['input']
-  /** An object where the defined keys will be set on the `Suggestion` being updated. */
-  suggestionPatch: SuggestionPatch
-}
-
-/** The output of our update `Suggestion` mutation. */
-export type UpdateSuggestionPayload = {
-  __typename?: 'UpdateSuggestionPayload'
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
-  clientMutationId?: Maybe<Scalars['String']['output']>
-  /** Our root query field type. Allows us to run any query from our mutation payload. */
-  query?: Maybe<Query>
-  /** The `Suggestion` that was updated by this mutation. */
-  suggestion?: Maybe<Suggestion>
-  /** An edge for our `Suggestion`. May be used by Relay 1. */
-  suggestionEdge?: Maybe<SuggestionsEdge>
-}
-
-/** The output of our update `Suggestion` mutation. */
-export type UpdateSuggestionPayloadSuggestionEdgeArgs = {
-  orderBy?: InputMaybe<Array<SuggestionsOrderBy>>
+  url?: string | null | undefined
 }
 
 export type SuggestionItemFragment = {
-  __typename?: 'Suggestion'
   id: number
   nodeId: string
   artist: string
-  comment?: string | null
+  comment: string | null
   title: string
 } & { ' $fragmentName'?: 'SuggestionItemFragment' }
 
@@ -384,14 +33,10 @@ export type CreateSuggestionMutationVariables = Exact<{
 }>
 
 export type CreateSuggestionMutation = {
-  __typename?: 'Mutation'
-  createSuggestion?: {
-    __typename?: 'CreateSuggestionPayload'
-    suggestion?:
-      | ({ __typename?: 'Suggestion' } & {
-          ' $fragmentRefs'?: { SuggestionItemFragment: SuggestionItemFragment }
-        })
-      | null
+  createSuggestion: {
+    suggestion: {
+      ' $fragmentRefs'?: { SuggestionItemFragment: SuggestionItemFragment }
+    } | null
   } | null
 }
 

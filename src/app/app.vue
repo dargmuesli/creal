@@ -6,16 +6,13 @@
       <NuxtPage />
     </NuxtLayout>
     <CrPlayerPlyr />
-    <CookieControl :locale="locale" />
+    <CookieControl :locale />
     <VioSonner />
   </div>
 </template>
 
 <script setup lang="ts">
-import type { Locale } from '@dargmuesli/nuxt-cookie-control/runtime/types.js'
-
-const i18n = useI18n()
-const { t } = i18n
+const { locale } = useI18n()
 const siteConfig = useSiteConfig()
 const timeZone = useTimeZone()
 
@@ -37,24 +34,11 @@ const saveTimeZoneAsCookie = () =>
 
 // computations
 const isLoading = computed(() => !!loadingIds.value.length)
-const locale = computed(() => i18n.locale.value as Locale)
 
 // lifecycle
 onMounted(() => indicateLoadingDone())
 
 // initialization
-defineOgImageComponent(
-  'Default',
-  {
-    description: siteConfig.description,
-    headline: t('headline'),
-    name: t('name'),
-    siteConfigName: siteConfig.name,
-  },
-  {
-    alt: t('globalSeoOgImageAlt'),
-  },
-)
 useAppLayout()
 usePolyfills()
 useSchemaOrg([
@@ -65,12 +49,3 @@ useSchemaOrg([
 useVioGtag()
 initialize()
 </script>
-
-<i18n lang="yaml">
-de:
-  headline: DJ und Event-Organisator
-  name: cReal
-en:
-  headline: DJ and event organizer
-  name: cReal
-</i18n>

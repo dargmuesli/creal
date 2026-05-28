@@ -46,10 +46,9 @@
 <script setup lang="ts">
 import prettyBytes from 'pretty-bytes'
 
-interface Props {
+const { playlistItem } = defineProps<{
   playlistItem: PlaylistItem
-}
-withDefaults(defineProps<Props>(), {})
+}>()
 
 const emit = defineEmits<{
   download: []

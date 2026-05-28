@@ -27,17 +27,19 @@
 <script setup lang="ts">
 import type { LocationQuery } from '#vue-router'
 
-interface Props {
+const {
+  isPreviousAllowed = true,
+  isNextAllowed = true,
+  partString,
+  queryPrevious,
+  queryNext,
+} = defineProps<{
   isPreviousAllowed?: boolean
   isNextAllowed?: boolean
   partString: string
   queryPrevious: LocationQuery
   queryNext: LocationQuery
-}
-const props = withDefaults(defineProps<Props>(), {
-  isPreviousAllowed: true,
-  isNextAllowed: true,
-})
+}>()
 
 const { t } = useI18n()
 const route = useRoute()
@@ -47,13 +49,13 @@ const router = useRouter()
 const goPrevious = () =>
   router.push({
     path: route.path,
-    query: props.queryPrevious,
+    query: queryPrevious,
   })
 
 const goNext = () =>
   router.push({
     path: route.path,
-    query: props.queryNext,
+    query: queryNext,
   })
 </script>
 

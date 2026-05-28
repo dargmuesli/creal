@@ -1,4 +1,4 @@
-import { VIO_NUXT_BASE_CONFIG } from '@dargmuesli/nuxt-vio/shared/utils/nuxt'
+import { VIO_NUXT_BASE_CONFIG } from '@dargmuesli/nuxt-vio/node/static'
 import { defu } from 'defu'
 
 import { SITE_NAME, PRODUCTION_HOST } from './shared/utils/constants'
@@ -8,7 +8,7 @@ export default defineNuxtConfig(
     {
       css: ['~/assets/css/creal.css'],
       extends: ['@dargmuesli/nuxt-vio'],
-      modules: ['@nuxt/scripts'],
+      modules: ['@nuxt/fonts', '@nuxt/scripts'],
       runtimeConfig: {
         creal: {
           s3: {
@@ -67,6 +67,16 @@ export default defineNuxtConfig(
       },
       cookieControl: {
         isControlButtonEnabled: false,
+      },
+      fonts: {
+        families: [
+          {
+            name: 'Inter',
+            weights: [600, 700],
+            global: true,
+            formats: ['ttf'],
+          },
+        ],
       },
       gtag: {
         id: 'G-K4R41W62BR',

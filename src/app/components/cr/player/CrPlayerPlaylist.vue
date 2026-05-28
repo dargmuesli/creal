@@ -21,10 +21,9 @@
 </template>
 
 <script setup lang="ts">
-interface Props {
+const { playlist } = defineProps<{
   playlist: Playlist
-}
-const props = withDefaults(defineProps<Props>(), {})
+}>()
 
 const route = useRoute()
 const alertError = useAlertError()
@@ -34,8 +33,8 @@ const coverUrl = ref('')
 
 // methods
 const init = () => {
-  if (props.playlist.cover) {
-    setCoverUrl(props.playlist.cover)
+  if (playlist.cover) {
+    setCoverUrl(playlist.cover)
   } else {
     coverUrl.value = '/player/playlist-cover_default.jpg'
   }

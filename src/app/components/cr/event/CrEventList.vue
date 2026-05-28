@@ -18,8 +18,7 @@
 <script setup lang="ts">
 import type { CollectionItem } from '@dargmuesli/nuxt-vio/shared/types/fetch'
 
-interface Props {
+const { events } = defineProps<{
   events: CollectionItem<CrealEvent>[]
-}
-withDefaults(defineProps<Props>(), {})
+}>()
 </script>

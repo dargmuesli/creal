@@ -94,7 +94,7 @@ const eventsPast = computed(() => {
 })
 
 // initialization
-useHeadDefault({
+useCrealHeadDefault({
   description: t('description'),
   title,
 })

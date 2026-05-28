@@ -9,44 +9,45 @@ on:
       - alpha
       - beta
       - main
-      - master
       - renovate/**
 
 jobs:
   ci-optimization:
     name: CI optimization
-    uses: dargmuesli/github-actions/.github/workflows/ci-optimization.yml@d706bfb7bffcbeb7a3828298f5b0d0a0c2da5185 # 4.0.4
+    uses: dargmuesli/github-actions/.github/workflows/ci-optimization.yml@80b5e01f2dbaca72f21852f2cb24ce636a46fffa # 5.4.0
     permissions:
       pull-requests: read
   release_semantic_dry:
     needs: ci-optimization
     if: needs.ci-optimization.outputs.continue == 'true'
     name: Release (semantic, dry)
-    uses: dargmuesli/github-actions/.github/workflows/release-semantic.yml@d706bfb7bffcbeb7a3828298f5b0d0a0c2da5185 # 4.0.4
+    uses: dargmuesli/github-actions/.github/workflows/release-semantic.yml@80b5e01f2dbaca72f21852f2cb24ce636a46fffa # 5.4.0
     permissions:
       contents: write
       id-token: write
     secrets:
-      PERSONAL_ACCESS_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+      GH_APP_PRIVATE_KEY: ${{ secrets.GH_APP_PRIVATE_KEY }}
     with:
-      APT_PACKAGES: mkcert
       DRY_RUN: true
+      GH_APP_ID: ${{ vars.GH_APP_ID }}
   build:
     name: Build
-    uses: dargmuesli/github-actions/.github/workflows/docker.yml@d706bfb7bffcbeb7a3828298f5b0d0a0c2da5185 # 4.0.4
+    uses: dargmuesli/github-actions/.github/workflows/docker.yml@80b5e01f2dbaca72f21852f2cb24ce636a46fffa # 5.4.0
     needs: release_semantic_dry
     permissions:
       packages: write
     with:
+      BUILD_ADD_HOSTS: |
+        app.localhost=127.0.0.1
       TAG: ${{ needs.release_semantic_dry.outputs.new_release_version }}
   release_semantic:
     needs: build
     name: Release (semantic)
-    uses: dargmuesli/github-actions/.github/workflows/release-semantic.yml@d706bfb7bffcbeb7a3828298f5b0d0a0c2da5185 # 4.0.4
+    uses: dargmuesli/github-actions/.github/workflows/release-semantic.yml@80b5e01f2dbaca72f21852f2cb24ce636a46fffa # 5.4.0
     permissions:
       contents: write
       id-token: write
     secrets:
-      PERSONAL_ACCESS_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+      GH_APP_PRIVATE_KEY: ${{ secrets.GH_APP_PRIVATE_KEY }}
     with:
-      APT_PACKAGES: mkcert
+      GH_APP_ID: ${{ vars.GH_APP_ID }}

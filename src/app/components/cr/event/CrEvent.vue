@@ -87,11 +87,10 @@ export interface Image {
   url: URL
 }
 
-interface Props {
+const { crealEvent, index } = defineProps<{
   crealEvent: CrealEvent
   index: number
-}
-const props = withDefaults(defineProps<Props>(), {})
+}>()
 
 const { t } = useI18n()
 const getServiceHref = useGetServiceHref()
@@ -101,7 +100,7 @@ const now = useNow()
 const imageSrc = computed(
   () =>
     getServiceHref({ isSsr: false, name: 'creal-strapi', port: 1337 }) +
-    props.crealEvent.image.url,
+    crealEvent.image.url,
 )
 </script>
 

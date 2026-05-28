@@ -6,6 +6,11 @@ const address = {
 
 export default defineAppConfig({
   vio: {
+    seo: {
+      ogImage: {
+        defaultComponent: 'Default.takumi',
+      },
+    },
     pages: {
       legalNotice: {
         contact: {
