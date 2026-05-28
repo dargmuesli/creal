@@ -1,3 +1,9 @@
+## [5.3.9](https://github.com/dargmuesli/creal/compare/5.3.8...5.3.9) (2026-05-28)
+
+### Bug Fixes
+
+* **docker:** set url argument in dockerfile ([c8b1c51](https://github.com/dargmuesli/creal/commit/c8b1c511b2ceff106939ca13f602bd4437d7b7c5))
+
 ## [5.3.8](https://github.com/dargmuesli/creal/compare/5.3.7...5.3.8) (2026-05-28)
 
 ### Bug Fixes
