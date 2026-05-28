@@ -21,6 +21,7 @@
 </template>
 
 <script setup lang="ts">
+import { getPlaylistPrefix } from '~/utils/player-route'
 const { playlist } = defineProps<{
   playlist: Playlist
 }>()
@@ -40,11 +41,9 @@ const init = () => {
   }
 }
 const setCoverUrl = async (cover: Cover) => {
-  const playlistPrefix =
-    store.playerData.currentPlaylist?.name &&
-    store.playerData.currentPlaylist.name !== 'root'
-      ? `${store.playerData.currentPlaylist.name}/`
-      : ''
+  const playlistPrefix = getPlaylistPrefix(
+    store.playerData.currentPlaylist?.name,
+  )
   const key =
     PLAYER_PREFIX + `${playlistPrefix}${cover.name}.${cover.fileExtension}`
   const {

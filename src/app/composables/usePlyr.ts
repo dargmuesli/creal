@@ -1,4 +1,4 @@
-import { getMixPath } from '~/utils/player-route'
+import { getMixPath, getPlaylistPrefix } from '~/utils/player-route'
 
 export const usePlyr = () => {
   const router = useRouter()
@@ -16,7 +16,7 @@ export const usePlyr = () => {
       // Get meta.
       const key =
         PLAYER_PREFIX +
-        (playlistPath ? playlistPath + '/' : '') +
+        getPlaylistPrefix(playlistPath) +
         playlistItem.fileName +
         '.json'
 

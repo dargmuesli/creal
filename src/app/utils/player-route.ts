@@ -13,3 +13,12 @@ export const getMixPath = (playlistPath?: string, track?: string) => {
 
   return joinMixPath(segments)
 }
+
+export const normalizePlaylistPath = (playlistPath?: string) =>
+  playlistPath && playlistPath !== 'root' ? playlistPath : undefined
+
+export const getPlaylistPrefix = (playlistPath?: string) => {
+  const normalizedPlaylistPath = normalizePlaylistPath(playlistPath)
+
+  return normalizedPlaylistPath ? `${normalizedPlaylistPath}/` : ''
+}

@@ -128,9 +128,8 @@ const init = async () => {
   resolvedPlaylistPath.value = playlistPath
   resolvedTrack.value = track
   store.playerData.currentPlaylist = playlistDataFetch
-  store.playerData.currentPlaylist.name = playlistPath
-    ? decodeURIComponent(playlistPath)
-    : store.playerData.currentPlaylist.name
+  store.playerData.currentPlaylist.name =
+    playlistPath ?? store.playerData.currentPlaylist.name
 
   // Try to select and play track as indicated by route path.
   if (
@@ -170,7 +169,7 @@ const download = async (playlistItem: PlaylistItem) => {
   if (!signedUrl) return alertError('Could not get signed url!')
 
   link.setAttribute('href', signedUrl)
-  link.setAttribute('download', `${playlistItem.fileName}.mp3`)
+  link.setAttribute('download', playlistItem.fileName)
   link.click()
 }
 
@@ -200,7 +199,7 @@ const breadcrumbSuffixes = computed(() => {
     }
 
     breadcrumbSuffixes.push({
-      name: decodeURIComponent(playlistPathPart),
+      name: playlistPathPart,
       to: localePath(
         getMixPath(
           playlistPath,
