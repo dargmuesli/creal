@@ -78,6 +78,7 @@ const isLoading = ref(false)
 const resolvedPlaylistPath = ref<string>()
 const resolvedTrack = ref<string>()
 const title = t('titlePage')
+const DEFAULT_AUDIO_EXTENSION = 'mp3'
 
 // methods
 const fetchPlaylistData = async (prefix?: string) => {
@@ -171,7 +172,7 @@ const download = async (playlistItem: PlaylistItem) => {
   link.setAttribute('href', signedUrl)
   const downloadFileName = playlistItem.fileName.includes('.')
     ? playlistItem.fileName
-    : `${playlistItem.fileName}.mp3`
+    : `${playlistItem.fileName}.${DEFAULT_AUDIO_EXTENSION}`
 
   link.setAttribute('download', downloadFileName)
   link.click()
@@ -211,21 +212,30 @@ const breadcrumbSuffixes = computed(() => {
 })
 
 // lifecycle
+
+const isOnlyTrackChanged = (pathParts: string[]) => {
+  const trackCandidate = pathParts[pathParts.length - 1]
+
+  return (
+    !!resolvedPlaylistPath.value &&
+    pathParts.slice(0, -1).join('/') === resolvedPlaylistPath.value &&
+    !!trackCandidate &&
+    !!store.playerData.currentPlaylist?.items.some(
+      (playlistItem) => playlistItem.fileName === trackCandidate,
+    )
+  )
+}
+
 watch(
   () => route.params.path,
   async () => {
     const pathParts = routePathParts.value
     const joinedPath = pathParts.join('/')
-    const trackCandidate = pathParts[pathParts.length - 1]
-    const isOnlyTrackUpdated =
-      !!resolvedPlaylistPath.value &&
-      pathParts.slice(0, -1).join('/') === resolvedPlaylistPath.value &&
-      !!trackCandidate &&
-      !!store.playerData.currentPlaylist?.items.some(
-        (playlistItem) => playlistItem.fileName === trackCandidate,
-      )
-
-    if (joinedPath === resolvedPlaylistPath.value || isOnlyTrackUpdated) return
+    if (
+      joinedPath === resolvedPlaylistPath.value ||
+      isOnlyTrackChanged(pathParts)
+    )
+      return
 
     await init()
   },
