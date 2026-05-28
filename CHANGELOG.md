@@ -1,3 +1,9 @@
+## [5.3.10](https://github.com/dargmuesli/creal/compare/5.3.9...5.3.10) (2026-05-28)
+
+### Bug Fixes
+
+* **docker:** correct entrypoint inclusion ([8fef418](https://github.com/dargmuesli/creal/commit/8fef418d8596a5d1b69ab4c64584b16c87038a1a))
+
 ## [5.3.9](https://github.com/dargmuesli/creal/compare/5.3.8...5.3.9) (2026-05-28)
 
 ### Bug Fixes
