@@ -169,7 +169,7 @@ const download = async (playlistItem: PlaylistItem) => {
   if (!signedUrl) return alertError('Could not get signed url!')
 
   link.setAttribute('href', signedUrl)
-  const signedUrlWithoutQuery = signedUrl.split('?')[0]
+  const signedUrlWithoutQuery = signedUrl.split('?')[0] ?? signedUrl
   const signedUrlPathPart = signedUrlWithoutQuery?.split('/').at(-1)
   const downloadFileName = signedUrlPathPart
     ? decodeURIComponent(signedUrlPathPart)
@@ -178,6 +178,8 @@ const download = async (playlistItem: PlaylistItem) => {
   link.setAttribute('download', downloadFileName)
   link.click()
 }
+const getPathWithoutLastPart = (pathParts: string[]) =>
+  pathParts.slice(0, -1).join('/')
 
 // computations
 const routePathParts = computed(() => {
@@ -187,8 +189,6 @@ const routePathParts = computed(() => {
 
   return []
 })
-const getPathWithoutLastPart = (pathParts: string[]) =>
-  pathParts.slice(0, -1).join('/')
 const breadcrumbSuffixes = computed(() => {
   if (!resolvedPlaylistPath.value) return
 
