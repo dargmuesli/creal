@@ -1,4 +1,4 @@
-export interface CrealEvent {
+export interface CrealGig {
   dateEnd: string
   dateStart: string
   location: string
@@ -8,6 +8,13 @@ export interface CrealEvent {
     url: string
   }
   url: string
+}
+
+export interface CrealEvent {
+  gigs?: (CrealGig & {
+    documentId: string
+    id: number
+  })[]
 }
 
 export interface CrealFaq {
