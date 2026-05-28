@@ -1,3 +1,9 @@
+## [5.3.8](https://github.com/dargmuesli/creal/compare/5.3.7...5.3.8) (2026-05-28)
+
+### Bug Fixes
+
+* **deps:** update dargmuesli/github-actions to v5.4.0 ([8a074a2](https://github.com/dargmuesli/creal/commit/8a074a2dd56c5c2b4651f0bf80fc16f8cb319191))
+
 ## [5.3.7](https://github.com/dargmuesli/creal/compare/5.3.6...5.3.7) (2026-05-28)
 
 ### Bug Fixes
