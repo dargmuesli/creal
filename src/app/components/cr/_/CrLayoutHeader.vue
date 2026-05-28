@@ -32,7 +32,7 @@
         <VioLink
           aria-label="Player"
           :is-colored="false"
-          :to="localePath('/player')"
+          :to="localePath('/mixes')"
         >
           {{ t('player') }}
         </VioLink>
@@ -119,7 +119,7 @@
                 aria-label="Player"
                 class="-mx-3 block rounded-lg px-3 py-2 text-base leading-7 font-semibold text-white hover:bg-gray-800"
                 :is-colored="false"
-                :to="localePath('/player')"
+                :to="localePath('/mixes')"
                 @click="mobileMenuOpen = false"
               >
                 {{ t('player') }}

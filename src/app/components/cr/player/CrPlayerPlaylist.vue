@@ -25,7 +25,7 @@ const { playlist } = defineProps<{
   playlist: Playlist
 }>()
 
-const route = useRoute()
+const store = useStore()
 const alertError = useAlertError()
 
 // data
@@ -40,9 +40,13 @@ const init = () => {
   }
 }
 const setCoverUrl = async (cover: Cover) => {
+  const playlistPrefix =
+    store.playerData.currentPlaylist?.name &&
+    store.playerData.currentPlaylist.name !== 'root'
+      ? `${store.playerData.currentPlaylist.name}/`
+      : ''
   const key =
-    PLAYER_PREFIX +
-    `${route.query.playlist || ''}${cover.name}.${cover.fileExtension}`
+    PLAYER_PREFIX + `${playlistPrefix}${cover.name}.${cover.fileExtension}`
   const {
     data: { value: signedUrl },
   } = await useFetch('/api/player/signed-url', {
