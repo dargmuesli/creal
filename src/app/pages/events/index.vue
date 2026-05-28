@@ -56,15 +56,46 @@ const typicalSetLengthMilliseconds = 2 * 60 * 60 * 1000 // 2h
 const title = t('titlePage')
 
 // computations
+const getLegacyGig = (
+  event: CollectionItem<CrealEvent>,
+): CollectionItem<CrealGig> | undefined => {
+  if (
+    typeof event.dateStart !== 'string' ||
+    (typeof event.dateEnd !== 'undefined' &&
+      typeof event.dateEnd !== 'string') ||
+    typeof event.location !== 'string' ||
+    typeof event.title !== 'string' ||
+    typeof event.description !== 'string' ||
+    typeof event.url !== 'string' ||
+    !event.image ||
+    typeof event.image.url !== 'string'
+  ) {
+    return
+  }
+
+  return {
+    dateEnd: event.dateEnd || '',
+    dateStart: event.dateStart,
+    description: event.description,
+    documentId: event.documentId,
+    id: event.id,
+    image: event.image,
+    location: event.location,
+    title: event.title,
+    url: event.url,
+  }
+}
+
 const gigs = computed<CollectionItem<CrealGig>[] | undefined>(() => {
   if (!events) return
 
   return events
-    .flatMap((event) =>
-      event.gigs?.length
-        ? event.gigs
-        : [event as unknown as CollectionItem<CrealGig>],
-    )
+    .flatMap((event) => {
+      if (event.gigs?.length) return event.gigs
+
+      const legacyGig = getLegacyGig(event)
+      return legacyGig ? [legacyGig] : []
+    })
     .sort(
       (gigA, gigB) =>
         new Date(gigB.dateStart).getTime() - new Date(gigA.dateStart).getTime(),
@@ -73,14 +104,14 @@ const gigs = computed<CollectionItem<CrealGig>[] | undefined>(() => {
 const eventsCurrent = computed(() => {
   if (!gigs.value) return
 
-  return gigs.value.filter((event) => {
-    const dateStart = new Date(event.dateStart)
+  return gigs.value.filter((gig) => {
+    const dateStart = new Date(gig.dateStart)
     const dateStartPlus2h = new Date(
       dateStart.getTime() + typicalSetLengthMilliseconds,
     )
 
-    if (event.dateEnd) {
-      return dateStart <= now.value && now.value < new Date(event.dateEnd)
+    if (gig.dateEnd) {
+      return dateStart <= now.value && now.value < new Date(gig.dateEnd)
     } else {
       return dateStart <= now.value && now.value < dateStartPlus2h
     }
@@ -90,20 +121,20 @@ const eventsFuture = computed(() => {
   if (!gigs.value) return
 
   return gigs.value
-    .filter((event) => now.value < new Date(event.dateStart))
+    .filter((gig) => now.value < new Date(gig.dateStart))
     .reverse()
 })
 const eventsPast = computed(() => {
   if (!gigs.value) return
 
-  return gigs.value.filter((event) => {
-    const dateStart = new Date(event.dateStart)
+  return gigs.value.filter((gig) => {
+    const dateStart = new Date(gig.dateStart)
     const dateStartPlus2h = new Date(
       dateStart.getTime() + typicalSetLengthMilliseconds,
     )
 
-    if (event.dateEnd) {
-      return new Date(event.dateEnd) < now.value
+    if (gig.dateEnd) {
+      return new Date(gig.dateEnd) < now.value
     } else {
       return dateStartPlus2h < now.value
     }
