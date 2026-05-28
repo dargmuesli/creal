@@ -214,15 +214,18 @@ const breadcrumbSuffixes = computed(() => {
 // lifecycle
 
 const isOnlyTrackChanged = (pathParts: string[]) => {
+  if (!resolvedPlaylistPath.value || !store.playerData.currentPlaylist) {
+    return false
+  }
+
   const trackCandidate = pathParts[pathParts.length - 1]
 
-  return (
-    !!resolvedPlaylistPath.value &&
-    pathParts.slice(0, -1).join('/') === resolvedPlaylistPath.value &&
-    !!trackCandidate &&
-    !!store.playerData.currentPlaylist?.items.some(
-      (playlistItem) => playlistItem.fileName === trackCandidate,
-    )
+  if (!trackCandidate) return false
+  if (pathParts.slice(0, -1).join('/') !== resolvedPlaylistPath.value)
+    return false
+
+  return store.playerData.currentPlaylist.items.some(
+    (playlistItem) => playlistItem.fileName === trackCandidate,
   )
 }
 
