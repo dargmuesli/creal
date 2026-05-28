@@ -1,5 +1,5 @@
 export interface CrealGig {
-  dateEnd: string
+  dateEnd?: string
   dateStart: string
   location: string
   title: string
