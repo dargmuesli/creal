@@ -1,3 +1,9 @@
+## [5.3.7](https://github.com/dargmuesli/creal/compare/5.3.6...5.3.7) (2026-05-28)
+
+### Bug Fixes
+
+* **ci:** add static domain ([35ef2d5](https://github.com/dargmuesli/creal/commit/35ef2d5814acf6d7a50dd57030ded59ae98e8fb8))
+
 ## [5.3.6](https://github.com/dargmuesli/creal/compare/5.3.5...5.3.6) (2026-05-21)
 
 ### Bug Fixes
