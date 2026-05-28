@@ -46,8 +46,8 @@ const {
 } = await useStrapiData<CrealEvent>({
   path: '/events',
   query: {
-    populate: 'image',
-    'populate[gigs][populate]': 'image',
+    'populate[image]': 'true',
+    'populate[gigs][populate][image]': 'true',
     sort: 'dateStart:desc',
   },
 })
