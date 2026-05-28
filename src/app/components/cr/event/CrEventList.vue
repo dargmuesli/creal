@@ -19,6 +19,6 @@
 import type { CollectionItem } from '@dargmuesli/nuxt-vio/shared/types/fetch'
 
 const { events } = defineProps<{
-  events: CollectionItem<CrealEvent>[]
+  events: CollectionItem<CrealGig>[]
 }>()
 </script>

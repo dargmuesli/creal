@@ -7,7 +7,7 @@
       {{ requestError }}
     </VioCardStateAlert>
     <CrPaging
-      v-else-if="events?.length && paging"
+      v-else-if="gigs?.length && paging"
       class="flex flex-col gap-16"
       :is-previous-allowed="paging.isPreviousAllowed"
       :is-next-allowed="paging.isNextAllowed"
@@ -33,6 +33,8 @@
 </template>
 
 <script setup lang="ts">
+import type { CollectionItem } from '@dargmuesli/nuxt-vio/shared/types/fetch'
+
 const {
   items: events,
   paging,
@@ -41,6 +43,7 @@ const {
   path: '/events',
   query: {
     populate: 'image',
+    'populate[gigs][populate]': 'image',
     sort: 'dateStart:desc',
   },
 })
@@ -53,10 +56,24 @@ const typicalSetLengthMilliseconds = 2 * 60 * 60 * 1000 // 2h
 const title = t('titlePage')
 
 // computations
-const eventsCurrent = computed(() => {
+const gigs = computed<CollectionItem<CrealGig>[] | undefined>(() => {
   if (!events) return
 
-  return events.filter((event) => {
+  return events
+    .flatMap((event) =>
+      event.gigs?.length
+        ? event.gigs
+        : [event as unknown as CollectionItem<CrealGig>],
+    )
+    .sort(
+      (gigA, gigB) =>
+        new Date(gigB.dateStart).getTime() - new Date(gigA.dateStart).getTime(),
+    )
+})
+const eventsCurrent = computed(() => {
+  if (!gigs.value) return
+
+  return gigs.value.filter((event) => {
     const dateStart = new Date(event.dateStart)
     const dateStartPlus2h = new Date(
       dateStart.getTime() + typicalSetLengthMilliseconds,
@@ -70,16 +87,16 @@ const eventsCurrent = computed(() => {
   })
 })
 const eventsFuture = computed(() => {
-  if (!events) return
+  if (!gigs.value) return
 
-  return events
+  return gigs.value
     .filter((event) => now.value < new Date(event.dateStart))
     .reverse()
 })
 const eventsPast = computed(() => {
-  if (!events) return
+  if (!gigs.value) return
 
-  return events.filter((event) => {
+  return gigs.value.filter((event) => {
     const dateStart = new Date(event.dateStart)
     const dateStartPlus2h = new Date(
       dateStart.getTime() + typicalSetLengthMilliseconds,
