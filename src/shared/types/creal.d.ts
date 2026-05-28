@@ -11,6 +11,15 @@ export interface CrealGig {
 }
 
 export interface CrealEvent {
+  dateEnd?: string
+  dateStart?: string
+  location?: string
+  title?: string
+  description?: string
+  image?: {
+    url: string
+  }
+  url?: string
   gigs?: (CrealGig & {
     documentId: string
     id: number
