@@ -44,8 +44,7 @@ const setCoverUrl = async (cover: Cover) => {
   const playlistPrefix = getPlaylistPrefix(
     store.playerData.currentPlaylist?.name,
   )
-  const key =
-    PLAYER_PREFIX + `${playlistPrefix}${cover.name}.${cover.fileExtension}`
+  const key = `${PLAYER_PREFIX}${playlistPrefix}${cover.name}.${cover.fileExtension}`
   const {
     data: { value: signedUrl },
   } = await useFetch('/api/player/signed-url', {

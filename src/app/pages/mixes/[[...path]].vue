@@ -169,7 +169,11 @@ const download = async (playlistItem: PlaylistItem) => {
   if (!signedUrl) return alertError('Could not get signed url!')
 
   link.setAttribute('href', signedUrl)
-  link.setAttribute('download', playlistItem.fileName)
+  const downloadFileName = playlistItem.fileName.includes('.')
+    ? playlistItem.fileName
+    : `${playlistItem.fileName}.mp3`
+
+  link.setAttribute('download', downloadFileName)
   link.click()
 }
 
@@ -188,15 +192,7 @@ const breadcrumbSuffixes = computed(() => {
   const playlistPathParts = resolvedPlaylistPath.value.split('/')
 
   for (const [index, playlistPathPart] of playlistPathParts.entries()) {
-    let playlistPath = ''
-
-    for (let i = 0; i <= index; i++) {
-      if (i !== 0) {
-        playlistPath += '/'
-      }
-
-      playlistPath += playlistPathParts[i]
-    }
+    const playlistPath = playlistPathParts.slice(0, index + 1).join('/')
 
     breadcrumbSuffixes.push({
       name: playlistPathPart,
