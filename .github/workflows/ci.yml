@@ -39,6 +39,8 @@ jobs:
     with:
       BUILD_ADD_HOSTS: |
         app.localhost=127.0.0.1
+      BUILD_ARGUMENTS: |
+        NUXT_PUBLIC_I18N_BASE_URL=https://creal.jonas-thelemann.de
       TAG: ${{ needs.release_semantic_dry.outputs.new_release_version }}
   release_semantic:
     needs: build
