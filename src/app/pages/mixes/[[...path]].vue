@@ -187,12 +187,9 @@ const breadcrumbSuffixes = computed(() => {
   if (!selectedPlaylistPath.value) return
 
   const breadcrumbSuffixes = []
-  const routeQueryPlaylistParts = selectedPlaylistPath.value.split('/')
+  const playlistPathParts = selectedPlaylistPath.value.split('/')
 
-  for (const [
-    index,
-    routeQueryPlaylistPart,
-  ] of routeQueryPlaylistParts.entries()) {
+  for (const [index, playlistPathPart] of playlistPathParts.entries()) {
     let playlistPath = ''
 
     for (let i = 0; i <= index; i++) {
@@ -200,15 +197,15 @@ const breadcrumbSuffixes = computed(() => {
         playlistPath += '/'
       }
 
-      playlistPath += routeQueryPlaylistParts[i]
+      playlistPath += playlistPathParts[i]
     }
 
     breadcrumbSuffixes.push({
-      name: decodeURIComponent(routeQueryPlaylistPart),
+      name: decodeURIComponent(playlistPathPart),
       to: localePath(
         getMixPath(
           playlistPath,
-          index === routeQueryPlaylistParts.length - 1
+          index === playlistPathParts.length - 1
             ? resolvedTrack.value
             : undefined,
         ),
