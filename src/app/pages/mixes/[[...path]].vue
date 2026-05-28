@@ -169,7 +169,13 @@ const download = async (playlistItem: PlaylistItem) => {
   if (!signedUrl) return alertError('Could not get signed url!')
 
   link.setAttribute('href', signedUrl)
-  link.setAttribute('download', playlistItem.fileName)
+  const signedUrlWithoutQuery = signedUrl.split('?')[0]
+  const signedUrlPathPart = signedUrlWithoutQuery?.split('/').at(-1)
+  const downloadFileName = signedUrlPathPart
+    ? decodeURIComponent(signedUrlPathPart)
+    : playlistItem.fileName
+
+  link.setAttribute('download', downloadFileName)
   link.click()
 }
 

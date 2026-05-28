@@ -1,5 +1,13 @@
 export const MIXES_PATH = '/mixes'
 
+const decodeUriComponentSafe = (value: string) => {
+  try {
+    return decodeURIComponent(value)
+  } catch {
+    return value
+  }
+}
+
 const joinMixPath = (segments: string[]) =>
   segments.length
     ? `${MIXES_PATH}/${segments.map((segment) => encodeURIComponent(segment)).join('/')}`
@@ -7,8 +15,10 @@ const joinMixPath = (segments: string[]) =>
 
 export const getMixPath = (playlistPath?: string, track?: string) => {
   const segments = [
-    ...(playlistPath ? playlistPath.split('/').filter(Boolean) : []),
-    ...(track ? [track] : []),
+    ...(playlistPath
+      ? playlistPath.split('/').filter(Boolean).map(decodeUriComponentSafe)
+      : []),
+    ...(track ? [decodeUriComponentSafe(track)] : []),
   ]
 
   return joinMixPath(segments)
