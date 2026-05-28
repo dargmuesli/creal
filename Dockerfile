@@ -77,6 +77,9 @@ RUN pnpm install --offline
 
 FROM prepare AS build-node
 
+ARG NUXT_PUBLIC_I18N_BASE_URL=https://creal.jonas-thelemann.de
+ENV NUXT_PUBLIC_I18N_BASE_URL=${NUXT_PUBLIC_I18N_BASE_URL}
+
 ENV NODE_ENV=production
 RUN pnpm run --dir src build:node
 
