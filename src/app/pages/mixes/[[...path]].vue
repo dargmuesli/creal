@@ -36,17 +36,17 @@
             :key="playlistItem.fileName"
             :class="{
               'text-yellow-500':
-                selectedPlaylistPath &&
+                resolvedPlaylistPath &&
                 store.playerData.currentPlaylist &&
                 store.playerData.currentTrack &&
-                selectedPlaylistPath ===
+                resolvedPlaylistPath ===
                   store.playerData.currentPlaylist.name &&
                 playlistItem.fileName ===
                   store.playerData.currentTrack.fileName,
             }"
             :playlist-item="playlistItem"
             @download="download(playlistItem)"
-            @play="play(playlistItem, selectedPlaylistPath)"
+            @play="play(playlistItem, resolvedPlaylistPath)"
           />
         </ul>
         <div
@@ -164,13 +164,13 @@ const download = async (playlistItem: PlaylistItem) => {
   const link = document.createElement('a')
   const signedUrl = await getSignedUrl({
     playlistItem,
-    playlistPath: selectedPlaylistPath.value,
+    playlistPath: resolvedPlaylistPath.value,
   })
 
   if (!signedUrl) return alertError('Could not get signed url!')
 
   link.setAttribute('href', signedUrl)
-  link.setAttribute('download', '123.mp3') // This value is never shown to the user in current browser implementations.
+  link.setAttribute('download', `${playlistItem.fileName}.mp3`)
   link.click()
 }
 
@@ -182,12 +182,11 @@ const routePathParts = computed(() => {
 
   return []
 })
-const selectedPlaylistPath = computed(() => resolvedPlaylistPath.value)
 const breadcrumbSuffixes = computed(() => {
-  if (!selectedPlaylistPath.value) return
+  if (!resolvedPlaylistPath.value) return
 
   const breadcrumbSuffixes = []
-  const playlistPathParts = selectedPlaylistPath.value.split('/')
+  const playlistPathParts = resolvedPlaylistPath.value.split('/')
 
   for (const [index, playlistPathPart] of playlistPathParts.entries()) {
     let playlistPath = ''

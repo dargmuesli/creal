@@ -13,6 +13,3 @@ export const getMixPath = (playlistPath?: string, track?: string) => {
 
   return joinMixPath(segments)
 }
-
-export const getMixPathFromLegacyQuery = (playlist?: string, track?: string) =>
-  getMixPath(playlist, track)
