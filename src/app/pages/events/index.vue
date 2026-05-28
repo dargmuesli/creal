@@ -7,7 +7,7 @@
       {{ requestError }}
     </VioCardStateAlert>
     <CrPaging
-      v-else-if="gigs?.length && paging"
+      v-else-if="eventGroups?.length && paging"
       class="flex flex-col gap-16"
       :is-previous-allowed="paging.isPreviousAllowed"
       :is-next-allowed="paging.isNextAllowed"
@@ -15,16 +15,16 @@
       :query-previous="paging.queryPrevious"
       :query-next="paging.queryNext"
     >
-      <CrEventList v-if="eventsCurrent" :events="eventsCurrent">
+      <CrEventList v-if="eventsCurrent" :event-groups="eventsCurrent">
         <div class="flex items-center gap-2">
           {{ t('eventsCurrent') }}
           <CrLivePulse />
         </div>
       </CrEventList>
-      <CrEventList v-if="eventsFuture" :events="eventsFuture">
+      <CrEventList v-if="eventsFuture" :event-groups="eventsFuture">
         {{ t('eventsFuture') }}
       </CrEventList>
-      <CrEventList v-if="eventsPast" :events="eventsPast">
+      <CrEventList v-if="eventsPast" :event-groups="eventsPast">
         {{ t('eventsPast') }}
       </CrEventList>
     </CrPaging>
@@ -56,7 +56,7 @@ const typicalSetLengthMilliseconds = 2 * 60 * 60 * 1000 // 2h
 const title = t('titlePage')
 
 // computations
-const getLegacyGig = (
+const transformLegacyEvent = (
   event: CollectionItem<CrealEvent>,
 ): CollectionItem<CrealGig> | undefined => {
   if (
@@ -74,7 +74,7 @@ const getLegacyGig = (
   }
 
   return {
-    dateEnd: event.dateEnd || '',
+    dateEnd: event.dateEnd,
     dateStart: event.dateStart,
     description: event.description,
     documentId: event.documentId,
@@ -86,60 +86,84 @@ const getLegacyGig = (
   }
 }
 
-const gigs = computed<CollectionItem<CrealGig>[] | undefined>(() => {
+type EventGroup = {
+  event: CollectionItem<CrealEvent>
+  gigs: CollectionItem<CrealGig>[]
+}
+
+const isGigCurrent = (gig: CollectionItem<CrealGig>) => {
+  const dateStart = new Date(gig.dateStart)
+  const dateStartPlus2h = new Date(
+    dateStart.getTime() + typicalSetLengthMilliseconds,
+  )
+
+  if (gig.dateEnd) {
+    return dateStart <= now.value && now.value < new Date(gig.dateEnd)
+  } else {
+    return dateStart <= now.value && now.value < dateStartPlus2h
+  }
+}
+const isGigFuture = (gig: CollectionItem<CrealGig>) =>
+  now.value < new Date(gig.dateStart)
+const isGigPast = (gig: CollectionItem<CrealGig>) => {
+  const dateStart = new Date(gig.dateStart)
+  const dateStartPlus2h = new Date(
+    dateStart.getTime() + typicalSetLengthMilliseconds,
+  )
+
+  if (gig.dateEnd) {
+    return new Date(gig.dateEnd) < now.value
+  } else {
+    return dateStartPlus2h < now.value
+  }
+}
+
+const eventGroups = computed<EventGroup[] | undefined>(() => {
   if (!events) return
 
   return events
-    .flatMap((event) => {
-      if (event.gigs?.length) return event.gigs
+    .map((event) => {
+      if (event.gigs?.length) {
+        return {
+          event,
+          gigs: [...event.gigs].sort(
+            (gigA, gigB) =>
+              new Date(gigB.dateStart).getTime() -
+              new Date(gigA.dateStart).getTime(),
+          ),
+        }
+      }
 
-      const legacyGig = getLegacyGig(event)
-      return legacyGig ? [legacyGig] : []
+      const legacyGig = transformLegacyEvent(event)
+      return { event, gigs: legacyGig ? [legacyGig] : [] }
     })
-    .sort(
-      (gigA, gigB) =>
-        new Date(gigB.dateStart).getTime() - new Date(gigA.dateStart).getTime(),
-    )
+    .filter((eventGroup) => eventGroup.gigs.length)
 })
-const eventsCurrent = computed(() => {
-  if (!gigs.value) return
+const getFilteredEventGroups = (
+  filterGig: (gig: CollectionItem<CrealGig>) => boolean,
+) => {
+  if (!eventGroups.value) return
 
-  return gigs.value.filter((gig) => {
-    const dateStart = new Date(gig.dateStart)
-    const dateStartPlus2h = new Date(
-      dateStart.getTime() + typicalSetLengthMilliseconds,
-    )
-
-    if (gig.dateEnd) {
-      return dateStart <= now.value && now.value < new Date(gig.dateEnd)
-    } else {
-      return dateStart <= now.value && now.value < dateStartPlus2h
-    }
-  })
-})
+  return eventGroups.value
+    .map((eventGroup) => ({
+      ...eventGroup,
+      gigs: eventGroup.gigs.filter(filterGig),
+    }))
+    .filter((eventGroup) => eventGroup.gigs.length)
+}
+const eventsCurrent = computed(() => getFilteredEventGroups(isGigCurrent))
 const eventsFuture = computed(() => {
-  if (!gigs.value) return
+  const futureEventGroups = getFilteredEventGroups(isGigFuture)
+  if (!futureEventGroups) return
 
-  return gigs.value
-    .filter((gig) => now.value < new Date(gig.dateStart))
+  return futureEventGroups
+    .map((eventGroup) => ({
+      ...eventGroup,
+      gigs: [...eventGroup.gigs].reverse(),
+    }))
     .reverse()
 })
-const eventsPast = computed(() => {
-  if (!gigs.value) return
-
-  return gigs.value.filter((gig) => {
-    const dateStart = new Date(gig.dateStart)
-    const dateStartPlus2h = new Date(
-      dateStart.getTime() + typicalSetLengthMilliseconds,
-    )
-
-    if (gig.dateEnd) {
-      return new Date(gig.dateEnd) < now.value
-    } else {
-      return dateStartPlus2h < now.value
-    }
-  })
-})
+const eventsPast = computed(() => getFilteredEventGroups(isGigPast))
 
 // initialization
 useCrealHeadDefault({
