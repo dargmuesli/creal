@@ -1,3 +1,27 @@
+## [6.0.0-beta.2](https://github.com/dargmuesli/creal/compare/6.0.0-beta.1...6.0.0-beta.2) (2026-05-28)
+
+### Features
+
+* **deps:** upgrade @dargmuesli/nuxt-vio to v21 ([261a4ea](https://github.com/dargmuesli/creal/commit/261a4ea651bf036e59bd2a9bc626c919f22b47d9))
+
+### Bug Fixes
+
+* **ci:** add static domain ([35ef2d5](https://github.com/dargmuesli/creal/commit/35ef2d5814acf6d7a50dd57030ded59ae98e8fb8))
+* **ci:** upgrade to dargmuesli/github-actions v5.0.0-beta.1 ([16d0202](https://github.com/dargmuesli/creal/commit/16d0202c7764e172c8ab44cee3b191e5e13b633f))
+* **deps:** update dargmuesli/github-actions to v5.4.0 ([8a074a2](https://github.com/dargmuesli/creal/commit/8a074a2dd56c5c2b4651f0bf80fc16f8cb319191))
+* **docker:** change app directory owner ([eb010a3](https://github.com/dargmuesli/creal/commit/eb010a36ccbb7be12ef0b1336f62c0a971154bc6))
+* **docker:** correct entrypoint inclusion ([8fef418](https://github.com/dargmuesli/creal/commit/8fef418d8596a5d1b69ab4c64584b16c87038a1a))
+* **docker:** correct production environment ([b29e7cc](https://github.com/dargmuesli/creal/commit/b29e7cc036a21e9e04e143638817dd22369757d2))
+* **docker:** include node server script ([1ca9fbe](https://github.com/dargmuesli/creal/commit/1ca9fbe372b14772a349a9ef2db094121e628d4d))
+* **docker:** set url argument in dockerfile ([c8b1c51](https://github.com/dargmuesli/creal/commit/c8b1c511b2ceff106939ca13f602bd4437d7b7c5))
+* schedule release ([0ef0bca](https://github.com/dargmuesli/creal/commit/0ef0bcaf8240c047f362151132cc44f934692c35))
+* schedule release ([c2bcff2](https://github.com/dargmuesli/creal/commit/c2bcff2c1939f91e92dfb6a227778cfaa165b1c1))
+* schedule release ([58092ab](https://github.com/dargmuesli/creal/commit/58092aba1c1411b78eaaaf4fb658d2678a92041b))
+* schedule release ([2555e27](https://github.com/dargmuesli/creal/commit/2555e27a59497d39ff1d57b8e705a04c525c0e11))
+* schedule release ([06d1822](https://github.com/dargmuesli/creal/commit/06d1822892bd417743cb5e48000c7e71e49e359a))
+* schedule release ([40e7ec4](https://github.com/dargmuesli/creal/commit/40e7ec4324b9724659a1e50a2d9782d15543bf55))
+* schedule release ([41d3566](https://github.com/dargmuesli/creal/commit/41d35668aa9274d761986dfd84a0e28dce618953))
+
 ## [6.0.0-beta.1](https://github.com/dargmuesli/creal/compare/5.2.0...6.0.0-beta.1) (2026-01-30)
 
 ### ⚠ BREAKING CHANGES
