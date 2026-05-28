@@ -78,7 +78,6 @@ const isLoading = ref(false)
 const resolvedPlaylistPath = ref<string>()
 const resolvedTrack = ref<string>()
 const title = t('titlePage')
-const DEFAULT_AUDIO_EXTENSION = 'mp3'
 
 // methods
 const fetchPlaylistData = async (prefix?: string) => {
@@ -122,7 +121,7 @@ const init = async () => {
     !playlistDataFetch.items.length
   ) {
     track = pathParts[pathParts.length - 1]
-    playlistPath = pathParts.slice(0, -1).join('/') || undefined
+    playlistPath = getPathWithoutLastPart(pathParts) || undefined
     playlistDataFetch = await fetchPlaylistData(playlistPath)
   }
 
@@ -170,11 +169,7 @@ const download = async (playlistItem: PlaylistItem) => {
   if (!signedUrl) return alertError('Could not get signed url!')
 
   link.setAttribute('href', signedUrl)
-  const downloadFileName = playlistItem.fileName.includes('.')
-    ? playlistItem.fileName
-    : `${playlistItem.fileName}.${DEFAULT_AUDIO_EXTENSION}`
-
-  link.setAttribute('download', downloadFileName)
+  link.setAttribute('download', playlistItem.fileName)
   link.click()
 }
 
@@ -186,6 +181,8 @@ const routePathParts = computed(() => {
 
   return []
 })
+const getPathWithoutLastPart = (pathParts: string[]) =>
+  pathParts.slice(0, -1).join('/')
 const breadcrumbSuffixes = computed(() => {
   if (!resolvedPlaylistPath.value) return
 
@@ -221,7 +218,7 @@ const isOnlyTrackChanged = (pathParts: string[]) => {
   const trackCandidate = pathParts[pathParts.length - 1]
 
   if (!trackCandidate) return false
-  if (pathParts.slice(0, -1).join('/') !== resolvedPlaylistPath.value)
+  if (getPathWithoutLastPart(pathParts) !== resolvedPlaylistPath.value)
     return false
 
   return store.playerData.currentPlaylist.items.some(
