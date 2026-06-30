@@ -1,5 +1,8 @@
 <template>
-  <div class="bg-gray-800 text-gray-50" style="font-family: Inter, sans-serif">
+  <div
+    class="flex bg-gray-800 text-gray-50"
+    style="font-family: Inter, sans-serif"
+  >
     <img
       alt="DJ cReal"
       class="object-cover"
