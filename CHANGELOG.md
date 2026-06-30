@@ -1,3 +1,5 @@
+## [5.3.13](https://github.com/dargmuesli/creal/compare/5.3.12...5.3.13) (2026-06-30)
+
 ## [5.3.12](https://github.com/dargmuesli/creal/compare/5.3.11...5.3.12) (2026-06-25)
 
 ### Bug Fixes
