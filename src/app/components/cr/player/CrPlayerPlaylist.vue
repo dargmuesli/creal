@@ -21,11 +21,12 @@
 </template>
 
 <script setup lang="ts">
+import { getPlaylistPrefix } from '~/utils/player-route'
 const { playlist } = defineProps<{
   playlist: Playlist
 }>()
 
-const route = useRoute()
+const store = useStore()
 const alertError = useAlertError()
 
 // data
@@ -40,9 +41,10 @@ const init = () => {
   }
 }
 const setCoverUrl = async (cover: Cover) => {
-  const key =
-    PLAYER_PREFIX +
-    `${route.query.playlist || ''}${cover.name}.${cover.fileExtension}`
+  const playlistPrefix = getPlaylistPrefix(
+    store.playerData.currentPlaylist?.name,
+  )
+  const key = `${PLAYER_PREFIX}${playlistPrefix}${cover.name}.${cover.fileExtension}`
   const {
     data: { value: signedUrl },
   } = await useFetch('/api/player/signed-url', {

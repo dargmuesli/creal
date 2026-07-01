@@ -50,6 +50,7 @@
 </template>
 
 <script setup lang="ts">
+import { getMixPath } from '~/utils/player-route'
 const store = useStore()
 const { t } = useI18n()
 const { play } = usePlyr()
@@ -157,9 +158,10 @@ const share = async () => {
     return alertError(t('copyError'))
 
   await copyText(
-    `${window.location.origin}/player?playlist=${encodeURIComponent(
+    `${window.location.origin}${getMixPath(
       store.playerData.currentPlaylist.name,
-    )}&track=${encodeURIComponent(store.playerData.currentTrack.fileName)}`,
+      store.playerData.currentTrack.fileName,
+    )}`,
   )
 }
 
