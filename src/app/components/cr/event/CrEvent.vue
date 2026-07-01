@@ -88,7 +88,7 @@ export interface Image {
 }
 
 const { crealEvent, index } = defineProps<{
-  crealEvent: CrealEvent
+  crealEvent: CrealGig
   index: number
 }>()
 
