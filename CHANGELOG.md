@@ -1,3 +1,5 @@
+## [5.3.15](https://github.com/dargmuesli/creal/compare/5.3.14...5.3.15) (2026-07-23)
+
 ## [5.3.14](https://github.com/dargmuesli/creal/compare/5.3.13...5.3.14) (2026-07-10)
 
 ## [5.3.13](https://github.com/dargmuesli/creal/compare/5.3.12...5.3.13) (2026-06-30)
