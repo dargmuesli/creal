@@ -1,5 +1,6 @@
+import { getMixPath, getPlaylistPrefix } from '~/utils/player-route'
+
 export const usePlyr = () => {
-  const route = useRoute()
   const router = useRouter()
   const store = useStore()
   const alertError = useAlertError()
@@ -8,24 +9,14 @@ export const usePlyr = () => {
     play: async (playlistItem: PlaylistItem, playlistPath?: string) => {
       store.playerData.isVisible = true
 
-      // Set query parameter.
-      const queryObject = JSON.parse(JSON.stringify(route.query))
-      const queryObjectTrack = playlistItem.fileName
-
-      // Conditionally update track query parameter.
-      if (queryObject.track !== queryObjectTrack) {
-        queryObject.track = queryObjectTrack
-
-        router.replace({
-          // path: route.path,
-          query: queryObject,
-        })
-      }
+      router.replace({
+        path: getMixPath(playlistPath, playlistItem.fileName),
+      })
 
       // Get meta.
       const key =
         PLAYER_PREFIX +
-        (playlistPath ? playlistPath + '/' : '') +
+        getPlaylistPrefix(playlistPath) +
         playlistItem.fileName +
         '.json'
 
