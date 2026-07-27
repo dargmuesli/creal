@@ -251,11 +251,17 @@ watch(
   async () => {
     const pathParts = routePathParts.value
     const joinedPath = pathParts.join('/') || undefined
-    if (
-      joinedPath === resolvedPlaylistPath.value ||
-      isOnlyTrackChanged(pathParts)
-    )
+
+    // Keep breadcrumb state in sync even when we can skip a refetch.
+    if (joinedPath === resolvedPlaylistPath.value) {
+      resolvedTrack.value = undefined
       return
+    }
+
+    if (isOnlyTrackChanged(pathParts)) {
+      resolvedTrack.value = pathParts[pathParts.length - 1]
+      return
+    }
 
     await init()
   },
