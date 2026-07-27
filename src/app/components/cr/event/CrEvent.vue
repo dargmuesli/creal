@@ -68,8 +68,8 @@
           <VioLink
             v-if="crealEvent.url && crealEvent.url !== ''"
             :aria-label="t('details')"
-            :is-colored="false"
             :icon="false"
+            :is-colored="false"
             :to="crealEvent.url"
           >
             {{ t('details') }}

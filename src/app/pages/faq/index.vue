@@ -8,11 +8,11 @@
     </VioCardStateAlert>
     <CrPaging
       v-if="faqs?.length && paging"
-      :is-previous-allowed="paging.isPreviousAllowed"
       :is-next-allowed="paging.isNextAllowed"
+      :is-previous-allowed="paging.isPreviousAllowed"
       :part-string="paging.partString"
-      :query-previous="paging.queryPrevious"
       :query-next="paging.queryNext"
+      :query-previous="paging.queryPrevious"
     >
       <ul>
         <li

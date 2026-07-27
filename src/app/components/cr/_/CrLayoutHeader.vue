@@ -1,6 +1,6 @@
 <template>
   <header class="mb-8 gap-4">
-    <nav class="flex items-center justify-between gap-4" aria-label="Global">
+    <nav aria-label="Global" class="flex items-center justify-between gap-4">
       <VioButton :aria-label="t('creal')" :to="localePath('/')">
         <span class="text-lg font-bold">{{ t('creal') }}</span>
         <template #prefix>
@@ -12,7 +12,7 @@
         class="justify-center rounded-md p-2.5 text-gray-400 lg:hidden"
         @click="mobileMenuOpen = true"
       >
-        <Bars3Icon class="h-6 w-6" aria-hidden="true" />
+        <Bars3Icon aria-hidden="true" class="h-6 w-6" />
       </VioButton>
       <div class="hidden gap-16 text-xl lg:flex">
         <VioLink
@@ -86,12 +86,12 @@
             </template>
           </VioButton>
           <button
-            type="button"
             class="-m-2.5 rounded-md p-2.5 text-gray-400"
+            type="button"
             @click="mobileMenuOpen = false"
           >
             <!-- <span class="sr-only">Close menu</span> -->
-            <XMarkIcon class="h-6 w-6" aria-hidden="true" />
+            <XMarkIcon aria-hidden="true" class="h-6 w-6" />
           </button>
         </div>
         <div class="mt-6 flow-root">
