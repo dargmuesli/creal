@@ -64,8 +64,6 @@
 </template>
 
 <script setup lang="ts">
-import { getMixPath } from '~/utils/player-route'
-
 const store = useStore()
 const { t } = useI18n()
 const localePath = useLocalePath()
@@ -107,7 +105,10 @@ const fetchPlaylistData = async (prefix?: string) => {
 
   return playlistDataFetch
 }
+let initRequestId = 0
+
 const init = async () => {
+  const requestId = ++initRequestId
   isLoading.value = true
 
   const pathParts = routePathParts.value
@@ -116,14 +117,31 @@ const init = async () => {
   let playlistDataFetch = await fetchPlaylistData(playlistPath)
 
   if (
-    pathParts.length > 1 &&
     !playlistDataFetch.collections.length &&
     !playlistDataFetch.items.length
   ) {
-    track = pathParts[pathParts.length - 1]
-    playlistPath = getPathWithoutLastPart(pathParts) || undefined
-    playlistDataFetch = await fetchPlaylistData(playlistPath)
+    // The path may point at a track rather than a (possibly empty)
+    // playlist. Confirm against the parent playlist's actual items
+    // instead of guessing from the empty result alone.
+    const candidateTrack = pathParts[pathParts.length - 1]
+    const candidateParentPath = getPathWithoutLastPart(pathParts) || undefined
+
+    if (candidateTrack) {
+      const parentDataFetch = await fetchPlaylistData(candidateParentPath)
+
+      if (
+        parentDataFetch.items.some(
+          (playlistItem) => playlistItem.fileName === candidateTrack,
+        )
+      ) {
+        track = candidateTrack
+        playlistPath = candidateParentPath
+        playlistDataFetch = parentDataFetch
+      }
+    }
   }
+
+  if (requestId !== initRequestId) return
 
   resolvedPlaylistPath.value = playlistPath
   resolvedTrack.value = track
@@ -132,12 +150,7 @@ const init = async () => {
     playlistPath ?? store.playerData.currentPlaylist.name
 
   // Try to select and play track as indicated by route path.
-  if (
-    store.playerData.isPaused &&
-    store.playerData.currentPlaylist &&
-    playlistPath &&
-    track
-  ) {
+  if (store.playerData.isPaused && store.playerData.currentPlaylist && track) {
     for (const playlistItem of store.playerData.currentPlaylist.items) {
       if (playlistItem.fileName === track) {
         play(playlistItem, playlistPath)
@@ -171,9 +184,10 @@ const download = async (playlistItem: PlaylistItem) => {
   link.setAttribute('href', signedUrl)
   const signedUrlWithoutQuery = signedUrl.split('?')[0] ?? signedUrl
   const signedUrlPathPart = signedUrlWithoutQuery?.split('/').at(-1)
+  const fallbackFileName = `${playlistItem.fileName}.${playlistItem.fileExtension}`
   const downloadFileName = signedUrlPathPart
-    ? decodeURIComponent(signedUrlPathPart)
-    : playlistItem.fileName
+    ? decodeUriComponentSafe(signedUrlPathPart)
+    : fallbackFileName
 
   link.setAttribute('download', downloadFileName)
   link.click()
@@ -217,15 +231,15 @@ const breadcrumbSuffixes = computed(() => {
 // lifecycle
 
 const isOnlyTrackChanged = (pathParts: string[]) => {
-  if (!resolvedPlaylistPath.value || !store.playerData.currentPlaylist) {
-    return false
-  }
+  if (!store.playerData.currentPlaylist) return false
 
   const trackCandidate = pathParts[pathParts.length - 1]
 
   if (!trackCandidate) return false
-  if (getPathWithoutLastPart(pathParts) !== resolvedPlaylistPath.value)
-    return false
+
+  const candidateParentPath = getPathWithoutLastPart(pathParts) || undefined
+
+  if (candidateParentPath !== resolvedPlaylistPath.value) return false
 
   return store.playerData.currentPlaylist.items.some(
     (playlistItem) => playlistItem.fileName === trackCandidate,
@@ -236,7 +250,7 @@ watch(
   () => route.params.path,
   async () => {
     const pathParts = routePathParts.value
-    const joinedPath = pathParts.join('/')
+    const joinedPath = pathParts.join('/') || undefined
     if (
       joinedPath === resolvedPlaylistPath.value ||
       isOnlyTrackChanged(pathParts)

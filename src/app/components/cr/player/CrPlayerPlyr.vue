@@ -50,7 +50,6 @@
 </template>
 
 <script setup lang="ts">
-import { getMixPath } from '~/utils/player-route'
 const store = useStore()
 const { t } = useI18n()
 const { play } = usePlyr()

@@ -1,7 +1,6 @@
-import { getMixPath, getPlaylistPrefix } from '~/utils/player-route'
-
 export const usePlyr = () => {
   const router = useRouter()
+  const localePath = useLocalePath()
   const store = useStore()
   const alertError = useAlertError()
 
@@ -10,7 +9,7 @@ export const usePlyr = () => {
       store.playerData.isVisible = true
 
       router.replace({
-        path: getMixPath(playlistPath, playlistItem.fileName),
+        path: localePath(getMixPath(playlistPath, playlistItem.fileName)),
       })
 
       // Get meta.

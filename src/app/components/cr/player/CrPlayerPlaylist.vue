@@ -21,7 +21,6 @@
 </template>
 
 <script setup lang="ts">
-import { getPlaylistPrefix } from '~/utils/player-route'
 const { playlist } = defineProps<{
   playlist: Playlist
 }>()

@@ -7,7 +7,7 @@ export const getSignedUrl = async ({
 }) => {
   const key =
     PLAYER_PREFIX +
-    (playlistPath ? playlistPath + '/' : '') +
+    getPlaylistPrefix(playlistPath) +
     playlistItem.fileName +
     '.' +
     playlistItem.fileExtension

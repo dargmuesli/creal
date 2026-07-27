@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { getMixPath } from '~/utils/player-route'
-
 const localePath = useLocalePath()
 const route = useRoute()
 
