@@ -13,8 +13,8 @@ const PAGE_PATH = '/'
 testA11y(PAGE_PATH)
 testOgImage({
   dynamic: {
-    de: 'a_~RWluIEJpbGQgdm9uIERKIGNSZWFsLCBzZWluIExvZ28gdW5kIE5hbWUgc293aWUgZGVyIFRpdGVsIGRlciBTZWl0ZS4,c_Default.takumi,description_DJ+cReals+Webseite.,title_cReal,headline_DJ+und+Event-Organisator,p_Ii9kZSI.png',
-    en: `a_~QSBwaWN0dXJlIG9mIERKIGNSZWFsLCBoaXMgbG9nbyBhbmQgbmFtZSBhcyB3ZWxsIGFzIHBhZ2UncyB0aXRsZS4,c_Default.takumi,description_DJ+cReal's+website.,title_cReal,headline_DJ+and+event+organizer.png`,
+    de: 'a_~RWluIEJpbGQgdm9uIERKIGNSZWFsLCBzZWluIExvZ28gdW5kIE5hbWUgc293aWUgZGVyIFRpdGVsIGRlciBTZWl0ZS4,c_Default.takumi,description_DJ+cReals+Webseite.,title_cReal,headline_DJ+und+Event-Organisator,p_Ii9kZSI,s_o4ri_f3VWLu1k36B.png',
+    en: `a_~QSBwaWN0dXJlIG9mIERKIGNSZWFsLCBoaXMgbG9nbyBhbmQgbmFtZSBhcyB3ZWxsIGFzIHBhZ2UncyB0aXRsZS4,c_Default.takumi,description_DJ+cReal's+website.,title_cReal,headline_DJ+and+event+organizer,s_dni6-DWD765dGH3t.png`,
   },
 })
 testPageLoad(PAGE_PATH)

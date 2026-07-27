@@ -3,11 +3,11 @@
     <slot />
     <CrPagingControls
       v-if="isPreviousAllowed || isNextAllowed"
-      :is-previous-allowed="isPreviousAllowed"
       :is-next-allowed="isNextAllowed"
+      :is-previous-allowed="isPreviousAllowed"
       :part-string="partString"
-      :query-previous="queryPrevious"
       :query-next="queryNext"
+      :query-previous="queryPrevious"
     />
   </div>
 </template>

@@ -1,19 +1,19 @@
 <template>
-  <div class="bg-gray-800 text-gray-50" style="font-family: Inter, sans-serif">
+  <div class="flex bg-gray-800 text-gray-50">
     <img
       alt="DJ cReal"
       class="object-cover"
+      height="630"
       src="/assets/static/images/og.jpg"
       width="400"
-      height="630"
     />
     <div class="ml-16 flex flex-col justify-center">
       <img
         alt="DJ cReal"
         class="absolute left-25 opacity-[0.025]"
+        height="700"
         src="/assets/static/logos/creal.svg"
         width="700"
-        height="700"
       />
       <div
         class="mt-20 text-[40px] font-semibold text-gray-300"

@@ -4,8 +4,8 @@
     <div class="inline-grid grid-cols-2">
       <VioButton
         :aria-label="t('previous')"
-        :icon="false"
         :disabled="!isPreviousAllowed"
+        :icon="false"
         :wrapper-class="'mx-2'"
         @click="goPrevious"
       >
@@ -13,8 +13,8 @@
       </VioButton>
       <VioButton
         :aria-label="t('next')"
-        :icon="false"
         :disabled="!isNextAllowed"
+        :icon="false"
         :wrapper-class="'mx-2'"
         @click="goNext"
       >

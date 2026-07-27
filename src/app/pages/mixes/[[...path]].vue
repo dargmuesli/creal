@@ -18,8 +18,8 @@
             :key="collection.name"
           >
             <VioLink
-              :is-colored="false"
               class="block"
+              :is-colored="false"
               :title="collection.name"
               :to="getPlaylistLink(collection.name)"
             >

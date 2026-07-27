@@ -18,16 +18,16 @@
                 :to="testimonial.link"
               >
                 <img
+                  :alt="t('imageAlt', { name: testimonial.name })"
                   class="absolute inset-0 h-full w-full rounded-2xl bg-gray-800 object-cover object-top shadow-2xl"
                   :src="pictureSource"
-                  :alt="t('imageAlt', { name: testimonial.name })"
                 />
               </VioLink>
               <img
                 v-else
+                :alt="t('imageAlt', { name: testimonial.name })"
                 class="absolute inset-0 h-full w-full rounded-2xl bg-gray-800 object-cover object-top shadow-2xl"
                 :src="pictureSource"
-                :alt="t('imageAlt', { name: testimonial.name })"
               />
             </div>
           </div>
@@ -36,10 +36,10 @@
           >
             <figure class="relative isolate pt-6 sm:pt-12">
               <svg
-                viewBox="0 0 162 128"
-                fill="none"
                 aria-hidden="true"
                 class="absolute top-0 left-0 -z-10 h-32 stroke-white/20"
+                fill="none"
+                viewBox="0 0 162 128"
               >
                 <path
                   id="b56e9dab-6ccb-4d32-ad02-6b4bb5d9bbeb"
@@ -57,9 +57,9 @@
               <figcaption class="mt-8 text-base">
                 <VioLink
                   v-if="testimonial.link"
-                  :to="testimonial.link"
-                  :is-colored="false"
                   class="font-semibold text-yellow-500"
+                  :is-colored="false"
+                  :to="testimonial.link"
                 >
                   {{ testimonial.name }}
                 </VioLink>
