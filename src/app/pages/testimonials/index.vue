@@ -9,11 +9,11 @@
     <div v-else-if="items?.length && paging" class="flex flex-col gap-32">
       <CrPaging
         class="flex flex-col gap-4 lg:gap-8"
-        :is-previous-allowed="paging.isPreviousAllowed"
         :is-next-allowed="paging.isNextAllowed"
+        :is-previous-allowed="paging.isPreviousAllowed"
         :part-string="paging.partString"
-        :query-previous="paging.queryPrevious"
         :query-next="paging.queryNext"
+        :query-previous="paging.queryPrevious"
       >
         <ul>
           <li

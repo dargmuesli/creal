@@ -1,7 +1,5 @@
 import { parseURL } from 'ufo'
 
-export const DARGSTACK_SECRET_UNUSED_THIRD_PARTY = 'UNSET THIRD PARTY SECRET'
-
 const crealS3EndpointHost = `${process.env.NUXT_PUBLIC_CREAL_S3_BUCKET}.${parseURL(process.env.NUXT_PUBLIC_CREAL_S3_ENDPOINT).host}`
 
 export const GET_CSP = ({ siteUrl }: { siteUrl: URL }) => {

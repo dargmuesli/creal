@@ -7,11 +7,11 @@
         >
           {{ t('cities') }}
           <VioLink
-            :to="localePath('/events')"
-            :is-colored="false"
             class="font-semibold text-white"
+            :is-colored="false"
+            :to="localePath('/events')"
           >
-            <span class="absolute inset-0" aria-hidden="true" />
+            <span aria-hidden="true" class="absolute inset-0" />
             {{ t('viewAll') }}
             <span aria-hidden="true">{{ t('arrow') }}</span>
           </VioLink>
