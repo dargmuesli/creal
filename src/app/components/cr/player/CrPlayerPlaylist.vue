@@ -21,11 +21,11 @@
 </template>
 
 <script setup lang="ts">
-const { playlist } = defineProps<{
+const { playlist, playlistPath } = defineProps<{
   playlist: Playlist
+  playlistPath?: string
 }>()
 
-const store = useStore()
 const alertError = useAlertError()
 
 // data
@@ -40,9 +40,7 @@ const init = () => {
   }
 }
 const setCoverUrl = async (cover: Cover) => {
-  const playlistPrefix = getPlaylistPrefix(
-    store.playerData.currentPlaylist?.name,
-  )
+  const playlistPrefix = getPlaylistPrefix(playlistPath)
   const key = `${PLAYER_PREFIX}${playlistPrefix}${cover.name}.${cover.fileExtension}`
   const {
     data: { value: signedUrl },

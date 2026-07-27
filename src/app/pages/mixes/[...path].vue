@@ -23,7 +23,11 @@
               :title="collection.name"
               :to="getPlaylistLink(collection.name)"
             >
-              <CrPlayerPlaylist class="h-full" :playlist="collection" />
+              <CrPlayerPlaylist
+                class="h-full"
+                :playlist="collection"
+                :playlist-path="getPlaylistPath(collection.name)"
+              />
             </VioLink>
           </li>
         </ul>
@@ -75,7 +79,7 @@ const { play } = usePlyr()
 const isLoading = ref(false)
 const resolvedPlaylistPath = ref<string>()
 const resolvedTrack = ref<string>()
-const title = t('titlePage')
+const title = computed(() => t('titlePage'))
 
 // methods
 const fetchPlaylistData = async (prefix?: string) => {
@@ -146,6 +150,7 @@ const init = async () => {
   resolvedPlaylistPath.value = playlistPath
   resolvedTrack.value = track
   store.playerData.currentPlaylist = playlistDataFetch
+  // `name` is overloaded to store the resolved playlist path for routing.
   store.playerData.currentPlaylist.name =
     playlistPath ?? store.playerData.currentPlaylist.name
 
@@ -153,7 +158,7 @@ const init = async () => {
   if (store.playerData.isPaused && store.playerData.currentPlaylist && track) {
     for (const playlistItem of store.playerData.currentPlaylist.items) {
       if (playlistItem.fileName === track) {
-        play(playlistItem, playlistPath)
+        play(playlistItem, playlistPath, true)
         break
       }
     }
@@ -161,14 +166,15 @@ const init = async () => {
 
   isLoading.value = false
 }
-const titleHead = () =>
+const titleHead = computed(() =>
   store.playerData.currentTrack?.fileName && !store.playerData.isPaused
     ? store.playerData.currentTrack.fileName
-    : title
+    : title.value,
+)
+const getPlaylistPath = (name: string) =>
+  [resolvedPlaylistPath.value, name].filter(Boolean).join('/')
 const getPlaylistLink = (name: string) => {
-  const playlistPath = [resolvedPlaylistPath.value, name]
-    .filter(Boolean)
-    .join('/')
+  const playlistPath = getPlaylistPath(name)
 
   return localePath(getMixPath(playlistPath))
 }
@@ -271,7 +277,7 @@ watch(
 await init()
 useCrealHeadDefault({
   description: t('description'),
-  title: titleHead(),
+  title: titleHead,
 })
 </script>
 

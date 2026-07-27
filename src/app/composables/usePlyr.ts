@@ -5,12 +5,12 @@ export const usePlyr = () => {
   const alertError = useAlertError()
 
   return {
-    play: async (playlistItem: PlaylistItem, playlistPath?: string) => {
+    play: async (
+      playlistItem: PlaylistItem,
+      playlistPath?: string,
+      skipRoute = false,
+    ) => {
       store.playerData.isVisible = true
-
-      router.replace({
-        path: localePath(getMixPath(playlistPath, playlistItem.fileName)),
-      })
 
       // Get meta.
       const key =
@@ -22,6 +22,12 @@ export const usePlyr = () => {
       const signedUrl = await getSignedUrl({ playlistItem, playlistPath })
 
       if (!signedUrl) return alertError('Could not get signed url!')
+
+      if (!skipRoute) {
+        router.replace({
+          path: localePath(getMixPath(playlistPath, playlistItem.fileName)),
+        })
+      }
 
       store.playerData.currentTrack = {
         ...playlistItem,
