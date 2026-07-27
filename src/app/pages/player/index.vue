@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const localePath = useLocalePath()
+const mixLocalePath = useMixLocalePath()
 const route = useRoute()
 
 const playlist =
@@ -7,8 +7,11 @@ const playlist =
 const track =
   typeof route.query.track === 'string' ? route.query.track : undefined
 
-// Redirects to /mixes when no query params (getMixPath returns MIXES_PATH).
-await navigateTo(localePath(getMixPath(playlist, track)), {
-  redirectCode: 301,
-})
+// Redirects legacy query-param links to the new path-based /mixes scheme.
+await navigateTo(
+  mixLocalePath(
+    track ? getTrackPath(playlist, track) : getCollectionPath(playlist),
+  ),
+  { redirectCode: 301 },
+)
 </script>

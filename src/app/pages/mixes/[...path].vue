@@ -1,8 +1,8 @@
 <template>
   <div class="container mx-auto">
     <section>
-      <VioLayoutBreadcrumbs :suffixes="breadcrumbSuffixes">
-        {{ title }}
+      <VioLayoutBreadcrumbs :prefixes="breadcrumbPrefixes">
+        {{ currentLabel }}
       </VioLayoutBreadcrumbs>
       <div v-if="isLoading" class="text-center">
         <VioLoaderIndicatorSpinner class="m-auto h-32 w-32" />
@@ -26,7 +26,7 @@
               <CrPlayerPlaylist
                 class="h-full"
                 :playlist="collection"
-                :playlist-path="getPlaylistPath(collection.name)"
+                :playlist-path="resolvedPlaylistPath"
               />
             </VioLink>
           </li>
@@ -40,11 +40,8 @@
             :key="playlistItem.fileName"
             :class="{
               'text-yellow-500':
-                resolvedPlaylistPath &&
-                store.playerData.currentPlaylist &&
+                resolvedPlaylistPath === store.playerData.currentPlaylistPath &&
                 store.playerData.currentTrack &&
-                resolvedPlaylistPath ===
-                  store.playerData.currentPlaylist.name &&
                 playlistItem.fileName ===
                   store.playerData.currentTrack.fileName,
             }"
@@ -70,10 +67,14 @@
 <script setup lang="ts">
 const store = useStore()
 const { t } = useI18n()
-const localePath = useLocalePath()
+const mixLocalePath = useMixLocalePath()
 const route = useRoute()
 const alertError = useAlertError()
 const { play } = usePlyr()
+// Captured synchronously: navigateTo() needs the Nuxt app context, which
+// is only implicitly available before the first `await` — init() calls it
+// after awaiting a fetch, so it must be restored explicitly.
+const nuxtApp = useNuxtApp()
 
 // data
 const isLoading = ref(false)
@@ -82,6 +83,9 @@ const resolvedTrack = ref<string>()
 const title = computed(() => t('titlePage'))
 
 // methods
+// $fetch, not useFetch: called repeatedly (pagination loop) and from the
+// route watcher after prior awaits — well outside the synchronous setup
+// call useFetch's context tracking and auto-key deduplication require.
 const fetchPlaylistData = async (prefix?: string) => {
   let continuationToken: string | undefined
   const playlistDataFetch = {
@@ -92,7 +96,7 @@ const fetchPlaylistData = async (prefix?: string) => {
   } as Playlist
 
   do {
-    const { data } = await useFetch('/api/player/playlists', {
+    const data = await $fetch<FetchPlaylist>('/api/player/playlists', {
       params: {
         ...(continuationToken && {
           'continuation-token': continuationToken,
@@ -103,11 +107,36 @@ const fetchPlaylistData = async (prefix?: string) => {
       },
     })
 
-    mergeByKey(playlistDataFetch, data.value?.playlistData, 'name')
-    continuationToken = data.value?.nextContinuationToken
+    mergeByKey(playlistDataFetch, data?.playlistData, 'name')
+    continuationToken = data?.nextContinuationToken
   } while (continuationToken)
 
   return playlistDataFetch
+}
+const getPathWithoutLastPart = (pathParts: string[]) =>
+  pathParts.slice(0, -1).join('/')
+const isTrackInPlaylist = (
+  playlistData: Playlist | undefined,
+  trackCandidate: string | undefined,
+) =>
+  !!trackCandidate &&
+  !!playlistData?.items.some(
+    (playlistItem) => playlistItem.fileName === trackCandidate,
+  )
+// A trailing slash unambiguously means "collection" (an S3 prefix), no
+// trailing slash means "track" (an S3 object key) — see getCollectionPath /
+// getTrackPath. This makes path resolution deterministic: there is never a
+// need to guess whether a URL segment names a folder or a file.
+const resolveRoutePath = () => {
+  const pathParts = routePathParts.value
+  const isCollectionRoute = pathParts.length === 0 || route.path.endsWith('/')
+
+  return isCollectionRoute
+    ? { playlistPath: pathParts.join('/') || undefined, track: undefined }
+    : {
+        playlistPath: getPathWithoutLastPart(pathParts) || undefined,
+        track: pathParts[pathParts.length - 1],
+      }
 }
 let initRequestId = 0
 
@@ -115,48 +144,40 @@ const init = async () => {
   const requestId = ++initRequestId
   isLoading.value = true
 
-  const pathParts = routePathParts.value
-  let playlistPath = pathParts.join('/') || undefined
-  let track: string | undefined
-  let playlistDataFetch = await fetchPlaylistData(playlistPath)
-
-  if (
-    !playlistDataFetch.collections.length &&
-    !playlistDataFetch.items.length
-  ) {
-    // The path may point at a track rather than a (possibly empty)
-    // playlist. Confirm against the parent playlist's actual items
-    // instead of guessing from the empty result alone.
-    const candidateTrack = pathParts[pathParts.length - 1]
-    const candidateParentPath = getPathWithoutLastPart(pathParts) || undefined
-    const parentDataFetch = candidateTrack
-      ? await fetchPlaylistData(candidateParentPath)
-      : undefined
-
-    if (isTrackInPlaylist(parentDataFetch, candidateTrack)) {
-      track = candidateTrack
-      playlistPath = candidateParentPath
-      playlistDataFetch = parentDataFetch!
-    }
-  }
+  const { playlistPath, track } = resolveRoutePath()
+  const playlistDataFetch = await fetchPlaylistData(playlistPath)
 
   if (requestId !== initRequestId) return
+
+  if (track && !isTrackInPlaylist(playlistDataFetch, track)) {
+    // Non-canonical URL (missing trailing slash) whose last segment isn't
+    // actually a track here either: redirect to the canonical collection
+    // URL instead of silently rendering the wrong thing. This re-enters
+    // init() via the route watcher with a definitive collection route.
+    await nuxtApp.runWithContext(() =>
+      navigateTo(
+        mixLocalePath(getCollectionPath(routePathParts.value.join('/'))),
+        {
+          redirectCode: 301,
+          replace: true,
+        },
+      ),
+    )
+    return
+  }
 
   resolvedPlaylistPath.value = playlistPath
   resolvedTrack.value = track
   store.playerData.currentPlaylist = playlistDataFetch
-  // `name` is overloaded to store the resolved playlist path for routing.
-  store.playerData.currentPlaylist.name =
-    playlistPath ?? store.playerData.currentPlaylist.name
+  store.playerData.currentPlaylistPath = playlistPath
 
   // Try to select and play track as indicated by route path.
-  if (store.playerData.isPaused && store.playerData.currentPlaylist && track) {
-    for (const playlistItem of store.playerData.currentPlaylist.items) {
-      if (playlistItem.fileName === track) {
-        play(playlistItem, playlistPath, true)
-        break
-      }
-    }
+  if (store.playerData.isPaused && track) {
+    const playlistItem = playlistDataFetch.items.find(
+      (item) => item.fileName === track,
+    )
+
+    if (playlistItem) play(playlistItem, playlistPath, true)
   }
 
   isLoading.value = false
@@ -168,11 +189,8 @@ const titleHead = computed(() =>
 )
 const getPlaylistPath = (name: string) =>
   joinPathSegments(resolvedPlaylistPath.value, name)
-const getPlaylistLink = (name: string) => {
-  const playlistPath = getPlaylistPath(name)
-
-  return localePath(getMixPath(playlistPath))
-}
+const getPlaylistLink = (name: string) =>
+  mixLocalePath(getCollectionPath(getPlaylistPath(name)))
 const download = async (playlistItem: PlaylistItem) => {
   const link = document.createElement('a')
   const signedUrl = await getSignedUrl({
@@ -193,77 +211,77 @@ const download = async (playlistItem: PlaylistItem) => {
   link.setAttribute('download', downloadFileName)
   link.click()
 }
-const getPathWithoutLastPart = (pathParts: string[]) =>
-  pathParts.slice(0, -1).join('/')
-const isTrackInPlaylist = (
-  playlistData: Playlist | undefined,
-  trackCandidate: string | undefined,
-) =>
-  !!trackCandidate &&
-  !!playlistData?.items.some(
-    (playlistItem) => playlistItem.fileName === trackCandidate,
-  )
 
 // computations
 const routePathParts = computed(() => {
-  if (Array.isArray(route.params.path)) return route.params.path
+  // A trailing slash on the URL surfaces as a trailing empty segment here
+  // (e.g. `['Muesli Mix', '']`) — strip it so it can't corrupt playlistPath
+  // into a value with an embedded trailing slash.
+  if (Array.isArray(route.params.path)) {
+    return route.params.path.filter(Boolean)
+  }
 
   if (typeof route.params.path === 'string') return [route.params.path]
 
   return []
 })
-const breadcrumbSuffixes = computed(() => {
+// VioLayoutBreadcrumbs always links its own slot content to the current
+// route.path (it's the "you are here" label, not a root link) — so "Mixes"
+// and every ancestor level must go through `prefixes` instead, leaving only
+// the deepest segment (the actual current page) in the slot.
+const breadcrumbPrefixes = computed(() => {
+  // At root, the slot itself already renders "Mixes" as the (self-linked)
+  // current page — don't also list it as a prefix, or it shows up twice.
   if (!resolvedPlaylistPath.value) return
 
-  const breadcrumbSuffixes = []
+  const prefixes = [
+    { name: title.value, to: mixLocalePath(getCollectionPath()) },
+  ]
   const playlistPathParts = resolvedPlaylistPath.value.split('/')
+  // A resolved track keeps the whole playlist path clickable, since the
+  // track itself (not its playlist) is the current page in that case.
+  const clickableCount = resolvedTrack.value
+    ? playlistPathParts.length
+    : playlistPathParts.length - 1
 
-  for (const [index, playlistPathPart] of playlistPathParts.entries()) {
+  for (let index = 0; index < clickableCount; index++) {
     const playlistPath = playlistPathParts.slice(0, index + 1).join('/')
 
-    breadcrumbSuffixes.push({
-      name: playlistPathPart,
-      to: localePath(
-        getMixPath(
-          playlistPath,
-          index === playlistPathParts.length - 1
-            ? resolvedTrack.value
-            : undefined,
-        ),
-      ),
+    prefixes.push({
+      name: playlistPathParts[index]!,
+      to: mixLocalePath(getCollectionPath(playlistPath)),
     })
   }
 
-  return breadcrumbSuffixes
+  return prefixes
+})
+const currentLabel = computed(() => {
+  if (resolvedTrack.value) return resolvedTrack.value
+
+  if (resolvedPlaylistPath.value) {
+    const playlistPathParts = resolvedPlaylistPath.value.split('/')
+
+    return playlistPathParts[playlistPathParts.length - 1]
+  }
+
+  return title.value
 })
 
 // lifecycle
-
-const isOnlyTrackChanged = (pathParts: string[]) => {
-  const candidateParentPath = getPathWithoutLastPart(pathParts) || undefined
-
-  if (candidateParentPath !== resolvedPlaylistPath.value) return false
-
-  return isTrackInPlaylist(
-    store.playerData.currentPlaylist,
-    pathParts[pathParts.length - 1],
-  )
-}
-
 watch(
-  () => route.params.path,
+  () => route.path,
   async () => {
-    const pathParts = routePathParts.value
-    const joinedPath = pathParts.join('/') || undefined
+    const { playlistPath, track } = resolveRoutePath()
 
-    // Keep breadcrumb state in sync even when we can skip a refetch.
-    if (joinedPath === resolvedPlaylistPath.value) {
-      resolvedTrack.value = undefined
-      return
-    }
-
-    if (isOnlyTrackChanged(pathParts)) {
-      resolvedTrack.value = pathParts[pathParts.length - 1]
+    // Keep breadcrumb/highlight state in sync even when we can skip a
+    // refetch because the playlist itself hasn't changed.
+    if (playlistPath === resolvedPlaylistPath.value) {
+      resolvedTrack.value = isTrackInPlaylist(
+        store.playerData.currentPlaylist,
+        track,
+      )
+        ? track
+        : undefined
       return
     }
 

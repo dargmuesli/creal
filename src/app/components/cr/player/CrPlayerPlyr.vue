@@ -111,7 +111,7 @@ const initPlyr = (plyr: { player: Plyr }) => {
     const nextTrack = trackList.slice(currentIndex + 1).find(Boolean)
 
     if (nextTrack) {
-      play(nextTrack, currentPlaylist.name)
+      play(nextTrack, store.playerData.currentPlaylistPath)
     }
   })
   plyr.player.on('pause', () => {
@@ -149,16 +149,12 @@ const initPlyr = (plyr: { player: Plyr }) => {
 }
 const { copy: copyText } = useCopy()
 const share = async () => {
-  if (
-    !window ||
-    !store.playerData.currentPlaylist?.name ||
-    !store.playerData.currentTrack?.fileName
-  )
+  if (!window || !store.playerData.currentTrack?.fileName)
     return alertError(t('copyError'))
 
   await copyText(
-    `${window.location.origin}${getMixPath(
-      store.playerData.currentPlaylist.name,
+    `${window.location.origin}${getTrackPath(
+      store.playerData.currentPlaylistPath,
       store.playerData.currentTrack.fileName,
     )}`,
   )

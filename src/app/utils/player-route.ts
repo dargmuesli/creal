@@ -11,28 +11,26 @@ export const decodeUriComponentSafe = (value: string) => {
 export const joinPathSegments = (...parts: (string | undefined)[]) =>
   parts.filter(Boolean).join('/')
 
-const joinMixPath = (segments: string[]) =>
-  segments.length
-    ? `${MIXES_PATH}/${segments.map((segment) => encodeURIComponent(segment)).join('/')}`
+const pathToSegments = (playlistPath?: string) =>
+  playlistPath ? playlistPath.split('/').filter(Boolean) : []
+
+const buildMixPath = (segments: string[], trailingSlash: boolean) => {
+  const encoded = segments.map((segment) => encodeURIComponent(segment))
+  const path = encoded.length
+    ? `${MIXES_PATH}/${encoded.join('/')}`
     : MIXES_PATH
 
-export const normalizePlaylistPath = (playlistPath?: string) =>
-  playlistPath && playlistPath !== 'root' ? playlistPath : undefined
-
-export const getMixPath = (playlistPath?: string, track?: string) => {
-  const normalizedPlaylistPath = normalizePlaylistPath(playlistPath)
-  const segments = [
-    ...(normalizedPlaylistPath
-      ? normalizedPlaylistPath.split('/').filter(Boolean)
-      : []),
-    ...(track ? [track] : []),
-  ]
-
-  return joinMixPath(segments)
+  return trailingSlash ? `${path}/` : path
 }
 
-export const getPlaylistPrefix = (playlistPath?: string) => {
-  const normalizedPlaylistPath = normalizePlaylistPath(playlistPath)
+// A trailing slash denotes a collection (browsable S3 prefix), mirroring
+// how S3 itself distinguishes a "folder" prefix from an object key.
+export const getCollectionPath = (playlistPath?: string) =>
+  buildMixPath(pathToSegments(playlistPath), true)
 
-  return normalizedPlaylistPath ? `${normalizedPlaylistPath}/` : ''
-}
+// No trailing slash denotes a track (a concrete S3 object key).
+export const getTrackPath = (playlistPath: string | undefined, track: string) =>
+  buildMixPath([...pathToSegments(playlistPath), track], false)
+
+export const getPlaylistPrefix = (playlistPath?: string) =>
+  playlistPath ? `${playlistPath}/` : ''

@@ -48,6 +48,11 @@ export interface FetchPlaylist {
 
 export interface PlayerData {
   currentPlaylist: Ref<Playlist | undefined>
+  // The S3 prefix (no PLAYER_PREFIX, no trailing slash, undefined at root)
+  // of the currently displayed playlist. This is the single source of
+  // truth for routing/prefix building; `currentPlaylist.name` is display
+  // text only and must never be used for path construction.
+  currentPlaylistPath: Ref<string | undefined>
   currentTrack: Ref<(PlaylistItem & { meta?: PlaylistItemMeta }) | undefined>
   isPaused: Ref<boolean>
   isVisible: Ref<boolean>
