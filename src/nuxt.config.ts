@@ -13,8 +13,10 @@ export default defineNuxtConfig(
         private: {
           creal: {
             s3: {
-              accessKeyId: '',
-              secretAccessKey: '',
+              accessKey: {
+                id: '',
+                secret: '',
+              },
             },
           },
         },
