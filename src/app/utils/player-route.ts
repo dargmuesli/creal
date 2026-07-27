@@ -8,6 +8,9 @@ export const decodeUriComponentSafe = (value: string) => {
   }
 }
 
+export const joinPathSegments = (...parts: (string | undefined)[]) =>
+  parts.filter(Boolean).join('/')
+
 const joinMixPath = (segments: string[]) =>
   segments.length
     ? `${MIXES_PATH}/${segments.map((segment) => encodeURIComponent(segment)).join('/')}`

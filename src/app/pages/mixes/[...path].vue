@@ -129,19 +129,14 @@ const init = async () => {
     // instead of guessing from the empty result alone.
     const candidateTrack = pathParts[pathParts.length - 1]
     const candidateParentPath = getPathWithoutLastPart(pathParts) || undefined
+    const parentDataFetch = candidateTrack
+      ? await fetchPlaylistData(candidateParentPath)
+      : undefined
 
-    if (candidateTrack) {
-      const parentDataFetch = await fetchPlaylistData(candidateParentPath)
-
-      if (
-        parentDataFetch.items.some(
-          (playlistItem) => playlistItem.fileName === candidateTrack,
-        )
-      ) {
-        track = candidateTrack
-        playlistPath = candidateParentPath
-        playlistDataFetch = parentDataFetch
-      }
+    if (isTrackInPlaylist(parentDataFetch, candidateTrack)) {
+      track = candidateTrack
+      playlistPath = candidateParentPath
+      playlistDataFetch = parentDataFetch!
     }
   }
 
@@ -172,7 +167,7 @@ const titleHead = computed(() =>
     : title.value,
 )
 const getPlaylistPath = (name: string) =>
-  [resolvedPlaylistPath.value, name].filter(Boolean).join('/')
+  joinPathSegments(resolvedPlaylistPath.value, name)
 const getPlaylistLink = (name: string) => {
   const playlistPath = getPlaylistPath(name)
 
@@ -189,7 +184,7 @@ const download = async (playlistItem: PlaylistItem) => {
 
   link.setAttribute('href', signedUrl)
   const signedUrlWithoutQuery = signedUrl.split('?')[0] ?? signedUrl
-  const signedUrlPathPart = signedUrlWithoutQuery?.split('/').at(-1)
+  const signedUrlPathPart = signedUrlWithoutQuery.split('/').at(-1)
   const fallbackFileName = `${playlistItem.fileName}.${playlistItem.fileExtension}`
   const downloadFileName = signedUrlPathPart
     ? decodeUriComponentSafe(signedUrlPathPart)
@@ -200,6 +195,14 @@ const download = async (playlistItem: PlaylistItem) => {
 }
 const getPathWithoutLastPart = (pathParts: string[]) =>
   pathParts.slice(0, -1).join('/')
+const isTrackInPlaylist = (
+  playlistData: Playlist | undefined,
+  trackCandidate: string | undefined,
+) =>
+  !!trackCandidate &&
+  !!playlistData?.items.some(
+    (playlistItem) => playlistItem.fileName === trackCandidate,
+  )
 
 // computations
 const routePathParts = computed(() => {
@@ -237,18 +240,13 @@ const breadcrumbSuffixes = computed(() => {
 // lifecycle
 
 const isOnlyTrackChanged = (pathParts: string[]) => {
-  if (!store.playerData.currentPlaylist) return false
-
-  const trackCandidate = pathParts[pathParts.length - 1]
-
-  if (!trackCandidate) return false
-
   const candidateParentPath = getPathWithoutLastPart(pathParts) || undefined
 
   if (candidateParentPath !== resolvedPlaylistPath.value) return false
 
-  return store.playerData.currentPlaylist.items.some(
-    (playlistItem) => playlistItem.fileName === trackCandidate,
+  return isTrackInPlaylist(
+    store.playerData.currentPlaylist,
+    pathParts[pathParts.length - 1],
   )
 }
 
