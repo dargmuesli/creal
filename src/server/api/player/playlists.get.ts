@@ -65,51 +65,117 @@ const getPlaylist = (playlistDataExtended: PlaylistExtended): Playlist => {
     }
   }
 
-  const subCollections: Playlist[] = []
-
-  for (const collection of playlistDataExtended.collections) {
-    subCollections.push(getPlaylist(collection))
-  }
-
   // Leave out the helper properties `covers` and `metas`.
   return {
     name: playlistDataExtended.name,
-    collections: subCollections,
+    collections: playlistDataExtended.collections,
     items: playlistDataExtended.items.sort(itemSort),
     cover: playlistDataExtended.cover,
   }
 }
 
-const getPlaylistExtended = (
-  pathParts: string[],
-  size: number,
-  root = 'root',
-) => {
-  const playlistDataExtended: PlaylistExtended = {
-    name: root,
-    collections: [],
-    items: [],
-    cover: undefined,
-    covers: [],
-    metas: [],
+const useFetchPlaylist = () => {
+  const event = useEvent()
+  const config = useRuntimeConfig()
+  const { client: s3 } = useS3()
+
+  const { req } = event.node
+  const urlSearchParams = parseQuery(parseURL(req.url).search)
+
+  const continuationToken = urlSearchParams['continuation-token']
+
+  if (Array.isArray(continuationToken)) {
+    throw createError({
+      status: 400,
+      statusText: 'Continuation token is an array',
+    })
   }
 
-  if (pathParts.length === 1) {
-    // An item.
-    const itemName = pathParts[0]
+  const paramPrefix = urlSearchParams.prefix
 
-    if (!itemName) return
+  if (Array.isArray(paramPrefix)) {
+    throw createError({
+      status: 400,
+      statusText: 'Prefix is an array',
+    })
+  }
 
-    if (size) {
-      // A file.
-      const match = itemName.match(/^(.+)\.(.+)$/)
+  // S3 has no "directories" — a collection is just every object key that
+  // shares this prefix. Delimiter scopes the listing to the immediate
+  // children only (CommonPrefixes = sub-collections, Contents = files),
+  // instead of scanning the entire subtree and discarding what's too deep.
+  const prefix = PLAYER_PREFIX + (paramPrefix ? `${paramPrefix}/` : '')
 
-      if (!match || !match[1] || !match[2]) {
-        return undefined
+  return async () => {
+    const data = await s3.send(
+      new ListObjectsV2Command({
+        Bucket: config.public.creal.s3.bucket,
+        Delimiter: '/',
+        Prefix: prefix,
+        ...(continuationToken && {
+          ContinuationToken: continuationToken,
+        }),
+      }),
+    )
+
+    if (!data) return
+
+    if (!data.Contents?.length && !data.CommonPrefixes?.length) {
+      return sendNoContent(event)
+    }
+
+    const playlistDataExtended: PlaylistExtended = {
+      name: paramPrefix
+        ? (paramPrefix.split('/').filter(Boolean).pop() ?? paramPrefix)
+        : 'root',
+      collections: [],
+      items: [],
+      cover: undefined,
+      covers: [],
+      metas: [],
+    }
+
+    for (const commonPrefix of data.CommonPrefixes ?? []) {
+      const key = commonPrefix.Prefix
+
+      if (!key) continue
+
+      // Strip the queried prefix and the trailing delimiter to get the
+      // immediate sub-collection's own name.
+      const name = key.slice(prefix.length, -1)
+
+      if (!name) continue
+
+      playlistDataExtended.collections.push({
+        name,
+        collections: [],
+        items: [],
+        cover: undefined,
+        covers: [],
+        metas: [],
+      })
+    }
+
+    for (const content of data.Contents ?? []) {
+      const key = content.Key
+
+      if (!key) {
+        throw createError({ status: 500, statusText: 'Content key undefined' })
       }
 
-      const matchName = match[1]
-      const matchEnding = match[2]
+      const leafName = key.slice(prefix.length)
+
+      // Skip a zero-byte "folder marker" object sitting exactly at the
+      // queried prefix (used to represent an intentionally empty
+      // collection — S3 has no other way to express that).
+      if (!leafName) continue
+
+      const match = leafName.match(/^(.+)\.(.+)$/)
+
+      if (!match?.[1] || !match?.[2]) continue
+
+      const [, matchName, matchEnding] = match
+      const size = content.Size || 0
 
       switch (matchEnding) {
         case 'mp3':
@@ -135,123 +201,6 @@ const getPlaylistExtended = (
         default:
           consola.warn('Unexpected file type: ' + matchEnding)
       }
-    } else {
-      // A directory.
-      playlistDataExtended.collections.push({
-        name: itemName,
-        collections: [],
-        items: [],
-        cover: undefined,
-        covers: [],
-        metas: [],
-      })
-    }
-  } else if (pathParts.length > 1) {
-    const name = pathParts[0]
-
-    pathParts.shift()
-    const playlistDataSub = getPlaylistExtended(pathParts, size, name)
-
-    if (playlistDataSub) {
-      playlistDataExtended.collections.push(playlistDataSub)
-    } else {
-      return undefined
-    }
-  }
-
-  return playlistDataExtended
-}
-
-const useFetchPlaylist = () => {
-  const event = useEvent()
-  const config = useRuntimeConfig()
-  const { client: s3 } = useS3()
-
-  const { req } = event.node
-
-  const PLAYER_PREFIX_LENGTH = PLAYER_PREFIX.split('/').length - 1
-  const urlSearchParams = parseQuery(parseURL(req.url).search)
-
-  const continuationToken = urlSearchParams['continuation-token']
-
-  if (Array.isArray(continuationToken)) {
-    throw createError({
-      status: 400,
-      statusText: 'Continuation token is an array',
-    })
-  }
-
-  const paramPrefix = urlSearchParams.prefix
-
-  if (Array.isArray(paramPrefix)) {
-    throw createError({
-      status: 400,
-      statusText: 'Prefix is an array',
-    })
-  }
-
-  const paramPrefixLength = paramPrefix ? paramPrefix.split('/').length : 0
-  const paramPrefixLengthTotal = PLAYER_PREFIX_LENGTH + paramPrefixLength
-
-  return async () => {
-    const data = await s3.send(
-      new ListObjectsV2Command({
-        ...{
-          Bucket: config.public.creal.s3.bucket,
-          // MaxKeys: 10,
-        },
-        ...(continuationToken && {
-          ContinuationToken: continuationToken,
-        }),
-        ...(paramPrefix && {
-          Prefix: PLAYER_PREFIX + paramPrefix + '/',
-        }),
-      }),
-    )
-
-    if (!data) return
-
-    if (!data.Contents) {
-      return sendNoContent(event)
-    }
-
-    const playlistDataExtended: PlaylistExtended = {
-      name: paramPrefix || 'root',
-      collections: [],
-      items: [],
-      cover: undefined,
-      covers: [],
-      metas: [],
-    }
-
-    // Iterate all subdirectories and files.
-    for (const content of data.Contents) {
-      // The content's key is the directory's/file's path.
-      if (!content.Key) {
-        throw createError({ status: 500, statusText: 'Content key undefined' })
-      }
-
-      const keyParts = content.Key.split('/')
-
-      // Normalize directories.
-      if (keyParts[keyParts.length - 1] === '') {
-        keyParts.pop()
-      }
-
-      if (
-        ![paramPrefixLengthTotal + 1, paramPrefixLengthTotal + 2].includes(
-          keyParts.length,
-        )
-      ) {
-        // Not an item on any requested level.
-        continue
-      }
-
-      keyParts.splice(0, paramPrefixLengthTotal)
-
-      const nestedData = getPlaylistExtended(keyParts, content.Size || 0)
-
-      mergeByKey(playlistDataExtended, nestedData, 'name')
     }
 
     const playlistData = getPlaylist(playlistDataExtended)

@@ -21,11 +21,11 @@
 </template>
 
 <script setup lang="ts">
-const { playlist } = defineProps<{
+const { playlist, playlistPath } = defineProps<{
   playlist: Playlist
+  playlistPath?: string
 }>()
 
-const route = useRoute()
 const alertError = useAlertError()
 
 // data
@@ -40,12 +40,9 @@ const init = () => {
   }
 }
 const setCoverUrl = async (cover: Cover) => {
-  const key =
-    PLAYER_PREFIX +
-    `${route.query.playlist || ''}${cover.name}.${cover.fileExtension}`
-  const {
-    data: { value: signedUrl },
-  } = await useFetch('/api/player/signed-url', {
+  const playlistPrefix = getPlaylistPrefix(playlistPath)
+  const key = `${PLAYER_PREFIX}${playlistPrefix}${cover.name}.${cover.fileExtension}`
+  const signedUrl = await $fetch('/api/player/signed-url', {
     params: { key },
   })
 

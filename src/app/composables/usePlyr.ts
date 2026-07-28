@@ -1,37 +1,35 @@
 export const usePlyr = () => {
-  const route = useRoute()
   const router = useRouter()
+  const mixLocalePath = useMixLocalePath()
   const store = useStore()
   const alertError = useAlertError()
 
   return {
-    play: async (playlistItem: PlaylistItem, playlistPath?: string) => {
+    play: async (
+      playlistItem: PlaylistItem,
+      playlistPath?: string,
+      skipRoute = false,
+    ) => {
       store.playerData.isVisible = true
-
-      // Set query parameter.
-      const queryObject = JSON.parse(JSON.stringify(route.query))
-      const queryObjectTrack = playlistItem.fileName
-
-      // Conditionally update track query parameter.
-      if (queryObject.track !== queryObjectTrack) {
-        queryObject.track = queryObjectTrack
-
-        router.replace({
-          // path: route.path,
-          query: queryObject,
-        })
-      }
 
       // Get meta.
       const key =
         PLAYER_PREFIX +
-        (playlistPath ? playlistPath + '/' : '') +
+        getPlaylistPrefix(playlistPath) +
         playlistItem.fileName +
         '.json'
 
       const signedUrl = await getSignedUrl({ playlistItem, playlistPath })
 
       if (!signedUrl) return alertError('Could not get signed url!')
+
+      if (!skipRoute) {
+        router.replace({
+          path: mixLocalePath(
+            getTrackPath(playlistPath, playlistItem.fileName),
+          ),
+        })
+      }
 
       store.playerData.currentTrack = {
         ...playlistItem,

@@ -7,15 +7,12 @@ export const getSignedUrl = async ({
 }) => {
   const key =
     PLAYER_PREFIX +
-    (playlistPath ? playlistPath + '/' : '') +
+    getPlaylistPrefix(playlistPath) +
     playlistItem.fileName +
     '.' +
     playlistItem.fileExtension
-  const {
-    data: { value },
-  } = await useFetch('/api/player/signed-url', {
+
+  return await $fetch('/api/player/signed-url', {
     params: { key },
   })
-
-  return value
 }
