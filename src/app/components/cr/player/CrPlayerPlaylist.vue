@@ -42,10 +42,6 @@ const init = () => {
 const setCoverUrl = async (cover: Cover) => {
   const playlistPrefix = getPlaylistPrefix(playlistPath)
   const key = `${PLAYER_PREFIX}${playlistPrefix}${cover.name}.${cover.fileExtension}`
-  // $fetch, not useFetch: this is a client-only progressive image load (see
-  // displayImageWhenFullyLoaded's server guard below), so there is nothing
-  // to SSR or serialize into the payload, and one useFetch call per list
-  // item risks key collisions across sibling component instances.
   const signedUrl = await $fetch('/api/player/signed-url', {
     params: { key },
   })

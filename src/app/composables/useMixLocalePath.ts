@@ -7,6 +7,7 @@
 // routes only ever need a locale *prefix* (this app's i18n strategy is
 // prefix_except_default), prefixing it manually avoids the buggy path
 // entirely instead of relying on localePath's general-purpose resolution.
+// TODO: remove workaround (https://github.com/nuxt-modules/i18n/issues/4098)
 export const useMixLocalePath = () => {
   const { locale } = useI18n({ useScope: 'global' })
   const { defaultLocale } = useRuntimeConfig().public.i18n

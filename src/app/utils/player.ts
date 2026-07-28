@@ -12,8 +12,6 @@ export const getSignedUrl = async ({
     '.' +
     playlistItem.fileExtension
 
-  // $fetch, not useFetch: this runs from event handlers and after prior
-  // awaits, never during the synchronous setup phase useFetch requires.
   return await $fetch('/api/player/signed-url', {
     params: { key },
   })

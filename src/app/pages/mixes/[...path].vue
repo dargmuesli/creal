@@ -82,9 +82,6 @@ const resolvedPlaylistPath = ref<string>()
 const title = computed(() => t('titlePage'))
 
 // methods
-// $fetch, not useFetch: called repeatedly (pagination loop) and from the
-// route watcher after prior awaits — well outside the synchronous setup
-// call useFetch's context tracking and auto-key deduplication require.
 const fetchPlaylistData = async (prefix?: string) => {
   let continuationToken: string | undefined
   const playlistDataFetch = {
