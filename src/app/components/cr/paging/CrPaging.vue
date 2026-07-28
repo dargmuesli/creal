@@ -51,7 +51,7 @@ const init = () => {
                 queryPreviousSearchParamsString === '?'
                   ? route.path
                   : route.path + queryPreviousSearchParamsString,
-              rel: 'prev',
+              rel: 'prev' as const,
             },
           ]
         : []),
@@ -62,7 +62,7 @@ const init = () => {
                 route.path +
                 '?' +
                 (queryNext as Record<string, string>).toString(),
-              rel: 'next',
+              rel: 'next' as const,
             },
           ]
         : []),
