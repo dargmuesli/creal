@@ -10,9 +10,8 @@
       v-if="faqs?.length && paging"
       :is-next-allowed="paging.isNextAllowed"
       :is-previous-allowed="paging.isPreviousAllowed"
+      :page="paging.page"
       :part-string="paging.partString"
-      :query-next="paging.queryNext"
-      :query-previous="paging.queryPrevious"
     >
       <ul>
         <li
@@ -43,6 +42,11 @@
 <script setup lang="ts">
 import { htmlToText } from 'html-to-text'
 import { marked } from 'marked'
+
+// remount on pagination changes so the top-level `await` below refetches
+definePageMeta({
+  key: (route) => route.fullPath,
+})
 
 const { t } = useI18n()
 const route = useRoute()
@@ -76,8 +80,6 @@ const toggleItemFocus = (id: string) => {
 onMounted(() => {
   itemFocusedId.value = route.hash.substring(1)
 })
-// watchQuery: ['limit', 'start'],
-
 // initialization
 useCrealHeadDefault({
   description: t('description'),

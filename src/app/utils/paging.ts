@@ -1,43 +1,28 @@
-import type { LocationQuery } from '#vue-router'
-
-export const getPaging = <T>({
-  items,
-  itemsCountTotal,
-  query,
-  start,
-  limit,
+export const getPaging = ({
+  itemsCountOnPage,
+  pagination,
 }: {
-  items?: T[]
-  itemsCountTotal?: number
-  query: LocationQuery
-  start: number
-  limit: number
+  itemsCountOnPage: number
+  pagination: {
+    page: number
+    pageCount: number
+    pageSize: number
+    total: number
+  }
 }) => {
+  const { page, pageCount, pageSize, total } = pagination
+  const start = (page - 1) * pageSize
   const partString =
-    (items?.length && items?.length > 0 ? start + 1 : 0) +
+    (itemsCountOnPage > 0 ? start + 1 : 0) +
     '-' +
-    (items?.length && items.length > 0 ? start + items.length : 0) +
+    (itemsCountOnPage > 0 ? start + itemsCountOnPage : 0) +
     ' / ' +
-    itemsCountTotal
-
-  const startPrevious = Math.max(0, start - limit)
-  const queryPrevious = {
-    ...(query.limit && { limit: query.limit }),
-    ...(startPrevious > 0 && { start: `${startPrevious}` }),
-  }
-  const queryNext = {
-    ...(query.limit && { limit: query.limit }),
-    start: `${start + limit}`,
-  }
-
-  const isNextAllowed = start + (items?.length || 0) < (itemsCountTotal || 0)
-  const isPreviousAllowed = start > 0
+    total
 
   return {
-    isNextAllowed,
-    isPreviousAllowed,
+    isNextAllowed: page < pageCount,
+    isPreviousAllowed: page > 1,
+    page,
     partString,
-    queryNext,
-    queryPrevious,
   } as Paging
 }

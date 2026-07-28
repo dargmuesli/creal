@@ -25,38 +25,23 @@
 </template>
 
 <script setup lang="ts">
-import type { LocationQuery } from '#vue-router'
+import { useRouteQuery } from '@vueuse/router'
 
-const {
-  isPreviousAllowed = true,
-  isNextAllowed = true,
-  partString,
-  queryPrevious,
-  queryNext,
-} = defineProps<{
+const { isPreviousAllowed = true, isNextAllowed = true } = defineProps<{
   isPreviousAllowed?: boolean
   isNextAllowed?: boolean
   partString: string
-  queryPrevious: LocationQuery
-  queryNext: LocationQuery
 }>()
 
 const { t } = useI18n()
-const route = useRoute()
-const router = useRouter()
+const page = useRouteQuery('page', '1', {
+  mode: 'push',
+  transform: { get: Number, set: String },
+})
 
 // methods
-const goPrevious = () =>
-  router.push({
-    path: route.path,
-    query: queryPrevious,
-  })
-
-const goNext = () =>
-  router.push({
-    path: route.path,
-    query: queryNext,
-  })
+const goPrevious = () => page.value--
+const goNext = () => page.value++
 </script>
 
 <i18n lang="yaml">

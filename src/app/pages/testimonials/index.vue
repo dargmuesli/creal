@@ -11,9 +11,8 @@
         class="flex flex-col gap-4 lg:gap-8"
         :is-next-allowed="paging.isNextAllowed"
         :is-previous-allowed="paging.isPreviousAllowed"
+        :page="paging.page"
         :part-string="paging.partString"
-        :query-next="paging.queryNext"
-        :query-previous="paging.queryPrevious"
       >
         <ul>
           <li
@@ -48,6 +47,11 @@
 </template>
 
 <script setup lang="ts">
+// remount on pagination changes so the top-level `await` below refetches
+definePageMeta({
+  key: (route) => route.fullPath,
+})
+
 const { t } = useI18n()
 const localePath = useLocalePath()
 const { items, paging, requestError } = await useStrapiData<CrealTestimonial>({
