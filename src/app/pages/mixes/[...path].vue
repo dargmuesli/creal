@@ -79,7 +79,6 @@ const nuxtApp = useNuxtApp()
 // data
 const isLoading = ref(false)
 const resolvedPlaylistPath = ref<string>()
-const resolvedTrack = ref<string>()
 const title = computed(() => t('titlePage'))
 
 // methods
@@ -167,7 +166,6 @@ const init = async () => {
   }
 
   resolvedPlaylistPath.value = playlistPath
-  resolvedTrack.value = track
   store.playerData.currentPlaylist = playlistDataFetch
   store.playerData.currentPlaylistPath = playlistPath
 
@@ -238,11 +236,10 @@ const breadcrumbPrefixes = computed(() => {
     { name: title.value, to: mixLocalePath(getCollectionPath()) },
   ]
   const playlistPathParts = resolvedPlaylistPath.value.split('/')
-  // A resolved track keeps the whole playlist path clickable, since the
-  // track itself (not its playlist) is the current page in that case.
-  const clickableCount = resolvedTrack.value
-    ? playlistPathParts.length
-    : playlistPathParts.length - 1
+  // The deepest playlist segment is the current page (rendered via the slot
+  // below), regardless of whether a track within it is also deep-linked —
+  // a track is content inside the playlist, not a breadcrumb level of its own.
+  const clickableCount = playlistPathParts.length - 1
 
   for (let index = 0; index < clickableCount; index++) {
     const playlistPath = playlistPathParts.slice(0, index + 1).join('/')
@@ -256,8 +253,6 @@ const breadcrumbPrefixes = computed(() => {
   return prefixes
 })
 const currentLabel = computed(() => {
-  if (resolvedTrack.value) return resolvedTrack.value
-
   if (resolvedPlaylistPath.value) {
     const playlistPathParts = resolvedPlaylistPath.value.split('/')
 
@@ -271,19 +266,11 @@ const currentLabel = computed(() => {
 watch(
   () => route.path,
   async () => {
-    const { playlistPath, track } = resolveRoutePath()
+    const { playlistPath } = resolveRoutePath()
 
-    // Keep breadcrumb/highlight state in sync even when we can skip a
-    // refetch because the playlist itself hasn't changed.
-    if (playlistPath === resolvedPlaylistPath.value) {
-      resolvedTrack.value = isTrackInPlaylist(
-        store.playerData.currentPlaylist,
-        track,
-      )
-        ? track
-        : undefined
-      return
-    }
+    // Skip the refetch when only the deep-linked track changed within the
+    // same playlist — the breadcrumb only reflects the playlist path anyway.
+    if (playlistPath === resolvedPlaylistPath.value) return
 
     await init()
   },

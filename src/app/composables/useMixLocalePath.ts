@@ -8,7 +8,7 @@
 // prefix_except_default), prefixing it manually avoids the buggy path
 // entirely instead of relying on localePath's general-purpose resolution.
 export const useMixLocalePath = () => {
-  const { locale } = useI18n()
+  const { locale } = useI18n({ useScope: 'global' })
   const { defaultLocale } = useRuntimeConfig().public.i18n
 
   return (path: string) =>
