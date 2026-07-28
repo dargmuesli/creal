@@ -4,7 +4,7 @@ import { S3Client } from '@aws-sdk/client-s3'
 export default defineNitroPlugin((nitroApp) => {
   const runtimeConfig = useRuntimeConfig()
 
-  if (!runtimeConfig.private.creal.s3.accessKey.id) {
+  if (!runtimeConfig.private.creal.s3.accessKeyId) {
     ;(import.meta.dev ? consola.warn : consola.error)(
       'AWS access key id is not set',
     )
@@ -12,7 +12,7 @@ export default defineNitroPlugin((nitroApp) => {
   }
 
   if (
-    runtimeConfig.private.creal.s3.accessKey.id ===
+    runtimeConfig.private.creal.s3.accessKeyId ===
     DARGSTACK_SECRET_UNUSED_THIRD_PARTY
   ) {
     consola.warn(
@@ -21,7 +21,7 @@ export default defineNitroPlugin((nitroApp) => {
     return
   }
 
-  if (!runtimeConfig.private.creal.s3.accessKey.secret) {
+  if (!runtimeConfig.private.creal.s3.secretAccessKey) {
     ;(import.meta.dev ? consola.warn : consola.error)(
       'AWS secret access key is not set',
     )
@@ -29,7 +29,7 @@ export default defineNitroPlugin((nitroApp) => {
   }
 
   if (
-    runtimeConfig.private.creal.s3.accessKey.secret ===
+    runtimeConfig.private.creal.s3.secretAccessKey ===
     DARGSTACK_SECRET_UNUSED_THIRD_PARTY
   ) {
     consola.warn(
@@ -40,8 +40,8 @@ export default defineNitroPlugin((nitroApp) => {
 
   const s3 = new S3Client({
     credentials: {
-      accessKeyId: runtimeConfig.private.creal.s3.accessKey.id,
-      secretAccessKey: runtimeConfig.private.creal.s3.accessKey.secret,
+      accessKeyId: runtimeConfig.private.creal.s3.accessKeyId,
+      secretAccessKey: runtimeConfig.private.creal.s3.secretAccessKey,
     },
     endpoint: runtimeConfig.public.creal.s3.endpoint, // can't use minio as signed url is not publicly resolvable
     region: runtimeConfig.public.creal.s3.region,
