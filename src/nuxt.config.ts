@@ -94,6 +94,13 @@ export default defineNuxtConfig(
         },
         twitter: '@dargmuesli',
       },
+      sitemap: {
+        // Mixes come from S3, not Nuxt pages, and change independently of
+        // deploys, so they're resolved by this source at runtime rather
+        // than baked in at build time (which `zeroRuntime` would require).
+        sources: ['/api/__sitemap__/mixes'],
+        zeroRuntime: false,
+      },
 
       $production: {
         security: {
