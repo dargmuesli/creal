@@ -41,7 +41,8 @@ const resolvePageHref = (targetPage: number) => {
 // initialization
 useHead({
   link: [
-    // // Overrides nuxtseo's canonical link, breaking Google's SEO
+    // Don't canonicalize to route.path (page 1): that would tell Google
+    // pages 2+ are duplicates of page 1, hiding their unique content.
     // {
     //   href: route.path,
     //   rel: 'canonical',
