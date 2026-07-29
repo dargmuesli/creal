@@ -64,8 +64,8 @@ const fetchMixSitemapUrls = async (): Promise<SitemapUrl[]> => {
   const urls = [toSitemapUrl(getCollectionPath())]
   const playlistPathQueue: (string | undefined)[] = [undefined]
 
-  while (playlistPathQueue.length) {
-    const playlistPath = playlistPathQueue.shift()
+  for (let i = 0; i < playlistPathQueue.length; i++) {
+    const playlistPath = playlistPathQueue[i]
     const { collectionPaths, trackNames } = await listPlaylistLevel({
       bucket,
       playlistPath,
