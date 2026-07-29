@@ -1,3 +1,5 @@
+## [5.6.0](https://github.com/dargmuesli/creal/compare/5.5.1...5.6.0) (2026-07-29)
+
 ## [5.5.1](https://github.com/dargmuesli/creal/compare/5.5.0...5.5.1) (2026-07-29)
 
 ## [5.5.0](https://github.com/dargmuesli/creal/compare/5.4.0...5.5.0) (2026-07-29)
