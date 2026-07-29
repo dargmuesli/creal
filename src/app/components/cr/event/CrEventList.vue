@@ -1,15 +1,26 @@
 <template>
-  <div v-if="events?.length" class="flex flex-col gap-8">
+  <div v-if="eventGroups?.length" class="flex flex-col gap-8">
     <div class="text-3xl font-bold text-white lg:text-4xl">
       <slot />
     </div>
-    <ul class="flex flex-col">
+    <ul class="flex flex-col gap-12">
       <li
-        v-for="(crealEvent, index) in events"
-        :key="crealEvent.documentId"
-        class="relative"
+        v-for="eventGroup in eventGroups"
+        :key="eventGroup.event.documentId"
+        class="flex flex-col gap-4"
       >
-        <CrEvent :creal-event :index />
+        <h2 class="text-2xl font-bold text-white lg:text-3xl">
+          {{ eventGroup.event.title || eventGroup.gigs[0]?.title || '' }}
+        </h2>
+        <ul class="flex flex-col">
+          <li
+            v-for="(gig, index) in eventGroup.gigs"
+            :key="gig.documentId"
+            class="relative"
+          >
+            <CrEvent :creal-event="gig" :index />
+          </li>
+        </ul>
       </li>
     </ul>
   </div>
@@ -18,7 +29,12 @@
 <script setup lang="ts">
 import type { CollectionItem } from '@dargmuesli/nuxt-vio/shared/types/fetch'
 
-const { events } = defineProps<{
-  events: CollectionItem<CrealEvent>[]
+type EventGroup = {
+  event: CollectionItem<CrealEvent>
+  gigs: CollectionItem<CrealGig>[]
+}
+
+const { eventGroups } = defineProps<{
+  eventGroups: EventGroup[]
 }>()
 </script>
