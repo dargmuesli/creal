@@ -90,6 +90,6 @@ const fetchMixSitemapUrls = async (): Promise<SitemapUrl[]> => {
 // re-crawling the whole tree every time the sitemap cache itself expires.
 export default defineCachedEventHandler(fetchMixSitemapUrls, {
   getKey: () => 'urls',
-  maxAge: 60 * 60,
+  maxAge: 60 * 60 * 24, // 1 day
   name: 'sitemap-mixes',
 })
