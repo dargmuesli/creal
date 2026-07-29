@@ -1,9 +1,6 @@
-import type { LocationQuery } from '#vue-router'
-
 export interface Paging {
   isNextAllowed: boolean
   isPreviousAllowed: boolean
+  page: number
   partString: string
-  queryNext: LocationQuery
-  queryPrevious: LocationQuery
 }
