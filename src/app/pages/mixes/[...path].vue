@@ -67,7 +67,7 @@
 <script setup lang="ts">
 const store = useStore()
 const { t } = useI18n()
-const mixLocalePath = useMixLocalePath()
+const localePath = useLocalePath()
 const route = useRoute()
 const alertError = useAlertError()
 const { play } = usePlyr()
@@ -152,7 +152,7 @@ const init = async () => {
     // init() via the route watcher with a definitive collection route.
     await nuxtApp.runWithContext(() =>
       navigateTo(
-        mixLocalePath(getCollectionPath(routePathParts.value.join('/'))),
+        localePath(getCollectionPath(routePathParts.value.join('/'))),
         {
           redirectCode: 301,
           replace: true,
@@ -185,7 +185,7 @@ const titleHead = computed(() =>
 const getPlaylistPath = (name: string) =>
   joinPathSegments(resolvedPlaylistPath.value, name)
 const getPlaylistLink = (name: string) =>
-  mixLocalePath(getCollectionPath(getPlaylistPath(name)))
+  localePath(getCollectionPath(getPlaylistPath(name)))
 const download = async (playlistItem: PlaylistItem) => {
   const link = document.createElement('a')
   const signedUrl = await getSignedUrl({
@@ -229,9 +229,7 @@ const breadcrumbPrefixes = computed(() => {
   // current page — don't also list it as a prefix, or it shows up twice.
   if (!resolvedPlaylistPath.value) return
 
-  const prefixes = [
-    { name: title.value, to: mixLocalePath(getCollectionPath()) },
-  ]
+  const prefixes = [{ name: title.value, to: localePath(getCollectionPath()) }]
   const playlistPathParts = resolvedPlaylistPath.value.split('/')
   // The deepest playlist segment is the current page (rendered via the slot
   // below), regardless of whether a track within it is also deep-linked —
@@ -243,7 +241,7 @@ const breadcrumbPrefixes = computed(() => {
 
     prefixes.push({
       name: playlistPathParts[index]!,
-      to: mixLocalePath(getCollectionPath(playlistPath)),
+      to: localePath(getCollectionPath(playlistPath)),
     })
   }
 

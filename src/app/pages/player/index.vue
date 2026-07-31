@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const mixLocalePath = useMixLocalePath()
+const localePath = useLocalePath()
 const route = useRoute()
 
 const playlist =
@@ -9,7 +9,7 @@ const track =
 
 // Redirects legacy query-param links to the new path-based /mixes scheme.
 await navigateTo(
-  mixLocalePath(
+  localePath(
     track ? getTrackPath(playlist, track) : getCollectionPath(playlist),
   ),
   { redirectCode: 301 },

@@ -1,6 +1,6 @@
 export const usePlyr = () => {
   const router = useRouter()
-  const mixLocalePath = useMixLocalePath()
+  const localePath = useLocalePath()
   const store = useStore()
   const alertError = useAlertError()
 
@@ -25,9 +25,7 @@ export const usePlyr = () => {
 
       if (!skipRoute) {
         router.replace({
-          path: mixLocalePath(
-            getTrackPath(playlistPath, playlistItem.fileName),
-          ),
+          path: localePath(getTrackPath(playlistPath, playlistItem.fileName)),
         })
       }
 
