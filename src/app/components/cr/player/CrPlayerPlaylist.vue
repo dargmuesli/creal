@@ -21,7 +21,7 @@
 </template>
 
 <script setup lang="ts">
-const { playlist, playlistPath } = defineProps<{
+const { playlist, playlistPath = undefined } = defineProps<{
   playlist: Playlist
   playlistPath?: string
 }>()
