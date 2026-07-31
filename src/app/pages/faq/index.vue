@@ -88,12 +88,14 @@ useCrealHeadDefault({
 // TODO: remove markdown formatting
 useSchemaOrg([
   defineWebPage({ '@type': 'FAQPage' }),
-  (faqs || []).map(async (faq) =>
-    defineQuestion({
-      name: faq.title,
-      acceptedAnswer: htmlToText(await marked(faq.answer)),
-    }),
-  ),
+  ...(await Promise.all(
+    (faqs || []).map(async (faq) =>
+      defineQuestion({
+        name: faq.title,
+        acceptedAnswer: htmlToText(await marked(faq.answer)),
+      }),
+    ),
+  )),
 ])
 </script>
 
