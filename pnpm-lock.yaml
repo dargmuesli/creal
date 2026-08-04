@@ -210,11 +210,11 @@ importers:
   src:
     devDependencies:
       '@aws-sdk/client-s3':
-        specifier: 3.1100.0
-        version: 3.1100.0
+        specifier: 3.1101.0
+        version: 3.1101.0
       '@aws-sdk/s3-request-presigner':
-        specifier: 3.1100.0
-        version: 3.1100.0
+        specifier: 3.1101.0
+        version: 3.1101.0
       '@dargmuesli/nuxt-cookie-control':
         specifier: 9.3.1
         version: 9.3.1(magic-string@1.1.0)(magicast@0.5.4)(oxc-parser@0.140.0)(rolldown@1.2.1)(unplugin@3.3.0(esbuild@0.28.1)(rolldown@1.2.1)(rollup@4.62.4)(vite@8.2.0(@types/node@24.13.3)(esbuild@0.28.1)(jiti@2.7.0)(terser@5.49.0)(yaml@2.9.0))(webpack@5.109.2(cssnano@8.0.2(postcss@8.5.25))(csso@5.0.5)(esbuild@0.28.1)(lightningcss@1.33.0)(postcss@8.5.25)))(webpack@5.109.2(cssnano@8.0.2(postcss@8.5.25))(csso@5.0.5)(esbuild@0.28.1)(lightningcss@1.33.0)(postcss@8.5.25))
@@ -455,8 +455,8 @@ packages:
     resolution: {integrity: sha512-7TWLjypP8kk3savsDBRuhZJx7mBuFFA2136BQhwwLllsAnO4Tmq/p+SXZaNxbuulkzUFz3BZzj0bb4YzexZcNQ==}
     engines: {node: '>=20.0.0'}
 
-  '@aws-sdk/client-s3@3.1100.0':
-    resolution: {integrity: sha512-5IvIlW6kWOC9EPq2RM7VQUgfDF2QFHHFgQJ2DichmrYBDg5yiAmqMkDiHqUSkFYosVexXaXD/lV4yYxTyA27zw==}
+  '@aws-sdk/client-s3@3.1101.0':
+    resolution: {integrity: sha512-16EFb1aTEBgPcfUAWAjjlB57IZCyn7B3rlfT+xqE7M6WoH8AMMU3vFZO0UOitwh/xvvzVx73YED1/n0PU4qBMw==}
     engines: {node: '>=20.0.0'}
 
   '@aws-sdk/core@3.977.4':
@@ -503,8 +503,8 @@ packages:
     resolution: {integrity: sha512-wU5NPnj62Sb7A8xn/Zb+xThe05P3otNtDl37iOIi5DDMeCesNeCckaG+eXWGUs12Z9R34I8CD05TaTe6SIa61g==}
     engines: {node: '>=20.0.0'}
 
-  '@aws-sdk/s3-request-presigner@3.1100.0':
-    resolution: {integrity: sha512-YXl2CNTJi9sCWCZufz4efHgYUrLSHg+b6NnbLbUZKXjazlcPjYRE8liZ50ckj7ZSVaB6LHY3C8/8Sz7CcrLkmQ==}
+  '@aws-sdk/s3-request-presigner@3.1101.0':
+    resolution: {integrity: sha512-2raRfiex9qYrdQ60ATeEmOVVC7Do2GEDGSTnoPbgv+xyN3oB48tZeREVw0brI7AlRRvm9fygXTHmyRR0I/LskA==}
     engines: {node: '>=20.0.0'}
 
   '@aws-sdk/signature-v4-multi-region@3.996.43':
@@ -8787,7 +8787,7 @@ snapshots:
       '@smithy/types': 4.16.1
       tslib: 2.8.1
 
-  '@aws-sdk/client-s3@3.1100.0':
+  '@aws-sdk/client-s3@3.1101.0':
     dependencies:
       '@aws-sdk/checksums': 3.1000.24
       '@aws-sdk/core': 3.977.4
@@ -8916,7 +8916,7 @@ snapshots:
       '@smithy/types': 4.16.1
       tslib: 2.8.1
 
-  '@aws-sdk/s3-request-presigner@3.1100.0':
+  '@aws-sdk/s3-request-presigner@3.1101.0':
     dependencies:
       '@aws-sdk/core': 3.977.4
       '@aws-sdk/signature-v4-multi-region': 3.996.43
