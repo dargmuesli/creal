@@ -3,13 +3,13 @@ import { defu } from 'defu'
 
 export default defineNitroPlugin((nitroApp) => {
   nitroApp.hooks.hook('nuxt-security:routeRules', async (routeRules) => {
-    const { siteUrlTyped: siteUrl } = useSiteUrl()
+    const getSiteServiceHref = useGetServiceHref()
 
     routeRules['/**'] = cleanupCsp(
       defu(
         {
           headers: {
-            contentSecurityPolicy: GET_CSP({ siteUrl }),
+            contentSecurityPolicy: GET_CSP({ getSiteServiceHref }),
           },
         },
         routeRules['/**'],
