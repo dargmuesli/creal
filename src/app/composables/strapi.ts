@@ -1,7 +1,22 @@
-import type { StrapiResult } from '@dargmuesli/nuxt-vio/shared/types/fetch'
+import type { CollectionItem } from '@dargmuesli/nuxt-vio/shared/types/fetch'
 import { FETCH_RETRY_AMOUNT } from '@dargmuesli/nuxt-vio/shared/utils/constants'
 import { consola } from 'consola'
 import type { FetchOptions } from 'ofetch'
+
+// Strapi's REST API only returns `pageCount` for page-based pagination
+// (`pagination[page]`/`pagination[pageSize]`), not for offset-based
+// pagination - hence this narrower result type than `StrapiResult`.
+type StrapiPageResult<T> = {
+  data: CollectionItem<T>[]
+  meta: {
+    pagination: {
+      page: number
+      pageCount: number
+      pageSize: number
+      total: number
+    }
+  }
+}
 
 export const useStrapiData = async <T>({
   path,
@@ -11,32 +26,29 @@ export const useStrapiData = async <T>({
   query: FetchOptions['query']
 }) => {
   const { locale } = useI18n({ useScope: 'global' })
-  const strapiFetch = useStrapiFetch()
+  const strapiFetch = useStrapiFetch({ name: 'creal_strapi' })
   const route = useRoute()
 
   // data
   const requestError = ref()
-  const queryLimit = +(route.query.limit ? route.query.limit : 100)
-  const queryStart = +(route.query.start ? route.query.start : 0)
+  const queryPage = +(route.query.page ? route.query.page : 1)
+  const queryPageSize = +(route.query.pageSize ? route.query.pageSize : 100)
 
   try {
     // async data
-    const asyncData = await strapiFetch<StrapiResult<T>>(path, {
+    const asyncData = await strapiFetch<StrapiPageResult<T>>(path, {
       query: {
         locale: locale.value,
-        'pagination[limit]': String(queryLimit),
-        'pagination[start]': String(queryStart),
+        'pagination[page]': String(queryPage),
+        'pagination[pageSize]': String(queryPageSize),
         ...query,
       },
       retry: FETCH_RETRY_AMOUNT,
     })
     const items = asyncData.data
     const paging = getPaging({
-      items,
-      itemsCountTotal: asyncData?.meta.pagination.total,
-      query: route.query,
-      start: queryStart,
-      limit: queryLimit,
+      itemsCountOnPage: items.length,
+      pagination: asyncData.meta.pagination,
     })
 
     return { items, paging, requestError }

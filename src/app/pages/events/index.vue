@@ -9,11 +9,10 @@
     <CrPaging
       v-else-if="events?.length && paging"
       class="flex flex-col gap-16"
-      :is-previous-allowed="paging.isPreviousAllowed"
       :is-next-allowed="paging.isNextAllowed"
+      :is-previous-allowed="paging.isPreviousAllowed"
+      :page="paging.page"
       :part-string="paging.partString"
-      :query-previous="paging.queryPrevious"
-      :query-next="paging.queryNext"
     >
       <CrEventList v-if="eventsCurrent" :events="eventsCurrent">
         <div class="flex items-center gap-2">
@@ -33,6 +32,11 @@
 </template>
 
 <script setup lang="ts">
+// remount on pagination changes so the top-level `await` below refetches
+definePageMeta({
+  key: (route) => route.fullPath,
+})
+
 const {
   items: events,
   paging,

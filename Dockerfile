@@ -3,7 +3,7 @@
 #############
 # Create base image.
 
-FROM node:24.15.0-slim AS base-image
+FROM node:24.19.0-slim AS base-image
 
 # The `CI` environment variable must be set for pnpm to run in headless mode
 ENV CI=true
@@ -59,7 +59,7 @@ EXPOSE 3000
 
 FROM base-image AS prepare
 
-COPY ./pnpm-lock.yaml ./package.json ./
+COPY ./pnpm-lock.yaml ./package.json ./pnpm-workspace.yaml ./
 # COPY ./patches ./patches
 
 RUN --mount=type=cache,id=pnpm-store,target=/root/.local/share/pnpm/store \
@@ -121,7 +121,7 @@ RUN pnpm -r run lint
 ########################
 # Nuxt: test (e2e, base-image)
 
-FROM mcr.microsoft.com/playwright:v1.60.0 AS test-e2e-base-image
+FROM mcr.microsoft.com/playwright:v1.62.1 AS test-e2e-base-image
 
 # The `CI` environment variable must be set for pnpm to run in headless mode
 ENV CI=true

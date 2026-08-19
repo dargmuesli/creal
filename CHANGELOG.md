@@ -31,6 +31,42 @@
 ### Code Refactoring
 
 * **nuxt:** drop private property in runtime configuration ([f75469c](https://github.com/dargmuesli/creal/commit/f75469ca0194db97fc7bc973f68b779b288e76c2))
+## [5.6.3](https://github.com/dargmuesli/creal/compare/5.6.2...5.6.3) (2026-08-19)
+
+### Performance Improvements
+
+* **git:** track snapshot images with lfs ([#653](https://github.com/dargmuesli/creal/issues/653)) ([9e5841e](https://github.com/dargmuesli/creal/commit/9e5841e8333126887840d1a9d632acdab801523c))
+
+## [5.6.2](https://github.com/dargmuesli/creal/compare/5.6.1...5.6.2) (2026-08-13)
+
+## [5.6.1](https://github.com/dargmuesli/creal/compare/5.6.0...5.6.1) (2026-07-31)
+
+## [5.6.0](https://github.com/dargmuesli/creal/compare/5.5.1...5.6.0) (2026-07-29)
+
+## [5.5.1](https://github.com/dargmuesli/creal/compare/5.5.0...5.5.1) (2026-07-29)
+
+## [5.5.0](https://github.com/dargmuesli/creal/compare/5.4.0...5.5.0) (2026-07-29)
+
+## [5.4.0](https://github.com/dargmuesli/creal/compare/5.3.15...5.4.0) (2026-07-28)
+
+## [5.3.15](https://github.com/dargmuesli/creal/compare/5.3.14...5.3.15) (2026-07-23)
+
+## [5.3.14](https://github.com/dargmuesli/creal/compare/5.3.13...5.3.14) (2026-07-10)
+
+## [5.3.13](https://github.com/dargmuesli/creal/compare/5.3.12...5.3.13) (2026-06-30)
+
+## [5.3.12](https://github.com/dargmuesli/creal/compare/5.3.11...5.3.12) (2026-06-25)
+
+### Bug Fixes
+
+* schedule release ([89d2980](https://github.com/dargmuesli/creal/commit/89d2980b3b954c6120e5ffcf7254c0d60d133a1e))
+
+## [5.3.11](https://github.com/dargmuesli/creal/compare/5.3.10...5.3.11) (2026-06-11)
+
+### Bug Fixes
+
+* schedule release ([1519ec2](https://github.com/dargmuesli/creal/commit/1519ec230f902add7cafb1f2884926b919b7c3d4))
+
 ## [5.3.10](https://github.com/dargmuesli/creal/compare/5.3.9...5.3.10) (2026-05-28)
 
 ### Bug Fixes

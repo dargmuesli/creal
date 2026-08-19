@@ -4,7 +4,7 @@
 
 cReal's website: [creal.jonas-thelemann.de](https://creal.jonas-thelemann.de).
 
-![DJ cReal](https://creal.jonas-thelemann.de/_og/d/a_~QSBwaWN0dXJlIG9mIERKIGNSZWFsLCBoaXMgbG9nbyBhbmQgbmFtZSBhcyB3ZWxsIGFzIHBhZ2UncyB0aXRsZS4,c_Default.takumi,description_DJ+cReal's+website.,title_cReal,headline_DJ+and+event+organizer.png "DJ cReal")
+![DJ cReal](https://creal.jonas-thelemann.de/_og/d/a_~QSBwaWN0dXJlIG9mIERKIGNSZWFsLCBoaXMgbG9nbyBhbmQgbmFtZSBhcyB3ZWxsIGFzIHBhZ2UncyB0aXRsZS4,c_Default.takumi,description_DJ+cReal's+website.,title_cReal,headline_DJ+and+event+organizer,s_8Jp_gdqswa2sxzVo.png "DJ cReal")
 
 ## Table of Contents
 1. **[Development](#development)**
