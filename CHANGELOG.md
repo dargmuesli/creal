@@ -1,3 +1,34 @@
+## [6.0.0-beta.3](https://github.com/dargmuesli/creal/compare/6.0.0-beta.2...6.0.0-beta.3) (2026-08-19)
+
+### ⚠ BREAKING CHANGES
+
+* **dargstack:** upgrade to v4
+
+### Features
+
+* **pagination:** use strapi page-based pagination and vueuse route query ([#649](https://github.com/dargmuesli/creal/issues/649)) ([6d49fe0](https://github.com/dargmuesli/creal/commit/6d49fe0b140602b9305e0ab420d9ae7245233f56))
+* **player:** migrate mix playback URLs from query params to path-based `/mixes` routes ([#633](https://github.com/dargmuesli/creal/issues/633)) ([72eb674](https://github.com/dargmuesli/creal/commit/72eb67475a2fc87768bdd95b2df12299776668de))
+* **seo:** include mixes content in sitemap ([#648](https://github.com/dargmuesli/creal/issues/648)) ([19572bd](https://github.com/dargmuesli/creal/commit/19572bd24fa61de7286948a31e898f4f4a742fec))
+
+### Bug Fixes
+
+* **deps:** update vio to v22.0.1 ([33994f0](https://github.com/dargmuesli/creal/commit/33994f0ff5ce53ad528df47e4fa0a3cc5014d1a3))
+* schedule release ([8b6203d](https://github.com/dargmuesli/creal/commit/8b6203db75c4f441ac8aacb56cb41fbd0bf5e66c))
+* schedule release ([1adafe2](https://github.com/dargmuesli/creal/commit/1adafe2769fc3b6dc00a0530ed234f5408370580))
+* schedule release ([6f7da6f](https://github.com/dargmuesli/creal/commit/6f7da6f3e079beded189a83e6a819ffadf299ec4))
+* schedule release ([89d2980](https://github.com/dargmuesli/creal/commit/89d2980b3b954c6120e5ffcf7254c0d60d133a1e))
+* schedule release ([1519ec2](https://github.com/dargmuesli/creal/commit/1519ec230f902add7cafb1f2884926b919b7c3d4))
+* **seo:** cache mixes urls for one day ([ca13a80](https://github.com/dargmuesli/creal/commit/ca13a8001b726e3b64a567129f83d3710833cbd2))
+* **seo:** correct open graph image display ([87c7122](https://github.com/dargmuesli/creal/commit/87c71222b74bba24c8d8a258e4856e4b392e24c7))
+
+### Performance Improvements
+
+* **git:** track snapshot images with lfs ([#653](https://github.com/dargmuesli/creal/issues/653)) ([9e5841e](https://github.com/dargmuesli/creal/commit/9e5841e8333126887840d1a9d632acdab801523c))
+
+### Code Refactoring
+
+* **dargstack:** upgrade to v4 ([48f6573](https://github.com/dargmuesli/creal/commit/48f6573f12bda4e930d7d21686ed83fc21a91a31))
+
 ## [6.0.0-beta.2](https://github.com/dargmuesli/creal/compare/6.0.0-beta.1...6.0.0-beta.2) (2026-05-28)
 
 ### Features
