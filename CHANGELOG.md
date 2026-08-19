@@ -1,3 +1,9 @@
+## [5.6.3](https://github.com/dargmuesli/creal/compare/5.6.2...5.6.3) (2026-08-19)
+
+### Performance Improvements
+
+* **git:** track snapshot images with lfs ([#653](https://github.com/dargmuesli/creal/issues/653)) ([9e5841e](https://github.com/dargmuesli/creal/commit/9e5841e8333126887840d1a9d632acdab801523c))
+
 ## [5.6.2](https://github.com/dargmuesli/creal/compare/5.6.1...5.6.2) (2026-08-13)
 
 ## [5.6.1](https://github.com/dargmuesli/creal/compare/5.6.0...5.6.1) (2026-07-31)
