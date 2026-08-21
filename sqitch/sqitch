@@ -46,7 +46,7 @@ for var in \
     TNS_ADMIN TWO_TASK ORACLE_SID \
     ISC_USER ISC_PASSWORD \
     VSQL_HOST VSQL_PORT VSQL_USER VSQL_PASSWORD VSQL_SSLMODE \
-    SNOWSQL_ACCOUNT SNOWSQL_USER SNOWSQL_PWD SNOWSQL_HOST SNOWSQL_PORT SNOWSQL_DATABASE SNOWSQL_REGION SNOWSQL_WAREHOUSE SNOWSQL_PRIVATE_KEY_PASSPHRASE
+    SNOWSQL_ACCOUNT SNOWSQL_USER SNOWSQL_PWD SNOWSQL_HOST SNOWSQL_PORT SNOWSQL_DATABASE SNOWSQL_REGION SNOWSQL_WAREHOUSE SNOWSQL_PRIVATE_KEY_PASSPHRASE SNOWSQL_ROLE
 do
     if [ -n "${!var}" ]; then
        passopt+=(-e "$var")
@@ -68,19 +68,19 @@ elif [ ! -t 0 ]; then
     passopt+=(--interactive)
 fi
 
+THIS=$(dirname "$(readlink -f "$0")")
+
+function docker_sudo() {
+    if id -nG | grep -qw "docker"; then
+        docker "$@"
+    else
+        sudo --preserve-env="SQITCH_TARGET" docker "$@"
+    fi
+}
+
 # Run the container with the current and home directories mounted.
-if id -nG | grep -qw "docker"; then
-  docker run --rm --network host \
-      --mount "type=bind,src=$(pwd),dst=/repo" \
-      --mount "type=bind,src=$HOME,dst=$homedst" \
-      --mount "type=bind,src=$PWD/../../jonas-thelemann_stack/src/development/secrets/postgres/role_creal_postgraphile_password.secret,dst=/run/secrets/postgres_role_creal_postgraphile_password" \
-      --mount "type=bind,src=/run/postgresql/,dst=/run/postgresql/" \
-      "${passopt[@]}" "$SQITCH_IMAGE" "$@"
-else
-  sudo docker run --rm --network host \
-      --mount "type=bind,src=$(pwd),dst=/repo" \
-      --mount "type=bind,src=$HOME,dst=$homedst" \
-      --mount "type=bind,src=$PWD/../../jonas-thelemann_stack/src/development/secrets/postgres/role_creal_postgraphile_password.secret,dst=/run/secrets/postgres_role_creal_postgraphile_password" \
-      --mount "type=bind,src=/run/postgresql/,dst=/run/postgresql/" \
-      "${passopt[@]}" "$SQITCH_IMAGE" "$@"
-fi
+docker_sudo run --rm --network host \
+    --mount "type=bind,src=$THIS,dst=/repo" \
+    --mount "type=bind,src=$HOME,dst=$homedst" \
+    --mount "type=bind,src=$THIS/../../jonas-thelemann_stack/src/development/secrets/postgres/role-creal-postgraphile-password.secret,dst=/run/secrets/postgres-role-creal-postgraphile-password" \
+    "${passopt[@]}" "$SQITCH_IMAGE" "$@"
