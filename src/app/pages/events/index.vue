@@ -7,23 +7,23 @@
       {{ requestError }}
     </VioCardStateAlert>
     <CrPaging
-      v-else-if="events?.length && paging"
+      v-else-if="eventGroups?.length && paging"
       class="flex flex-col gap-16"
       :is-next-allowed="paging.isNextAllowed"
       :is-previous-allowed="paging.isPreviousAllowed"
       :page="paging.page"
       :part-string="paging.partString"
     >
-      <CrEventList v-if="eventsCurrent" :events="eventsCurrent">
+      <CrEventList v-if="eventsCurrent" :event-groups="eventsCurrent">
         <div class="flex items-center gap-2">
           {{ t('eventsCurrent') }}
           <CrLivePulse />
         </div>
       </CrEventList>
-      <CrEventList v-if="eventsFuture" :events="eventsFuture">
+      <CrEventList v-if="eventsFuture" :event-groups="eventsFuture">
         {{ t('eventsFuture') }}
       </CrEventList>
-      <CrEventList v-if="eventsPast" :events="eventsPast">
+      <CrEventList v-if="eventsPast" :event-groups="eventsPast">
         {{ t('eventsPast') }}
       </CrEventList>
     </CrPaging>
@@ -32,6 +32,8 @@
 </template>
 
 <script setup lang="ts">
+import type { CollectionItem } from '@dargmuesli/nuxt-vio/shared/types/fetch'
+
 // remount on pagination changes so the top-level `await` below refetches
 definePageMeta({
   key: (route) => route.fullPath,
@@ -44,7 +46,8 @@ const {
 } = await useStrapiData<CrealEvent>({
   path: '/events',
   query: {
-    populate: 'image',
+    'populate[image]': 'true',
+    'populate[gigs][populate][image]': 'true',
     sort: 'dateStart:desc',
   },
 })
@@ -57,45 +60,114 @@ const typicalSetLengthMilliseconds = 2 * 60 * 60 * 1000 // 2h
 const title = t('titlePage')
 
 // computations
-const eventsCurrent = computed(() => {
-  if (!events) return
+const transformLegacyEvent = (
+  event: CollectionItem<CrealEvent>,
+): CollectionItem<CrealGig> | undefined => {
+  if (
+    typeof event.dateStart !== 'string' ||
+    (typeof event.dateEnd !== 'undefined' &&
+      typeof event.dateEnd !== 'string') ||
+    typeof event.location !== 'string' ||
+    typeof event.title !== 'string' ||
+    typeof event.description !== 'string' ||
+    typeof event.url !== 'string' ||
+    !event.image ||
+    typeof event.image.url !== 'string'
+  ) {
+    return
+  }
 
-  return events.filter((event) => {
-    const dateStart = new Date(event.dateStart)
-    const dateStartPlus2h = new Date(
-      dateStart.getTime() + typicalSetLengthMilliseconds,
-    )
+  return {
+    dateEnd: event.dateEnd,
+    dateStart: event.dateStart,
+    description: event.description,
+    documentId: event.documentId,
+    id: event.id,
+    image: event.image,
+    location: event.location,
+    title: event.title,
+    url: event.url,
+  }
+}
 
-    if (event.dateEnd) {
-      return dateStart <= now.value && now.value < new Date(event.dateEnd)
-    } else {
-      return dateStart <= now.value && now.value < dateStartPlus2h
-    }
-  })
-})
-const eventsFuture = computed(() => {
+type EventGroup = {
+  event: CollectionItem<CrealEvent>
+  gigs: CollectionItem<CrealGig>[]
+}
+
+const isGigCurrent = (gig: CollectionItem<CrealGig>) => {
+  const dateStart = new Date(gig.dateStart)
+  const dateStartPlus2h = new Date(
+    dateStart.getTime() + typicalSetLengthMilliseconds,
+  )
+
+  if (gig.dateEnd) {
+    return dateStart <= now.value && now.value < new Date(gig.dateEnd)
+  } else {
+    return dateStart <= now.value && now.value < dateStartPlus2h
+  }
+}
+const isGigFuture = (gig: CollectionItem<CrealGig>) =>
+  now.value < new Date(gig.dateStart)
+const isGigPast = (gig: CollectionItem<CrealGig>) => {
+  const dateStart = new Date(gig.dateStart)
+  const dateStartPlus2h = new Date(
+    dateStart.getTime() + typicalSetLengthMilliseconds,
+  )
+
+  if (gig.dateEnd) {
+    return new Date(gig.dateEnd) < now.value
+  } else {
+    return dateStartPlus2h < now.value
+  }
+}
+
+const eventGroups = computed<EventGroup[] | undefined>(() => {
   if (!events) return
 
   return events
-    .filter((event) => now.value < new Date(event.dateStart))
+    .map((event) => {
+      if (event.gigs?.length) {
+        return {
+          event,
+          gigs: [...event.gigs].sort(
+            (gigA, gigB) =>
+              new Date(gigB.dateStart).getTime() -
+              new Date(gigA.dateStart).getTime(),
+          ),
+        }
+      }
+
+      const legacyGig = transformLegacyEvent(event)
+      return { event, gigs: legacyGig ? [legacyGig] : [] }
+    })
+    .filter((eventGroup) => eventGroup.gigs.length)
+})
+const getFilteredEventGroups = (
+  filterGig: (gig: CollectionItem<CrealGig>) => boolean,
+) => {
+  if (!eventGroups.value) return
+
+  return eventGroups.value
+    .map((eventGroup) => ({
+      ...eventGroup,
+      gigs: eventGroup.gigs.filter(filterGig),
+    }))
+    .filter((eventGroup) => eventGroup.gigs.length)
+}
+const eventsCurrent = computed(() => getFilteredEventGroups(isGigCurrent))
+const eventsFuture = computed(() => {
+  const futureEventGroups = getFilteredEventGroups(isGigFuture)
+  if (!futureEventGroups) return
+
+  return futureEventGroups
+    .map((eventGroup) => ({
+      ...eventGroup,
+      gigs: [...eventGroup.gigs].reverse(),
+    }))
     .reverse()
 })
-const eventsPast = computed(() => {
-  if (!events) return
-
-  return events.filter((event) => {
-    const dateStart = new Date(event.dateStart)
-    const dateStartPlus2h = new Date(
-      dateStart.getTime() + typicalSetLengthMilliseconds,
-    )
-
-    if (event.dateEnd) {
-      return new Date(event.dateEnd) < now.value
-    } else {
-      return dateStartPlus2h < now.value
-    }
-  })
-})
+const eventsPast = computed(() => getFilteredEventGroups(isGigPast))
 
 // initialization
 useCrealHeadDefault({
