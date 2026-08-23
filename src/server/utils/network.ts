@@ -12,7 +12,9 @@ export const useProxy = () => {
       return await $fetch<ReturnType<typeof f>>(
         getServiceHref({
           host: getHost(event),
+          isServer: true,
           name: 'creal',
+          services: config.public.vio.services,
           stagingHost: config.public.vio.stagingHost,
         }) + (event.node.req.url ?? ''),
       )
