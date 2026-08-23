@@ -63,17 +63,8 @@ const title = t('titlePage')
 const transformLegacyEvent = (
   event: CollectionItem<CrealEvent>,
 ): CollectionItem<CrealGig> | undefined => {
-  if (
-    typeof event.dateStart !== 'string' ||
-    (typeof event.dateEnd !== 'undefined' &&
-      typeof event.dateEnd !== 'string') ||
-    typeof event.location !== 'string' ||
-    typeof event.title !== 'string' ||
-    typeof event.description !== 'string' ||
-    typeof event.url !== 'string' ||
-    !event.image ||
-    typeof event.image.url !== 'string'
-  ) {
+  // Event only requires title and dateStart, matching its Strapi schema.
+  if (typeof event.dateStart !== 'string' || typeof event.title !== 'string') {
     return
   }
 

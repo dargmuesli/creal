@@ -1,13 +1,13 @@
 export interface CrealGig {
   dateEnd?: string
   dateStart: string
-  location: string
+  location?: string
   title: string
-  description: string
-  image: {
+  description?: string
+  image?: {
     url: string
   }
-  url: string
+  url?: string
 }
 
 export interface CrealEvent {

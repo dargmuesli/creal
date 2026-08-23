@@ -100,7 +100,7 @@ const now = useNow()
 const imageSrc = computed(
   () =>
     getServiceHref({ isSsr: false, name: 'creal-strapi', port: 1337 }) +
-    crealEvent.image.url,
+    crealEvent.image?.url,
 )
 </script>
 
