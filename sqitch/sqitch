@@ -82,5 +82,5 @@ function docker_sudo() {
 docker_sudo run --rm --network host \
     --mount "type=bind,src=$THIS,dst=/repo" \
     --mount "type=bind,src=$HOME,dst=$homedst" \
-    --mount "type=bind,src=$THIS/../../jonas-thelemann_stack/src/development/secrets/postgres/role-creal-postgraphile-password.secret,dst=/run/secrets/postgres-role-creal-postgraphile-password" \
+    --mount "type=bind,src=$THIS/../../jonas-thelemann_stack/artifacts/secrets/postgres-role-creal-postgraphile-password.secret,dst=/run/secrets/postgres-role-creal-postgraphile-password" \
     "${passopt[@]}" "$SQITCH_IMAGE" "$@"

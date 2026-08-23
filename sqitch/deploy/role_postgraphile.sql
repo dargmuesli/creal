@@ -2,8 +2,8 @@
 
 BEGIN;
 
-\set role-creal-postgraphile-password `cat /run/secrets/postgres-role-creal-postgraphile-password`
-CREATE ROLE creal_postgraphile LOGIN PASSWORD :'role-creal-postgraphile-password';
+\set role_creal_postgraphile_password `cat /run/secrets/postgres-role-creal-postgraphile-password`
+CREATE ROLE creal_postgraphile LOGIN PASSWORD :'role_creal_postgraphile_password';
 
 COMMENT ON ROLE creal_postgraphile IS 'PostGraphile''s role.';
 
