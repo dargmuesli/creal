@@ -1,5 +1,9 @@
 # syntax=docker/dockerfile:1
 
+# <DEPENDENCIES>
+FROM ghcr.io/dargmuesli/creal-strapi:5.0.0-beta.1
+# </DEPENDENCIES>
+
 #############
 # Create base image.
 
