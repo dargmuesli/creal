@@ -60,9 +60,12 @@ const typicalSetLengthMilliseconds = 2 * 60 * 60 * 1000 // 2h
 const title = t('titlePage')
 
 // computations
-const transformLegacyEvent = (
+
+// The event itself is always shown; gigs (if any) are its children, not a
+// replacement for the event's own info.
+const getEventDisplay = (
   event: CollectionItem<CrealEvent>,
-): CollectionItem<CrealGig> | undefined => {
+): CrealGig | undefined => {
   // Event only requires title and dateStart, matching its Strapi schema.
   if (typeof event.dateStart !== 'string' || typeof event.title !== 'string') {
     return
@@ -72,8 +75,6 @@ const transformLegacyEvent = (
     dateEnd: event.dateEnd,
     dateStart: event.dateStart,
     description: event.description,
-    documentId: event.documentId,
-    id: event.id,
     image: event.image,
     location: event.location,
     title: event.title,
@@ -83,33 +84,57 @@ const transformLegacyEvent = (
 
 type EventGroup = {
   event: CollectionItem<CrealEvent>
+  eventDisplay: CrealGig
   gigs: CollectionItem<CrealGig>[]
 }
 
-const isGigCurrent = (gig: CollectionItem<CrealGig>) => {
-  const dateStart = new Date(gig.dateStart)
-  const dateStartPlus2h = new Date(
-    dateStart.getTime() + typicalSetLengthMilliseconds,
-  )
+// An event's own gigs may span different times, so a single event is placed
+// into one section (current/future/past) by the range covering all of them.
+const getEventRange = (eventGroup: EventGroup) => {
+  if (!eventGroup.gigs.length) {
+    return {
+      dateEnd: eventGroup.eventDisplay.dateEnd,
+      dateStart: eventGroup.eventDisplay.dateStart,
+    }
+  }
 
-  if (gig.dateEnd) {
-    return dateStart <= now.value && now.value < new Date(gig.dateEnd)
-  } else {
-    return dateStart <= now.value && now.value < dateStartPlus2h
+  return {
+    dateEnd: new Date(
+      Math.max(
+        ...eventGroup.gigs.map((gig) =>
+          new Date(gig.dateEnd ?? gig.dateStart).getTime(),
+        ),
+      ),
+    ).toISOString(),
+    dateStart: new Date(
+      Math.min(
+        ...eventGroup.gigs.map((gig) => new Date(gig.dateStart).getTime()),
+      ),
+    ).toISOString(),
   }
 }
-const isGigFuture = (gig: CollectionItem<CrealGig>) =>
-  now.value < new Date(gig.dateStart)
-const isGigPast = (gig: CollectionItem<CrealGig>) => {
-  const dateStart = new Date(gig.dateStart)
-  const dateStartPlus2h = new Date(
-    dateStart.getTime() + typicalSetLengthMilliseconds,
-  )
+const isEventCurrent = (eventGroup: EventGroup) => {
+  const { dateEnd, dateStart } = getEventRange(eventGroup)
+  const start = new Date(dateStart)
+  const startPlus2h = new Date(start.getTime() + typicalSetLengthMilliseconds)
 
-  if (gig.dateEnd) {
-    return new Date(gig.dateEnd) < now.value
+  if (dateEnd) {
+    return start <= now.value && now.value < new Date(dateEnd)
   } else {
-    return dateStartPlus2h < now.value
+    return start <= now.value && now.value < startPlus2h
+  }
+}
+const isEventFuture = (eventGroup: EventGroup) =>
+  now.value < new Date(getEventRange(eventGroup).dateStart)
+const isEventPast = (eventGroup: EventGroup) => {
+  const { dateEnd, dateStart } = getEventRange(eventGroup)
+  const start = new Date(dateStart)
+  const startPlus2h = new Date(start.getTime() + typicalSetLengthMilliseconds)
+
+  if (dateEnd) {
+    return new Date(dateEnd) < now.value
+  } else {
+    return startPlus2h < now.value
   }
 }
 
@@ -118,37 +143,24 @@ const eventGroups = computed<EventGroup[] | undefined>(() => {
 
   return events
     .map((event) => {
-      if (event.gigs?.length) {
-        return {
-          event,
-          gigs: [...event.gigs].sort(
-            (gigA, gigB) =>
-              new Date(gigB.dateStart).getTime() -
-              new Date(gigA.dateStart).getTime(),
-          ),
-        }
+      const eventDisplay = getEventDisplay(event)
+      if (!eventDisplay) return
+
+      return {
+        event,
+        eventDisplay,
+        gigs: [...(event.gigs ?? [])].sort(
+          (gigA, gigB) =>
+            new Date(gigB.dateStart).getTime() -
+            new Date(gigA.dateStart).getTime(),
+        ),
       }
-
-      const legacyGig = transformLegacyEvent(event)
-      return { event, gigs: legacyGig ? [legacyGig] : [] }
     })
-    .filter((eventGroup) => eventGroup.gigs.length)
+    .filter((eventGroup): eventGroup is EventGroup => !!eventGroup)
 })
-const getFilteredEventGroups = (
-  filterGig: (gig: CollectionItem<CrealGig>) => boolean,
-) => {
-  if (!eventGroups.value) return
-
-  return eventGroups.value
-    .map((eventGroup) => ({
-      ...eventGroup,
-      gigs: eventGroup.gigs.filter(filterGig),
-    }))
-    .filter((eventGroup) => eventGroup.gigs.length)
-}
-const eventsCurrent = computed(() => getFilteredEventGroups(isGigCurrent))
+const eventsCurrent = computed(() => eventGroups.value?.filter(isEventCurrent))
 const eventsFuture = computed(() => {
-  const futureEventGroups = getFilteredEventGroups(isGigFuture)
+  const futureEventGroups = eventGroups.value?.filter(isEventFuture)
   if (!futureEventGroups) return
 
   return futureEventGroups
@@ -158,7 +170,7 @@ const eventsFuture = computed(() => {
     }))
     .reverse()
 })
-const eventsPast = computed(() => getFilteredEventGroups(isGigPast))
+const eventsPast = computed(() => eventGroups.value?.filter(isEventPast))
 
 // initialization
 useCrealHeadDefault({

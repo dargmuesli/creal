@@ -75,20 +75,71 @@
             {{ t('details') }}
           </VioLink>
         </div>
+        <template v-if="gigs.length">
+          <hr class="my-4 border-gray-700" />
+          <ul class="flex flex-col gap-3">
+            <li
+              v-for="gig in gigs"
+              :key="gig.documentId"
+              class="rounded-lg bg-gray-800 p-3"
+            >
+              <i18n-t keypath="datetime" tag="span">
+                <template #start>
+                  <VioTime :datetime="gig.dateStart" />
+                </template>
+                <template v-if="gig.dateEnd" #end>
+                  <i18n-t keypath="datetimeEnd" tag="span">
+                    <template #end>
+                      <VioTime :datetime="gig.dateEnd" />
+                    </template>
+                  </i18n-t>
+                </template>
+                <template v-if="gig.location" #location>
+                  {{ t('datetimeLocation', { location: gig.location }) }}
+                </template>
+              </i18n-t>
+              <div class="text-lg font-bold text-white">
+                {{ gig.title }}
+              </div>
+              <!-- eslint-disable vue/no-v-html -->
+              <div
+                v-if="gig.description"
+                class="*:overflow-hidden *:text-ellipsis"
+                v-html="marked(gig.description)"
+              />
+              <!-- eslint-enable vue/no-v-html -->
+              <VioLink
+                v-if="gig.url && gig.url !== ''"
+                :aria-label="t('details')"
+                :icon="false"
+                :is-colored="false"
+                :to="gig.url"
+              >
+                {{ t('details') }}
+              </VioLink>
+            </li>
+          </ul>
+        </template>
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import type { CollectionItem } from '@dargmuesli/nuxt-vio/shared/types/fetch'
 import { marked } from 'marked'
 
 export interface Image {
   url: URL
 }
 
-const { crealEvent, index } = defineProps<{
+const {
+  crealEvent,
+  gigs = [],
+  index,
+} = defineProps<{
   crealEvent: CrealGig
+  gigs?: CollectionItem<CrealGig>[]
   index: number
 }>()
 
