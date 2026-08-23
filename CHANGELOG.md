@@ -1,3 +1,17 @@
+## [6.0.0-beta.4](https://github.com/dargmuesli/creal/compare/6.0.0-beta.3...6.0.0-beta.4) (2026-08-23)
+
+### ⚠ BREAKING CHANGES
+
+* **dargstack:** rename child services
+
+### Features
+
+* **dargstack:** rename child services ([040ed53](https://github.com/dargmuesli/creal/commit/040ed534c9f66f815ee109a10696bf725457706d))
+
+### Bug Fixes
+
+* **dargstack:** correct secret resolution ([15e966f](https://github.com/dargmuesli/creal/commit/15e966faa84de4510cdc54c60661a64b40bf1272))
+
 ## [6.0.0-beta.3](https://github.com/dargmuesli/creal/compare/6.0.0-beta.2...6.0.0-beta.3) (2026-08-19)
 
 ### ⚠ BREAKING CHANGES
