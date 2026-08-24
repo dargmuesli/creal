@@ -1,3 +1,13 @@
+## [6.0.0-beta.5](https://github.com/dargmuesli/creal/compare/6.0.0-beta.4...6.0.0-beta.5) (2026-08-24)
+
+### ⚠ BREAKING CHANGES
+
+* **event:** allow for multiple gigs (#634)
+
+### Features
+
+* **event:** allow for multiple gigs ([#634](https://github.com/dargmuesli/creal/issues/634)) ([44baa01](https://github.com/dargmuesli/creal/commit/44baa010d8c11dba9320f4c93a62bd001b22a39d))
+
 ## [6.0.0-beta.4](https://github.com/dargmuesli/creal/compare/6.0.0-beta.3...6.0.0-beta.4) (2026-08-23)
 
 ### ⚠ BREAKING CHANGES
