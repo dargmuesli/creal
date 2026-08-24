@@ -4,7 +4,7 @@ import { codegenConfigBase } from './.rc'
 
 const codegenConfig: CodegenConfig = {
   ...codegenConfigBase,
-  schema: 'https://creal-postgraphile.localhost/graphql',
+  schema: 'https://creal-postgraphile.app.localhost/graphql',
 }
 
 export default codegenConfig

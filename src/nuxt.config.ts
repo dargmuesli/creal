@@ -10,11 +10,11 @@ export default defineNuxtConfig(
       extends: ['@dargmuesli/nuxt-vio'],
       modules: ['@nuxt/fonts', '@nuxt/scripts'],
       runtimeConfig: {
-        private: {
-          creal: {
-            s3: {
-              accessKeyId: '',
-              secretAccessKey: '',
+        creal: {
+          s3: {
+            accessKey: {
+              id: '',
+              secret: '',
             },
           },
         },
@@ -111,6 +111,11 @@ export default defineNuxtConfig(
       },
     },
     VIO_NUXT_BASE_CONFIG({
+      services: {
+        creal: { hasSubdomain: true, port: 3000 },
+        'creal-postgraphile': { hasSubdomain: true, port: 5000 },
+        'creal-strapi': { hasSubdomain: true, port: 1337 },
+      },
       siteName: SITE_NAME,
       stagingHost: PRODUCTION_HOST,
     }),

@@ -26,7 +26,7 @@ export const useStrapiData = async <T>({
   query: FetchOptions['query']
 }) => {
   const { locale } = useI18n({ useScope: 'global' })
-  const strapiFetch = useStrapiFetch({ name: 'creal_strapi' })
+  const strapiFetch = useStrapiFetch({ name: 'creal-strapi' })
   const route = useRoute()
 
   // data
