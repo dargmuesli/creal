@@ -1,3 +1,26 @@
+## [6.0.0](https://github.com/dargmuesli/creal/compare/5.6.3...6.0.0) (2026-08-24)
+
+### ⚠ BREAKING CHANGES
+
+* **event:** allow for multiple gigs (#634)
+* **dargstack:** rename child services
+* **dargstack:** upgrade to v4
+* **nuxt:** drop private property in runtime configuration
+
+### Features
+
+* **dargstack:** rename child services ([040ed53](https://github.com/dargmuesli/creal/commit/040ed534c9f66f815ee109a10696bf725457706d))
+* **event:** allow for multiple gigs ([#634](https://github.com/dargmuesli/creal/issues/634)) ([44baa01](https://github.com/dargmuesli/creal/commit/44baa010d8c11dba9320f4c93a62bd001b22a39d))
+
+### Bug Fixes
+
+* **dargstack:** correct secret resolution ([15e966f](https://github.com/dargmuesli/creal/commit/15e966faa84de4510cdc54c60661a64b40bf1272))
+
+### Code Refactoring
+
+* **dargstack:** upgrade to v4 ([48f6573](https://github.com/dargmuesli/creal/commit/48f6573f12bda4e930d7d21686ed83fc21a91a31))
+* **nuxt:** drop private property in runtime configuration ([f75469c](https://github.com/dargmuesli/creal/commit/f75469ca0194db97fc7bc973f68b779b288e76c2))
+
 ## [6.0.0-beta.5](https://github.com/dargmuesli/creal/compare/6.0.0-beta.4...6.0.0-beta.5) (2026-08-24)
 
 ### ⚠ BREAKING CHANGES
