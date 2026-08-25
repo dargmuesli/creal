@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1
 
 # <DEPENDENCIES>
-FROM ghcr.io/dargmuesli/creal-strapi:5.0.0
+FROM ghcr.io/dargmuesli/creal-strapi:5.0.2
 # </DEPENDENCIES>
 
 #############
