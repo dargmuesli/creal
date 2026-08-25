@@ -36,13 +36,6 @@
         >
           {{ t('player') }}
         </VioLink>
-        <VioLink
-          aria-label="Suggestions"
-          :is-colored="false"
-          :to="localePath('/suggestions')"
-        >
-          {{ t('suggestions') }}
-        </VioLink>
       </div>
       <!-- <VioLink
       v-if="eventsCurrentCount"
@@ -124,15 +117,6 @@
               >
                 {{ t('player') }}
               </VioLink>
-              <VioLink
-                aria-label="Suggestions"
-                class="-mx-3 block rounded-lg px-3 py-2 text-base leading-7 font-semibold text-white hover:bg-gray-800"
-                :is-colored="false"
-                :to="localePath('/suggestions')"
-                @click="mobileMenuOpen = false"
-              >
-                {{ t('suggestions') }}
-              </VioLink>
               <!-- <a
                 v-for="item in navigation"
                 :key="item.name"
@@ -210,7 +194,6 @@ de:
   # live: Live
   menuToggle: Menü umschalten
   player: Mixe
-  suggestions: Vorschläge
   testimonials: Erfahrungsberichte
 en:
   creal: cReal
@@ -220,6 +203,5 @@ en:
   # live: Live
   menuToggle: Toggle menu
   player: Mixes
-  suggestions: Suggestions
   testimonials: Testimonials
 </i18n>
