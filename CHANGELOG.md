@@ -1,3 +1,9 @@
+## [6.1.0](https://github.com/dargmuesli/creal/compare/6.0.0...6.1.0) (2026-08-25)
+
+### Features
+
+* **layout:** drop suggestions link from navigation ([66bee19](https://github.com/dargmuesli/creal/commit/66bee198e2f157eb5b96c099b6210713d80b6261))
+
 ## [6.0.0](https://github.com/dargmuesli/creal/compare/5.6.3...6.0.0) (2026-08-24)
 
 ### ⚠ BREAKING CHANGES
