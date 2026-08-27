@@ -1,8 +1,7 @@
 import { defu } from 'defu'
 import { parseURL } from 'ufo'
 
-// getServiceHref() truncates any host to its last two DNS labels, which would mangle a multi-label external endpoint host.
-// Hence this one is concatenated plainly instead of being routed through getSiteServiceHref.
+// The S3 endpoint lives on a third-party domain rather than on a subdomain of this site, so it is not a registered service and has to be assembled by hand.
 const crealS3EndpointHost = `${process.env.NUXT_PUBLIC_CREAL_S3_BUCKET}.${parseURL(process.env.NUXT_PUBLIC_CREAL_S3_ENDPOINT).host}`
 
 export const GET_CSP = ({
