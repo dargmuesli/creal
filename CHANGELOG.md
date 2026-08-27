@@ -1,3 +1,9 @@
+## [6.2.0](https://github.com/dargmuesli/creal/compare/6.1.0...6.2.0) (2026-08-27)
+
+### Features
+
+* **sentry:** use vio's built-in Sentry integration ([9d31a94](https://github.com/dargmuesli/creal/commit/9d31a94c5f9a19377176d279dc0770c8d2f43570))
+
 ## [6.1.0](https://github.com/dargmuesli/creal/compare/6.0.0...6.1.0) (2026-08-25)
 
 ### Features
