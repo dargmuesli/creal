@@ -112,6 +112,7 @@ export default defineNuxtConfig(
     },
     VIO_NUXT_BASE_CONFIG({
       services: {
+        backend: { hasSubdomain: true, port: 3000 },
         creal: { hasSubdomain: true, port: 3000 },
         'creal-postgraphile': { hasSubdomain: true, port: 5000 },
         'creal-strapi': { hasSubdomain: true, port: 1337 },
