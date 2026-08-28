@@ -219,8 +219,8 @@ importers:
         specifier: 9.3.4
         version: 9.3.4(magic-string@1.2.2)(magicast@0.5.4)(oxc-parser@0.140.0)(rolldown@1.2.5)(unplugin@3.3.0(esbuild@0.28.2)(rolldown@1.2.5)(rollup@4.62.5)(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.50.0)(yaml@2.9.0))(webpack@5.109.2(cssnano@8.0.8(postcss@8.5.26))(csso@5.0.5)(esbuild@0.28.2)(lightningcss@1.33.0)(postcss@8.5.26)))(webpack@5.109.2(cssnano@8.0.8(postcss@8.5.26))(csso@5.0.5)(esbuild@0.28.2)(lightningcss@1.33.0)(postcss@8.5.26))
       '@dargmuesli/nuxt-vio':
-        specifier: 23.0.0-beta.4
-        version: 23.0.0-beta.4(d18fbf55bd5154c9cdd1eb4d32d7487e)
+        specifier: 23.0.0-beta.5
+        version: 23.0.0-beta.5(d18fbf55bd5154c9cdd1eb4d32d7487e)
       '@graphql-codegen/cli':
         specifier: 7.3.1
         version: 7.3.1(@types/node@24.13.3)(crossws@0.4.12(srvx@0.11.22))(graphql@17.0.2)(supports-color@10.2.2)(typescript@6.0.3)
@@ -391,11 +391,11 @@ importers:
         specifier: 4.13.0
         version: 4.13.0(playwright-core@1.62.1)
       '@dargmuesli/nuxt-vio':
-        specifier: 23.0.0-beta.4
-        version: 23.0.0-beta.4(2ea929276d3ffe9e1157e5a2da8edc23)
+        specifier: 23.0.0-beta.5
+        version: 23.0.0-beta.5(2ea929276d3ffe9e1157e5a2da8edc23)
       '@dargmuesli/nuxt-vio-testing':
-        specifier: 23.0.0-beta.4
-        version: 23.0.0-beta.4(@axe-core/playwright@4.13.0(playwright-core@1.62.1))(@playwright/test@1.62.1)(lodash-es@4.18.1)(playwright-core@1.62.1)(ufo@1.6.4)
+        specifier: 23.0.0-beta.5
+        version: 23.0.0-beta.5(@axe-core/playwright@4.13.0(playwright-core@1.62.1))(@playwright/test@1.62.1)(lodash-es@4.18.1)(playwright-core@1.62.1)(ufo@1.6.4)
       '@eslint/js':
         specifier: 10.0.1
         version: 10.0.1(eslint@10.9.0(jiti@2.7.0)(supports-color@10.2.2))
@@ -792,8 +792,8 @@ packages:
     resolution: {integrity: sha512-3+yMC0had2EGS+xS0q9Dzer8xOd7srgL1wB9EwpdrJEqKi+FlSz+s1LiE/SuEpWjUwb/xUqdN7VWT9lC+Njz+g==}
     engines: {node: '>=16'}
 
-  '@dargmuesli/nuxt-vio-testing@23.0.0-beta.4':
-    resolution: {integrity: sha512-nkgZngFu6qsUQX0Bcnuvq5lo6GCu+uvyJMLYgkSt/Ayr5gq6KwvbAmpS2j5ZOuu/rIqnO7j2ecoGGyB6e+r3Nw==}
+  '@dargmuesli/nuxt-vio-testing@23.0.0-beta.5':
+    resolution: {integrity: sha512-pljMo/Px5oMzgp67i4WPh0nrnANGGwNMnk5O4XMT0tMQF9u7n8iutT76vbvsT+OGJHSuHJuFEO7k0ORRMEtU5A==}
     engines: {node: '24'}
     peerDependencies:
       '@axe-core/playwright': ^4.11.1
@@ -802,8 +802,8 @@ packages:
       playwright-core: ^1.58.2
       ufo: ^1.6.3
 
-  '@dargmuesli/nuxt-vio@23.0.0-beta.4':
-    resolution: {integrity: sha512-H7UGp+z4RD/HgUZW/pqvDf2kan2/3RrpQg7hHsAUePnOimZT9G9nJ6H8tdm3II0k3AQCxVgDfqWpTZ0zlhEjiA==}
+  '@dargmuesli/nuxt-vio@23.0.0-beta.5':
+    resolution: {integrity: sha512-dERp9jRLHZalCD4Sh9Ja/FcEjrSgB+lj/oofMWQMta9jRxv6JxRf4lBh/kGtwhV2o5phHFwR7JXn38xVxR/M5Q==}
     engines: {node: '24'}
     peerDependencies:
       nuxt: ^4.1.0
@@ -9474,7 +9474,7 @@ snapshots:
       - unplugin
       - webpack
 
-  '@dargmuesli/nuxt-vio-testing@23.0.0-beta.4(@axe-core/playwright@4.13.0(playwright-core@1.62.1))(@playwright/test@1.62.1)(lodash-es@4.18.1)(playwright-core@1.62.1)(ufo@1.6.4)':
+  '@dargmuesli/nuxt-vio-testing@23.0.0-beta.5(@axe-core/playwright@4.13.0(playwright-core@1.62.1))(@playwright/test@1.62.1)(lodash-es@4.18.1)(playwright-core@1.62.1)(ufo@1.6.4)':
     dependencies:
       '@axe-core/playwright': 4.13.0(playwright-core@1.62.1)
       '@playwright/test': 1.62.1
@@ -9482,7 +9482,7 @@ snapshots:
       playwright-core: 1.62.1
       ufo: 1.6.4
 
-  '@dargmuesli/nuxt-vio@23.0.0-beta.4(2ea929276d3ffe9e1157e5a2da8edc23)':
+  '@dargmuesli/nuxt-vio@23.0.0-beta.5(2ea929276d3ffe9e1157e5a2da8edc23)':
     dependencies:
       '@dargmuesli/nuxt-cookie-control': 9.3.3(magic-string@1.2.2)(magicast@0.5.4)(oxc-parser@0.143.0)(rolldown@1.2.5)(unplugin@3.3.0(esbuild@0.28.2)(rolldown@1.2.5)(rollup@4.62.5)(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.50.0)(yaml@2.9.0))(webpack@5.109.2(cssnano@8.0.8(postcss@8.5.26))(csso@5.0.5)(esbuild@0.28.2)(lightningcss@1.33.0)(postcss@8.5.26)))(webpack@5.109.2(cssnano@8.0.8(postcss@8.5.26))(csso@5.0.5)(esbuild@0.28.2)(lightningcss@1.33.0)(postcss@8.5.26))
       '@eslint/compat': 2.1.0(eslint@10.8.1(jiti@2.7.0)(supports-color@10.2.2))
@@ -9634,7 +9634,7 @@ snapshots:
       - yaml-eslint-parser
       - zod
 
-  '@dargmuesli/nuxt-vio@23.0.0-beta.4(d18fbf55bd5154c9cdd1eb4d32d7487e)':
+  '@dargmuesli/nuxt-vio@23.0.0-beta.5(d18fbf55bd5154c9cdd1eb4d32d7487e)':
     dependencies:
       '@dargmuesli/nuxt-cookie-control': 9.3.3(magic-string@1.2.2)(magicast@0.5.4)(oxc-parser@0.140.0)(rolldown@1.2.5)(unplugin@3.3.0(esbuild@0.28.2)(rolldown@1.2.5)(rollup@4.62.5)(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.50.0)(yaml@2.9.0))(webpack@5.109.2(cssnano@8.0.8(postcss@8.5.26))(csso@5.0.5)(esbuild@0.28.2)(lightningcss@1.33.0)(postcss@8.5.26)))(webpack@5.109.2(cssnano@8.0.8(postcss@8.5.26))(csso@5.0.5)(esbuild@0.28.2)(lightningcss@1.33.0)(postcss@8.5.26))
       '@eslint/compat': 2.1.0(eslint@10.8.1(jiti@2.7.0)(supports-color@10.2.2))
