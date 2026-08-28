@@ -7,7 +7,7 @@ FROM ghcr.io/dargmuesli/creal-strapi:5.0.2
 #############
 # Create base image.
 
-FROM node:24.19.0-slim AS base-image
+FROM node:24.20.0-slim AS base-image
 
 # The `CI` environment variable must be set for pnpm to run in headless mode
 ENV CI=true
