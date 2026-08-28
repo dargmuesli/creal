@@ -1,3 +1,9 @@
+## [6.2.1](https://github.com/dargmuesli/creal/compare/6.2.0...6.2.1) (2026-08-28)
+
+### Bug Fixes
+
+* **security:** derive CSP hosts from getServiceHref ([#658](https://github.com/dargmuesli/creal/issues/658)) ([cdc657a](https://github.com/dargmuesli/creal/commit/cdc657af3ef35562d5545c854ea7a0fad3e54bb9))
+
 ## [6.2.0](https://github.com/dargmuesli/creal/compare/6.1.0...6.2.0) (2026-08-27)
 
 ### Features
