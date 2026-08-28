@@ -9,11 +9,12 @@ vioTest.describe('content security policy', () => {
     if (process.env.VIO_SERVER === 'static') return // a statically served build runs no Nitro plugins and sends no such header
 
     const csp = (await request.get('/')).headers()['content-security-policy']
-    const rootHost = new URL(SITE_URL).host.replace(/^app\./, '')
+    // Playwright starts the server under test with `NUXT_PUBLIC_VIO_IS_TESTING`, which places services directly below the site host rather than below its root host.
+    const serviceHost = new URL(SITE_URL).host
 
-    expect(csp).toContain(`https://backend.${rootHost}/api/`)
-    expect(csp).toContain(`https://creal-postgraphile.${rootHost}`)
-    expect(csp).toContain(`https://creal-strapi.${rootHost}`)
+    expect(csp).toContain(`https://backend.${serviceHost}/api/`)
+    expect(csp).toContain(`https://creal-postgraphile.${serviceHost}`)
+    expect(csp).toContain(`https://creal-strapi.${serviceHost}`)
     expect(csp).toContain('https://cdn.plyr.io')
   })
 })
