@@ -12,6 +12,11 @@ const configurationTslint = [
 ]
 
 export default pluginTypescript.config(
+  // generated Playwright output, mirrors `.gitignore`
+  {
+    ignores: ['e2e/report/', 'e2e/results/'],
+  },
+
   configurationJs,
   configurationPrettier,
   ...configurationTslint,
