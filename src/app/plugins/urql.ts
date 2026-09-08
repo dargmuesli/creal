@@ -72,8 +72,7 @@ export default defineNuxtPlugin(async (nuxtApp) => {
   const urqlReset = () => (client.value = createClient(clientOptions))
 
   nuxtApp.hook('vue:setup', () => {
-    const { $urql } = useNuxtApp()
-    provideClient($urql)
+    provideClient(client)
   })
 
   return {
