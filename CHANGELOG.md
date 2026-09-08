@@ -1,3 +1,9 @@
+## [6.2.2](https://github.com/dargmuesli/creal/compare/6.2.1...6.2.2) (2026-09-08)
+
+### Bug Fixes
+
+* **urql:** provide client ref directly ([2acb7ec](https://github.com/dargmuesli/creal/commit/2acb7ec6a89d1074c09cd6de26b7dead456780b4))
+
 ## [6.2.1](https://github.com/dargmuesli/creal/compare/6.2.0...6.2.1) (2026-08-28)
 
 ### Bug Fixes
