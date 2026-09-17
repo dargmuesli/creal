@@ -1,3 +1,9 @@
+## [6.4.0](https://github.com/dargmuesli/creal/compare/6.3.0...6.4.0) (2026-09-17)
+
+### Features
+
+* **rider:** improve texts, spacing and seo ([d5bafbc](https://github.com/dargmuesli/creal/commit/d5bafbce7e8f01f4626c4ad5558cfb2b3e8dfc6b))
+
 ## [6.3.0](https://github.com/dargmuesli/creal/compare/6.2.4...6.3.0) (2026-09-17)
 
 ### Features
