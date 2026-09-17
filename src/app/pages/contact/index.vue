@@ -10,6 +10,10 @@
     </VioCardStateInfo>
     <section v-else>
       <h1>{{ t('title') }}</h1>
+      <p class="mb-4">
+        {{ t('riderHint') }}
+        <VioLink :to="localePath('/rider')">{{ t('rider') }}</VioLink>
+      </p>
       <VioFormContact :is-loading="isFormSubmitting" @submit="submit" />
     </section>
   </div>
@@ -18,6 +22,7 @@
 <script setup lang="ts">
 const { t } = useI18n()
 const alertError = useAlertError()
+const localePath = useLocalePath()
 const backendFetch = useServiceFetch({
   name: 'backend',
 })
@@ -53,11 +58,15 @@ useCrealHeadDefault({ title: t('title') })
 <i18n lang="yaml">
 de:
   fetchError: Es gab einen Fehler beim Versenden der Nachricht
+  rider: technischen Rider
+  riderHint: Die technischen Anforderungen für eine Buchung findest du im
   thankYouBody: Deine Nachricht wurde versendet. Ich werde mich in Kürze bei dir melden.
   thankYouTitle: Danke!
   title: Kontakt
 en:
   fetchError: There was an error sending the message
+  rider: technical rider
+  riderHint: You can find the technical requirements for a booking in the
   thankYouBody: Your message has been sent. I'll get back to you shortly.
   thankYouTitle: Thank you!
   title: Contact
