@@ -3,60 +3,39 @@
     <VioLayoutBreadcrumbs>
       {{ title }}
     </VioLayoutBreadcrumbs>
-    <div class="flex flex-col gap-12">
-      <p class="max-w-3xl text-lg leading-8 text-gray-300">{{ t('intro') }}</p>
-      <div class="grid gap-8 lg:grid-cols-2">
-        <section
+    <div class="flex flex-col gap-16">
+      <p class="text-lg leading-8 text-gray-300">{{ t('intro') }}</p>
+      <div class="grid gap-4 lg:grid-cols-2 lg:gap-8">
+        <VioCard
           v-for="(section, index) in sections"
           :key="section.heading"
-          class="flex flex-col gap-6 rounded-2xl bg-gray-900 p-8 shadow-2xl ring-1 ring-white/10"
+          background-color="bg-gray-900"
+          class="flex flex-col gap-4 lg:p-8"
           :class="{ 'lg:col-span-2': index === 0 }"
         >
           <div class="flex items-center gap-4">
-            <div
-              class="flex size-12 shrink-0 items-center justify-center rounded-full bg-yellow-500/10 text-yellow-500"
-            >
-              <component :is="section.icon" aria-hidden="true" class="size-6" />
-            </div>
-            <h2 class="m-0 text-2xl font-bold text-white">
-              {{ section.heading }}
-            </h2>
+            <component
+              :is="section.icon"
+              aria-hidden="true"
+              class="size-8 shrink-0 text-yellow-500"
+            />
+            <h2>{{ section.heading }}</h2>
           </div>
           <ul
-            class="flex flex-col gap-3"
+            class="flex flex-col gap-2"
             :class="{ 'lg:grid lg:grid-cols-3 lg:gap-8': index === 0 }"
           >
-            <li
-              v-for="item in section.items"
-              :key="item"
-              class="flex gap-3 text-gray-300"
-            >
+            <li v-for="item in section.items" :key="item" class="flex gap-2">
               <CheckIcon
                 aria-hidden="true"
-                class="mt-0.5 size-5 shrink-0 text-yellow-500"
+                class="size-6 shrink-0 text-yellow-500"
               />
               <span>{{ item }}</span>
             </li>
           </ul>
-        </section>
+        </VioCard>
       </div>
-      <div class="mb-32 flex justify-center">
-        <div
-          class="bg-background-darken flex flex-col items-center gap-8 rounded-lg p-8 lg:flex-row lg:gap-16 lg:px-16"
-        >
-          <div class="flex flex-col gap-4">
-            <span class="text-4xl font-bold">{{ t('ctaTitle') }}</span>
-            <span class="text-xl">{{ t('ctaText') }}</span>
-          </div>
-          <VioButtonColored
-            :aria-label="t('ctaButton')"
-            class="font-semibold shadow-xs"
-            :to="localePath('/contact')"
-          >
-            {{ t('ctaButton') }}
-          </VioButtonColored>
-        </div>
-      </div>
+      <CrBookingCta :text="t('ctaText')" :title="t('ctaTitle')" />
     </div>
   </div>
 </template>
@@ -72,7 +51,6 @@ import {
 } from '@heroicons/vue/24/outline'
 
 const { t } = useI18n()
-const localePath = useLocalePath()
 
 // data
 const sections = [
@@ -131,7 +109,6 @@ de:
   bringController: Denon DJ Prime GO+ (standalone, kein Laptop nötig)
   bringHeadphones: Kopfhörer
   bringMedia: Musik auf USB Sticks
-  ctaButton: cReal buchen →
   ctaText: Schreib mir, dann klären wir die Details!
   ctaTitle: Alles dabei?
   description: Technische Anforderungen für Auftritte von DJ cReal.
@@ -157,7 +134,6 @@ en:
   bringController: Denon DJ Prime GO+ (standalone, no laptop needed)
   bringHeadphones: Headphones
   bringMedia: Music on USB sticks
-  ctaButton: Book cReal →
   ctaText: Get in touch and we'll sort out the details!
   ctaTitle: All set?
   description: Technical requirements for performances by DJ cReal.
