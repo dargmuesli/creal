@@ -1,3 +1,9 @@
+## [6.2.4](https://github.com/dargmuesli/creal/compare/6.2.3...6.2.4) (2026-09-17)
+
+### Bug Fixes
+
+* **vite:** stop pre-bundling vio auth store ([#662](https://github.com/dargmuesli/creal/issues/662)) ([48d400e](https://github.com/dargmuesli/creal/commit/48d400e1b16798ecaeee44ef21514c6d6b585049))
+
 ## [6.2.3](https://github.com/dargmuesli/creal/compare/6.2.2...6.2.3) (2026-09-17)
 
 ### Bug Fixes
