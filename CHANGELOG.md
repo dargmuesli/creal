@@ -1,3 +1,13 @@
+## [6.3.0](https://github.com/dargmuesli/creal/compare/6.2.4...6.3.0) (2026-09-17)
+
+### Features
+
+* **rider:** add technical rider page ([#661](https://github.com/dargmuesli/creal/issues/661)) ([8fd3c2d](https://github.com/dargmuesli/creal/commit/8fd3c2d9d47d5133e1eec64175694d118e760e96))
+
+### Bug Fixes
+
+* **theme:** unify brand yellow ([#663](https://github.com/dargmuesli/creal/issues/663)) ([a55b1cb](https://github.com/dargmuesli/creal/commit/a55b1cba3c36d4dc10330941ea246e8ab0963c58))
+
 ## [6.2.4](https://github.com/dargmuesli/creal/compare/6.2.3...6.2.4) (2026-09-17)
 
 ### Bug Fixes
