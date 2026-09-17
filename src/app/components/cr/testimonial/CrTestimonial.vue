@@ -57,7 +57,7 @@
               <figcaption class="mt-8 text-base">
                 <VioLink
                   v-if="testimonial.link"
-                  class="font-semibold text-yellow-500"
+                  class="text-vio-primary-bg font-semibold"
                   :is-colored="false"
                   :to="testimonial.link"
                 >

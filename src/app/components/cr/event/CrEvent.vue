@@ -64,7 +64,7 @@
           v-html="marked(crealEvent.description)"
         />
         <!-- eslint-enable vue/no-v-html -->
-        <div class="prose-a:text-yellow-500">
+        <div class="prose-a:text-vio-primary-bg">
           <VioLink
             v-if="crealEvent.url && crealEvent.url !== ''"
             :aria-label="t('details')"
