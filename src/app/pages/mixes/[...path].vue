@@ -39,7 +39,7 @@
             v-for="playlistItem of store.playerData.currentPlaylist.items"
             :key="playlistItem.fileName"
             :class="{
-              'text-yellow-500':
+              'text-vio-primary-bg':
                 resolvedPlaylistPath === store.playerData.currentPlaylistPath &&
                 store.playerData.currentTrack &&
                 playlistItem.fileName ===
