@@ -104,7 +104,7 @@ de:
   booth: DJ Pult
   boothBattery: "Als Rückfall ist Akkubetrieb möglich, für Sets bis zu 2\u00A0Stunden problemlos."
   boothPower: "Eine geerdete 230\u00A0V Steckdose, der Controller braucht höchstens 30\u00A0W."
-  boothTable: "Ein stabiler, ebener Tisch mit mindestens 50\u00A0×\u00A035\u00A0cm Fläche."
+  boothTable: "Ein stabiler, ebener Tisch in Stehhöhe mit mindestens 50\u00A0×\u00A035\u00A0cm Fläche."
   boothWeather: Draußen eine Überdachung für das DJ Pult.
   bring: Das bringe ich mit
   bringController: Denon DJ Prime GO+ (standalone, kein Laptop nötig)
@@ -115,7 +115,7 @@ de:
   description: Technische Anforderungen für Auftritte von DJ cReal.
   optional: Auf Wunsch
   optionalMicrophone: "Mikrofon für Ansagen, anschließbar über XLR oder 6,35\u00A0mm Klinke."
-  optionalStreaming: Musikstreaming, falls WLAN verfügbar ist.
+  optionalStreaming: Musikstreaming über WLAN oder, bei gutem Mobilfunkempfang, über meinen eigenen Hotspot. Dafür ist eine zweite Steckdose zum Laden des Hotspots empfehlenswert.
   setup: Aufbau
   setupPlay: Einstecken und loslegen ist möglich, auch ohne Stromanschluss.
   setupSoundcheck: Ein Soundcheck vor der Veranstaltung ist mir lieber.
@@ -128,7 +128,7 @@ en:
   booth: Booth
   boothBattery: "Battery operation works as a fallback, reliably for sets of up to 2\u00A0hours."
   boothPower: "One grounded 230\u00A0V socket, the controller draws 30\u00A0W at most."
-  boothTable: "A stable, level table with at least 50\u00A0×\u00A035\u00A0cm of space."
+  boothTable: "A stable, level table at standing height with at least 50\u00A0×\u00A035\u00A0cm of space."
   boothWeather: Outdoors, a roof or cover over the booth.
   bring: What I bring
   bringController: Denon DJ Prime GO+ (standalone, no laptop needed)
@@ -139,7 +139,7 @@ en:
   description: Technical requirements for performances by DJ cReal.
   optional: On request
   optionalMicrophone: "Microphone for announcements, connected via XLR or 6.35\u00A0mm jack."
-  optionalStreaming: Music streaming, if Wi-Fi is available.
+  optionalStreaming: Music streaming via Wi-Fi or, with good mobile reception, via my own hotspot. A second socket to charge the hotspot is recommended in that case.
   setup: Setup
   setupPlay: Plug and play is possible, even without a power connection.
   setupSoundcheck: A soundcheck before the event is preferred.
