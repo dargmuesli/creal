@@ -4,7 +4,7 @@
       <component
         :is="icon"
         aria-hidden="true"
-        class="size-8 shrink-0 text-yellow-500"
+        class="text-vio-primary-bg size-8 shrink-0"
       />
       <component :is="headingTag">{{ heading }}</component>
     </div>

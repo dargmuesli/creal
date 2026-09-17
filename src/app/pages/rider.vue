@@ -89,7 +89,7 @@ de:
   bring: Das bringe ich mit
   bringController: Denon DJ Prime GO+ (standalone, kein Laptop nötig)
   bringHeadphones: Kopfhörer
-  bringHotspot: Hotspot für Musikstreaming
+  bringHotspot: Hotspot für Musikstreaming, auf Wunsch
   bringMedia: Musik auf USB Sticks
   bringMicrophone: Mikrofon für Ansagen, auf Wunsch
   ctaText: Melde dich vor dem Termin, dann finden wir eine Lösung.
@@ -116,7 +116,7 @@ en:
   bring: What I bring
   bringController: Denon DJ Prime GO+ (standalone, no laptop needed)
   bringHeadphones: Headphones
-  bringHotspot: Hotspot for music streaming
+  bringHotspot: Hotspot for music streaming, on request
   bringMedia: Music on USB sticks
   bringMicrophone: Microphone for announcements, on request
   ctaText: Get in touch before the gig and we'll find a solution.
