@@ -4,7 +4,6 @@
       {{ title }}
     </VioLayoutBreadcrumbs>
     <div class="flex flex-col gap-16">
-      <p class="text-lg leading-8 text-gray-300">{{ t('intro') }}</p>
       <div class="grid gap-4 lg:grid-cols-2 lg:gap-8">
         <VioCard
           v-for="(section, index) in sections"
@@ -22,15 +21,18 @@
             <h2>{{ section.heading }}</h2>
           </div>
           <ul
-            class="flex flex-col gap-2"
-            :class="{ 'lg:grid lg:grid-cols-3 lg:gap-8': index === 0 }"
+            class="divide-y divide-gray-700"
+            :class="{
+              'lg:grid lg:grid-cols-3 lg:divide-x lg:divide-y-0': index === 0,
+            }"
           >
-            <li v-for="item in section.items" :key="item" class="flex gap-2">
-              <CheckIcon
-                aria-hidden="true"
-                class="size-6 shrink-0 text-yellow-500"
-              />
-              <span>{{ item }}</span>
+            <li
+              v-for="item in section.items"
+              :key="item"
+              class="py-2"
+              :class="{ 'lg:px-4 lg:first:pl-0': index === 0 }"
+            >
+              {{ item }}
             </li>
           </ul>
         </VioCard>
@@ -44,7 +46,6 @@
 import {
   BoltIcon,
   BriefcaseIcon,
-  CheckIcon,
   SparklesIcon,
   SpeakerWaveIcon,
   WrenchScrewdriverIcon,
@@ -109,10 +110,9 @@ de:
   bringController: Denon DJ Prime GO+ (standalone, kein Laptop nötig)
   bringHeadphones: Kopfhörer
   bringMedia: Musik auf USB Sticks
-  ctaText: Schreib mir, dann klären wir die Details!
-  ctaTitle: Alles dabei?
+  ctaText: Melde dich vor dem Termin, dann finden wir eine Lösung.
+  ctaTitle: Fehlt etwas?
   description: Technische Anforderungen für Auftritte von DJ cReal.
-  intro: Hier steht, was ich zum Auflegen brauche. Falls etwas davon nicht möglich ist, melde dich gerne vor dem Termin, dann finden wir eine Lösung.
   optional: Auf Wunsch
   optionalMicrophone: "Mikrofon für Ansagen, anschließbar über XLR oder 6,35\u00A0mm Klinke."
   optionalStreaming: Musikstreaming, falls WLAN verfügbar ist.
@@ -134,10 +134,9 @@ en:
   bringController: Denon DJ Prime GO+ (standalone, no laptop needed)
   bringHeadphones: Headphones
   bringMedia: Music on USB sticks
-  ctaText: Get in touch and we'll sort out the details!
-  ctaTitle: All set?
+  ctaText: Get in touch before the gig and we'll find a solution.
+  ctaTitle: Something missing?
   description: Technical requirements for performances by DJ cReal.
-  intro: This rider lists what I need to play. If something can't be provided, just get in touch before the gig and we'll find a solution.
   optional: On request
   optionalMicrophone: "Microphone for announcements, connected via XLR or 6.35\u00A0mm jack."
   optionalStreaming: Music streaming, if Wi-Fi is available.
