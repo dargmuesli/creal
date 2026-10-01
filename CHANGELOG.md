@@ -1,3 +1,9 @@
+## [6.4.1](https://github.com/dargmuesli/creal/compare/6.4.0...6.4.1) (2026-10-01)
+
+### Bug Fixes
+
+* schedule release ([2b3781a](https://github.com/dargmuesli/creal/commit/2b3781a1e4eb149c8b250271e8d5f78b2738ad09))
+
 ## [6.4.0](https://github.com/dargmuesli/creal/compare/6.3.0...6.4.0) (2026-09-17)
 
 ### Features
