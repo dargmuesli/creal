@@ -1,4 +1,4 @@
-export const usePlyr = () => {
+export const usePlayer = () => {
   const router = useRouter()
   const localePath = useLocalePath()
   const store = useStore()
@@ -42,15 +42,7 @@ export const usePlyr = () => {
             )
           : undefined,
       }
-      store.playerData.sourceInfo = {
-        type: 'audio',
-        sources: [
-          {
-            src: signedUrl,
-            type: 'audio/mp3',
-          },
-        ],
-      }
+      store.playerData.sourceUrl = signedUrl
     },
   }
 }
