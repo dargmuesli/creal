@@ -70,7 +70,7 @@ const { t } = useI18n()
 const localePath = useLocalePath()
 const route = useRoute()
 const alertError = useAlertError()
-const { play } = usePlyr()
+const { play } = usePlayer()
 // Captured synchronously: navigateTo() needs the Nuxt app context, which
 // is only implicitly available before the first `await` — init() calls it
 // after awaiting a fetch, so it must be restored explicitly.

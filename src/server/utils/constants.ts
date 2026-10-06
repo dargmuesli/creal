@@ -34,7 +34,6 @@ export const GET_CSP = ({
         hrefBackend, // contact form
         hrefPostgraphile,
         hrefStrapi,
-        'https://cdn.plyr.io', // plyr
       ],
       'font-src': ["'self'"], // og-image
       'form-action': ["'self'"],
@@ -43,7 +42,6 @@ export const GET_CSP = ({
         hrefS3, // playlist cover
       ],
       'media-src': [
-        'https://cdn.plyr.io/static/blank.mp4', // plyr
         hrefS3, // music
       ],
       'report-to': 'sentry',

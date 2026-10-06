@@ -1,4 +1,3 @@
-import type Plyr from 'plyr'
 import type { Ref } from 'vue'
 
 export interface Cover {
@@ -56,5 +55,5 @@ export interface PlayerData {
   currentTrack: Ref<(PlaylistItem & { meta?: PlaylistItemMeta }) | undefined>
   isPaused: Ref<boolean>
   isVisible: Ref<boolean>
-  sourceInfo: Ref<Plyr.SourceInfo | undefined>
+  sourceUrl: Ref<string | undefined>
 }
