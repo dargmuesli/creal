@@ -1,3 +1,9 @@
+## [6.4.2](https://github.com/dargmuesli/creal/compare/6.4.1...6.4.2) (2026-10-12)
+
+### Bug Fixes
+
+* schedule release ([2799fee](https://github.com/dargmuesli/creal/commit/2799fee6a1179996d0c488a592b524c0f79bab89))
+
 ## [6.4.1](https://github.com/dargmuesli/creal/compare/6.4.0...6.4.1) (2026-10-01)
 
 ### Bug Fixes
