@@ -8,7 +8,7 @@ export const useStore = defineStore('creal', () => {
     currentTrack: ref(),
     isPaused: ref(true),
     isVisible: ref(false),
-    sourceInfo: ref(),
+    sourceUrl: ref(),
   }
 
   return {

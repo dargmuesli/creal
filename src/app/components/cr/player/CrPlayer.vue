@@ -38,12 +38,17 @@
     </div>
     <div :class="{ hidden: !store.playerData.isVisible }">
       <ClientOnly>
-        <vue-plyr
-          ref="plyrRef"
-          :emit="['ended', 'pause', 'playing', 'timeupdate']"
-        >
-          <audio crossorigin="anonymous" />
-        </vue-plyr>
+        <audio-player>
+          <audio-neutral-skin>
+            <audio
+              ref="audioRef"
+              crossorigin="anonymous"
+              @ended="onEnded"
+              @pause="onPause"
+              @timeupdate="onTimeUpdate"
+            />
+          </audio-neutral-skin>
+        </audio-player>
       </ClientOnly>
     </div>
   </div>
@@ -52,12 +57,11 @@
 <script setup lang="ts">
 const store = useStore()
 const { t } = useI18n()
-const { play } = usePlyr()
+const { play } = usePlayer()
 const alertError = useAlertError()
 
 // data
-const isInitialized = ref(false)
-const plyrRef = ref<{ player: Plyr }>()
+const audioRef = ref<HTMLAudioElement>()
 
 // methods
 const binarySearch = <A, B>(
@@ -95,57 +99,49 @@ const closeProtect = () =>
   (window.onbeforeunload = () =>
     'The music will stop playing if you navigate away.')
 
-const initPlyr = (plyr: { player: Plyr }) => {
-  plyr.player.on('ended', () => {
-    closeAllow()
+const onEnded = () => {
+  closeAllow()
 
-    const { currentPlaylist, currentTrack } = store.playerData
+  const { currentPlaylist, currentTrack } = store.playerData
 
-    if (!currentPlaylist || !currentTrack) return
+  if (!currentPlaylist || !currentTrack) return
 
-    const trackList = currentPlaylist.items
-    const currentIndex = trackList.findIndex(
-      (item) => item?.fileName === currentTrack.fileName,
-    )
+  const trackList = currentPlaylist.items
+  const currentIndex = trackList.findIndex(
+    (item) => item?.fileName === currentTrack.fileName,
+  )
 
-    const nextTrack = trackList.slice(currentIndex + 1).find(Boolean)
+  const nextTrack = trackList.slice(currentIndex + 1).find(Boolean)
 
-    if (nextTrack) {
-      play(nextTrack, store.playerData.currentPlaylistPath)
-    }
-  })
-  plyr.player.on('pause', () => {
-    store.playerData.isPaused = true
-    closeAllow()
-  })
-  // plyr.player.on('playing', () => {
-  //   store.playerData.isPaused = false
-  //   closeProtect()
-  // })
-  plyr.player.on('timeupdate', () => {
-    if (!store.playerData.currentTrack?.meta?.tracklist || !player.value) return
+  if (nextTrack) {
+    play(nextTrack, store.playerData.currentPlaylistPath)
+  }
+}
+const onPause = () => {
+  store.playerData.isPaused = true
+  closeAllow()
+}
+const onTimeUpdate = () => {
+  if (!store.playerData.currentTrack?.meta?.tracklist || !audioRef.value) return
 
-    const trackListItem =
-      store.playerData.currentTrack.meta.tracklist[
-        binarySearch(
-          store.playerData.currentTrack.meta.tracklist,
-          player.value.currentTime,
-          trackListItemComparator,
-        )
-      ]
+  const trackListItem =
+    store.playerData.currentTrack.meta.tracklist[
+      binarySearch(
+        store.playerData.currentTrack.meta.tracklist,
+        audioRef.value.currentTime,
+        trackListItemComparator,
+      )
+    ]
 
-    const currentTrackDescription = trackListItem
-      ? trackListItem.artistName + ' - ' + trackListItem.songName
-      : ''
+  const currentTrackDescription = trackListItem
+    ? trackListItem.artistName + ' - ' + trackListItem.songName
+    : ''
 
-    if (
-      store.playerData.currentTrack.meta.description !== currentTrackDescription
-    ) {
-      store.playerData.currentTrack.meta.description = currentTrackDescription
-    }
-  })
-
-  isInitialized.value = true
+  if (
+    store.playerData.currentTrack.meta.description !== currentTrackDescription
+  ) {
+    store.playerData.currentTrack.meta.description = currentTrackDescription
+  }
 }
 const { copy: copyText } = useCopy()
 const share = async () => {
@@ -160,28 +156,17 @@ const share = async () => {
   )
 }
 
-// computations
-const player = computed(() => {
-  if (!plyrRef.value) return
-
-  if (!isInitialized.value) {
-    initPlyr(plyrRef.value)
-  }
-
-  return plyrRef.value.player
-})
-
 // lifecycle
 watch(
-  () => store.playerData.sourceInfo,
+  () => store.playerData.sourceUrl,
   (current, _old) => {
     if (
       current &&
-      player.value
+      audioRef.value
       // !store.playerData.isPaused
     ) {
-      player.value.source = current
-      player.value.play()
+      audioRef.value.src = current
+      audioRef.value.play()
       store.playerData.isPaused = false
       closeProtect()
     }
