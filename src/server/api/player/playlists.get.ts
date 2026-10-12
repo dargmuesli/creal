@@ -1,6 +1,17 @@
 import { ListObjectsV2Command } from '@aws-sdk/client-s3'
 import { consola } from 'consola'
+import { defineEventHandler, sendNoContent } from 'h3'
+import { useEvent } from 'nitropack/runtime'
 import { parseURL, parseQuery } from 'ufo'
+
+import { useS3 } from '#server/utils/dependencies/aws'
+import { useProxy } from '#server/utils/network'
+import type {
+  FetchPlaylist,
+  Playlist,
+  PlaylistExtended,
+  PlaylistItem,
+} from '#shared/types/player'
 
 export default defineEventHandler(async () => {
   const runtimeConfig = useRuntimeConfig()

@@ -9,7 +9,7 @@
           <VioLink
             class="font-semibold text-white"
             :is-colored="false"
-            :to="localePath('/events')"
+            :to="localePath({ path: '/events' })"
           >
             <span aria-hidden="true" class="absolute inset-0" />
             {{ t('viewAll') }}
@@ -34,7 +34,7 @@
           <VioButtonColored
             :aria-label="t('testimonialsRead')"
             class="text-sm font-semibold shadow-xs"
-            :to="localePath('/testimonials')"
+            :to="localePath({ path: '/testimonials' })"
           >
             {{ t('testimonialsRead') }}
           </VioButtonColored>
