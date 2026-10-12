@@ -88,7 +88,7 @@ export default defineNuxtConfig(
         },
       },
       site: {
-        identity: 'Person', // an object crashes ssr as nuxt-schema-org 7.0.0 writes into the frozen site config
+        identity: 'Person', // TODO: use `{ type: 'Person' }` again once nuxt-schema-org stops writing into the frozen site config (https://github.com/harlan-zw/nuxt-schema-org/issues/188)
         twitter: '@dargmuesli',
       },
       sitemap: {
