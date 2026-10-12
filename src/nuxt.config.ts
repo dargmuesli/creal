@@ -88,9 +88,7 @@ export default defineNuxtConfig(
         },
       },
       site: {
-        identity: {
-          type: 'Person',
-        },
+        identity: 'Person', // an object crashes ssr as nuxt-schema-org 7.0.0 writes into the frozen site config
         twitter: '@dargmuesli',
       },
       sitemap: {
