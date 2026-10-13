@@ -88,7 +88,9 @@ export default defineNuxtConfig(
         },
       },
       site: {
-        identity: 'Person', // TODO: use `{ type: 'Person' }` again once nuxt-schema-org stops writing into the frozen site config (https://github.com/harlan-zw/nuxt-schema-org/issues/188)
+        identity: {
+          type: 'Person',
+        },
         twitter: '@dargmuesli',
       },
       sitemap: {
