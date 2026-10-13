@@ -1,3 +1,13 @@
+## [7.0.0-beta.1](https://github.com/dargmuesli/creal/compare/6.4.2...7.0.0-beta.1) (2026-10-13)
+
+### ⚠ BREAKING CHANGES
+
+* **deps:** update vio to 23.0.0-beta.10 (#671)
+
+### Bug Fixes
+
+* **deps:** update vio to 23.0.0-beta.10 ([#671](https://github.com/dargmuesli/creal/issues/671)) ([c52e95c](https://github.com/dargmuesli/creal/commit/c52e95c4165024e85ad7529542bcdef59a3f3af8))
+
 ## [6.4.2](https://github.com/dargmuesli/creal/compare/6.4.1...6.4.2) (2026-10-12)
 
 ### Bug Fixes
