@@ -1,3 +1,7 @@
+import { useEvent } from 'nitropack/runtime'
+
+import { throwError } from '#server/utils/error'
+
 export const useS3 = () => {
   const event = useEvent()
   const s3 = event.context.$s3

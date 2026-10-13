@@ -10,7 +10,7 @@
       <VioButtonColored
         :aria-label="t('bookCreal')"
         class="font-semibold shadow-xs"
-        :to="localePath('/contact')"
+        :to="localePath({ path: '/contact' })"
       >
         {{ t('bookCreal') }} {{ t('arrow') }}
       </VioButtonColored>

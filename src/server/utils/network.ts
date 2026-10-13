@@ -2,6 +2,7 @@ import {
   getHost,
   getServiceHref,
 } from '@dargmuesli/nuxt-vio/shared/utils/networking'
+import { useEvent } from 'nitropack/runtime'
 
 export const useProxy = () => {
   const event = useEvent()

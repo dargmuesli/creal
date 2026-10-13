@@ -25,7 +25,9 @@ export const usePlyr = () => {
 
       if (!skipRoute) {
         router.replace({
-          path: localePath(getTrackPath(playlistPath, playlistItem.fileName)),
+          path: localePath({
+            path: getTrackPath(playlistPath, playlistItem.fileName),
+          }),
         })
       }
 

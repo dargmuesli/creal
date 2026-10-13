@@ -16,7 +16,9 @@
         tag="p"
       >
         <template #rider>
-          <VioLink :to="localePath('/rider')">{{ t('rider') }}</VioLink>
+          <VioLink :to="localePath({ path: '/rider' })">{{
+            t('rider')
+          }}</VioLink>
         </template>
       </i18n-t>
       <VioFormContact :is-loading="isFormSubmitting" @submit="submit" />

@@ -1,7 +1,7 @@
 <template>
   <header class="mb-8 gap-4">
     <nav aria-label="Global" class="flex items-center justify-between gap-4">
-      <VioButton :aria-label="t('creal')" :to="localePath('/')">
+      <VioButton :aria-label="t('creal')" :to="localePath({ path: '/' })">
         <span class="text-lg font-bold">{{ t('creal') }}</span>
         <template #prefix>
           <CrIconLogo class="h-10 w-10" />
@@ -18,21 +18,21 @@
         <VioLink
           aria-label="Events"
           :is-colored="false"
-          :to="localePath('/events')"
+          :to="localePath({ path: '/events' })"
         >
           {{ t('events') }}
         </VioLink>
         <VioLink
           aria-label="FAQ"
           :is-colored="false"
-          :to="localePath('/testimonials')"
+          :to="localePath({ path: '/testimonials' })"
         >
           {{ t('testimonials') }}
         </VioLink>
         <VioLink
           aria-label="Player"
           :is-colored="false"
-          :to="localePath('/mixes')"
+          :to="localePath({ path: '/mixes' })"
         >
           {{ t('player') }}
         </VioLink>
@@ -41,7 +41,7 @@
       v-if="eventsCurrentCount"
       class="flex items-center gap-2 rounded-full border px-4 py-2 font-bold focus:rounded-full sm:px-4"
       :is-colored="false"
-      :to="localePath('/events')"
+      :to="localePath({ path: '/events' })"
     >
       <CrLivePulse />
       <span class="hidden whitespace-nowrap sm:inline">
@@ -52,7 +52,7 @@
       v-else-if="eventsFutureCount"
       class="flex items-center gap-2 rounded-full border px-2 py-2 font-bold focus:rounded-full sm:px-4"
       :is-colored="false"
-      :to="localePath('/events')"
+      :to="localePath({ path: '/events' })"
     >
       <CrLivePulse />
       <span class="hidden whitespace-nowrap sm:inline">
@@ -72,7 +72,7 @@
         class="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-gray-900 px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-white/10"
       >
         <div class="flex items-center justify-between">
-          <VioButton :aria-label="t('creal')" :to="localePath('/')">
+          <VioButton :aria-label="t('creal')" :to="localePath({ path: '/' })">
             <span class="text-lg font-bold">{{ t('creal') }}</span>
             <template #prefix>
               <CrIconLogo class="h-10 w-10" />
@@ -94,7 +94,7 @@
                 aria-label="Events"
                 class="-mx-3 block rounded-lg px-3 py-2 text-base leading-7 font-semibold text-white hover:bg-gray-800"
                 :is-colored="false"
-                :to="localePath('/events')"
+                :to="localePath({ path: '/events' })"
                 @click="mobileMenuOpen = false"
               >
                 {{ t('events') }}
@@ -103,7 +103,7 @@
                 aria-label="FAQ"
                 class="-mx-3 block rounded-lg px-3 py-2 text-base leading-7 font-semibold text-white hover:bg-gray-800"
                 :is-colored="false"
-                :to="localePath('/testimonials')"
+                :to="localePath({ path: '/testimonials' })"
                 @click="mobileMenuOpen = false"
               >
                 {{ t('testimonials') }}
@@ -112,7 +112,7 @@
                 aria-label="Player"
                 class="-mx-3 block rounded-lg px-3 py-2 text-base leading-7 font-semibold text-white hover:bg-gray-800"
                 :is-colored="false"
-                :to="localePath('/mixes')"
+                :to="localePath({ path: '/mixes' })"
                 @click="mobileMenuOpen = false"
               >
                 {{ t('player') }}

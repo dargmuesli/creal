@@ -9,9 +9,9 @@ const track =
 
 // Redirects legacy query-param links to the new path-based /mixes scheme.
 await navigateTo(
-  localePath(
-    track ? getTrackPath(playlist, track) : getCollectionPath(playlist),
-  ),
+  localePath({
+    path: track ? getTrackPath(playlist, track) : getCollectionPath(playlist),
+  }),
   { redirectCode: 301 },
 )
 </script>

@@ -1,10 +1,10 @@
 <template>
   <VioLayoutFooter :class="{ 'mb-20': store.playerData.isVisible }">
     <VioLayoutFooterCategory class="basis-full" :heading="t('legal')">
-      <VioLink :to="localePath('/legal-notice')">
+      <VioLink :to="localePath({ path: '/legal-notice' })">
         {{ t('legalNotice') }}
       </VioLink>
-      <VioLink :to="localePath('/privacy-policy')">
+      <VioLink :to="localePath({ path: '/privacy-policy' })">
         {{ t('privacyPolicy') }}
       </VioLink>
     </VioLayoutFooterCategory>
@@ -37,7 +37,7 @@
       </div>
     </VioLayoutFooterCategory>
     <template #logo>
-      <VioLink :aria-label="t('faq')" :to="localePath('/faq')">
+      <VioLink :aria-label="t('faq')" :to="localePath({ path: '/faq' })">
         <CrIconLogo class="mx-12 h-12 w-12 opacity-60 brightness-0 invert" />
       </VioLink>
     </template>
