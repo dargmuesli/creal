@@ -98,6 +98,7 @@ export default defineNuxtConfig(
         sources: ['/api/__sitemap__/mixes'],
         zeroRuntime: false,
       },
+      skewProtection: {}, // vio disables it, the dockerfile carries its storage from image to image
 
       $production: {
         security: {
