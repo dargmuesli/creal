@@ -1,3 +1,9 @@
+## [7.0.0-beta.3](https://github.com/dargmuesli/creal/compare/7.0.0-beta.2...7.0.0-beta.3) (2026-10-13)
+
+### Bug Fixes
+
+* **seo:** restore schema.org identity object ([#672](https://github.com/dargmuesli/creal/issues/672)) ([e11c6b2](https://github.com/dargmuesli/creal/commit/e11c6b2da9b0bbae05d7ed54f0c3c851b9d97d5f))
+
 ## [7.0.0-beta.2](https://github.com/dargmuesli/creal/compare/7.0.0-beta.1...7.0.0-beta.2) (2026-10-13)
 
 ### Features
