@@ -1,3 +1,9 @@
+## [7.0.0-beta.2](https://github.com/dargmuesli/creal/compare/7.0.0-beta.1...7.0.0-beta.2) (2026-10-13)
+
+### Features
+
+* **seo:** enable skew protection ([#670](https://github.com/dargmuesli/creal/issues/670)) ([0b19549](https://github.com/dargmuesli/creal/commit/0b19549e460f0343aad067346552c6f03ab8868a))
+
 ## [7.0.0-beta.1](https://github.com/dargmuesli/creal/compare/6.4.2...7.0.0-beta.1) (2026-10-13)
 
 ### ⚠ BREAKING CHANGES
