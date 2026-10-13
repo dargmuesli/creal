@@ -1,4 +1,11 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["github>dargmuesli/renovate-config"]
+  "extends": ["github>dargmuesli/renovate-config"],
+  "packageRules": [
+    {
+      "allowedVersions": "<=3.3.11",
+      "description": "https://github.com/vuejs/language-tools/issues/6240",
+      "matchPackageNames": ["vue-tsc"]
+    }
+  ]
 }
