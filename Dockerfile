@@ -1,8 +1,13 @@
 # syntax=docker/dockerfile:1
 
+# the image whose skew protection storage seeds this build
+ARG SKEW_PROTECTION_SOURCE_IMAGE=ghcr.io/dargmuesli/creal:latest
+
 # <DEPENDENCIES>
 FROM ghcr.io/dargmuesli/creal-strapi:5.0.7
 # </DEPENDENCIES>
+
+FROM ${SKEW_PROTECTION_SOURCE_IMAGE} AS skew-protection-source
 
 #############
 # Create base image.
@@ -83,7 +88,15 @@ ARG NUXT_PUBLIC_I18N_BASE_URL=https://creal.jonas-thelemann.de
 ENV NUXT_PUBLIC_I18N_BASE_URL=${NUXT_PUBLIC_I18N_BASE_URL}
 
 ENV NODE_ENV=production
-RUN pnpm run --dir src build:node
+
+# restore previous builds' assets from the source image and keep this build's assets for the next one
+RUN --mount=type=bind,from=skew-protection-source,source=/srv/app,target=/tmp/skew-protection-source \
+    if [ -d /tmp/skew-protection-source/.skew-protection ]; then \
+      mkdir -p src/node_modules/.cache/nuxt-seo \
+      && cp -r /tmp/skew-protection-source/.skew-protection src/node_modules/.cache/nuxt-seo/skew-protection; \
+    fi \
+    && pnpm run --dir src build:node \
+    && mkdir -p src/node_modules/.cache/nuxt-seo/skew-protection
 
 
 # ########################
@@ -210,6 +223,7 @@ FROM base-image AS collect
 RUN chown node:node .
 
 COPY --from=build-node --chown=node /srv/app/src/.output ./src/.output
+COPY --from=build-node --chown=node /srv/app/src/node_modules/.cache/nuxt-seo/skew-protection ./.skew-protection
 COPY --from=build-node --chown=node /srv/app/src/node/server/node.mjs ./src/node/server/node.mjs
 COPY --from=build-node --chown=node /srv/app/src/package.json ./src/package.json
 COPY --from=build-node --chown=node /srv/app/docker-entrypoint.sh ./docker-entrypoint.sh

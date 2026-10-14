@@ -11,7 +11,7 @@
     :aria-label="t('bookCreal')"
     class="flex gap-2"
     :is-colored="false"
-    :to="localePath('/contact')"
+    :to="localePath({ path: '/contact' })"
   >
     <span class="basis-0 whitespace-nowrap">{{ t('bookCreal') }}</span>
     <span aria-hidden="true">{{ t('arrow') }}</span>

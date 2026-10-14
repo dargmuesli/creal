@@ -1,3 +1,25 @@
+## [7.0.0-beta.3](https://github.com/dargmuesli/creal/compare/7.0.0-beta.2...7.0.0-beta.3) (2026-10-13)
+
+### Bug Fixes
+
+* **seo:** restore schema.org identity object ([#672](https://github.com/dargmuesli/creal/issues/672)) ([e11c6b2](https://github.com/dargmuesli/creal/commit/e11c6b2da9b0bbae05d7ed54f0c3c851b9d97d5f))
+
+## [7.0.0-beta.2](https://github.com/dargmuesli/creal/compare/7.0.0-beta.1...7.0.0-beta.2) (2026-10-13)
+
+### Features
+
+* **seo:** enable skew protection ([#670](https://github.com/dargmuesli/creal/issues/670)) ([0b19549](https://github.com/dargmuesli/creal/commit/0b19549e460f0343aad067346552c6f03ab8868a))
+
+## [7.0.0-beta.1](https://github.com/dargmuesli/creal/compare/6.4.2...7.0.0-beta.1) (2026-10-13)
+
+### ⚠ BREAKING CHANGES
+
+* **deps:** update vio to 23.0.0-beta.10 (#671)
+
+### Bug Fixes
+
+* **deps:** update vio to 23.0.0-beta.10 ([#671](https://github.com/dargmuesli/creal/issues/671)) ([c52e95c](https://github.com/dargmuesli/creal/commit/c52e95c4165024e85ad7529542bcdef59a3f3af8))
+
 ## [6.4.2](https://github.com/dargmuesli/creal/compare/6.4.1...6.4.2) (2026-10-12)
 
 ### Bug Fixes

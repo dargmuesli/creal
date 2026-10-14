@@ -1,5 +1,8 @@
 import { ListObjectsV2Command } from '@aws-sdk/client-s3'
+import { defineCachedEventHandler } from 'nitropack/runtime'
 import type { SitemapUrl } from '#sitemap/types'
+
+import { useS3 } from '#server/utils/dependencies/aws'
 
 import {
   getCollectionPath,

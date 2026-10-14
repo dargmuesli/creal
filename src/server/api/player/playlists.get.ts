@@ -1,11 +1,25 @@
 import { ListObjectsV2Command } from '@aws-sdk/client-s3'
 import { consola } from 'consola'
-import { parseURL, parseQuery } from 'ufo'
+import {
+  defineEventHandler,
+  getQuery,
+  type RequestEvent,
+  setResponseStatus,
+} from 'nuxt/server'
 
-export default defineEventHandler(async () => {
+import { useS3 } from '#server/utils/dependencies/aws'
+import { useProxy } from '#server/utils/network'
+import type {
+  FetchPlaylist,
+  Playlist,
+  PlaylistExtended,
+  PlaylistItem,
+} from '#shared/types/player'
+
+export default defineEventHandler(async (event) => {
   const runtimeConfig = useRuntimeConfig()
   const proxy = useProxy()
-  const fetchPlaylist = useFetchPlaylist()
+  const fetchPlaylist = useFetchPlaylist(event)
 
   if (runtimeConfig.public.vio.proxy) {
     return await proxy(fetchPlaylist)
@@ -74,13 +88,11 @@ const getPlaylist = (playlistDataExtended: PlaylistExtended): Playlist => {
   }
 }
 
-const useFetchPlaylist = () => {
-  const event = useEvent()
+const useFetchPlaylist = (event: RequestEvent) => {
   const config = useRuntimeConfig()
   const { client: s3 } = useS3()
 
-  const { req } = event.node
-  const urlSearchParams = parseQuery(parseURL(req.url).search)
+  const urlSearchParams = getQuery(event)
 
   const continuationToken = urlSearchParams['continuation-token']
 
@@ -121,7 +133,8 @@ const useFetchPlaylist = () => {
     if (!data) return
 
     if (!data.Contents?.length && !data.CommonPrefixes?.length) {
-      return sendNoContent(event)
+      setResponseStatus(event, 204)
+      return null
     }
 
     const playlistDataExtended: PlaylistExtended = {
