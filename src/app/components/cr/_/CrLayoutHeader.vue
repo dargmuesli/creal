@@ -15,25 +15,16 @@
         <Bars3Icon aria-hidden="true" class="h-6 w-6" />
       </VioButton>
       <div class="hidden gap-16 text-xl lg:flex">
-        <VioLink
-          aria-label="Events"
-          :is-colored="false"
-          :to="localePath({ path: '/events' })"
-        >
+        <VioLink :is-colored="false" :to="localePath({ path: '/events' })">
           {{ t('events') }}
         </VioLink>
         <VioLink
-          aria-label="FAQ"
           :is-colored="false"
           :to="localePath({ path: '/testimonials' })"
         >
           {{ t('testimonials') }}
         </VioLink>
-        <VioLink
-          aria-label="Player"
-          :is-colored="false"
-          :to="localePath({ path: '/mixes' })"
-        >
+        <VioLink :is-colored="false" :to="localePath({ path: '/mixes' })">
           {{ t('player') }}
         </VioLink>
       </div>
@@ -91,7 +82,6 @@
           <div class="-my-6 divide-y divide-gray-500/25">
             <div class="space-y-2 py-6">
               <VioLink
-                aria-label="Events"
                 class="-mx-3 block rounded-lg px-3 py-2 text-base leading-7 font-semibold text-white hover:bg-gray-800"
                 :is-colored="false"
                 :to="localePath({ path: '/events' })"
@@ -100,7 +90,6 @@
                 {{ t('events') }}
               </VioLink>
               <VioLink
-                aria-label="FAQ"
                 class="-mx-3 block rounded-lg px-3 py-2 text-base leading-7 font-semibold text-white hover:bg-gray-800"
                 :is-colored="false"
                 :to="localePath({ path: '/testimonials' })"
@@ -109,7 +98,6 @@
                 {{ t('testimonials') }}
               </VioLink>
               <VioLink
-                aria-label="Player"
                 class="-mx-3 block rounded-lg px-3 py-2 text-base leading-7 font-semibold text-white hover:bg-gray-800"
                 :is-colored="false"
                 :to="localePath({ path: '/mixes' })"
