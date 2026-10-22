@@ -12,10 +12,8 @@ const PAGE_PATH = '/'
 
 testA11y(PAGE_PATH)
 testOgImage({
-  dynamic: {
-    de: 'a_~RWluIEJpbGQgdm9uIERKIGNSZWFsLCBzZWluIExvZ28gdW5kIE5hbWUgc293aWUgZGVyIFRpdGVsIGRlciBTZWl0ZS4,c_Default.takumi,description_DJ+cReals+Webseite.,title_cReal,headline_DJ+und+Event-Organisator,p_Ii9kZSI,s_s9Px3A3PSUIsE4l2.png',
-    en: `a_~QSBwaWN0dXJlIG9mIERKIGNSZWFsLCBoaXMgbG9nbyBhbmQgbmFtZSBhcyB3ZWxsIGFzIHBhZ2UncyB0aXRsZS4,c_Default.takumi,description_DJ+cReal's+website.,title_cReal,headline_DJ+and+event+organizer,s_hL5iAyrnMfAV_zr2.png`,
-  },
+  de: '/de',
+  en: PAGE_PATH,
 })
 testPageLoad(PAGE_PATH)
 testVisualRegression(PAGE_PATH)
