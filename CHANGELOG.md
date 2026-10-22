@@ -1,3 +1,9 @@
+## [7.0.1](https://github.com/dargmuesli/creal/compare/7.0.0...7.0.1) (2026-10-22)
+
+### Bug Fixes
+
+* schedule release ([2fce52b](https://github.com/dargmuesli/creal/commit/2fce52bf2f47489193f0de869ff6d321f2f4db8d))
+
 ## [7.0.0](https://github.com/dargmuesli/creal/compare/6.4.2...7.0.0) (2026-10-14)
 
 ### ⚠ BREAKING CHANGES
