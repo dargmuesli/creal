@@ -1,3 +1,9 @@
+## [7.1.0](https://github.com/dargmuesli/creal/compare/7.0.1...7.1.0) (2026-10-24)
+
+### Features
+
+* **postgraphile:** align with the 5 server ([#679](https://github.com/dargmuesli/creal/issues/679)) ([95f31e5](https://github.com/dargmuesli/creal/commit/95f31e52c4f3f47d5078c06f0f41ab9772bfbaa6))
+
 ## [7.0.1](https://github.com/dargmuesli/creal/compare/7.0.0...7.0.1) (2026-10-22)
 
 ### Bug Fixes
