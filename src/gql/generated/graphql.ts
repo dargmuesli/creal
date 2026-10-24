@@ -21,8 +21,7 @@ export type SuggestionInput = {
 }
 
 export type SuggestionItemFragment = {
-  id: number
-  nodeId: string
+  id: string
   artist: string
   comment: string | null
   title: string
@@ -54,7 +53,6 @@ export const SuggestionItemFragmentDoc = {
         kind: 'SelectionSet',
         selections: [
           { kind: 'Field', name: { kind: 'Name', value: 'id' } },
-          { kind: 'Field', name: { kind: 'Name', value: 'nodeId' } },
           { kind: 'Field', name: { kind: 'Name', value: 'artist' } },
           { kind: 'Field', name: { kind: 'Name', value: 'comment' } },
           { kind: 'Field', name: { kind: 'Name', value: 'title' } },
@@ -144,7 +142,6 @@ export const CreateSuggestionDocument = {
         kind: 'SelectionSet',
         selections: [
           { kind: 'Field', name: { kind: 'Name', value: 'id' } },
-          { kind: 'Field', name: { kind: 'Name', value: 'nodeId' } },
           { kind: 'Field', name: { kind: 'Name', value: 'artist' } },
           { kind: 'Field', name: { kind: 'Name', value: 'comment' } },
           { kind: 'Field', name: { kind: 'Name', value: 'title' } },
