@@ -63,7 +63,7 @@ export default defineNuxtPlugin(async (nuxtApp) => {
 
       return { headers }
     },
-    preferGetMethod: false, // TODO: remove with Postgraphile v5
+    preferGetMethod: false, // The GraphQL API only accepts POST requests.
     requestPolicy: 'cache-and-network',
     url: getServiceHref({ name: 'creal-postgraphile' }) + '/graphql',
   }

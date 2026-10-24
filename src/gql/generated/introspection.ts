@@ -45,19 +45,22 @@ export default {
             name: 'suggestionEdge',
             type: {
               kind: 'OBJECT',
-              name: 'SuggestionsEdge',
+              name: 'SuggestionEdge',
               ofType: null,
             },
             args: [
               {
                 name: 'orderBy',
                 type: {
-                  kind: 'LIST',
+                  kind: 'NON_NULL',
                   ofType: {
-                    kind: 'NON_NULL',
+                    kind: 'LIST',
                     ofType: {
-                      kind: 'SCALAR',
-                      name: 'Any',
+                      kind: 'NON_NULL',
+                      ofType: {
+                        kind: 'SCALAR',
+                        name: 'Any',
+                      },
                     },
                   },
                 },
@@ -109,19 +112,22 @@ export default {
             name: 'suggestionEdge',
             type: {
               kind: 'OBJECT',
-              name: 'SuggestionsEdge',
+              name: 'SuggestionEdge',
               ofType: null,
             },
             args: [
               {
                 name: 'orderBy',
                 type: {
-                  kind: 'LIST',
+                  kind: 'NON_NULL',
                   ofType: {
-                    kind: 'NON_NULL',
+                    kind: 'LIST',
                     ofType: {
-                      kind: 'SCALAR',
-                      name: 'Any',
+                      kind: 'NON_NULL',
+                      ofType: {
+                        kind: 'SCALAR',
+                        name: 'Any',
+                      },
                     },
                   },
                 },
@@ -176,7 +182,7 @@ export default {
             ],
           },
           {
-            name: 'deleteSuggestionById',
+            name: 'deleteSuggestionByRowId',
             type: {
               kind: 'OBJECT',
               name: 'DeleteSuggestionPayload',
@@ -216,7 +222,7 @@ export default {
             ],
           },
           {
-            name: 'updateSuggestionById',
+            name: 'updateSuggestionByRowId',
             type: {
               kind: 'OBJECT',
               name: 'UpdateSuggestionPayload',
@@ -243,7 +249,7 @@ export default {
         name: 'Node',
         fields: [
           {
-            name: 'nodeId',
+            name: 'id',
             type: {
               kind: 'NON_NULL',
               ofType: {
@@ -319,7 +325,7 @@ export default {
             name: 'allSuggestions',
             type: {
               kind: 'OBJECT',
-              name: 'SuggestionsConnection',
+              name: 'SuggestionConnection',
               ofType: null,
             },
             args: [
@@ -381,6 +387,17 @@ export default {
             ],
           },
           {
+            name: 'id',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'SCALAR',
+                name: 'Any',
+              },
+            },
+            args: [],
+          },
+          {
             name: 'node',
             type: {
               kind: 'INTERFACE',
@@ -389,7 +406,7 @@ export default {
             },
             args: [
               {
-                name: 'nodeId',
+                name: 'id',
                 type: {
                   kind: 'NON_NULL',
                   ofType: {
@@ -401,23 +418,12 @@ export default {
             ],
           },
           {
-            name: 'nodeId',
-            type: {
-              kind: 'NON_NULL',
-              ofType: {
-                kind: 'SCALAR',
-                name: 'Any',
-              },
-            },
-            args: [],
-          },
-          {
             name: 'query',
             type: {
               kind: 'NON_NULL',
               ofType: {
-                kind: 'OBJECT',
                 name: 'Query',
+                kind: 'OBJECT',
                 ofType: null,
               },
             },
@@ -432,7 +438,7 @@ export default {
             },
             args: [
               {
-                name: 'nodeId',
+                name: 'id',
                 type: {
                   kind: 'NON_NULL',
                   ofType: {
@@ -444,7 +450,7 @@ export default {
             ],
           },
           {
-            name: 'suggestionById',
+            name: 'suggestionByRowId',
             type: {
               kind: 'OBJECT',
               name: 'Suggestion',
@@ -452,7 +458,7 @@ export default {
             },
             args: [
               {
-                name: 'id',
+                name: 'rowId',
                 type: {
                   kind: 'NON_NULL',
                   ofType: {
@@ -506,7 +512,7 @@ export default {
             args: [],
           },
           {
-            name: 'nodeId',
+            name: 'rowId',
             type: {
               kind: 'NON_NULL',
               ofType: {
@@ -556,7 +562,7 @@ export default {
       },
       {
         kind: 'OBJECT',
-        name: 'SuggestionsConnection',
+        name: 'SuggestionConnection',
         fields: [
           {
             name: 'edges',
@@ -567,8 +573,8 @@ export default {
                 ofType: {
                   kind: 'NON_NULL',
                   ofType: {
+                    name: 'SuggestionEdge',
                     kind: 'OBJECT',
-                    name: 'SuggestionsEdge',
                     ofType: null,
                   },
                 },
@@ -583,9 +589,12 @@ export default {
               ofType: {
                 kind: 'LIST',
                 ofType: {
-                  kind: 'OBJECT',
-                  name: 'Suggestion',
-                  ofType: null,
+                  kind: 'NON_NULL',
+                  ofType: {
+                    name: 'Suggestion',
+                    kind: 'OBJECT',
+                    ofType: null,
+                  },
                 },
               },
             },
@@ -596,8 +605,8 @@ export default {
             type: {
               kind: 'NON_NULL',
               ofType: {
-                kind: 'OBJECT',
                 name: 'PageInfo',
+                kind: 'OBJECT',
                 ofType: null,
               },
             },
@@ -619,7 +628,7 @@ export default {
       },
       {
         kind: 'OBJECT',
-        name: 'SuggestionsEdge',
+        name: 'SuggestionEdge',
         fields: [
           {
             name: 'cursor',
@@ -632,9 +641,12 @@ export default {
           {
             name: 'node',
             type: {
-              kind: 'OBJECT',
-              name: 'Suggestion',
-              ofType: null,
+              kind: 'NON_NULL',
+              ofType: {
+                name: 'Suggestion',
+                kind: 'OBJECT',
+                ofType: null,
+              },
             },
             args: [],
           },
@@ -675,19 +687,22 @@ export default {
             name: 'suggestionEdge',
             type: {
               kind: 'OBJECT',
-              name: 'SuggestionsEdge',
+              name: 'SuggestionEdge',
               ofType: null,
             },
             args: [
               {
                 name: 'orderBy',
                 type: {
-                  kind: 'LIST',
+                  kind: 'NON_NULL',
                   ofType: {
-                    kind: 'NON_NULL',
+                    kind: 'LIST',
                     ofType: {
-                      kind: 'SCALAR',
-                      name: 'Any',
+                      kind: 'NON_NULL',
+                      ofType: {
+                        kind: 'SCALAR',
+                        name: 'Any',
+                      },
                     },
                   },
                 },
