@@ -1,3 +1,9 @@
+## [7.1.1](https://github.com/dargmuesli/creal/compare/7.1.0...7.1.1) (2026-10-28)
+
+### Bug Fixes
+
+* **i18n:** render unparseable ICU messages as raw string ([#683](https://github.com/dargmuesli/creal/issues/683)) ([967b575](https://github.com/dargmuesli/creal/commit/967b575c61d2f7bc43c781a7c98a434e308f7733))
+
 ## [7.1.0](https://github.com/dargmuesli/creal/compare/7.0.1...7.1.0) (2026-10-24)
 
 ### Features
