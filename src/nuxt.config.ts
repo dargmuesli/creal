@@ -35,25 +35,31 @@ export default defineNuxtConfig(
           },
         },
       },
+      vue: {
+        compilerOptions: {
+          isCustomElement: (tag) =>
+            ['audio-neutral-skin', 'audio-player'].includes(tag),
+        },
+      },
       vite: {
         optimizeDeps: {
           include: [
             '@dargmuesli/nuxt-vio/shared/utils/constants',
             '@headlessui/vue',
             '@heroicons/vue/24/outline',
-            '@skjnldsv/vue-plyr',
             '@urql/core',
             '@urql/devtools',
             '@urql/exchange-graphcache',
             '@urql/exchange-graphcache/default-storage',
             '@urql/vue',
+            '@videojs/html/audio/neutral-skin',
+            '@videojs/html/audio/player',
             '@vuelidate/core',
             '@vuelidate/validators',
             'clsx',
             'html-to-text',
             'lodash-es',
             'marked',
-            'plyr',
             'pretty-bytes',
             'tailwind-merge',
           ],
@@ -83,7 +89,7 @@ export default defineNuxtConfig(
       security: {
         headers: {
           contentSecurityPolicy: {
-            // 'require-trusted-types-for': "'script'", // breaks vue-plyr (test in Chrome!)
+            // 'require-trusted-types-for': "'script'", // untested with the Video.js player (test in Chrome!)
           },
         },
       },

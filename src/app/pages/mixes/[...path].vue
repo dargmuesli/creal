@@ -8,13 +8,13 @@
         <VioLoaderIndicatorSpinner class="m-auto h-32 w-32" />
         {{ t('globalStatusLoading') }}
       </div>
-      <div v-else-if="store.playerData.currentPlaylist">
+      <div v-else-if="playlistData">
         <ul
-          v-if="store.playerData.currentPlaylist.collections.length"
+          v-if="playlistData.collections.length"
           class="flex flex-col flex-wrap items-center gap-4 md:flex-row"
         >
           <li
-            v-for="collection in store.playerData.currentPlaylist.collections"
+            v-for="collection in playlistData.collections"
             :key="collection.name"
           >
             <VioLink
@@ -31,30 +31,25 @@
             </VioLink>
           </li>
         </ul>
-        <ul
-          v-if="store.playerData.currentPlaylist.items.length"
-          class="flex flex-col gap-4"
-        >
+        <ul v-if="playlistData.items.length" class="flex flex-col gap-4">
           <CrPlayerPlaylistItem
-            v-for="playlistItem of store.playerData.currentPlaylist.items"
+            v-for="playlistItem of playlistData.items"
             :key="playlistItem.fileName"
-            :class="{
-              'text-vio-primary-bg':
-                resolvedPlaylistPath === store.playerData.currentPlaylistPath &&
-                store.playerData.currentTrack &&
-                playlistItem.fileName ===
-                  store.playerData.currentTrack.fileName,
-            }"
+            :is-current="
+              resolvedPlaylistPath === store.playerData.currentPlaylistPath &&
+              store.playerData.currentTrack &&
+              playlistItem.fileName === store.playerData.currentTrack.fileName
+            "
             :playlist-item="playlistItem"
-            @download="download(playlistItem)"
-            @play="play(playlistItem, resolvedPlaylistPath)"
+            @download="download(playlistItem, resolvedPlaylistPath)"
+            @play="
+              play(playlistItem, resolvedPlaylistPath, false, playlistData)
+            "
+            @share="share(playlistItem, resolvedPlaylistPath)"
           />
         </ul>
         <div
-          v-if="
-            !store.playerData.currentPlaylist.collections.length &&
-            !store.playerData.currentPlaylist.items.length
-          "
+          v-if="!playlistData.collections.length && !playlistData.items.length"
           class="text-center"
         >
           {{ t('itemsNone') }}
@@ -69,8 +64,7 @@ const store = useStore()
 const { t } = useI18n()
 const localePath = useLocalePath()
 const route = useRoute()
-const alertError = useAlertError()
-const { play } = usePlyr()
+const { play, download, share } = usePlayer()
 // Captured synchronously: navigateTo() needs the Nuxt app context, which
 // is only implicitly available before the first `await` — init() calls it
 // after awaiting a fetch, so it must be restored explicitly.
@@ -79,36 +73,13 @@ const nuxtApp = useNuxtApp()
 // data
 const isLoading = ref(false)
 const resolvedPlaylistPath = ref<string>()
+// The playlist this page displays. Kept local on purpose: the store's
+// currentPlaylist is the player's playback context and must not be driven
+// by navigation.
+const playlistData = ref<Playlist>()
 const title = computed(() => t('titlePage'))
 
 // methods
-const fetchPlaylistData = async (prefix?: string) => {
-  let continuationToken: string | undefined
-  const playlistDataFetch = {
-    name: 'root',
-    collections: [],
-    items: [],
-    isCoverAvailable: false,
-  } as Playlist
-
-  do {
-    const data = await $fetch<FetchPlaylist>('/api/player/playlists', {
-      params: {
-        ...(continuationToken && {
-          'continuation-token': continuationToken,
-        }),
-        ...(prefix && {
-          prefix,
-        }),
-      },
-    })
-
-    mergeByKey(playlistDataFetch, data?.playlistData, 'name')
-    continuationToken = data?.nextContinuationToken
-  } while (continuationToken)
-
-  return playlistDataFetch
-}
 const getPathWithoutLastPart = (pathParts: string[]) =>
   pathParts.slice(0, -1).join('/')
 const isTrackInPlaylist = (
@@ -163,8 +134,7 @@ const init = async () => {
   }
 
   resolvedPlaylistPath.value = playlistPath
-  store.playerData.currentPlaylist = playlistDataFetch
-  store.playerData.currentPlaylistPath = playlistPath
+  playlistData.value = playlistDataFetch
 
   // Try to select and play track as indicated by route path.
   if (store.playerData.isPaused && track) {
@@ -172,7 +142,7 @@ const init = async () => {
       (item) => item.fileName === track,
     )
 
-    if (playlistItem) play(playlistItem, playlistPath, true)
+    if (playlistItem) play(playlistItem, playlistPath, true, playlistDataFetch)
   }
 
   isLoading.value = false
@@ -186,26 +156,6 @@ const getPlaylistPath = (name: string) =>
   joinPathSegments(resolvedPlaylistPath.value, name)
 const getPlaylistLink = (name: string) =>
   localePath({ path: getCollectionPath(getPlaylistPath(name)) })
-const download = async (playlistItem: PlaylistItem) => {
-  const link = document.createElement('a')
-  const signedUrl = await getSignedUrl({
-    playlistItem,
-    playlistPath: resolvedPlaylistPath.value,
-  })
-
-  if (!signedUrl) return alertError('Could not get signed url!')
-
-  link.setAttribute('href', signedUrl)
-  const signedUrlWithoutQuery = signedUrl.split('?')[0] ?? signedUrl
-  const signedUrlPathPart = signedUrlWithoutQuery.split('/').at(-1)
-  const fallbackFileName = `${playlistItem.fileName}.${playlistItem.fileExtension}`
-  const downloadFileName = signedUrlPathPart
-    ? decodeUriComponentSafe(signedUrlPathPart)
-    : fallbackFileName
-
-  link.setAttribute('download', downloadFileName)
-  link.click()
-}
 
 // computations
 const routePathParts = computed(() => {

@@ -40,11 +40,7 @@ const init = () => {
   }
 }
 const setCoverUrl = async (cover: Cover) => {
-  const playlistPrefix = getPlaylistPrefix(playlistPath)
-  const key = `${PLAYER_PREFIX}${playlistPrefix}${cover.name}.${cover.fileExtension}`
-  const signedUrl = await $fetch('/api/player/signed-url', {
-    params: { key },
-  })
+  const signedUrl = await getCoverSignedUrl({ cover, playlistPath })
 
   if (!signedUrl) return alertError('Could not get signed url!')
 

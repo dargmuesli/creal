@@ -55,6 +55,21 @@ vioTest.describe('internationalization', () => {
   )
 })
 
+vioTest.describe('player', () => {
+  // Playback needs S3 credentials, so only check that the Video.js plugin registered its elements.
+  vioTest('defines the audio player elements', async ({ defaultPage }) => {
+    await defaultPage.goto('/')
+    await expect(defaultPage.page.locator('audio-player audio')).toBeAttached()
+    expect(
+      await defaultPage.page.evaluate(() =>
+        ['audio-player', 'audio-neutral-skin'].every((tag) =>
+          customElements.get(tag),
+        ),
+      ),
+    ).toBe(true)
+  })
+})
+
 vioTest.describe('visual regression', () => {
   vioTest('displays the cookie banner', async ({ page }) => {
     await page.goto('/')
