@@ -55,8 +55,6 @@
 </template>
 
 <script setup lang="ts">
-import type Plyr from 'plyr'
-
 const store = useStore()
 const { t } = useI18n()
 const { play } = usePlayer()
