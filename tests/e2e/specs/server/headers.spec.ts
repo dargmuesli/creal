@@ -15,6 +15,5 @@ vioTest.describe('content security policy', () => {
     expect(csp).toContain(`https://backend.${serviceHost}/api/`)
     expect(csp).toContain(`https://creal-postgraphile.${serviceHost}`)
     expect(csp).toContain(`https://creal-strapi.${serviceHost}`)
-    expect(csp).toContain('https://cdn.plyr.io')
   })
 })

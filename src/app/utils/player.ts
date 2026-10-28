@@ -16,3 +16,32 @@ export const getSignedUrl = async ({
     params: { key },
   })
 }
+
+export const getCoverSignedUrl = async ({
+  cover,
+  playlistPath,
+}: {
+  cover: Cover
+  playlistPath?: string
+}) => {
+  const key =
+    PLAYER_PREFIX +
+    getPlaylistPrefix(playlistPath) +
+    cover.name +
+    '.' +
+    cover.fileExtension
+
+  return await $fetch('/api/player/signed-url', {
+    params: { key },
+  })
+}
+
+// Display label for a track: drops the "cReal - " prefix and reorders the
+// remaining " - " segments so the mix name comes first
+// ("2020-05 - cReal - Trap Mix" -> "Trap Mix · 2020-05").
+export const formatTrackLabel = (fileName: string) =>
+  fileName
+    .replace(/cReal - /, '')
+    .split(' - ')
+    .reverse()
+    .join(' · ')

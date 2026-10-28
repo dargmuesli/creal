@@ -3,7 +3,7 @@
     <div class="text-3xl font-bold text-white lg:text-4xl">
       <slot />
     </div>
-    <ul class="flex flex-col gap-12">
+    <ul class="flex flex-col">
       <li
         v-for="(eventGroup, index) in eventGroups"
         :key="eventGroup.event.documentId"

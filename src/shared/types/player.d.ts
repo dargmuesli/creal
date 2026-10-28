@@ -1,4 +1,3 @@
-import type Plyr from 'plyr'
 import type { Ref } from 'vue'
 
 export interface Cover {
@@ -47,14 +46,17 @@ export interface FetchPlaylist {
 }
 
 export interface PlayerData {
+  // The playlist the player is playing from (the "playback context"), not the
+  // playlist a page happens to display. Written only by usePlayer().play()
+  // so navigating the site never changes what the player shows.
   currentPlaylist: Ref<Playlist | undefined>
   // The S3 prefix (no PLAYER_PREFIX, no trailing slash, undefined at root)
-  // of the currently displayed playlist. This is the single source of
+  // of the playback-context playlist. This is the single source of
   // truth for routing/prefix building; `currentPlaylist.name` is display
   // text only and must never be used for path construction.
   currentPlaylistPath: Ref<string | undefined>
   currentTrack: Ref<(PlaylistItem & { meta?: PlaylistItemMeta }) | undefined>
   isPaused: Ref<boolean>
   isVisible: Ref<boolean>
-  sourceInfo: Ref<Plyr.SourceInfo | undefined>
+  sourceUrl: Ref<string | undefined>
 }

@@ -5,7 +5,7 @@
       <!-- `NuxtLayout` can't have mulitple child nodes (https://github.com/nuxt/nuxt/issues/21759) -->
       <NuxtPage />
     </NuxtLayout>
-    <CrPlayerPlyr />
+    <CrPlayer />
     <CookieControl :locale />
     <VioSonner />
   </div>
@@ -15,6 +15,7 @@
 const { locale } = useI18n()
 const siteConfig = useSiteConfig()
 const timeZone = useTimeZone()
+const { restore } = usePlayer()
 
 const { loadingIds, indicateLoadingDone } = useLoadingDoneIndicator('app')
 
@@ -36,7 +37,12 @@ const saveTimeZoneAsCookie = () =>
 const isLoading = computed(() => !!loadingIds.value.length)
 
 // lifecycle
-onMounted(() => indicateLoadingDone())
+onMounted(() => {
+  indicateLoadingDone()
+  // onMounted is client-only; restore() re-creates the playback context after
+  // a reload on any page (it bails out on the track's own URL).
+  restore()
+})
 
 // initialization
 useAppLayout()

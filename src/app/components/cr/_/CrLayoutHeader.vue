@@ -14,7 +14,7 @@
       >
         <Bars3Icon aria-hidden="true" class="h-6 w-6" />
       </VioButton>
-      <div class="hidden gap-16 text-xl lg:flex">
+      <div class="hidden gap-8 text-xl lg:flex xl:gap-16">
         <VioLink :is-colored="false" :to="localePath({ path: '/events' })">
           {{ t('events') }}
         </VioLink>
