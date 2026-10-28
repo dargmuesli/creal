@@ -1,5 +1,5 @@
 <template>
-  <div class="flex bg-gray-800 text-gray-50">
+  <div class="flex gap-64 bg-gray-800 text-gray-50">
     <img
       alt="DJ cReal"
       class="object-cover"
@@ -7,23 +7,25 @@
       src="/assets/static/images/og.jpg"
       width="400"
     />
-    <div class="ml-16 flex flex-col justify-center">
+    <div>
       <img
         alt="DJ cReal"
-        class="absolute left-25 opacity-[0.025]"
+        class="absolute -top-12 -right-15 opacity-[0.025]"
         height="700"
         src="/assets/static/logos/creal.svg"
         width="700"
       />
-      <div
-        class="mt-20 text-[40px] font-semibold text-gray-300"
-        :style="headlineLineClamp"
-      >
-        {{ headline }}
+      <div class="flex h-full flex-col justify-center">
+        <div
+          class="mt-20 text-[40px] font-semibold text-gray-300"
+          :style="headlineLineClamp"
+        >
+          {{ headline }}
+        </div>
+        <h1 class="text-[72px] font-bold" :style="titleLineClamp">
+          {{ title }}
+        </h1>
       </div>
-      <h1 class="text-[72px] font-bold" :style="titleLineClamp">
-        {{ title }}
-      </h1>
     </div>
   </div>
 </template>
