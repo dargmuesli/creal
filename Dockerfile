@@ -19,7 +19,9 @@ ENV CI=true
 
 WORKDIR /srv/app/
 
-RUN corepack enable \
+# node 25+ no longer ships corepack, install it explicitly
+RUN npm install -g corepack \
+  && corepack enable \
   && apt-get update \
   && apt-get install --no-install-recommends -y \
       mkcert \
