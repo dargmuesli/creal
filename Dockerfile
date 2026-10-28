@@ -12,14 +12,16 @@ FROM ${SKEW_PROTECTION_SOURCE_IMAGE} AS skew-protection-source
 #############
 # Create base image.
 
-FROM node:24.22.1-slim AS base-image
+FROM node:26.12.1-slim AS base-image
 
 # The `CI` environment variable must be set for pnpm to run in headless mode
 ENV CI=true
 
 WORKDIR /srv/app/
 
-RUN corepack enable \
+# node 25+ no longer ships corepack, install it explicitly
+RUN npm install -g corepack \
+  && corepack enable \
   && apt-get update \
   && apt-get install --no-install-recommends -y \
       mkcert \
