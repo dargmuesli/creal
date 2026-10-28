@@ -1,3 +1,16 @@
+## [7.2.0](https://github.com/dargmuesli/creal/compare/7.1.1...7.2.0) (2026-10-28)
+
+### Features
+
+* **contact:** warn before leaving with form input ([3c30b89](https://github.com/dargmuesli/creal/commit/3c30b89b4ad0d2e6c23c5ff6d5ba4e442f01bfba))
+* **events:** remove item gap and stretch card image to height on lg ([2c4fe92](https://github.com/dargmuesli/creal/commit/2c4fe9268d2171150845a305dfa496ea3fe32f5a))
+* **layout:** smaller header menu gap and player-independent bottom padding ([abde1ca](https://github.com/dargmuesli/creal/commit/abde1ca249c252694ca12216010148cf33c3f24c))
+* **player:** persistent sidebar player ([44db410](https://github.com/dargmuesli/creal/commit/44db410b37cf6889696402795c1c0b0b76700108))
+
+### Bug Fixes
+
+* **seo:** center og image text and reposition watermark ([cd16e99](https://github.com/dargmuesli/creal/commit/cd16e991d411be4a3ad7cb606267556acfe2f428))
+
 ## [7.1.1](https://github.com/dargmuesli/creal/compare/7.1.0...7.1.1) (2026-10-28)
 
 ### Bug Fixes
