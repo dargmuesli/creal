@@ -2,11 +2,11 @@
   <div
     class="flex flex-col max-lg:border-l-2 max-lg:border-dashed max-lg:border-gray-700 max-lg:pl-4 lg:flex-row lg:items-stretch"
   >
-    <div class="shrink-0 basis-1/3">
+    <div class="shrink-0 basis-1/3 lg:my-4">
       <img
         v-if="crealEvent.image"
         :alt="t('imageAlt')"
-        class="mt-4 max-h-64 w-full rounded-t-lg object-cover lg:mb-4 lg:max-h-none lg:rounded-l-lg lg:rounded-r-none"
+        class="mt-4 max-h-64 w-full rounded-t-lg object-cover lg:mt-0 lg:mb-0 lg:h-full lg:max-h-none lg:rounded-l-lg lg:rounded-r-none"
         :src="imageSrc"
       />
     </div>
