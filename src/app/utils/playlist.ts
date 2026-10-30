@@ -11,7 +11,7 @@ export const fetchPlaylistData = async (prefix?: string): Promise<Playlist> => {
 
   do {
     const data = await $fetch<FetchPlaylist>('/api/player/playlists', {
-      params: {
+      query: {
         ...(continuationToken && {
           'continuation-token': continuationToken,
         }),
