@@ -13,7 +13,7 @@ export const getSignedUrl = async ({
     playlistItem.fileExtension
 
   return await $fetch('/api/player/signed-url', {
-    params: { key },
+    query: { key },
   })
 }
 
@@ -32,7 +32,7 @@ export const getCoverSignedUrl = async ({
     cover.fileExtension
 
   return await $fetch('/api/player/signed-url', {
-    params: { key },
+    query: { key },
   })
 }
 

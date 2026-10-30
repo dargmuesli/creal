@@ -4,7 +4,7 @@
 ARG SKEW_PROTECTION_SOURCE_IMAGE=ghcr.io/dargmuesli/creal:latest
 
 # <DEPENDENCIES>
-FROM ghcr.io/dargmuesli/creal-strapi:5.0.9
+FROM ghcr.io/dargmuesli/creal-strapi:5.0.10
 # </DEPENDENCIES>
 
 FROM ${SKEW_PROTECTION_SOURCE_IMAGE} AS skew-protection-source
