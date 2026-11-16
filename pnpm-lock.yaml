@@ -178,11 +178,11 @@ importers:
   src:
     devDependencies:
       '@aws-sdk/client-s3':
-        specifier: 3.1167.0
-        version: 3.1167.0
+        specifier: 3.1168.0
+        version: 3.1168.0
       '@aws-sdk/s3-request-presigner':
-        specifier: 3.1167.0
-        version: 3.1167.0
+        specifier: 3.1168.0
+        version: 3.1168.0
       '@dargmuesli/nuxt-cookie-control':
         specifier: 10.0.0
         version: 10.0.0(@nuxt/schema@4.6.4)(confbox@0.3.2)(dotenv@17.4.2)(giget@3.3.1)(jiti@2.7.0)(magic-string@1.4.5)(mlly@1.8.2)(oxc-parser@0.140.0)(rolldown@1.2.16)(unplugin@3.7.0(esbuild@0.28.2)(rolldown@1.2.16)(rollup@4.68.0)(vite@8.3.6)(webpack@5.112.2(cssnano@9.9.0(postcss@8.5.32))(esbuild@0.28.2)(lightningcss@1.33.0)(postcss@8.5.32)(sharp@0.35.5(@types/node@26.6.6))))(webpack@5.112.2(cssnano@9.9.0(postcss@8.5.32))(esbuild@0.28.2)(lightningcss@1.33.0)(postcss@8.5.32)(sharp@0.35.5(@types/node@26.6.6)))
@@ -211,8 +211,8 @@ importers:
         specifier: 2.2.0
         version: 2.2.0(vue@3.5.45(typescript@6.0.3))
       '@intlify/core-base':
-        specifier: 11.4.18
-        version: 11.4.18
+        specifier: 11.4.19
+        version: 11.4.19
       '@nuxt/fonts':
         specifier: 1.2.0
         version: 1.2.0(@devframes/agentic@1.3.2)(@nuxt/schema@4.6.4)(cac@7.1.0)(confbox@0.3.2)(db0@0.3.4)(dotenv@17.4.2)(esbuild@0.28.2)(giget@3.3.1)(ioredis@5.11.1(supports-color@10.2.2))(jiti@2.7.0)(lightningcss@1.33.0)(magic-string@1.4.5)(mlly@1.8.2)(oxc-parser@0.140.0)(postcss@8.5.32)(rolldown@1.2.16)(rollup@4.68.0)(srvx@1.0.8)(vite@8.3.6)(webpack@5.112.2(cssnano@9.9.0(postcss@8.5.32))(esbuild@0.28.2)(lightningcss@1.33.0)(postcss@8.5.32)(sharp@0.35.5(@types/node@26.6.6)))
@@ -241,8 +241,8 @@ importers:
         specifier: 2.1.1
         version: 2.1.1(@urql/core@6.0.3(graphql@17.1.0))(vue@3.5.45(typescript@6.0.3))
       '@videojs/html':
-        specifier: 10.3.0
-        version: 10.3.0(react@19.3.1)
+        specifier: 10.4.0
+        version: 10.4.0(react@19.3.1)
       '@vuelidate/core':
         specifier: 2.0.3
         version: 2.0.3(vue@3.5.45(typescript@6.0.3))
@@ -420,8 +420,8 @@ packages:
     resolution: {integrity: sha512-OHlfkNzDFjYnwNPABhwAkDTUi0HPjfsKUHJDR0bSMORpCXNzRpInPCNCIT08xKDhjaPlcLJ+2Av+Sk7hHnuC8A==}
     engines: {node: '>=20.0.0'}
 
-  '@aws-sdk/client-s3@3.1167.0':
-    resolution: {integrity: sha512-HMOyvnlf0+7DFjZjMxGYluL3kbaJMFfslmL7KVda7KFJU/gb0KROGuKhrv2s0abQ0Nryd006yGy0dsxz3BpK+w==}
+  '@aws-sdk/client-s3@3.1168.0':
+    resolution: {integrity: sha512-7NcVxqy7Vc6I8A3KOZFORGh+zfMCd4S5aje55tBNBfshddz+F1NZwxLXblt44TC6nw0Hgx5os3AM2d/P0McELQ==}
     engines: {node: '>=20.0.0'}
 
   '@aws-sdk/core@3.981.0':
@@ -468,8 +468,8 @@ packages:
     resolution: {integrity: sha512-acHTTzMB13CU6dU4sxABYExMI3PQM2zStWH2MiUwJp/7QKTrLg2f7mbzSXoegW2kYOk2tdqQYagsZrWB8Xv7eA==}
     engines: {node: '>=20.0.0'}
 
-  '@aws-sdk/s3-request-presigner@3.1167.0':
-    resolution: {integrity: sha512-c54YuxhIbSjRxLWg48bU0AXOTmcvKuIhyThe12f6uIyHmq+Z+KWDeBqWIvJb0U5op8PyH+RLcrEi376ShsV8IQ==}
+  '@aws-sdk/s3-request-presigner@3.1168.0':
+    resolution: {integrity: sha512-HLjffsA8Di01lZuChctZAhbLsK2CuM8dE1D2+rA/jaerV5W2pj65iBmed15kouJFXTX3XhTF2mFxEEUxMoP4yw==}
     engines: {node: '>=20.0.0'}
 
   '@aws-sdk/signature-v4-multi-region@3.996.52':
@@ -1999,12 +1999,20 @@ packages:
     resolution: {integrity: sha512-uryU7clROKIJsCLM8I8J6GA4pw9EVI5BCptnFQslpUXGPj/dCrlrixOaV/6gL1jLXZe3Hl8YY3yNi24bgfhvBw==}
     engines: {node: '>= 22'}
 
+  '@intlify/core-base@11.4.19':
+    resolution: {integrity: sha512-evgu8NEnGifZbIUV9Rr226ryCIa5CGxVDHAdU9oh0LIgdpznXYxZwONsnBHucq6nSrOaWXUjnOtKXA6VaiVJ0A==}
+    engines: {node: '>= 22'}
+
   '@intlify/core@11.4.18':
     resolution: {integrity: sha512-gpgBRwnQZ1iYrZ+woDFefXa66vZbZLQ6LRvr2LS+i4ZNkGhR+gjGsDZL4fnWgaILLMOXLbJTLUzH9appMhSgTg==}
     engines: {node: '>= 22'}
 
   '@intlify/devtools-types@11.4.18':
     resolution: {integrity: sha512-J7/PW4wSSijVzR8j578q2+/HICPbA09RhCIMZsLHEL8PlRkdXXVadhunrxLOre8cBe8dDK54922frpa0Z1UimA==}
+    engines: {node: '>= 22'}
+
+  '@intlify/devtools-types@11.4.19':
+    resolution: {integrity: sha512-rt8akChgJ+3MCaDKQnWt2sCfLTneEFUd9O/7Fxxye2It/aqHwKUUT3XREBCpTWLt4qrJS3INqIRfoE08mOEEeg==}
     engines: {node: '>= 22'}
 
   '@intlify/eslint-plugin-vue-i18n@4.5.1':
@@ -2024,8 +2032,16 @@ packages:
     resolution: {integrity: sha512-9v2s0+mIuJaFOyWBfZBHrV/g9VLFH/4osx/zaQ52BgT6FQkjvTWHWyNriCMRqWs3PEuBKysmwTUwmNpg9iPjJw==}
     engines: {node: '>= 22'}
 
+  '@intlify/message-compiler@11.4.19':
+    resolution: {integrity: sha512-y6VkdYYSSNpMRf/dWoJQWhEPE349g2KQ02ImDJaplsXnrf+dVGjl6Kqqhv4TYtr7ZCfaLCwdmutcz6ZTMaDBXA==}
+    engines: {node: '>= 22'}
+
   '@intlify/shared@11.4.18':
     resolution: {integrity: sha512-8q7UR/eAFP0xOZndaClKYeh/lWkcIPOZkWsU85CMR9BYLjTeaENpAFWfFBvuUI8fFz0BDtZvR/fgbwiiQaqcDg==}
+    engines: {node: '>= 22'}
+
+  '@intlify/shared@11.4.19':
+    resolution: {integrity: sha512-JCor7CqIfZJHyAM+OzUUNRvc+D6v5RJBXHu/FRNiwFOopqftBsvRtTM5tOiptPIT3S6Ryt9DOupdM+tNGwoUcw==}
     engines: {node: '>= 22'}
 
   '@intlify/unplugin-vue-i18n@11.2.8':
@@ -4383,34 +4399,34 @@ packages:
     engines: {node: '>=20'}
     hasBin: true
 
-  '@videojs/core@10.3.0':
-    resolution: {integrity: sha512-JiH3Z8tjxAZdt5s+hSztgtTVMU2lI02in1cFdn2nm1n+LxbvWwwdjsRbUZSJsk1bURBNNiLctn9W7DK59JIdEQ==}
+  '@videojs/core@10.4.0':
+    resolution: {integrity: sha512-uPBHrIpfQtsVGskChdJhF5ny38SvksBDFDm1z05DUucU9hgPwnirnSDCrTehyPC2wOb9NNlPdjCL0+Cud7uXYQ==}
 
-  '@videojs/element@10.3.0':
-    resolution: {integrity: sha512-xDX521q/S37QEDXtGfTPtmqQQWAN1IDZ72h34AdEh0M2oThK1uvfthsOzVWnwxNoceRlpQ1cyyfRvZwwCf03mg==}
+  '@videojs/element@10.4.0':
+    resolution: {integrity: sha512-VYMNCasyyFTbPA6Ny3tqyD2f493gIsOe/meCIJTlAAGL8ztadZMbhuOrwZ5K8RA60+CMz539qOiDq6cJUWdYlA==}
 
-  '@videojs/html@10.3.0':
-    resolution: {integrity: sha512-wfhbEaCJMSOU5bwNN2iYuXIb9Nq7QEpKVcBEq50S/OCv24lTk6DxVbfCAnZroJGFxopBs7Fykl5jMP8ZcdVlZA==}
+  '@videojs/html@10.4.0':
+    resolution: {integrity: sha512-BmVGe22mr7lxYKOAMFo1ikJ3qrflTfV7UX3sOgTiNF7X/g0UzTvQvkbwhhNOzFtqhWAFDtol2equ/1SimeoHJQ==}
     peerDependencies:
-      '@videojs/cloudflare-video': 10.3.0
-      '@videojs/dailymotion-video': 10.3.0
-      '@videojs/dash-video': 10.3.0
-      '@videojs/google-analytics': 10.3.0
-      '@videojs/google-cast': 10.3.0
-      '@videojs/hlsjs-video': 10.3.0
-      '@videojs/mixcloud-audio': 10.3.0
-      '@videojs/mux-audio': 10.3.0
-      '@videojs/mux-data': 10.3.0
-      '@videojs/mux-video': 10.3.0
-      '@videojs/playerjs-video': 10.3.0
-      '@videojs/shaka-video': 10.3.0
-      '@videojs/soundcloud-audio': 10.3.0
-      '@videojs/spotify-audio': 10.3.0
-      '@videojs/tiktok-video': 10.3.0
-      '@videojs/twitch-video': 10.3.0
-      '@videojs/vimeo-video': 10.3.0
-      '@videojs/wistia-video': 10.3.0
-      '@videojs/youtube-video': 10.3.0
+      '@videojs/cloudflare-video': 10.4.0
+      '@videojs/dailymotion-video': 10.4.0
+      '@videojs/dash-video': 10.4.0
+      '@videojs/google-analytics': 10.4.0
+      '@videojs/google-cast': 10.4.0
+      '@videojs/hlsjs-video': 10.4.0
+      '@videojs/mixcloud-audio': 10.4.0
+      '@videojs/mux-audio': 10.4.0
+      '@videojs/mux-data': 10.4.0
+      '@videojs/mux-video': 10.4.0
+      '@videojs/playerjs-video': 10.4.0
+      '@videojs/shaka-video': 10.4.0
+      '@videojs/soundcloud-audio': 10.4.0
+      '@videojs/spotify-audio': 10.4.0
+      '@videojs/tiktok-video': 10.4.0
+      '@videojs/twitch-video': 10.4.0
+      '@videojs/vimeo-video': 10.4.0
+      '@videojs/wistia-video': 10.4.0
+      '@videojs/youtube-video': 10.4.0
     peerDependenciesMeta:
       '@videojs/cloudflare-video':
         optional: true
@@ -4451,19 +4467,19 @@ packages:
       '@videojs/youtube-video':
         optional: true
 
-  '@videojs/media@10.3.0':
-    resolution: {integrity: sha512-xZ/33XPTLcQwIDW3b0GSASGYDzXwrqWZjlYdfn3dh/344/7G80wjwDkbgech8+LnL9yEAHGRQ9u+Wue4c/pQZw==}
+  '@videojs/media@10.4.0':
+    resolution: {integrity: sha512-kW7b4KuqRZ6++LzDbbbMMGKMqYNo1V7Q7m2BRUKVD1Szr33C3klDZ0vwkQOel9sp/HHCi5nIXgYW+VGwNxP8pA==}
 
-  '@videojs/native-hls-video@10.3.0':
-    resolution: {integrity: sha512-5UYFBXcnpSwxBfZ2WkTCH+ehftRHCTa301y3Ks+tCiKTT1LjrTlsrqwHqrLTuKVGhaHHDXTBP8FybmgHa1xxag==}
+  '@videojs/native-hls-video@10.4.0':
+    resolution: {integrity: sha512-Vdheo6YCUNrfzd3o3e9ms8mMYMloLLAYWGJWhQxA/APvJBtunHrs6D8hL+mTLVGYRw5l3NDihpcOGtCMdykLUg==}
 
-  '@videojs/spf@10.3.0':
-    resolution: {integrity: sha512-/Rde9nglitWTl5JXGUEy+P1kDv+Dth216pnWJRGhDbliYYIX/YD+dQDLKummw6IAus1I+N+X2OODK3+0L18GFw==}
+  '@videojs/spf@10.4.0':
+    resolution: {integrity: sha512-wRQZ55RqSnjZCtwKv3ufV6DFjbLTuB5hueqWuADEGnyq1nRM1KzobhXATNIRvWFhQ/9ZQ0rEbdcL4Yul2CB92g==}
 
-  '@videojs/store@10.3.0':
-    resolution: {integrity: sha512-mcQuqXgFV9KoGDADHwUgsvqf6k1+5H65oz/g/+JCwen7RCBt0RQmLjTxQ5Q2n+V4OqnhF40mVlEWHN0gvhLjjw==}
+  '@videojs/store@10.4.0':
+    resolution: {integrity: sha512-YYSihmzsW1AkoQQRbZOIBrPiot1przTwzItvr9WDTnr+eV2qvCixlBvyMW41xTdMDvXFnk2xPi9/hsaqyuJwDQ==}
     peerDependencies:
-      '@videojs/element': 10.3.0
+      '@videojs/element': 10.4.0
       react: ^18.0.0 || ^19.0.0
     peerDependenciesMeta:
       '@videojs/element':
@@ -4471,8 +4487,8 @@ packages:
       react:
         optional: true
 
-  '@videojs/utils@10.3.0':
-    resolution: {integrity: sha512-BvkO1yfy/dhesnNAbFJ9yDcmFOvbQ7ZbBszJqwt73eJJVQFTdFtxpPiVQmxlolA9ifNJvHaLrh9TkUUyig3sZQ==}
+  '@videojs/utils@10.4.0':
+    resolution: {integrity: sha512-tTgS2Rf/DJQZ045b4GI7hb04hQkvfI5qfQy7dP9xFCiNXtP5J3ZBGiLzF1msflIOV9T2aJb5aZqMoNbAjT7faA==}
 
   '@vitejs/devtools-kit@0.8.2':
     resolution: {integrity: sha512-N4xUBiVHFzZrISpR9421h6WQw2VE34DTrBQys8sEJzFkIvvLTQYZ1kzErDu1PwBUP72AyCgcZi8WMojO9RRLuQ==}
@@ -8575,8 +8591,8 @@ packages:
     resolution: {integrity: sha512-u4J1hr6Y+C/hit34GwL3eIcUf3wngT8TlYUjK7tk0jxydKLAq3sYvifjdTDA6U3KCKRcQCQDGf/srjxfZF3l7g==}
     engines: {node: '>=18.12.0'}
 
-  video.js@10.3.0:
-    resolution: {integrity: sha512-IzlvcWxJ9ox1gHkYma9FsVdWf7jmWFpyFjvISJQW6wA7tsT7IcpxK8T1aFZebGCezyWxG2c5xTyuOzHIfwQPFQ==}
+  video.js@10.4.0:
+    resolution: {integrity: sha512-AXKpx8SOKYkE4FbAJYwdqAEvEvVILgGpmxpvfrmk3yjGuziMc4QubkwC7eqUHo/uszV2sKF/6kLdQxJUFF1HRw==}
 
   vite-dev-rpc@2.0.0:
     resolution: {integrity: sha512-yKwbTwdHKSD2k/aGqyWpPHepo45OQc8lH3/6IfT4ZqeKE26ooKvi4WIEKzqWav8v+9Is8u1k8q54hvOmqASazA==}
@@ -8984,7 +9000,7 @@ snapshots:
       '@smithy/types': 4.20.0
       tslib: 2.9.1
 
-  '@aws-sdk/client-s3@3.1167.0':
+  '@aws-sdk/client-s3@3.1168.0':
     dependencies:
       '@aws-sdk/checksums': 3.1002.5
       '@aws-sdk/core': 3.981.0
@@ -9113,7 +9129,7 @@ snapshots:
       '@smithy/types': 4.20.0
       tslib: 2.9.1
 
-  '@aws-sdk/s3-request-presigner@3.1167.0':
+  '@aws-sdk/s3-request-presigner@3.1168.0':
     dependencies:
       '@aws-sdk/core': 3.981.0
       '@aws-sdk/signature-v4-multi-region': 3.996.52
@@ -11053,6 +11069,12 @@ snapshots:
       '@intlify/message-compiler': 11.4.18
       '@intlify/shared': 11.4.18
 
+  '@intlify/core-base@11.4.19':
+    dependencies:
+      '@intlify/devtools-types': 11.4.19
+      '@intlify/message-compiler': 11.4.19
+      '@intlify/shared': 11.4.19
+
   '@intlify/core@11.4.18':
     dependencies:
       '@intlify/core-base': 11.4.18
@@ -11063,10 +11085,15 @@ snapshots:
       '@intlify/core-base': 11.4.18
       '@intlify/shared': 11.4.18
 
+  '@intlify/devtools-types@11.4.19':
+    dependencies:
+      '@intlify/core-base': 11.4.19
+      '@intlify/shared': 11.4.19
+
   '@intlify/eslint-plugin-vue-i18n@4.5.1(eslint@10.14.0(jiti@2.7.0)(supports-color@10.2.2))(jsonc-eslint-parser@2.4.2)(supports-color@10.2.2)(vue-eslint-parser@10.4.2(eslint@10.14.0(jiti@2.7.0)(supports-color@10.2.2))(supports-color@10.2.2))(yaml-eslint-parser@2.1.0)':
     dependencies:
       '@eslint/eslintrc': 3.3.7(supports-color@10.2.2)
-      '@intlify/core-base': 11.4.18
+      '@intlify/core-base': 11.4.19
       '@intlify/message-compiler': 11.4.18
       debug: 4.4.3(supports-color@10.2.2)
       eslint: 10.14.0(jiti@2.7.0)(supports-color@10.2.2)
@@ -11097,7 +11124,14 @@ snapshots:
       '@intlify/shared': 11.4.18
       source-map-js: 1.2.2
 
+  '@intlify/message-compiler@11.4.19':
+    dependencies:
+      '@intlify/shared': 11.4.19
+      source-map-js: 1.2.2
+
   '@intlify/shared@11.4.18': {}
+
+  '@intlify/shared@11.4.19': {}
 
   '@intlify/unplugin-vue-i18n@11.2.8(rollup@4.68.0)(supports-color@10.2.2)(typescript@6.0.3)(vite@8.3.6)(vue-i18n@11.4.18(vue@3.5.45(typescript@6.0.3)))(vue@3.5.45(typescript@6.0.3))':
     dependencies:
@@ -14438,60 +14472,60 @@ snapshots:
       - rollup
       - supports-color
 
-  '@videojs/core@10.3.0(@videojs/element@10.3.0)(react@19.3.1)':
+  '@videojs/core@10.4.0(@videojs/element@10.4.0)(react@19.3.1)':
     dependencies:
-      '@videojs/media': 10.3.0
-      '@videojs/store': 10.3.0(@videojs/element@10.3.0)(react@19.3.1)
-      '@videojs/utils': 10.3.0
-      video.js: 10.3.0
+      '@videojs/media': 10.4.0
+      '@videojs/store': 10.4.0(@videojs/element@10.4.0)(react@19.3.1)
+      '@videojs/utils': 10.4.0
+      video.js: 10.4.0
     transitivePeerDependencies:
       - '@videojs/element'
       - react
 
-  '@videojs/element@10.3.0':
+  '@videojs/element@10.4.0':
     dependencies:
       '@lit/context': 1.1.6
-      '@videojs/utils': 10.3.0
+      '@videojs/utils': 10.4.0
 
-  '@videojs/html@10.3.0(react@19.3.1)':
+  '@videojs/html@10.4.0(react@19.3.1)':
     dependencies:
-      '@videojs/core': 10.3.0(@videojs/element@10.3.0)(react@19.3.1)
-      '@videojs/element': 10.3.0
-      '@videojs/media': 10.3.0
-      '@videojs/native-hls-video': 10.3.0
-      '@videojs/spf': 10.3.0
-      '@videojs/store': 10.3.0(@videojs/element@10.3.0)(react@19.3.1)
-      '@videojs/utils': 10.3.0
+      '@videojs/core': 10.4.0(@videojs/element@10.4.0)(react@19.3.1)
+      '@videojs/element': 10.4.0
+      '@videojs/media': 10.4.0
+      '@videojs/native-hls-video': 10.4.0
+      '@videojs/spf': 10.4.0
+      '@videojs/store': 10.4.0(@videojs/element@10.4.0)(react@19.3.1)
+      '@videojs/utils': 10.4.0
     transitivePeerDependencies:
       - react
 
-  '@videojs/media@10.3.0':
+  '@videojs/media@10.4.0':
     dependencies:
-      '@videojs/utils': 10.3.0
+      '@videojs/utils': 10.4.0
 
-  '@videojs/native-hls-video@10.3.0':
+  '@videojs/native-hls-video@10.4.0':
     dependencies:
-      '@videojs/media': 10.3.0
-      '@videojs/spf': 10.3.0
-      '@videojs/utils': 10.3.0
+      '@videojs/media': 10.4.0
+      '@videojs/spf': 10.4.0
+      '@videojs/utils': 10.4.0
 
-  '@videojs/spf@10.3.0':
+  '@videojs/spf@10.4.0':
     dependencies:
       '@svta/cml-error-codes': 0.1.2(@svta/cml-utils@1.7.0)
       '@svta/cml-utils': 1.7.0
-      '@videojs/media': 10.3.0
-      '@videojs/utils': 10.3.0
+      '@videojs/media': 10.4.0
+      '@videojs/utils': 10.4.0
       signal-polyfill: 0.2.2
 
-  '@videojs/store@10.3.0(@videojs/element@10.3.0)(react@19.3.1)':
+  '@videojs/store@10.4.0(@videojs/element@10.4.0)(react@19.3.1)':
     dependencies:
-      '@videojs/utils': 10.3.0
+      '@videojs/utils': 10.4.0
       react-compiler-runtime: 1.0.0(react@19.3.1)
     optionalDependencies:
-      '@videojs/element': 10.3.0
+      '@videojs/element': 10.4.0
       react: 19.3.1
 
-  '@videojs/utils@10.3.0': {}
+  '@videojs/utils@10.4.0': {}
 
   '@vitejs/devtools-kit@0.8.2(@devframes/agentic@1.3.2)(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(srvx@1.0.8)(vite@8.3.6)':
     dependencies:
@@ -19958,7 +19992,7 @@ snapshots:
 
   verkit@0.5.0: {}
 
-  video.js@10.3.0: {}
+  video.js@10.4.0: {}
 
   vite-dev-rpc@2.0.0(vite@8.3.6):
     dependencies:
