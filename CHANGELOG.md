@@ -1,3 +1,9 @@
+## [7.2.4](https://github.com/dargmuesli/creal/compare/7.2.3...7.2.4) (2026-11-24)
+
+### Bug Fixes
+
+* **docker:** apply debian security updates ([#699](https://github.com/dargmuesli/creal/issues/699)) ([2ed9d58](https://github.com/dargmuesli/creal/commit/2ed9d58ab707114353d6354ea993c40f7592e1d0))
+
 ## [7.2.3](https://github.com/dargmuesli/creal/compare/7.2.2...7.2.3) (2026-11-19)
 
 ### Bug Fixes
