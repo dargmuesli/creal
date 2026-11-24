@@ -19,10 +19,10 @@ ENV CI=true
 
 WORKDIR /srv/app/
 
+# upgrade to receive Debian security fixes before the upstream image is rebuilt
 RUN npm i -g pnpm \
   && apt-get update \
-  && apt-get install --no-install-recommends -y \
-      mkcert \
+  && apt-get upgrade -y \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 
@@ -37,9 +37,10 @@ ENV CI=false
 
 # Update and install dependencies.
 # - `libdbd-pg-perl postgresql-client sqitch` is required by the entrypoint
+# - `mkcert` is required by the development server's certificates
 RUN apt-get update \
     && apt-get install --no-install-recommends -y \
-        libdbd-pg-perl postgresql-client sqitch \
+        libdbd-pg-perl mkcert postgresql-client sqitch \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* \
     && mkdir \
