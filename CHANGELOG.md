@@ -1,3 +1,9 @@
+## [7.2.5](https://github.com/dargmuesli/creal/compare/7.2.4...7.2.5) (2026-11-25)
+
+### Bug Fixes
+
+* **deps:** update all non-major dependencies ([5dcc864](https://github.com/dargmuesli/creal/commit/5dcc86409aa209ba8d134a36c437a97c6fd37433))
+
 ## [7.2.4](https://github.com/dargmuesli/creal/compare/7.2.3...7.2.4) (2026-11-24)
 
 ### Bug Fixes
